@@ -5879,6 +5879,47 @@
 			},
 			"type": "cube",
 			"uuid": "359dd3fd-12b4-4ba2-c755-98a8404ea11c"
+		},
+		{
+			"name": "Tag",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-7.5, 21.75, -6.5],
+			"to": [-5.5, 25.75, -6],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-6.5, 25.75, -6],
+			"faces": {
+				"north": {
+					"uv": [50, 32, 51, 33],
+					"texture": 0
+				},
+				"east": {
+					"uv": [50, 33, 51, 34],
+					"texture": 0
+				},
+				"south": {
+					"uv": [50, 32, 51, 33],
+					"texture": 0
+				},
+				"west": {
+					"uv": [50, 33, 51, 34],
+					"texture": 0
+				},
+				"up": {
+					"uv": [50, 33, 51, 34],
+					"texture": 0
+				},
+				"down": {
+					"uv": [50, 33, 51, 34],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "146df492-3550-0bf0-705d-25f10a969ee2"
 		}
 	],
 	"outliner": [
@@ -6448,7 +6489,7 @@
 							"uuid": "ef0438b0-7cc0-87ec-09e5-105e54134c2a",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -6673,7 +6714,19 @@
 							"autouv": 0,
 							"children": [
 								"ef0ebb92-9e16-f243-74d9-a83479f2e438",
-								"c48bc7df-c526-db32-4caf-1cf817a80a5e",
+								{
+									"name": "RoofPillarNW",
+									"origin": [9, 17.75, -7],
+									"color": 0,
+									"uuid": "644ad0aa-9e60-ae84-4802-003928af25e8",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["c48bc7df-c526-db32-4caf-1cf817a80a5e", "146df492-3550-0bf0-705d-25f10a969ee2"]
+								},
 								"ffbbcd85-e2cf-63dc-469d-5f9d564a3be6",
 								"4f10055c-192e-2af7-4fba-c3010c9cc9f5",
 								"05211735-430a-3649-ce4c-44ff98dfcf5f",
