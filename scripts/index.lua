@@ -11,5 +11,4 @@ events.ENTITY_INIT:register(function ()
 	Bullet = require("scripts.bullet")
 
 	--機能別クラス
-	PlacementObject = require("scripts.palcement_object")
 end)
