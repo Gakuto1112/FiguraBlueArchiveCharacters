@@ -6913,6 +6913,48 @@
 			},
 			"type": "cube",
 			"uuid": "85b71342-8185-0dd2-2a14-9531da573f96"
+		},
+		{
+			"name": "TableShaftMiddle",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [14, 17, -4],
+			"to": [15, 18, 4],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -45],
+			"origin": [15, 15, 2],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "e7a9edf2-5a6e-e800-b789-32ccdda325ef"
 		}
 	],
 	"outliner": [
@@ -7340,11 +7382,11 @@
 							"uuid": "4e32e922-2778-fbd2-e10c-3f7963bddc9e",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["a0bac997-e4b0-36a1-c8da-316f16f5e83c", "96240497-b57b-aa19-a59d-d0aa399aad1a"]
+							"children": ["a0bac997-e4b0-36a1-c8da-316f16f5e83c", "96240497-b57b-aa19-a59d-d0aa399aad1a", "e7a9edf2-5a6e-e800-b789-32ccdda325ef"]
 						},
 						{
 							"name": "Flowers",
