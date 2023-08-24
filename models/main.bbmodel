@@ -876,6 +876,7 @@
 			"to": [-3.3, 33.13, -2.27],
 			"autouv": 0,
 			"color": 0,
+			"inflate": 0.001,
 			"rotation": [0, 0, 45],
 			"origin": [-4.5, 32.35, -2.25],
 			"faces": {
@@ -918,6 +919,7 @@
 			"to": [-4.5, 33.13, -2.27],
 			"autouv": 0,
 			"color": 0,
+			"inflate": 0.001,
 			"rotation": [0, 0, -45],
 			"origin": [-4.5, 32.35, -2.25],
 			"faces": {
@@ -4555,7 +4557,7 @@
 					"uuid": "22d40862-bd19-a16d-9e33-79364e6656d8",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -4569,7 +4571,7 @@
 							"uuid": "8fdd9c15-a5a5-9fec-1b96-d09838d76542",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -5358,6 +5360,22 @@
 			"uuid": "7bd4b824-3db6-476b-99e3-dde805a618f1",
 			"relative_path": "../../textures/gun.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAALBJREFUKFNjNDYy+s+AA3BycTFIS0sxyP54y9CzcS8jSBljT0/3/5KSUrgWYyMjhjYLCxQj1t29zDBz52GIBhcXl/979uxB0YBuoaOsIMIGkJPOnjuHouHsuXNg02Ag3d32P9wGbH5A14CsmbHE3xns6X0XrzI46WuD5fCxUTS0ewUx7H56E6wBmY1sEFyDq7Q63ObKbetw2obTBlzOI88PMOeA3A8CID6MjR4AJNsAAOReiez6QnqkAAAAAElFTkSuQmCC"
+		}
+	],
+	"animations": [
+		{
+			"uuid": "1324ae75-23d9-b1b9-fd11-82642068b046",
+			"name": "ex_skill",
+			"loop": "once",
+			"override": false,
+			"length": 0,
+			"snapping": 24,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {}
 		}
 	],
 	"reference_images": [
