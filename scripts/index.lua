@@ -1,6 +1,8 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
 	Config = require("scripts.config")
+	Language = require("scripts.language")
+
 
 	--抽象クラス
 
@@ -11,4 +13,6 @@ events.ENTITY_INIT:register(function ()
 	Bullet = require("scripts.bullet")
 
 	--機能別クラス
+	ActionWheel = require("scripts.action_wheel")
+	ExSkill = require("scripts.ex_skill")
 end)
