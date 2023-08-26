@@ -20,6 +20,19 @@ ExSkill = {
             ExSkill.stop()
             ExSkill.AnimationCount = -1
         else
+            if ExSkill.AnimationCount == 24 then
+                FaceParts.setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
+            elseif ExSkill.AnimationCount == 29 then
+                FaceParts.setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+            elseif ExSkill.AnimationCount == 37 then
+                FaceParts.setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
+            elseif ExSkill.AnimationCount == 39 then
+                FaceParts.setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
+            elseif ExSkill.AnimationCount == 46 then
+                FaceParts.setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
+            elseif ExSkill.AnimationCount == 57 then
+                FaceParts.setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 43, true)
+            end
             ExSkill.AnimationCount = ExSkill.AnimationCount + 1
         end
     end,
@@ -44,6 +57,7 @@ end,
         end
         events.TICK:register(ExSkill.animationTick, "ex_skill_tick")
         events.RENDER:register(ExSkill.animationRender, "ex_skill_render")
+        FaceParts.setEmotion("NORMAL", "NORMAL", "OPENED", 24, true)
         ExSkill.AnimationCount = 0
         ExSkill.AnimationLength = animations["models.main"]["ex_skill"]:getLength() * 20
         end,
