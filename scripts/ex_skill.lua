@@ -25,10 +25,9 @@ ExSkill = {
 
     ---アニメーション再生中のみ実行されるレンダー関数
     animationRender = function (delta)
-        renderer:setCameraPivot(ExSkill.CAMERA_ANCHOR:getTruePos():scale(1 / 16):add(player:getPos(delta)))
-        local cameraRot = ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, 0):add(0, player:getBodyYaw(delta))
-        renderer:setOffsetCameraPivot(math.sin(math.rad(cameraRot.y)) * -4 * math.cos(math.rad(cameraRot.x)), math.sin(math.rad(cameraRot.x)) * -4, math.cos(math.rad(cameraRot.y)) * 4 * math.cos(math.rad(cameraRot.x)))
-        renderer:setCameraRot(cameraRot)
+        renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(-player:getBodyYaw(delta) % 360 + 180, ExSkill.CAMERA_ANCHOR:getTruePos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0))
+        renderer:setCameraPos(0, 0, -4)
+        renderer:setCameraRot(ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, 0):add(0, player:getBodyYaw(delta) % 360))
     end,
 
     ---アニメーションを再生する。
@@ -54,10 +53,13 @@ ExSkill = {
         end
         events.TICK:remove("ex_skill_tick")
         events.RENDER:remove("ex_skill_render")
-        renderer:setCameraPivot()
+        renderer:setCameraPos()
         renderer:setOffsetCameraPivot()
         renderer:setCameraRot()
     end
 }
+
+events.TICK:register(function ()
+end)
 
 return ExSkill
