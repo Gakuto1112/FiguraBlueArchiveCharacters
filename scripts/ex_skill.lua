@@ -5,21 +5,22 @@
 ---@field AnimationCount integer Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
 ExSkill = {
     --定数
-    SHOWN_MODELS = {models.models.placement_object.PlacementObject, models.models.tea_set.TeaSet},
+    SHOWN_MODELS = {models.models.placement_object.PlacementObject, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet},
     ANIMATION_MODELS = {"main", "placement_object", "tea_set"},
     CAMERA_ANCHOR = models.models.main.CameraAnchor,
 
     --変数
     AnimationCount = -1,
+    AnimationLength = 0,
 
     --関数
     ---アニメーション再生中のみ実行されるティック関数
     animationTick = function ()
-        if ExSkill.AnimationCount == 0 then
+        if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
             ExSkill.stop()
             ExSkill.AnimationCount = -1
         else
-            ExSkill.AnimationCount = ExSkill.AnimationCount - 1
+            ExSkill.AnimationCount = ExSkill.AnimationCount + 1
         end
     end,
 
@@ -27,7 +28,7 @@ ExSkill = {
     animationRender = function (delta)
         renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(-player:getBodyYaw(delta) % 360 + 180, ExSkill.CAMERA_ANCHOR:getTruePos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0))
         renderer:setCameraPos(0, 0, -4)
-        renderer:setCameraRot(ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, 0):add(0, player:getBodyYaw(delta) % 360))
+        renderer:setCameraRot(ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360))
     end,
 
     ---アニメーションを再生する。
@@ -40,8 +41,9 @@ ExSkill = {
         end
         events.TICK:register(ExSkill.animationTick, "ex_skill_tick")
         events.RENDER:register(ExSkill.animationRender, "ex_skill_render")
-        ExSkill.AnimationCount = animations["models.main"]["ex_skill"]:getLength() * 20
-    end,
+        ExSkill.AnimationCount = 0
+        ExSkill.AnimationLength = animations["models.main"]["ex_skill"]:getLength() * 20
+        end,
 
     ---アニメーションを停止する。
     stop = function ()
@@ -59,7 +61,7 @@ ExSkill = {
     end
 }
 
-events.TICK:register(function ()
-end)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setPos(5.5, 12, 0)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setRot(180, 0, 0)
 
 return ExSkill
