@@ -3,8 +3,10 @@ events.ENTITY_INIT:register(function ()
 	Config = require("scripts.config")
 	Language = require("scripts.language")
 
-
 	--抽象クラス
+
+	--ユーティリティクラス
+	RaycastUtils = require("scripts.utils.raycast_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")
