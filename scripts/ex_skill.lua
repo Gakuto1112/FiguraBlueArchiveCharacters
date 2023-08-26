@@ -15,7 +15,7 @@ ExSkill = {
 
     --関数
     ---アニメーション再生中のみ実行されるティック関数
-    animationTick = function ()
+    animationTick = function()
         if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
             ExSkill.stop()
             ExSkill.AnimationCount = -1
@@ -25,14 +25,17 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function (delta)
-        renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(-player:getBodyYaw(delta) % 360 + 180, ExSkill.CAMERA_ANCHOR:getTruePos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0))
-        renderer:setCameraPos(0, 0, -4)
-        renderer:setCameraRot(ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360))
-    end,
+    animationRender = function(delta)
+        local bodyYaw = player:getBodyYaw(delta)
+        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getTruePos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
+        local cameraRot = ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
+        renderer:setOffsetCameraPivot(cameraPos)
+        renderer:setCameraPos(0, 0, RaycastUtils.getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), vectors.rotateAroundAxis(0, vectors.rotateAroundAxis(cameraRot.z, vectors.rotateAroundAxis(-cameraRot.y, vectors.rotateAroundAxis(cameraRot.x, vectors.vec3(0, 0, 1), 1, 0, 0), 0, 1, 0), 0, 0, 1), 0, 1, 0):scale(-1)) * -1)
+        renderer:setCameraRot(cameraRot)
+end,
 
     ---アニメーションを再生する。
-    play = function ()
+    play = function()
         for _, modelPart in ipairs(ExSkill.SHOWN_MODELS) do
             modelPart:setVisible(true)
         end
@@ -46,7 +49,7 @@ ExSkill = {
         end,
 
     ---アニメーションを停止する。
-    stop = function ()
+    stop = function()
         for _, modelPart in ipairs(ExSkill.SHOWN_MODELS) do
             modelPart:setVisible(false)
         end
