@@ -50,6 +50,13 @@ ExSkill = {
         local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
         local targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, ExSkill.CAMERA_START_POS, 0, 1):add(0, -1.62)
         local targetCameraRot = ExSkill.CAMERA_START_ROT:copy():add(0, -bodyYaw, 0)
+        if cameraRot.y * targetCameraRot.y < 0 then
+            if cameraRot.y < 0 then
+                cameraRot.y = cameraRot.y + 360
+            else
+                targetCameraRot.y = targetCameraRot.y + 360
+            end
+        end
 
         renderer:setOffsetCameraPivot(targetCameraPos:scale(ExSkill.TransitionCount))
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils:cameraRotToRotationVector(targetCameraRot):scale(-1)) * -1 * ExSkill.TransitionCount)
