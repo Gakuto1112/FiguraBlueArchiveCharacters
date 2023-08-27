@@ -1,6 +1,5 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
-	Config = require("scripts.config")
 	Language = require("scripts.language")
 
 	--ユーティリティクラス
