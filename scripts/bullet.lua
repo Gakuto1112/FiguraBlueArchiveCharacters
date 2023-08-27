@@ -2,6 +2,7 @@
 ---@type table<string, integer>
 local arrowTable = {}
 
+---このレンダー内で既に銃の発射音を再生したかどうか。音が重複しない為の仕様。
 local gunSoundPlayed = false
 
 events.TICK:register(function()

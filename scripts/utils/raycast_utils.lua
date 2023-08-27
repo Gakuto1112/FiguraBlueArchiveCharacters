@@ -10,9 +10,9 @@ RaycastUtils = {
     ---指定された点から当たり判定までの距離を返す。
     ---@param worldPos Vector3 測定開始地点のワールド座標
     ---@param worldDir Vector3 測定する向きを示すワールド回転
-    getLengthBetweenPointAndCollision = function (worldPos, worldDir)
+    getLengthBetweenPointAndCollision = function (self, worldPos, worldDir)
         local currentPos = worldPos:copy() --現在の測定位置
-        for i = 1, RaycastUtils.RAYCAST_FINESS * RaycastUtils.MAXIMUM_LENGTH do
+        for i = 1, self.RAYCAST_FINESS * self.MAXIMUM_LENGTH do
             local currentBlock = world.getBlockState(currentPos)
             if currentBlock:hasCollision() and not currentBlock.id:find("glass") and currentBlock.id ~= "minecraft:iron_bars" then
                 local blockOffset = currentPos:copy():applyFunc(function (value)
@@ -20,13 +20,13 @@ RaycastUtils = {
                 end)
                 for _, collisionShape in ipairs(currentBlock:getCollisionShape()) do
                     if collisionShape[1][1] <= blockOffset.x and collisionShape[2][1] >= blockOffset.x and collisionShape[1][2] <= blockOffset.y and collisionShape[2][2] >= blockOffset.y and collisionShape[1][3] <= blockOffset.z and collisionShape[2][3] >= blockOffset.z then
-                        return 1 / RaycastUtils.RAYCAST_FINESS * i
+                        return 1 / self.RAYCAST_FINESS * i
                     end
                 end
             end
-            currentPos:add(worldDir:copy():scale(1 / RaycastUtils.RAYCAST_FINESS))
+            currentPos:add(worldDir:copy():scale(1 / self.RAYCAST_FINESS))
         end
-        return RaycastUtils.MAXIMUM_LENGTH
+        return self.MAXIMUM_LENGTH
     end
 }
 

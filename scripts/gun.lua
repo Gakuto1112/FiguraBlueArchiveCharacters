@@ -4,6 +4,7 @@
 ---| "LEFT"
 
 ---@class Gun 生徒の銃を制御するクラス
+---@field GUN_ITEMS table<string> 銃のモデルを適用するアイテムIDのテーブル
 ---@field TargetModel ModelPart 銃のモデルパーツ
 Gun = {
     --定数
@@ -78,7 +79,7 @@ local function setGunPose(GunPosition)
         end
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Body)
         setBodyGunPos()
-        Arms.setBowPose(false, false)
+        Arms:setBowPose(false, false)
     elseif GunPosition == "RIGHT" then
         for _, tickName in ipairs({"body_gun_tick", "left_gun_tick"}) do
             events.TICK:remove(tickName)
@@ -94,7 +95,7 @@ local function setGunPose(GunPosition)
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
         Gun.TargetModel:setPos(4, 10, 0)
         Gun.TargetModel:setRot(-90, 0, 90)
-        Arms.setBowPose(true, false)
+        Arms:setBowPose(true, false)
     else
         for _, tickName in ipairs({"body_gun_tick", "right_gun_tick"}) do
             events.TICK:remove(tickName)
@@ -110,7 +111,7 @@ local function setGunPose(GunPosition)
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm)
         Gun.TargetModel:setPos(-4, 10, 0)
         Gun.TargetModel:setRot(-90, 0, 90)
-        Arms.setBowPose(true, true)
+        Arms:setBowPose(true, true)
     end
 end
 
