@@ -52,7 +52,7 @@ ExSkill = {
         local targetCameraRot = ExSkill.CAMERA_START_ROT:copy():add(0, -bodyYaw, 0)
 
         renderer:setOffsetCameraPivot(targetCameraPos:scale(ExSkill.TransitionCount))
-        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils:cameraRotToRotationVector(targetCameraRot:copy():mul(1, -1, 1))) * -1 * ExSkill.TransitionCount)
+        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils:cameraRotToRotationVector(targetCameraRot):scale(-1)) * -1 * ExSkill.TransitionCount)
         renderer:setCameraRot(targetCameraRot:copy():sub(cameraRot):scale(ExSkill.TransitionCount):add(cameraRot))
         ExSkill.TransitionCount = math.min(ExSkill.TransitionCount + 4 / client:getFPS(), 1)
         if ExSkill.TransitionCount == 1 then
