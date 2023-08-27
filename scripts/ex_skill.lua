@@ -44,6 +44,9 @@ ExSkill = {
                 elseif ExSkill.AnimationCount == 29 then
                     FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
                 end
+                if (ExSkill.AnimationCount - 24) % 2 == 0 then
+                    sounds:playSound("entity.experience_orb.pickup", player:getPos(), 5, 2)
+                end
                 ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
             elseif ExSkill.AnimationCount == 36 then
                 ExSkill.ExclamationText:setVisible(false)
@@ -55,6 +58,13 @@ ExSkill = {
                 FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
             elseif ExSkill.AnimationCount == 57 then
                 FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 43, true)
+            elseif ExSkill.AnimationCount == 76 then
+                local playerPos = player:getPos()
+                sounds:playSound("entity.generic.small_fall", playerPos, 5, 1)
+                sounds:playSound("block.glass.break", playerPos, 5, 0.5)
+            end
+            if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
+                sounds:playSound("entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
             end
             ExSkill.AnimationCount = ExSkill.AnimationCount + 1
         end
@@ -63,8 +73,8 @@ ExSkill = {
     ---アニメーション再生中のみ実行されるレンダー関数
     animationRender = function(delta)
         local bodyYaw = player:getBodyYaw(delta)
-        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getTruePos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
-        local cameraRot = ExSkill.CAMERA_ANCHOR:getTrueRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
+        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
+        local cameraRot = ExSkill.CAMERA_ANCHOR:getAnimRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
         renderer:setOffsetCameraPivot(cameraPos)
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils:cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
         renderer:setCameraRot(cameraRot)
@@ -174,6 +184,7 @@ ExSkill = {
     ---アニメーションを再生する。
     play = function(self)
         renderer:setRenderHUD(false)
+        sounds:playSound("entity.player.levelup", player:getPos(), 5, 2)
         self:transition("PRE", function()
             for _, modelPart in ipairs(self.SHOWN_MODELS) do
                 modelPart:setVisible(true)
@@ -191,6 +202,9 @@ ExSkill = {
 
     ---アニメーションを停止する。
     stop = function(self)
+        if host:isHost() then
+            sounds:playSound("entity.player.levelup", player:getPos(), 5, 2)
+        end
         for _, modelPart in ipairs(self.SHOWN_MODELS) do
             modelPart:setVisible(false)
         end
