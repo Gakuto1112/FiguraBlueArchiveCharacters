@@ -3,6 +3,7 @@ events.ENTITY_INIT:register(function ()
 	Language = require("scripts.language")
 
 	--ユーティリティクラス
+	CameraUtils = require("scripts.utils.camera_utils")
 	RaycastUtils = require("scripts.utils.raycast_utils")
 
 	--パーツ別クラス
