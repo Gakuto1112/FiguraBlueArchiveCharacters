@@ -10,7 +10,9 @@
 ---@field CAMERA_START_ROT Vector3 Exスキルのアニメーション開始時のカメラの向き。BlockBenchの値をそのまま入力する。
 ---@field CAMERA_END_POS Vector3 Exスキルのアニメーション終了時のカメラの位置。BlockBenchの値をそのまま入力する。
 ---@field CAMERA_END_ROT Vector3 Exスキルのアニメーション終了時のカメラの向き。BlockBenchの値をそのまま入力する。
+---@field ExclamationText TextTask Exスキルのアニメーション中に表示する「！！」のテキストタスク
 ---@field AnimationCount integer Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
+---@field AnimationLength integer Exスキルのアニメーションの長さ。スクリプトで自動で代入する。
 ---@field TransitionCount number Exスキルのアニメーション前後のカメラのトランジションの進捗を示すカウンター
 ExSkill = {
     --定数
@@ -23,6 +25,7 @@ ExSkill = {
     CAMERA_END_ROT = vectors.vec3(0, 250, 0),
 
     --変数
+    ExclamationText = models.models.main.CameraAnchor:newText("ex_skill_text"):setVisible(false):setText("§c! !"):setRot(0, 180, 5):setScale(0.8, 0.8, 0.8):setOutline(true):setOutlineColor(1, 1, 1),
     AnimationCount = -1,
     AnimationLength = 0,
     TransitionCount = 0,
@@ -34,10 +37,16 @@ ExSkill = {
             ExSkill:stop()
             ExSkill.AnimationCount = -1
         else
-            if ExSkill.AnimationCount == 24 then
-                FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
-            elseif ExSkill.AnimationCount == 29 then
-                FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+            if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
+                if ExSkill.AnimationCount == 24 then
+                    ExSkill.ExclamationText:setVisible(true)
+                    FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
+                elseif ExSkill.AnimationCount == 29 then
+                    FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+                end
+                ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
+            elseif ExSkill.AnimationCount == 36 then
+                ExSkill.ExclamationText:setVisible(false)
             elseif ExSkill.AnimationCount == 37 then
                 FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
             elseif ExSkill.AnimationCount == 39 then
