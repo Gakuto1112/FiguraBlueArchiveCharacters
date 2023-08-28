@@ -49,7 +49,7 @@ ExSkill = {
                         FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
                     end
                     if (ExSkill.AnimationCount - 24) % 2 == 0 then
-                        sounds:playSound("entity.experience_orb.pickup", player:getPos(), 5, 2)
+                        sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 5, 2)
                     end
                     ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
                 elseif ExSkill.AnimationCount == 36 then
@@ -65,11 +65,16 @@ ExSkill = {
                 elseif ExSkill.AnimationCount == 76 then
                     FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
                     local playerPos = player:getPos()
-                    sounds:playSound("entity.generic.small_fall", playerPos, 5, 1)
-                    sounds:playSound("block.glass.break", playerPos, 5, 0.5)
+                    sounds:playSound("minecraft:entity.generic.small_fall", playerPos, 5, 1)
+                    sounds:playSound("minecraft:block.glass.break", playerPos, 5, 0.5)
+                    local particleAncor1Matrix = models.models.main.Avatar.Head.ExSkillAnimParticleAnchor1:partToWorldMatrix()
+                    for i = 0, 5 do
+                        local particleRot = math.rad(i * 60)
+                        particles:newParticle("minecraft:wax_off", particleAncor1Matrix[4][1], particleAncor1Matrix[4][2], particleAncor1Matrix[4][3]):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
+                    end
                 end
                 if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
-                    sounds:playSound("entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
+                    sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
                 end
                 ExSkill.AnimationCount = ExSkill.AnimationCount + 1
             end
@@ -194,7 +199,7 @@ ExSkill = {
     ---アニメーションを再生する。
     play = function(self)
         renderer:setRenderHUD(false)
-        sounds:playSound("entity.player.levelup", player:getPos(), 5, 2)
+        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         self:transition("PRE", function()
             for _, modelPart in ipairs(self.SHOWN_MODELS) do
                 modelPart:setVisible(true)
@@ -213,7 +218,7 @@ ExSkill = {
     ---アニメーションを停止する。
     stop = function(self)
         if host:isHost() then
-            sounds:playSound("entity.player.levelup", player:getPos(), 5, 2)
+            sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         end
         for _, modelPart in ipairs(self.SHOWN_MODELS) do
             modelPart:setVisible(false)
