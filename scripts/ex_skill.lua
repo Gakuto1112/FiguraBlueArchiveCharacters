@@ -61,8 +61,9 @@ ExSkill = {
                 elseif ExSkill.AnimationCount == 46 then
                     FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
                 elseif ExSkill.AnimationCount == 57 then
-                    FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 43, true)
+                    FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
                 elseif ExSkill.AnimationCount == 76 then
+                    FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
                     local playerPos = player:getPos()
                     sounds:playSound("entity.generic.small_fall", playerPos, 5, 1)
                     sounds:playSound("block.glass.break", playerPos, 5, 0.5)
