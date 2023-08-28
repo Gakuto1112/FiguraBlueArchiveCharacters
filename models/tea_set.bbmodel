@@ -1450,6 +1450,47 @@
 			},
 			"type": "cube",
 			"uuid": "401d31d0-a12e-b51b-9355-ac6108a74835"
+		},
+		{
+			"name": "WaterSpill",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8, 0.01, -8],
+			"to": [8, 0.01, 8],
+			"autouv": 0,
+			"color": 0,
+			"origin": [0, 0.01, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 66, 2.0625],
+					"texture": 1
+				}
+			},
+			"type": "cube",
+			"uuid": "729be174-cf05-c52d-4edf-151e9a81f005"
 		}
 	],
 	"outliner": [
@@ -1473,7 +1514,7 @@
 					"uuid": "44342e5a-4871-d00f-5c2d-9c37c1699be4",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -1580,6 +1621,19 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "WaterSpill",
+					"origin": [0, 0.01, 0],
+					"color": 0,
+					"uuid": "ee9fdd63-adc5-88fe-372b-a3be9c1abfbc",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": ["729be174-cf05-c52d-4edf-151e9a81f005"]
 				}
 			]
 		}
@@ -1604,6 +1658,26 @@
 			"uuid": "d85735f0-f463-5389-f8bf-ffe33c0d0e05",
 			"relative_path": "../../textures/placement_object.png",
 			"source": "data:image/png;base64,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"
+		},
+		{
+			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\water_still.png",
+			"name": "water_still.png",
+			"folder": "",
+			"namespace": "",
+			"id": "1",
+			"particle": false,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"mode": "bitmap",
+			"saved": true,
+			"uuid": "029f2154-4c5f-2ab4-5123-6e6ac4dcd96a",
+			"relative_path": "../../textures/for_modeling/water_still.png",
+			"source": "data:image/png;base64,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"
 		}
 	],
 	"animations": [
@@ -1612,7 +1686,7 @@
 			"name": "ex_skill",
 			"loop": "hold",
 			"override": false,
-			"length": 3.83333,
+			"length": 4.83333,
 			"snapping": 24,
 			"selected": true,
 			"anim_time_update": "",
@@ -2193,6 +2267,72 @@
 							"time": 3.83333,
 							"color": -1,
 							"interpolation": "catmullrom",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"ee9fdd63-adc5-88fe-372b-a3be9c1abfbc": {
+					"name": "WaterSpill",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "84b9e00b-3187-23a3-62e5-d77ad0baa266",
+							"time": 3.83333,
+							"color": -1,
+							"uniform": true,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "80e421d0-be70-8921-3b61-81cadf09d9d1",
+							"time": 0,
+							"color": -1,
+							"uniform": true,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "scale",
+							"data_points": [
+								{
+									"x": "1",
+									"y": "1",
+									"z": "1"
+								}
+							],
+							"uuid": "ee45d0d8-c174-6088-2693-744479391862",
+							"time": 4.83333,
+							"color": -1,
+							"uniform": true,
+							"interpolation": "linear",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
 							"bezier_left_value": [0, 0, 0],
