@@ -10,6 +10,7 @@
 ---@field CAMERA_START_ROT Vector3 Exスキルのアニメーション開始時のカメラの向き。BlockBenchの値をそのまま入力する。
 ---@field CAMERA_END_POS Vector3 Exスキルのアニメーション終了時のカメラの位置。BlockBenchの値をそのまま入力する。
 ---@field CAMERA_END_ROT Vector3 Exスキルのアニメーション終了時のカメラの向き。BlockBenchの値をそのまま入力する。
+---@field RenderProcessed boolean そのレンダーで既にレンダー処理したかどうか
 ---@field ExclamationText TextTask Exスキルのアニメーション中に表示する「！！」のテキストタスク
 ---@field AnimationCount integer Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
 ---@field AnimationLength integer Exスキルのアニメーションの長さ。スクリプトで自動で代入する。
@@ -25,6 +26,7 @@ ExSkill = {
     CAMERA_END_ROT = vectors.vec3(0, 250, 0),
 
     --変数
+    RenderProcessed = false,
     ExclamationText = models.models.main.CameraAnchor:newText("ex_skill_text"):setVisible(false):setText("§c! !"):setRot(0, 180, 5):setScale(0.8, 0.8, 0.8):setOutline(true):setOutlineColor(1, 1, 1),
     AnimationCount = -1,
     AnimationLength = 0,
@@ -33,40 +35,43 @@ ExSkill = {
     --関数
     ---アニメーション再生中のみ実行されるティック関数
     animationTick = function()
-        if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
-            ExSkill:stop()
-            ExSkill.AnimationCount = -1
-        else
-            if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
-                if ExSkill.AnimationCount == 24 then
-                    ExSkill.ExclamationText:setVisible(true)
-                    FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
-                elseif ExSkill.AnimationCount == 29 then
-                    FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+        if not client:isPaused() then
+            if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
+                ExSkill:stop()
+                events.TICK:remove("ex_skill_tick")
+                ExSkill.AnimationCount = -1
+            else
+                if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
+                    if ExSkill.AnimationCount == 24 then
+                        ExSkill.ExclamationText:setVisible(true)
+                        FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
+                    elseif ExSkill.AnimationCount == 29 then
+                        FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+                    end
+                    if (ExSkill.AnimationCount - 24) % 2 == 0 then
+                        sounds:playSound("entity.experience_orb.pickup", player:getPos(), 5, 2)
+                    end
+                    ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
+                elseif ExSkill.AnimationCount == 36 then
+                    ExSkill.ExclamationText:setVisible(false)
+                elseif ExSkill.AnimationCount == 37 then
+                    FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
+                elseif ExSkill.AnimationCount == 39 then
+                    FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
+                elseif ExSkill.AnimationCount == 46 then
+                    FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
+                elseif ExSkill.AnimationCount == 57 then
+                    FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 43, true)
+                elseif ExSkill.AnimationCount == 76 then
+                    local playerPos = player:getPos()
+                    sounds:playSound("entity.generic.small_fall", playerPos, 5, 1)
+                    sounds:playSound("block.glass.break", playerPos, 5, 0.5)
                 end
-                if (ExSkill.AnimationCount - 24) % 2 == 0 then
-                    sounds:playSound("entity.experience_orb.pickup", player:getPos(), 5, 2)
+                if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
+                    sounds:playSound("entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
                 end
-                ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
-            elseif ExSkill.AnimationCount == 36 then
-                ExSkill.ExclamationText:setVisible(false)
-            elseif ExSkill.AnimationCount == 37 then
-                FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
-            elseif ExSkill.AnimationCount == 39 then
-                FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
-            elseif ExSkill.AnimationCount == 46 then
-                FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
-            elseif ExSkill.AnimationCount == 57 then
-                FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 43, true)
-            elseif ExSkill.AnimationCount == 76 then
-                local playerPos = player:getPos()
-                sounds:playSound("entity.generic.small_fall", playerPos, 5, 1)
-                sounds:playSound("block.glass.break", playerPos, 5, 0.5)
+                ExSkill.AnimationCount = ExSkill.AnimationCount + 1
             end
-            if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
-                sounds:playSound("entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
-            end
-            ExSkill.AnimationCount = ExSkill.AnimationCount + 1
         end
     end,
 
@@ -78,6 +83,7 @@ ExSkill = {
         renderer:setOffsetCameraPivot(cameraPos)
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils:cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
         renderer:setCameraRot(cameraRot)
+        ExSkill.RenderProcessed = true
     end,
 
     ---Exスキルのアニメーションの前後のカメラのトランジションを行う関数
@@ -152,7 +158,9 @@ ExSkill = {
             end
 
             --カウンター更新
-            self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 4 / client:getFPS(), 1) or math.max(self.TransitionCount - 4 / client:getFPS(), 0)
+            if not client:isPaused() and not ExSkill.RenderProcessed then
+                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 4 / client:getFPS(), 1) or math.max(self.TransitionCount - 4 / client:getFPS(), 0)
+            end
             if (direction == "PRE" and self.TransitionCount == 1) or (direction == "POST" and self.TransitionCount == 0) then
                 models.models.ex_skill_frame.Gui.FrameBar:setPos(0, 0, 0)
                 if direction == "PRE" then
@@ -178,6 +186,7 @@ ExSkill = {
                 callback()
                 events.RENDER:remove("ex_skill_transition")
             end
+            ExSkill.RenderProcessed = true
         end, "ex_skill_transition")
     end,
 
@@ -211,7 +220,6 @@ ExSkill = {
         for _, modelPart in ipairs(self.ANIMATION_MODELS) do
             animations["models."..modelPart]["ex_skill"]:stop()
         end
-        events.TICK:remove("ex_skill_tick")
         events.RENDER:remove("ex_skill_render")
         self:transition("POST", function()
             renderer:setCameraPos()
@@ -240,6 +248,10 @@ ExSkill = {
 
 events.TICK:register(function()
     models.models.ex_skill_frame.Gui.FrameBar:setScale(1, client:getScaledWindowSize().y * math.sqrt(2) / 16 + 1, 1)
+end)
+
+events.WORLD_RENDER:register(function()
+    ExSkill.RenderProcessed = false
 end)
 
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setPos(5.5, 12, 0)
