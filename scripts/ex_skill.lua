@@ -72,14 +72,19 @@ ExSkill = {
                         local particleRot = math.rad(i * 60)
                         particles:newParticle("minecraft:wax_off", particleAncor1Matrix[4][1], particleAncor1Matrix[4][2], particleAncor1Matrix[4][3]):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
                     end
+                    local particleAncor4Matrix = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkillAnimParticleAnchor4:partToWorldMatrix()
+                    for i = 0, 5 do
+                        local particleRot = i * (math.pi / 3)
+                        particles:newParticle("minecraft:splash", particleAncor4Matrix[4][1] + math.cos(particleRot) * 0.25, particleAncor4Matrix[4][2], particleAncor4Matrix[4][3] + math.sin(particleRot) * 0.25):setScale(1.5):setLifetime(10)
+                    end
                 end
                 if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
                     sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
                 end
                 if ExSkill.AnimationCount % 4 == 0 and ExSkill.AnimationCount <= 76 then
                     for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkillAnimParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkillAnimParticleAnchor3}) do
-                        local particleAncor1Matrix = modelPart:partToWorldMatrix()
-                        particles:newParticle("poof", particleAncor1Matrix[4][1], particleAncor1Matrix[4][2], particleAncor1Matrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
+                        local particleAncorMatrix = modelPart:partToWorldMatrix()
+                        particles:newParticle("poof", particleAncorMatrix[4][1], particleAncorMatrix[4][2], particleAncorMatrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
                     end
                 end
                 ExSkill.AnimationCount = ExSkill.AnimationCount + 1
