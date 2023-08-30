@@ -76,6 +76,12 @@ ExSkill = {
                 if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
                     sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
                 end
+                if ExSkill.AnimationCount % 4 == 0 and ExSkill.AnimationCount <= 76 then
+                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkillAnimParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkillAnimParticleAnchor3}) do
+                        local particleAncor1Matrix = modelPart:partToWorldMatrix()
+                        particles:newParticle("poof", particleAncor1Matrix[4][1], particleAncor1Matrix[4][2], particleAncor1Matrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
+                    end
+                end
                 ExSkill.AnimationCount = ExSkill.AnimationCount + 1
             end
         end
