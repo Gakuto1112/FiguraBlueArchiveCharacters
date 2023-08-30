@@ -41,51 +41,60 @@ ExSkill = {
                 events.TICK:remove("ex_skill_tick")
                 ExSkill.AnimationCount = -1
             else
-                if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
-                    if ExSkill.AnimationCount == 24 then
-                        ExSkill.ExclamationText:setVisible(true)
-                        FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
-                    elseif ExSkill.AnimationCount == 29 then
-                        FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+                if ExSkill.AnimationCount <= 76 then
+                    if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
+                        if ExSkill.AnimationCount == 24 then
+                            ExSkill.ExclamationText:setVisible(true)
+                            FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
+                        elseif ExSkill.AnimationCount == 29 then
+                            FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
+                        end
+                        if (ExSkill.AnimationCount - 24) % 2 == 0 then
+                            sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 5, 2)
+                        end
+                        ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
+                    elseif ExSkill.AnimationCount == 36 then
+                        ExSkill.ExclamationText:setVisible(false)
+                    elseif ExSkill.AnimationCount == 37 then
+                        FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
+                    elseif ExSkill.AnimationCount == 39 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
+                    elseif ExSkill.AnimationCount == 46 then
+                        FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
+                    elseif ExSkill.AnimationCount == 57 then
+                        FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
+                    elseif ExSkill.AnimationCount == 76 then
+                        FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
+                        local playerPos = player:getPos()
+                        sounds:playSound("minecraft:entity.generic.small_fall", playerPos, 5, 1)
+                        sounds:playSound("minecraft:block.glass.break", playerPos, 5, 0.5)
+                        local particleAnchor1Matrix = models.models.main.Avatar.Head.ExSkillAnimParticleAnchor1:partToWorldMatrix()
+                        for i = 0, 5 do
+                            local particleRot = math.rad(i * 60)
+                            particles:newParticle("minecraft:wax_off", particleAnchor1Matrix[4][1], particleAnchor1Matrix[4][2], particleAnchor1Matrix[4][3]):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
+                        end
+                        local particleAnchor4Matrix = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkillAnimParticleAnchor4:partToWorldMatrix()
+                        for i = 0, 5 do
+                            local particleRot = i * (math.pi / 3)
+                            particles:newParticle("minecraft:splash", particleAnchor4Matrix[4][1] + math.cos(particleRot) * 0.25, particleAnchor4Matrix[4][2], particleAnchor4Matrix[4][3] + math.sin(particleRot) * 0.25):setScale(1.5):setLifetime(10)
+                        end
                     end
-                    if (ExSkill.AnimationCount - 24) % 2 == 0 then
-                        sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 5, 2)
+                    if ExSkill.AnimationCount % 4 == 0 then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkillAnimParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkillAnimParticleAnchor3}) do
+                            local particleAnchorMatrix = modelPart:partToWorldMatrix()
+                            particles:newParticle("poof", particleAnchorMatrix[4][1], particleAnchorMatrix[4][2], particleAnchorMatrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
+                        end
                     end
-                    ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
-                elseif ExSkill.AnimationCount == 36 then
-                    ExSkill.ExclamationText:setVisible(false)
-                elseif ExSkill.AnimationCount == 37 then
-                    FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
-                elseif ExSkill.AnimationCount == 39 then
-                    FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
-                elseif ExSkill.AnimationCount == 46 then
-                    FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
-                elseif ExSkill.AnimationCount == 57 then
-                    FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
-                elseif ExSkill.AnimationCount == 76 then
-                    FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
-                    local playerPos = player:getPos()
-                    sounds:playSound("minecraft:entity.generic.small_fall", playerPos, 5, 1)
-                    sounds:playSound("minecraft:block.glass.break", playerPos, 5, 0.5)
-                    local particleAncor1Matrix = models.models.main.Avatar.Head.ExSkillAnimParticleAnchor1:partToWorldMatrix()
-                    for i = 0, 5 do
-                        local particleRot = math.rad(i * 60)
-                        particles:newParticle("minecraft:wax_off", particleAncor1Matrix[4][1], particleAncor1Matrix[4][2], particleAncor1Matrix[4][3]):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
-                    end
-                    local particleAncor4Matrix = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkillAnimParticleAnchor4:partToWorldMatrix()
-                    for i = 0, 5 do
-                        local particleRot = i * (math.pi / 3)
-                        particles:newParticle("minecraft:splash", particleAncor4Matrix[4][1] + math.cos(particleRot) * 0.25, particleAncor4Matrix[4][2], particleAncor4Matrix[4][3] + math.sin(particleRot) * 0.25):setScale(1.5):setLifetime(10)
+                end
+                if ExSkill.AnimationCount % 2 == 0 and ExSkill.AnimationCount >= 70 then
+                    local particleAnchor5Matrix = models.models.placement_object.PlacementObject.ExSkillAnimParticleAnchor5:partToWorldMatrix()
+                    for i = 0, 11 do
+                        local particleRot = i * (math.pi / 6)
+                        particles:newParticle("minecraft:block minecraft:dirt", particleAnchor5Matrix[4][1] + math.cos(particleRot) * 0.6, particleAnchor5Matrix[4][2], particleAnchor5Matrix[4][3] + math.sin(particleRot) * 0.6)
                     end
                 end
                 if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
                     sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
-                end
-                if ExSkill.AnimationCount % 4 == 0 and ExSkill.AnimationCount <= 76 then
-                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkillAnimParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkillAnimParticleAnchor3}) do
-                        local particleAncorMatrix = modelPart:partToWorldMatrix()
-                        particles:newParticle("poof", particleAncorMatrix[4][1], particleAncorMatrix[4][2], particleAncorMatrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
-                    end
                 end
                 ExSkill.AnimationCount = ExSkill.AnimationCount + 1
             end
