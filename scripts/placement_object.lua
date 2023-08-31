@@ -19,6 +19,14 @@ PlacementObject = {
         newObject:setPos(worldPos:scale(16))
         newObject:setRot(0, -worldRot, 0)
         table.insert(self.placedObjects, newObject)
+    end,
+
+    ---設置済みの設置物を全て削除する。
+    removeAll = function(self)
+        while(#self.placedObjects > 0) do
+            models.models.placement_object.WorldObjects:removeChild(self.placedObjects[1])
+            table.remove(self.placedObjects, 1)
+        end
     end
 }
 

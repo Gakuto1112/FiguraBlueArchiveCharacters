@@ -221,6 +221,7 @@ ExSkill = {
 
     ---アニメーションを再生する。
     play = function(self)
+        PlacementObject:removeAll()
         renderer:setRenderHUD(false)
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         self:transition("PRE", function()
