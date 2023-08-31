@@ -16,4 +16,5 @@ events.ENTITY_INIT:register(function ()
 	--機能別クラス
 	ActionWheel = require("scripts.action_wheel")
 	ExSkill = require("scripts.ex_skill")
+	PlacementObject = require("scripts.placement_object")
 end)

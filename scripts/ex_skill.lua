@@ -37,6 +37,9 @@ ExSkill = {
     animationTick = function()
         if not client:isPaused() then
             if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
+                local objectRot = vectors.vec3(0.11417, 14.97985, 0.45019)
+                local bodyYaw = player:getBodyYaw() % 360
+                PlacementObject:place(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 0, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
                 ExSkill:stop()
                 events.TICK:remove("ex_skill_tick")
                 ExSkill.AnimationCount = -1
