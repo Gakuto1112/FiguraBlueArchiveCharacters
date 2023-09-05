@@ -50,27 +50,36 @@ PlacementObject = {
     tick = function()
         for _, modelPart in ipairs(models.models.placement_object.WorldObjects:getChildren()) do
             --現在の位置でのコリジョン判定
-            local isCollision = false
+            local collisionDetected = false
             local modelPos = modelPart:getPos():scale(1 / 16)
             for _, hitBox in ipairs(PlacementObject.HITBOXES) do
-                for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPart:getPos():scale(1 / 16):add(hitBox[1]), hitBox[2])) do
-                    local block = world.getBlockState(pos)
-                    if block:hasCollision() then
-                        for _, collision in ipairs(block:getCollisionShape()) do
-                            local hitBoxStartPos = modelPos:copy():add(hitBox[1])
-                            if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
+                if collisionDetected then
+                    break
+                else
+                    for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPart:getPos():scale(1 / 16):add(hitBox[1]), hitBox[2])) do
+                        if collisionDetected then
+                            break
+                        else
+                            local block = world.getBlockState(pos)
+                            if block.id == "minecraft:lava" then
+                                sounds:playSound("minecraft:block.fire.extinguish", modelPos)
+                                for _ = 1, math.ceil(hitBox[2].x * hitBox[2].y * hitBox[2].z) * 10 do
+                                    particles:newParticle("minecraft:smoke", modelPos:copy():add(math.random() * hitBox[2].x - hitBox[2].x / 2, math.random() * hitBox[2].y, math.random() * hitBox[2].z - hitBox[2].z / 2))
+                                end
                                 PlacementObject:remove(modelPart)
-                                isCollision = true
-                                break
+                                collisionDetected = true
+                            elseif block:hasCollision() then
+                                for _, collision in ipairs(block:getCollisionShape()) do
+                                    local hitBoxStartPos = modelPos:copy():add(hitBox[1])
+                                    if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
+                                        PlacementObject:remove(modelPart)
+                                        collisionDetected = true
+                                        break
+                                    end
+                                end
                             end
                         end
                     end
-                    if isCollision then
-                        break
-                    end
-                end
-                if isCollision then
-                    break
                 end
             end
         end
