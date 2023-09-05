@@ -24,6 +24,15 @@ PlacementObject = {
         end
     end,
 
+    ---設置済みの設置物から指定したものを削除する。
+    ---@param targetModel ModelPart 削除対象の設置物
+    remove = function(self, targetModel)
+        models.models.placement_object.WorldObjects:removeChild(targetModel)
+        if #models.models.placement_object.WorldObjects:getChildren() == 0 then
+            events.TICK:remove("placement_object_tick")
+        end
+    end,
+
     ---設置済みの設置物を全て削除する。
     removeAll = function(self)
         events.TICK:remove("placement_object_tick")
@@ -50,7 +59,7 @@ PlacementObject = {
                         for _, collision in ipairs(block:getCollisionShape()) do
                             local hitBoxStartPos = modelPos:copy():add(hitBox[1])
                             if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
-                                models.models.placement_object.WorldObjects:removeChild(modelPart)
+                                PlacementObject:remove(modelPart)
                                 isCollision = true
                                 break
                             end
