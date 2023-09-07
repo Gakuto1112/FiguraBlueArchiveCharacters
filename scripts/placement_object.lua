@@ -68,7 +68,7 @@ PlacementObject = {
     tick = function()
         for _, modelPart in ipairs(models.models.placement_object.WorldObjects:getChildren()) do
             local objectNumber = PlacementObject:getObjectNumber(modelPart)
-            if PlacementObject.ObjectData[objectNumber] ~= nil then
+            if type(PlacementObject.ObjectData[objectNumber]) == "table" then
                 modelPart:setPos(PlacementObject.ObjectData[objectNumber].nextPos)
             end
             --現在の位置でのコリジョン判定
@@ -145,10 +145,12 @@ PlacementObject = {
     render = function(delta)
         for _, modelPart in ipairs(models.models.placement_object.WorldObjects:getChildren()) do
             local objectNumber = PlacementObject:getObjectNumber(modelPart)
-            local currentPos = PlacementObject.ObjectData[objectNumber].currentPos
-            local nextPos = PlacementObject.ObjectData[objectNumber].nextPos
-            if currentPos.x ~= nextPos.x or currentPos.y ~= nextPos.y or currentPos.z ~= nextPos.z then
-                modelPart:setPos(currentPos:copy():add(nextPos:copy():sub(currentPos):scale(delta)))
+            if type(PlacementObject.ObjectData[objectNumber]) == "table" then
+                local currentPos = PlacementObject.ObjectData[objectNumber].currentPos
+                local nextPos = PlacementObject.ObjectData[objectNumber].nextPos
+                if currentPos.x ~= nextPos.x or currentPos.y ~= nextPos.y or currentPos.z ~= nextPos.z then
+                    modelPart:setPos(currentPos:copy():add(nextPos:copy():sub(currentPos):scale(delta)))
+                end
             end
         end
     end
