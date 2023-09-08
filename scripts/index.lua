@@ -11,6 +11,7 @@ events.ENTITY_INIT:register(function ()
 	require("scripts.vanilla_model")
 	Arms = require("scripts.arms")
 	FaceParts = require("scripts.face_parts")
+	Physics = require("scripts.physics")
 	Gun = require("scripts.gun")
 	Bullet = require("scripts.bullet")
 
