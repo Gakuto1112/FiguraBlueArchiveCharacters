@@ -225,6 +225,7 @@ ExSkill = {
         renderer:setRenderHUD(false)
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         self:transition("PRE", function()
+            Physics:disable()
             for _, modelPart in ipairs(self.SHOWN_MODELS) do
                 modelPart:setVisible(true)
             end
@@ -251,6 +252,7 @@ ExSkill = {
             animations["models."..modelPart]["ex_skill"]:stop()
         end
         events.RENDER:remove("ex_skill_render")
+        Physics:enable()
         self:transition("POST", function()
             renderer:setCameraPos()
             renderer:setOffsetCameraPivot()

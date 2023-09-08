@@ -1,12 +1,12 @@
 ---@class Physics 物理演算（もどき）を制御するクラス
----@field PHYSIC_DATA table<table> 物理演算で動かすモデルパーツのテーブル
+---@field PHYSICS_DATA table<table> 物理演算で動かすモデルパーツのテーブル
 ---@field VelocityData table<table<number>> 速度データ：1. 頭前後, 2. 上下, 3. 頭左右, 4. 頭角速度, 5. 体前後, 6. 体左右, 7. 体角速度
 ---@field VelocityAverage table<number> 速度の平均値：1. 頭前後, 2. 上下, 3. 頭左右, 4. 頭角速度, 5. 体前後, 6. 体左右, 7. 体角速度
 ---@field DirectionPrevRender table<number> 前レンダーチックのdirectionテーブル
 ---@field RenderProcessed boolean このレンダーで処理済みかどうか
 Physics = {
     --定数
-    PHYSIC_DATA = {
+    PHYSICS_DATA = {
         {
             modelPart = models.models.main.Avatar.UpperBody.Body.Hairs.BackHair,
             x = {
@@ -238,6 +238,37 @@ Physics = {
     RenderProcessed = false,
 
     --関数
+    ---物理演算を初期化し、有効にする。
+    enable = function(self)
+        self.VelocityData = {{}, {}, {}, {}, {}, {}, {}}
+        self.VelocityAverage = {0, 0, 0, 0, 0, 0, 0}
+        self.DirectionPrevRender = {}
+        self.RenderProcessed = false
+        if events.RENDER:getRegisteredCount("physics_render") == 0 then
+            events.RENDER:register(Physics.render, "physics_render")
+            events.WORLD_RENDER:register(Physics.worldRender, "physics_world_render")
+        end
+    end,
+
+    --物理演算を無効にする。物理演算で管理していたモデルの回転をリセットする。
+    disable = function(self)
+        events.RENDER:remove("physics_render")
+        events.WORLD_RENDER:remove("physics_world_render")
+        for _, physicData in ipairs(self.PHYSICS_DATA) do
+            local initialRot = vectors.vec3()
+            if type(physicData.x) == "table" and type(physicData.x.vertical) == "table" then
+                initialRot.x = physicData.x.vertical.neutral
+            end
+            if type(physicData.y) == "table" and type(physicData.y.vertical) == "table" then
+                initialRot.y = physicData.y.vertical.neutral
+            end
+            if type(physicData.z) == "table" and type(physicData.z.vertical) == "table" then
+                initialRot.z = physicData.z.vertical.neutral
+            end
+            physicData.modelPart:setRot(initialRot)
+        end
+    end,
+
     ---レンダー関数
     render = function(delta)
         local lookDir = player:getLookDir()
@@ -301,7 +332,7 @@ Physics = {
         local waterMultiplayer = player:isInWater() and 2 or 1
         local headRot = math.deg(math.asin(player:getLookDir().y))
         local isSneaking = player:isCrouching()
-        for _, physicData in ipairs(Physics.PHYSIC_DATA) do
+        for _, physicData in ipairs(Physics.PHYSICS_DATA) do
             local rotX = 0
             if physicData.x then
                 if isHorizontal then
@@ -504,9 +535,6 @@ Physics = {
     end
 }
 
-if #Physics.PHYSIC_DATA > 0 then
-    events.RENDER:register(Physics.render, "physics_render")
-    events.WORLD_RENDER:register(Physics.worldRender, "physics_world_render")
-end
+Physics:enable()
 
 return Physics
