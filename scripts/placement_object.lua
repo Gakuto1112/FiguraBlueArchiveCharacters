@@ -9,7 +9,7 @@ PlacementObject = {
     PLACEMENT_OBJECTS = models.models.placement_object.PlacementObject,
     HITBOXES = {{vectors.vec3(-5, 0, -10), vectors.vec3(20, 38, 20)}},
     COLLISION_FINESS = 16,
-    FALL_SPEED = 0.5,
+    FALL_SPEED = 3.5,
 
     --変数
     ObjectData = {},
