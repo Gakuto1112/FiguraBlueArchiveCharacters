@@ -48,4 +48,6 @@ events.WORLD_RENDER:register(function()
     renderProcessed = false
 end)
 
+models.models.main.Avatar.Head.HeadRing:setLight(15)
+
 return HeadRing
