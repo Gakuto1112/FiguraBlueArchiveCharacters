@@ -71,67 +71,71 @@ PlacementObject = {
             if type(PlacementObject.ObjectData[objectNumber]) == "table" then
                 modelPart:setPos(PlacementObject.ObjectData[objectNumber].nextPos)
             end
+            local modelPos = modelPart:getPos():scale(1 / 16)
+            if modelPos.y <= -128 then
+                PlacementObject:remove(modelPart)
+                break
+            end
             --現在の位置でのコリジョン判定
             local collisionDetected = false
-            local modelPos = modelPart:getPos():scale(1 / 16)
             for _, hitBox in ipairs(PlacementObject.HITBOXES) do
-                if collisionDetected then
-                    break
-                else
-                    for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]), hitBox[2])) do
-                        if collisionDetected then
-                            break
-                        else
-                            local block = world.getBlockState(pos)
-                            if block.id == "minecraft:lava" or block.id == "minecraft:fire" or block.id == "minecraft:soul_fire" then
-                                sounds:playSound("minecraft:block.fire.extinguish", modelPos)
-                                for _ = 1, math.ceil(hitBox[2].x * hitBox[2].y * hitBox[2].z) * 10 do
-                                    particles:newParticle("minecraft:smoke", modelPos:copy():add(math.random() * hitBox[2].x - hitBox[2].x / 2, math.random() * hitBox[2].y, math.random() * hitBox[2].z - hitBox[2].z / 2))
-                                end
+                for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]), hitBox[2])) do
+                    local block = world.getBlockState(pos)
+                    if block.id == "minecraft:lava" or block.id == "minecraft:fire" or block.id == "minecraft:soul_fire" then
+                        sounds:playSound("minecraft:block.fire.extinguish", modelPos)
+                        for _ = 1, math.ceil(hitBox[2].x * hitBox[2].y * hitBox[2].z) * 10 do
+                            particles:newParticle("minecraft:smoke", modelPos:copy():add(math.random() * hitBox[2].x - hitBox[2].x / 2, math.random() * hitBox[2].y, math.random() * hitBox[2].z - hitBox[2].z / 2))
+                        end
+                        PlacementObject:remove(modelPart)
+                        collisionDetected = true
+                    elseif block:hasCollision() then
+                        for _, collision in ipairs(block:getCollisionShape()) do
+                            local hitBoxStartPos = modelPos:copy():add(hitBox[1])
+                            if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
                                 PlacementObject:remove(modelPart)
                                 collisionDetected = true
-                            elseif block:hasCollision() then
+                                break
+                            end
+                        end
+                    end
+                    if collisionDetected then
+                        break
+                    end
+                end
+                if collisionDetected then
+                    break
+                end
+            end
+            --落下先の判定
+            local fallDistance = 0
+            if not collisionDetected then
+                collisionDetected = false
+                for i = 0, -PlacementObject.FALL_SPEED, -(1 / PlacementObject.COLLISION_FINESS) do
+                    for _, hitBox in ipairs(PlacementObject.HITBOXES) do
+                        for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]):add(0, i), hitBox[2]:copy():mul(1, 0, 1))) do
+                            local block = world.getBlockState(pos)
+                            if block:hasCollision() then
                                 for _, collision in ipairs(block:getCollisionShape()) do
                                     local hitBoxStartPos = modelPos:copy():add(hitBox[1])
-                                    if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
-                                        PlacementObject:remove(modelPart)
+                                    if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]:copy():mul(1, 0, 1)), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
                                         collisionDetected = true
                                         break
                                     end
                                 end
                             end
-                        end
-                    end
-                end
-            end
-            --落下先の判定
-            local fallDistance = 0
-            collisionDetected = false
-            for i = 0, -PlacementObject.FALL_SPEED, -(1 / PlacementObject.COLLISION_FINESS) do
-                for _, hitBox in ipairs(PlacementObject.HITBOXES) do
-                    for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]):add(0, i), hitBox[2]:copy():mul(1, 0, 1))) do
-                        local block = world.getBlockState(pos)
-                        if block:hasCollision() then
-                            for _, collision in ipairs(block:getCollisionShape()) do
-                                local hitBoxStartPos = modelPos:copy():add(hitBox[1])
-                                if CollisionUtils:isCubeOverrapped(hitBoxStartPos, hitBoxStartPos:copy():add(hitBox[2]:copy():mul(1, 0, 1)), pos:copy():add(collision[1]), pos:copy():add(collision[2])) then
-                                    collisionDetected = true
-                                    break
-                                end
+                            if collisionDetected then
+                                break
                             end
                         end
                         if collisionDetected then
                             break
+                        else
+                            fallDistance = -i
                         end
                     end
                     if collisionDetected then
                         break
-                    else
-                        fallDistance = -i
                     end
-                end
-                if collisionDetected then
-                    break
                 end
             end
             PlacementObject.ObjectData[objectNumber] = {
