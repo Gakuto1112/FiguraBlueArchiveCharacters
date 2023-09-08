@@ -33,6 +33,13 @@ ExSkill = {
     TransitionCount = 0,
 
     --関数
+    ---アニメーションが再生可能かどうかを返す。
+    ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
+    canPlayAnimation = function()
+        local velocity = player:getVelocity()
+        return velocity:length() < 0.01 and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
+    end,
+
     ---アニメーション再生中のみ実行されるティック関数
     animationTick = function()
         if not client:isPaused() then
@@ -43,7 +50,7 @@ ExSkill = {
                 ExSkill:stop()
                 events.TICK:remove("ex_skill_tick")
                 ExSkill.AnimationCount = -1
-            else
+            elseif ExSkill:canPlayAnimation() then
                 if ExSkill.AnimationCount <= 76 then
                     if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
                         if ExSkill.AnimationCount == 24 then
@@ -100,6 +107,8 @@ ExSkill = {
                     sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
                 end
                 ExSkill.AnimationCount = ExSkill.AnimationCount + 1
+            else
+                ExSkill:forceStop()
             end
         end
     end,
@@ -263,17 +272,29 @@ ExSkill = {
 
     ---アニメーションを停止させる。終了時のトランジションも無効
     forceStop = function(self)
-        self:stop()
+        for _, modelPart in ipairs(self.SHOWN_MODELS) do
+            modelPart:setVisible(false)
+        end
+        for _, modelPart in ipairs(self.ANIMATION_MODELS) do
+            animations["models."..modelPart]["ex_skill"]:stop()
+        end
+        events.TICK:remove("ex_skill_tick")
+        for _, eventName in ipairs({"ex_skill_render", "ex_skill_transition"}) do
+            events.RENDER:remove(eventName)
+        end
+        Physics:enable()
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
             modelPart:setVisible(false)
         end
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
             modelPart:setScale(0, 0, 0)
         end
+        FaceParts:resetEmotion()
         renderer:setCameraPos()
         renderer:setOffsetCameraPivot()
         renderer:setCameraRot()
-        renderer:setRenderHUD(false)
+        renderer:setRenderHUD(true)
+        self.AnimationCount = -1
         self.TransitionCount = 0
     end
 }

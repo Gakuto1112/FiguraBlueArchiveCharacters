@@ -3,10 +3,17 @@
 Language = {
 	LanguageData = {
 		en_us = {
-			action_wheel__main__title = "Ex skill"
+			action_wheel__main__action_1__title = "Ex skill",
+			action_wheel__main__action_1__title_2 = "Momoyado on-site service!", --Ex skill name
+			action_wheel__main__action_1__unavailable = "You cannot do this now.",
+			action_wheel__main__action_1__unavailable_firstperson = "You cannot do this in first person."
+
 		},
 		ja_jp = {
-			action_wheel__main__title = "Exスキル"
+			action_wheel__main__action_1__title = "Exスキル",
+			action_wheel__main__action_1__title_2 = "百夜堂出張サービス！", --Exスキル名
+			action_wheel__main__action_1__unavailable = "今は再生できません。",
+			action_wheel__main__action_1__unavailable_firstperson = "一人称視点では再生できません。"
 		}
 	},
 
