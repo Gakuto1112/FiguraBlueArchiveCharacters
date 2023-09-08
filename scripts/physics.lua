@@ -1,3 +1,113 @@
+--[[
+    PHYSICS_DATAのデータフォーマット
+
+    PHYSICS_DATA = {
+        --1つのモデルパーツ毎に1つのデータエントリーを作成する。
+        ---@type physic_data_entry
+        {},
+        ---@type physic_data_entry
+        {},
+        ---@type physic_data_entry
+        {}
+    }
+
+    ---@typedef physic_data_entry
+    {
+        ---物理演算を適用するモデルパーツ
+        ---@type ModelPart
+        modelPart = path.to.modelPart,
+
+        ---X軸の物理演算データ
+        ---@type axis_data?
+        x = {},
+
+        ---Y軸の物理演算データ
+        ---@type axis_data?
+        y = {},
+
+        ---Z軸の物理演算データ
+        ---@type axis_data?
+        z = {}
+    }
+
+    ---@typedef axis_data
+    {
+        ---体が垂直方向である時（通常時）の物理演算
+        ---@type body_state_data?
+        vertical = {},
+
+        ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算
+        ---@type body_state_data?
+        horizontal = {},
+    }
+
+    ---@typedef body_state_data
+    {
+        ---このモデルパーツの絶対的な回転の最小値（度）
+        ---@type number
+        min = 0,
+
+        ---このモデルパーツの通常時の回転位置（度）
+        ---@type number
+        neutral = 0,
+
+        ---このモデルパーツの絶対的な回転の最大値（度）
+        ---@type number
+        max = 90,
+
+        ---スニーク時にこのモデルパーツの回転に加えられるオフセット値
+        ---@type number?
+        sneakOffset = 30,
+
+        ---頭の回転と共にこのモデルパーツの回転に加えられる値の倍率
+        ---@type number?
+        headRotMultiplayer = -1,
+
+        ---頭の前後方向の回転データ
+        ---@type rotation_data?
+        headX = {},
+
+        ---頭の左右方向の回転データ
+        ---@type rotation_data?
+        headZ = {},
+
+        ---頭の角速度基準の回転データ
+        ---@type rotation_data?
+        headRot = {},
+
+        ---体の前後方向の回転データ
+        ---@type rotation_data?
+        bodyX = {},
+
+        ---体の上下方向の回転データ
+        ---@type rotation_data?
+        bodyY = {},
+
+        ---体の左右方向の回転データ
+        ---@type rotation_data?
+        bodyZ = {},
+
+        ---体の角速度基準の回転データ
+        ---@type rotation_data?
+        bodyRot = {}
+    }
+
+    ---@typedef rotation_data
+    {
+        ---この回転事象がモデルパーツに与える回転の倍率
+        ---@type number
+        multiplayer = 80,
+
+        ---この回転事象がモデルパーツに与える回転の最小値
+        ---@type number
+        min = 0,
+
+        ---この回転事象がモデルパーツに与える回転の最大値
+        ---@type number
+        max = 45
+    }
+]]
+
 ---@class Physics 物理演算（もどき）を制御するクラス
 ---@field PHYSICS_DATA table<table> 物理演算で動かすモデルパーツのテーブル
 ---@field VelocityData table<table<number>> 速度データ：1. 頭前後, 2. 上下, 3. 頭左右, 4. 頭角速度, 5. 体前後, 6. 体左右, 7. 体角速度
