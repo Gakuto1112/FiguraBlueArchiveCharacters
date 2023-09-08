@@ -83,7 +83,7 @@ PlacementObject = {
                             break
                         else
                             local block = world.getBlockState(pos)
-                            if block.id == "minecraft:lava" then
+                            if block.id == "minecraft:lava" or block.id == "minecraft:fire" or block.id == "minecraft:soul_fire" then
                                 sounds:playSound("minecraft:block.fire.extinguish", modelPos)
                                 for _ = 1, math.ceil(hitBox[2].x * hitBox[2].y * hitBox[2].z) * 10 do
                                     particles:newParticle("minecraft:smoke", modelPos:copy():add(math.random() * hitBox[2].x - hitBox[2].x / 2, math.random() * hitBox[2].y, math.random() * hitBox[2].z - hitBox[2].z / 2))
