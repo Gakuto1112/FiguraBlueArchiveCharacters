@@ -78,6 +78,7 @@ PlacementObject = {
             end
             --現在の位置でのコリジョン判定
             local collisionDetected = false
+            local inWater = false
             for _, hitBox in ipairs(PlacementObject.HITBOXES) do
                 for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]), hitBox[2])) do
                     local block = world.getBlockState(pos)
@@ -88,6 +89,8 @@ PlacementObject = {
                         end
                         PlacementObject:remove(modelPart)
                         collisionDetected = true
+                    elseif block.id == "minecraft:water" then
+                        inWater = true
                     elseif block:hasCollision() then
                         for _, collision in ipairs(block:getCollisionShape()) do
                             local hitBoxStartPos = modelPos:copy():add(hitBox[1])
@@ -110,7 +113,7 @@ PlacementObject = {
             local fallDistance = 0
             if not collisionDetected then
                 collisionDetected = false
-                for i = 0, -PlacementObject.FALL_SPEED, -(1 / PlacementObject.COLLISION_FINESS) do
+                for i = 0, -(PlacementObject.FALL_SPEED * (inWater and 0.1 or 1)), -(1 / PlacementObject.COLLISION_FINESS) do
                     for _, hitBox in ipairs(PlacementObject.HITBOXES) do
                         for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]):add(0, i), hitBox[2]:copy():mul(1, 0, 1))) do
                             local block = world.getBlockState(pos)
