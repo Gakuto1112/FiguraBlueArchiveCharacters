@@ -13,6 +13,7 @@ events.ENTITY_INIT:register(function ()
 	FaceParts = require("scripts.face_parts")
 	Physics = require("scripts.physics")
 	HeadRing = require("scripts.headRing")
+	require("scripts.skirt")
 	Gun = require("scripts.gun")
 	Bullet = require("scripts.bullet")
 
