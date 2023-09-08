@@ -35,9 +35,11 @@ events.RENDER:register(function()
         models.models.main.Avatar.Head.HeadRing:setRot(HeadRing.HeadRotAverage - headRot + HeadRing.NEUTRAL_ROT)
 
         --頭の輪っかの浮遊アニメーション
-        HeadRing.FloatCount = HeadRing.FloatCount + 0.25 / fps
-        HeadRing.FloatCount = HeadRing.FloatCount > 1 and HeadRing.FloatCount - 1 or HeadRing.FloatCount
-        models.models.main.Avatar.Head.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25, 0)
+        if not client:isPaused() then
+            HeadRing.FloatCount = HeadRing.FloatCount + 0.25 / fps
+            HeadRing.FloatCount = HeadRing.FloatCount > 1 and HeadRing.FloatCount - 1 or HeadRing.FloatCount
+            models.models.main.Avatar.Head.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25, 0)
+        end
         renderProcessed = true
     end
 end)

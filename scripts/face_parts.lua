@@ -66,16 +66,17 @@ FaceParts = {
 local blinkCount = 200
 
 events.TICK:register(function ()
+	local isPaused = client:isPaused()
 	if blinkCount == 0 then
 		FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", 2, false)
 		blinkCount = 200
-	else
+	elseif not isPaused then
 		blinkCount = blinkCount - 1
 	end
 	if FaceParts.EmotionCount == 0 then
 		FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 0, false)
 	end
-	FaceParts.EmotionCount = (FaceParts.EmotionCount > 0 and not client:isPaused()) and FaceParts.EmotionCount - 1 or FaceParts.EmotionCount
+	FaceParts.EmotionCount = (FaceParts.EmotionCount > 0 and not isPaused) and FaceParts.EmotionCount - 1 or FaceParts.EmotionCount
 end)
 
 return FaceParts
