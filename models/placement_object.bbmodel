@@ -501,7 +501,7 @@
 			"uuid": "85dbde6a-e3b7-2e64-fc3c-adb7d57a1608"
 		},
 		{
-			"name": "TableShaftNorth",
+			"name": "TableShaftNorth1",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -511,7 +511,6 @@
 			"to": [15, 18.25, -4],
 			"autouv": 0,
 			"color": 0,
-			"rotation": [0, 0, -45],
 			"origin": [15, 15.25, -3],
 			"faces": {
 				"north": {
@@ -543,7 +542,7 @@
 			"uuid": "a0bac997-e4b0-36a1-c8da-316f16f5e83c"
 		},
 		{
-			"name": "TableShaftSouth",
+			"name": "TableShaftSouth1",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -553,7 +552,6 @@
 			"to": [15, 18.25, 5],
 			"autouv": 0,
 			"color": 0,
-			"rotation": [0, 0, -45],
 			"origin": [15, 15.25, 2],
 			"faces": {
 				"north": {
@@ -6751,17 +6749,16 @@
 			"uuid": "85b71342-8185-0dd2-2a14-9531da573f96"
 		},
 		{
-			"name": "TableShaftMiddle",
+			"name": "TableShaftMiddle1",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [14, 17.25, -4],
-			"to": [15, 18.25, 4],
+			"from": [14, 16.825, -4],
+			"to": [15, 17.825, 4],
 			"autouv": 0,
 			"color": 0,
-			"rotation": [0, 0, -45],
 			"origin": [15, 15.25, 2],
 			"faces": {
 				"north": {
@@ -7740,6 +7737,784 @@
 			},
 			"type": "cube",
 			"uuid": "5731f73e-14a2-48d1-6853-efa73e521d90"
+		},
+		{
+			"name": "WheelEastFrame",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [10.325, 0, -0.5],
+			"to": [13.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [5.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "1c9c86dd-c638-741b-b8b9-03b611c798cf"
+		},
+		{
+			"name": "WheelEastFrame2L",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [13.325, 0, -0.5],
+			"to": [16.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [14.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "44896247-6221-d78d-7c27-a53a44a5c80b"
+		},
+		{
+			"name": "WheelEastFrame3L",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [16.325, 0, -0.5],
+			"to": [19.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [15.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "11d9f13b-a863-f7d9-e9a5-c70d0be27b68"
+		},
+		{
+			"name": "WheelEastFrame4L",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [19.325, 0, -0.5],
+			"to": [22.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [22.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "56829741-c946-4dcc-9578-2daa6b5f0bc4"
+		},
+		{
+			"name": "WheelEastFrame5",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [22.325, 0, -0.5],
+			"to": [25.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [26.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "53c9701b-fcb7-8660-2163-ae7aac1ff7b9"
+		},
+		{
+			"name": "WheelEastFrame2R",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [7.325, 0, -0.5],
+			"to": [10.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [6.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "5b38679a-dde6-0ba0-4b4b-33228b44eab7"
+		},
+		{
+			"name": "WheelEastFrame3R",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [4.325, 0, -0.5],
+			"to": [7.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [6.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "6720532a-b377-9ef2-d8c7-5c3448c056a3"
+		},
+		{
+			"name": "WheelEastFrame4R",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [1.325, 0, -0.5],
+			"to": [4.325, 0.75, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [2.325, 0, 0.5],
+			"faces": {
+				"north": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				},
+				"west": {
+					"uv": [2, 2, 10, 6]
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 12, 27, 13],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "293cb5d1-da68-5e78-748e-02bcde0d2e99"
+		},
+		{
+			"name": "WheelEastShaft1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "af9657d0-84af-3d0d-ea40-c4edda5135e9"
+		},
+		{
+			"name": "WheelEastShaft2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, 45],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "54100cb3-025d-311e-8e3c-8c87d903f2b6"
+		},
+		{
+			"name": "WheelEastShaft3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, 90],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "d65287c4-2ab4-7891-ed26-0776160ac669"
+		},
+		{
+			"name": "WheelEastShaft4",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, 135],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "59db7583-5c03-ccc0-ae8a-4851964f6739"
+		},
+		{
+			"name": "WheelEastShaft5",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -180],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "92328707-a4ab-39d2-af91-709f3b51c012"
+		},
+		{
+			"name": "WheelEastShaft6",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -135],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "1a5b465a-2542-18cb-5935-1b96fa5659c0"
+		},
+		{
+			"name": "WheelEastShaft7",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -90],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "266ae763-65a0-db87-804a-47ddbe9fab52"
+		},
+		{
+			"name": "WheelEastShaft8",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [11.575, 4.125, -0.25],
+			"to": [12.075, 6.5, 0.25],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -45],
+			"origin": [11.825, 3.625, 0],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"up": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [2, 0, 2, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "4ae21e2e-1bbf-326a-4b5d-9b1e5c6410a2"
+		},
+		{
+			"name": "TableShaftSouth2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [15, 4.25, 4],
+			"to": [21.5, 5.25, 5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [15, 15.25, 2],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "742884d0-789f-7954-dd2d-e7a5d342bf24"
+		},
+		{
+			"name": "TableShaftNorth2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [15, 4.25, -5],
+			"to": [21.5, 5.25, -4],
+			"autouv": 0,
+			"color": 0,
+			"origin": [15, 15.25, -3],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "43c2c94d-3d07-d800-68d8-7e0b8f4543c1"
+		},
+		{
+			"name": "TableShaftMiddle2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [20.5, 4.25, -4],
+			"to": [21.5, 5.25, 4],
+			"autouv": 0,
+			"color": 0,
+			"origin": [15, 15.25, -3],
+			"faces": {
+				"north": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"east": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"south": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				},
+				"down": {
+					"uv": [26, 13, 27, 14],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "fd473a36-0f32-ce3f-e3c3-dbe63cc4663d"
 		}
 	],
 	"outliner": [
@@ -8098,6 +8873,165 @@
 								}
 							]
 						},
+						{
+							"name": "WheelEast",
+							"origin": [11.825, 3.625, 0],
+							"color": 0,
+							"uuid": "5c873e6d-d2bd-47a4-a4c1-85fc51107a1e",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "WheelEastFrame",
+									"origin": [5.325, 0, 0.5],
+									"color": 0,
+									"uuid": "eae29683-dd72-2e7f-0b17-9344ede24495",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										"1c9c86dd-c638-741b-b8b9-03b611c798cf",
+										{
+											"name": "WheelEastFrame2L",
+											"origin": [13.325, 0, 0.5],
+											"rotation": [0, 0, 45],
+											"color": 0,
+											"uuid": "3c80801a-b1dd-beca-fc61-57369f22e0cb",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												"44896247-6221-d78d-7c27-a53a44a5c80b",
+												{
+													"name": "WheelEastFrame3L",
+													"origin": [16.325, 0, 0.5],
+													"rotation": [0, 0, 45],
+													"color": 0,
+													"uuid": "65e1276c-910e-958b-e83a-cd5143cc4ef3",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														"11d9f13b-a863-f7d9-e9a5-c70d0be27b68",
+														{
+															"name": "WheelEastFrame4L",
+															"origin": [19.325, 0, 0.5],
+															"rotation": [0, 0, 45],
+															"color": 0,
+															"uuid": "0cd8d7b7-a93b-c636-190f-27325159437f",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"56829741-c946-4dcc-9578-2daa6b5f0bc4",
+																{
+																	"name": "WheelEastFrame5",
+																	"origin": [22.325, 0, 0.5],
+																	"rotation": [0, 0, 45],
+																	"color": 0,
+																	"uuid": "e92b12b4-02e9-4281-5024-86520ca6a803",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": ["53c9701b-fcb7-8660-2163-ae7aac1ff7b9"]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "WheelEastFrame2R",
+											"origin": [10.325, 0, 0.5],
+											"rotation": [0, 0, -45],
+											"color": 0,
+											"uuid": "3a6325d2-fc6f-b0ce-f60b-d995b9ba61f0",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												"5b38679a-dde6-0ba0-4b4b-33228b44eab7",
+												{
+													"name": "WheelEastFrame3R",
+													"origin": [7.325, 0, 0.5],
+													"rotation": [0, 0, -45],
+													"color": 0,
+													"uuid": "86855916-a7f5-8b33-1261-9589e44dedac",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														"6720532a-b377-9ef2-d8c7-5c3448c056a3",
+														{
+															"name": "WheelEastFrame4R",
+															"origin": [4.325, 0, 0.5],
+															"rotation": [0, 0, -45],
+															"color": 0,
+															"uuid": "2a7c89b3-ae82-57c1-6bcc-c9e7a1bfe30d",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["293cb5d1-da68-5e78-748e-02bcde0d2e99"]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "WheelEastShaft",
+									"origin": [4.825, -0.75, 0.5],
+									"color": 0,
+									"uuid": "ccbc0c85-fc23-c44c-0747-798dd4b942ac",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										"af9657d0-84af-3d0d-ea40-c4edda5135e9",
+										"54100cb3-025d-311e-8e3c-8c87d903f2b6",
+										"d65287c4-2ab4-7891-ed26-0776160ac669",
+										"59db7583-5c03-ccc0-ae8a-4851964f6739",
+										"92328707-a4ab-39d2-af91-709f3b51c012",
+										"1a5b465a-2542-18cb-5935-1b96fa5659c0",
+										"266ae763-65a0-db87-804a-47ddbe9fab52",
+										"4ae21e2e-1bbf-326a-4b5d-9b1e5c6410a2"
+									]
+								}
+							]
+						},
 						"6b613621-54da-69ff-11c3-51be10184c0f"
 					]
 				},
@@ -8157,16 +9091,24 @@
 						},
 						{
 							"name": "TableShaft",
-							"origin": [-6, 1.25, 0],
+							"origin": [15, 16, 0],
+							"rotation": [0, 0, -42.5],
 							"color": 0,
 							"uuid": "4e32e922-2778-fbd2-e10c-3f7963bddc9e",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["a0bac997-e4b0-36a1-c8da-316f16f5e83c", "96240497-b57b-aa19-a59d-d0aa399aad1a", "e7a9edf2-5a6e-e800-b789-32ccdda325ef"]
+							"children": [
+								"a0bac997-e4b0-36a1-c8da-316f16f5e83c",
+								"43c2c94d-3d07-d800-68d8-7e0b8f4543c1",
+								"e7a9edf2-5a6e-e800-b789-32ccdda325ef",
+								"fd473a36-0f32-ce3f-e3c3-dbe63cc4663d",
+								"96240497-b57b-aa19-a59d-d0aa399aad1a",
+								"742884d0-789f-7954-dd2d-e7a5d342bf24"
+							]
 						},
 						{
 							"name": "Flowers",
@@ -8893,7 +9835,7 @@
 			"override": false,
 			"length": 5,
 			"snapping": 24,
-			"selected": false,
+			"selected": true,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
@@ -9096,6 +10038,50 @@
 								}
 							],
 							"uuid": "4e84f056-8754-4c07-86eb-61ebf5bc5df2",
+							"time": 5,
+							"color": -1,
+							"interpolation": "bezier",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"5c873e6d-d2bd-47a4-a4c1-85fc51107a1e": {
+					"name": "WheelEast",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "1080"
+								}
+							],
+							"uuid": "832df17d-73bd-8d88-707d-c90a476dfb85",
+							"time": 0,
+							"color": -1,
+							"interpolation": "bezier",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -3.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 3.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 0,
+									"y": 0,
+									"z": 0
+								}
+							],
+							"uuid": "f3148e4e-1873-5306-c491-cf7c2ea6a240",
 							"time": 5,
 							"color": -1,
 							"interpolation": "bezier",
