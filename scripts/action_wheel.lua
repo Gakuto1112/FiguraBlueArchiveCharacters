@@ -75,6 +75,10 @@ function pings.action_wheel_main_action3_changeName(typeId, showClubName)
     Nameplate:setName(typeId, showClubName)
 end
 
+function pings.action_wheel_main_action4(toggled)
+    Armor.ShowArmor = toggled
+end
+
 events.TICK:register(function()
     local actionWheelOpened = action_wheel:isEnabled()
     if actionWheelOpened then
@@ -165,9 +169,11 @@ end)
 
 --アクション4. 防具の表示
 mainPage:newAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_4__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:iron_chestplate"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+    pings.action_wheel_main_action4(true)
     action:hoverColor(0.33, 1, 0.33)
     Config:saveConfig("showArmor", true)
 end):onUntoggle(function(_, action)
+    pings.action_wheel_main_action4(false)
     action:hoverColor(1, 0.33, 0.33)
     Config:saveConfig("showArmor", false)
 end)

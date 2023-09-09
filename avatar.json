@@ -5,7 +5,13 @@
 	"version": "0.1.1",
 	"color": "a3e0fb",
 	"ignoredTextures": [
-		"textures.for_modeling.water_still"
+		"textures.for_modeling.water_still",
+		"textures.for_modeling.leather_layer_1",
+		"textures.for_modeling.leather_layer_1_overlay",
+		"textures.for_modeling.leather_layer_2",
+		"textures.for_modeling.leather_layer_2_overlay",
+		"textures.for_modeling.trim",
+		"textures.for_modeling.trim_leggings"
 	],
 	"autoScripts": [
 		"scripts/index.lua"
@@ -34,6 +40,120 @@
 		},
 		"models.models.main.CameraAnchor": {
 			"parentType": "None"
+		},
+		"models.models.armor.ArmorH": {
+			"moveTo": "models.models.main.Avatar.Head",
+			"visible": false
+		},
+		"models.models.armor.ArmorH.Helmet.HelmetTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Body"
+		},
+		"models.models.armor.ArmorB.Chestplate": {
+			"visible": false
+		},
+		"models.models.armor.ArmorB.Chestplate.ChestplateTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorB.Leggings": {
+			"visible": false
+		},
+		"models.models.armor.ArmorB.Leggings.LeggingsTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRA": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm",
+			"visible": false
+		},
+		"models.models.armor.ArmorRA.RightChestplate.RightChestplateTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRAB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom",
+			"visible": false
+		},
+		"models.models.armor.ArmorRAB.RightChestplateBottom.RightChestplateBottomTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLA": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.LeftArm",
+			"visible": false
+		},
+		"models.models.armor.ArmorLA.LeftChestplate.LeftChestplateTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLAB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom",
+			"visible": false
+		},
+		"models.models.armor.ArmorLAB.LeftChestplateBottom.LeftChestplateBottomTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRL": {
+			"moveTo": "models.models.main.Avatar.LowerBody.Legs.RightLeg"
+		},
+		"models.models.armor.ArmorRL.RightLeggings": {
+			"visible": false,
+			"parentType": "None"
+		},
+		"models.models.armor.ArmorRL.RightLeggings.RightLeggingsTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRL.RightBoots": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRL.RightBoots.RightBootsTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRLB": {
+			"moveTo": "models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegBottom"
+		},
+		"models.models.armor.ArmorRLB.RightLeggingsBottom": {
+			"visible": false,
+			"parentType": "None"
+		},
+		"models.models.armor.ArmorRLB.RightLeggingsBottom.RightLeggingsBottomTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRLB.RightBootsBottom": {
+			"visible": false
+		},
+		"models.models.armor.ArmorRLB.RightBootsBottom.RightBootsBottomTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLL": {
+			"moveTo": "models.models.main.Avatar.LowerBody.Legs.LeftLeg"
+		},
+		"models.models.armor.ArmorLL.LeftLeggings": {
+			"visible": false,
+			"parentType": "None"
+		},
+		"models.models.armor.ArmorLL.LeftLeggings.LeftLeggingsTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLL.LeftBoots": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLL.LeftBoots.LeftBootsTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLLB": {
+			"moveTo": "models.models.main.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom"
+		},
+		"models.models.armor.ArmorLLB.LeftLeggingsBottom": {
+			"visible": false,
+			"parentType": "None"
+		},
+		"models.models.armor.ArmorLLB.LeftLeggingsBottom.LeftLeggingsBottomTrim": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLLB.LeftBootsBottom": {
+			"visible": false
+		},
+		"models.models.armor.ArmorLLB.LeftBootsBottom.LeftBootsBottomTrim": {
+			"visible": false
 		},
 		"models.models.placement_object.PlacementObject": {
 			"visible": false
