@@ -16,10 +16,13 @@ local mainPage = action_wheel:newPage()
 local attackType = "MYSTERY"
 
 --ping関数
-function pings.action_wheel_main_action1()
+function pings.action_wheel_main_action1_left()
     ExSkill:play()
 end
 
+function pings.action_wheel_main_action1_right()
+    PlacementObject:removeAll()
+end
 events.TICK:register(function()
     if action_wheel:isEnabled() then
         --EXスキルが再生可能か確認
@@ -33,14 +36,16 @@ end)
 
 --アクションの設定
 --アクション1. Exスキル
-mainPage:newAction(1):item("diamond"):onLeftClick(function ()
+mainPage:newAction(1):item("diamond"):onLeftClick(function()
     if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 then
-        pings.action_wheel_main_action1()
+        pings.action_wheel_main_action1_left()
     elseif renderer:isFirstPerson() then
         print(Language:getTranslate("action_wheel__main__action_1__unavailable_firstperson"))
     else
         print(Language:getTranslate("action_wheel__main__action_1__unavailable"))
     end
+end):onRightClick(function()
+    pings.action_wheel_main_action1_right()
 end)
 
 action_wheel:setPage(mainPage)
