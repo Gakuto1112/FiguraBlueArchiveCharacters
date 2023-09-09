@@ -3,17 +3,29 @@
 Language = {
 	LanguageData = {
 		en_us = {
+			namepalte__club_name = "Festival Management Committee", --Club name
+			action_wheel__toggle_off = "off",
+			action_wheel__toggle_on = "on",
 			action_wheel__main__action_1__title = "Ex skill",
 			action_wheel__main__action_1__title_2 = "Momoyado on-site service!", --Ex skill name
 			action_wheel__main__action_1__unavailable = "You cannot do this now.",
-			action_wheel__main__action_1__unavailable_firstperson = "You cannot do this in first person."
+			action_wheel__main__action_1__unavailable_firstperson = "You cannot do this in first person.",
+			action_wheel__main__action_2__title = "Change display name: ",
+			action_wheel__main__action_2__title_2 = "Show club name: "
 
 		},
 		ja_jp = {
+			namepalte__club_name = "お祭り運営委員会", --部活名
+			action_wheel__toggle_off = "オフ",
+			action_wheel__toggle_on = "オン",
 			action_wheel__main__action_1__title = "Exスキル",
 			action_wheel__main__action_1__title_2 = "百夜堂出張サービス！", --Exスキル名
 			action_wheel__main__action_1__unavailable = "今は再生できません。",
-			action_wheel__main__action_1__unavailable_firstperson = "一人称視点では再生できません。"
+			action_wheel__main__action_1__unavailable_firstperson = "一人称視点では再生できません。",
+			action_wheel__main__action_3__title = "表示名を変更：",
+			action_wheel__main__action_3__title_2 = "部活名を表示：",
+			action_wheel__main__action_3__done_first = "表示名を§b",
+			action_wheel__main__action_3__done_last = "§rに変更しました。"
 		}
 	},
 

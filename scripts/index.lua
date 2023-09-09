@@ -17,6 +17,7 @@ events.ENTITY_INIT:register(function ()
 	require("scripts.skirt")
 	Gun = require("scripts.gun")
 	Bullet = require("scripts.bullet")
+	Nameplate = require("scripts.nameplate")
 
 	--機能別クラス
 	ActionWheel = require("scripts.action_wheel")
