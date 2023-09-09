@@ -38,7 +38,7 @@ events.RENDER:register(function()
         if not client:isPaused() then
             HeadRing.FloatCount = HeadRing.FloatCount + 0.25 / fps
             HeadRing.FloatCount = HeadRing.FloatCount > 1 and HeadRing.FloatCount - 1 or HeadRing.FloatCount
-            models.models.main.Avatar.Head.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25, 0)
+            models.models.main.Avatar.Head.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25)
         end
         renderProcessed = true
     end
@@ -48,6 +48,12 @@ events.WORLD_RENDER:register(function()
     renderProcessed = false
 end)
 
-models.models.main.Avatar.Head.HeadRing:setLight(15)
+events.SKULL_RENDER:register(function()
+    models.models.skull.Skull.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25)
+end)
+
+for _, modelPart in ipairs({models.models.main.Avatar.Head.HeadRing, models.models.skull.Skull.HeadRing}) do
+    modelPart:setLight(15)
+end
 
 return HeadRing
