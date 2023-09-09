@@ -18,7 +18,9 @@ Language = {
 			action_wheel__main__action_3__title = "Change display name: ",
 			action_wheel__main__action_3__title_2 = "Show club name: ",
 			action_wheel__main__action_3__done_first = "Changed display name to§b",
-			action_wheel__main__action_3__done_last = "§r."
+			action_wheel__main__action_3__done_last = "§r.",
+			action_wheel__main__action_4__title = "Show armors: ",
+			action_wheel__main__action_5__title = "Show health bar: "
 		},
 		ja_jp = {
 			namepalte__club_name = "お祭り運営委員会", --部活名
@@ -36,7 +38,9 @@ Language = {
 			action_wheel__main__action_3__title = "表示名を変更：",
 			action_wheel__main__action_3__title_2 = "部活名を表示：",
 			action_wheel__main__action_3__done_first = "表示名を§b",
-			action_wheel__main__action_3__done_last = "§rに変更しました。"
+			action_wheel__main__action_3__done_last = "§rに変更しました。",
+			action_wheel__main__action_4__title = "防具を表示：",
+			action_wheel__main__action_5__title = "HPバーを表示："
 		}
 	},
 

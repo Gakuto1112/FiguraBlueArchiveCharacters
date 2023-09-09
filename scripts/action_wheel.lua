@@ -163,6 +163,34 @@ end):onRightClick(function()
     refreshNameChangeActionTitle()
 end)
 
+--アクション4. 防具の表示
+mainPage:newAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_4__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:iron_chestplate"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+    action:hoverColor(0.33, 1, 0.33)
+    Config:saveConfig("showArmor", true)
+end):onUntoggle(function(_, action)
+    action:hoverColor(1, 0.33, 0.33)
+    Config:saveConfig("showArmor", false)
+end)
+if Config:loadConfig("showArmor", false) then
+    local action = mainPage:getAction(4)
+    action:toggled(true)
+    action:hoverColor(0.33, 1, 0.33)
+end
+
+--アクション5. HPバーの表示
+mainPage:newAction(5):title(Language:getTranslate("action_wheel__main__action_5__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_5__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:cake"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+    action:hoverColor(0.33, 1, 0.33)
+    Config:saveConfig("showHealthBar", true)
+end):onUntoggle(function(_, action)
+    action:hoverColor(1, 0.33, 0.33)
+    Config:saveConfig("showHealthBar", false)
+end)
+if Config:loadConfig("showHealthBar", false) then
+    local action = mainPage:getAction(5)
+    action:toggled(true)
+    action:hoverColor(0.33, 1, 0.33)
+end
+
 refreshCostumeChangeActionTitle()
 refreshNameChangeActionTitle()
 
