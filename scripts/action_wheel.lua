@@ -21,11 +21,11 @@ local actionWheelOpenedPrev = false
 
 ---現在選択中の表示名
 ---@type integer
-local selectingNameState = 1
+local selectingNameState = Nameplate.CurrentName
 
 ---現在選択中の「部活名を表示するかどうか」
 ---@type boolean
-local selectingShowClubName = false
+local selectingShowClubName = Nameplate.ClubShown
 
 --関数
 local function refreshNameChangeActionTitle()
@@ -68,6 +68,8 @@ events.TICK:register(function()
     elseif actionWheelOpenedPrev then
         if selectingNameState ~= Nameplate.CurrentName or selectingShowClubName ~= Nameplate.ClubShown then
             pings.action_wheel_main_action3_changeName(selectingNameState, selectingShowClubName)
+            Config:saveConfig("currentName", selectingNameState)
+            Config:saveConfig("showClubName", selectingShowClubName)
             print(Language:getTranslate("action_wheel__main__action_3__done_first")..Nameplate:getName(selectingNameState)..Language:getTranslate("action_wheel__main__action_3__done_last"))
         end
     end

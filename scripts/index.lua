@@ -1,6 +1,7 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
 	Language = require("scripts.language")
+	Config = require("scripts.config")
 
 	--ユーティリティクラス
 	PlayerUtils = require("scripts.utils.player_utils")
