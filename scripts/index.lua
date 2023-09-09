@@ -21,6 +21,7 @@ events.ENTITY_INIT:register(function ()
 	Nameplate = require("scripts.nameplate")
 
 	--機能別クラス
+	Costume = require("scripts.costume")
 	ActionWheel = require("scripts.action_wheel")
 	ExSkill = require("scripts.ex_skill")
 	PlacementObject = require("scripts.placement_object")

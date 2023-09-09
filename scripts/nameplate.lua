@@ -3,7 +3,7 @@
 ---@field ClubShown boolean 部活名を表示するかどうか
 Nameplate = {
     --変数
-    CurrentName = Config:loadConfig("currentName", 1),
+    CurrentName = Config:loadConfig("name", 1),
     ClubShown = Config:loadConfig("showClubName", false),
 
     --関数
