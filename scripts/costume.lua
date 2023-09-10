@@ -3,7 +3,7 @@
 ---@field CurrentCostume integer 現在のコスチューム
 Costume = {
 	--定数
-	COSTUME_LIST = {"default"},
+	COSTUME_LIST = {"default", "swimsuit"},
 
 	--変数
 	CurrentCostume = Config:loadConfig("costume", 1),
@@ -28,13 +28,30 @@ Costume = {
 	---@param costume integer 設定するコスチューム
 	setCostume = function(self, costume)
 		self:resetCostume()
+		if costume == 2 then
+			--水着
+			self:setCostumeTextureOffset(1)
+			for _, modelPart in ipairs({models.models.main.Avatar.Head.Brim, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom}) do
+				modelPart:setVisible(false)
+			end
+			models.models.main.Avatar.Head.CSwimsuitH:setVisible(true)
+			for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
+				modelPart:setVisible(not Armor.ArmorVisible[1])
+			end
+		end
 		self.CurrentCostume = costume
 	end,
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
 	resetCostume = function(self)
 		self:setCostumeTextureOffset(0)
-		Costume.CurrentCostume = 1
+		models.models.main.Avatar.Head.Brim:setVisible(not Armor.ArmorVisible[1])
+		models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[2])
+		for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom}) do
+			modelPart:setVisible()
+		end
+		models.models.main.Avatar.Head.CSwimsuitH:setVisible(false)
+	Costume.CurrentCostume = 1
 	end,
 
 	---防具が更新された時にArmorから呼び出される関数
@@ -42,12 +59,17 @@ Costume = {
 	onArmorChenge = function(self, armorIndex)
 		if armorIndex == 1 then
 			if Armor.ArmorVisible[1] then
-				for _, modelPart in ipairs({models.models.main.Avatar.Head.Brim, models.models.main.Avatar.Head.HairTails}) do
+				for _, modelPart in ipairs({models.models.main.Avatar.Head.Brim, models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
 					modelPart:setVisible(false)
 				end
 			else
-				for _, modelPart in ipairs({models.models.main.Avatar.Head.Brim, models.models.main.Avatar.Head.HairTails}) do
-					modelPart:setVisible(true)
+				models.models.main.Avatar.Head.HairTails:setVisible(true)
+				if self.CurrentCostume == 1 then
+					models.models.main.Avatar.Head.Brim:setVisible(true)
+				elseif self.CurrentCostume == 2 then
+					for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
+						modelPart:setVisible(true)
+					end
 				end
 			end
 		elseif armorIndex == 2 then
@@ -63,7 +85,7 @@ Costume = {
 				Physics.PHYSICS_DATA[1].x.horizontal.neutral = 0
 				Physics.PHYSICS_DATA[1].x.horizontal.max = 0
 			else
-				models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(true)
+				models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(self.CurrentCostume == 1)
 				for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
 					modelPart:setPos()
 				end

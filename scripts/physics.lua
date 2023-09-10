@@ -13,8 +13,8 @@
 
     ---@typedef physic_data_entry
     {
-        ---物理演算を適用するモデルパーツ
-        ---@type ModelPart
+        ---物理演算を適用するモデルパーツ。テーブル指定で複数のモデルパーツにおいて設定可能。
+        ---@type ModelPart|table
         modelPart = path.to.modelPart,
 
         ---X軸の物理演算データ
@@ -234,7 +234,7 @@ Physics = {
             }
         },
         {
-            modelPart = models.models.main.Avatar.Head.Brim.BrimRibbon.BrimLines.BrimLineLeft,
+            modelPart = {models.models.main.Avatar.Head.Brim.BrimRibbon.BrimLines.BrimLineLeft, models.models.main.Avatar.Head.Brim.BrimRibbon.BrimLines.BrimLineRight, models.models.main.Avatar.Head.CSwimsuitH.Brim.BrimRibbonRight.BrimLines.BrimLineLeft, models.models.main.Avatar.Head.CSwimsuitH.Brim.BrimRibbonRight.BrimLines.BrimLineRight},
             x = {
                 vertical = {
                     min = 0,
@@ -287,55 +287,108 @@ Physics = {
             }
         },
         {
-            modelPart = models.models.main.Avatar.Head.Brim.BrimRibbon.BrimLines.BrimLineRight,
+            modelPart = models.models.main.Avatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft,
             x = {
                 vertical = {
-                    min = 0,
-                    neutral = 0,
-                    max = 150,
+                    min = -150,
+                    neutral = -7.5,
+                    max = 70,
                     headRotMultiplayer = -1,
                     headX = {
-                        multiplayer = -160,
-                        min = 0,
-                        max = 90
-                    },
-                    bodyY = {
-                        multiplayer = -160,
-                        min = 0,
-                        max = 150
+                        multiplayer = -80,
+                        min = -90,
+                        max = 70
                     },
                     headRot = {
-                        multiplayer = -0.1,
-                        min = 0,
-                        max = 90
+                        multiplayer = 0.05,
+                        min = -90,
+                        max = -7.5
+                    },
+                    bodyY = {
+                        multiplayer = 80,
+                        min = -150,
+                        max = -7.5
                     }
                 },
                 horizontal = {
-                    min = 0,
+                    min = -150,
                     neutral = 45,
-                    max = 150,
+                    max = 70,
                     headX = {
-                        multiplayer = -160,
-                        min = 0,
-                        max = 150
-                    }
+                        multiplayer = -80,
+                        min = -45,
+                        max = 70
+                    },
                 }
             },
             z = {
                 vertical = {
-                    min = -60,
-                    neutral = 0,
-                    max = 0,
+                    min = -70,
+                    neutral = 5,
+                    max = 70,
                     headZ = {
-                        multiplayer = -160,
-                        min = -60,
-                        max = 0
+                        multiplayer = -80,
+                        min = -70,
+                        max = 70
+                    },
+                },
+                horizontal = {
+                    min = -150,
+                    neutral = 20,
+                    max = 70,
+                }
+            }
+        },
+        {
+            modelPart = models.models.main.Avatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight,
+            x = {
+                vertical = {
+                    min = -150,
+                    neutral = -7.5,
+                    max = 70,
+                    headRotMultiplayer = -1,
+                    headX = {
+                        multiplayer = -80,
+                        min = -90,
+                        max = 70
+                    },
+                    headRot = {
+                        multiplayer = 0.05,
+                        min = -90,
+                        max = -7.5
+                    },
+                    bodyY = {
+                        multiplayer = 80,
+                        min = -150,
+                        max = -7.5
                     }
                 },
                 horizontal = {
-                    min = -60,
-                    neutral = 0,
-                    max = 0
+                    min = -150,
+                    neutral = 45,
+                    max = 70,
+                    headX = {
+                        multiplayer = -80,
+                        min = -45,
+                        max = 70
+                    },
+                }
+            },
+            z = {
+                vertical = {
+                    min = -70,
+                    neutral = -5,
+                    max = 70,
+                    headZ = {
+                        multiplayer = -80,
+                        min = -70,
+                        max = 70
+                    },
+                },
+                horizontal = {
+                    min = -150,
+                    neutral = -20,
+                    max = 70,
                 }
             }
         }
@@ -443,200 +496,208 @@ Physics = {
         local headRot = math.deg(math.asin(player:getLookDir().y))
         local isSneaking = player:isCrouching()
         for _, physicData in ipairs(Physics.PHYSICS_DATA) do
-            if physicData.modelPart:getVisible() then
-                local rotX = 0
-                if physicData.x then
-                    if isHorizontal then
-                        rotX = physicData.x.horizontal.neutral
-                        if physicData.x.horizontal.headX then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.horizontal.headX.multiplayer * waterMultiplayer, physicData.x.horizontal.headX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headX.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.headZ then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[3] * physicData.x.horizontal.headZ.multiplayer * waterMultiplayer, physicData.x.horizontal.headZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headZ.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.headRot then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[4] * physicData.x.horizontal.headRot.multiplayer, physicData.x.horizontal.headRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headRot.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.bodyX then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyX.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.bodyY then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyY.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyY.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.bodyZ then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[6] * physicData.x.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyZ.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.bodyRot then
-                            rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.horizontal.bodyRot.multiplayer, physicData.x.horizontal.bodyRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyRot.max - physicData.x.horizontal.neutral)
-                        end
-                        if physicData.x.horizontal.headRotMultiplayer then
-                            rotX = rotX + headRot * physicData.x.horizontal.headRotMultiplayer
-                        end
-                        rotX = math.clamp(rotX, physicData.x.horizontal.min, physicData.x.horizontal.max)
-                        if isSneaking and physicData.x.horizontal.sneakOffset then
-                            rotX = rotX + physicData.x.horizontal.sneakOffset
-                        end
-                    else
-                        rotX = physicData.x.vertical.neutral
-                        if physicData.x.vertical.headX then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.vertical.headX.multiplayer, physicData.x.vertical.headX.min - physicData.x.vertical.neutral, physicData.x.vertical.headX.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.headZ then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[3] * physicData.x.vertical.headZ.multiplayer, physicData.x.vertical.headZ.min - physicData.x.vertical.neutral, physicData.x.vertical.headZ.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.headRot then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[4] * physicData.x.vertical.headRot.multiplayer, physicData.x.vertical.headRot.min - physicData.x.vertical.neutral, physicData.x.vertical.headRot.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.bodyX then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.vertical.bodyX.multiplayer, physicData.x.vertical.bodyX.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyX.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.bodyY then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer, physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.bodyZ then
-                            rotX = rotX + math.clamp(Physics.VelocityAverage[6] * physicData.x.vertical.bodyZ.multiplayer, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.bodyRot then
-                            rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.vertical.bodyRot.multiplayer, physicData.x.vertical.bodyRot.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyRot.max - physicData.x.vertical.neutral)
-                        end
-                        if physicData.x.vertical.headRotMultiplayer then
-                            rotX = rotX + headRot * physicData.x.vertical.headRotMultiplayer
-                        end
-                        rotX = math.clamp(rotX, physicData.x.vertical.min, physicData.x.vertical.max)
-                        if isSneaking and physicData.x.vertical.sneakOffset then
-                            rotX = rotX + physicData.x.vertical.sneakOffset
-                        end
-                    end
-                end
-                local rotY = 0
-                if physicData.y then
-                    if isHorizontal then
-                        rotY = physicData.y.horizontal.neutral
-                        if physicData.y.horizontal.headX then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.horizontal.headX.multiplayer * waterMultiplayer, physicData.y.horizontal.headX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headX.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.headZ then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[3] * physicData.y.horizontal.headZ.multiplayer * waterMultiplayer, physicData.y.horizontal.headZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headZ.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.headRot then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[4] * physicData.y.horizontal.headRot.multiplayer, physicData.y.horizontal.headRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headRot.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.bodyX then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[5] * physicData.y.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyX.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.bodyY then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyY.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyY.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.bodyZ then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[6] * physicData.y.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyZ.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.bodyRot then
-                            rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.horizontal.bodyRot.multiplayer, physicData.y.horizontal.bodyRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyRot.max - physicData.y.horizontal.neutral)
-                        end
-                        if physicData.y.horizontal.headRotMultiplayer then
-                            rotY = rotY + headRot * physicData.y.horizontal.headRotMultiplayer
-                        end
-                        rotY = math.clamp(rotY, physicData.y.horizontal.min, physicData.y.horizontal.max)
-                        if isSneaking and physicData.y.horizontal.sneakOffset then
-                            rotY = rotY + physicData.y.horizontal.sneakOffset
-                        end
-                    else
-                        rotY = physicData.y.vertical.neutral
-                        if physicData.y.vertical.headX then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.vertical.headX.multiplayer, physicData.y.vertical.headX.min - physicData.y.vertical.neutral, physicData.y.vertical.headX.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.headZ then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[3] * physicData.y.vertical.headZ.multiplayer, physicData.y.vertical.headZ.min - physicData.y.vertical.neutral, physicData.y.vertical.headZ.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.headRot then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[4] * physicData.y.vertical.headRot.multiplayer, physicData.y.vertical.headRot.min - physicData.y.vertical.neutral, physicData.y.vertical.headRot.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.bodyX then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[5] * physicData.y.vertical.bodyX.multiplayer, physicData.y.vertical.bodyX.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyX.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.bodyY then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.vertical.bodyY.multiplayer, physicData.y.vertical.bodyY.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyY.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.bodyZ then
-                            rotY = rotY + math.clamp(Physics.VelocityAverage[6] * physicData.y.vertical.bodyZ.multiplayer, physicData.y.vertical.bodyZ.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyZ.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.bodyRot then
-                            rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.vertical.bodyRot.multiplayer, physicData.y.vertical.bodyRot.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyRot.max - physicData.y.vertical.neutral)
-                        end
-                        if physicData.y.vertical.headRotMultiplayer then
-                            rotY = rotY + headRot * physicData.y.vertical.headRotMultiplayer
-                        end
-                        rotY = math.clamp(rotY, physicData.y.vertical.min, physicData.y.vertical.max)
-                        if isSneaking and physicData.y.vertical.sneakOffset then
-                            rotY = rotY + physicData.y.vertical.sneakOffset
+            local modelParts = {}
+            if type(physicData.modelPart) == "ModelPart" then
+                table.insert(modelParts, physicData.modelPart)
+            elseif type(physicData.modelPart) == "table" then
+                modelParts = physicData.modelPart
+            end
+            for _, modelPart in ipairs(modelParts) do
+                if modelPart:getVisible() then
+                    local rotX = 0
+                    if physicData.x then
+                        if isHorizontal then
+                            rotX = physicData.x.horizontal.neutral
+                            if physicData.x.horizontal.headX then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.horizontal.headX.multiplayer * waterMultiplayer, physicData.x.horizontal.headX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headX.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.headZ then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[3] * physicData.x.horizontal.headZ.multiplayer * waterMultiplayer, physicData.x.horizontal.headZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headZ.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.headRot then
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.x.horizontal.headRot.multiplayer, physicData.x.horizontal.headRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headRot.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.bodyX then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyX.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.bodyY then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyY.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyY.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.bodyZ then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[6] * physicData.x.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyZ.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.bodyRot then
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.horizontal.bodyRot.multiplayer, physicData.x.horizontal.bodyRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyRot.max - physicData.x.horizontal.neutral)
+                            end
+                            if physicData.x.horizontal.headRotMultiplayer then
+                                rotX = rotX + headRot * physicData.x.horizontal.headRotMultiplayer
+                            end
+                            rotX = math.clamp(rotX, physicData.x.horizontal.min, physicData.x.horizontal.max)
+                            if isSneaking and physicData.x.horizontal.sneakOffset then
+                                rotX = rotX + physicData.x.horizontal.sneakOffset
+                            end
+                        else
+                            rotX = physicData.x.vertical.neutral
+                            if physicData.x.vertical.headX then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.vertical.headX.multiplayer, physicData.x.vertical.headX.min - physicData.x.vertical.neutral, physicData.x.vertical.headX.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.headZ then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[3] * physicData.x.vertical.headZ.multiplayer, physicData.x.vertical.headZ.min - physicData.x.vertical.neutral, physicData.x.vertical.headZ.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.headRot then
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.x.vertical.headRot.multiplayer, physicData.x.vertical.headRot.min - physicData.x.vertical.neutral, physicData.x.vertical.headRot.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.bodyX then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.vertical.bodyX.multiplayer, physicData.x.vertical.bodyX.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyX.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.bodyY then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer, physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.bodyZ then
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[6] * physicData.x.vertical.bodyZ.multiplayer, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.bodyRot then
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.vertical.bodyRot.multiplayer, physicData.x.vertical.bodyRot.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyRot.max - physicData.x.vertical.neutral)
+                            end
+                            if physicData.x.vertical.headRotMultiplayer then
+                                rotX = rotX + headRot * physicData.x.vertical.headRotMultiplayer
+                            end
+                            rotX = math.clamp(rotX, physicData.x.vertical.min, physicData.x.vertical.max)
+                            if isSneaking and physicData.x.vertical.sneakOffset then
+                                rotX = rotX + physicData.x.vertical.sneakOffset
+                            end
                         end
                     end
-                end
-                local rotZ = 0
-                if physicData.z then
-                    if isHorizontal then
-                        rotZ = physicData.z.horizontal.neutral
-                        if physicData.z.horizontal.headX then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.horizontal.headX.multiplayer * waterMultiplayer, physicData.z.horizontal.headX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headX.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.headZ then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[3] * physicData.z.horizontal.headZ.multiplayer * waterMultiplayer, physicData.z.horizontal.headZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headZ.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.headRot then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[4] * physicData.z.horizontal.headRot.multiplayer, physicData.z.horizontal.headRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headRot.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.bodyX then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[5] * physicData.z.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyX.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.bodyY then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyY.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyY.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.bodyZ then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[6] * physicData.z.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyZ.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.bodyRot then
-                            rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.horizontal.bodyRot.multiplayer, physicData.z.horizontal.bodyRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyRot.max - physicData.z.horizontal.neutral)
-                        end
-                        if physicData.z.horizontal.headRotMultiplayer then
-                            rotZ = rotZ + headRot * physicData.z.horizontal.headRotMultiplayer
-                        end
-                        rotZ = math.clamp(rotZ, physicData.z.horizontal.min, physicData.z.horizontal.max)
-                        if isSneaking and physicData.z.horizontal.sneakOffset then
-                            rotZ = rotZ + physicData.z.horizontal.sneakOffset
-                        end
-                    else
-                        rotZ = physicData.z.vertical.neutral
-                        if physicData.z.vertical.headX then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.vertical.headX.multiplayer, physicData.z.vertical.headX.min - physicData.z.vertical.neutral, physicData.z.vertical.headX.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.headZ then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[3] * physicData.z.vertical.headZ.multiplayer, physicData.z.vertical.headZ.min - physicData.z.vertical.neutral, physicData.z.vertical.headZ.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.headRot then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[4] * physicData.z.vertical.headRot.multiplayer, physicData.z.vertical.headRot.min - physicData.z.vertical.neutral, physicData.z.vertical.headRot.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.bodyX then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[5] * physicData.z.vertical.bodyX.multiplayer, physicData.z.vertical.bodyX.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyX.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.bodyY then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.vertical.bodyY.multiplayer, physicData.z.vertical.bodyY.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyY.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.bodyZ then
-                            rotZ = rotZ + math.clamp(Physics.VelocityAverage[6] * physicData.z.vertical.bodyZ.multiplayer, physicData.z.vertical.bodyZ.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyZ.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.bodyRot then
-                            rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.vertical.bodyRot.multiplayer, physicData.z.vertical.bodyRot.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyRot.max - physicData.z.vertical.neutral)
-                        end
-                        if physicData.z.vertical.headRotMultiplayer then
-                            rotZ = rotZ + headRot * physicData.z.vertical.headRotMultiplayer
-                        end
-                        rotZ = math.clamp(rotZ, physicData.z.vertical.min, physicData.z.vertical.max)
-                        if isSneaking and physicData.z.vertical.sneakOffset then
-                            rotZ = rotZ + physicData.z.vertical.sneakOffset
+                    local rotY = 0
+                    if physicData.y then
+                        if isHorizontal then
+                            rotY = physicData.y.horizontal.neutral
+                            if physicData.y.horizontal.headX then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.horizontal.headX.multiplayer * waterMultiplayer, physicData.y.horizontal.headX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headX.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.headZ then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[3] * physicData.y.horizontal.headZ.multiplayer * waterMultiplayer, physicData.y.horizontal.headZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headZ.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.headRot then
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.y.horizontal.headRot.multiplayer, physicData.y.horizontal.headRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headRot.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.bodyX then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[5] * physicData.y.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyX.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.bodyY then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyY.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyY.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.bodyZ then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[6] * physicData.y.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyZ.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.bodyRot then
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.horizontal.bodyRot.multiplayer, physicData.y.horizontal.bodyRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyRot.max - physicData.y.horizontal.neutral)
+                            end
+                            if physicData.y.horizontal.headRotMultiplayer then
+                                rotY = rotY + headRot * physicData.y.horizontal.headRotMultiplayer
+                            end
+                            rotY = math.clamp(rotY, physicData.y.horizontal.min, physicData.y.horizontal.max)
+                            if isSneaking and physicData.y.horizontal.sneakOffset then
+                                rotY = rotY + physicData.y.horizontal.sneakOffset
+                            end
+                        else
+                            rotY = physicData.y.vertical.neutral
+                            if physicData.y.vertical.headX then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.vertical.headX.multiplayer, physicData.y.vertical.headX.min - physicData.y.vertical.neutral, physicData.y.vertical.headX.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.headZ then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[3] * physicData.y.vertical.headZ.multiplayer, physicData.y.vertical.headZ.min - physicData.y.vertical.neutral, physicData.y.vertical.headZ.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.headRot then
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.y.vertical.headRot.multiplayer, physicData.y.vertical.headRot.min - physicData.y.vertical.neutral, physicData.y.vertical.headRot.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.bodyX then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[5] * physicData.y.vertical.bodyX.multiplayer, physicData.y.vertical.bodyX.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyX.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.bodyY then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.vertical.bodyY.multiplayer, physicData.y.vertical.bodyY.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyY.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.bodyZ then
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[6] * physicData.y.vertical.bodyZ.multiplayer, physicData.y.vertical.bodyZ.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyZ.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.bodyRot then
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.vertical.bodyRot.multiplayer, physicData.y.vertical.bodyRot.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyRot.max - physicData.y.vertical.neutral)
+                            end
+                            if physicData.y.vertical.headRotMultiplayer then
+                                rotY = rotY + headRot * physicData.y.vertical.headRotMultiplayer
+                            end
+                            rotY = math.clamp(rotY, physicData.y.vertical.min, physicData.y.vertical.max)
+                            if isSneaking and physicData.y.vertical.sneakOffset then
+                                rotY = rotY + physicData.y.vertical.sneakOffset
+                            end
                         end
                     end
+                    local rotZ = 0
+                    if physicData.z then
+                        if isHorizontal then
+                            rotZ = physicData.z.horizontal.neutral
+                            if physicData.z.horizontal.headX then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.horizontal.headX.multiplayer * waterMultiplayer, physicData.z.horizontal.headX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headX.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.headZ then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[3] * physicData.z.horizontal.headZ.multiplayer * waterMultiplayer, physicData.z.horizontal.headZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headZ.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.headRot then
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.z.horizontal.headRot.multiplayer, physicData.z.horizontal.headRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headRot.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.bodyX then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[5] * physicData.z.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyX.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.bodyY then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyY.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyY.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.bodyZ then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[6] * physicData.z.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyZ.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.bodyRot then
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.horizontal.bodyRot.multiplayer, physicData.z.horizontal.bodyRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyRot.max - physicData.z.horizontal.neutral)
+                            end
+                            if physicData.z.horizontal.headRotMultiplayer then
+                                rotZ = rotZ + headRot * physicData.z.horizontal.headRotMultiplayer
+                            end
+                            rotZ = math.clamp(rotZ, physicData.z.horizontal.min, physicData.z.horizontal.max)
+                            if isSneaking and physicData.z.horizontal.sneakOffset then
+                                rotZ = rotZ + physicData.z.horizontal.sneakOffset
+                            end
+                        else
+                            rotZ = physicData.z.vertical.neutral
+                            if physicData.z.vertical.headX then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.vertical.headX.multiplayer, physicData.z.vertical.headX.min - physicData.z.vertical.neutral, physicData.z.vertical.headX.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.headZ then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[3] * physicData.z.vertical.headZ.multiplayer, physicData.z.vertical.headZ.min - physicData.z.vertical.neutral, physicData.z.vertical.headZ.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.headRot then
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.z.vertical.headRot.multiplayer, physicData.z.vertical.headRot.min - physicData.z.vertical.neutral, physicData.z.vertical.headRot.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.bodyX then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[5] * physicData.z.vertical.bodyX.multiplayer, physicData.z.vertical.bodyX.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyX.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.bodyY then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.vertical.bodyY.multiplayer, physicData.z.vertical.bodyY.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyY.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.bodyZ then
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[6] * physicData.z.vertical.bodyZ.multiplayer, physicData.z.vertical.bodyZ.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyZ.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.bodyRot then
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.vertical.bodyRot.multiplayer, physicData.z.vertical.bodyRot.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyRot.max - physicData.z.vertical.neutral)
+                            end
+                            if physicData.z.vertical.headRotMultiplayer then
+                                rotZ = rotZ + headRot * physicData.z.vertical.headRotMultiplayer
+                            end
+                            rotZ = math.clamp(rotZ, physicData.z.vertical.min, physicData.z.vertical.max)
+                            if isSneaking and physicData.z.vertical.sneakOffset then
+                                rotZ = rotZ + physicData.z.vertical.sneakOffset
+                            end
+                        end
+                    end
+                    modelPart:setRot(rotX, rotY, rotZ)
                 end
-                physicData.modelPart:setRot(rotX, rotY, rotZ)
             end
         end
     end,
