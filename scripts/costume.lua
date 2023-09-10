@@ -38,7 +38,9 @@ Costume = {
 			for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
 				modelPart:setVisible(not Armor.ArmorVisible[1])
 			end
+			models.models.skull_swimsuit.Skull:setVisible(true)
 		end
+		models.models.skull_default.Skull:setVisible(false)
 		self.CurrentCostume = costume
 	end,
 
@@ -51,7 +53,9 @@ Costume = {
 			modelPart:setVisible()
 		end
 		models.models.main.Avatar.Head.CSwimsuitH:setVisible(false)
-	Costume.CurrentCostume = 1
+		models.models.skull_default.Skull:setVisible(true)
+		models.models.skull_swimsuit.Skull:setVisible(false)
+		Costume.CurrentCostume = 1
 	end,
 
 	---防具が更新された時にArmorから呼び出される関数

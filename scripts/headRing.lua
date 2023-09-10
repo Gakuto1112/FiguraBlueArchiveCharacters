@@ -49,10 +49,10 @@ events.WORLD_RENDER:register(function()
 end)
 
 events.SKULL_RENDER:register(function()
-    models.models.skull.Skull.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25)
+    models.models["skull_"..Costume.COSTUME_LIST[Costume.CurrentCostume]].Skull.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25)
 end)
 
-for _, modelPart in ipairs({models.models.main.Avatar.Head.HeadRing, models.models.skull.Skull.HeadRing}) do
+for _, modelPart in ipairs({models.models.main.Avatar.Head.HeadRing, models.models.skull_default.Skull.HeadRing, models.models.skull_swimsuit.Skull.HeadRing}) do
     modelPart:setLight(15)
 end
 
