@@ -428,7 +428,15 @@ Physics = {
             if type(physicData.z) == "table" and type(physicData.z.vertical) == "table" then
                 initialRot.z = physicData.z.vertical.neutral
             end
-            physicData.modelPart:setRot(initialRot)
+            local modelParts = {}
+            if type(physicData.modelPart) == "ModelPart" then
+                table.insert(modelParts, physicData.modelPart)
+            elseif type(physicData.modelPart) == "table" then
+                modelParts = physicData.modelPart
+            end
+            for _, modelPart in ipairs(modelParts) do
+                modelPart:setRot(initialRot)
+            end
         end
     end,
 
