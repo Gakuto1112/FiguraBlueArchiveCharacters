@@ -9,7 +9,6 @@ Language = {
 			action_wheel__toggle_off = "off",
 			action_wheel__toggle_on = "on",
 			action_wheel__main__action_1__title = "Ex skill",
-			action_wheel__main__action_1__title_2 = "Momoyado on-site service!", --Ex skill name
 			action_wheel__main__action_1__unavailable = "You cannot do this now.",
 			action_wheel__main__action_1__unavailable_firstperson = "You cannot do this in first person.",
 			action_wheel__main__action_2__title = "Change costume: ",
@@ -30,7 +29,7 @@ Language = {
 			action_wheel__toggle_off = "オフ",
 			action_wheel__toggle_on = "オン",
 			action_wheel__main__action_1__title = "Exスキル",
-			action_wheel__main__action_1__title_2 = "百夜堂出張サービス！", --Exスキル名
+			action_wheel__main__action_1__title_2 = "", --Exスキル名
 			action_wheel__main__action_1__unavailable = "今は再生できません。",
 			action_wheel__main__action_1__unavailable_firstperson = "一人称視点では再生できません。",
 			action_wheel__main__action_2__title = "衣装を変更：",
@@ -54,5 +53,10 @@ Language = {
 		return (self.LanguageData[activeLanguage] and self.LanguageData[activeLanguage][keyName]) and self.LanguageData[activeLanguage][keyName] or (self.LanguageData["en_us"][keyName] and self.LanguageData["en_us"][keyName] or keyName)
 	end
 }
+
+for index, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
+	Language.LanguageData.en_us["action_wheel__main__action_1__title_2_"..index] = exSkill.nameEN
+	Language.LanguageData.ja_jp["action_wheel__main__action_1__title_2_"..index] = exSkill.nameJP
+end
 
 return Language

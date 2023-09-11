@@ -1,5 +1,6 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
+	BlueArchiveCharacter = require("scripts.blue_archive_character")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
 
@@ -15,7 +16,7 @@ events.ENTITY_INIT:register(function ()
 	Armor = require("scripts.armor")
 	FaceParts = require("scripts.face_parts")
 	Physics = require("scripts.physics")
-	HeadRing = require("scripts.headRing")
+	HeadRing = require("scripts.head_ring")
 	require("scripts.skirt")
 	Gun = require("scripts.gun")
 	Bullet = require("scripts.bullet")

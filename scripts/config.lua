@@ -1,20 +1,6 @@
 ---@class Config アバター設定を管理するクラス
----@field FIRST_NAME_EN string 生徒の名前（英語）
----@field LAST_NAME_EN string 生徒の苗字（英語）
----@field FIRST_NAME_JP string 生徒の名前（日本語）
----@field LAST_NAME_JP string 生徒の苗字（日本語）
----@field BIRTH_MONTH integer 生徒の誕生月
----@field BIRTH_DAY integer 生徒の誕生日
 ---@field DefaultValues table<any> 読み込んだ値のデフォルト値を保持するテーブル
 Config = {
-	--キャラクター定数
-    FIRST_NAME_EN = "Shizuko",
-    LAST_NAME_EN = "Kawawa",
-    FIRST_NAME_JP = "シズコ",
-    LAST_NAME_JP = "河和",
-    BIRTH_MONTH = 7,
-    BIRTH_DAY = 7,
-
 	--変数
 	DefaultValues = {},
 
@@ -71,7 +57,7 @@ function pings.syncAvatarConfig(nameTypeId, showClubName)
 end
 
 if host:isHost() then
-	config:setName("BlueArchive_"..Config.FIRST_NAME_EN..Config.LAST_NAME_EN)
+	config:setName("BlueArchive_"..BlueArchiveCharacter.FIRST_NAME_EN..BlueArchiveCharacter.LAST_NAME_EN)
 	events.TICK:register(function ()
 		if nextSyncCount == 0 then
 			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown)

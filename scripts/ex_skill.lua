@@ -4,12 +4,7 @@
 
 ---@class ExSkill Exスキルのアニメーションを管理するクラス
 ---@field SHOWN_MODELS table<ModelPart> Exスキルのアニメーション時に表示するモデルのテーブル
----@field ANIMATION_MODELS table<string> Exスキルのアニメーションが含まれるモデルファイルの名前のテーブル
 ---@field CAMERA_ANCHOR ModelPart Exスキルのアニメーション時にカメラの追従基準となるモデルパーツ
----@field CAMERA_START_POS Vector3 Exスキルのアニメーション開始時のカメラの位置。BlockBenchの値をそのまま入力する。
----@field CAMERA_START_ROT Vector3 Exスキルのアニメーション開始時のカメラの向き。BlockBenchの値をそのまま入力する。
----@field CAMERA_END_POS Vector3 Exスキルのアニメーション終了時のカメラの位置。BlockBenchの値をそのまま入力する。
----@field CAMERA_END_ROT Vector3 Exスキルのアニメーション終了時のカメラの向き。BlockBenchの値をそのまま入力する。
 ---@field RenderProcessed boolean そのレンダーで既にレンダー処理したかどうか
 ---@field ExclamationText TextTask Exスキルのアニメーション中に表示する「！！」のテキストタスク
 ---@field AnimationCount integer Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
@@ -17,17 +12,10 @@
 ---@field TransitionCount number Exスキルのアニメーション前後のカメラのトランジションの進捗を示すカウンター
 ExSkill = {
     --定数
-    SHOWN_MODELS = {models.models.placement_object.PlacementObject, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet},
-    ANIMATION_MODELS = {"main", "placement_object", "tea_set"},
     CAMERA_ANCHOR = models.models.main.CameraAnchor,
-    CAMERA_START_POS = vectors.vec3(-2, 24, -18),
-    CAMERA_START_ROT = vectors.vec3(0, 160, 0),
-    CAMERA_END_POS = vectors.vec3(-146, 25, -33),
-    CAMERA_END_ROT = vectors.vec3(0, 250, 0),
 
     --変数
     RenderProcessed = false,
-    ExclamationText = models.models.main.CameraAnchor:newText("ex_skill_text"):setVisible(false):setText("§c! !"):setRot(0, 180, 5):setScale(0.8, 0.8, 0.8):setOutline(true):setOutlineColor(1, 1, 1),
     AnimationCount = -1,
     AnimationLength = 0,
     TransitionCount = 0,
@@ -44,68 +32,9 @@ ExSkill = {
     animationTick = function()
         if not client:isPaused() then
             if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
-                local objectRot = vectors.vec3(0.11417, 14.97985, 0.45019)
-                local bodyYaw = player:getBodyYaw() % 360
-                PlacementObject:place(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 1, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
                 ExSkill:stop()
-                events.TICK:remove("ex_skill_tick")
-                ExSkill.AnimationCount = -1
             elseif ExSkill:canPlayAnimation() then
-                if ExSkill.AnimationCount <= 76 then
-                    if ExSkill.AnimationCount >= 24 and ExSkill.AnimationCount < 36 then
-                        if ExSkill.AnimationCount == 24 then
-                            ExSkill.ExclamationText:setVisible(true)
-                            FaceParts:setEmotion("INVERSED", "NORMAL", "CLOSED", 5, true)
-                        elseif ExSkill.AnimationCount == 29 then
-                            FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
-                        end
-                        if (ExSkill.AnimationCount - 24) % 2 == 0 then
-                            sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 5, 2)
-                        end
-                        ExSkill.ExclamationText:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
-                    elseif ExSkill.AnimationCount == 36 then
-                        ExSkill.ExclamationText:setVisible(false)
-                    elseif ExSkill.AnimationCount == 37 then
-                        FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 2, true)
-                    elseif ExSkill.AnimationCount == 39 then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
-                    elseif ExSkill.AnimationCount == 46 then
-                        FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
-                    elseif ExSkill.AnimationCount == 57 then
-                        FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
-                    elseif ExSkill.AnimationCount == 76 then
-                        FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
-                        local playerPos = player:getPos()
-                        sounds:playSound("minecraft:entity.generic.small_fall", playerPos, 5, 1)
-                        sounds:playSound("minecraft:block.glass.break", playerPos, 5, 0.5)
-                        local particleAnchor1Matrix = models.models.main.Avatar.Head.ExSkillAnimParticleAnchor1:partToWorldMatrix()
-                        for i = 0, 5 do
-                            local particleRot = math.rad(i * 60)
-                            particles:newParticle("minecraft:wax_off", particleAnchor1Matrix[4][1], particleAnchor1Matrix[4][2], particleAnchor1Matrix[4][3]):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
-                        end
-                        local particleAnchor4Matrix = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkillAnimParticleAnchor4:partToWorldMatrix()
-                        for i = 0, 5 do
-                            local particleRot = i * (math.pi / 3)
-                            particles:newParticle("minecraft:splash", particleAnchor4Matrix[4][1] + math.cos(particleRot) * 0.25, particleAnchor4Matrix[4][2], particleAnchor4Matrix[4][3] + math.sin(particleRot) * 0.25):setScale(1.5):setLifetime(10)
-                        end
-                    end
-                    if ExSkill.AnimationCount % 4 == 0 then
-                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkillAnimParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkillAnimParticleAnchor3}) do
-                            local particleAnchorMatrix = modelPart:partToWorldMatrix()
-                            particles:newParticle("poof", particleAnchorMatrix[4][1], particleAnchorMatrix[4][2], particleAnchorMatrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
-                        end
-                    end
-                end
-                if ExSkill.AnimationCount % 2 == 0 and ExSkill.AnimationCount >= 70 then
-                    local particleAnchor5Matrix = models.models.placement_object.PlacementObject.ExSkillAnimParticleAnchor5:partToWorldMatrix()
-                    for i = 0, 11 do
-                        local particleRot = i * (math.pi / 6)
-                        particles:newParticle("minecraft:block minecraft:dirt", particleAnchor5Matrix[4][1] + math.cos(particleRot) * 0.6, particleAnchor5Matrix[4][2], particleAnchor5Matrix[4][3] + math.sin(particleRot) * 0.6)
-                    end
-                end
-                if ExSkill.AnimationCount % math.ceil((ExSkill.AnimationLength - ExSkill.AnimationCount) / 20) == 0 then
-                    sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
-                end
+                BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animationTick(ExSkill.AnimationCount)
                 ExSkill.AnimationCount = ExSkill.AnimationCount + 1
             else
                 ExSkill:forceStop()
@@ -136,11 +65,11 @@ ExSkill = {
             local targetCameraPos = vectors.vec3()
             local targetCameraRot = vectors.vec3()
             if direction == "PRE" then
-                targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, self.CAMERA_START_POS, 0, 1):add(0, -1.62)
-                targetCameraRot = self.CAMERA_START_ROT:copy():add(0, -bodyYaw, 0)
+                targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].cameraStartPos, 0, 1):add(0, -1.62)
+                targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].cameraStartRot:copy():add(0, -bodyYaw, 0)
             else
-                targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, self.CAMERA_END_POS, 0, 1):add(0, -1.62)
-                targetCameraRot = self.CAMERA_END_ROT:copy():add(0, -bodyYaw, 0)
+                targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].cameraEndPos, 0, 1):add(0, -1.62)
+                targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].cameraEndRot:copy():add(0, -bodyYaw, 0)
             end
             if cameraRot.y * targetCameraRot.y < 0 then
                 if cameraRot.y < 0 then
@@ -235,17 +164,20 @@ ExSkill = {
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         self:transition("PRE", function()
             Physics:disable()
-            for _, modelPart in ipairs(self.SHOWN_MODELS) do
+            for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].models) do
                 modelPart:setVisible(true)
             end
-            for _, modelPart in ipairs(self.ANIMATION_MODELS) do
-                animations["models."..modelPart]["ex_skill"]:play()
+            for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animations) do
+                animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:play()
+            end
+            if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].preAnimationCallback) == "function" then
+                BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].preAnimationCallback()
             end
             events.TICK:register(self.animationTick, "ex_skill_tick")
             events.RENDER:register(self.animationRender, "ex_skill_render")
             FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 24, true)
             self.AnimationCount = 0
-            self.AnimationLength = animations["models.main"]["ex_skill"]:getLength() * 20
+            self.AnimationLength = animations["models.main"]["ex_skill_"..Costume.CurrentCostume]:getLength() * 20
         end)
     end,
 
@@ -254,13 +186,18 @@ ExSkill = {
         if host:isHost() then
             sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         end
-        for _, modelPart in ipairs(self.SHOWN_MODELS) do
+        for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].models) do
             modelPart:setVisible(false)
         end
-        for _, modelPart in ipairs(self.ANIMATION_MODELS) do
-            animations["models."..modelPart]["ex_skill"]:stop()
+        for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animations) do
+            animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:stop()
         end
+        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback) == "function" then
+            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback()
+        end
+        events.TICK:remove("ex_skill_tick")
         events.RENDER:remove("ex_skill_render")
+        ExSkill.AnimationCount = -1
         Physics:enable()
         self:transition("POST", function()
             renderer:setCameraPos()
@@ -272,11 +209,11 @@ ExSkill = {
 
     ---アニメーションを停止させる。終了時のトランジションも無効
     forceStop = function(self)
-        for _, modelPart in ipairs(self.SHOWN_MODELS) do
+        for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].models) do
             modelPart:setVisible(false)
         end
-        for _, modelPart in ipairs(self.ANIMATION_MODELS) do
-            animations["models."..modelPart]["ex_skill"]:stop()
+        for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animations) do
+            animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:stop()
         end
         events.TICK:remove("ex_skill_tick")
         for _, eventName in ipairs({"ex_skill_render", "ex_skill_transition"}) do
@@ -311,8 +248,5 @@ models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setPos(5
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setRot(180, 0, 0)
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setColor(0.25, 0.39, 0.67)
-
-ExSkill.CAMERA_START_POS:mul(-1, 1, 1):scale(1 / 16)
-ExSkill.CAMERA_END_POS:mul(-1, 1, 1):scale(1 / 16)
 
 return ExSkill

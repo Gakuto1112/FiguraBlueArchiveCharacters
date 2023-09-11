@@ -11,9 +11,9 @@ Nameplate = {
     ---@param typeId integer 表示名の種類: 1. プレイヤー名, 2. 名のみ（英語）, 3. 名のみ（日本語）, 4. 名性（英語）, 5. 性名（英語）, 6. 性名（日本語）
     ---@return string displayName 指定されたtypeIdでの表示名
     getName = function(self, typeId)
-        local displayName = typeId == 1 and player:getName() or ((typeId == 2 or typeId == 4) and Config.FIRST_NAME_EN or (typeId == 5 and Config.LAST_NAME_EN or (typeId == 3 and Config.FIRST_NAME_JP or Config.LAST_NAME_JP)))
+        local displayName = typeId == 1 and player:getName() or ((typeId == 2 or typeId == 4) and BlueArchiveCharacter.FIRST_NAME_EN or (typeId == 5 and BlueArchiveCharacter.LAST_NAME_EN or (typeId == 3 and BlueArchiveCharacter.FIRST_NAME_JP or BlueArchiveCharacter.LAST_NAME_JP)))
         if typeId >= 4 then
-            displayName = displayName.." "..(typeId == 4 and Config.LAST_NAME_EN or (typeId == 5 and Config.FIRST_NAME_EN or Config.FIRST_NAME_JP))
+            displayName = displayName.." "..(typeId == 4 and BlueArchiveCharacter.LAST_NAME_EN or (typeId == 5 and BlueArchiveCharacter.FIRST_NAME_EN or BlueArchiveCharacter.FIRST_NAME_JP))
         end
         return displayName
     end,
@@ -23,7 +23,7 @@ Nameplate = {
     ---@param showClubName boolean 部活名を表示するかどうか
     setName = function(self, typeId, showClubName)
         local date = client:getDate()
-        local displayName = self:getName(typeId)..((typeId >= 2 and date.month == Config.BIRTH_MONTH and date.day == Config.BIRTH_DAY) and " :cake:" or "")
+        local displayName = self:getName(typeId)..((typeId >= 2 and date.month == BlueArchiveCharacter.BIRTH_MONTH and date.day == BlueArchiveCharacter.BIRTH_DAY) and " :cake:" or "")
         nameplate.ALL:setText(displayName)
         if typeId >= 2 and showClubName then
             nameplate.ENTITY:setText(displayName.."\n§7"..Language:getTranslate("namepalte__club_name"))
