@@ -175,7 +175,6 @@ ExSkill = {
             end
             events.TICK:register(self.animationTick, "ex_skill_tick")
             events.RENDER:register(self.animationRender, "ex_skill_render")
-            FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 24, true)
             self.AnimationCount = 0
             self.AnimationLength = animations["models.main"]["ex_skill_"..Costume.CurrentCostume]:getLength() * 20
         end)

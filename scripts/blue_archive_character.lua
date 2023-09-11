@@ -109,6 +109,9 @@ BlueArchiveCharacter = {
 			cameraStartRot = vectors.vec3(0, 160, 0),
 			cameraEndPos = vectors.vec3(-146, 25, -33),
 			cameraEndRot = vectors.vec3(0, 250, 0),
+            preAnimationCallback = function()
+                FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 24, true)
+            end,
 			animationTick = function(tick)
 				if tick <= 76 then
                     if tick >= 24 and tick < 36 then
@@ -171,7 +174,21 @@ BlueArchiveCharacter = {
                 local bodyYaw = player:getBodyYaw() % 360
                 PlacementObject:place(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 1, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
 			end
-		}
+		},
+        {
+            nameEN = "On-site, summer Momoyado stall!",
+			nameJP = "出張、夏の百夜堂出店！",
+			models = {models.models.ex_skill_2.Stall, models.models.ex_skill_2.SoftCream, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate},
+			animations = {"main", "ex_skill_2"},
+			cameraStartPos = vectors.vec3(),
+			cameraStartRot = vectors.vec3(),
+			cameraEndPos = vectors.vec3(),
+			cameraEndRot = vectors.vec3(),
+			animationTick = function(tick)
+			end,
+			postAnimationCallback = function()
+			end
+        }
 	},
 
     --[[
