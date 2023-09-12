@@ -140,29 +140,29 @@ BlueArchiveCharacter = {
                         local playerPos = player:getPos()
                         sounds:playSound("minecraft:entity.generic.small_fall", playerPos, 5, 1)
                         sounds:playSound("minecraft:block.glass.break", playerPos, 5, 0.5)
-                        local particleAnchor1Matrix = models.models.main.Avatar.Head.ExSkillAnimParticleAnchor1:partToWorldMatrix()
+                        local particleAnchor1Pos = PlayerUtils:getModelWorldPos(models.models.main.Avatar.Head.ExSkillAnimParticleAnchor1)
                         for i = 0, 5 do
                             local particleRot = math.rad(i * 60)
-                            particles:newParticle("minecraft:wax_off", particleAnchor1Matrix[4][1], particleAnchor1Matrix[4][2], particleAnchor1Matrix[4][3]):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
+                            particles:newParticle("minecraft:wax_off", particleAnchor1Pos):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
                         end
-                        local particleAnchor4Matrix = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkillAnimParticleAnchor4:partToWorldMatrix()
+                        local particleAnchor4Pos = PlayerUtils:getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkillAnimParticleAnchor4)
                         for i = 0, 5 do
                             local particleRot = i * (math.pi / 3)
-                            particles:newParticle("minecraft:splash", particleAnchor4Matrix[4][1] + math.cos(particleRot) * 0.25, particleAnchor4Matrix[4][2], particleAnchor4Matrix[4][3] + math.sin(particleRot) * 0.25):setScale(1.5):setLifetime(10)
+                            particles:newParticle("minecraft:splash", particleAnchor4Pos:copy():add(math.cos(particleRot) * 0.25, 0, math.sin(particleRot) * 0.25)):setScale(1.5):setLifetime(10)
                         end
                     end
                     if tick % 4 == 0 then
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkillAnimParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkillAnimParticleAnchor3}) do
-                            local particleAnchorMatrix = modelPart:partToWorldMatrix()
-                            particles:newParticle("poof", particleAnchorMatrix[4][1], particleAnchorMatrix[4][2], particleAnchorMatrix[4][3]):setScale(0.2):setVelocity():setLifetime(15)
+                            local particleAnchorPos = PlayerUtils:getModelWorldPos(modelPart)
+                            particles:newParticle("poof", particleAnchorPos):setScale(0.2):setVelocity():setLifetime(15)
                         end
                     end
                 end
                 if tick % 2 == 0 and tick >= 70 then
-                    local particleAnchor5Matrix = models.models.placement_object.PlacementObject.ExSkillAnimParticleAnchor5:partToWorldMatrix()
+                    local particleAnchor5Pos = PlayerUtils:getModelWorldPos(models.models.placement_object.PlacementObject.ExSkillAnimParticleAnchor5)
                     for i = 0, 11 do
                         local particleRot = i * (math.pi / 6)
-                        particles:newParticle("minecraft:block minecraft:dirt", particleAnchor5Matrix[4][1] + math.cos(particleRot) * 0.6, particleAnchor5Matrix[4][2], particleAnchor5Matrix[4][3] + math.sin(particleRot) * 0.6)
+                        particles:newParticle("minecraft:block minecraft:dirt", particleAnchor5Pos:copy():add(math.cos(particleRot) * 0.6, 0, math.sin(particleRot) * 0.6))
                     end
                 end
                 if tick % math.ceil((ExSkill.AnimationLength - tick) / 20) == 0 then
