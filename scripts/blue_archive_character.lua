@@ -169,24 +169,34 @@ BlueArchiveCharacter = {
                     sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
                 end
 			end,
-			postAnimationCallback = function()
-				local objectRot = vectors.vec3(0.11417, 14.97985, 0.45019)
-                local bodyYaw = player:getBodyYaw() % 360
-                PlacementObject:place(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 1, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
+			postAnimationCallback = function(forcedStop)
+                if not forcedStop then
+                    local objectRot = vectors.vec3(0.11417, 14.97985, 0.45019)
+                    local bodyYaw = player:getBodyYaw() % 360
+                    PlacementObject:place(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 1, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
+                end
 			end
 		},
         {
             nameEN = "On-site, summer Momoyado stall!",
 			nameJP = "出張、夏の百夜堂出店！",
-			models = {models.models.ex_skill_2.Stall, models.models.ex_skill_2.SoftCream, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate},
-			animations = {"main", "ex_skill_2"},
-			cameraStartPos = vectors.vec3(),
-			cameraStartRot = vectors.vec3(),
-			cameraEndPos = vectors.vec3(),
-			cameraEndRot = vectors.vec3(),
+			models = {models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate},
+			animations = {"main", "costume_swimsuit", "ex_skill_2"},
+			cameraStartPos = vectors.vec3(33, 26, 9.5),
+			cameraStartRot = vectors.vec3(0, 210),
+			cameraEndPos = vectors.vec3(6, 26, -18.5),
+			cameraEndRot = vectors.vec3(0, 197.5),
+			preTransitionCallback = function()
+                for _, modelPart in ipairs({models.models.ex_skill_2.Stall, models.models.ex_skill_2.SoftCream}) do
+                    modelPart:setVisible(true)
+                end
+			end,
 			animationTick = function(tick)
 			end,
 			postAnimationCallback = function()
+                for _, modelPart in ipairs({models.models.ex_skill_2.Stall, models.models.ex_skill_2.SoftCream}) do
+                    modelPart:setVisible(false)
+                end
 			end
         }
 	},

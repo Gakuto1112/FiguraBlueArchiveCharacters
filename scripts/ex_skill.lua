@@ -162,6 +162,9 @@ ExSkill = {
         PlacementObject:removeAll()
         renderer:setRenderHUD(false)
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
+        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].preTransitionCallback) == "function" then
+            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].preTransitionCallback()
+        end
         self:transition("PRE", function()
             Physics:disable()
             for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].models) do
@@ -192,13 +195,16 @@ ExSkill = {
             animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:stop()
         end
         if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback) == "function" then
-            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback()
+            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback(false)
         end
         events.TICK:remove("ex_skill_tick")
         events.RENDER:remove("ex_skill_render")
         ExSkill.AnimationCount = -1
         Physics:enable()
         self:transition("POST", function()
+            if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postTransitionCallback) == "function" then
+                BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postTransitionCallback(false)
+            end
             renderer:setCameraPos()
             renderer:setOffsetCameraPivot()
             renderer:setCameraRot()
@@ -224,6 +230,12 @@ ExSkill = {
         end
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
             modelPart:setScale(0, 0, 0)
+        end
+        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback) == "function" then
+            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback(true)
+        end
+        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postTransitionCallback) == "function" then
+            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postTransitionCallback(true)
         end
         FaceParts:resetEmotion()
         renderer:setCameraPos()
