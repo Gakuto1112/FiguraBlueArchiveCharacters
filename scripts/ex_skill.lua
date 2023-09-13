@@ -171,7 +171,7 @@ ExSkill = {
                 modelPart:setVisible(true)
             end
             for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animations) do
-                animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:play()
+                animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill]:play()
             end
             if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].preAnimationCallback) == "function" then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].preAnimationCallback()
@@ -179,7 +179,7 @@ ExSkill = {
             events.TICK:register(self.animationTick, "ex_skill_tick")
             events.RENDER:register(self.animationRender, "ex_skill_render")
             self.AnimationCount = 0
-            self.AnimationLength = animations["models.main"]["ex_skill_"..Costume.CurrentCostume]:getLength() * 20
+            self.AnimationLength = animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill]:getLength() * 20
         end)
     end,
 
@@ -192,7 +192,7 @@ ExSkill = {
             modelPart:setVisible(false)
         end
         for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animations) do
-            animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:stop()
+            animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill]:stop()
         end
         if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback) == "function" then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].postAnimationCallback(false)
@@ -218,7 +218,7 @@ ExSkill = {
             modelPart:setVisible(false)
         end
         for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animations) do
-            animations["models."..modelPart]["ex_skill_"..Costume.CurrentCostume]:stop()
+            animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill]:stop()
         end
         events.TICK:remove("ex_skill_tick")
         for _, eventName in ipairs({"ex_skill_render", "ex_skill_transition"}) do
