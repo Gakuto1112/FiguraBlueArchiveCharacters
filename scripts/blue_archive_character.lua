@@ -241,6 +241,9 @@ BlueArchiveCharacter = {
                     for i = 1, 4 do
                         particles:newParticle("minecraft:electric_spark", particleAnchor2Pos):setColor(0.99, 0.6, 0.73):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 30, vectors.vec3(i <= 2 and 0.2 or -0.2, i % 2 == 0 and 0 or 0.1), 0, 1)):setGravity(0.5):setLifetime(4)
                     end
+                    sounds:playSound("minecraft:entity.item.pickup", PlayerUtils:getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ExSkill2SoundAnchor1), 1, 0.75)
+                elseif tick >= 34 and tick <= 69 then
+                    sounds:playSound("minecraft:item.bucket.empty", PlayerUtils:getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.Wave.ExSkill2SoundAnchor2), math.clamp(tick <= 43 and (tick * 0.056 - 1.904) or (tick >= 60 and (tick * -0.056 + 3.86) or 0.5), 0, 0.5), 0.75)
                 elseif tick == 75 then
                     FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 13, true)
                 elseif tick == 88 then
@@ -249,10 +252,11 @@ BlueArchiveCharacter = {
                     FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 18, true)
                     local bodyYaw = player:getBodyYaw()
                     particles:newParticle("minecraft:electric_spark", PlayerUtils:getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2ParticleAnchor3)):setColor(1, 1, 0.68):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 5, vectors.vec3(0.2, 0.2), 0, 1)):setGravity(1):setLifetime(18)
+                    sounds:playSound("minecraft:entity.experience_orb.pickup", PlayerUtils:getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2SoundAnchor3), 1, 2)
                     local particleAnchor4Pos = PlayerUtils:getModelWorldPos(models.models.main.ExSkill2ParticleAnchor4)
                     for i = 0, 31 do
                         local particleRot = i / 8 * math.pi
-                        particles:newParticle("minecraft:electric_spark", particleAnchor4Pos):setColor(0.87, 0.71, 0.99):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 17.5, vectors.vec3(math.cos(particleRot), math.sin(particleRot)), 0, 1):scale(i < 16 and 0.15 or 0.2)):setScale(1.5):setLifetime(18)
+                        particles:newParticle("minecraft:electric_spark", particleAnchor4Pos):setColor(0.87, 0.71, 0.99, 0.5):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 17.5, vectors.vec3(math.cos(particleRot), math.sin(particleRot)), 0, 1):scale(i < 16 and 0.15 or 0.2)):setScale(1.5) :setLifetime(18)
                     end
                 end
 			end,
