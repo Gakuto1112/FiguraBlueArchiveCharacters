@@ -35,7 +35,7 @@ ExSkill = {
                 ExSkill:stop()
             elseif ExSkill:canPlayAnimation() then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].animationTick(ExSkill.AnimationCount)
-                ExSkill.AnimationCount = ExSkill.AnimationCount + 1
+                ExSkill.AnimationCount = ExSkill.AnimationCount > -1 and ExSkill.AnimationCount + 1 or ExSkill.AnimationCount
             else
                 ExSkill:forceStop()
             end
@@ -246,6 +246,10 @@ ExSkill = {
         self.TransitionCount = 0
     end
 }
+
+events.TICK:register(function()
+    print(ExSkill.AnimationCount)
+end)
 
 events.TICK:register(function()
     models.models.ex_skill_frame.Gui.FrameBar:setScale(1, client:getScaledWindowSize().y * math.sqrt(2) / 16 + 1, 1)

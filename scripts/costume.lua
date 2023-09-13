@@ -33,6 +33,9 @@ Costume = {
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
 	resetCostume = function(self)
+		if type(ExSkill) == "table" then
+			ExSkill:forceStop()
+		end
 		self:setCostumeTextureOffset(0)
 		BlueArchiveCharacter:COSTUME_RESET_CALLBACK()
 		models.models["skull_"..BlueArchiveCharacter.COSTUME[self.CurrentCostume].name].Skull:setVisible(false)
