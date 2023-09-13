@@ -248,10 +248,6 @@ ExSkill = {
 }
 
 events.TICK:register(function()
-    print(ExSkill.AnimationCount)
-end)
-
-events.TICK:register(function()
     models.models.ex_skill_frame.Gui.FrameBar:setScale(1, client:getScaledWindowSize().y * math.sqrt(2) / 16 + 1, 1)
 end)
 
