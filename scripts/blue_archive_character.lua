@@ -122,7 +122,7 @@ BlueArchiveCharacter = {
                             FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
                         end
                         if (tick - 24) % 2 == 0 then
-                            sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 5, 2)
+                            sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 1, 2)
                         end
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_1:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
                     elseif tick == 36 then
@@ -137,9 +137,8 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
                     elseif tick == 76 then
                         FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
-                        local playerPos = player:getPos()
-                        sounds:playSound("minecraft:entity.generic.small_fall", playerPos, 5, 1)
-                        sounds:playSound("minecraft:block.glass.break", playerPos, 5, 0.5)
+                        sounds:playSound("minecraft:entity.generic.small_fall", player:getPos(), 1)
+                        sounds:playSound("minecraft:block.glass.break", PlayerUtils:getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.ExSkill1SoundAnchor2), 1, 0.5)
                         local particleAnchor1Pos = PlayerUtils:getModelWorldPos(models.models.main.Avatar.Head.ExSkill1ParticleAnchor1)
                         for i = 0, 5 do
                             local particleRot = math.rad(i * 60)
@@ -166,7 +165,7 @@ BlueArchiveCharacter = {
                     end
                 end
                 if tick % math.ceil((ExSkill.AnimationLength - tick) / 20) == 0 then
-                    sounds:playSound("minecraft:entity.boat.paddle_land", player:getPos():add(models.models.placement_object.PlacementObject:getAnimPos():scale(1 / 16)), 5, 1)
+                    sounds:playSound("minecraft:entity.boat.paddle_land", PlayerUtils:getModelWorldPos(models.models.placement_object.PlacementObject.Wheels.ExSkill1SoundAnchor1))
                 end
 			end,
 			postAnimationCallback = function(forcedStop)
