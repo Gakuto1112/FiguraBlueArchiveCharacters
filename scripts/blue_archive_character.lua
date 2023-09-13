@@ -254,7 +254,7 @@ BlueArchiveCharacter = {
                     sounds:playSound("minecraft:entity.experience_orb.pickup", PlayerUtils:getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2SoundAnchor3), 1, 2)
                     local particleAnchor4Pos = PlayerUtils:getModelWorldPos(models.models.main.ExSkill2ParticleAnchor4)
                     for i = 0, 31 do
-                        local particleRot = i / 8 * math.pi
+                        local particleRot = i / 8 * math.pi + 0.2
                         particles:newParticle("minecraft:electric_spark", particleAnchor4Pos):setColor(0.87, 0.71, 0.99, 0.5):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 17.5, vectors.vec3(math.cos(particleRot), math.sin(particleRot)), 0, 1):scale(i < 16 and 0.15 or 0.2)):setScale(1.5) :setLifetime(18)
                     end
                 end
