@@ -69,9 +69,9 @@ BlueArchiveCharacter = {
 				end
 			else
 				models.models.main.Avatar.Head.HairTails:setVisible(true)
-				if self.CurrentCostume == 1 then
+				if Costume.CurrentCostume == 1 then
 					models.models.main.Avatar.Head.Brim:setVisible(true)
-				elseif self.CurrentCostume == 2 then
+				elseif Costume.CurrentCostume == 2 then
 					for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
 						modelPart:setVisible(true)
 					end
@@ -90,7 +90,7 @@ BlueArchiveCharacter = {
 				self.PHYSICS[1].x.horizontal.neutral = 0
 				self.PHYSICS[1].x.horizontal.max = 0
 			else
-				models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(self.CurrentCostume == 1)
+				models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(Costume.CurrentCostume == 1)
 				for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
 					modelPart:setPos()
 				end
