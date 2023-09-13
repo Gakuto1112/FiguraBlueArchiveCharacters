@@ -1,3 +1,10 @@
+---生徒の攻撃属性。アクションホイール上のExスキルアクションの色に影響する。
+---@alias BlueArchiveCharacter.SkillType
+---| "EXPLOSION" 爆発
+---| "PIERCE" 貫通
+---| "MYSTERY" 神秘
+---| "VIBRATION" 振動
+
 ---@class BlueArchiveCharacter （今後別のキャラを作る時に備えて、）キャラクター変数を保持するクラス。別のキャラクターに対してもここを変更するだけで対応できるようにする。
 ---@field FIRST_NAME_EN string 生徒の名前（英語）
 ---@field LAST_NAME_EN string 生徒の苗字（英語）
@@ -8,7 +15,7 @@
 ---@field HEAD_RING_NEUTRAL_ROT number 通常時の輪っかの角度
 ---@field COSTUME table 衣装のデータ: name. 衣装の内部名, ex_skill. 衣装に対応するExスキルのインデックス番号
 ---@field PHYSICS table 物理演算で動かすモデルパーツのテーブル
----@field EX_SKILL table Exスキルのデータ: nameEN. 英語でのExスキル名, nameJP. 日本語でのExスキル名, models. アニメーションの前後で表示/非表示にするモデルのテーブル, animations. Exスキルのアニメーションが含まれるbbmodelファイル名, cameraStartPos. アニメーション開始時のカメラの位置, cameraStartRot. アニメーション開始時のカメラの向き, cameraEndPos. アニメーション終了時のカメラの位置, cameraEndRot. アニメーション終了時のカメラの向き, preAnimationCallback. , animationTick. アニメーション再生時のみ呼び出されるティック関数, postAnimationCallback. アニメーション終了後に呼び出されるコールバック関数
+---@field EX_SKILL table Exスキルのデータ: nameEN. 英語でのExスキル名, nameJP. 日本語でのExスキル名, skillType. 生徒の攻撃属性, models. アニメーションの前後で表示/非表示にするモデルのテーブル, animations. Exスキルのアニメーションが含まれるbbmodelファイル名, cameraStartPos. アニメーション開始時のカメラの位置, cameraStartRot. アニメーション開始時のカメラの向き, cameraEndPos. アニメーション終了時のカメラの位置, cameraEndRot. アニメーション終了時のカメラの向き, preTransitionCallback. アニメーション開始前のトランジション開始前に呼ばれるコールバック関数, preAnimationCallback. アニメーション開始に呼び出されるコールバック関数, animationTick. アニメーション再生時のみ呼び出されるティック関数, postAnimationCallback. アニメーション終了後に呼び出されるコールバック関数。1つ目の引数はアニメーションが途中終了した場合にtrueになる。, postTransitionCallback. アニメーション終了後のトランジション終了語に呼ばれるコールバック関数。1つ目の引数はアニメーションが途中終了した場合にtrueになる。
 ---@field EX_SKILL_1_TEXT_1 TextTask Exスキル1で使用するテキストタスク
 BlueArchiveCharacter = {
 	--基本
@@ -103,6 +110,7 @@ BlueArchiveCharacter = {
 		{
 			nameEN = "Momoyado on-site service!",
 			nameJP = "百夜堂出張サービス！",
+            skillType = "MYSTERY",
 			models = {models.models.placement_object.PlacementObject, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet},
 			animations = {"main", "placement_object", "ex_skill_1"},
 			cameraStartPos = vectors.vec3(-2, 24, -18),
@@ -179,6 +187,7 @@ BlueArchiveCharacter = {
         {
             nameEN = "On-site, summer Momoyado stall!",
 			nameJP = "出張、夏の百夜堂出店！",
+            skillType = "MYSTERY",
 			models = {models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate},
 			animations = {"main", "costume_swimsuit", "ex_skill_2"},
 			cameraStartPos = vectors.vec3(33, 26, 9.5),
