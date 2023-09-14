@@ -105,6 +105,30 @@ BlueArchiveCharacter = {
 		end
     end,
 
+    --目や口
+    FACE_PARTS = {
+        RightEye = {
+            NORMAL = {0, 0},
+            INVERSED = {2, 0},
+            SURPLISED = {3, 0},
+            TIRED = {4, 0},
+            CLOSED = {0, 1},
+            UNEQUAL = {1, 1}
+        },
+        LeftEye = {
+            NORMAL = {0, 0},
+            SURPLISED = {2, 0},
+            TIRED = {3, 0},
+            CLOSED = {-1, 1},
+            UNEQUAL = {0, 1}
+        },
+        Mouth = {
+            CLOSED = {0, 0},
+            OPENED = {1, 0},
+            TRIANGLE = {2, 0}
+        }
+    },
+
 	--Exスキル
 	EX_SKILL = {
 		{
