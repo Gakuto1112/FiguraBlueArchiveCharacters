@@ -161,7 +161,8 @@ BlueArchiveCharacter = {
             left = vectors.vec3(0, 180, 45)
         },
         sound = {
-            name = ""
+            name = "minecraft:entity.generic.explode",
+            pitch = 2
         }
     },
 

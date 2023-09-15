@@ -21,7 +21,7 @@ events.ARROW_RENDER:register(function(delta, arrow)
     local arrowUUID = arrow:getUUID()
     if arrowTable[arrowUUID] == nil and not gunSoundPlayed then
         local arrowPos = arrow:getPos()
-        sounds:playSound("entity.generic.explode", arrowPos, 1, 2)
+        sounds:playSound(BlueArchiveCharacter.GUN.sound.name, arrowPos, 1, BlueArchiveCharacter.GUN.sound.pitch)
         for _ = 1, 5 do
             particles:newParticle("smoke", arrowPos:copy():applyFunc(function(pos)
                 return pos + (math.random() * 0.4 - 0.2)
