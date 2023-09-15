@@ -29,24 +29,24 @@ local heldItemsPrev = {world.newItem("minecraft:air"), world.newItem("minecraft:
 ---背中の銃の位置・向きを設定する。
 local function setBodyGunPos()
     if player:isLeftHanded() then
-        if BlueArchiveCharacter.GUN.PutPosOffset ~= nil and BlueArchiveCharacter.GUN.PutPosOffset.Left ~= nil then
-            Gun.TargetModel:setPos(vectors.vec3(0, 12):add(BlueArchiveCharacter.GUN.PutPosOffset.Left))
+        if BlueArchiveCharacter.GUN.putPosOffset ~= nil and BlueArchiveCharacter.GUN.putPosOffset.left ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(0, 12):add(BlueArchiveCharacter.GUN.putPosOffset.left))
         else
             Gun.TargetModel:setPos(vectors.vec3(0, 12))
         end
-        if BlueArchiveCharacter.GUN.PutRotOffset ~= nil and BlueArchiveCharacter.GUN.PutRotOffset.Left ~= nil then
-            Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.PutRotOffset.Left)
+        if BlueArchiveCharacter.GUN.putRotOffset ~= nil and BlueArchiveCharacter.GUN.putRotOffset.left ~= nil then
+            Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.putRotOffset.left)
         else
             Gun.TargetModel:setRot()
         end
     else
-        if BlueArchiveCharacter.GUN.PutPosOffset ~= nil and BlueArchiveCharacter.GUN.PutPosOffset.Right ~= nil then
-            Gun.TargetModel:setPos(vectors.vec3(0, 12):add(BlueArchiveCharacter.GUN.PutPosOffset.Right))
+        if BlueArchiveCharacter.GUN.putPosOffset ~= nil and BlueArchiveCharacter.GUN.putPosOffset.right ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(0, 12):add(BlueArchiveCharacter.GUN.putPosOffset.right))
         else
             Gun.TargetModel:setPos(vectors.vec3(0, 12))
         end
-        if BlueArchiveCharacter.GUN.PutRotOffset ~= nil and BlueArchiveCharacter.GUN.PutRotOffset.Right ~= nil then
-            Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.PutRotOffset.Right)
+        if BlueArchiveCharacter.GUN.putRotOffset ~= nil and BlueArchiveCharacter.GUN.putRotOffset.right ~= nil then
+            Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.putRotOffset.right)
         else
             Gun.TargetModel:setRot()
         end
@@ -95,9 +95,9 @@ local function setGunPose(GunPosition)
         for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
             itemModel:setVisible(true)
         end
-        if BlueArchiveCharacter.GUN.HoldPose == "NORMAL" then
+        if BlueArchiveCharacter.GUN.holdPose == "NORMAL" then
             Arms:setBowPose(false, false)
-        elseif BlueArchiveCharacter.GUN.HoldPose == "CUSTOM" then
+        elseif BlueArchiveCharacter.GUN.holdPose == "CUSTOM" then
             for _, animationName in ipairs({"gun_hold_right", "gun_hold_left"}) do
                 animations["models.main"][animationName]:stop()
             end
@@ -124,20 +124,20 @@ local function setGunPose(GunPosition)
         end
         Gun.TargetModel:setVisible(true)
         vanilla_model.LEFT_ITEM:setVisible(true)
-        if BlueArchiveCharacter.GUN.HoldPose == "NORMAL" then
+        if BlueArchiveCharacter.GUN.holdPose == "NORMAL" then
             Arms:setBowPose(true, false)
-        elseif BlueArchiveCharacter.GUN.HoldPose == "CUSTOM" then
+        elseif BlueArchiveCharacter.GUN.holdPose == "CUSTOM" then
             animations["models.main"]["gun_hold_left"]:stop()
             animations["models.main"]["gun_hold_right"]:play()
         end
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
-        if BlueArchiveCharacter.GUN.HoldPosePosOffset ~= nil and BlueArchiveCharacter.GUN.HoldPosePosOffset.Right ~= nil then
-            Gun.TargetModel:setPos(vectors.vec3(4, 8, 0):add(BlueArchiveCharacter.GUN.HoldPosePosOffset.Right))
+        if BlueArchiveCharacter.GUN.holdPosePosOffset ~= nil and BlueArchiveCharacter.GUN.holdPosePosOffset.right ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(4, 8, 0):add(BlueArchiveCharacter.GUN.holdPosePosOffset.right))
         else
             Gun.TargetModel:setPos(vectors.vec3(4, 8, 0))
         end
-        if BlueArchiveCharacter.GUN.HoldPoseRotOffset ~= nil and BlueArchiveCharacter.GUN.HoldPoseRotOffset.Right ~= nil then
-            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.HoldPoseRotOffset.Right))
+        if BlueArchiveCharacter.GUN.holdPoseRotOffset ~= nil and BlueArchiveCharacter.GUN.holdPoseRotOffset.right ~= nil then
+            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.holdPoseRotOffset.right))
         else
             Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90))
         end
@@ -154,20 +154,20 @@ local function setGunPose(GunPosition)
         end
         Gun.TargetModel:setVisible(true)
         vanilla_model.RIGHT_ITEM:setVisible(true)
-        if BlueArchiveCharacter.GUN.HoldPose == "NORMAL" then
+        if BlueArchiveCharacter.GUN.holdPose == "NORMAL" then
             Arms:setBowPose(true, true)
-        elseif BlueArchiveCharacter.GUN.HoldPose == "CUSTOM" then
+        elseif BlueArchiveCharacter.GUN.holdPose == "CUSTOM" then
             animations["models.main"]["gun_hold_right"]:stop()
             animations["models.main"]["gun_hold_left"]:play()
         end
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm)
-        if BlueArchiveCharacter.GUN.HoldPosePosOffset ~= nil and BlueArchiveCharacter.GUN.HoldPosePosOffset.Left ~= nil then
-            Gun.TargetModel:setPos(vectors.vec3(-4, 8, 0):add(BlueArchiveCharacter.GUN.HoldPosePosOffset.Left))
+        if BlueArchiveCharacter.GUN.holdPosePosOffset ~= nil and BlueArchiveCharacter.GUN.holdPosePosOffset.left ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(-4, 8, 0):add(BlueArchiveCharacter.GUN.holdPosePosOffset.left))
         else
             Gun.TargetModel:setPos(vectors.vec3(-4, 8, 0))
         end
-        if BlueArchiveCharacter.GUN.HoldPoseRotOffset ~= nil and BlueArchiveCharacter.GUN.HoldPoseRotOffset.Left ~= nil then
-            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.HoldPoseRotOffset.Left))
+        if BlueArchiveCharacter.GUN.holdPoseRotOffset ~= nil and BlueArchiveCharacter.GUN.holdPoseRotOffset.left ~= nil then
+            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.holdPoseRotOffset.left))
         else
             Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90))
         end

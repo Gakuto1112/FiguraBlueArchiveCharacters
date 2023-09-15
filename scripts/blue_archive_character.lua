@@ -146,19 +146,22 @@ BlueArchiveCharacter = {
 
     --銃
     GUN = {
-        HoldPose = "NORMAL",
-        HoldPosePosOffset = {
-            Right = vectors.vec3(0, 2),
-            Left = vectors.vec3(0, 2)
+        holdPose = "NORMAL",
+        holdPosePosOffset = {
+            right = vectors.vec3(0, 2),
+            left = vectors.vec3(0, 2)
         },
-        PutType = "BODY",
-        PutPosOffset = {
-            Right = vectors.vec3(0, 4, 3),
-            Left = vectors.vec3(0, 4, 3)
+        putType = "BODY",
+        putPosOffset = {
+            right = vectors.vec3(0, 4, 3),
+            left = vectors.vec3(0, 4, 3)
         },
-        PutRotOffset = {
-            Right = vectors.vec3(0, 0, -45),
-            Left = vectors.vec3(0, 180, 45)
+        putRotOffset = {
+            right = vectors.vec3(0, 0, -45),
+            left = vectors.vec3(0, 180, 45)
+        },
+        sound = {
+            name = ""
         }
     },
 
