@@ -1,5 +1,5 @@
 ---@alias Gun.GunPosition
----| "BODY"
+---| "NONE"
 ---| "RIGHT"
 ---| "LEFT"
 
@@ -14,6 +14,10 @@ Gun = {
     TargetModel = models.models.gun.Gun,
 }
 
+---現在の銃の位置
+---@type Gun.GunPosition
+local currentGunStatus = "NONE"
+
 ---前ティックに左利きだったかどうか
 ---@type boolean
 local leftHandedPrev = player:isLeftHanded()
@@ -25,11 +29,28 @@ local heldItemsPrev = {world.newItem("minecraft:air"), world.newItem("minecraft:
 ---背中の銃の位置・向きを設定する。
 local function setBodyGunPos()
     if player:isLeftHanded() then
-        Gun.TargetModel:setRot(0, 180, 45)
+        if BlueArchiveCharacter.GUN.PutPosOffset ~= nil and BlueArchiveCharacter.GUN.PutPosOffset.Left ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(0, 12):add(BlueArchiveCharacter.GUN.PutPosOffset.Left))
+        else
+            Gun.TargetModel:setPos(vectors.vec3(0, 12))
+        end
+        if BlueArchiveCharacter.GUN.PutRotOffset ~= nil and BlueArchiveCharacter.GUN.PutRotOffset.Left ~= nil then
+            Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.PutRotOffset.Left)
+        else
+            Gun.TargetModel:setRot()
+        end
     else
-        Gun.TargetModel:setRot(0, 0, -45)
+        if BlueArchiveCharacter.GUN.PutPosOffset ~= nil and BlueArchiveCharacter.GUN.PutPosOffset.Right ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(0, 12):add(BlueArchiveCharacter.GUN.PutPosOffset.Right))
+        else
+            Gun.TargetModel:setPos(vectors.vec3(0, 12))
+        end
+        if BlueArchiveCharacter.GUN.PutRotOffset ~= nil and BlueArchiveCharacter.GUN.PutRotOffset.Right ~= nil then
+            Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.PutRotOffset.Right)
+        else
+            Gun.TargetModel:setRot()
+        end
     end
-    Gun.TargetModel:setPos(0, 16, 3)
 end
 
 ---銃が背中にある際のティック処理
@@ -63,12 +84,9 @@ end
 ---銃の構えを変更する。
 ---@param GunPosition Gun.GunPosition 変更先の構え位置
 local function setGunPose(GunPosition)
-    if GunPosition == "BODY" then
+    if GunPosition == "NONE" then
         for _, tickName in ipairs({"right_gun_tick", "left_gun_tick"}) do
             events.TICK:remove(tickName)
-        end
-        if events.TICK:getRegisteredCount("body_gun_tick") == 0 then
-            events.TICK:register(bodyGunTick, "body_gun_tick")
         end
         Gun.TargetModel:setSecondaryRenderType("NONE")
         for _, renderName in ipairs({"right_gun_render", "left_gun_render"}) do
@@ -77,9 +95,22 @@ local function setGunPose(GunPosition)
         for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
             itemModel:setVisible(true)
         end
-        Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Body)
-        setBodyGunPos()
-        Arms:setBowPose(false, false)
+        if BlueArchiveCharacter.GUN.HoldPose == "NORMAL" then
+            Arms:setBowPose(false, false)
+        elseif BlueArchiveCharacter.GUN.HoldPose == "CUSTOM" then
+            for _, animationName in ipairs({"gun_hold_right", "gun_hold_left"}) do
+                animations["models.main"][animationName]:stop()
+            end
+        end
+        if BlueArchiveCharacter.GUN.PutType == "BODY" then
+            Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Body)
+            if events.TICK:getRegisteredCount("body_gun_tick") == 0 then
+                events.TICK:register(bodyGunTick, "body_gun_tick")
+            end
+            setBodyGunPos()
+        elseif BlueArchiveCharacter.GUN.PutType == "HIDDEN" then
+            Gun.TargetModel:setVisible(false)
+        end
     elseif GunPosition == "RIGHT" then
         for _, tickName in ipairs({"body_gun_tick", "left_gun_tick"}) do
             events.TICK:remove(tickName)
@@ -91,11 +122,25 @@ local function setGunPose(GunPosition)
         if events.RENDER:getRegisteredCount("right_gun_render") == 0 then
             events.RENDER:register(rightGunRender, "right_gun_render")
         end
+        Gun.TargetModel:setVisible(true)
         vanilla_model.LEFT_ITEM:setVisible(true)
+        if BlueArchiveCharacter.GUN.HoldPose == "NORMAL" then
+            Arms:setBowPose(true, false)
+        elseif BlueArchiveCharacter.GUN.HoldPose == "CUSTOM" then
+            animations["models.main"]["gun_hold_left"]:stop()
+            animations["models.main"]["gun_hold_right"]:play()
+        end
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
-        Gun.TargetModel:setPos(4, 10, 0)
-        Gun.TargetModel:setRot(-90, 0, 90)
-        Arms:setBowPose(true, false)
+        if BlueArchiveCharacter.GUN.HoldPosePosOffset ~= nil and BlueArchiveCharacter.GUN.HoldPosePosOffset.Right ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(4, 8, 0):add(BlueArchiveCharacter.GUN.HoldPosePosOffset.Right))
+        else
+            Gun.TargetModel:setPos(vectors.vec3(4, 8, 0))
+        end
+        if BlueArchiveCharacter.GUN.HoldPoseRotOffset ~= nil and BlueArchiveCharacter.GUN.HoldPoseRotOffset.Right ~= nil then
+            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.HoldPoseRotOffset.Right))
+        else
+            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90))
+        end
     else
         for _, tickName in ipairs({"body_gun_tick", "right_gun_tick"}) do
             events.TICK:remove(tickName)
@@ -107,11 +152,25 @@ local function setGunPose(GunPosition)
         if events.RENDER:getRegisteredCount("left_gun_render") == 0 then
             events.RENDER:register(leftGunRender, "left_gun_render")
         end
+        Gun.TargetModel:setVisible(true)
         vanilla_model.RIGHT_ITEM:setVisible(true)
+        if BlueArchiveCharacter.GUN.HoldPose == "NORMAL" then
+            Arms:setBowPose(true, true)
+        elseif BlueArchiveCharacter.GUN.HoldPose == "CUSTOM" then
+            animations["models.main"]["gun_hold_right"]:stop()
+            animations["models.main"]["gun_hold_left"]:play()
+        end
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm)
-        Gun.TargetModel:setPos(-4, 10, 0)
-        Gun.TargetModel:setRot(-90, 0, 90)
-        Arms:setBowPose(true, true)
+        if BlueArchiveCharacter.GUN.HoldPosePosOffset ~= nil and BlueArchiveCharacter.GUN.HoldPosePosOffset.Left ~= nil then
+            Gun.TargetModel:setPos(vectors.vec3(-4, 8, 0):add(BlueArchiveCharacter.GUN.HoldPosePosOffset.Left))
+        else
+            Gun.TargetModel:setPos(vectors.vec3(-4, 8, 0))
+        end
+        if BlueArchiveCharacter.GUN.HoldPoseRotOffset ~= nil and BlueArchiveCharacter.GUN.HoldPoseRotOffset.Left ~= nil then
+            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.HoldPoseRotOffset.Left))
+        else
+            Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90))
+        end
     end
 end
 
@@ -121,28 +180,54 @@ events.TICK:register(function()
     if heldItems[1].id ~= heldItemsPrev[1].id or heldItems[2].id ~= heldItemsPrev[2].id then
         for _, gunItem in ipairs(Gun.GUN_ITEMS) do
             if heldItems[1].id == gunItem then
-                setGunPose(player:isLeftHanded() and "LEFT" or "RIGHT")
+                --メインハンドに対象アイテムを持つ
                 targetItemFound = true
+                if player:isLeftHanded() then
+                    if currentGunStatus ~= "LEFT" then
+                        setGunPose("LEFT")
+                        currentGunStatus = "LEFT"
+                    end
+                else
+                    if currentGunStatus ~= "RIGHT" then
+                        setGunPose("RIGHT")
+                        currentGunStatus = "RIGHT"
+                    end
+                end
                 break
             end
         end
         if not targetItemFound then
             for _, gunItem in ipairs(Gun.GUN_ITEMS) do
                 if heldItems[2].id == gunItem then
-                    setGunPose(player:isLeftHanded() and "RIGHT" or "LEFT")
+                    --オフハンドに対象アイテムを持つ
                     targetItemFound = true
+                    if player:isLeftHanded() then
+                        if currentGunStatus ~= "RIGHT" then
+                            setGunPose("RIGHT")
+                            currentGunStatus = "RIGHT"
+                        end
+                    else
+                        if currentGunStatus ~= "LEFT" then
+                            setGunPose("LEFT")
+                            currentGunStatus = "LEFT"
+                        end
+                    end
                     break
                 end
             end
         end
         if not targetItemFound then
-            setGunPose("BODY")
+            --対象アイテムは持たない
+            if currentGunStatus ~= "NONE" then
+                setGunPose("NONE")
+                currentGunStatus = "NONE"
+            end
         end
         heldItemsPrev = heldItems
     end
 end)
 
 Gun.TargetModel:setScale(1.5, 1.5, 1.5)
-setGunPose("BODY")
+setGunPose("NONE")
 
 return Gun
