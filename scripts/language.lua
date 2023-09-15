@@ -3,9 +3,6 @@
 Language = {
 	LanguageData = {
 		en_us = {
-			namepalte__club_name = "Festival Management Committee", --Club name
-			costume__default = "Default",
-			costume__swimsuit = "Swimsuit",
 			action_wheel__toggle_off = "off",
 			action_wheel__toggle_on = "on",
 			action_wheel__main__action_1__title = "Ex skill",
@@ -23,13 +20,9 @@ Language = {
 			action_wheel__main__action_5__title = "Show health bar: "
 		},
 		ja_jp = {
-			namepalte__club_name = "お祭り運営委員会", --部活名
-			costume__default = "デフォルト",
-			costume__swimsuit = "水着",
 			action_wheel__toggle_off = "オフ",
 			action_wheel__toggle_on = "オン",
 			action_wheel__main__action_1__title = "Exスキル",
-			action_wheel__main__action_1__title_2 = "", --Exスキル名
 			action_wheel__main__action_1__unavailable = "今は再生できません。",
 			action_wheel__main__action_1__unavailable_firstperson = "一人称視点では再生できません。",
 			action_wheel__main__action_2__title = "衣装を変更：",
@@ -54,9 +47,17 @@ Language = {
 	end
 }
 
-for index, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-	Language.LanguageData.en_us["action_wheel__main__action_1__title_2_"..index] = exSkill.nameEN
-	Language.LanguageData.ja_jp["action_wheel__main__action_1__title_2_"..index] = exSkill.nameJP
+Language.LanguageData.en_us["namepalte__club_name"] = BlueArchiveCharacter.CLUB_NAME_EN
+Language.LanguageData.ja_jp["namepalte__club_name"] = BlueArchiveCharacter.CLUB_NAME_JP
+if host:isHost() then
+	for _, costume in ipairs(BlueArchiveCharacter.COSTUME) do
+		Language.LanguageData.en_us["costume__"..costume.name] = costume.name_en
+		Language.LanguageData.ja_jp["costume__"..costume.name] = costume.name_jp
+	end
+	for index, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
+		Language.LanguageData.en_us["action_wheel__main__action_1__title_2_"..index] = exSkill.nameEN
+		Language.LanguageData.ja_jp["action_wheel__main__action_1__title_2_"..index] = exSkill.nameJP
+	end
 end
 
 return Language

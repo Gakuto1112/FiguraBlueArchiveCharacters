@@ -22,13 +22,15 @@
 ---@field LAST_NAME_JP string 生徒の苗字（日本語）
 ---@field BIRTH_MONTH integer 生徒の誕生月
 ---@field BIRTH_DAY integer 生徒の誕生日
+---@field CLUB_NAME_EN string 生徒所属の部活名（英語）
+---@field CLUB_NAME_JP string 生徒所属の部活名（日本語）
 ---@field HEAD_RING_NEUTRAL_ROT number 通常時の輪っかの角度
----@field COSTUME table 衣装のデータ: name. 衣装の内部名, ex_skill. 衣装に対応するExスキルのインデックス番号
+---@field COSTUME table 衣装のデータ: name. 衣装の内部名, name_en. 衣装の表示名（英語）, name_jp. 衣装の表示名（日本語）, ex_skill. 衣装に対応するExスキルのインデックス番号
 ---@field COSTUME_CHANGE_CALLBACK fun(self: table, costumeId: integer) 衣装が変更された場合に実行されるコールバック関数
 ---@field COSTUME_RESET_CALLBACK fun(self: table) 衣装がリセットされた場合に実行されるコールバック関数
 ---@field ARMOR_CHANGE_CALLBACK fun(self: table, armorIndex: integer) 防具が変更された場合に実行されるコールバック関数
 ---@field FACE_PARTS table 目や口のパーツデータ。パーツ名を鍵として、インデックス1に、デフォルトパーツから見て右にx番目、インデックス2に、デフォルトパーツから見て下にy番目を入力する。
----@field GUN table table 銃の位置調整のデータ: HoldPose. 銃の構え方（"NORMAL", "CUSTOM"）, HoldPosePosOffset. 銃を構える時の位置オフセット（任意）, HoldPoseRotOffset. 銃を構える時の向きオフセット（任意）, PutType. 銃を構えていない時の挙動（"BODY", "HIDDEN"）, PutPosOffset. 銃がアバターのBodyにある場合の位置オフセット（任意）, PutRotOffset. 銃がアバターのBodyにある場合の向きオフセット（任意）
+---@field GUN table table 銃の位置調整のデータ: HoldPose. 銃の構え方（"NORMAL", "CUSTOM"）, HoldPosePosOffset. 銃を構える時の位置オフセット（任意）, HoldPoseRotOffset. 銃を構える時の向きオフセット（任意）, PutType. 銃を構えていない時の挙動（"BODY", "HIDDEN"）, PutPosOffset. 銃がアバターのBodyにある場合の位置オフセット（任意）, PutRotOffset. 銃がアバターのBodyにある場合の向きオフセット（任意）, sound. 射撃音（サウンド名とピッチ）
 ---@field PHYSICS table 物理演算で動かすモデルパーツのテーブル
 ---@field EX_SKILL table Exスキルのデータ: nameEN. 英語でのExスキル名, nameJP. 日本語でのExスキル名, skillType. 生徒の攻撃属性, models. アニメーションの前後で表示/非表示にするモデルのテーブル, animations. Exスキルのアニメーションが含まれるbbmodelファイル名, cameraStartPos. アニメーション開始時のカメラの位置, cameraStartRot. アニメーション開始時のカメラの向き, cameraEndPos. アニメーション終了時のカメラの位置, cameraEndRot. アニメーション終了時のカメラの向き, preTransitionCallback. アニメーション開始前のトランジション開始前に呼ばれるコールバック関数, preAnimationCallback. アニメーション開始に呼び出されるコールバック関数, animationTick. アニメーション再生時のみ呼び出されるティック関数, postAnimationCallback. アニメーション終了後に呼び出されるコールバック関数。1つ目の引数はアニメーションが途中終了した場合にtrueになる。, postTransitionCallback. アニメーション終了後のトランジション終了語に呼ばれるコールバック関数。1つ目の引数はアニメーションが途中終了した場合にtrueになる。
 ---@field EX_SKILL_1_TEXT_1 TextTask Exスキル1で使用するテキストタスク
@@ -38,6 +40,8 @@ BlueArchiveCharacter = {
     LAST_NAME_EN = "Kawawa",
     FIRST_NAME_JP = "シズコ",
     LAST_NAME_JP = "河和",
+    CLUB_NAME_EN = "Festival Management Committee",
+    CLUB_NAME_JP = "お祭り運営委員会",
     BIRTH_MONTH = 7,
     BIRTH_DAY = 7,
 
@@ -48,10 +52,14 @@ BlueArchiveCharacter = {
 	COSTUME = {
 		{
 			name = "default",
+            name_en = "Default",
+            name_jp = "デフォルト",
 			ex_skill = 1
 		},
 		{
 			name = "swimsuit",
+            name_en = "Swimsuit",
+            name_jp = "水着",
 			ex_skill = 2
 		}
 	},
