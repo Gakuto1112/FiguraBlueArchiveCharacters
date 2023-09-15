@@ -102,13 +102,13 @@ local function setGunPose(GunPosition)
                 animations["models.main"][animationName]:stop()
             end
         end
-        if BlueArchiveCharacter.GUN.PutType == "BODY" then
+        if BlueArchiveCharacter.GUN.putType == "BODY" then
             Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Body)
             if events.TICK:getRegisteredCount("body_gun_tick") == 0 then
                 events.TICK:register(bodyGunTick, "body_gun_tick")
             end
             setBodyGunPos()
-        elseif BlueArchiveCharacter.GUN.PutType == "HIDDEN" then
+        elseif BlueArchiveCharacter.GUN.putType == "HIDDEN" then
             Gun.TargetModel:setVisible(false)
         end
     elseif GunPosition == "RIGHT" then
