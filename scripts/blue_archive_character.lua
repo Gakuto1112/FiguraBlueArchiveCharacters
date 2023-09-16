@@ -179,6 +179,7 @@ BlueArchiveCharacter = {
 	---Exスキル
 	EX_SKILL = {
         --[[
+        ======== データテンプレート ========
 		{
             ---Exスキルの名前
             name = {
@@ -569,6 +570,7 @@ BlueArchiveCharacter = {
         ---コスチュームの内部名をインデックスとする。
         costumes = {
             --[[
+            ======== データテンプレート ========
             costume_name = {
                 ---コスチュームの表示名
                 name = {
@@ -706,6 +708,7 @@ BlueArchiveCharacter = {
     ---物理演算データ
     PHYSICS = {
         --[[
+        ======== データテンプレート ========
         {
             ---この物理演算データを適用させるモデルパーツ
             ---@type ModelPart | ModelPart[]
