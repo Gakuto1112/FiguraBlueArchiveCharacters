@@ -73,8 +73,8 @@ ExSkill = {
                 targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.pos, 0, 1):add(0, -1.62)
                 targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.rot:copy():add(0, -bodyYaw, 0)
             end
-            if cameraRot.y * targetCameraRot.y < 0 then
-                if cameraRot.y < 0 then
+            if math.abs(cameraRot.y - targetCameraRot.y) >= 180 then
+                if cameraRot.y < targetCameraRot.y then
                     cameraRot.y = cameraRot.y + 360
                 else
                     targetCameraRot.y = targetCameraRot.y + 360
