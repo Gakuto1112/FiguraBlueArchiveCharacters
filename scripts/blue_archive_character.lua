@@ -104,6 +104,10 @@ BlueArchiveCharacter = {
 
     ---銃
     GUN = {
+        ---銃の大きさの倍率（省略可）
+        ---@type number
+        scale = 1.5,
+
         ---構えている時
         hold = {
             ---構え方

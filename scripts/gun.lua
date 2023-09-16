@@ -260,7 +260,10 @@ events.TICK:register(function()
     end
 end)
 
-Gun.TargetModel:setScale(1.5, 1.5, 1.5)
+if BlueArchiveCharacter.GUN.scale ~= nil then
+    Gun.TargetModel:setScale(vectors.vec3(1, 1, 1):scale(BlueArchiveCharacter.GUN.scale))
+end
+
 setGunPose("NONE")
 
 return Gun
