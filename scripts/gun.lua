@@ -73,12 +73,44 @@ end
 
 ---右手に銃を持った際のレンダー処理
 local function rightGunRender(_, context)
-    vanilla_model.RIGHT_ITEM:setVisible(context == "FIRST_PERSON")
+    if context == "FIRST_PERSON" then
+        if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
+            Arms:setBowPose(false, false)
+        else
+            animations["models.main"]["gun_hold_right"]:stop()
+        end
+        vanilla_model.RIGHT_ITEM:setVisible(true)
+        Gun.TargetModel:setVisible(false)
+    else
+        if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
+            Arms:setBowPose(true, false)
+        else
+            animations["models.main"]["gun_hold_right"]:play()
+        end
+        vanilla_model.RIGHT_ITEM:setVisible(false)
+        Gun.TargetModel:setVisible(true)
+    end
 end
 
 ---左手に銃を持った際のレンダー処理
 local function leftGunRender(_, context)
-    vanilla_model.LEFT_ITEM:setVisible(context == "FIRST_PERSON")
+    if context == "FIRST_PERSON" then
+        if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
+            Arms:setBowPose(false, false)
+        else
+            animations["models.main"]["gun_hold_left"]:stop()
+        end
+        vanilla_model.LEFT_ITEM:setVisible(true)
+        Gun.TargetModel:setVisible(false)
+    else
+        if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
+            Arms:setBowPose(true, true)
+        else
+            animations["models.main"]["gun_hold_left"]:play()
+        end
+        vanilla_model.LEFT_ITEM:setVisible(false)
+        Gun.TargetModel:setVisible(true)
+    end
 end
 
 ---銃の構えを変更する。
@@ -128,13 +160,9 @@ local function setGunPose(GunPosition)
         if events.RENDER:getRegisteredCount("right_gun_render") == 0 then
             events.RENDER:register(rightGunRender, "right_gun_render")
         end
-        Gun.TargetModel:setVisible(true)
         vanilla_model.LEFT_ITEM:setVisible(true)
-        if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-            Arms:setBowPose(true, false)
-        elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
+        if BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
             animations["models.main"]["gun_hold_left"]:stop()
-            animations["models.main"]["gun_hold_right"]:play()
         end
         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
         if BlueArchiveCharacter.GUN.hold.pos ~= nil and BlueArchiveCharacter.GUN.hold.pos.right ~= nil then
@@ -158,7 +186,6 @@ local function setGunPose(GunPosition)
         if events.RENDER:getRegisteredCount("left_gun_render") == 0 then
             events.RENDER:register(leftGunRender, "left_gun_render")
         end
-        Gun.TargetModel:setVisible(true)
         vanilla_model.RIGHT_ITEM:setVisible(true)
         if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
             Arms:setBowPose(true, true)
