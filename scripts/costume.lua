@@ -1,7 +1,9 @@
 ---@class Costume キャラクターのコスチュームを管理し、円滑に切り替えられるようにするクラス
+---@field CostumeList string[] 利用可能なコスチューム一覧。BlueArchiveCharacterクラスから動的に生成される。
 ---@field CurrentCostume integer 現在のコスチューム
 Costume = {
 	--変数
+	CostumeList = {},
 	CurrentCostume = Config:loadConfig("costume", 1),
 
 	--関数
@@ -9,7 +11,7 @@ Costume = {
 	---@param costumeId integer ローカル名を取得する衣装のID
 	---@return string localCostumeName 衣装のローカル名
 	getCostumeLocalName = function(self, costumeId)
-		return Language:getTranslate("costume__"..BlueArchiveCharacter.COSTUME[costumeId].name)
+		return Language:getTranslate("costume__"..Costume.CostumeList[costumeId])
 	end,
 
 	---メインモデルのテクスチャのオフセット値を設定する。
@@ -24,10 +26,10 @@ Costume = {
 	---@param costume integer 設定するコスチューム
 	setCostume = function(self, costume)
 		self:resetCostume()
-		for index, costumeData in ipairs(BlueArchiveCharacter.COSTUME) do
-			models.models["skull_"..costumeData.name].Skull:setVisible(index == costume)
+		for index, name in ipairs(self.CostumeList) do
+			models.models["skull_"..name].Skull:setVisible(index == costume)
 		end
-		BlueArchiveCharacter:COSTUME_CHANGE_CALLBACK(costume)
+		BlueArchiveCharacter.COSTUME.callbacks.change(costume)
 		self.CurrentCostume = costume
 	end,
 
@@ -37,12 +39,16 @@ Costume = {
 			ExSkill:forceStop()
 		end
 		self:setCostumeTextureOffset(0)
-		BlueArchiveCharacter:COSTUME_RESET_CALLBACK()
-		models.models["skull_"..BlueArchiveCharacter.COSTUME[self.CurrentCostume].name].Skull:setVisible(false)
+		BlueArchiveCharacter.COSTUME.callbacks.reset()
+		models.models["skull_"..self.CostumeList[self.CurrentCostume]].Skull:setVisible(false)
 		models.models.skull_default.Skull:setVisible(true)
 		self.CurrentCostume = 1
 	end
 }
+
+for name, _ in pairs(BlueArchiveCharacter.COSTUME.costumes) do
+	table.insert(Costume.CostumeList, name)
+end
 
 if Costume.CurrentCostume >= 2 then
 	Costume:setCostume(Costume.CurrentCostume)

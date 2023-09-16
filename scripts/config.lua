@@ -57,7 +57,7 @@ function pings.syncAvatarConfig(nameTypeId, showClubName)
 end
 
 if host:isHost() then
-	config:setName("BlueArchive_"..BlueArchiveCharacter.FIRST_NAME_EN..BlueArchiveCharacter.LAST_NAME_EN)
+	config:setName("BlueArchive_"..BlueArchiveCharacter.BASIC.firstName.en_us..BlueArchiveCharacter.BASIC.lastName.en_us)
 	events.TICK:register(function ()
 		if nextSyncCount == 0 then
 			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown)

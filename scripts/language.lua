@@ -47,16 +47,16 @@ Language = {
 	end
 }
 
-Language.LanguageData.en_us["namepalte__club_name"] = BlueArchiveCharacter.CLUB_NAME_EN
-Language.LanguageData.ja_jp["namepalte__club_name"] = BlueArchiveCharacter.CLUB_NAME_JP
+Language.LanguageData.en_us["namepalte__club_name"] = BlueArchiveCharacter.BASIC.clubName.en_us
+Language.LanguageData.ja_jp["namepalte__club_name"] = BlueArchiveCharacter.BASIC.clubName.ja_jp
 if host:isHost() then
-	for _, costume in ipairs(BlueArchiveCharacter.COSTUME) do
-		Language.LanguageData.en_us["costume__"..costume.name] = costume.name_en
-		Language.LanguageData.ja_jp["costume__"..costume.name] = costume.name_jp
-	end
 	for index, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-		Language.LanguageData.en_us["action_wheel__main__action_1__title_2_"..index] = exSkill.nameEN
-		Language.LanguageData.ja_jp["action_wheel__main__action_1__title_2_"..index] = exSkill.nameJP
+		Language.LanguageData.en_us["action_wheel__main__action_1__title_2_"..index] = exSkill.name.en_us
+		Language.LanguageData.ja_jp["action_wheel__main__action_1__title_2_"..index] = exSkill.name.ja_jp
+	end
+	for name, costume in pairs(BlueArchiveCharacter.COSTUME.costumes) do
+		Language.LanguageData.en_us["costume__"..name] = costume.name.en_us
+		Language.LanguageData.ja_jp["costume__"..name] = costume.name.ja_jp
 	end
 end
 

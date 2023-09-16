@@ -23,7 +23,7 @@ local selectingShowClubName = Nameplate.ClubShown
 --関数
 ---衣装変更アクションのタイトルを更新する。
 local function refreshCostumeChangeActionTitle()
-    if #BlueArchiveCharacter.COSTUME >= 2 then
+    if #Costume.CostumeList >= 2 then
         mainPage:getAction(2):title(Language:getTranslate("action_wheel__main__action_2__title").."§b"..Costume:getCostumeLocalName(selectingCostume))
     else
         mainPage:getAction(2):title("§7"..Language:getTranslate("action_wheel__main__action_2__title")..Costume:getCostumeLocalName(selectingCostume))
@@ -73,9 +73,9 @@ events.TICK:register(function()
     if actionWheelOpened then
         --EXスキルが再生可能か確認
         if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 then
-            mainPage:getAction(1):title(Language:getTranslate("action_wheel__main__action_1__title").."\n§b"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill)):color(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].skillType == "EXPLOSION" and vectors.vec3(0.55, 0, 0.03) or (BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].skillType == "PIERCE" and vectors.vec3(0.72, 0.55, 0.2) or (BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill].skillType == "MYSTERY" and vectors.vec3(0.16, 0.43, 0.6) or vectors.vec3(0.58, 0.28, 0.64)))):hoverColor(1, 1, 1)
+            mainPage:getAction(1):title(Language:getTranslate("action_wheel__main__action_1__title").."\n§b"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill)):color(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].skillType == "EXPLOSION" and vectors.vec3(0.55, 0, 0.03) or (BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].skillType == "PIERCE" and vectors.vec3(0.72, 0.55, 0.2) or (BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].skillType == "MYSTERY" and vectors.vec3(0.16, 0.43, 0.6) or vectors.vec3(0.58, 0.28, 0.64)))):hoverColor(1, 1, 1)
         else
-            mainPage:getAction(1):title("§7"..Language:getTranslate("action_wheel__main__action_1__title").."\n"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME[Costume.CurrentCostume].ex_skill)):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33)
+            mainPage:getAction(1):title("§7"..Language:getTranslate("action_wheel__main__action_1__title").."\n"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill)):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33)
         end
     elseif actionWheelOpenedPrev then
         if selectingNameState ~= Nameplate.CurrentName or selectingShowClubName ~= Nameplate.ClubShown then
@@ -111,29 +111,29 @@ end)
 
 --アクション2. 衣装を変更
 mainPage:newAction(2):item("minecraft:leather_chestplate"):onScroll(function(direction)
-    if #BlueArchiveCharacter.COSTUME >= 2 then
+    if #Costume.CostumeList >= 2 then
         if direction < 0 then
-            selectingCostume = selectingCostume == #BlueArchiveCharacter.COSTUME and 1 or selectingCostume + 1
+            selectingCostume = selectingCostume == #Costume.CostumeList and 1 or selectingCostume + 1
         else
-            selectingCostume = selectingCostume == 1 and #BlueArchiveCharacter.COSTUME or selectingCostume - 1
+            selectingCostume = selectingCostume == 1 and #Costume.CostumeList or selectingCostume - 1
         end
         refreshCostumeChangeActionTitle()
     else
         print(Language:getTranslate("action_wheel__main__action_2__unavailable"))
     end
 end):onLeftClick(function()
-    if #BlueArchiveCharacter.COSTUME >= 2 then
+    if #Costume.CostumeList >= 2 then
         selectingCostume = Costume.CurrentCostume
         refreshCostumeChangeActionTitle()
     end
 end):onRightClick(function()
-    if #BlueArchiveCharacter.COSTUME >= 2 then
+    if #Costume.CostumeList >= 2 then
         selectingCostume = 1
         refreshCostumeChangeActionTitle()
     end
 end)
 
-if #BlueArchiveCharacter.COSTUME >= 2 then
+if #Costume.CostumeList >= 2 then
     mainPage:getAction(2):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1)
 else
     mainPage:getAction(2):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33)

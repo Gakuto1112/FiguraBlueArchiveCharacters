@@ -1,3 +1,10 @@
+---防具の部位
+---@alias Armor.ArmorPart
+---| "HELMET" ヘルメット
+---| "CHEST_PLATE" チェストプレート
+---| "LEGGINGS" レギンス
+---| "BOOTS" ブーツ
+
 ---@class Armor 防具の表示を制御するクラス
 ---@field ShowArmor boolean 防具を表示するかどうか
 ---@field ArmorSlotItemsPrev table<ItemStack> 前チックの防具スロットのアイテム
