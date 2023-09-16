@@ -92,8 +92,14 @@ local function setGunPose(GunPosition)
         for _, renderName in ipairs({"right_gun_render", "left_gun_render"}) do
             events.RENDER:remove(renderName)
         end
-        for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
-            itemModel:setVisible(true)
+        if type(ExSkill) == "table" and ExSkill.AnimationCount > -1 then
+            for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
+                itemModel:setVisible(false)
+            end
+        else
+            for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
+                itemModel:setVisible(true)
+            end
         end
         if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
             Arms:setBowPose(false, false)
@@ -175,7 +181,7 @@ local function setGunPose(GunPosition)
 end
 
 events.TICK:register(function()
-    local heldItems = {player:getHeldItem(false), player:getHeldItem(true)}
+    local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem("minecraft:air"), world.newItem("minecraft:air")}
     local targetItemFound = false
     if heldItems[1].id ~= heldItemsPrev[1].id or heldItems[2].id ~= heldItemsPrev[2].id then
         for _, gunItem in ipairs(Gun.GUN_ITEMS) do

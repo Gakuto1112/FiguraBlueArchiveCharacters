@@ -169,6 +169,9 @@ ExSkill = {
         end
         self:transition("PRE", function()
             Physics:disable()
+            for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
+                itemModel:setVisible(false)
+            end
             for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].models) do
                 modelPart:setVisible(true)
             end
@@ -189,6 +192,9 @@ ExSkill = {
     stop = function(self)
         if host:isHost() then
             sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
+        end
+        for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
+            itemModel:setVisible(true)
         end
         for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].models) do
             modelPart:setVisible(false)
@@ -216,6 +222,9 @@ ExSkill = {
 
     ---アニメーションを停止させる。終了時のトランジションも無効
     forceStop = function(self)
+        for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
+            itemModel:setVisible(true)
+        end
         for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].models) do
             modelPart:setVisible(false)
         end
