@@ -49,7 +49,14 @@ events.TICK:register(function ()
 	elseif not isPaused then
 		blinkCount = blinkCount - 1
 	end
-	if FaceParts.EmotionCount == 0 then
+	local damageStatus = PlayerUtils:getDamageStatus()
+	if damageStatus == "DAMAGE" then
+		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 8, true)
+	elseif damageStatus == "DIED" then
+		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 20, true)
+	elseif player:getPose() == "SLEEPING" then
+		FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", 1, true)
+	elseif FaceParts.EmotionCount == 0 then
 		FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 0, false)
 	end
 	FaceParts.EmotionCount = (FaceParts.EmotionCount > 0 and not isPaused) and FaceParts.EmotionCount - 1 or FaceParts.EmotionCount
