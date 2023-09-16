@@ -11,11 +11,11 @@ Arms = {
             local function bowPoseRender()
                 local headRot = vanilla_model.HEAD:getOriginRot()
                 if self.BowPoseLeftHanded then
-                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + 90, math.map(headRot.y, -50, 50, -21, 78))
+                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78))
                     models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + 90, headRot.y)
                 else
                     models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + 90, headRot.y)
-                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + 90, math.map(headRot.y, -50, 50, -78, 21))
+                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21))
                 end
             end
 
