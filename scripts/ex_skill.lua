@@ -161,7 +161,9 @@ ExSkill = {
 
     ---アニメーションを再生する。
     play = function(self)
-        PlacementObject:removeAll()
+        if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
+            PlacementObject:removeAll()
+        end
         renderer:setRenderHUD(false)
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition) == "function" then

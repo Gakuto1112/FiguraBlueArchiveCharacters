@@ -106,7 +106,9 @@ mainPage:newAction(1):item("minecraft:diamond"):onLeftClick(function()
         print(Language:getTranslate("action_wheel__main__action_1__unavailable"))
     end
 end):onRightClick(function()
-    pings.action_wheel_main_action1_right()
+    if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
+        pings.action_wheel_main_action1_right()
+    end
 end)
 
 --アクション2. 衣装を変更
