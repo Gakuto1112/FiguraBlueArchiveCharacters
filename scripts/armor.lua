@@ -168,7 +168,7 @@ events.TICK:register(function ()
 					armorPart:setVisible(overlayVisible)
 				end
 			end
-			BlueArchiveCharacter:ARMOR_CHANGE_CALLBACK(index)
+			BlueArchiveCharacter.COSTUME.callbacks.armorChange(index == 1 and "HELMET" or (index == 2 and "CHEST_PLATE" or (index == 3 and "LEGGINGS" or "BOOTS")))
 		end
 		local glint = armorSlotItem:hasGlint()
 		if glint ~= Armor.ArmorSlotItemsPrev[index]:hasGlint() then

@@ -29,13 +29,13 @@ Physics = {
         events.WORLD_RENDER:remove("physics_world_render")
         for _, physicData in ipairs(BlueArchiveCharacter.PHYSICS) do
             local initialRot = vectors.vec3()
-            if type(physicData.x) == "table" and type(physicData.x.vertical) == "table" then
+            if physicData.x ~= nil and physicData.x.vertical ~= nil then
                 initialRot.x = physicData.x.vertical.neutral
             end
-            if type(physicData.y) == "table" and type(physicData.y.vertical) == "table" then
+            if physicData.y ~= nil and physicData.y.vertical ~= nil then
                 initialRot.y = physicData.y.vertical.neutral
             end
-            if type(physicData.z) == "table" and type(physicData.z.vertical) == "table" then
+            if physicData.z ~= nil and physicData.z.vertical ~= nil then
                 initialRot.z = physicData.z.vertical.neutral
             end
             local modelParts = {}

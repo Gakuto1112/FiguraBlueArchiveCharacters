@@ -34,7 +34,7 @@ ExSkill = {
             if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
                 ExSkill:stop()
             elseif ExSkill:canPlayAnimation() then
-                if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick) == "function" then
+                if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick ~= nil then
                     BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick(ExSkill.AnimationCount)
                 end
                 ExSkill.AnimationCount = ExSkill.AnimationCount > -1 and ExSkill.AnimationCount + 1 or ExSkill.AnimationCount
@@ -166,7 +166,7 @@ ExSkill = {
         end
         renderer:setRenderHUD(false)
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
-        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition) == "function" then
+        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition()
         end
         self:transition("PRE", function()
@@ -180,7 +180,7 @@ ExSkill = {
             for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].animations) do
                 animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:play()
             end
-            if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation) == "function" then
+            if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation()
             end
             events.TICK:register(self.animationTick, "ex_skill_tick")
@@ -204,7 +204,7 @@ ExSkill = {
         for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].animations) do
             animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:stop()
         end
-        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation) == "function" then
+        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation(false)
         end
         events.TICK:remove("ex_skill_tick")
@@ -212,7 +212,7 @@ ExSkill = {
         ExSkill.AnimationCount = -1
         Physics:enable()
         self:transition("POST", function()
-            if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition) == "function" then
+            if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition(false)
             end
             renderer:setCameraPos()
@@ -244,10 +244,10 @@ ExSkill = {
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
             modelPart:setScale(0, 0, 0)
         end
-        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation) == "function" then
+        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation(true)
         end
-        if type(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition) == "function" then
+        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition(true)
         end
         FaceParts:resetEmotion()

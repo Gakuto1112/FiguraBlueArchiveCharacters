@@ -35,7 +35,7 @@ Costume = {
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
 	resetCostume = function(self)
-		if type(ExSkill) == "table" then
+		if ExSkill ~= nil then
 			ExSkill:forceStop()
 		end
 		self:setCostumeTextureOffset(0)
