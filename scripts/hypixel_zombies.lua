@@ -1,0 +1,3 @@
+---@class HypixelZombies Hypixelの「Zombies」で使用される武器アイテムも銃モデルに置き換えるパッチ
+
+Gun.GUN_ITEMS = {"minecraft:bow", "minecraft:crossbow", "minecraft:wooden_hoe", "minecraft:stone_hoe", "minecraft:iron_hoe", "minecraft:wooden_shovel", "minecraft:stone_shovel", "minecraft:shears", "minecraft:diamond_hoe", "minecraft:golden_hoe", "minecraft:iron_shovel", "minecraft:diamond_pickaxe", "minecraft:golden_pickaxe", "minecraft:golden_hoe", "minecraft:flint_and_steel"}
