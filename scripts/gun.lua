@@ -124,7 +124,7 @@ local function setGunPose(GunPosition)
         for _, renderName in ipairs({"right_gun_render", "left_gun_render"}) do
             events.RENDER:remove(renderName)
         end
-        if type(ExSkill) == "table" and ExSkill.AnimationCount > -1 then
+        if ExSkill ~= nil and ExSkill.AnimationCount > -1 then
             for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
                 itemModel:setVisible(false)
             end
