@@ -3,7 +3,7 @@
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![サムネイル](./README_images/thumbnail.jpg)
+![サムネイル](./README_images/thumbnail.png)
 
 このブランチは**河和 シズコ**（**Shizuko Kawawa**）のブランチです。
 
