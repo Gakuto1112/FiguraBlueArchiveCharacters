@@ -6,7 +6,7 @@ RaycastUtils = {
     --定数
     RAYCAST_FINESS = 16,
     MAXIMUM_LENGTH = 4,
-    DEBUG_MODE = true,
+    DEBUG_MODE = false,
 
     --関数
     ---指定された点から当たり判定までの距離を返す。
