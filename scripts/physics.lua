@@ -39,9 +39,9 @@ Physics = {
                 initialRot.z = physicData.z.vertical.neutral
             end
             local modelParts = {}
-            if physicData.modelPart ~= nil then
+            if type(physicData.modelPart) == "ModelPart" then
                 table.insert(modelParts, physicData.modelPart)
-            elseif physicData.modelPart ~= nil then
+            elseif type(physicData.modelPart) == "table" then
                 modelParts = physicData.modelPart
             end
             for _, modelPart in ipairs(modelParts) do
