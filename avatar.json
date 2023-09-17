@@ -1,11 +1,10 @@
 {
-	"name": "Shizuko",
-	"description": "Shizuko Kawawa from Blue Archive",
+	"name": "<student_first_name_here>",
+	"description": "<student_full_name_here> from Blue Archive",
 	"author": "Gakuto1112",
 	"version": "0.1.1",
 	"color": "a3e0fb",
 	"ignoredTextures": [
-		"textures.for_modeling.water_still",
 		"textures.for_modeling.leather_layer_1",
 		"textures.for_modeling.leather_layer_1_overlay",
 		"textures.for_modeling.leather_layer_2",
@@ -158,34 +157,7 @@
 		"models.models.placement_object.PlacementObject": {
 			"visible": false
 		},
-		"models.models.ex_skill_1.TeaSet": {
-			"visible": false,
-			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom"
-		},
-		"models.models.ex_skill_2.Stall": {
-			"visible": false
-		},
-		"models.models.ex_skill_2.SoftCream": {
-			"visible": false
-		},
-		"models.models.ex_skill_2.Plate": {
-			"visible": false,
-			"moveTo": "models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom"
-		},
-		"models.models.ex_skill_2.Plate.ShavedIce.ShavedIce2.ShavedIceFace": {
-			"visible": false
-		},
-		"models.models.costume_swimsuit.CSwimsuitH": {
-			"visible": false,
-			"moveTo": "models.models.main.Avatar.Head"
-		},
 		"models.models.skull_default.Skull.HeadRing": {
-			"parentType": "None"
-		},
-		"models.models.skull_swimsuit.Skull": {
-			"visible": false
-		},
-		"models.models.skull_swimsuit.Skull.HeadRing": {
 			"parentType": "None"
 		}
 	}
