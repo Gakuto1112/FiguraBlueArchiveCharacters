@@ -4,7 +4,7 @@
 ---| "LEFT"
 
 ---@class Gun 生徒の銃を制御するクラス
----@field GUN_ITEMS table<string> 銃のモデルを適用するアイテムIDのテーブル
+---@field GUN_ITEMS Minecraft.itemID[] 銃のモデルを適用するアイテムIDのテーブル
 ---@field TargetModel ModelPart 銃のモデルパーツ
 Gun = {
     --定数

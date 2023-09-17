@@ -28,4 +28,6 @@ events.ENTITY_INIT:register(function ()
 	if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
 		PlacementObject = require("scripts.placement_object")
 	end
+
+	--require("scripts.hypixel_zombies")
 end)
