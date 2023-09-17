@@ -2288,4 +2288,14 @@ for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
 	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
 end
 
+--生徒固有初期化処理
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setPos(5.5, 12, 0)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setRot(180, 0, 0)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setColor(0.25, 0.39, 0.67)
+
+for _, modelPart in ipairs({models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb1.LightBulb1, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb2.LightBulb2, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb3.LightBulb3, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb4.LightBulb4, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb5.LightBulb5, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb6.LightBulb6}) do
+    modelPart:setLight(15)
+end
+
 return BlueArchiveCharacter

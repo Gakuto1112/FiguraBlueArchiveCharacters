@@ -168,8 +168,5 @@ for _, hitBox in ipairs(PlacementObject.HITBOXES) do
         chunk:scale(1 / 16)
     end
 end
-for _, modelPart in ipairs({models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb1.LightBulb1, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb2.LightBulb2, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb3.LightBulb3, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb4.LightBulb4, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb5.LightBulb5, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb6.LightBulb6}) do
-    modelPart:setLight(15)
-end
 
 return PlacementObject
