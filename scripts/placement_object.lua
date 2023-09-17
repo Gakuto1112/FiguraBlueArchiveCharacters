@@ -154,7 +154,6 @@ PlacementObject = {
         for _, modelPart in ipairs(models.models.placement_object.WorldObjects:getChildren()) do
             local objectNumber = PlacementObject:getObjectNumber(modelPart)
             if PlacementObject.ObjectData[objectNumber].currentPos ~= nil and PlacementObject.ObjectData[objectNumber].nectPos ~= nil then
-                printTable(PlacementObject.ObjectData[objectNumber])
                 local currentPos = PlacementObject.ObjectData[objectNumber].currentPos
                 local nextPos = PlacementObject.ObjectData[objectNumber].nextPos
                 if currentPos.x ~= nextPos.x or currentPos.y ~= nextPos.y or currentPos.z ~= nextPos.z then
