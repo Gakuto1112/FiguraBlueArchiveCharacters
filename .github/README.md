@@ -113,3 +113,5 @@ Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[
   - 生徒を★5にしなくてもこの画面は見れます。
 - 生徒の初期レアリティ（★1、★2、★3）
   - アバターのサムネイル画像の決定に使います。
+- やる気
+  - 「作ってやる！」という意欲
