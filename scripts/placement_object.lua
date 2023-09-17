@@ -1,13 +1,9 @@
 ---@class PalcementObject
----@field PLACEMENT_OBJECTS ModelPart[] 設置物として扱うモデル。指定したモデルをここでコピーして設置物とする。
----@field HITBOXES Vector3[][][] 設置物の当たり判定。直方体（立方体）のxyz座標がそれぞれ最小の頂点を指定し、そこからのxyz軸での長さを指定する。
 ---@field COLLISION_FINESS integer 当たり判定の細かさ（1ブロックの長さにつき何回処理を行うか）。当然細かくすれば精度が向上するが、その分処理の負荷も増大する。
 ---@field FALL_SPEED number 空中にある設置物が落下する速度（ブロック/ティック）
 ---@field ObjectData table 設置物の情報テーブル
 PlacementObject = {
     --定数
-    PLACEMENT_OBJECTS = {models.models.placement_object.PlacementObject},
-    HITBOXES = {{{vectors.vec3(-5, 0, -10), vectors.vec3(20, 38, 20)}}},
     COLLISION_FINESS = 16,
     FALL_SPEED = 3.5,
 
@@ -28,7 +24,8 @@ PlacementObject = {
     ---@param worldRot number 設置物の向き
     place = function(self, objectIndex, worldPos, worldRot)
         local objectNumber = #models.models.placement_object.WorldObjects:getChildren() + 1
-        local newObject = self.PLACEMENT_OBJECTS[objectIndex]:copy("Object"..objectNumber)
+        ---@diagnostic disable-next-line: redundant-parameter
+        local newObject = BlueArchiveCharacter.PLACEMENT_OBJECT.objects[objectIndex]:copy("Object"..objectNumber)
         models.models.placement_object.WorldObjects:addChild(newObject)
         newObject:setVisible(true)
         newObject:setPos(worldPos:scale(16))
@@ -83,7 +80,7 @@ PlacementObject = {
             --現在の位置でのコリジョン判定
             local collisionDetected = false
             local inWater = false
-            for _, hitBox in ipairs(PlacementObject.HITBOXES[PlacementObject.ObjectData[objectNumber].index]) do
+            for _, hitBox in ipairs(BlueArchiveCharacter.PLACEMENT_OBJECT.hitBoxes[PlacementObject.ObjectData[objectNumber].index]) do
                 for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]), hitBox[2])) do
                     local block = world.getBlockState(pos)
                     if block.id == "minecraft:lava" or block.id == "minecraft:fire" or block.id == "minecraft:soul_fire" then
@@ -118,7 +115,7 @@ PlacementObject = {
             if not collisionDetected then
                 collisionDetected = false
                 for i = 0, -(PlacementObject.FALL_SPEED * (inWater and 0.1 or 1)), -(1 / PlacementObject.COLLISION_FINESS) do
-                    for _, hitBox in ipairs(PlacementObject.HITBOXES[PlacementObject.ObjectData[objectNumber].index]) do
+                    for _, hitBox in ipairs(BlueArchiveCharacter.PLACEMENT_OBJECT.hitBoxes[PlacementObject.ObjectData[objectNumber].index]) do
                         for _, pos in ipairs(CollisionUtils:getCollisionBlocks(modelPos:copy():add(hitBox[1]):add(0, i), hitBox[2]:copy():mul(1, 0, 1))) do
                             local block = world.getBlockState(pos)
                             if block:hasCollision() then
@@ -167,13 +164,5 @@ PlacementObject = {
         end
     end
 }
-
-for _, hitBoxPair in ipairs(PlacementObject.HITBOXES) do
-    for _, hitBox in ipairs(hitBoxPair) do
-        for _ , chunk in ipairs(hitBox) do
-            chunk:scale(1 / 16)
-        end
-    end
-end
 
 return PlacementObject

@@ -26,5 +26,7 @@ events.ENTITY_INIT:register(function ()
 	Costume = require("scripts.costume")
 	ActionWheel = require("scripts.action_wheel")
 	ExSkill = require("scripts.ex_skill")
-	PlacementObject = require("scripts.placement_object")
+	if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
+		PlacementObject = require("scripts.placement_object")
+	end
 end)

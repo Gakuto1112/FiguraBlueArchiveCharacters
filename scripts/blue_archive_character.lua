@@ -180,6 +180,30 @@ BlueArchiveCharacter = {
         }
     },
 
+    ---設置物
+    PLACEMENT_OBJECT = {
+        ---設置物スクリプトを使用するかどうか
+        ---falseにするとスクリプトを読み込まないため、この場合PlacementObject関数を呼び出さないように注意すること。
+        ---@type boolean
+        use = true,
+
+        ---設置物として扱うモデル
+        ---このテーブルのインデックス番号がPlacementObject:place()で指定するobjectIndexになる。
+        ---@type ModelPart[]
+        objects = {models.models.placement_object.PlacementObject},
+
+        ---設置物の当たり判定
+        ---2つ目のテーブルは、上記"objects"のモデルと対応する当たり判定データのインデックス番号を一致させること。
+        hitBoxes = {
+            {
+                ---当たり判定（ヒットボックス）データ
+                ---直方体（立方体）のxyz座標がそれぞれ最小の頂点を指定し、そこからのxyz軸での長さを指定する。なお、設置物のヒットボックスは複数定義可能。
+                ---@type Vector3[]
+                {vectors.vec3(-5, 0, -10), vectors.vec3(20, 38, 20)}
+            }
+        }
+    },
+
 	---Exスキル
 	EX_SKILL = {
         --[[
@@ -2282,6 +2306,16 @@ BlueArchiveCharacter = {
     ---@diagnostic disable-next-line: undefined-field
     EX_SKILL_1_TEXT_1 = models.models.main.CameraAnchor:newText("ex_skill_1_text_1"):setVisible(false):setText("§c! !"):setRot(0, 180, 5):setScale(0.8, 0.8, 0.8):setOutline(true):setOutlineColor(1, 1, 1),
 }
+
+if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
+    for _, hitBoxPair in ipairs(BlueArchiveCharacter.PLACEMENT_OBJECT.hitBoxes) do
+        for _, hitBox in ipairs(hitBoxPair) do
+            for _ , chunk in ipairs(hitBox) do
+                chunk:scale(1 / 16)
+            end
+        end
+    end
+end
 
 for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
 	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
