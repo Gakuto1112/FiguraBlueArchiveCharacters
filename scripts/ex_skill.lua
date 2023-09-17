@@ -186,7 +186,7 @@ ExSkill = {
             events.TICK:register(self.animationTick, "ex_skill_tick")
             events.RENDER:register(self.animationRender, "ex_skill_render")
             self.AnimationCount = 0
-            self.AnimationLength = animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20
+            self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20)
         end)
     end,
 
