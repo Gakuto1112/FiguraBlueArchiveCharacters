@@ -7,11 +7,11 @@
 
 ![サムネイル](./README_images/thumbnail.jpg)
 
-**このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「作成状況」から特定のキャラクターのブランチに移動して下さい。**
+**このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
 
 ## 作成状況
 ### 作成済み
-- [河和 シズコ（Shizuko Kawawa）](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
+- [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 
 ### 作成中
 なし

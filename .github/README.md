@@ -7,4 +7,11 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 
 ![Thumbnail](./README_images/thumbnail.jpg)
 
-**This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "Creation status" section below.**
+**This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "[Creation status](#creation-status)" section below.**
+
+## Creation status
+### Done
+- [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
+
+### In progress
+None
