@@ -164,4 +164,8 @@ PlacementObject = {
     end
 }
 
+keybinds:newKeybind("debug_spawn_object", "key.keyboard.z"):onPress(function ()
+    PlacementObject:place(1, player:getPos(), player:getLookDir().y)
+end)
+
 return PlacementObject
