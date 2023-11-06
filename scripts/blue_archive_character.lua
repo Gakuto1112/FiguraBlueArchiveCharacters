@@ -64,13 +64,6 @@ BlueArchiveCharacter = {
         }
     },
 
-    ---頭の輪っか
-    HEAD_RING = {
-        ---基準角度
-        ---@type number
-        neutralRot = 0
-    },
-
     ---目や口
     ---パーツ名を鍵として、インデックス1に、デフォルトパーツから見て右にx番目、インデックス2に、デフォルトパーツから見て下にy番目を入力する。
     ---右目と左目については"NORMAL", "CLOSED", "SURPLISED"が必須となる。

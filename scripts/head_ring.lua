@@ -28,7 +28,7 @@ events.RENDER:register(function()
             table.remove(HeadRing.HeadRotData, 1)
         end
         --頭の輪っかの角度を設定
-        models.models.main.Avatar.Head.HeadRing:setRot(HeadRing.HeadRotAverage - headRot + BlueArchiveCharacter.HEAD_RING.neutralRot)
+        models.models.main.Avatar.Head.HeadRing:setRot(HeadRing.HeadRotAverage - headRot)
 
         --頭の輪っかの浮遊アニメーション
         if not client:isPaused() then
