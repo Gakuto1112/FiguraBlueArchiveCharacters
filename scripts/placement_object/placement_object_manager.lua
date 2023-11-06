@@ -15,7 +15,9 @@ PlacementObjectManager = {
     ---@param worldPos Vector3 設置する場所を示すワールド座標
     ---@param worldRot number 設置物の向き
     place = function (self, objectData, worldPos, worldRot)
-        table.insert(self.Objects, PlacementObject:new(objectData))
+        local instance = PlacementObject.new(objectData)
+        instance:setWorldPos(worldPos)
+        table.insert(self.Objects, instance)
     end
 }
 
