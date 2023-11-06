@@ -15,6 +15,12 @@ PlacementObject = {
             self.object:setPos(newWorldPos:scale(16))
         end
 
+        ---設置物の向きを変更する。度数法で入力する。
+        ---@param newWorldRot Vector3 移動先のワールド方向
+        instance.setWorldRot = function (self, newWorldRot)
+            self.object:setRot(newWorldRot)
+        end
+
         models.script_placement_object:addChild(instance.object)
         instance.object:setVisible(true)
 

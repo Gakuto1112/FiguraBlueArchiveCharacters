@@ -17,6 +17,7 @@ PlacementObjectManager = {
     place = function (self, objectData, worldPos, worldRot)
         local instance = PlacementObject.new(objectData)
         instance:setWorldPos(worldPos)
+        instance:setWorldRot(vectors.vec3(0, worldRot))
         table.insert(self.Objects, instance)
     end
 }
@@ -24,9 +25,10 @@ PlacementObjectManager = {
 PlacementObjectManager:init()
 
 keybinds:newKeybind("debug_place_object", "key.keyboard.z"):onPress(function ()
+    local lookDir = player:getLookDir()
     PlacementObjectManager:place({
         model = models.models.placement_object.PlacementObject
-    }, player:getPos(), player:getLookDir().y)
+    }, player:getPos(), -math.deg(math.atan2(lookDir.z, lookDir.x)) - 90)
 end)
 
 return PlacementObjectManager
