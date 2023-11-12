@@ -14,8 +14,11 @@ PlacementObjectManager = {
         models:newPart("script_placement_object", "World")
 
         events.TICK:register(function ()
-            for _, placementObject in ipairs(self.Objects) do
-                placementObject:onTick()
+            for index, placementObject in ipairs(self.Objects) do
+                if placementObject:getIsObjectOverlapped() then
+                    placementObject:remove()
+                    table.remove(self.Objects, index)
+                end
             end
         end)
     end,

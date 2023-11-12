@@ -13,6 +13,18 @@ PlacementObject = {
         ---@type Vector3
         instance.boundingBox = objectData.boundingBox
 
+        ---設置物を削除する。設置物削除後はこの設置物のインスタンスを削除すること。
+        instance.remove = function (self)
+            if PlacementObjectManager.DEBUG_MODE then
+                local objectName = self.object:getName()
+                models.script_placement_object[objectName].Debug:removeChild(models.script_placement_object[objectName].Debug.BoundingBox)
+                while #models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren() > 0 do
+                    models.script_placement_object[objectName].Debug.CollisionBlocks:removeChild(models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1])
+                end
+            end
+            models.script_placement_object:removeChild(self.object)
+        end
+
         ---設置物の位置をワールド座標で変更する。
         ---@param newWorldPos Vector3 移動先のワールド座標
         instance.setWorldPos = function (self, newWorldPos)
@@ -29,15 +41,16 @@ PlacementObject = {
             self.object:setRot(newWorldRot)
         end
 
-        ---毎ティック実行する関数
-        instance.onTick = function (self)
-            --前ティックのデバッグ用重なっているブロック表示を削除する。
+        ---設置物とブロックの当たり判定が重なっているかどうかを返す。
+        ---@return boolean isObjectOverlapped 設置物とブロックの当たり判定が重なっているかどうか
+        instance.getIsObjectOverlapped = function (self)
+            --前ティックのブロック表示をリセット
             if PlacementObjectManager.DEBUG_MODE then
                 local objectName = self.object:getName()
+                models.script_placement_object[objectName].Debug.BoundingBox:setColor()
                 while #models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren() > 0 do
                     models.script_placement_object[objectName].Debug.CollisionBlocks:removeChild(models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1])
                 end
-                models.script_placement_object[objectName].Debug.BoundingBox:setColor()
             end
 
             --設置物と重なるブロックを取得する。
@@ -92,10 +105,12 @@ PlacementObject = {
                                 boundingBoxModel:setColor(1, 0, 0)
                                 models.script_placement_object[self.object:getName()].Debug.BoundingBox:setColor(1, 0, 0)
                             end
+                            return true
                         end
                     end
                 end
             end
+            return false
         end
 
         models.script_placement_object:addChild(instance.object)
