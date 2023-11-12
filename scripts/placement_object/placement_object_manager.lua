@@ -1,7 +1,5 @@
 ---@class PlacementObjectManager 設置物を管理するマネージャークラス
 PlacementObjectManager = {
-    --定数
-
     ---デバッグモード
     ---@type boolean
     DEBUG_MODE = true,
@@ -10,12 +8,16 @@ PlacementObjectManager = {
     ---@type table<table>
     Objects = {},
 
-    --関数
-
     ---初期化関数
     init = function (self)
         ---@diagnostic disable-next-line: discard-returns
         models:newPart("script_placement_object", "World")
+
+        events.TICK:register(function ()
+            for _, placementObject in ipairs(self.Objects) do
+                placementObject:onTick()
+            end
+        end)
     end,
 
     ---指定した場所に指定した向きで設置物を置く。
