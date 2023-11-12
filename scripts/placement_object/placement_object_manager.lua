@@ -1,8 +1,16 @@
 ---@class PlacementObjectManager 設置物を管理するマネージャークラス
 PlacementObjectManager = {
+    --定数
+
+    ---デバッグモード
+    ---@type boolean
+    DEBUG_MODE = true,
+
     ---設置物のインスタンスを保持するテーブル
     ---@type table<table>
     Objects = {},
+
+    --関数
 
     ---初期化関数
     init = function (self)
@@ -27,7 +35,8 @@ PlacementObjectManager:init()
 keybinds:newKeybind("debug_place_object", "key.keyboard.z"):onPress(function ()
     local lookDir = player:getLookDir()
     PlacementObjectManager:place({
-        model = models.models.placement_object.PlacementObject
+        model = models.models.placement_object.PlacementObject,
+        boundingBox = vectors.vec3(8, 8, 8)
     }, player:getPos(), -math.deg(math.atan2(lookDir.z, lookDir.x)) - 90)
 end)
 
