@@ -33,10 +33,11 @@ PlacementObject = {
         instance.onTick = function (self)
             --前ティックのデバッグ用重なっているブロック表示を削除する。
             if PlacementObjectManager.DEBUG_MODE then
-                local collisionBlocksGroup = models.script_placement_object[self.object:getName()].Debug.CollisionBlocks
-                while #collisionBlocksGroup:getChildren() > 0 do
-                    collisionBlocksGroup:removeChild(collisionBlocksGroup:getChildren()[1])
+                local objectName = self.object:getName()
+                while #models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren() > 0 do
+                    models.script_placement_object[objectName].Debug.CollisionBlocks:removeChild(models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1])
                 end
+                models.script_placement_object[objectName].Debug.BoundingBox:setColor()
             end
 
             --設置物と重なるブロックを取得する。
@@ -62,7 +63,6 @@ PlacementObject = {
                     collisionBlocksGroup:addChild(collisionBlockModel)
                     collisionBlockModel:setPos(block:copy():add(0.5, 0, 0.5):scale(16))
                     collisionBlockModel:setScale(16, 16, 16)
-                    collisionBlockModel:setColor(1, 0 , 0)
                     collisionBlockModel:setVisible(true)
                 end
 
@@ -70,18 +70,28 @@ PlacementObject = {
                 local blockState = world.getBlockState(block)
                 if blockState:hasCollision() then
                     if PlacementObjectManager.DEBUG_MODE then
-                        collisionBlockModel:setColor(0, 1, 0)
+                        collisionBlockModel:setColor(1, 0, 0)
                     end
                     for _, boundingBox in ipairs(blockState:getCollisionShape()) do
+                        local boundingBoxCenter = vectors.vec3(boundingBox[1].x + ((boundingBox[2].x - boundingBox[1].x) / 2), boundingBox[1].y + ((boundingBox[2].y - boundingBox[1].y) / 2), boundingBox[1].z + ((boundingBox[2].z - boundingBox[1].z) / 2))
+                        local boundingBoxModel = nil
                         if PlacementObjectManager.DEBUG_MODE then
                             local collisionBlocksGroup = models.script_placement_object[self.object:getName()].Debug.CollisionBlocks
                             ---@diagnostic disable-next-line: redundant-parameter
-                            local boundingBoxModel = models.models.bounding_box.BoundingBox:copy("CollisionBlock_"..(#collisionBlocksGroup:getChildren() + 1))
+                            boundingBoxModel = models.models.bounding_box.BoundingBox:copy("CollisionBlock_"..(#collisionBlocksGroup:getChildren() + 1))
                             collisionBlocksGroup:addChild(boundingBoxModel)
-                            boundingBoxModel:setPos(block:copy():add(boundingBox[1].x + ((boundingBox[2].x - boundingBox[1].x) / 2), boundingBox[1].y, boundingBox[1].z + ((boundingBox[2].z - boundingBox[1].z) / 2)):scale(16))
+                            boundingBoxModel:setPos(block:copy():add(boundingBoxCenter.x, boundingBox[1].y, boundingBoxCenter.z):scale(16))
                             boundingBoxModel:setScale((boundingBox[2].x - boundingBox[1].x) * 16, (boundingBox[2].y - boundingBox[1].y) * 16, (boundingBox[2].z - boundingBox[1].z) * 16)
-                            boundingBoxModel:setColor(1, 0, 1)
                             boundingBoxModel:setVisible(true)
+                        end
+                        local worldObjectBoundingBoxCenter = self.object:getPos():scale(1 / 16):add(0, self.boundingBox.y / 32)
+                        local worldBoundingBoxCenter = boundingBoxCenter:copy():add(block)
+                        if math.abs(worldObjectBoundingBoxCenter.x - worldBoundingBoxCenter.x) < self.boundingBox.x / 32 + (boundingBox[2].x - boundingBox[1].x) / 2 and math.abs(worldObjectBoundingBoxCenter.y - worldBoundingBoxCenter.y) < self.boundingBox.y / 32 + (boundingBox[2].y - boundingBox[1].y) / 2 and math.abs(worldObjectBoundingBoxCenter.z - worldBoundingBoxCenter.z) < self.boundingBox.z / 32 + (boundingBox[2].z - boundingBox[1].z) / 2 then
+                            --重なりを検出
+                            if PlacementObjectManager.DEBUG_MODE then
+                                boundingBoxModel:setColor(1, 0, 0)
+                                models.script_placement_object[self.object:getName()].Debug.BoundingBox:setColor(1, 0, 0)
+                            end
                         end
                     end
                 end
