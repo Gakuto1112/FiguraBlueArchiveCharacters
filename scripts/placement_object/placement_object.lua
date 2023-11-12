@@ -54,15 +54,36 @@ PlacementObject = {
 
             for _, block in ipairs(collisionBlocks) do
                 --デバッグ用重なっているブロック表示を作成
+                local collisionBlockModel = nil
                 if PlacementObjectManager.DEBUG_MODE then
                     local collisionBlocksGroup = models.script_placement_object[self.object:getName()].Debug.CollisionBlocks
                     ---@diagnostic disable-next-line: redundant-parameter
-                    local collisionBlockModel = models.models.bounding_box.BoundingBox:copy("CollisionBlock_"..(#collisionBlocksGroup:getChildren() + 1))
+                    collisionBlockModel = models.models.bounding_box.BoundingBox:copy("CollisionBlock_"..(#collisionBlocksGroup:getChildren() + 1))
                     collisionBlocksGroup:addChild(collisionBlockModel)
                     collisionBlockModel:setPos(block:copy():add(0.5, 0, 0.5):scale(16))
                     collisionBlockModel:setScale(16, 16, 16)
-                    collisionBlockModel:setColor(1, 0 , 1)
+                    collisionBlockModel:setColor(1, 0 , 0)
                     collisionBlockModel:setVisible(true)
+                end
+
+                --重なるブロックの当たり判定を調査
+                local blockState = world.getBlockState(block)
+                if blockState:hasCollision() then
+                    if PlacementObjectManager.DEBUG_MODE then
+                        collisionBlockModel:setColor(0, 1, 0)
+                    end
+                    for _, boundingBox in ipairs(blockState:getCollisionShape()) do
+                        if PlacementObjectManager.DEBUG_MODE then
+                            local collisionBlocksGroup = models.script_placement_object[self.object:getName()].Debug.CollisionBlocks
+                            ---@diagnostic disable-next-line: redundant-parameter
+                            local boundingBoxModel = models.models.bounding_box.BoundingBox:copy("CollisionBlock_"..(#collisionBlocksGroup:getChildren() + 1))
+                            collisionBlocksGroup:addChild(boundingBoxModel)
+                            boundingBoxModel:setPos(block:copy():add(boundingBox[1].x + ((boundingBox[2].x - boundingBox[1].x) / 2), boundingBox[1].y, boundingBox[1].z + ((boundingBox[2].z - boundingBox[1].z) / 2)):scale(16))
+                            boundingBoxModel:setScale((boundingBox[2].x - boundingBox[1].x) * 16, (boundingBox[2].y - boundingBox[1].y) * 16, (boundingBox[2].z - boundingBox[1].z) * 16)
+                            boundingBoxModel:setColor(1, 0, 1)
+                            boundingBoxModel:setVisible(true)
+                        end
+                    end
                 end
             end
         end
