@@ -168,25 +168,31 @@ BlueArchiveCharacter = {
 
     ---設置物
     PLACEMENT_OBJECT = {
-        ---設置物スクリプトを使用するかどうか
-        ---falseにするとスクリプトを読み込まないため、この場合PlacementObject関数を呼び出さないように注意すること。
-        ---@type boolean
-        use = true,
+        --[[
+        ======== データテンプレート ========
+        {
+            ---設置物として扱うモデル
+            ---指定したモデルをコピーして設置物とする。
+            ---@type ModelPart
+            model = models.models.placement_object.PlacementObject,
 
-        ---設置物として扱うモデル
-        ---このテーブルのインデックス番号がPlacementObject:place()で指定するobjectIndexになる。
-        ---@type ModelPart[]
-        objects = {models.models.placement_object.PlacementObject},
+            ---設置物の当たり判定
+            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+            ---@type Vector3
+            boundingBox = vectors.vec3(8, 8, 8)
+        }
+        ]]
 
-        ---設置物の当たり判定
-        ---2つ目のテーブルは、上記"objects"のモデルと対応する当たり判定データのインデックス番号を一致させること。
-        hitBoxes = {
-            {
-                ---当たり判定（ヒットボックス）データ
-                ---直方体（立方体）のxyz座標がそれぞれ最小の頂点を指定し、そこからのxyz軸での長さを指定する。BlockBench上の数値をそのまま入力する。なお、設置物のヒットボックスは複数定義可能。
-                ---@type Vector3[]
-                {vectors.vec3(-4, 0, -4), vectors.vec3(8, 8, 8)}
-            }
+        {
+            ---設置物として扱うモデル
+            ---指定したモデルをコピーして設置物とする。
+            ---@type ModelPart
+            model = models.models.placement_object.PlacementObject,
+
+            ---設置物の当たり判定
+            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+            ---@type Vector3
+            boundingBox = vectors.vec3(8, 8, 8)
         }
     },
 

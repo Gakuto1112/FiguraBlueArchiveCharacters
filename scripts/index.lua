@@ -25,10 +25,8 @@ events.ENTITY_INIT:register(function ()
 	Costume = require("scripts.costume")
 	ActionWheel = require("scripts.action_wheel")
 	ExSkill = require("scripts.ex_skill")
-	if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
-		PlacementObject = require("scripts.placement_object.placement_object")
-		PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
-	end
+	PlacementObject = require("scripts.placement_object.placement_object")
+	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 
 	--require("scripts.hypixel_zombies")
 end)
