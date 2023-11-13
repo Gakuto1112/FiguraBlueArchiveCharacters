@@ -146,7 +146,7 @@ PlacementObject = {
             self.objectPosPrev = self.objectPos
 
             --落下速度を更新
-            self.fallSpeed = math.min(self.fallSpeed + 0.035, 3.575)
+            self.fallSpeed = world.getBlockState(self.objectPos).id == "minecraft:water" and math.max(self.fallSpeed - 0.1, 0.1) or math.min(self.fallSpeed + 0.035, 3.575)
 
             --落下先の判定
             local fallDistance = 0
