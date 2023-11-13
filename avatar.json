@@ -16,6 +16,9 @@
 		"scripts/index.lua"
 	],
 	"customizations": {
+		"models.models.main": {
+			"primaryRenderType": "CUTOUT"
+		},
 		"models.models.main.Avatar.Head.HeadRing": {
 			"parentType": "None"
 		},
@@ -159,6 +162,10 @@
 		},
 		"models.models.skull_default.Skull.HeadRing": {
 			"parentType": "None"
+		},
+		"models.models.barrier": {
+			"visible": false,
+			"primaryRenderType": "TRANSLUCENT"
 		},
 		"models.models.bounding_box.BoundingBox": {
 			"visible": false,
