@@ -2,7 +2,7 @@
 PlacementObjectManager = {
     ---デバッグモード
     ---@type boolean
-    DEBUG_MODE = true,
+    DEBUG_MODE = false,
 
     ---設置物のインスタンスを保持するテーブル
     ---@type table<table>
@@ -84,14 +84,5 @@ PlacementObjectManager = {
 }
 
 PlacementObjectManager:init()
-
-keybinds:newKeybind("debug_place_object", "key.keyboard.z"):onPress(function ()
-    local lookDir = player:getLookDir()
-    PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], player:getPos(), -math.deg(math.atan2(lookDir.z, lookDir.x)) - 90)
-end)
-
-keybinds:newKeybind("debug_remove_all_objects", "key.keyboard.x"):onPress(function ()
-    PlacementObjectManager:removeAll()
-end)
 
 return PlacementObjectManager
