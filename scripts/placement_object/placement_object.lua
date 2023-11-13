@@ -25,11 +25,11 @@ PlacementObject = {
         ---@type number
         instance.fallSpeed = 0
 
-        ---直方体（立方体）が当たり判定のあるブロックと重なっているかどうかを返す。
+        ---直方体（立方体）と重なっているブロックの座標のリストを返す。
         ---@param cubeStart Vector3 調べる直方体（立方体）の始点の頂点のワールド座標。xyzの値をcubeEndのものよりも小さくすること。
         ---@param cubeEnd Vector3 調べる直方体（立方体）の終点の頂点のワールド座標。xyzの値をcubeStartのものよりも大きくすること。
-        instance.isCubeOverlapped = function (self, cubeStart, cubeEnd)
-            --設置物と重なるブロックを取得する。
+        ---@return Vector3[] collisionBlocks 設置物が重なっているブロックの座標のリスト
+        instance.getCollisionBlocks = function (self, cubeStart, cubeEnd)
             local collisionBlocks = {}
             local boudingBoxSize = cubeEnd:copy():sub(cubeStart)
             local halfBoundingBoxSize = boudingBoxSize:copy():scale(1 / 2)
@@ -41,8 +41,16 @@ PlacementObject = {
                     end
                 end
             end
+            return collisionBlocks
+        end
 
-            for _, block in ipairs(collisionBlocks) do
+        ---直方体（立方体）が当たり判定のあるブロックと重なっているかどうかを返す。
+        ---@param cubeStart Vector3 調べる直方体（立方体）の始点の頂点のワールド座標。xyzの値をcubeEndのものよりも小さくすること。
+        ---@param cubeEnd Vector3 調べる直方体（立方体）の終点の頂点のワールド座標。xyzの値をcubeStartのものよりも大きくすること。
+        instance.isCubeOverlapped = function (self, cubeStart, cubeEnd)
+            --設置物と重なるブロックを取得する。
+
+            for _, block in ipairs(self:getCollisionBlocks(cubeStart, cubeEnd)) do
                 --デバッグ用重なっているブロック表示を作成
                 local collisionBlockModel = nil
                 if PlacementObjectManager.DEBUG_MODE then
@@ -99,6 +107,12 @@ PlacementObject = {
                 end
             end
             models.script_placement_object:removeChild(self.object)
+        end
+
+        ---設置物のワールド座標を返す。
+        ---@return Vector3 objectPos 設置物のワールド座標。設置物の底面の中央が基準。
+        instance.getWorldPos = function (self)
+            return self.objectPos
         end
 
         ---設置物の位置をワールド座標で変更する。

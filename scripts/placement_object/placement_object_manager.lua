@@ -17,13 +17,35 @@ PlacementObjectManager = {
         models:newPart("script_placement_object", "World")
 
         events.TICK:register(function ()
-            for index, placementObject in ipairs(self.Objects) do
-                if placementObject:getIsObjectOverlapped() then
-                    placementObject:remove()
+            local index = 1
+            while index <= #self.Objects do
+                if self.Objects[index]:getIsObjectOverlapped() then
+                    self.Objects[index]:remove()
                     table.remove(self.Objects, index)
                 else
-                    placementObject:fallTickProcess()
+                    local objectRemoved = false
+                    local objectPos = self.Objects[index]:getWorldPos()
+                    local worldBoungingBoxSize = self.Objects[index].boundingBox:copy():scale(1 / 16)
+                    local halfWorldBoungingBoxSize = worldBoungingBoxSize:copy():scale(1 / 2)
+                    for _, block in ipairs(self.Objects[index]:getCollisionBlocks(vectors.vec3(objectPos.x - halfWorldBoungingBoxSize.x, objectPos.y, objectPos.z - halfWorldBoungingBoxSize.z), vectors.vec3(objectPos.x + halfWorldBoungingBoxSize.x, objectPos.y + worldBoungingBoxSize.y, objectPos.z + halfWorldBoungingBoxSize.z))) do
+                        local objectBlockId = world.getBlockState(block).id
+                        if objectBlockId == "minecraft:lava" or objectBlockId == "minecraft:fire" or objectBlockId == "minecraft:soul_fire" then
+                            self.Objects[index]:remove()
+                            table.remove(self.Objects, index)
+                            sounds:playSound("minecraft:block.fire.extinguish", objectPos)
+                            for _ = 0, worldBoungingBoxSize.x * worldBoungingBoxSize.y * worldBoungingBoxSize.z * 8 do
+                                particles:newParticle("minecraft:smoke", vectors.vec3(objectPos.x + math.random() * worldBoungingBoxSize.x - halfWorldBoungingBoxSize.x, objectPos.y + math.random() * worldBoungingBoxSize.y, objectPos.z + math.random() * worldBoungingBoxSize.z - halfWorldBoungingBoxSize.z))
+                            end
+                            objectRemoved = true
+                            break
+                        end
+                    end
+                    if not objectRemoved then
+                        self.Objects[index]:fallTickProcess()
+                        index = index + 1
+                    end
                 end
+
             end
         end)
 
