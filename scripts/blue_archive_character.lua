@@ -175,25 +175,31 @@ BlueArchiveCharacter = {
 
     ---設置物
     PLACEMENT_OBJECT = {
-        ---設置物スクリプトを使用するかどうか
-        ---falseにするとスクリプトを読み込まないため、この場合PlacementObject関数を呼び出さないように注意すること。
-        ---@type boolean
-        use = true,
+        --[[
+        ======== データテンプレート ========
+        {
+            ---設置物として扱うモデル
+            ---指定したモデルをコピーして設置物とする。
+            ---@type ModelPart
+            model = models.models.ex_skill_1.Stall,
 
-        ---設置物として扱うモデル
-        ---このテーブルのインデックス番号がPlacementObject:place()で指定するobjectIndexになる。
-        ---@type ModelPart[]
-        objects = {models.models.placement_object.PlacementObject},
+            ---設置物の当たり判定
+            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+            ---@type Vector3
+            boundingBox = vectors.vec3(8, 8, 8)
+        }
+        ]]
 
-        ---設置物の当たり判定
-        ---2つ目のテーブルは、上記"objects"のモデルと対応する当たり判定データのインデックス番号を一致させること。
-        hitBoxes = {
-            {
-                ---当たり判定（ヒットボックス）データ
-                ---直方体（立方体）のxyz座標がそれぞれ最小の頂点を指定し、そこからのxyz軸での長さを指定する。BlockBench上の数値をそのまま入力する。なお、設置物のヒットボックスは複数定義可能。
-                ---@type Vector3[]
-                {vectors.vec3(-5, 0, -10), vectors.vec3(20, 38, 20)}
-            }
+        {
+            ---設置物として扱うモデル
+            ---指定したモデルをコピーして設置物とする。
+            ---@type ModelPart
+            model = models.models.ex_skill_1.Stall,
+
+            ---設置物の当たり判定
+            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+            ---@type Vector3
+            boundingBox = vectors.vec3(20, 38, 20)
         }
     },
 
@@ -312,12 +318,12 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.placement_object.PlacementObject, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet},
+			models = {models.models.ex_skill_1.Stall, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main", "placement_object", "ex_skill_1"},
+			animations = {"main", "ex_skill_1"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
@@ -405,14 +411,14 @@ BlueArchiveCharacter = {
                         end
                     end
                     if tick % 2 == 0 and tick >= 70 then
-                        local particleAnchor5Pos = PlayerUtils:getModelWorldPos(models.models.placement_object.PlacementObject.ExSkill1ParticleAnchor5)
+                        local particleAnchor5Pos = PlayerUtils:getModelWorldPos(models.models.ex_skill_1.Stall.ExSkill1ParticleAnchor5)
                         for i = 0, 11 do
                             local particleRot = i * (math.pi / 6)
                             particles:newParticle("minecraft:block minecraft:dirt", particleAnchor5Pos:copy():add(math.cos(particleRot) * 0.6, 0, math.sin(particleRot) * 0.6))
                         end
                     end
                     if tick % math.ceil((ExSkill.AnimationLength - tick) / 20) == 0 then
-                        sounds:playSound("minecraft:entity.boat.paddle_land", PlayerUtils:getModelWorldPos(models.models.placement_object.PlacementObject.Wheels.ExSkill1SoundAnchor1))
+                        sounds:playSound("minecraft:entity.boat.paddle_land", PlayerUtils:getModelWorldPos(models.models.ex_skill_1.Stall.Wheels.ExSkill1SoundAnchor1))
                     end
                 end,
 
@@ -423,7 +429,7 @@ BlueArchiveCharacter = {
                     if not forcedStop then
                         local objectRot = vectors.vec3(0.11417, 14.97985, 0.45019)
                         local bodyYaw = player:getBodyYaw() % 360
-                        PlacementObject:place(1, vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 1, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
+                        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(objectRot.z, vectors.rotateAroundAxis(objectRot.y, vectors.rotateAroundAxis(objectRot.x, vectors.vec3(-126.95374, 1, -8.99059):scale(1 / 16), 1), 0, 1), 0, 0, 1), 0, 1):add(player:getPos()), -objectRot.y + bodyYaw + 180)
                     end
                 end
             }
@@ -2304,16 +2310,6 @@ BlueArchiveCharacter = {
     EX_SKILL_1_TEXT_1 = models.models.main.CameraAnchor:newText("ex_skill_1_text_1"):setVisible(false):setText("§c! !"):setRot(0, 180, 5):setScale(0.8, 0.8, 0.8):setOutline(true):setOutlineColor(1, 1, 1),
 }
 
-if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
-    for _, hitBoxPair in ipairs(BlueArchiveCharacter.PLACEMENT_OBJECT.hitBoxes) do
-        for _, hitBox in ipairs(hitBoxPair) do
-            for _ , chunk in ipairs(hitBox) do
-                chunk:scale(1 / 16)
-            end
-        end
-    end
-end
-
 for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
 	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
 	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
@@ -2325,7 +2321,7 @@ models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setRot(1
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setColor(0.25, 0.39, 0.67)
 
-for _, modelPart in ipairs({models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb1.LightBulb1, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb2.LightBulb2, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb3.LightBulb3, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb4.LightBulb4, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb5.LightBulb5, models.models.placement_object.PlacementObject.Roof.RoofTop.LightBulbs.LightBulb6.LightBulb6}) do
+for _, modelPart in ipairs({models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb1.LightBulb1, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb2.LightBulb2, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb3.LightBulb3, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb4.LightBulb4, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb5.LightBulb5, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb6.LightBulb6}) do
     modelPart:setLight(15)
 end
 

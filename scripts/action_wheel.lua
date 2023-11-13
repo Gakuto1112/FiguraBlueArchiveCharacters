@@ -49,7 +49,7 @@ function pings.action_wheel_main_action1_left()
 end
 
 function pings.action_wheel_main_action1_right()
-    PlacementObject:removeAll()
+    PlacementObjectManager:removeAll()
 end
 
 function pings.action_wheel_main_action2_changeCostume(costumeId)
@@ -106,9 +106,7 @@ mainPage:newAction(1):item("minecraft:diamond"):onLeftClick(function()
         print(Language:getTranslate("action_wheel__main__action_1__unavailable"))
     end
 end):onRightClick(function()
-    if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
-        pings.action_wheel_main_action1_right()
-    end
+    pings.action_wheel_main_action1_right()
 end)
 
 --アクション2. 衣装を変更
