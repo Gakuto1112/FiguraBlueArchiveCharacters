@@ -30,6 +30,9 @@ PlacementObjectManager = {
                 if self.Objects[index]:getIsObjectOverlapped() then
                     self.Objects[index]:remove()
                     table.remove(self.Objects, index)
+                elseif self.Objects[index]:getWorldPos().y <= -128 then
+                    self.Objects[index]:remove()
+                    table.remove(self.Objects, index)
                 else
                     local objectRemoved = false
                     local objectPos = self.Objects[index]:getWorldPos()
