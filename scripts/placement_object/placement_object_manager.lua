@@ -8,6 +8,9 @@ PlacementObjectManager = {
     ---@type table<table>
     Objects = {},
 
+    ---レンダーイベントを処理したかどうか
+    IsRenderProcessed = false,
+
     ---初期化関数
     init = function (self)
         ---@diagnostic disable-next-line: discard-returns
@@ -23,6 +26,19 @@ PlacementObjectManager = {
                 end
             end
         end)
+
+        events.RENDER:register(function (delta)
+            if not self.IsRenderProcessed then
+                for _, placementObject in ipairs(self.Objects) do
+                    placementObject:fallRenderProcess(delta)
+                end
+                self.IsRenderProcessed = true
+            end
+        end)
+
+        events.WORLD_RENDER:register(function ()
+            self.IsRenderProcessed = false
+        end)
     end,
 
     ---指定した場所に指定した向きで設置物を置く。
@@ -31,7 +47,7 @@ PlacementObjectManager = {
     ---@param worldRot number 設置物の向き
     place = function (self, objectData, worldPos, worldRot)
         local instance = PlacementObject.new(objectData)
-        instance:setWorldPos(worldPos)
+        instance:setWorldPos(worldPos, true)
         instance:setWorldRot(vectors.vec3(0, worldRot))
         table.insert(self.Objects, instance)
     end

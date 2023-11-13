@@ -13,6 +13,14 @@ PlacementObject = {
         ---@type Vector3
         instance.boundingBox = objectData.boundingBox
 
+        ---設置物のワールド位置
+        ---@type Vector3
+        instance.objectPos = vectors.vec3()
+
+        ---前ティックのワールド位置
+        ---@type Vector3
+        instance.objectPosPrev = vectors.vec3()
+
         ---設置物の落下速度
         ---@type number
         instance.fallSpeed = 0
@@ -95,7 +103,12 @@ PlacementObject = {
 
         ---設置物の位置をワールド座標で変更する。
         ---@param newWorldPos Vector3 移動先のワールド座標
-        instance.setWorldPos = function (self, newWorldPos)
+        ---@param updateObjectPos boolean "instance.objectPos"や"instance.objectPosPrev"を更新するかどうか
+        instance.setWorldPos = function (self, newWorldPos, updateObjectPos)
+            if updateObjectPos then
+                self.objectPos = newWorldPos:copy()
+                self.objectPosPrev = newWorldPos:copy()
+            end
             local newPos = newWorldPos:copy():scale(16)
             self.object:setPos(newPos)
             if PlacementObjectManager.DEBUG_MODE then
@@ -128,6 +141,10 @@ PlacementObject = {
 
         ---設置物の落下処理。ティック関数内で処理する。
         instance.fallTickProcess = function (self)
+            --設置物の位置を強制的に更新
+            self:setWorldPos(self.objectPos, false)
+            self.objectPosPrev = self.objectPos
+
             --落下速度を更新
             self.fallSpeed = math.min(self.fallSpeed + 0.035, 3.575)
 
@@ -147,7 +164,14 @@ PlacementObject = {
                     fallDistance = fallDistance + 1 / 16
                 end
             end
-            self:setWorldPos(self.object:getPos():scale(1 / 16):sub(0, fallDistance, 0))
+            self.objectPos = self.objectPos:copy():sub(0, fallDistance, 0)
+        end
+
+        ---設置物の落下処理。レンダー関数内で処理する。
+        instance.fallRenderProcess = function (self, delta)
+            if self.objectPos ~= self.objectPosPrev then
+                self:setWorldPos(self.objectPosPrev:copy():add(self.objectPos:copy():sub(self.objectPosPrev):scale(delta)), false)
+            end
         end
 
         models.script_placement_object:addChild(instance.object)
