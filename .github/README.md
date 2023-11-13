@@ -33,6 +33,10 @@ None
 
   ![Gun](./README_images/gun.jpg)
 
+- A barrier will applied when the player has absorption hearts (yellow hearts).
+
+  ![Barrier](./README_images/barrier.jpg)
+
 - Can change costume if the character has multiple costumes.
 
   ![Costume](./README_images/costume.jpg)
