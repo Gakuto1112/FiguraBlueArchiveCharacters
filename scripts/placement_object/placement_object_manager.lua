@@ -18,6 +18,8 @@ PlacementObjectManager = {
                 if placementObject:getIsObjectOverlapped() then
                     placementObject:remove()
                     table.remove(self.Objects, index)
+                else
+                    placementObject:fallTickProcess()
                 end
             end
         end)

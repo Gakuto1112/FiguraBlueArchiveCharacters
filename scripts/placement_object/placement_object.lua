@@ -13,15 +13,19 @@ PlacementObject = {
         ---@type Vector3
         instance.boundingBox = objectData.boundingBox
 
+        ---設置物の落下速度
+        ---@type number
+        instance.fallSpeed = 0
+
         ---直方体（立方体）が当たり判定のあるブロックと重なっているかどうかを返す。
         ---@param cubeStart Vector3 調べる直方体（立方体）の始点の頂点のワールド座標。xyzの値をcubeEndのものよりも小さくすること。
         ---@param cubeEnd Vector3 調べる直方体（立方体）の終点の頂点のワールド座標。xyzの値をcubeStartのものよりも大きくすること。
         instance.isCubeOverlapped = function (self, cubeStart, cubeEnd)
             --設置物と重なるブロックを取得する。
             local collisionBlocks = {}
-            local objectPos = self.object:getPos():scale(1 / 16)
             local boudingBoxSize = cubeEnd:copy():sub(cubeStart)
             local halfBoundingBoxSize = boudingBoxSize:copy():scale(1 / 2)
+            local objectPos = cubeStart:copy():add(halfBoundingBoxSize.x, 0, halfBoundingBoxSize.z)
             for z = math.floor(objectPos.z - halfBoundingBoxSize.z), math.floor(objectPos.z + halfBoundingBoxSize.z) do
                 for y = math.floor(objectPos.y), math.floor(objectPos.y + boudingBoxSize.y) do
                     for x = math.floor(objectPos.x - halfBoundingBoxSize.x), math.floor(objectPos.x + halfBoundingBoxSize.x) do
@@ -120,6 +124,30 @@ PlacementObject = {
             local worldPos = self.object:getPos():scale(1 / 16)
             local halfBoundingBoxSize = self.boundingBox:copy():scale(1 / 32)
             return self:isCubeOverlapped(vectors.vec3(worldPos.x - halfBoundingBoxSize.x, worldPos.y, worldPos.z - halfBoundingBoxSize.z), vectors.vec3(worldPos.x + halfBoundingBoxSize.x, worldPos.y + self.boundingBox.y / 16, worldPos.z + halfBoundingBoxSize.z))
+        end
+
+        ---設置物の落下処理。ティック関数内で処理する。
+        instance.fallTickProcess = function (self)
+            --落下速度を更新
+            self.fallSpeed = math.min(self.fallSpeed + 0.035, 3.575)
+
+            --落下先の判定
+            local fallDistance = 0
+            local worldPos = self.object:getPos():scale(1 / 16)
+            local halfBoundingBoxSize = self.boundingBox:copy():scale(1 / 32)
+            local boundingBoxStart = worldPos:copy():sub(halfBoundingBoxSize.x, 0, halfBoundingBoxSize.z)
+            local boundingBoxEnd = worldPos:copy():add(halfBoundingBoxSize.x, self.boundingBox.y / 16, halfBoundingBoxSize.z)
+            for i = 0, self.fallSpeed - 1 / 16, 1 / 16 do
+                if self:isCubeOverlapped(vectors.vec3(boundingBoxStart.x, boundingBoxStart.y - i - 1 / 16, boundingBoxStart.z), vectors.vec3(boundingBoxEnd.x, boundingBoxStart.y - i, boundingBoxEnd.z)) then
+                    if i == 0 then
+                        self.fallSpeed = 0
+                    end
+                    break
+                else
+                    fallDistance = fallDistance + 1 / 16
+                end
+            end
+            self:setWorldPos(self.object:getPos():scale(1 / 16):sub(0, fallDistance, 0))
         end
 
         models.script_placement_object:addChild(instance.object)
