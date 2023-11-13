@@ -8,7 +8,6 @@ events.ENTITY_INIT:register(function ()
 	PlayerUtils = require("scripts.utils.player_utils")
 	CameraUtils = require("scripts.utils.camera_utils")
 	RaycastUtils = require("scripts.utils.raycast_utils")
-	CollisionUtils = require("scripts.utils.collision_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")
