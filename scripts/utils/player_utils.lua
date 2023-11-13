@@ -28,7 +28,7 @@ PlayerUtils = {
 }
 
 events.TICK:register(function()
-    local health = player:getHealth() + player:getAbsorptionAmount()
+    local health = player:getHealth()
     PlayerUtils.DamageStatus = health < PlayerUtils.HealthPrev and (health == 0 and "DIED" or "DAMAGE") or "NONE"
     PlayerUtils.HealthPrev = health
 end)

@@ -27,6 +27,7 @@ events.ENTITY_INIT:register(function ()
 	ExSkill = require("scripts.ex_skill")
 	PlacementObject = require("scripts.placement_object.placement_object")
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
+	Barrier = require("scripts.barrier")
 
 	--require("scripts.hypixel_zombies")
 end)
