@@ -11,6 +11,14 @@ PlacementObjectManager = {
     ---レンダーイベントを処理したかどうか
     IsRenderProcessed = false,
 
+    ---今ある全ての設置物を削除する。
+    removeAll = function (self)
+        while #self.Objects > 0 do
+            self.Objects[1]:remove()
+            table.remove(self.Objects, 1)
+        end
+    end,
+
     ---初期化関数
     init = function (self)
         ---@diagnostic disable-next-line: discard-returns
@@ -83,6 +91,10 @@ keybinds:newKeybind("debug_place_object", "key.keyboard.z"):onPress(function ()
         model = models.models.placement_object.PlacementObject,
         boundingBox = vectors.vec3(8, 8, 8)
     }, player:getPos(), -math.deg(math.atan2(lookDir.z, lookDir.x)) - 90)
+end)
+
+keybinds:newKeybind("debug_remove_all_objects", "key.keyboard.x"):onPress(function ()
+    PlacementObjectManager:removeAll()
 end)
 
 return PlacementObjectManager
