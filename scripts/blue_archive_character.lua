@@ -1212,16 +1212,6 @@ BlueArchiveCharacter = {
     --その他定数・変数
 }
 
-if BlueArchiveCharacter.PLACEMENT_OBJECT.use then
-    for _, hitBoxPair in ipairs(BlueArchiveCharacter.PLACEMENT_OBJECT.hitBoxes) do
-        for _, hitBox in ipairs(hitBoxPair) do
-            for _ , chunk in ipairs(hitBox) do
-                chunk:scale(1 / 16)
-            end
-        end
-    end
-end
-
 for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
 	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
 	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
