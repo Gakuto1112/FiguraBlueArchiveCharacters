@@ -17,7 +17,7 @@ Barrier = {
 
         if events.RENDER:getRegisteredCount("barrier_render") == 0 then
             events.RENDER:register(function ()
-                if not self.IsRenderProcessed then
+                if not self.IsRenderProcessed and not client:isPaused() then
                     local renderCount = 0.5 / client:getFPS()
                     for index, modelPart in ipairs(models.models.barrier.Barrier:getChildren()) do
                         self.AnimationCounters[index] = self.AnimationCounters[index] + renderCount
