@@ -1506,7 +1506,7 @@
 	],
 	"textures": [
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\main.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\河和シズコ\\textures\\main.png",
 			"name": "main.png",
 			"folder": "",
 			"namespace": "",
@@ -2119,6 +2119,196 @@
 							"time": 0,
 							"color": -1,
 							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "a634b452-bc3b-97ab-d8b1-fc16e8045957",
+			"name": "death_animation_1",
+			"loop": "hold",
+			"override": false,
+			"length": 0,
+			"snapping": 20,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"e98e96cf-993b-878e-02b8-777c368bb888": {
+					"name": "Avatar",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": -12,
+									"z": "0"
+								}
+							],
+							"uuid": "0ac4fb23-6ffc-12c0-58ad-d479fed3ebd6",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"22d40862-bd19-a16d-9e33-79364e6656d8": {
+					"name": "Head",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 30,
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "1b42d6fe-eba8-308d-c050-17e4dd4bd565",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"3c1cb66d-8a31-d31f-ec9f-65a33e313a53": {
+					"name": "RightArm",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": -35,
+									"y": 0,
+									"z": -20
+								}
+							],
+							"uuid": "01769809-0764-9d4c-9cb9-b64f2246af47",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"e7d3e5d8-00e4-587c-7bb6-6787db00054b": {
+					"name": "LeftArm",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "-35",
+									"y": "20",
+									"z": "0"
+								}
+							],
+							"uuid": "a7f6df7f-0a6c-d545-3e76-0e985395f4cb",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"29730186-2622-086d-ab67-4bb8e356bb6c": {
+					"name": "Legs",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": -90,
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "e0c9965e-5139-240f-f202-44f07f092596",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"4e80b5b4-7c04-8374-f8a7-526b3d36d050": {
+					"name": "RightLeg",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": 10
+								}
+							],
+							"uuid": "00da5cdb-d89e-e981-7519-2fd2f9a5d4be",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"73b3d6bc-af0b-a066-5d73-f3938109e11f": {
+					"name": "LeftLeg",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": -10
+								}
+							],
+							"uuid": "6e0098a6-33ac-0862-947f-866185ce6fe5",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
 							"bezier_left_value": [0, 0, 0],
