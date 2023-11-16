@@ -37,6 +37,10 @@ DeathAnimation = {
 
 ---@diagnostic disable-next-line: redundant-parameter
 models.models.death_animation.DummyAvatar.Head:addChild(models.models.main.Avatar.Head.HeadRing:copy("HeadRing"))
+if BlueArchiveCharacter.GUN.put.type == "BODY" then
+    ---@diagnostic disable-next-line: redundant-parameter
+    models.models.death_animation.DummyAvatar.UpperBody.Body:addChild(models.models.main.Avatar.UpperBody.Body.Gun:copy("Gun"))
+end
 
 --デバッグ用
 keybinds:newKeybind("death_animation_play", "key.keyboard.z"):onPress(function ()
