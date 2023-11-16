@@ -34,7 +34,11 @@ events.RENDER:register(function()
         if not client:isPaused() then
             HeadRing.FloatCount = HeadRing.FloatCount + 0.25 / fps
             HeadRing.FloatCount = HeadRing.FloatCount > 1 and HeadRing.FloatCount - 1 or HeadRing.FloatCount
-            models.models.main.Avatar.Head.HeadRing:setPos(0, math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25)
+            local headRingPos = math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25
+            models.models.main.Avatar.Head.HeadRing:setPos(0, headRingPos)
+            if DeathAnimation.AnimationCount > 0 then
+                models.models.death_animation.DummyAvatar.Head.HeadRing:setPos(0, headRingPos)
+            end
         end
         renderProcessed = true
     end

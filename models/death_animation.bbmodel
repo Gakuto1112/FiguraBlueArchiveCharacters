@@ -5539,49 +5539,6 @@
 			"uuid": "328a2de5-64bc-807b-5906-227bfceedf26"
 		},
 		{
-			"name": "HeadRing",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 35, -4],
-			"to": [4, 35, 4],
-			"autouv": 0,
-			"color": 0,
-			"inflate": 0.001,
-			"origin": [-3, 22, -4],
-			"faces": {
-				"north": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"east": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"south": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"west": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"up": {
-					"uv": [96, 150.91358, 164, 191],
-					"texture": 1
-				},
-				"down": {
-					"uv": [164, 150.91358, 232, 191],
-					"rotation": 180,
-					"texture": 1
-				}
-			},
-			"type": "cube",
-			"uuid": "48cfe147-8711-a325-c722-fe73d6c4d87a"
-		},
-		{
 			"name": "Body",
 			"box_uv": false,
 			"rescale": false,
@@ -7094,19 +7051,6 @@
 									"children": ["7853e9a2-b429-5a00-5e0e-70449c3a71ee", "328a2de5-64bc-807b-5906-227bfceedf26"]
 								}
 							]
-						},
-						{
-							"name": "HeadRing",
-							"origin": [0, 28, 0],
-							"color": 0,
-							"uuid": "e8809cb5-a507-86d8-da91-c79b1d4d233e",
-							"export": true,
-							"mirror_uv": false,
-							"isOpen": true,
-							"locked": false,
-							"visibility": true,
-							"autouv": 0,
-							"children": ["48cfe147-8711-a325-c722-fe73d6c4d87a"]
 						}
 					]
 				},
