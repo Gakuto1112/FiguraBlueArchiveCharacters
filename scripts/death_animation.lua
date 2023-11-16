@@ -29,6 +29,13 @@ DeathAnimation = {
                 elseif self.AnimationCount >= 120 and models.models.death_animation.DummyAvatar:getParent() == models.models.death_animation then
                     models.models.death_animation.DummyAvatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
                 end
+                local particleAnchorPos = PlayerUtils:getModelWorldPos(models.models.death_animation.DeathAnimationParticleAnchor)
+                for _ = 1, 3 do
+                    local particleRot = math.random() * math.pi * 2
+                    local particleOffset = math.random() * 3
+                    particles:newParticle("minecraft:poof", particleAnchorPos:copy():add(math.cos(particleRot) * particleOffset, 0, math.sin(particleRot) * particleOffset)):setVelocity(math.cos(particleRot), 0, math.sin(particleRot))
+
+                end
             end, "death_animation_tick")
         end
         if events.WORLD_TICK:getRegisteredCount("death_animation_world_tick") == 0 then
