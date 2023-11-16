@@ -27,6 +27,7 @@ events.ENTITY_INIT:register(function ()
 	PlacementObject = require("scripts.placement_object.placement_object")
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 	Barrier = require("scripts.barrier")
+	DeathAnimation = require("scripts.death_animation")
 
 	--require("scripts.hypixel_zombies")
 end)
