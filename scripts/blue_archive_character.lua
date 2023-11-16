@@ -72,14 +72,16 @@ BlueArchiveCharacter = {
         RightEye = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
-            CLOSED = {2, 0}
+            TIED = {2, 0},
+            CLOSED = {3, 0}
         },
 
         ---左目
         LeftEye = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
-            CLOSED = {2, 0}
+            TIED = {2, 0},
+            CLOSED = {3, 0}
         },
 
         ---口
