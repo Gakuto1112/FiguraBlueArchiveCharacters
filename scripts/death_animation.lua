@@ -8,16 +8,30 @@ DeathAnimation = {
     ---@type Vector3
     AnimationPos = vectors.vec3(),
 
+    ---アニメーションを再生している向き（度数法で示す）
+    ---@type number
+    AnimationRot = 0,
+
     ---プレイヤーモデルが不可視かどうか
     ---@type boolean
     playerInvisible = false,
+
+    ---ヘリコプターの出現/消滅パーティクルを生成する。
+    spawnHelicopterParticles = function (self)
+        local helicopterPos = PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter)
+        for _ = 1, 100 do
+            local particleOffset = vectors.rotateAroundAxis(self.AnimationRot, math.random() * 3.375 - 1.6875, math.random() * 5.125 - 2.5625, math.random() * 17.875 - 8.9375, helicopterPos:copy():mul(0, 1, 0))
+            particles:newParticle("minecraft:poof", helicopterPos:copy():add(particleOffset)):setVelocity(particleOffset:copy():scale(0.1))
+        end
+    end,
 
     ---死亡アニメーションを再生する。
     play = function (self)
         self:stop()
         self.AnimationPos = player:getPos()
         models.models.death_animation:setPos(self.AnimationPos:copy():scale(16))
-        models.models.death_animation:setRot(0, -player:getBodyYaw() + 180)
+        self.AnimationRot = (-player:getBodyYaw() + 180) % 360
+        models.models.death_animation:setRot(0, self.AnimationRot)
         models.models.death_animation:setVisible(true)
         animations["models.death_animation"]["death_animation"]:play()
         if events.TICK:getRegisteredCount("death_animation_tick") == 0 then
@@ -25,9 +39,13 @@ DeathAnimation = {
                 if self.AnimationCount < 120 then
                     models.models.death_animation.DummyAvatar:setLight(world.getLightLevel(self.AnimationPos))
                 elseif self.AnimationCount >= 255 then
+                    self:spawnHelicopterParticles()
                     self:stop()
                 elseif self.AnimationCount >= 120 and models.models.death_animation.DummyAvatar:getParent() == models.models.death_animation then
                     models.models.death_animation.DummyAvatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
+                end
+                if self.AnimationCount == 1 then
+                    self:spawnHelicopterParticles()
                 end
                 local particleAnchorPos = PlayerUtils:getModelWorldPos(models.models.death_animation.DeathAnimationParticleAnchor)
                 for _ = 1, 3 do
