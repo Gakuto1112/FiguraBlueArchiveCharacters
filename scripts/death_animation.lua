@@ -35,6 +35,9 @@ DeathAnimation = {
         animations["models.death_animation"]["death_animation"]:play()
         if events.TICK:getRegisteredCount("death_animation_tick") == 0 then
             events.TICK:register(function ()
+                if self.AnimationCount % 2 == 1 then
+                    sounds:playSound("minecraft:block.bamboo_wood_door.close", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                end
                 if self.AnimationCount < 120 then
                     models.models.death_animation.DummyAvatar:setLight(world.getLightLevel(self.AnimationPos))
                 elseif self.AnimationCount >= 255 then
