@@ -35,6 +35,13 @@ DeathAnimation = {
         animations["models.death_animation"]["death_animation"]:play()
         if events.TICK:getRegisteredCount("death_animation_tick") == 0 then
             events.TICK:register(function ()
+                local particleAnchorPos = PlayerUtils:getModelWorldPos(models.models.death_animation.DeathAnimationParticleAnchor)
+                for _ = 1, 3 do
+                    local particleRot = math.random() * math.pi * 2
+                    local particleOffset = math.random() * 3
+                    particles:newParticle("minecraft:poof", particleAnchorPos:copy():add(math.cos(particleRot) * particleOffset, 0, math.sin(particleRot) * particleOffset)):setVelocity(math.cos(particleRot), 0, math.sin(particleRot))
+
+                end
                 if self.AnimationCount % 2 == 1 then
                     sounds:playSound("minecraft:block.bamboo_wood_door.close", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 end
@@ -48,13 +55,10 @@ DeathAnimation = {
                 end
                 if self.AnimationCount == 1 then
                     self:spawnHelicopterParticles()
-                end
-                local particleAnchorPos = PlayerUtils:getModelWorldPos(models.models.death_animation.DeathAnimationParticleAnchor)
-                for _ = 1, 3 do
-                    local particleRot = math.random() * math.pi * 2
-                    local particleOffset = math.random() * 3
-                    particles:newParticle("minecraft:poof", particleAnchorPos:copy():add(math.cos(particleRot) * particleOffset, 0, math.sin(particleRot) * particleOffset)):setVelocity(math.cos(particleRot), 0, math.sin(particleRot))
-
+                elseif self.AnimationCount == 10 then
+                    sounds:playSound("minecraft:block.iron_door.open", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                elseif self.AnimationCount == 230 then
+                    sounds:playSound("minecraft:block.iron_door.close", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 end
             end, "death_animation_tick")
         end
