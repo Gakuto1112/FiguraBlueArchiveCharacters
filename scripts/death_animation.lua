@@ -57,6 +57,8 @@ DeathAnimation = {
                     self:spawnHelicopterParticles()
                 elseif self.AnimationCount == 10 then
                     sounds:playSound("minecraft:block.iron_door.open", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                elseif self.AnimationCount >= 57 and self.AnimationCount < 76 then
+                    sounds:playSound("minecraft:entity.player.attack.sweep", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14), 0.25, 2)
                 elseif self.AnimationCount == 230 then
                     sounds:playSound("minecraft:block.iron_door.close", PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 end
