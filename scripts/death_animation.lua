@@ -108,9 +108,4 @@ if BlueArchiveCharacter.GUN.put.type == "BODY" then
     models.models.death_animation.DummyAvatar.UpperBody.Body:addChild(models.models.main.Avatar.UpperBody.Body.Gun:copy("Gun"))
 end
 
---デバッグ用
-keybinds:newKeybind("death_animation_play", "key.keyboard.z"):onPress(function ()
-    DeathAnimation:play()
-end)
-
 return DeathAnimation
