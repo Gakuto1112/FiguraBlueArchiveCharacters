@@ -20,8 +20,7 @@ DeathAnimation = {
     spawnHelicopterParticles = function (self)
         local helicopterPos = PlayerUtils:getModelWorldPos(models.models.death_animation.Helicopter)
         for _ = 1, 100 do
-            local particleOffset = vectors.rotateAroundAxis(self.AnimationRot, math.random() * 3.375 - 1.6875, math.random() * 5.125 - 2.5625, math.random() * 17.875 - 8.9375, helicopterPos:copy():mul(0, 1, 0))
-            particles:newParticle("minecraft:poof", helicopterPos:copy():add(particleOffset)):setVelocity(particleOffset:copy():scale(0.1))
+            particles:newParticle("minecraft:poof", helicopterPos:copy():add(vectors.rotateAroundAxis(self.AnimationRot, math.random() * 9.375 - 4.6875, math.random() * 11.125 - 5.5625, math.random() * 23.875 - 11.9375, 0, math.abs(helicopterPos.y), 0)))
         end
     end,
 
@@ -78,7 +77,7 @@ DeathAnimation = {
     ---毎ティック呼び出す関数
     onTick = function (self)
         if PlayerUtils:getDamageStatus() == "DIED" then
-            DeathAnimation:play()
+            self:play()
             models.models.main:setVisible(false)
             self.playerInvisible = true
         end
