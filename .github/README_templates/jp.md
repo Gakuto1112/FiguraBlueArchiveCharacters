@@ -14,7 +14,7 @@
 - [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 
 ### 作成中
-なし
+- 久田 イズナ
 
 ## 特徴
 - Exスキルのカットインを再現しています。
