@@ -38,6 +38,7 @@
   ![バリア](../README_images/barrier.jpg)
 
 - プレイヤーが死ぬとヘリコプターで回収されます。
+  - MinecraftやFiguraの仕様上、プレイヤーが表示されていないとこのアニメーションが表示されません。
 
   ![ヘリコプターで回収](../README_images/death_animation.jpg)
 
