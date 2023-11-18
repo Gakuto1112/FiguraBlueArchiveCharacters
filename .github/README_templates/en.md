@@ -42,7 +42,6 @@ None
 
   ![Rescued by helicopter](../README_images/death_animation.jpg)
 
-  ![ヘリコプターで回収](../README_images/death_animation.jpg)
 - Can change costume if the character has multiple costumes.
 
   ![Costume](../README_images/costume.jpg)
