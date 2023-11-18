@@ -681,15 +681,18 @@ BlueArchiveCharacter = {
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
-                models.models.main.Avatar.Head.Brim:setVisible(not Armor.ArmorVisible[1])
-                models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[2])
-                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom}) do
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"UpperBody.Body.Hairs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom"})) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB}) do
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB"})) do
                     modelPart:setVisible(false)
                 end
-        end,
+                models.models.main.Avatar.Head.Brim:setVisible(not Armor.ArmorVisible[1])
+                models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[2])
+                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.Brim, models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt}) do
+                    modelPart:setVisible(true)
+                end
+            end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数
             ---@type fun(index: integer)
