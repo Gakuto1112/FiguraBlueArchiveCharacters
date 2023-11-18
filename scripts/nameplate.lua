@@ -3,8 +3,8 @@
 ---@field ClubShown boolean 部活名を表示するかどうか
 Nameplate = {
     --変数
-    CurrentName = Config:loadConfig("name", 1),
-    ClubShown = Config:loadConfig("showClubName", false),
+    CurrentName = Config.loadConfig("name", 1),
+    ClubShown = Config.loadConfig("showClubName", false),
 
     --関数
     ---指定されたtypeIdでの表示名を返す。

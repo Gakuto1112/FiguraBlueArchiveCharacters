@@ -50,7 +50,7 @@ ExSkill = {
         local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
         local cameraRot = ExSkill.CAMERA_ANCHOR:getAnimRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
         renderer:setOffsetCameraPivot(cameraPos)
-        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils:cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
+        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
         renderer:setCameraRot(cameraRot)
         ExSkill.RenderProcessed = true
     end,
@@ -81,7 +81,7 @@ ExSkill = {
                 end
             end
             renderer:setOffsetCameraPivot(targetCameraPos:scale(self.TransitionCount))
-            renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils:cameraRotToRotationVector(targetCameraRot):scale(-1)) * -1 * self.TransitionCount)
+            renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils.cameraRotToRotationVector(targetCameraRot):scale(-1)) * -1 * self.TransitionCount)
             renderer:setCameraRot(targetCameraRot:copy():sub(cameraRot):scale(self.TransitionCount):add(cameraRot))
 
             --フレーム演出
@@ -168,7 +168,7 @@ ExSkill = {
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition()
         end
         self:transition("PRE", function()
-            Physics:disable()
+            Physics.disable()
             for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
                 itemModel:setVisible(false)
             end

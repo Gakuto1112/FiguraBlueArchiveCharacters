@@ -24,9 +24,9 @@ local selectingShowClubName = Nameplate.ClubShown
 ---衣装変更アクションのタイトルを更新する。
 local function refreshCostumeChangeActionTitle()
     if #Costume.CostumeList >= 2 then
-        mainPage:getAction(2):title(Language:getTranslate("action_wheel__main__action_2__title").."§b"..Costume:getCostumeLocalName(selectingCostume))
+        mainPage:getAction(2):title(Language:getTranslate("action_wheel__main__action_2__title").."§b"..Costume.getCostumeLocalName(selectingCostume))
     else
-        mainPage:getAction(2):title("§7"..Language:getTranslate("action_wheel__main__action_2__title")..Costume:getCostumeLocalName(selectingCostume))
+        mainPage:getAction(2):title("§7"..Language:getTranslate("action_wheel__main__action_2__title")..Costume.getCostumeLocalName(selectingCostume))
     end
 end
 
@@ -80,16 +80,16 @@ events.TICK:register(function()
     elseif actionWheelOpenedPrev then
         if selectingNameState ~= Nameplate.CurrentName or selectingShowClubName ~= Nameplate.ClubShown then
             pings.action_wheel_main_action3_changeName(selectingNameState, selectingShowClubName)
-            Config:saveConfig("name", selectingNameState)
-            Config:saveConfig("showClubName", selectingShowClubName)
+            Config.saveConfig("name", selectingNameState)
+            Config.saveConfig("showClubName", selectingShowClubName)
             sounds:playSound("minecraft:ui.cartography_table.take_result", player:getPos())
             print(Language:getTranslate("action_wheel__main__action_3__done_first")..Nameplate:getName(selectingNameState)..Language:getTranslate("action_wheel__main__action_3__done_last"))
         end
         if selectingCostume ~= Costume.CurrentCostume then
             pings.action_wheel_main_action2_changeCostume(selectingCostume)
-            Config:saveConfig("costume", selectingCostume)
+            Config.saveConfig("costume", selectingCostume)
             sounds:playSound("minecraft:item.armor.equip_leather", player:getPos())
-            print(Language:getTranslate("action_wheel__main__action_2__done_first")..Costume:getCostumeLocalName(selectingCostume)..Language:getTranslate("action_wheel__main__action_2__done_last"))
+            print(Language:getTranslate("action_wheel__main__action_2__done_first")..Costume.getCostumeLocalName(selectingCostume)..Language:getTranslate("action_wheel__main__action_2__done_last"))
         end
     end
     actionWheelOpenedPrev = actionWheelOpened
@@ -160,13 +160,13 @@ end)
 mainPage:newAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_4__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:iron_chestplate"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
     pings.action_wheel_main_action4(true)
     action:hoverColor(0.33, 1, 0.33)
-    Config:saveConfig("showArmor", true)
+    Config.saveConfig("showArmor", true)
 end):onUntoggle(function(_, action)
     pings.action_wheel_main_action4(false)
     action:hoverColor(1, 0.33, 0.33)
-    Config:saveConfig("showArmor", false)
+    Config.saveConfig("showArmor", false)
 end)
-if Config:loadConfig("showArmor", false) then
+if Config.loadConfig("showArmor", false) then
     local action = mainPage:getAction(4)
     action:toggled(true)
     action:hoverColor(0.33, 1, 0.33)

@@ -4,20 +4,20 @@
 Costume = {
 	--変数
 	CostumeList = {},
-	CurrentCostume = Config:loadConfig("costume", 1),
+	CurrentCostume = Config.loadConfig("costume", 1),
 
 	--関数
 	---設定言語を考慮した、衣装の名前を返す。
 	---@param costumeId integer ローカル名を取得する衣装のID
 	---@return string localCostumeName 衣装のローカル名
-	getCostumeLocalName = function(self, costumeId)
+	getCostumeLocalName = function(costumeId)
 		return Language:getTranslate("costume__"..Costume.CostumeList[costumeId])
 	end,
 
 	---メインモデルのテクスチャのオフセット値を設定する。
 	---@param offset integer オフセット値
-	setCostumeTextureOffset = function(self, offset)
-		for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Body, models.models.main.Avatar.UpperBody.Body.BodyLayer, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArm, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmLayer, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightArmBottom, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightArmBottomLayer, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArm, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmLayer, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftArmBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftArmBottomLayer, models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLeg, models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegLayer, models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.RightLegBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.RightLegBottomLayer, models.models.main.Avatar.LowerBody.Legs.LeftLeg.LeftLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg.LeftLegLayer, models.models.main.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom.LeftLegBottom, models.models.main.Avatar.LowerBody.Legs.LeftLeg.LeftLegBottom.LeftLegBottomLayer, models.models.death_animation.DummyAvatar.UpperBody.Body.Body, models.models.death_animation.DummyAvatar.UpperBody.Body.BodyLayer, models.models.death_animation.DummyAvatar.UpperBody.Arms.RightArm.RightArm, models.models.death_animation.DummyAvatar.UpperBody.Arms.RightArm.RightArmLayer, models.models.death_animation.DummyAvatar.UpperBody.Arms.RightArm.RightArmBottom.RightArmBottom, models.models.death_animation.DummyAvatar.UpperBody.Arms.RightArm.RightArmBottom.RightArmBottomLayer, models.models.death_animation.DummyAvatar.UpperBody.Arms.LeftArm.LeftArm, models.models.death_animation.DummyAvatar.UpperBody.Arms.LeftArm.LeftArmLayer, models.models.death_animation.DummyAvatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftArmBottom, models.models.death_animation.DummyAvatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftArmBottomLayer, models.models.death_animation.DummyAvatar.LowerBody.Legs.RightLeg.RightLeg, models.models.death_animation.DummyAvatar.LowerBody.Legs.RightLeg.RightLegLayer, models.models.death_animation.DummyAvatar.LowerBody.Legs.RightLeg.RightLegBottom.RightLegBottom, models.models.death_animation.DummyAvatar.LowerBody.Legs.RightLeg.RightLegBottom.RightLegBottomLayer, models.models.death_animation.DummyAvatar.LowerBody.Legs.LeftLeg.LeftLeg, models.models.death_animation.DummyAvatar.LowerBody.Legs.LeftLeg.LeftLegLayer, models.models.death_animation.DummyAvatar.LowerBody.Legs.LeftLeg.LeftLegBottom.LeftLegBottom, models.models.death_animation.DummyAvatar.LowerBody.Legs.LeftLeg.LeftLegBottom.LeftLegBottomLayer}) do
+	setCostumeTextureOffset = function(offset)
+		for _, modelPart in ipairs(ModelUtils.getPlayerModels({"UpperBody.Body.Body", "UpperBody.Body.BodyLayer", "UpperBody.Arms.RightArm.RightArm", "UpperBody.Arms.RightArm.RightArmLayer", "UpperBody.Arms.RightArm.RightArmBottom.RightArmBottom", "UpperBody.Arms.RightArm.RightArmBottom.RightArmBottomLayer", "UpperBody.Arms.LeftArm.LeftArm", "UpperBody.Arms.LeftArm.LeftArmLayer", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftArmBottom", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftArmBottomLayer", "LowerBody.Legs.RightLeg.RightLeg", "LowerBody.Legs.RightLeg.RightLegLayer", "LowerBody.Legs.RightLeg.RightLegBottom.RightLegBottom", "LowerBody.Legs.RightLeg.RightLegBottom.RightLegBottomLayer", "LowerBody.Legs.LeftLeg.LeftLeg", "LowerBody.Legs.LeftLeg.LeftLegLayer", "LowerBody.Legs.LeftLeg.LeftLegBottom.LeftLegBottom", "LowerBody.Legs.LeftLeg.LeftLegBottom.LeftLegBottomLayer"})) do
 			modelPart:setUVPixels(0, offset * 48)
 		end
 	end,
@@ -38,7 +38,7 @@ Costume = {
 		if ExSkill ~= nil then
 			ExSkill:forceStop()
 		end
-		self:setCostumeTextureOffset(0)
+		self.setCostumeTextureOffset(0)
 		BlueArchiveCharacter.COSTUME.callbacks.reset()
 		models.models["skull_"..self.CostumeList[self.CurrentCostume]].Skull:setVisible(false)
 		models.models.skull_default.Skull:setVisible(true)
