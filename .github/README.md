@@ -14,7 +14,7 @@ This branch is for **Shizuko Kawawa**.
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 
 ### In progress
-None
+- Izuna Kuda
 
 ## Features
 - Imitated ex skill cut-ins.
