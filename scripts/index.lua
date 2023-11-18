@@ -6,6 +6,7 @@ events.ENTITY_INIT:register(function ()
 
 	--ユーティリティクラス
 	PlayerUtils = require("scripts.utils.player_utils")
+	ModelUtils = require("scripts.utils.model_utils")
 	CameraUtils = require("scripts.utils.camera_utils")
 	RaycastUtils = require("scripts.utils.raycast_utils")
 
@@ -27,6 +28,7 @@ events.ENTITY_INIT:register(function ()
 	PlacementObject = require("scripts.placement_object.placement_object")
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 	Barrier = require("scripts.barrier")
+	DeathAnimation = require("scripts.death_animation")
 
 	--require("scripts.hypixel_zombies")
 end)

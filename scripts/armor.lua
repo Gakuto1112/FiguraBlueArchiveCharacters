@@ -10,7 +10,7 @@
 ---@field ArmorSlotItemsPrev table<ItemStack> 前チックの防具スロットのアイテム
 ---@field ArmorVisible table<boolean> 各防具の部位（ヘルメット、チェストプイート、レギンス、ブーツ）が可視状態かどうか。
 Armor = {
-	ShowArmor = Config:loadConfig("showArmor", false),
+	ShowArmor = Config.loadConfig("showArmor", false),
 	ArmorSlotItemsPrev = {world.newItem("minecraft:air"), world.newItem("minecraft:air"), world.newItem("minecraft:air"), world.newItem("minecraft:air")},
 	ArmorVisible = {false, false, false, false}
 }

@@ -41,7 +41,7 @@ Barrier = {
     end,
 
     ---バリア機能を無効化する。
-    disable = function (self)
+    disable = function ()
         models.models.barrier:setVisible(false)
 
         events.RENDER:remove("barrier_render")
@@ -56,11 +56,11 @@ local hadAbsorptionPrev = false
 models.models.barrier:setLight(15)
 
 events.TICK:register(function ()
-    local hasabsorption = player:getAbsorptionAmount() > 0
+    local hasabsorption = player:getAbsorptionAmount() > 0 and player:getHealth() > 0
     if hasabsorption and not hadAbsorptionPrev then
         Barrier:enable()
     elseif not hasabsorption and hadAbsorptionPrev then
-        Barrier:disable()
+        Barrier.disable()
     end
     hadAbsorptionPrev = hasabsorption
 end)

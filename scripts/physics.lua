@@ -24,7 +24,7 @@ Physics = {
     end,
 
     --物理演算を無効にする。物理演算で管理していたモデルの回転をリセットする。
-    disable = function(self)
+    disable = function()
         events.RENDER:remove("physics_render")
         events.WORLD_RENDER:remove("physics_world_render")
         for _, physicData in ipairs(BlueArchiveCharacter.PHYSICS) do
