@@ -17,7 +17,7 @@ events.TICK:register(function()
     end
 end)
 
-events.ARROW_RENDER:register(function(delta, arrow)
+events.ARROW_RENDER:register(function(_, arrow)
     local arrowUUID = arrow:getUUID()
     if arrowTable[arrowUUID] == nil and not gunSoundPlayed then
         local arrowPos = arrow:getPos()

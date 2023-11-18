@@ -41,7 +41,7 @@ Barrier = {
     end,
 
     ---バリア機能を無効化する。
-    disable = function (self)
+    disable = function ()
         models.models.barrier:setVisible(false)
 
         events.RENDER:remove("barrier_render")
@@ -60,7 +60,7 @@ events.TICK:register(function ()
     if hasabsorption and not hadAbsorptionPrev then
         Barrier:enable()
     elseif not hasabsorption and hadAbsorptionPrev then
-        Barrier:disable()
+        Barrier.disable()
     end
     hadAbsorptionPrev = hasabsorption
 end)
