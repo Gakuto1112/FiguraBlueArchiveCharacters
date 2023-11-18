@@ -661,14 +661,18 @@ BlueArchiveCharacter = {
                 if costumeId == 2 then
                     --水着
                     Costume.setCostumeTextureOffset(1)
-                    for _, modelPart in ipairs({models.models.main.Avatar.Head.Brim, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom}) do
+                    for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Brim", "UpperBody.Body.Skirt", "UpperBody.Body.Hairs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom"})) do
                         modelPart:setVisible(false)
                     end
-                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB}) do
+
+                    for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB"})) do
                         modelPart:setVisible(true)
                     end
                     for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
                         modelPart:setVisible(not Armor.ArmorVisible[1])
+                    end
+                    for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.CSwimsuitH.Brim, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.EarAccessories}) do
+                        modelPart:setVisible(true)
                     end
                 end
             end,
