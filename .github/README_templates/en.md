@@ -14,7 +14,7 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 
 ### In progress
-None
+- Izuna Kuda
 
 ## Features
 - Imitated ex skill cut-ins.
