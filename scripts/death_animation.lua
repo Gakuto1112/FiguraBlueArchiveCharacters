@@ -88,10 +88,16 @@ DeathAnimation = {
         if PlayerUtils:getDamageStatus() == "DIED" then
             self:play()
             models.models.main:setVisible(false)
+            for _, vanillaModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM, vanilla_model.ELYTRA}) do
+                vanillaModel:setVisible(false)
+            end
             self.playerInvisible = true
         end
         if self.playerInvisible and player:getHealth() > 0 then
             models.models.main:setVisible(true)
+            for _, vanillaModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM, vanilla_model.ELYTRA}) do
+                vanillaModel:setVisible(true)
+            end
             self.playerInvisible = false
         end
     end

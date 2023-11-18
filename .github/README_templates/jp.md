@@ -37,6 +37,10 @@
 
   ![バリア](../README_images/barrier.jpg)
 
+- プレイヤーが死ぬとヘリコプターで回収されます。
+
+  ![ヘリコプターで回収](../README_images/death_animation.jpg)
+
 - 生徒に衣装違いがあれば、衣装変更が可能であり、衣装によって再生されるExスキルも異なります。
 
   ![衣装](../README_images/costume.jpg)
