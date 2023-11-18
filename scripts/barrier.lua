@@ -56,7 +56,7 @@ local hadAbsorptionPrev = false
 models.models.barrier:setLight(15)
 
 events.TICK:register(function ()
-    local hasabsorption = player:getAbsorptionAmount() > 0
+    local hasabsorption = player:getAbsorptionAmount() > 0 and player:getHealth() > 0
     if hasabsorption and not hadAbsorptionPrev then
         Barrier:enable()
     elseif not hasabsorption and hadAbsorptionPrev then
