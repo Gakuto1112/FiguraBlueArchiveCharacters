@@ -37,6 +37,12 @@ None
 
   ![Barrier](./README_images/barrier.jpg)
 
+- Will be rescued by the helicopter when the player dies.
+  - This animation won't visible if the player isn't visible because of Minecraft and Figura specifications.
+
+  ![Rescued by helicopter](./README_images/death_animation.jpg)
+
+  ![ヘリコプターで回収](./README_images/death_animation.jpg)
 - Can change costume if the character has multiple costumes.
 
   ![Costume](./README_images/costume.jpg)
