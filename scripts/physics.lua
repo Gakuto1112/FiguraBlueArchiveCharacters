@@ -142,7 +142,7 @@ Physics = {
                                 rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyY.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyY.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.bodyZ then
-                                rotX = rotX + math.clamp(Physics.VelocityAverage[6] * physicData.x.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyZ.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[player:getVehicle() ~= nil and 6 or 3] * physicData.x.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyZ.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.bodyRot then
                                 rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.horizontal.bodyRot.multiplayer, physicData.x.horizontal.bodyRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyRot.max - physicData.x.horizontal.neutral)
@@ -172,7 +172,7 @@ Physics = {
                                 rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer, physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyZ then
-                                rotX = rotX + math.clamp(Physics.VelocityAverage[6] * physicData.x.vertical.bodyZ.multiplayer, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[player:getVehicle() ~= nil and 6 or 3] * physicData.x.vertical.bodyZ.multiplayer, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyRot then
                                 rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.vertical.bodyRot.multiplayer, physicData.x.vertical.bodyRot.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyRot.max - physicData.x.vertical.neutral)
@@ -206,7 +206,7 @@ Physics = {
                                 rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyY.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyY.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.bodyZ then
-                                rotY = rotY + math.clamp(Physics.VelocityAverage[6] * physicData.y.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyZ.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[player:getVehicle() ~= nil and 6 or 3] * physicData.y.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyZ.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.bodyRot then
                                 rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.horizontal.bodyRot.multiplayer, physicData.y.horizontal.bodyRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyRot.max - physicData.y.horizontal.neutral)
@@ -236,7 +236,7 @@ Physics = {
                                 rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.vertical.bodyY.multiplayer, physicData.y.vertical.bodyY.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyY.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.bodyZ then
-                                rotY = rotY + math.clamp(Physics.VelocityAverage[6] * physicData.y.vertical.bodyZ.multiplayer, physicData.y.vertical.bodyZ.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyZ.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[player:getVehicle() ~= nil and 6 or 3] * physicData.y.vertical.bodyZ.multiplayer, physicData.y.vertical.bodyZ.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyZ.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.bodyRot then
                                 rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.vertical.bodyRot.multiplayer, physicData.y.vertical.bodyRot.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyRot.max - physicData.y.vertical.neutral)
@@ -270,7 +270,7 @@ Physics = {
                                 rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyY.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyY.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.bodyZ then
-                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[6] * physicData.z.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyZ.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[player:getVehicle() ~= nil and 6 or 3] * physicData.z.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyZ.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.bodyRot then
                                 rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.horizontal.bodyRot.multiplayer, physicData.z.horizontal.bodyRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyRot.max - physicData.z.horizontal.neutral)
@@ -300,7 +300,7 @@ Physics = {
                                 rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.vertical.bodyY.multiplayer, physicData.z.vertical.bodyY.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyY.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.bodyZ then
-                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[6] * physicData.z.vertical.bodyZ.multiplayer, physicData.z.vertical.bodyZ.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyZ.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[player:getVehicle() ~= nil and 6 or 3] * physicData.z.vertical.bodyZ.multiplayer, physicData.z.vertical.bodyZ.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyZ.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.bodyRot then
                                 rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.vertical.bodyRot.multiplayer, physicData.z.vertical.bodyRot.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyRot.max - physicData.z.vertical.neutral)
