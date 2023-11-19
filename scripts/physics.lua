@@ -124,7 +124,7 @@ Physics = {
                 if modelPart:getVisible() then
                     local rotX = 0
                     if physicData.x then
-                        if isHorizontal then
+                        if isHorizontal and physicData.x.horizontal then
                             rotX = physicData.x.horizontal.neutral
                             if physicData.x.horizontal.headX then
                                 rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.horizontal.headX.multiplayer * waterMultiplayer, physicData.x.horizontal.headX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headX.max - physicData.x.horizontal.neutral)
@@ -154,7 +154,7 @@ Physics = {
                             if isSneaking and physicData.x.horizontal.sneakOffset then
                                 rotX = rotX + physicData.x.horizontal.sneakOffset
                             end
-                        else
+                        elseif physicData.x.vertical then
                             rotX = physicData.x.vertical.neutral
                             if physicData.x.vertical.headX then
                                 rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.vertical.headX.multiplayer, physicData.x.vertical.headX.min - physicData.x.vertical.neutral, physicData.x.vertical.headX.max - physicData.x.vertical.neutral)
@@ -188,7 +188,7 @@ Physics = {
                     end
                     local rotY = 0
                     if physicData.y then
-                        if isHorizontal then
+                        if isHorizontal and physicData.y.horizontal then
                             rotY = physicData.y.horizontal.neutral
                             if physicData.y.horizontal.headX then
                                 rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.horizontal.headX.multiplayer * waterMultiplayer, physicData.y.horizontal.headX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headX.max - physicData.y.horizontal.neutral)
@@ -218,7 +218,7 @@ Physics = {
                             if isSneaking and physicData.y.horizontal.sneakOffset then
                                 rotY = rotY + physicData.y.horizontal.sneakOffset
                             end
-                        else
+                        elseif physicData.y.vertical then
                             rotY = physicData.y.vertical.neutral
                             if physicData.y.vertical.headX then
                                 rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.vertical.headX.multiplayer, physicData.y.vertical.headX.min - physicData.y.vertical.neutral, physicData.y.vertical.headX.max - physicData.y.vertical.neutral)
@@ -252,7 +252,7 @@ Physics = {
                     end
                     local rotZ = 0
                     if physicData.z then
-                        if isHorizontal then
+                        if isHorizontal and physicData.z.horizontal then
                             rotZ = physicData.z.horizontal.neutral
                             if physicData.z.horizontal.headX then
                                 rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.horizontal.headX.multiplayer * waterMultiplayer, physicData.z.horizontal.headX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headX.max - physicData.z.horizontal.neutral)
@@ -282,7 +282,7 @@ Physics = {
                             if isSneaking and physicData.z.horizontal.sneakOffset then
                                 rotZ = rotZ + physicData.z.horizontal.sneakOffset
                             end
-                        else
+                        elseif physicData.z.vertical then
                             rotZ = physicData.z.vertical.neutral
                             if physicData.z.vertical.headX then
                                 rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.vertical.headX.multiplayer, physicData.z.vertical.headX.min - physicData.z.vertical.neutral, physicData.z.vertical.headX.max - physicData.z.vertical.neutral)
