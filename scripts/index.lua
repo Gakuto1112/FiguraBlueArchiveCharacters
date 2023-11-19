@@ -13,6 +13,7 @@ events.ENTITY_INIT:register(function ()
 	--パーツ別クラス
 	require("scripts.vanilla_model")
 	Arms = require("scripts.arms")
+	Skirt = require("scripts.skirt")
 	Armor = require("scripts.armor")
 	FaceParts = require("scripts.face_parts")
 	Physics = require("scripts.physics")
