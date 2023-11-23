@@ -2317,11 +2317,6 @@ BlueArchiveCharacter = {
     EX_SKILL_1_TEXT_1 = models.models.main.CameraAnchor:newText("ex_skill_1_text_1"):setVisible(false):setText("§c! !"):setRot(0, 180, 5):setScale(0.8, 0.8, 0.8):setOutline(true):setOutlineColor(1, 1, 1),
 }
 
-for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
-	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
-end
-
 --生徒固有初期化処理
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setPos(5.5, 12, 0)
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setRot(180, 0, 0)
