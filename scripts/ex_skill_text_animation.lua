@@ -20,7 +20,7 @@ ExSkillTextAnimation = {
         ---サブのテキストレンダータスク
         ---@type TextTask
         ---@diagnostic disable-next-line: undefined-field
-        instance.SecondaryTextTask = models.models.main.CameraAnchor:newText(taskName.."_2"):setVisible(false):setText("§d"..text):setPos(textPos):setRot(0, 180, 0):setScale(0.45, 0.45, 0.45):setOutline(true)
+        instance.SecondaryTextTask = models.models.main.CameraAnchor:newText(taskName.."_2"):setVisible(false):setText("§d"..text):setPos(textPos):setRot(0, 180, 0):setScale(0.45, 0.45, 0.45)
 
         ---このテキストアニメーションの名前
         ---@type string
@@ -38,32 +38,56 @@ ExSkillTextAnimation = {
         ---@type number
         instance.AnimationCount = 0
 
+        ---文字がポンって置かれる部分に到達したかどうか
+        ---@type boolean
+        instance.AnimationPointPassed = false
+
         ---テキストレンダータスクの大きさを設定する。
         ---@param task ExSkillTextAnimation.TextTask 大きさを変更するテキストレンダータスク
         ---@param newScale number 設定する大きさの倍率。基準はこのテキストレンダータスク。
         instance.setScale = function (self, task, newScale)
             local targetTask = task == "PRIMARY" and self.PrimaryTextTask or self.SecondaryTextTask
             local scale = newScale * 0.4
-            local offset = (-newScale + 1) * 2.25
-            ---@diagnostic disable-next-line: undefined-field
-            targetTask:setPos(instance.TextTaskPos:copy():add(offset, -offset, 0)):setScale(scale, scale, scale)
+            local offset = (newScale - 1) * 3 / 2
+            targetTask:setPos(instance.TextTaskPos:copy():add(-offset, offset, 0))
+            targetTask:setScale(scale, scale, scale)
         end
 
         ---テキストアニメーションを再生する。
         instance.play = function (self)
-            for _, textTask in ipairs({self.PrimaryTextTask, self.SecondaryTextTask}) do
-                textTask:setVisible(true)
-            end
+            self.SecondaryTextTask:setVisible(true)
+            self.SecondaryTextTask:setOpacity(0.25)
+            self:setScale("SECONDARY", 2)
             if events.RENDER:getRegisteredCount(taskName.."_render") == 0 then
                 events.RENDER:register(function ()
-                    self.IsRenderProcessed = false
+                    if not self.IsRenderProcessed then
+                        if self.AnimationCount <= 0.1 then
+                            self:setScale("SECONDARY", self.AnimationCount * -10 + 2)
+                            self.SecondaryTextTask:setOpacity(self.AnimationCount * 5 + 0.5)
+                        elseif self.AnimationCount <= 0.2 then
+                            self:setScale("SECONDARY", self.AnimationCount * 10)
+                            self.SecondaryTextTask:setOpacity(self.AnimationCount * -5 + 1.5)
+                        else
+                            self.SecondaryTextTask:setVisible(false)
+                        end
+                        if self.AnimationCount >= 0.05 then
+                            self.PrimaryTextTask:setVisible(true)
+                            if self.AnimationCount <= 0.083 then
+                                self:setScale("PRIMARY", self.AnimationCount * -12.12 + 1.8)
+                            elseif self.AnimationCount <= 0.1 then
+                                self:setScale("PRIMARY", self.AnimationCount * 12.12 - 0.2)
+                            else
+                                self:setScale("PRIMARY", 1)
+                            end
+                        end
+                        self.AnimationCount = self.AnimationCount + 1 / client:getFPS()
+                        self.IsRenderProcessed = true
+                    end
                 end, taskName.."_render")
             end
             if events.WORLD_RENDER:getRegisteredCount(taskName.."_world_render") == 0 then
                 events.WORLD_RENDER:register(function ()
-                    if not self.IsRenderProcessed then
-                        self.IsRenderProcessed = true
-                    end
+                    self.IsRenderProcessed = false
                 end, taskName.."_world_render")
             end
         end
@@ -75,6 +99,7 @@ ExSkillTextAnimation = {
             end
             events.RENDER:remove(taskName.."_render")
             events.WORLD_RENDER:remove(taskName.."_world_render")
+            self.AnimationCount = 0
         end
 
         return instance
