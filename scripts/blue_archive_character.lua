@@ -15,6 +15,8 @@
 ---| "BODY" アバターのBodyに銃を移動させる
 ---| "HIDDEN" 銃を隠す
 
+ExSkillTextAnimation = require("scripts.ex_skill_text_animation")
+
 ---@class BlueArchiveCharacter （今後別のキャラを作る時に備えて、）キャラクター変数を保持するクラス。別のキャラクターに対してもここを変更するだけで対応できるようにする。
 BlueArchiveCharacter = {
 	---生徒の基本情報（氏名、誕生日等）
@@ -372,10 +374,21 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 5, true)
                     elseif tick == 27 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 24, true)
+                    elseif tick == 31 then
+                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
+                    elseif tick == 33 then
+                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
+                    elseif tick == 35 then
+                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
+                    elseif tick == 37 then
+                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
                     elseif tick == 51 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
                     elseif tick == 61 then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 12, true)
+                        for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
+                            textAnimation:stop()
+                        end
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 12, true)
                     elseif tick == 73 then
                         FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 27, true)
                     end
@@ -2037,9 +2050,13 @@ BlueArchiveCharacter = {
                 }
             }
         }
-    }
+    },
 
     --その他定数・変数
+
+    ---Exスキル1で使用するテキストアニメーションインスタンスのテーブル。4つ合わせて「神出鬼没」。
+    ---@type table[]
+    EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("ex_skill_1_text_1", vectors.vec3(2, 5.5, -5), "神"), ExSkillTextAnimation.new("ex_skill_1_text_2", vectors.vec3(2, 0.5, -5), "出"), ExSkillTextAnimation.new("ex_skill_1_text_3", vectors.vec3(-5.5, 5.5, -5), "鬼"), ExSkillTextAnimation.new("ex_skill_1_text_4", vectors.vec3(-5.5, 0.5, -5), "没")}
 }
 
 --生徒固有初期化処理
