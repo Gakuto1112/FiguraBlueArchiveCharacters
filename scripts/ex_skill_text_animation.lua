@@ -40,7 +40,7 @@ ExSkillTextAnimation = {
 
         ---文字がポンって置かれる部分に到達したかどうか
         ---@type boolean
-        instance.AnimationPointPassed = false
+        instance.PonPointPassed = false
 
         ---テキストレンダータスクの大きさを設定する。
         ---@param task ExSkillTextAnimation.TextTask 大きさを変更するテキストレンダータスク
@@ -80,6 +80,10 @@ ExSkillTextAnimation = {
                                 self:setScale("PRIMARY", 1)
                             end
                         end
+                        if self.AnimationCount >= 0.1 and not self.PonPointPassed then
+                            sounds:playSound("minecraft:block.bone_block.place", player:getPos())
+                            self.PonPointPassed = true
+                        end
                         self.AnimationCount = self.AnimationCount + 1 / client:getFPS()
                         self.IsRenderProcessed = true
                     end
@@ -100,6 +104,7 @@ ExSkillTextAnimation = {
             events.RENDER:remove(taskName.."_render")
             events.WORLD_RENDER:remove(taskName.."_world_render")
             self.AnimationCount = 0
+            self.PonPointPassed = false
         end
 
         return instance

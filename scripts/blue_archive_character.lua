@@ -376,11 +376,11 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 24, true)
                     elseif tick == 31 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
-                    elseif tick == 33 then
+                    elseif tick == 34 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
-                    elseif tick == 35 then
+                    elseif tick == 38 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
-                    elseif tick == 37 then
+                    elseif tick == 41 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
                     elseif tick == 51 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
@@ -393,6 +393,17 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 27, true)
                     end
                 end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    if forcedStop then
+                        for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
+                            textAnimation:stop()
+                        end
+                    end
+                end
             }
 		}
 	},
