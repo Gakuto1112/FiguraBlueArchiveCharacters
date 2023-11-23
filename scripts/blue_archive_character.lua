@@ -73,7 +73,9 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
             TIED = {3, 0},
-            CLOSED = {0, 1}
+            CLOSED = {0, 1},
+            ANGRY = {1, 1},
+            CLOSED2 = {3, 1}
         },
 
         ---左目
@@ -81,12 +83,17 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
             TIED = {2, 0},
-            CLOSED = {-1, 1}
+            CLOSED = {-1, 1},
+            ANGRY = {1, 1},
+            CLOSED2 = {2, 1}
         },
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
+            CLOSED = {0, 0},
+            OPENED = {1, 0},
+            CIRCLE = {2, 0},
+            SMILE = {3, 0}
         }
     },
 
@@ -357,6 +364,21 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
+                    if tick == 0 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 19, true)
+                    elseif tick == 19 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 3, true)
+                    elseif tick == 22 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 5, true)
+                    elseif tick == 27 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 24, true)
+                    elseif tick == 51 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
+                    elseif tick == 61 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 12, true)
+                    elseif tick == 73 then
+                        FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 27, true)
+                    end
                 end,
             }
 		}
