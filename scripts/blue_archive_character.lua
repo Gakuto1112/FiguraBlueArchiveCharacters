@@ -382,6 +382,11 @@ BlueArchiveCharacter = {
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
                     elseif tick == 51 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
+                    elseif tick == 58 then
+                        local playerPos = player:getPos()
+                        for _ = 1, 70 do
+                            particles:newParticle("minecraft:poof", playerPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+                        end
                     elseif tick == 61 then
                         for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
                             textAnimation:stop()
