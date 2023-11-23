@@ -2020,11 +2020,6 @@ BlueArchiveCharacter = {
     --その他定数・変数
 }
 
-for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
-	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
-end
-
 --生徒固有初期化処理
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
 
