@@ -3,24 +3,27 @@
 ---| "POST"
 
 ---@class ExSkill Exスキルのアニメーションを管理するクラス
----@field SHOWN_MODELS table<ModelPart> Exスキルのアニメーション時に表示するモデルのテーブル
----@field CAMERA_ANCHOR ModelPart Exスキルのアニメーション時にカメラの追従基準となるモデルパーツ
----@field RenderProcessed boolean そのレンダーで既にレンダー処理したかどうか
----@field ExclamationText TextTask Exスキルのアニメーション中に表示する「！！」のテキストタスク
----@field AnimationCount integer Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
----@field AnimationLength integer Exスキルのアニメーションの長さ。スクリプトで自動で代入する。
----@field TransitionCount number Exスキルのアニメーション前後のカメラのトランジションの進捗を示すカウンター
 ExSkill = {
-    --定数
-    CAMERA_ANCHOR = models.models.main.CameraAnchor,
-
-    --変数
+    ---そのレンダーで既にレンダー処理したかどうか
+    ---@type boolean
     RenderProcessed = false,
+
+    ---アニメーション開始時のプレイヤーがいるワールド座標
+    ---@type Vector3
+    PlayerPos = vectors.vec3(),
+
+    ---Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
+    ---@type integer
     AnimationCount = -1,
+
+    ---Exスキルのアニメーションの長さ。スクリプトで自動で代入する。
+    ---@type integer
     AnimationLength = 0,
+
+    ---Exスキルのアニメーション前後のカメラのトランジションの進捗を示すカウンター
+    ---@type number
     TransitionCount = 0,
 
-    --関数
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
     canPlayAnimation = function()
@@ -45,10 +48,9 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function(delta)
-        local bodyYaw = player:getBodyYaw(delta)
-        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
-        local cameraRot = ExSkill.CAMERA_ANCHOR:getAnimRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
+    animationRender = function(self, delta)
+        local cameraPos = ModelUtils.getModelWorldPos(models.models.main.CameraAnchor):sub(self.PlayerPos):add(0, -1.62, 0)
+        local cameraRot = models.models.main.CameraAnchor:getAnimRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
         renderer:setOffsetCameraPivot(cameraPos)
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
         renderer:setCameraRot(cameraRot)
@@ -162,7 +164,8 @@ ExSkill = {
     ---アニメーションを再生する。
     play = function(self)
         PlacementObjectManager:removeAll()
-        renderer:setRenderHUD(false)
+        --renderer:setRenderHUD(false)
+        self.PlayerPos = player:getPos()
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition()
@@ -182,7 +185,9 @@ ExSkill = {
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation()
             end
             events.TICK:register(self.animationTick, "ex_skill_tick")
-            events.RENDER:register(self.animationRender, "ex_skill_render")
+            events.RENDER:register(function (delta)
+                self:animationRender(delta)
+            end, "ex_skill_render")
             self.AnimationCount = 0
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20)
         end)
