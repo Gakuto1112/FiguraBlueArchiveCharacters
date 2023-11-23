@@ -47,7 +47,7 @@ ExSkill = {
     ---アニメーション再生中のみ実行されるレンダー関数
     animationRender = function(delta)
         local bodyYaw = player:getBodyYaw(delta)
-        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
+        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
         local cameraRot = ExSkill.CAMERA_ANCHOR:getAnimRot():mul(-1, -1, -1):add(0, bodyYaw % 360)
         renderer:setOffsetCameraPivot(cameraPos)
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
@@ -267,8 +267,8 @@ events.WORLD_RENDER:register(function()
 end)
 
 for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16 * 0.9375)
-	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16 *  0.9375)
+	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
+	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
 end
 
 return ExSkill
