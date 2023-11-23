@@ -394,6 +394,18 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 12, true)
                     elseif tick == 73 then
                         FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 27, true)
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, 0, 0)
+                        for _ = 1, 100 do
+                            local offset = vectors.vec3(math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1)
+                            particles:newParticle("minecraft:cherry_leaves", avatarPos:copy():add(offset)):setVelocity(offset:scale(0.1))
+                        end
+                    end
+                    if tick <= 10 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.ExSkill1Anchor1)
+                        local verocityRot = vectors.rotateAroundAxis(-player:getBodyYaw(), -0.1, 0, 0, 0, 1, 0)
+                        for _ = 1, 2 do
+                            particles:newParticle("minecraft:cherry_leaves", anchorPos:copy():add(math.random() * 3 -  1.5, math.random() * 3, math.random() * 3 - 1.5)):setVelocity(verocityRot)
+                        end
                     end
                 end,
 
