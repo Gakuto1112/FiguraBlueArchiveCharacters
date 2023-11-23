@@ -175,6 +175,9 @@ local function setGunPose(GunPosition)
         else
             Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90))
         end
+        if not client:isPaused() then
+            sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)
+        end
     else
         for _, tickName in ipairs({"body_gun_tick", "right_gun_tick"}) do
             events.TICK:remove(tickName)
@@ -203,6 +206,9 @@ local function setGunPose(GunPosition)
             Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90):add(BlueArchiveCharacter.GUN.hold.rot.left))
         else
             Gun.TargetModel:setRot(vectors.vec3(-90, 0, 90))
+        end
+        if not client:isPaused() then
+            sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)
         end
     end
 end
