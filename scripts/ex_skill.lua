@@ -64,6 +64,7 @@ ExSkill = {
             local bodyYaw = -player:getBodyYaw(delta) % 360
             local lookDir = player:getLookDir()
             local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
+            cameraRot.y = cameraRot.y % 360
             local targetCameraPos = vectors.vec3()
             local targetCameraRot = vectors.vec3()
             if direction == "PRE" then
@@ -73,6 +74,7 @@ ExSkill = {
                 targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.pos, 0, 1):add(0, -1.62)
                 targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.rot:copy():add(0, -bodyYaw, 0)
             end
+            targetCameraRot.y = targetCameraRot.y % 360
             if math.abs(cameraRot.y - targetCameraRot.y) >= 180 then
                 if cameraRot.y < targetCameraRot.y then
                     cameraRot.y = cameraRot.y + 360
