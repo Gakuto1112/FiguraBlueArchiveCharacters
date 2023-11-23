@@ -140,31 +140,29 @@ BlueArchiveCharacter = {
         put = {
             ---構えていない時の銃の扱い方
             ---@type BlueArchiveCharacter.GunPutType
-            type = "HIDDEN",
+            type = "BODY",
 
-            --[[
             ---位置オフセット（省略可）
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(0, 1, 3),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
+                left = vectors.vec3(2, 1, 3)
             },
 
             ---向きオフセット（省略可）
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(0, 0, 20),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
+                left = vectors.vec3(0, 180, -20)
             }
-            ]]
         },
 
         ---射撃音
