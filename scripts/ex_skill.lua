@@ -47,7 +47,7 @@ ExSkill = {
     ---アニメーション再生中のみ実行されるレンダー関数
     animationRender = function(delta)
         local bodyYaw = player:getBodyYaw(delta)
-        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
+        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
         local cameraRot = ExSkill.CAMERA_ANCHOR:getAnimRot():mul(-1, -1, -1):add(0, player:getBodyYaw(delta) % 360)
         renderer:setOffsetCameraPivot(cameraPos)
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
