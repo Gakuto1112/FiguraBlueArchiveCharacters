@@ -26,6 +26,10 @@ ExSkillTextAnimation = {
         ---@type string
         instance.AnimationName = taskName
 
+        ---このテキストアニメーションが持つテキスト
+        ---@type string
+        instance.Text = text
+
         ---テキストレンダータスクの初期位置
         ---@type Vector3
         instance.TextTaskPos = textPos
@@ -51,6 +55,12 @@ ExSkillTextAnimation = {
             local offset = (newScale - 1) * 3 / 2
             targetTask:setPos(instance.TextTaskPos:copy():add(-offset, offset, 0))
             targetTask:setScale(scale, scale, scale)
+        end
+
+        ---テキストを真っ黒にする
+        ---@param black boolean テキストを真っ黒にするかどうか
+        instance.setBlack = function (self, black)
+            instance.PrimaryTextTask:setText("§"..(black and "0" or "d")..self.Text)
         end
 
         ---テキストアニメーションを再生する。

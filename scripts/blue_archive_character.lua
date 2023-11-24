@@ -386,8 +386,24 @@ BlueArchiveCharacter = {
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
                     elseif tick == 49 then
                         sounds:playSound("minecraft:entity.player.attack.sweep", player:getPos(), 0.5, 1.5)
+                    elseif tick == 50 and host:isHost() then
+                        models.models.main.CameraAnchor.Background:setVisible(true)
+                        local windowSize = client:getWindowSize()
+                        models.models.main.CameraAnchor.Background:setScale(windowSize.x / windowSize.y * 40, 40, 1)
+                        models.models.main.Avatar:setColor(0, 0, 0)
+                        for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
+                            textAnimation:setBlack(true)
+                        end
+                        renderer:setPostEffect("invert")
                     elseif tick == 51 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
+                    elseif tick == 53 and host:isHost() then
+                        models.models.main.CameraAnchor.Background:setVisible(false)
+                        models.models.main.Avatar:setColor(1, 1, 1)
+                        for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
+                            textAnimation:setBlack(false)
+                        end
+                        renderer:setPostEffect()
                     elseif tick == 58 then
                         local playerPos = player:getPos()
                         for _ = 1, 70 do
@@ -423,6 +439,10 @@ BlueArchiveCharacter = {
                     if forcedStop then
                         for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
                             textAnimation:stop()
+                        end
+                        if host:isHost() then
+                            models.models.main.CameraAnchor.Background:setVisible(false)
+                            models.models.main.Avatar:setColor(1, 1, 1)
                         end
                     end
                 end
@@ -2094,5 +2114,8 @@ BlueArchiveCharacter = {
 
 --生徒固有初期化処理
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+if host:isHost() then
+    models.models.main.CameraAnchor.Background:setLight(15)
+end
 
 return BlueArchiveCharacter
