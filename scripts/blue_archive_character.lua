@@ -372,14 +372,20 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 5, true)
                     elseif tick == 27 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 24, true)
+                    elseif tick == 29 then
+                        sounds:playSound("minecraft:entity.player.attack.weak", player:getPos(), 0.5, 1.5)
                     elseif tick == 31 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
                     elseif tick == 34 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
+                    elseif tick == 35 or tick == 40 or tick == 43 or tick == 48 then
+                        sounds:playSound("minecraft:entity.player.attack.weak", player:getPos(), 0.25, 1.5)
                     elseif tick == 38 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
                     elseif tick == 41 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
+                    elseif tick == 49 then
+                        sounds:playSound("minecraft:entity.player.attack.sweep", player:getPos(), 0.5, 1.5)
                     elseif tick == 51 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
                     elseif tick == 58 then
@@ -394,11 +400,12 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 12, true)
                     elseif tick == 73 then
                         FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 27, true)
-                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, 0, 0)
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
                         for _ = 1, 100 do
                             local offset = vectors.vec3(math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1)
                             particles:newParticle("minecraft:cherry_leaves", avatarPos:copy():add(offset)):setVelocity(offset:scale(0.1))
                         end
+                        sounds:playSound("minecraft:item.armor.equip_leather", avatarPos)
                     end
                     if tick <= 10 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.ExSkill1Anchor1)
