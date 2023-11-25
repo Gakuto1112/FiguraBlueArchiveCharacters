@@ -2138,6 +2138,178 @@ BlueArchiveCharacter = {
                     }
                 }
             }
+        },
+
+        {
+            ---この物理演算データを適用させるモデルパーツ
+            ---@type ModelPart | ModelPart[]
+            modelPart = models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.WhiteRibbon,
+
+            ---z軸回転における物理演算データ（省略可）
+            z = {
+                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                vertical = {
+                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                    ---@type number
+                    min = -40,
+
+                    ---このモデルパーツ、回転軸の中立の回転位置（度）
+                    ---@type number
+                    neutral = -20,
+
+                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                    ---@type number
+                    max = 160,
+
+                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                    bodyY = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = -20,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 160
+                    },
+
+                    ---頭を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
+                    headZ = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = -40,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 70
+                    },
+
+                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                    headRot = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -0.1,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = -20,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 70
+                    }
+                }
+            }
+        },
+
+        {
+            ---この物理演算データを適用させるモデルパーツ
+            ---@type ModelPart | ModelPart[]
+            modelPart = models.models.main.Avatar.UpperBody.Body.CSwimsuitB.Scarf,
+
+            ---x軸回転における物理演算データ（省略可）
+            x = {
+                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                vertical = {
+                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                    ---@type number
+                    min = 0,
+
+                    ---このモデルパーツ、回転軸の中立の回転位置（度）
+                    ---@type number
+                    neutral = 0,
+
+                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                    ---@type number
+                    max = 90,
+
+                    ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
+                    ---@type number
+                    sneakOffset = 30,
+
+                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                    bodyX = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = 0,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 90
+                    },
+
+                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                    bodyY = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = 0,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 90
+                    },
+
+                    ---体の回転によるによるモデルパーツの回転データ（省略可）
+                    bodyRot = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -0.1,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = 0,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 90
+                    }
+                },
+
+                ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                horizontal = {
+                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                    ---@type number
+                    min = 0,
+
+                    ---このモデルパーツ、回転軸の中立の回転位置（度）
+                    ---@type number
+                    neutral = 90,
+
+                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                    ---@type number
+                    max = 90,
+
+                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                    headX = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = 0,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 90
+                    }
+                }
+            }
         }
     },
 
@@ -2149,6 +2321,12 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+events.RENDER:register(function ()
+    if models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL:getVisible() then
+        models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL:setRot((vanilla_model.LEFT_LEG:getOriginRot().x + models.models.main.Avatar.LowerBody.Legs.LeftLeg:getTrueRot().x) * -1, 0, 0)
+    end
+end)
+
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower}) do
     modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
