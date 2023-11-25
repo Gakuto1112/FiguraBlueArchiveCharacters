@@ -513,6 +513,11 @@ BlueArchiveCharacter = {
             ---@type fun(index: integer)
             ---@param parts Armor.ArmorPart 変更された防具の部位
             armorChange = function(parts)
+                if parts == "CHEST_PLATE" then
+                    models.models.main.Avatar.UpperBody.Body.Scarfs:setPos(0, 0, Armor.ArmorVisible[2] and 1 or 0)
+                elseif parts == "LEGGINGS" then
+                    models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                end
             end
         }
 	},
