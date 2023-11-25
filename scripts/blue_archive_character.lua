@@ -560,6 +560,17 @@ BlueArchiveCharacter = {
                     elseif tick == 85 then
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
                         models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
+                    elseif tick == 87 then
+                        local beachBallPos = ModelUtils.getModelWorldPos(models.models.costume_swimsuit.BeachBall)
+                        local particleAxis = vectors.rotateAroundAxis(-player:getBodyYaw(), vectors.rotateAroundAxis(30, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                        local particleVelocityDirection = vectors.rotateAroundAxis(-player:getBodyYaw(), vectors.rotateAroundAxis(-50, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                        for i = 1, 60 do
+                            local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
+                            for _, particleData in ipairs({{0.5, -3, 0.1}, {0.25, -2.9, 0.025}, {0.375, -2, 0.05}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール
+                                particles:newParticle("minecraft:dust 1000000000 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(beachBallPos):add(0, -0.7, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                                particles:newParticle("minecraft:dust 0 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1] * 1.5, 0, particleAxis):add(beachBallPos):add(0, -0.7, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                            end
+                        end
                     elseif tick == 101 then
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 14)
                     end
