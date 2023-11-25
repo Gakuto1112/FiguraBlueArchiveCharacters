@@ -528,6 +528,10 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 2, true)
                     elseif tick == 21 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CIRCLE", 22, true)
+                    elseif tick == 28 then
+                        renderer:setPostEffect("phosphor")
+                    elseif tick == 38 then
+                        renderer:setPostEffect()
                     elseif tick == 43 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", 100, true)
                     end
