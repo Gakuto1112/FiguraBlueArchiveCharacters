@@ -2119,6 +2119,7 @@ BlueArchiveCharacter = {
 
 --生徒固有初期化処理
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower:setPrimaryTexture("RESOURCE", "textures/entity/block/sunflower_front.png")
 if host:isHost() then
     models.models.main.CameraAnchor.Background:setLight(15)
 end

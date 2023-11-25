@@ -6,6 +6,7 @@
 	"color": "a3e0fb",
 	"ignoredTextures": [
 		"textures.for_modeling.snow_fox",
+		"textures.for_modeling.sunflower_front",
 		"textures.for_modeling.leather_layer_1",
 		"textures.for_modeling.leather_layer_1_overlay",
 		"textures.for_modeling.leather_layer_2",
@@ -161,6 +162,18 @@
 		"models.models.ex_skill_1.Background": {
 			"moveTo": "models.models.main.CameraAnchor",
 			"visible": false
+		},
+		"models.models.costume_swimsuit.CSwimsuitH": {
+			"visible": false,
+			"moveTo": "models.models.main.Avatar.Head"
+		},
+		"models.models.costume_swimsuit.CSwimsuitB": {
+			"visible": false,
+			"moveTo": "models.models.main.Avatar.UpperBody.Body"
+		},
+		"models.models.costume_swimsuit.CSwimsuitLL": {
+			"visible": false,
+			"moveTo": "models.models.main.Avatar.LowerBody.Legs.LeftLeg"
 		},
 		"models.models.placement_object.PlacementObject": {
 			"visible": false
