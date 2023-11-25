@@ -528,12 +528,44 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 2, true)
                     elseif tick == 21 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CIRCLE", 22, true)
+                    elseif tick == 25 then
+                        models.models.main.Avatar:setVisible(false)
+                        local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
+                        for _ = 1, 30 do
+                            particles:newParticle("minecraft:poof", anchor1Pos:copy():add(math.random() - 0.5, math.random() * 2, math.random() - 0.5))
+                        end
                     elseif tick == 28 then
                         renderer:setPostEffect("phosphor")
                     elseif tick == 38 then
                         renderer:setPostEffect()
                     elseif tick == 43 then
+                        models.models.main.Avatar:setVisible(true)
                         FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", 100, true)
+                    elseif tick == 44 then
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, -1.5, 0)
+                        for _ = 1, 30 do
+                            particles:newParticle("minecraft:poof", avatarPos:copy():add(math.random() - 0.5, math.random() * 2, math.random() - 0.5))
+                        end
+                    elseif tick == 45 then
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body)
+                        local bodyYaw = player:getBodyYaw()
+                        local particleDirection = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                        for i = 1, 30 do
+                            for j = 0.7, 1.5, 0.1 do
+                                particles:newParticle("minecraft:dust 100 1000000000 1000000000 1", vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * j, math.sin(math.rad(i * 12)) * j, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
+                            end
+                            local particlePos = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * 1.5, math.sin(math.rad(i * 12)) * 1.5, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)
+                            particles:newParticle("minecraft:dust 100000000 1000000000 1000000000 1", particlePos):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
+                        end
+                    end
+                    if tick < 25 then
+                        local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
+                        local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
+                        if particleBlock ~= "minecraft:air" then
+                            for _ = 1, 50 do
+                                particles:newParticle("minecraft:block "..particleBlock, anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
+                            end
+                        end
                     end
                 end,
 
