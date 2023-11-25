@@ -519,7 +519,7 @@ BlueArchiveCharacter = {
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
                 Costume.setCostumeTextureOffset(1)
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
                     modelPart:setVisible(false)
                 end
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
@@ -532,7 +532,7 @@ BlueArchiveCharacter = {
             ---@type fun()
             reset = function()
                 Costume.setCostumeTextureOffset(0)
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
                     modelPart:setVisible(true)
                 end
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
