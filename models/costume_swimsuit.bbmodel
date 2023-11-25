@@ -13,7 +13,7 @@
 	"unhandled_root_fields": {},
 	"resolution": {
 		"width": 31,
-		"height": 10
+		"height": 30
 	},
 	"elements": [
 		{
@@ -943,22 +943,28 @@
 			"origin": [0, 4, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 0, 1, 1]
+					"uv": [0, 9, 7, 16],
+					"texture": 0
 				},
 				"east": {
-					"uv": [0, 0, 1, 1]
+					"uv": [7, 9, 14, 16],
+					"texture": 0
 				},
 				"south": {
-					"uv": [0, 0, 1, 1]
+					"uv": [14, 9, 21, 16],
+					"texture": 0
 				},
 				"west": {
-					"uv": [0, 0, 1, 1]
+					"uv": [14, 9, 7, 16],
+					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 1, 1]
+					"uv": [14, 9, 21, 16],
+					"texture": 0
 				},
 				"down": {
-					"uv": [0, 0, 1, 1]
+					"uv": [14, 9, 21, 16],
+					"texture": 0
 				}
 			},
 			"type": "cube",
@@ -1123,7 +1129,7 @@
 			]
 		},
 		{
-			"name": "Beachball",
+			"name": "BeachBall",
 			"origin": [0, 3, 0],
 			"color": 0,
 			"uuid": "ea9a8ecb-d512-98b2-b6b4-934c3f2ff7fd",
@@ -1141,7 +1147,7 @@
 					"uuid": "d64469d4-0363-c0d8-7f7e-961b8be85ea4",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -1169,7 +1175,7 @@
 			"saved": true,
 			"uuid": "f5cde97c-a6a0-df2e-55be-3c11285042e8",
 			"relative_path": "../../textures/costume_swimsuit.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAKCAYAAABMtYURAAAAAXNSR0IArs4c6QAAAQtJREFUOE9jZGBgYFDQcv8PonGBB9d2MuKTh8n9+/fvPxMTE1jtF5VGsJk8d+oZLy8p+/+q9geD8/1JcHP2Kub9ZyRkMTGWgtTcu7KdAWQxyAHf1Jrh2g5J/GOwKbdnOJ23ASwGcgDIYhCbJMtxhQDIA8hyMF+DLABZbhGnwcAR44/hD6pZjs/nitbMDPL1JQzHtSsYLK92wGmMuPx1az3e+Ic5n00tEGc6AJmBLv/t2zcMc8m2nFBaQLfc0zP3/9q1nXBtwcHlDFgtJ+QrQhaD5LH5HGQhyAEwmq6Wozua8cX6SqLimJBvJQLbcaYBkB0geeR45+LiYiSq8CBkMSnyTk4B//ft2wC2FwB/+Y8EDVyWXAAAAABJRU5ErkJggg=="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAeCAYAAADU8sWcAAAAAXNSR0IArs4c6QAAAblJREFUSEtjZGBgYFDQcv8PonGBB9d2MuKTh8n9+/fvPxMTE1jtF5VGsJk8d+oZLy8p+/+q9geD8/1JcHP2Kub9ZyRkMTGWgtTcu7KdAWQxyAHf1Jrh2g5J/GOwKbdnOJ23ASwGcgDIYhCbJMtxhQDIA8hyMF+DLABZbhGnwcAR44/hD6pZjs/nitbMDPL1JQzHtSsYLK92wGmMuPx1az3e+Ic5n00tEGc6AJmBLv/t2zcMc8m2nFBaQLfc0zP3/9q1nXBtwcHlDFgtJ+QrQhaD5LH5HGQhyAEwmq6Wozua8cX6SqLimJBvJQLbcaYBkB0geeR45+LiYmQ8f/sV2HJJET64+c/ffEKxi1Q5Q1UxnA5xcgr4v2/fBrA82HKQ4UzV/Qz/WgvhNMwByBbDXERIDp/lyL5ifJXV/h9kKTqAOQZbcOOTA6mXEOQgqjhmTA0O+t8qbgr2NQyADK9+eZqhec4yrFFdmxKFU44ky1+8//Ef3TBChhNMfMT6HBbnIAORLSUUr+iJFDk9EB3n9E7tKAmOUBDSUp6oVEkrB4xaTquQxWvuaLCPBjtdQ2A0wdE1uGGWDWiwAwAAwu4YnlB89wAAAABJRU5ErkJggg=="
 		},
 		{
 			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\sunflower_front.png",
@@ -1207,7 +1213,7 @@
 			"loop_delay": "",
 			"animators": {
 				"ea9a8ecb-d512-98b2-b6b4-934c3f2ff7fd": {
-					"name": "Beachball",
+					"name": "BeachBall",
 					"type": "bone",
 					"keyframes": [
 						{
