@@ -522,6 +522,15 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
+                    if tick == 0 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 19, true)
+                    elseif tick == 19 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 2, true)
+                    elseif tick == 21 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CIRCLE", 22, true)
+                    elseif tick == 43 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", 100, true)
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
