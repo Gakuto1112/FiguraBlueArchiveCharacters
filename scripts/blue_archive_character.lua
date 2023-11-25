@@ -491,6 +491,23 @@ BlueArchiveCharacter = {
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
+            },
+
+            swimsuit = {
+                ---コスチュームの表示名
+                name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Swimsuit",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "水着"
+                },
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 1
             }
         },
 
@@ -501,12 +518,26 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
+                Costume.setCostumeTextureOffset(1)
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
+                    modelPart:setVisible(false)
+                end
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                    modelPart:setVisible(true)
+                end
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
+                Costume.setCostumeTextureOffset(0)
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
+                    modelPart:setVisible(true)
+                end
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                    modelPart:setVisible(false)
+                end
             end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数
@@ -2119,7 +2150,9 @@ BlueArchiveCharacter = {
 
 --生徒固有初期化処理
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
-models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower:setPrimaryTexture("RESOURCE", "textures/entity/block/sunflower_front.png")
+for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower}) do
+    modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
+end
 if host:isHost() then
     models.models.main.CameraAnchor.Background:setLight(15)
 end
