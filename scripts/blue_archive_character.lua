@@ -557,6 +557,11 @@ BlueArchiveCharacter = {
                             local particlePos = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * 1.5, math.sin(math.rad(i * 12)) * 1.5, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)
                             particles:newParticle("minecraft:dust 100000000 1000000000 1000000000 1", particlePos):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
                         end
+                    elseif tick == 85 then
+                        models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
+                        models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
+                    elseif tick == 101 then
+                        models.models.costume_swimsuit.BeachBall:setUVPixels(0, 14)
                     end
                     if tick < 25 then
                         local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
@@ -573,6 +578,8 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
+                    models.models.costume_swimsuit.BeachBall:setUVPixels()
+                    models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("CUTOUT")
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）

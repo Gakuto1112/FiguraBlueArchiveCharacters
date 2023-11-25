@@ -13,7 +13,7 @@
 	"unhandled_root_fields": {},
 	"resolution": {
 		"width": 31,
-		"height": 30
+		"height": 31
 	},
 	"elements": [
 		{
@@ -943,27 +943,27 @@
 			"origin": [0, 4, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 9, 7, 16],
+					"uv": [0, 10, 7, 17],
 					"texture": 0
 				},
 				"east": {
-					"uv": [7, 9, 14, 16],
+					"uv": [7, 10, 14, 17],
 					"texture": 0
 				},
 				"south": {
-					"uv": [14, 9, 21, 16],
+					"uv": [21, 10, 28, 17],
 					"texture": 0
 				},
 				"west": {
-					"uv": [14, 9, 7, 16],
+					"uv": [14, 10, 7, 17],
 					"texture": 0
 				},
 				"up": {
-					"uv": [14, 9, 21, 16],
+					"uv": [14, 10, 21, 17],
 					"texture": 0
 				},
 				"down": {
-					"uv": [14, 9, 21, 16],
+					"uv": [14, 17, 21, 10],
 					"texture": 0
 				}
 			},
@@ -1135,7 +1135,7 @@
 			"uuid": "ea9a8ecb-d512-98b2-b6b4-934c3f2ff7fd",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -1175,7 +1175,7 @@
 			"saved": true,
 			"uuid": "f5cde97c-a6a0-df2e-55be-3c11285042e8",
 			"relative_path": "../../textures/costume_swimsuit.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAeCAYAAADU8sWcAAAAAXNSR0IArs4c6QAAAcVJREFUSEtjZGBgYFDQcv8PonGBB9d2MuKTh8n9+/fvPxMTE1jtF5VGsJk8d+oZLy8p+/+q9geD8/1JcHP2Kub9ZyRkMTGWgtTcu7KdAWQxyAHf1Jrh2g5J/GOwKbdnOJ23ASwGcgDIYhCbJMtxhQDIA8hyMF+DLABZbhGnwcAR44/hD6pZjs/nitbMDPL1JQzHtSsYLK92wGmMuPx1az3e+Ac5/wO3CYOYtCzOdPDq6eP/6PLfvn3DMJdsywmlBXTLPT1z/69d2wnXFhxczoDVcja1QJy+AoUMyOeEADafgywEOQBG09VydAczvlhfSTCOCfkSJC8R2I4ztEB2gOSR452Li4uR8fztV2DLJUX44HY8f/MJxT5S5QxVxXA6xMkp4P++fRvA8mDLQYYzVfcz/GsthNMwByBbDHMRITl8liP7ivFVVvt/kKXoAOYYbEGOTw4cBYIcRBXHjKnBQf9bxU3BvoYBkOHVL08zNM9ZhjW6a1OicMqRZPmL9z/+oxtGyHBCCZBon8PiHGQgsqWE4hU9kSKnB6LjnN6pHSXBEQpCWsoTlSpp5YBRy2kVsnjNHQ320WCnawiMJji6BjfMsgENdgAez/IYrCQa0wAAAABJRU5ErkJggg=="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAAAXNSR0IArs4c6QAAAsNJREFUWEftlU1oE1EQx+dFKDEWQdAaKWIrpqj1UlFQGxRSUHqyNSereNFeLIZUpa2GUqTEVkEtAW89am+huYlCctCCh4I5+AVWqiDFGERFQww5ZGRefbtvP95uYqq9+C4v2fn4zX9m2GUAAC27jyHdqvP+1UPmZBe2SqWCHo+H+xZ2XOM5G9+Osef3hjA/WoKudwktT7o1gswNXA2UfBZfPAACUwHFtnEt7LG/AsHhIzAfSfFnVACB6XdNcFUHSIBsE6oJQPADZ3aC9/Rxi44Vgzspb+1cA9vGLsPT9hE4+HJSuy2zLL+ZdZw/lf9t3T5oat6q3IP80gc024vFoiXvH8PddsEM7+6+gMnkDS0sHB4GW3hDW69SFXWGlLsdO+UEpALE/U/h5oJZbvaK64zdVJLd3zuh7BYxyC7P3efzsapeHtXAq/UJhXowk0lxLssu5LnyLRvXa/EfP3835FpJW0egSRPM4ZTcE7sDlfigdosCZLCoqB6bAZ4/P4EENR9RjF07nWxu7fdv8OrK+8MnML55P1ctDiWPfZqH8ekZ21yj5/qUtprgua8lNCerJ3lNcDFzCpKh9czVvMDyrlgWbtW2HS/ewlKDH7yhXVrHSpnX4C3ngJ47HR7T1aG7pLMgx9rlZLcv6Qv3c+Q+ettbAPoOWZNIBZmL4BAFnHxVtrWTp3Q4PnqGhuoFJZ01qjLRS7EZJcAClnKyo3v/w4HxmasW56/PfDW3Hb/8UH7PsX+arwobiurrFii4vcRAxNl+F5KD0sK5wDXw1PXlXNGrAHIBC43Lz+kZ/Q4UaoCfjCPcjViLHEgAln1G1eQlF6HoAd6cUnbHIyt/cvgsBpu3g6GAgQTMLS1C56Y96rYLxTaYquE087meKARTerXiv+3M5RbXq9xt4QzLJmC/50o2Uin7OKmmcEPb64G7rr2Ngwz/BZOi7yiAxs8lAAAAAElFTkSuQmCC"
 		},
 		{
 			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\sunflower_front.png",
@@ -1206,7 +1206,7 @@
 			"override": false,
 			"length": 7.15,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
