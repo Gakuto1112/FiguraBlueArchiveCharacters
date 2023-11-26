@@ -508,16 +508,6 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
-                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
-                ---@type fun()
-                preTransition = function()
-                end,
-
-                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
-                ---@type fun()
-                preAnimation = function()
-                end,
-
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
@@ -566,6 +556,18 @@ BlueArchiveCharacter = {
                             local particlePos = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * 1.5, math.sin(math.rad(i * 12)) * 1.5, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)
                             particles:newParticle("minecraft:dust 100000000 1000000000 1000000000 1", particlePos):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
                         end
+                    elseif tick == 79 and host:isHost() then
+                        models.models.main.CameraAnchor.Background:setVisible(true)
+                        local windowSize = client:getWindowSize()
+                        models.models.main.CameraAnchor.Background:setScale(windowSize.x / windowSize.y * 120, 120, 1)
+                        models.models.main.Avatar:setColor(0, 0, 0)
+                        for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
+                            modelPart:setColor(0, 0, 0)
+                        end
+                    elseif tick == 80 then
+                        renderer:setPostEffect("invert")
+                    elseif tick == 84 then
+                        renderer:setPostEffect()
                     elseif tick == 85 then
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
                         models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
@@ -579,6 +581,12 @@ BlueArchiveCharacter = {
                             for _, particleData in ipairs({{0.5, 0.4, 0.1}, {0.25, 0.6, 0.025}, {0.375, 2, 0.05}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール
                                 particles:newParticle("minecraft:dust 1000000000 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
                                 particles:newParticle("minecraft:dust 0 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1] * 1.5, 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                            end
+                        end
+                        if host:isHost() then
+                            models.models.main.CameraAnchor.Background:setVisible(false)
+                            for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
+                                modelPart:setColor()
                             end
                         end
                     elseif tick >= 101 then
@@ -605,14 +613,16 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
+                    models.models.main.Avatar:setVisible(true)
                     models.models.costume_swimsuit.BeachBall:setUVPixels()
                     models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("CUTOUT")
-                end,
-
-                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
-                ---@type fun(forcedStop: boolean)
-                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
-                postTransition = function(forcedStop)
+                    if forcedStop and host:isHost() then
+                        models.models.main.CameraAnchor.Background:setVisible(false)
+                        for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
+                            modelPart:setColor()
+                        end
+                        renderer:setPostEffect()
+                    end
                 end
             }
 		}
@@ -2498,9 +2508,6 @@ end)
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower}) do
     modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
-end
-if host:isHost() then
-    models.models.main.CameraAnchor.Background:setLight(15)
 end
 
 return BlueArchiveCharacter
