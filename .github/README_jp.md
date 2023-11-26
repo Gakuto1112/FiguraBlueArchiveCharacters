@@ -5,16 +5,17 @@
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![サムネイル](./README_images/thumbnail.jpg)
+![サムネイル](./README_images/thumbnail.png)
 
-**このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
+このブランチは**久田 イズナ**のブランチです。
 
 ## 作成状況
 ### 作成済み
 - [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
+- [久田 イズナ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### 作成中
-- 久田 イズナ
+なし
 
 ## 特徴
 - Exスキルのカットインを再現しています。

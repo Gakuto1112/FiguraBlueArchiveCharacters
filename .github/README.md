@@ -5,16 +5,17 @@ This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod 
 
 Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![Thumbnail](./README_images/thumbnail.jpg)
+![Thumbnail](./README_images/thumbnail.png)
 
-**This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "[Creation status](#creation-status)" section below.**
+This branch is for **Izuna Kuda**.
 
 ## Creation status
 ### Done
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
+- [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### In progress
-- Izuna Kuda
+None
 
 ## Features
 - Imitated ex skill cut-ins.
