@@ -522,12 +522,21 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 0 then
-                        FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 19, true)
-                    elseif tick == 19 then
-                        FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 2, true)
-                    elseif tick == 21 then
-                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CIRCLE", 22, true)
+                    if tick < 25 then
+                        if tick == 0 then
+                            FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 19, true)
+                        elseif tick == 19 then
+                            FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 2, true)
+                        elseif tick == 21 then
+                            FaceParts:setEmotion("CLOSED2", "CLOSED2", "CIRCLE", 22, true)
+                        end
+                        local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
+                        local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
+                        if particleBlock ~= "minecraft:air" then
+                            for _ = 1, 50 do
+                                particles:newParticle("minecraft:block "..particleBlock, anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
+                            end
+                        end
                     elseif tick == 25 then
                         models.models.main.Avatar:setVisible(false)
                         local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
@@ -560,27 +569,34 @@ BlueArchiveCharacter = {
                     elseif tick == 85 then
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
                         models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
-                    elseif tick == 87 then
-                        local beachBallPos = ModelUtils.getModelWorldPos(models.models.costume_swimsuit.BeachBall)
-                        local particleAxis = vectors.rotateAroundAxis(-player:getBodyYaw(), vectors.rotateAroundAxis(30, 0, 0, 1, 1, 0, 0), 0, 1, 0)
-                        local particleVelocityDirection = vectors.rotateAroundAxis(-player:getBodyYaw(), vectors.rotateAroundAxis(-50, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                    elseif tick == 86 then
+                        local bodyYaw = player:getBodyYaw()
+                        local anchor2Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ExSkill2Anchor2):add(vectors.rotateAroundAxis(-bodyYaw, -0.1, 0, 0, 0, 1, 0)):add(0, 0.4, 0)
+                        local particleAxis = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(30, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                        local particleVelocityDirection = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(-50, 0, 0, 1, 1, 0, 0), 0, 1, 0)
                         for i = 1, 60 do
                             local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
-                            for _, particleData in ipairs({{0.5, -3, 0.1}, {0.25, -2.9, 0.025}, {0.375, -2, 0.05}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール
-                                particles:newParticle("minecraft:dust 1000000000 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(beachBallPos):add(0, -0.7, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
-                                particles:newParticle("minecraft:dust 0 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1] * 1.5, 0, particleAxis):add(beachBallPos):add(0, -0.7, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                            for _, particleData in ipairs({{0.5, 0.4, 0.1}, {0.25, 0.6, 0.025}, {0.375, 2, 0.05}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール
+                                particles:newParticle("minecraft:dust 1000000000 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                                particles:newParticle("minecraft:dust 0 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1] * 1.5, 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
                             end
                         end
-                    elseif tick == 101 then
-                        models.models.costume_swimsuit.BeachBall:setUVPixels(0, 14)
-                    end
-                    if tick < 25 then
-                        local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
-                        local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
-                        if particleBlock ~= "minecraft:air" then
-                            for _ = 1, 50 do
-                                particles:newParticle("minecraft:block "..particleBlock, anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
+                    elseif tick >= 101 then
+                        local bodyYaw = player:getBodyYaw()
+                        local anchor2Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ExSkill2Anchor2):add(vectors.rotateAroundAxis(-bodyYaw, -0.1, 0, 0, 0, 1, 0)):add(0, -0.3, 0)
+                        local particleAxis = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(30, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                        local particleVelocityDirection = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(-50, 0, 0, 1, 1, 0, 0), 0, 1, 0)
+                        if tick == 101 then
+                            models.models.costume_swimsuit.BeachBall:setUVPixels(0, 14)
+                            for i = 1, 60 do
+                                local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
+                                for _, particleData in ipairs({{0.3, 3.5, 0.01, 0.5}, {0.5, 3.5, 0.01, 0.5}, {0.25, 7.9, 0.003, 0.2}, {0.28, 7.89, 0.003, 0.2}, {0.45, 7.85, 0.003, 0.5}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール, [4]. 輪っかのパーティクルの大きさ
+                                    particles:newParticle("minecraft:dust 1000000000 1 1 "..particleData[4], vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(45)
+                                end
                             end
+                        end
+                        for _ = 1, 10 do
+                            particles:newParticle("minecraft:dust 1000000000 1 1 1", anchor2Pos:copy():add(particleAxis:copy():scale(7.5)):add(vectors.rotateAroundAxis(-bodyYaw, -0.3, 0, 0, 0, 1, 0)):add(math.random() * 0.2 - 0.1, math.random() * 0.2 - 0.1 - 0.4, math.random() * 0.2 - 0.1)):setVelocity(particleAxis:copy():scale(-1))
                         end
                     end
                 end,
