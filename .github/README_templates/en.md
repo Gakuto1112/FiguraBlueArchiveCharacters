@@ -12,9 +12,10 @@ This branch is for **Izuna Kuda**.
 ## Creation status
 ### Done
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
+- [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### In progress
-- Izuna Kuda
+None
 
 ## Features
 - Imitated ex skill cut-ins.

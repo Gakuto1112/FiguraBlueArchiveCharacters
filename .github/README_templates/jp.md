@@ -12,9 +12,10 @@
 ## 作成状況
 ### 作成済み
 - [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
+- [久田 イズナ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### 作成中
-- 久田 イズナ
+なし
 
 ## 特徴
 - Exスキルのカットインを再現しています。
