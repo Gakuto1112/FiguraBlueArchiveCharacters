@@ -2,7 +2,10 @@ name: Generate README
 
 on:
   push:
-    branches: ${{ fromJSON(vars.TARGET_BRANCHES) }}
+    branches:
+      - base
+      - Shizuko
+      - Izuna
     paths:
       - .github/README_templates/**
       - .github/README_images/**
