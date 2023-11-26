@@ -730,7 +730,7 @@ BlueArchiveCharacter = {
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
                 Costume.setCostumeTextureOffset(1)
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Skirt", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Skirt", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
                     modelPart:setVisible(false)
                 end
                 for _, modelPart in ipairs(ModelUtils.getPlayerModels({"UpperBody.Body.CSwimsuitB"})) do
@@ -748,7 +748,7 @@ BlueArchiveCharacter = {
             ---@type fun()
             reset = function()
                 Costume.setCostumeTextureOffset(0)
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
                     modelPart:setVisible(true)
                 end
                 models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
