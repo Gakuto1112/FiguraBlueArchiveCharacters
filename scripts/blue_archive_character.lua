@@ -198,12 +198,12 @@ BlueArchiveCharacter = {
             ---設置物として扱うモデル
             ---指定したモデルをコピーして設置物とする。
             ---@type ModelPart
-            model = models.models.placement_object.PlacementObject,
+            model = models.models.ex_skill_1.PlacementObject,
 
             ---設置物の当たり判定
             ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
             ---@type Vector3
-            boundingBox = vectors.vec3(8, 8, 8)
+            boundingBox = vectors.vec3(12, 19, 12)
         }
     },
 
@@ -422,6 +422,13 @@ BlueArchiveCharacter = {
                             particles:newParticle("minecraft:cherry_leaves", avatarPos:copy():add(offset)):setVelocity(offset:scale(0.1))
                         end
                         sounds:playSound("minecraft:item.armor.equip_leather", avatarPos)
+                    elseif tick == 98 then
+                        if math.random() >= 0.95 then
+                            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+                        else
+                            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("PRIMARY")
+                        end
+                        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], ModelUtils.getModelWorldPos(models.models.main.Avatar), -player:getBodyYaw() + 180)
                     end
                     if tick <= 10 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.ExSkill1Anchor1)
