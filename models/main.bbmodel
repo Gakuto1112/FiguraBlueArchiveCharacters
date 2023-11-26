@@ -4417,41 +4417,6 @@
 			"uuid": "1ce37063-0695-616a-9142-28f7503cde9f"
 		},
 		{
-			"name": "Beachball",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-3, 0, -3],
-			"to": [3, 6, 3],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 4, 0],
-			"faces": {
-				"north": {
-					"uv": [0, 0, 1, 1]
-				},
-				"east": {
-					"uv": [0, 0, 1, 1]
-				},
-				"south": {
-					"uv": [0, 0, 1, 1]
-				},
-				"west": {
-					"uv": [0, 0, 1, 1]
-				},
-				"up": {
-					"uv": [0, 0, 1, 1]
-				},
-				"down": {
-					"uv": [0, 0, 1, 1]
-				}
-			},
-			"type": "cube",
-			"uuid": "e981b94c-f842-2c45-df21-c56e42c007c9"
-		},
-		{
 			"name": "Background",
 			"box_uv": false,
 			"rescale": false,
@@ -5235,7 +5200,7 @@
 			"uuid": "4ad021e9-2857-4e55-337b-f61da0762800",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -5251,7 +5216,7 @@
 					"uuid": "720436f3-5d95-7655-95af-b6368d82937b",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -5271,33 +5236,6 @@
 			"visibility": true,
 			"autouv": 0,
 			"children": []
-		},
-		{
-			"name": "Beachball",
-			"origin": [0, 3, 0],
-			"color": 0,
-			"uuid": "5b131a35-ca69-5b97-890c-5d9c25807b74",
-			"export": true,
-			"mirror_uv": false,
-			"isOpen": false,
-			"locked": false,
-			"visibility": true,
-			"autouv": 0,
-			"children": [
-				{
-					"name": "Beachball2",
-					"origin": [0, 3, 0],
-					"color": 0,
-					"uuid": "e2de46b9-4fa2-54cc-3fb5-c6eef1753f58",
-					"export": true,
-					"mirror_uv": false,
-					"isOpen": true,
-					"locked": false,
-					"visibility": true,
-					"autouv": 0,
-					"children": ["e981b94c-f842-2c45-df21-c56e42c007c9"]
-				}
-			]
 		}
 	],
 	"textures": [
@@ -14967,233 +14905,6 @@
 						}
 					]
 				},
-				"5b131a35-ca69-5b97-890c-5d9c25807b74": {
-					"name": "Beachball",
-					"type": "bone",
-					"keyframes": [
-						{
-							"channel": "rotation",
-							"data_points": [
-								{
-									"x": "7200",
-									"y": "0",
-									"z": 47.5
-								},
-								{
-									"x": "30",
-									"y": "0",
-									"z": "0"
-								}
-							],
-							"uuid": "d4eeacad-7268-2bc5-15dc-07ab14888488",
-							"time": 4.25,
-							"color": -1,
-							"interpolation": "step",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "rotation",
-							"data_points": [
-								{
-									"x": 0,
-									"y": 0,
-									"z": 47.5
-								}
-							],
-							"uuid": "31cb5756-5aba-fc9f-2878-dc0ce5c4daad",
-							"time": 0,
-							"color": -1,
-							"interpolation": "linear",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": 3,
-									"y": "231",
-									"z": -252
-								}
-							],
-							"uuid": "e01f143b-4629-c014-2262-4a9626193033",
-							"time": 3.35,
-							"color": -1,
-							"interpolation": "linear",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": 3,
-									"y": "368",
-									"z": "-800"
-								}
-							],
-							"uuid": "318c3f99-4ed9-7754-2554-2fad1a3c4408",
-							"time": 0,
-							"color": -1,
-							"interpolation": "linear",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": 3,
-									"y": "231",
-									"z": -252
-								}
-							],
-							"uuid": "92b0d820-98bc-c39a-1c1a-d52a5b28d01a",
-							"time": 4.2,
-							"color": -1,
-							"interpolation": "step",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": 2,
-									"y": "228.5",
-									"z": -252
-								}
-							],
-							"uuid": "60472c1a-b47f-5309-16f7-bb8977e8f901",
-							"time": 4.25,
-							"color": -1,
-							"interpolation": "bezier",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": 2,
-									"y": "110",
-									"z": "-458"
-								}
-							],
-							"uuid": "c8810ddb-56fa-c914-3733-d0cec92042fa",
-							"time": 5,
-							"color": -1,
-							"interpolation": "step",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.60006, -0.60286, -0.59726],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.60006, 0.60286, 0.59726],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": 3,
-									"y": 161,
-									"z": -367
-								}
-							],
-							"uuid": "18ceb8a2-c3b6-3a01-f54f-f4258b4f37a8",
-							"time": 5.15,
-							"color": -1,
-							"interpolation": "bezier",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "position",
-							"data_points": [
-								{
-									"x": "3",
-									"y": "228",
-									"z": "-252"
-								}
-							],
-							"uuid": "56a12f99-46c9-ddb0-40d8-15eab1ff4031",
-							"time": 5.05,
-							"color": -1,
-							"interpolation": "bezier",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.023, -0.022, -0.024],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.023, 0.022, 0.024],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "scale",
-							"data_points": [
-								{
-									"x": "1",
-									"y": "1",
-									"z": "1"
-								}
-							],
-							"uuid": "b7f2bfe4-71c3-1784-97cb-fe98a2db5915",
-							"time": 4.25,
-							"color": -1,
-							"uniform": true,
-							"interpolation": "bezier",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "scale",
-							"data_points": [
-								{
-									"x": "0.1",
-									"y": "0.1",
-									"z": "80"
-								},
-								{
-									"x": "1",
-									"y": "1",
-									"z": "1"
-								}
-							],
-							"uuid": "4987c63c-0e4d-0e7d-0413-17cbc60919cc",
-							"time": 5,
-							"color": -1,
-							"uniform": false,
-							"interpolation": "bezier",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.60426, -0.60286, -0.60047],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.60426, 0.60286, 0.60047],
-							"bezier_right_value": [0, 0, 0]
-						}
-					]
-				},
 				"4ad021e9-2857-4e55-337b-f61da0762800": {
 					"name": "CameraAnchor",
 					"type": "bone",
@@ -15760,50 +15471,6 @@
 							],
 							"uuid": "5bf96e9e-ca0f-0557-72d9-3faa06704cb0",
 							"time": 5.15,
-							"color": -1,
-							"interpolation": "linear",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						}
-					]
-				},
-				"e2de46b9-4fa2-54cc-3fb5-c6eef1753f58": {
-					"name": "Beachball2",
-					"type": "bone",
-					"keyframes": [
-						{
-							"channel": "rotation",
-							"data_points": [
-								{
-									"x": "0",
-									"y": "360",
-									"z": "0"
-								}
-							],
-							"uuid": "e1dd0822-57b5-71b8-efee-d5fa4e0a890b",
-							"time": 3.35,
-							"color": -1,
-							"interpolation": "linear",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "rotation",
-							"data_points": [
-								{
-									"x": 0,
-									"y": 0,
-									"z": 0
-								}
-							],
-							"uuid": "95127de0-5380-497e-0ffe-8ab2b96923ff",
-							"time": 0,
 							"color": -1,
 							"interpolation": "linear",
 							"bezier_linked": true,
