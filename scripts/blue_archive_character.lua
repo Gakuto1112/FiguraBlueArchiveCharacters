@@ -706,12 +706,17 @@ BlueArchiveCharacter = {
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
                 Costume.setCostumeTextureOffset(1)
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Skirt", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
                     modelPart:setVisible(false)
                 end
-                models.models.main.Avatar.UpperBody.Body.CSwimsuitB:setVisible(true)
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"UpperBody.Body.CSwimsuitB"})) do
+                    modelPart:setVisible(true)
+                end
                 models.models.main.Avatar.Head.CSwimsuitH:setVisible(not Armor.ArmorVisible[1])
                 models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL:setVisible(not Armor.ArmorVisible[3])
+                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.CSwimsuitH, models.models.death_animation.DummyAvatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                    modelPart:setVisible(true)
+                end
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
@@ -719,11 +724,12 @@ BlueArchiveCharacter = {
             ---@type fun()
             reset = function()
                 Costume.setCostumeTextureOffset(0)
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairAccessories.FoxAccessory, models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom, models.models.main.Avatar.LowerBody.Legs.RightLeg.Kunais}) do
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
                     modelPart:setVisible(true)
                 end
                 models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setVisible(true)
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB", "LowerBody.Legs.LeftLeg.CSwimsuitLL"})) do
                     modelPart:setVisible(false)
                 end
             end,
@@ -2536,7 +2542,7 @@ events.RENDER:register(function ()
 end)
 
 models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
-for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower}) do
+for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower}) do
     modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
 end
 
