@@ -15,6 +15,11 @@
 ---| "BODY" アバターのBodyに銃を移動させる
 ---| "HIDDEN" 銃を隠す
 
+---生徒の配置タイプ
+---@alias BlueArchiveCharacter.FormationType
+---| "STRIKER" ストライカー（前衛）
+---| "SPECIAL" スペシャル（後方支援）
+
 ExSkillTextAnimation = require("scripts.ex_skill_text_animation")
 
 ---@class BlueArchiveCharacter （今後別のキャラを作る時に備えて、）キャラクター変数を保持するクラス。別のキャラクターに対してもここを変更するだけで対応できるようにする。
@@ -664,6 +669,10 @@ BlueArchiveCharacter = {
                     ja_jp = "コスチューム"
                 },
 
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
+
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
@@ -682,6 +691,10 @@ BlueArchiveCharacter = {
                     ja_jp = "デフォルト"
                 },
 
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
+
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
@@ -698,6 +711,10 @@ BlueArchiveCharacter = {
                     ---@type string
                     ja_jp = "水着"
                 },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
