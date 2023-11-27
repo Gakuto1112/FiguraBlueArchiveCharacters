@@ -20,11 +20,17 @@ ExSkill = {
     ---@type number
     TransitionCount = 0,
 
+    ---Exスキルアニメーション開始時のプレイヤーのBodyYaw
+    ---@type number
+    BodyYaw = 0,
+
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
-    canPlayAnimation = function()
+    canPlayAnimation = function(self)
         local velocity = player:getVelocity()
-        return player:getPose() == "STANDING" and velocity:length() < 0.01 and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
+        local bodyYawPrev = self.BodyYaw
+        self.BodyYaw = player:getBodyYaw() % 360
+        return player:getPose() == "STANDING" and velocity:length() < 0.01 and bodyYawPrev == self.BodyYaw and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
     end,
 
     ---アニメーション再生中のみ実行されるティック関数
@@ -44,8 +50,8 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function(delta)
-        local bodyYaw = player:getBodyYaw(delta)
+    animationRender = function(self, delta)
+        local bodyYaw = self.BodyYaw
         local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
         local cameraRot = models.models.main.CameraAnchor:getAnimRot():mul(-1, -1, -1):add(0, bodyYaw % 360)
         renderer:setOffsetCameraPivot(cameraPos)
@@ -60,7 +66,7 @@ ExSkill = {
     transition = function(self, direction, callback)
         events.RENDER:register(function (delta)
             --カメラのトランジション
-            local bodyYaw = -player:getBodyYaw(delta) % 360
+            local bodyYaw = -self.BodyYaw
             local lookDir = player:getLookDir()
             local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
             local targetCameraPos = vectors.vec3()
@@ -182,7 +188,9 @@ ExSkill = {
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation()
             end
             events.TICK:register(self.animationTick, "ex_skill_tick")
-            events.RENDER:register(self.animationRender, "ex_skill_render")
+            events.RENDER:register(function ()
+                self:animationRender()
+            end, "ex_skill_render")
             self.AnimationCount = 0
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20)
         end)
