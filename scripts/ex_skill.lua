@@ -3,29 +3,34 @@
 ---| "POST"
 
 ---@class ExSkill Exスキルのアニメーションを管理するクラス
----@field SHOWN_MODELS table<ModelPart> Exスキルのアニメーション時に表示するモデルのテーブル
----@field CAMERA_ANCHOR ModelPart Exスキルのアニメーション時にカメラの追従基準となるモデルパーツ
----@field RenderProcessed boolean そのレンダーで既にレンダー処理したかどうか
----@field ExclamationText TextTask Exスキルのアニメーション中に表示する「！！」のテキストタスク
----@field AnimationCount integer Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
----@field AnimationLength integer Exスキルのアニメーションの長さ。スクリプトで自動で代入する。
----@field TransitionCount number Exスキルのアニメーション前後のカメラのトランジションの進捗を示すカウンター
 ExSkill = {
-    --定数
-    CAMERA_ANCHOR = models.models.main.CameraAnchor,
-
-    --変数
+    ---そのレンダーで既にレンダー処理したかどうか
+    ---@type boolean
     RenderProcessed = false,
+
+    ---Exスキルのアニメーション再生中に増加するカウンター。-1はアニメーション停止中を示す。
+    ---@type integer
     AnimationCount = -1,
+
+    ---Exスキルのアニメーションの長さ。スクリプトで自動で代入する。
+    ---@type number
     AnimationLength = 0,
+
+    ---Exスキルのアニメーション前後のカメラのトランジションの進捗を示すカウンター
+    ---@type number
     TransitionCount = 0,
 
-    --関数
+    ---Exスキルアニメーション開始時のプレイヤーのBodyYaw
+    ---@type number
+    BodyYaw = 0,
+
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
-    canPlayAnimation = function()
+    canPlayAnimation = function(self)
         local velocity = player:getVelocity()
-        return velocity:length() < 0.01 and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
+        local bodyYawPrev = self.BodyYaw
+        self.BodyYaw = player:getBodyYaw() % 360
+        return player:getPose() == "STANDING" and velocity:length() < 0.01 and bodyYawPrev == self.BodyYaw and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
     end,
 
     ---アニメーション再生中のみ実行されるティック関数
@@ -45,10 +50,10 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function(delta)
-        local bodyYaw = player:getBodyYaw(delta)
-        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, ExSkill.CAMERA_ANCHOR:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
-        local cameraRot = ExSkill.CAMERA_ANCHOR:getAnimRot():mul(-1, -1, -1):add(0, bodyYaw % 360)
+    animationRender = function(self, delta)
+        local bodyYaw = self.BodyYaw
+        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
+        local cameraRot = models.models.main.CameraAnchor:getAnimRot():mul(-1, -1, -1):add(0, bodyYaw % 360)
         renderer:setOffsetCameraPivot(cameraPos)
         renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
         renderer:setCameraRot(cameraRot)
@@ -61,7 +66,7 @@ ExSkill = {
     transition = function(self, direction, callback)
         events.RENDER:register(function (delta)
             --カメラのトランジション
-            local bodyYaw = -player:getBodyYaw(delta) % 360
+            local bodyYaw = -self.BodyYaw
             local lookDir = player:getLookDir()
             local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
             cameraRot.y = cameraRot.y % 360
@@ -185,7 +190,9 @@ ExSkill = {
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation()
             end
             events.TICK:register(self.animationTick, "ex_skill_tick")
-            events.RENDER:register(self.animationRender, "ex_skill_render")
+            events.RENDER:register(function ()
+                self:animationRender()
+            end, "ex_skill_render")
             self.AnimationCount = 0
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20)
         end)
