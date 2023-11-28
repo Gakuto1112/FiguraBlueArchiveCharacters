@@ -17,6 +17,11 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 ### In progress
 None
 
+### Planning
+- Marie Iochi ( #12 )
+- Momoi Saiba ( #13 )
+- Midori Saiba ( #14 )
+
 ## Features
 - Imitated ex skill cut-ins.
 
