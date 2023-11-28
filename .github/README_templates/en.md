@@ -17,6 +17,11 @@ This branch is for **Shizuko Kawawa**.
 ### In progress
 None
 
+### Planning
+- Marie Iochi ( #12 )
+- Momoi Saiba ( #13 )
+- Midori Saiba ( #14 )
+
 ## Features
 - Imitated ex skill cut-ins.
 
