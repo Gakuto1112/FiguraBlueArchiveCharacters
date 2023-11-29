@@ -8,7 +8,7 @@
 ---@field DamageStatus PlayerUtils.DamageStatus 現在のティックのダメージステータス
 PlayerUtils = {
     --変数
-    HealthPrev = 20,
+    HealthPrev = player:getHealth(),
     DamageStatus = "NONE",
 
     --関数
