@@ -435,6 +435,23 @@ BlueArchiveCharacter = {
         }
 	},
 
+    ---吹き出しエモートガイド
+    BUBBLE = {
+        callbacks = {
+            ---吹き出しエモートが再生された時に実行されるコールバック関数（任意）
+            ---@type fun(type: Bubble.BubbleType)
+            ---@param type Bubble.BubbleType 再生された吹き出しアニメーションの種類
+            onPlay = function(type)
+            end,
+
+            ---吹き出しアニメーション終了時に実行されるコールバック関数（任意）
+            ---@type fun(type: Bubble.BubbleType)
+            ---@param type Bubble.BubbleType 再生された吹き出しアニメーションの種類
+            onStop = function(type)
+            end
+        }
+    },
+
     ---物理演算データ
     PHYSICS = {
         --[[

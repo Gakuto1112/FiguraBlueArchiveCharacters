@@ -81,6 +81,9 @@ Bubble = {
                                 end
                                 events.TICK:remove("bubble_tick")
                                 events.RENDER:remove("bubble_render")
+                                if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onStop ~= nil then
+                                    BlueArchiveCharacter.BUBBLE.callbacks.onStop(type)
+                                end
                             end
                         end
                         if self.Emoji == "RELOAD" then
@@ -106,6 +109,9 @@ Bubble = {
                     self.IsRenderProcessed[1] = true
                 end
             end, "bubble_render")
+        end
+        if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil then
+            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type)
         end
     end,
 
