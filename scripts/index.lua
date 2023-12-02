@@ -3,6 +3,7 @@ events.ENTITY_INIT:register(function ()
 	BlueArchiveCharacter = require("scripts.blue_archive_character")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
+	KeyManager = require("scripts.key_manager")
 
 	--ユーティリティクラス
 	PlayerUtils = require("scripts.utils.player_utils")

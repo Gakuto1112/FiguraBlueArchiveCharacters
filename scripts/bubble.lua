@@ -23,6 +23,11 @@ Bubble = {
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     play = function (self, type)
         self.Count = 40
+        self.TransitionCount = 0
+        local emojiTexture = textures["textures.emojis."..type:lower()]
+        for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Emoji, models.models.bubble.Gui.FirstPersonBubble.Emoji}) do
+            modelPart:setPrimaryTexture("CUSTOM", emojiTexture)
+        end
         models.models.bubble.Camera.AvatarBubble:setVisible(true)
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
@@ -74,16 +79,48 @@ Bubble = {
     end,
 
     ---初期化関数
-    init = function ()
+    init = function (self)
         models.models.bubble:addChild(models:newPart("Gui", "Gui"))
         ---@diagnostic disable-next-line: redundant-parameter
         models.models.bubble.Gui:addChild(models.models.bubble.Camera.AvatarBubble:copy("FirstPersonBubble"))
+        models.models.bubble.Gui.FirstPersonBubble:setVisible(false)
         for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble, models.models.bubble.Gui.FirstPersonBubble}) do
             modelPart:setScale(0, 0, 0)
         end
+
+        --キーバインドに登録
+        KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
+            pings.bubble_up()
+        end)
+        KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
+            pings.bubble_right()
+        end)
+        KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
+            pings.bubble_down()
+        end)
+        KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
+            pings.bubble_left()
+        end)
     end
 }
 
-Bubble.init()
+--ping関数
+function pings.bubble_up()
+    Bubble:play("GOOD")
+end
+
+function pings.bubble_right()
+    Bubble:play("HEART")
+end
+
+function pings.bubble_down()
+    Bubble:play("RELOAD")
+end
+
+function pings.bubble_left()
+    Bubble:play("QUESTION")
+end
+
+Bubble:init()
 
 return Bubble

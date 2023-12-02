@@ -17,7 +17,11 @@ Language = {
 			action_wheel__main__action_3__done_first = "Changed display name to §b",
 			action_wheel__main__action_3__done_last = "§r.",
 			action_wheel__main__action_4__title = "Show armors: ",
-			action_wheel__main__action_5__title = "Show health bar: "
+			action_wheel__main__action_5__title = "Show health bar: ",
+			key_name__bubble_up = "Bubble: Good",
+			key_name__bubble_right = "Bubble: Heart",
+			key_name__bubble_down = "Bubble: Reload ammo",
+			key_name__bubble_left = "Bubble: Question"
 		},
 		ja_jp = {
 			action_wheel__toggle_off = "オフ",
@@ -34,7 +38,11 @@ Language = {
 			action_wheel__main__action_3__done_first = "表示名を§b",
 			action_wheel__main__action_3__done_last = "§rに変更しました。",
 			action_wheel__main__action_4__title = "防具を表示：",
-			action_wheel__main__action_5__title = "HPバーを表示："
+			action_wheel__main__action_5__title = "HPバーを表示：",
+			key_name__bubble_up = "吹き出し：いいね",
+			key_name__bubble_right = "吹き出し：ハート",
+			key_name__bubble_down = "吹き出し：弾薬補充",
+			key_name__bubble_left = "吹き出し：はてな",
 		}
 	},
 
