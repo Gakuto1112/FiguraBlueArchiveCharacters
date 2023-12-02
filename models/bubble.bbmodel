@@ -1,0 +1,328 @@
+{
+	"meta": {
+		"format_version": "4.5",
+		"model_format": "free",
+		"box_uv": false
+	},
+	"name": "bubble",
+	"model_identifier": "",
+	"visible_box": [1, 1, 0],
+	"variable_placeholders": "",
+	"variable_placeholder_buttons": [],
+	"timeline_setups": [],
+	"unhandled_root_fields": {},
+	"resolution": {
+		"width": 16,
+		"height": 16
+	},
+	"elements": [
+		{
+			"name": "Bubble",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-32, -32, 0],
+			"to": [0, 0, 0],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-16, -16, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 16],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "b75c16b6-27ce-2255-b1ed-50e06ca576b3"
+		},
+		{
+			"name": "Bubble",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [8, 27, 0],
+			"to": [16, 35, 0],
+			"autouv": 0,
+			"color": 0,
+			"origin": [12, 31, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 16],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "ee16cd89-5e16-d1c0-bdb4-bec63d4d29dc"
+		},
+		{
+			"name": "Emoji",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [9, 28, -0.1],
+			"to": [15, 34, -0.1],
+			"autouv": 0,
+			"color": 0,
+			"origin": [12, 31, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 16],
+					"texture": 1
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "e1f1401a-3276-4ed6-1633-16078de30336"
+		},
+		{
+			"name": "Emoji",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-28, -28, -0.1],
+			"to": [-4, -4, -0.1],
+			"autouv": 0,
+			"color": 0,
+			"origin": [12, 31, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 16],
+					"texture": 1
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "e547e87a-0089-f710-c2ca-015a33a463f0"
+		}
+	],
+	"outliner": [
+		{
+			"name": "Camera",
+			"origin": [12, 31, 0],
+			"color": 0,
+			"uuid": "1ad8e11f-891c-06f0-491f-55ff468a6e74",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": ["ee16cd89-5e16-d1c0-bdb4-bec63d4d29dc", "e1f1401a-3276-4ed6-1633-16078de30336"]
+		},
+		{
+			"name": "Gui",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "2a77c2c0-34ed-576b-8f2f-dc27afcbe53e",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": [
+				{
+					"name": "Bubble",
+					"origin": [0, 0, 0],
+					"color": 0,
+					"uuid": "8e07ed4f-1ded-f370-416d-de03f8958807",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": ["b75c16b6-27ce-2255-b1ed-50e06ca576b3", "e547e87a-0089-f710-c2ca-015a33a463f0"]
+				}
+			]
+		}
+	],
+	"textures": [
+		{
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\bubble.png",
+			"name": "bubble.png",
+			"folder": "",
+			"namespace": "",
+			"id": "0",
+			"particle": false,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"mode": "bitmap",
+			"saved": true,
+			"uuid": "849f6abb-5d52-7cbc-bc5e-c54506c00158",
+			"relative_path": "../../textures/bubble.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAGhJREFUOE/tk0sOABAMRNul+1/WroKO+KcSdqykzGvDDNN8yaLOfb0vJKHIXM9cro+brFs1bvsqKEFAMouBAuQK4Lh7PUWc4AMuvIGaz2aiJz4A1Pyd6kJHRP44TMgLIEM8dZxdnJuzAGqUPxJDQDMGAAAAAElFTkSuQmCC"
+		},
+		{
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\emojis\\good.png",
+			"name": "good.png",
+			"folder": "",
+			"namespace": "",
+			"id": "1",
+			"particle": false,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"mode": "bitmap",
+			"saved": true,
+			"uuid": "eb85d156-8f1a-0715-eb0c-73c744d1192a",
+			"relative_path": "../../textures/emojis/good.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAJVJREFUOE9jZCASRNmx/gcpXXboNyOyFhQOLrNAmpf2KzJ8fyXIkNJ+DsWQQWgAzK/I3plTacTAKfaesBdgfsUVFnjDADmgzj58AjfDWF4GbDsIEDQA5lRkFxw5/ZUBnyHwWAC5IDNKDMP1yJqxuQLFAFBco4OR5gJ8sQALG7x5ARQTIEOQAUgDMiCYG9GTMroG9FgCAA1snRHHg/NsAAAAAElFTkSuQmCC"
+		},
+		{
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\emojis\\heart.png",
+			"name": "heart.png",
+			"folder": "",
+			"namespace": "",
+			"id": "2",
+			"particle": false,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"mode": "bitmap",
+			"saved": true,
+			"uuid": "0f751aec-a519-017f-2410-5ac9e0a601cb",
+			"relative_path": "../../textures/emojis/heart.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAKhJREFUOE9jZKAQMCLrXyTg8h/Gj/uwhyg5uCKQ5siWXLh5y2smM8AMwScHNgBZAYuyFMOfu8/ABoEMAQFkg2E2wCxgxKWZmKABGQI3ANlmYjTDXDgIDEAPRFKcD4oljFggZAAsrOCxANOAHtfYDELXDFKDkdqwxTlIITbNGAZgCw+QRhAAJS7k1AlzIYoLkL2DnAJhKRI9f2B1AbbMhU0jXhcQiglkeQDhnXzlvzdk1wAAAABJRU5ErkJggg=="
+		},
+		{
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\emojis\\question.png",
+			"name": "question.png",
+			"folder": "",
+			"namespace": "",
+			"id": "3",
+			"particle": false,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"mode": "bitmap",
+			"saved": true,
+			"uuid": "0f142e45-9915-9908-6c14-6e682c9b40a8",
+			"relative_path": "../../textures/emojis/question.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAJFJREFUOE9jZMAN/qNJMWJTilWQgYHh/01rfxT16kc3gvgY6rEZANb8+BsDg8t5sCaGPYb+DLJcDAzYDEE3AF0zTP4/LkOwGoDDuWDD0eWobgDIy6DQJ9ZrmKGKJapwhQtYKa5ohJmDVzMhAwhqJmQALDzwqiPkBTwpHSJFyABYfsCpDp8B8PyAKx8QcgF9AhEAECBOERK1d/UAAAAASUVORK5CYII="
+		},
+		{
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\emojis\\reload.png",
+			"name": "reload.png",
+			"folder": "",
+			"namespace": "",
+			"id": "4",
+			"particle": false,
+			"render_mode": "default",
+			"render_sides": "auto",
+			"frame_time": 1,
+			"frame_order_type": "loop",
+			"frame_order": "",
+			"frame_interpolate": false,
+			"visible": true,
+			"mode": "bitmap",
+			"saved": true,
+			"uuid": "e5650158-1574-55d1-6b46-d58173bbb96b",
+			"relative_path": "../../textures/emojis/reload.png",
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAEpJREFUOE9jZKAQMFKonwFuwOf37/+DDOMVFCRJjCTFIAvQLQIbABKE2QxjEys2aoAg42gYIIUBcp4AJSpYioOJ4xKjXmYiN1cCAKtG/BHrN3pVAAAAAElFTkSuQmCC"
+		}
+	]
+}
