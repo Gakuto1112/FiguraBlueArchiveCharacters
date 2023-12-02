@@ -167,6 +167,7 @@ ExSkill = {
     ---アニメーションを再生する。
     play = function(self)
         PlacementObjectManager:removeAll()
+        renderer:setFOV(70 / client:getFOV())
         renderer:setRenderHUD(false)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
@@ -217,6 +218,7 @@ ExSkill = {
         events.RENDER:remove("ex_skill_render")
         ExSkill.AnimationCount = -1
         Physics:enable()
+        renderer:setFOV()
         self:transition("POST", function()
             if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition(false)
@@ -261,6 +263,7 @@ ExSkill = {
         renderer:setOffsetCameraPivot()
         renderer:setCameraRot()
         renderer:setRenderHUD(true)
+        renderer:setFOV()
         self.AnimationCount = -1
         self.TransitionCount = 0
     end
