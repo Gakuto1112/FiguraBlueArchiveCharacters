@@ -9,11 +9,16 @@
 Bubble = {
     ---吹き出しの表示時間を測るカウンター
     ---@type number
-    Count = 0,
+    Counter = 0,
 
     ---吹き出しのトランジションを測るカウンター
     ---@type number
-    TransitionCount = 0,
+    TransitionCounter = 0,
+
+    ---リロード絵文字のアニメーションのタイミングを測るカウンター
+    ---[1]. 吹き出し用, [2]. アクションホイールのエモートガイド用
+    ---@type number[]
+    ReloadAnimationCounters = {0, 0},
 
     ---このワールドレンダーでレンダー処理を行ったかどうか
     ---@type boolean
@@ -22,18 +27,23 @@ Bubble = {
     ---吹き出しエモートを再生する。
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     play = function (self, type)
-        self.Count = 40
-        self.TransitionCount = 0
+        self.Counter = 50
+        self.TransitionCounter = 0
+        self.ReloadAnimationCounters[1] = 0
         local emojiTexture = textures["textures.emojis."..type:lower()]
         for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Emoji, models.models.bubble.Gui.FirstPersonBubble.Emoji}) do
             modelPart:setPrimaryTexture("CUSTOM", emojiTexture)
         end
-        models.models.bubble.Camera.AvatarBubble:setVisible(true)
+        if type == "RELOAD" then
+            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
+                modelPart:setVisible(true)
+            end
+        end
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
                 models.models.bubble.Gui.FirstPersonBubble:setVisible(renderer:isFirstPerson())
                 if not client:isPaused() then
-                    self.Count = math.max(self.Count - 1, 0)
+                    self.Counter = math.max(self.Counter - 1, 0)
                 end
             end, "bubble_tick")
         end
@@ -42,12 +52,12 @@ Bubble = {
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
                 if not self.IsRenderProcessed then
                     if not client:isPaused() then
-                        if self.Count > 0 then
-                            self.TransitionCount = math.min(self.TransitionCount + 32 / client:getFPS(), 1)
+                        if self.Counter > 0 then
+                            self.TransitionCounter = math.min(self.TransitionCounter + 32 / client:getFPS(), 1)
                         else
-                            self.TransitionCount = math.max(self.TransitionCount - 32 / client:getFPS(), 0)
-                            if self.TransitionCount == 0 then
-                                for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble, models.models.bubble.Gui.FirstPersonBubble}) do
+                            self.TransitionCounter = math.max(self.TransitionCounter - 32 / client:getFPS(), 0)
+                            if self.TransitionCounter == 0 then
+                                for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble, models.models.bubble.Gui.FirstPersonBubble, models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
                                     modelPart:setVisible(false)
                                 end
                                 events.TICK:remove("bubble_tick")
@@ -55,12 +65,31 @@ Bubble = {
                                 events.WORLD_RENDER:remove("bubble_world_render")
                             end
                         end
+                        if type == "RELOAD" then
+                            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet1, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet1}) do
+                                local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 2, 0, 1)
+                                modelPart:setPos(0, 1 - ammoCounter, 0)
+                                modelPart:setOpacity(ammoCounter)
+                            end
+                            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet2, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet2}) do
+                                local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 4, 0, 1)
+                                modelPart:setPos(0, 1 - ammoCounter, 0)
+                                modelPart:setOpacity(ammoCounter)
+                            end
+                            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet3, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet3}) do
+                                local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 6, 0, 1)
+                                modelPart:setPos(0, 1 - ammoCounter, 0)
+                                modelPart:setOpacity(ammoCounter)
+                            end
+                            self.ReloadAnimationCounters[1] = self.ReloadAnimationCounters[1] + 4 / client:getFPS()
+                            self.ReloadAnimationCounters[1] = self.ReloadAnimationCounters[1] >= 5 and self.ReloadAnimationCounters[1] - 5 or self.ReloadAnimationCounters[1]
+                        end
                     end
-                    models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCount))
+                    models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 15, -windowSize.y + 15, 0)
-                        models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCount * 4))
+                        models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
                     end
                     local avatarBubblePos = vectors.vec3(0, 32, 0)
                     if not renderer:isFirstPerson() then
@@ -85,7 +114,7 @@ Bubble = {
 
     ---吹き出しエモートを停止する。
     stop = function (self)
-        self.Count = 0
+        self.Counter = 0
     end,
 
     ---初期化関数
