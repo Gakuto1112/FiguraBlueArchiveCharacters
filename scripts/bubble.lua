@@ -125,16 +125,24 @@ Bubble = {
 
         --キーバインドに登録
         KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
-            pings.bubble_up()
+            if ExSkill.AnimationCount == -1 then
+                pings.bubble_up()
+            end
         end)
         KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
-            pings.bubble_right()
+            if ExSkill.AnimationCount == -1 then
+                pings.bubble_right()
+            end
         end)
         KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
-            pings.bubble_down()
+            if ExSkill.AnimationCount == -1 then
+                pings.bubble_down()
+            end
         end)
         KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
-            pings.bubble_left()
+            if ExSkill.AnimationCount == -1 then
+                pings.bubble_left()
+            end
         end)
 
         --エモートガイド
@@ -153,7 +161,7 @@ Bubble = {
             end
             local isActionWheelEnabledPrev = false
             events.TICK:register(function ()
-                local isActionWheelEnabled = action_wheel:isEnabled()
+                local isActionWheelEnabled = action_wheel:isEnabled() and ExSkill.AnimationCount == -1
                 if isActionWheelEnabled then
                     if not isActionWheelEnabledPrev then
                         models.models.bubble.Gui.BubbleGuide:setVisible(true)
