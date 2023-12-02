@@ -23,11 +23,11 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [-32, -32, 0],
+			"from": [-8, -8, 0],
 			"to": [0, 0, 0],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-16, -16, 0],
+			"origin": [-8, -8, 0],
 			"faces": {
 				"north": {
 					"uv": [0, 0, 16, 16],
@@ -146,11 +146,11 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [-28, -28, -0.1],
-			"to": [-4, -4, -0.1],
+			"from": [-7, -7, -0.1],
+			"to": [-1, -1, -0.1],
 			"autouv": 0,
 			"color": 0,
-			"origin": [12, 31, 0],
+			"origin": [36, 55, 0],
 			"faces": {
 				"north": {
 					"uv": [0, 0, 16, 16],
@@ -193,7 +193,21 @@
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
-			"children": ["ee16cd89-5e16-d1c0-bdb4-bec63d4d29dc", "e1f1401a-3276-4ed6-1633-16078de30336"]
+			"children": [
+				{
+					"name": "AvatarBubble",
+					"origin": [8, 27, 0],
+					"color": 0,
+					"uuid": "ce33d433-402d-decd-b93f-250225de88c7",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": ["ee16cd89-5e16-d1c0-bdb4-bec63d4d29dc", "e1f1401a-3276-4ed6-1633-16078de30336"]
+				}
+			]
 		},
 		{
 			"name": "Gui",
@@ -208,8 +222,8 @@
 			"autouv": 0,
 			"children": [
 				{
-					"name": "Bubble",
-					"origin": [0, 0, 0],
+					"name": "FirstPersonBubble",
+					"origin": [-8, -8, 0],
 					"color": 0,
 					"uuid": "8e07ed4f-1ded-f370-416d-de03f8958807",
 					"export": true,

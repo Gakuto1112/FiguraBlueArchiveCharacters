@@ -27,6 +27,7 @@ events.ENTITY_INIT:register(function ()
 	ExSkill = require("scripts.ex_skill")
 	PlacementObject = require("scripts.placement_object.placement_object")
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
+	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
 	DeathAnimation = require("scripts.death_animation")
 
