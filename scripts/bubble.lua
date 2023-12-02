@@ -122,7 +122,6 @@ Bubble = {
 
     ---初期化関数
     init = function (self)
-        models.models.bubble:addChild(models:newPart("Gui", "Gui"))
         ---@diagnostic disable-next-line: redundant-parameter
         models.models.bubble.Gui:addChild(models.models.bubble.Camera.AvatarBubble:copy("FirstPersonBubble"))
         models.models.bubble.Gui.FirstPersonBubble:setVisible(false)
@@ -143,6 +142,47 @@ Bubble = {
         KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
             pings.bubble_left()
         end)
+
+        --エモートガイド
+        if host:isHost() then
+            models.models.bubble.Gui.BubbleGuide:setScale(2, 2, 2)
+            local bubbleGuideTitle = models.models.bubble.Gui.BubbleGuide:newText("bubble_guide.title")
+            bubbleGuideTitle:setScale(0.5, 0.5, 0.5)
+            bubbleGuideTitle:setText(Language:getTranslate("bubble_guide__title"))
+            bubbleGuideTitle:setAlignment("CENTER")
+            local bubbleKeyNames = {models.models.bubble.Gui.BubbleGuide.GoodEmoji:newText("bubble_guide.bubble_up.key_name"), models.models.bubble.Gui.BubbleGuide.HeartEmoji:newText("bubble_guide.bubble_right.key_name"), models.models.bubble.Gui.BubbleGuide.ReloadEmoji:newText("bubble_guide.bubble_down.key_name"), models.models.bubble.Gui.BubbleGuide.QuestionEmoji:newText("bubble_guide.bubble_left.key_name")}
+            for _, keyNameText in ipairs(bubbleKeyNames) do
+                keyNameText:setPos(-15, 1.5, 0)
+                keyNameText:setScale(0.5, 0.5, 0.5)
+                keyNameText:setWidth(60)
+                keyNameText:setAlignment("CENTER")
+            end
+            local isActionWheelEnabledPrev = false
+            events.TICK:register(function ()
+                local isActionWheelEnabled = action_wheel:isEnabled()
+                if isActionWheelEnabled then
+                    if not isActionWheelEnabledPrev then
+                        models.models.bubble.Gui.BubbleGuide:setVisible(true)
+                        for keyName, keybind in pairs(keybinds:getKeybinds()) do
+                            if keyName == Language:getTranslate("key_name__bubble_up") then
+                                bubbleKeyNames[1]:setText("§0"..keybind:getKeyName())
+                            elseif keyName == Language:getTranslate("key_name__bubble_right") then
+                                bubbleKeyNames[2]:setText("§0"..keybind:getKeyName())
+                            elseif keyName == Language:getTranslate("key_name__bubble_down") then
+                                bubbleKeyNames[3]:setText("§0"..keybind:getKeyName())
+                            elseif keyName == Language:getTranslate("key_name__bubble_left") then
+                                bubbleKeyNames[4]:setText("§0"..keybind:getKeyName())
+                            end
+                        end
+                    end
+                    local windowSize = client:getScaledWindowSize()
+                    models.models.bubble.Gui.BubbleGuide:setPos(-windowSize.x + 76, -windowSize.y + 51, 0)
+                elseif not isActionWheelEnabled and isActionWheelEnabledPrev then
+                    models.models.bubble.Gui.BubbleGuide:setVisible(false)
+                end
+                isActionWheelEnabledPrev = isActionWheelEnabled
+            end)
+        end
     end
 }
 
