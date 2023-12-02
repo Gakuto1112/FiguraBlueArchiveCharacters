@@ -23,52 +23,11 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [-8, -8, 0],
-			"to": [0, 0, 0],
+			"from": [-3, -4, 0],
+			"to": [5, 4, 0],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-8, -8, 0],
-			"faces": {
-				"north": {
-					"uv": [0, 0, 16, 16],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"south": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"west": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"down": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				}
-			},
-			"type": "cube",
-			"uuid": "b75c16b6-27ce-2255-b1ed-50e06ca576b3"
-		},
-		{
-			"name": "Bubble",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [8, 27, 0],
-			"to": [16, 35, 0],
-			"autouv": 0,
-			"color": 0,
-			"origin": [12, 31, 0],
+			"origin": [1, 0, 0],
 			"faces": {
 				"north": {
 					"uv": [0, 0, 16, 16],
@@ -105,11 +64,11 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [9, 28, -0.1],
-			"to": [15, 34, -0.1],
+			"from": [-2, -3, -0.1],
+			"to": [4, 3, -0.1],
 			"autouv": 0,
 			"color": 0,
-			"origin": [12, 31, 0],
+			"origin": [1, 0, 0],
 			"faces": {
 				"north": {
 					"uv": [0, 0, 16, 16],
@@ -138,53 +97,12 @@
 			},
 			"type": "cube",
 			"uuid": "e1f1401a-3276-4ed6-1633-16078de30336"
-		},
-		{
-			"name": "Emoji",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-7, -7, -0.1],
-			"to": [-1, -1, -0.1],
-			"autouv": 0,
-			"color": 0,
-			"origin": [36, 55, 0],
-			"faces": {
-				"north": {
-					"uv": [0, 0, 16, 16],
-					"texture": 1
-				},
-				"east": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"south": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"west": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"down": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				}
-			},
-			"type": "cube",
-			"uuid": "e547e87a-0089-f710-c2ca-015a33a463f0"
 		}
 	],
 	"outliner": [
 		{
 			"name": "Camera",
-			"origin": [12, 31, 0],
+			"origin": [0, 0, 0],
 			"color": 0,
 			"uuid": "1ad8e11f-891c-06f0-491f-55ff468a6e74",
 			"export": true,
@@ -196,7 +114,7 @@
 			"children": [
 				{
 					"name": "AvatarBubble",
-					"origin": [8, 27, 0],
+					"origin": [-3, -4, 0],
 					"color": 0,
 					"uuid": "ce33d433-402d-decd-b93f-250225de88c7",
 					"export": true,
@@ -206,33 +124,6 @@
 					"visibility": true,
 					"autouv": 0,
 					"children": ["ee16cd89-5e16-d1c0-bdb4-bec63d4d29dc", "e1f1401a-3276-4ed6-1633-16078de30336"]
-				}
-			]
-		},
-		{
-			"name": "Gui",
-			"origin": [0, 0, 0],
-			"color": 0,
-			"uuid": "2a77c2c0-34ed-576b-8f2f-dc27afcbe53e",
-			"export": true,
-			"mirror_uv": false,
-			"isOpen": true,
-			"locked": false,
-			"visibility": true,
-			"autouv": 0,
-			"children": [
-				{
-					"name": "FirstPersonBubble",
-					"origin": [-8, -8, 0],
-					"color": 0,
-					"uuid": "8e07ed4f-1ded-f370-416d-de03f8958807",
-					"export": true,
-					"mirror_uv": false,
-					"isOpen": true,
-					"locked": false,
-					"visibility": true,
-					"autouv": 0,
-					"children": ["b75c16b6-27ce-2255-b1ed-50e06ca576b3", "e547e87a-0089-f710-c2ca-015a33a463f0"]
 				}
 			]
 		}

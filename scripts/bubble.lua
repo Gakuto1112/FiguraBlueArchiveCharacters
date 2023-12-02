@@ -38,7 +38,7 @@ Bubble = {
             end, "bubble_tick")
         end
         if events.RENDER:getRegisteredCount("bubble_render") == 0 then
-            events.RENDER:register(function (_, context)
+            events.RENDER:register(function (delta, context)
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
                 if not self.IsRenderProcessed then
                     if not client:isPaused() then
@@ -62,6 +62,16 @@ Bubble = {
                         models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 15, -windowSize.y + 15, 0)
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCount * 4))
                     end
+                    local avatarBubblePos = vectors.vec3(0, 32, 0)
+                    if not renderer:isFirstPerson() then
+                        local playerPos = player:getPos()
+                        local cameraPos = client:getCameraPos()
+                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, 12, 0, 0, 0, -1, 0))
+                    else
+                        avatarBubblePos:add(12, 0, 0)
+                    end
+                    models.models.bubble.Camera:setOffsetPivot(avatarBubblePos)
+                    models.models.bubble.Camera.AvatarBubble:setPos(avatarBubblePos)
                     self.IsRenderProcessed = true
                 end
             end, "bubble_render")
