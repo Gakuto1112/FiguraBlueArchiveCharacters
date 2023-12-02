@@ -25,8 +25,24 @@ Bubble = {
     ReloadAnimationCounters = {0, 0},
 
     ---このワールドレンダーでレンダー処理を行ったかどうか
-    ---@type boolean
-    IsRenderProcessed = false,
+    ---[1]. 吹き出し用, [2]. アクションホイールのエモートガイド用
+    ---@type boolean[]
+    IsRenderProcessed = {false, false},
+
+    ---リロード絵文字アニメーションの処理を行う。
+    ---@param counterIndex number アニメーションカウンターのインデクス番号
+    ---@param rootModels ModelPart[] 弾薬のイラストモデルのルートモデルのテーブル
+    processReloadAnimation = function (self, counterIndex, rootModels)
+        local bulletCounters = {math.clamp(self.ReloadAnimationCounters[counterIndex] * 2 - 2, 0, 1), math.clamp(self.ReloadAnimationCounters[counterIndex] * 2 - 4, 0, 1), math.clamp(self.ReloadAnimationCounters[counterIndex] * 2 - 6, 0, 1)}
+        for _, rootModel in ipairs(rootModels) do
+            for index, bulletModel in ipairs(rootModel:getChildren()) do
+                bulletModel:setPos(0, 1 - bulletCounters[index], 0)
+                bulletModel:setOpacity(bulletCounters[index])
+            end
+        end
+        self.ReloadAnimationCounters[counterIndex] = self.ReloadAnimationCounters[counterIndex] + 4 / client:getFPS()
+        self.ReloadAnimationCounters[counterIndex] = self.ReloadAnimationCounters[counterIndex] >= 5 and self.ReloadAnimationCounters[counterIndex] - 5 or self.ReloadAnimationCounters[counterIndex]
+    end,
 
     ---吹き出しエモートを再生する。
     ---@param type Bubble.BubbleType 再生する絵文字の種類
@@ -53,7 +69,7 @@ Bubble = {
         if events.RENDER:getRegisteredCount("bubble_render") == 0 then
             events.RENDER:register(function (delta, context)
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
-                if not self.IsRenderProcessed then
+                if not self.IsRenderProcessed[1] then
                     if not client:isPaused() then
                         if self.Counter > 0 then
                             self.TransitionCounter = math.min(self.TransitionCounter + 32 / client:getFPS(), 1)
@@ -65,27 +81,10 @@ Bubble = {
                                 end
                                 events.TICK:remove("bubble_tick")
                                 events.RENDER:remove("bubble_render")
-                                events.WORLD_RENDER:remove("bubble_world_render")
                             end
                         end
                         if self.Emoji == "RELOAD" then
-                            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet1, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet1}) do
-                                local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 2, 0, 1)
-                                modelPart:setPos(0, 1 - ammoCounter, 0)
-                                modelPart:setOpacity(ammoCounter)
-                            end
-                            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet2, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet2}) do
-                                local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 4, 0, 1)
-                                modelPart:setPos(0, 1 - ammoCounter, 0)
-                                modelPart:setOpacity(ammoCounter)
-                            end
-                            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet3, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet3}) do
-                                local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 6, 0, 1)
-                                modelPart:setPos(0, 1 - ammoCounter, 0)
-                                modelPart:setOpacity(ammoCounter)
-                            end
-                            self.ReloadAnimationCounters[1] = self.ReloadAnimationCounters[1] + 4 / client:getFPS()
-                            self.ReloadAnimationCounters[1] = self.ReloadAnimationCounters[1] >= 5 and self.ReloadAnimationCounters[1] - 5 or self.ReloadAnimationCounters[1]
+                            self:processReloadAnimation(1, {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets})
                         end
                     end
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
@@ -104,14 +103,9 @@ Bubble = {
                     end
                     models.models.bubble.Camera:setOffsetPivot(avatarBubblePos)
                     models.models.bubble.Camera.AvatarBubble:setPos(avatarBubblePos)
-                    self.IsRenderProcessed = true
+                    self.IsRenderProcessed[1] = true
                 end
             end, "bubble_render")
-        end
-        if events.WORLD_RENDER:getRegisteredCount("bubble_world_render") == 0 then
-            events.WORLD_RENDER:register(function ()
-                self.IsRenderProcessed = false
-            end, "bubble_world_render")
         end
     end,
 
@@ -174,13 +168,28 @@ Bubble = {
                                 bubbleKeyNames[4]:setText("§0"..keybind:getKeyName())
                             end
                         end
+                        if events.RENDER:getRegisteredCount("bubble_guide_render") == 0 then
+                            events.RENDER:register(function ()
+                                if not self.IsRenderProcessed[2] then
+                                    self:processReloadAnimation(2, {models.models.bubble.Gui.BubbleGuide.ReloadEmoji.GuideBullets})
+                                    self.IsRenderProcessed[2] = true
+                                end
+                            end, "bubble_guide_render")
+                        end
                     end
                     local windowSize = client:getScaledWindowSize()
                     models.models.bubble.Gui.BubbleGuide:setPos(-windowSize.x + 76, -windowSize.y + 51, 0)
                 elseif not isActionWheelEnabled and isActionWheelEnabledPrev then
                     models.models.bubble.Gui.BubbleGuide:setVisible(false)
+                    events.RENDER:remove("bubble_guide_render")
+                    self.ReloadAnimationCounters[2] = 0
                 end
                 isActionWheelEnabledPrev = isActionWheelEnabled
+            end)
+            events.WORLD_RENDER:register(function ()
+                for i = 1, 2 do
+                    self.IsRenderProcessed[i] = false
+                end
             end)
         end
     end
