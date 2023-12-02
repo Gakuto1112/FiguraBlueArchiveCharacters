@@ -15,6 +15,10 @@ Bubble = {
     ---@type number
     TransitionCounter = 0,
 
+    ---一人称用にGUIに吹き出しを表示するかどうか
+    ---@type boolean
+    ShowInGui = false,
+
     ---吹き出しの絵文字
     ---@type Bubble.BubbleType
     Emoji = "GOOD",
@@ -50,19 +54,20 @@ Bubble = {
     ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
     play = function (self, type, duration, showInGui)
         self.Emoji = type
+        self.ShowInGui = showInGui
         self.Counter = duration
         self.TransitionCounter = 0
         self.ReloadAnimationCounters[1] = 0
         local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
         models.models.bubble.Camera.AvatarBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
         models.models.bubble.Camera.AvatarBubble.Bullets:setVisible(self.Emoji == "RELOAD")
-        if showInGui then
+        if self.ShowInGui then
             models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
             models.models.bubble.Gui.FirstPersonBubble.Bullets:setVisible(self.Emoji == "RELOAD")
         end
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
-                models.models.bubble.Gui.FirstPersonBubble:setVisible(showInGui and renderer:isFirstPerson())
+                models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShowInGui and renderer:isFirstPerson())
                 if not client:isPaused() and self.Counter >= 0 then
                     self.Counter = math.max(self.Counter - 1, 0)
                 end
@@ -89,11 +94,11 @@ Bubble = {
                             end
                         end
                         if self.Emoji == "RELOAD" then
-                            self:processReloadAnimation(1, showInGui and {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets} or {models.models.bubble.Camera.AvatarBubble.Bullets})
+                            self:processReloadAnimation(1, self.ShowInGui and {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets} or {models.models.bubble.Camera.AvatarBubble.Bullets})
                         end
                     end
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
-                    if host:isHost() and showInGui then
+                    if host:isHost() and self.ShowInGui then
                         local windowSize = client:getScaledWindowSize()
                         models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 105 or 10), 0)
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
