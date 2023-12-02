@@ -442,7 +442,8 @@ BlueArchiveCharacter = {
             ---@type fun(type: Bubble.BubbleType)
             ---@param type Bubble.BubbleType 再生された吹き出しアニメーションの種類
             ---@param duration integer 吹き出しを再生する時間。-1は時間無制限を示す。
-            onPlay = function(type, duration)
+            ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
+            onPlay = function(type, duration, showInGui)
             end,
 
             ---吹き出しアニメーション終了時に実行されるコールバック関数（任意）

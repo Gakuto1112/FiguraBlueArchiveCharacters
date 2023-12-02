@@ -47,21 +47,22 @@ Bubble = {
     ---吹き出しエモートを再生する。
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
-    play = function (self, type, duration)
+    ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
+    play = function (self, type, duration, showInGui)
         self.Emoji = type
         self.Counter = duration
         self.TransitionCounter = 0
         self.ReloadAnimationCounters[1] = 0
         local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
-        for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Emoji, models.models.bubble.Gui.FirstPersonBubble.Emoji}) do
-            modelPart:setPrimaryTexture("CUSTOM", emojiTexture)
-        end
-        for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
-            modelPart:setVisible(self.Emoji == "RELOAD")
+        models.models.bubble.Camera.AvatarBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
+        models.models.bubble.Camera.AvatarBubble.Bullets:setVisible(self.Emoji == "RELOAD")
+        if showInGui then
+            models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
+            models.models.bubble.Gui.FirstPersonBubble.Bullets:setVisible(self.Emoji == "RELOAD")
         end
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
-                models.models.bubble.Gui.FirstPersonBubble:setVisible(renderer:isFirstPerson())
+                models.models.bubble.Gui.FirstPersonBubble:setVisible(showInGui and renderer:isFirstPerson())
                 if not client:isPaused() and self.Counter >= 0 then
                     self.Counter = math.max(self.Counter - 1, 0)
                 end
@@ -88,11 +89,11 @@ Bubble = {
                             end
                         end
                         if self.Emoji == "RELOAD" then
-                            self:processReloadAnimation(1, {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets})
+                            self:processReloadAnimation(1, showInGui and {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets} or {models.models.bubble.Camera.AvatarBubble.Bullets})
                         end
                     end
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
-                    if host:isHost() then
+                    if host:isHost() and showInGui then
                         local windowSize = client:getScaledWindowSize()
                         models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 105 or 10), 0)
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
@@ -112,7 +113,7 @@ Bubble = {
             end, "bubble_render")
         end
         if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil then
-            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration)
+            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration, showInGui)
         end
     end,
 
@@ -212,20 +213,35 @@ Bubble = {
 
 --ping関数
 function pings.bubble_up()
-    Bubble:play("GOOD", 50)
+    Bubble:play("GOOD", 50, true)
 end
 
 function pings.bubble_right()
-    Bubble:play("HEART", 50)
+    Bubble:play("HEART", 50, true)
 end
 
 function pings.bubble_down()
-    Bubble:play("RELOAD", 50)
+    Bubble:play("RELOAD", 50, true)
 end
 
 function pings.bubble_left()
-    Bubble:play("QUESTION", 50)
+    Bubble:play("QUESTION", 50, true)
 end
+
+---リロードの吹き出しエモートがクロスボウによって再生されたかどうか
+---@type boolean
+local reloadByCrossbow = false
+
+events.TICK:register(function ()
+    local isCrossbowActive = player:getActiveItem().id == "minecraft:crossbow"
+    if isCrossbowActive and Bubble.Counter == 0 then
+        Bubble:play("RELOAD", -1, false)
+        reloadByCrossbow = true
+    elseif not isCrossbowActive and reloadByCrossbow then
+        Bubble:stop()
+        reloadByCrossbow = false
+    end
+end)
 
 Bubble:init()
 
