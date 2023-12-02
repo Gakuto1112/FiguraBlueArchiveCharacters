@@ -46,9 +46,10 @@ Bubble = {
 
     ---吹き出しエモートを再生する。
     ---@param type Bubble.BubbleType 再生する絵文字の種類
-    play = function (self, type)
+    ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
+    play = function (self, type, duration)
         self.Emoji = type
-        self.Counter = 50
+        self.Counter = duration
         self.TransitionCounter = 0
         self.ReloadAnimationCounters[1] = 0
         local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
@@ -61,7 +62,7 @@ Bubble = {
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
                 models.models.bubble.Gui.FirstPersonBubble:setVisible(renderer:isFirstPerson())
-                if not client:isPaused() then
+                if not client:isPaused() and self.Counter >= 0 then
                     self.Counter = math.max(self.Counter - 1, 0)
                 end
             end, "bubble_tick")
@@ -71,7 +72,7 @@ Bubble = {
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
                 if not self.IsRenderProcessed[1] then
                     if not client:isPaused() then
-                        if self.Counter > 0 then
+                        if self.Counter ~= 0 then
                             self.TransitionCounter = math.min(self.TransitionCounter + 32 / client:getFPS(), 1)
                         else
                             self.TransitionCounter = math.max(self.TransitionCounter - 32 / client:getFPS(), 0)
@@ -111,7 +112,7 @@ Bubble = {
             end, "bubble_render")
         end
         if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil then
-            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type)
+            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration)
         end
     end,
 
@@ -211,19 +212,19 @@ Bubble = {
 
 --ping関数
 function pings.bubble_up()
-    Bubble:play("GOOD")
+    Bubble:play("GOOD", 50)
 end
 
 function pings.bubble_right()
-    Bubble:play("HEART")
+    Bubble:play("HEART", 50)
 end
 
 function pings.bubble_down()
-    Bubble:play("RELOAD")
+    Bubble:play("RELOAD", 50)
 end
 
 function pings.bubble_left()
-    Bubble:play("QUESTION")
+    Bubble:play("QUESTION", 50)
 end
 
 Bubble:init()

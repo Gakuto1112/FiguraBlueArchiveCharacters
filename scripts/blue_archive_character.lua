@@ -441,7 +441,8 @@ BlueArchiveCharacter = {
             ---吹き出しエモートが再生された時に実行されるコールバック関数（任意）
             ---@type fun(type: Bubble.BubbleType)
             ---@param type Bubble.BubbleType 再生された吹き出しアニメーションの種類
-            onPlay = function(type)
+            ---@param duration integer 吹き出しを再生する時間。-1は時間無制限を示す。
+            onPlay = function(type, duration)
             end,
 
             ---吹き出しアニメーション終了時に実行されるコールバック関数（任意）
