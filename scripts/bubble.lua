@@ -15,6 +15,10 @@ Bubble = {
     ---@type number
     TransitionCounter = 0,
 
+    ---吹き出しの絵文字
+    ---@type Bubble.BubbleType
+    Emoji = "GOOD",
+
     ---リロード絵文字のアニメーションのタイミングを測るカウンター
     ---[1]. 吹き出し用, [2]. アクションホイールのエモートガイド用
     ---@type number[]
@@ -27,17 +31,16 @@ Bubble = {
     ---吹き出しエモートを再生する。
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     play = function (self, type)
+        self.Emoji = type
         self.Counter = 50
         self.TransitionCounter = 0
         self.ReloadAnimationCounters[1] = 0
-        local emojiTexture = textures["textures.emojis."..type:lower()]
+        local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
         for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Emoji, models.models.bubble.Gui.FirstPersonBubble.Emoji}) do
             modelPart:setPrimaryTexture("CUSTOM", emojiTexture)
         end
-        if type == "RELOAD" then
-            for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
-                modelPart:setVisible(true)
-            end
+        for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
+            modelPart:setVisible(self.Emoji == "RELOAD")
         end
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
@@ -65,7 +68,7 @@ Bubble = {
                                 events.WORLD_RENDER:remove("bubble_world_render")
                             end
                         end
-                        if type == "RELOAD" then
+                        if self.Emoji == "RELOAD" then
                             for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble.Bullets.Bullet1, models.models.bubble.Gui.FirstPersonBubble.Bullets.Bullet1}) do
                                 local ammoCounter = math.clamp(self.ReloadAnimationCounters[1] * 2 - 2, 0, 1)
                                 modelPart:setPos(0, 1 - ammoCounter, 0)
