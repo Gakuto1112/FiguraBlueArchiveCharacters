@@ -34,6 +34,13 @@ None
 
   ![Placement object](./README_images/placement_object.jpg)
 
+- Press cursor keys (↑→↓←) to show speech bubbles.
+  - The "reload" speech bubble will appear automatically while loading a crossbow.
+
+  ![Speech bubble 1](./README_images/bubble_good.jpg)
+
+  ![Speech bubble 2](./README_images/bubble_reload.jpg)
+
 - Holds the character's specific weapon instead of bows and crossbows. Shoots bullets instead of arrows.
   - Note that these changes are only in appearance. You are just shooting arrows in actual.
 
