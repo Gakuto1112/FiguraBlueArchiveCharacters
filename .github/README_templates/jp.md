@@ -39,6 +39,13 @@
 
   ![銃](../README_images/gun.jpg)
 
+- カーソルキー（↑→↓←）で吹き出しを表示できます。
+  - クロスボウに装填中は自動で装填の吹き出しが表示されます。
+
+  ![吹き出し1](../README_images/bubble_good.jpg)
+
+  ![吹き出し2](../README_images/bubble_reload.jpg)
+
 - 衝撃吸収のハート（黄色のハート）を持っている場合は、バリアが付きます。
 
   ![バリア](../README_images/barrier.jpg)

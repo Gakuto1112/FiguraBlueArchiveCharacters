@@ -12,8 +12,8 @@
 	"timeline_setups": [],
 	"unhandled_root_fields": {},
 	"resolution": {
-		"width": 1,
-		"height": 1
+		"width": 4,
+		"height": 12
 	},
 	"elements": [
 		{
@@ -25,32 +25,35 @@
 			"allow_mirror_modeling": true,
 			"from": [-0.5, 0, -1],
 			"to": [0.5, 1, 1],
-			"autouv": 1,
+			"autouv": 0,
 			"color": 0,
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 3, 2, 4],
 					"texture": 0
 				},
 				"east": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 3, 2, 11],
+					"rotation": 90,
 					"texture": 0
 				},
 				"south": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 10, 2, 11],
 					"texture": 0
 				},
 				"west": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 3, 2, 11],
+					"rotation": 270,
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 3, 2, 11],
 					"texture": 0
 				},
 				"down": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 3, 2, 11],
+					"rotation": 180,
 					"texture": 0
 				}
 			},
@@ -64,34 +67,34 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [-0.25, 0.25, -1.5],
-			"to": [0.25, 0.75, -1],
-			"autouv": 1,
+			"from": [-0.375, 0.125, -1.25],
+			"to": [0.375, 0.875, -1],
+			"autouv": 0,
 			"color": 0,
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 2, 2, 3],
 					"texture": 0
 				},
 				"east": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 2, 2, 3],
 					"texture": 0
 				},
 				"south": {
-					"uv": [0, 0, 1, 1],
-					"texture": 0
+					"uv": [0, 0, 0, 0],
+					"texture": null
 				},
 				"west": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 2, 2, 3],
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 2, 2, 3],
 					"texture": 0
 				},
 				"down": {
-					"uv": [0, 0, 1, 1],
+					"uv": [1, 2, 2, 3],
 					"texture": 0
 				}
 			},
@@ -116,7 +119,7 @@
 	],
 	"textures": [
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\シズコ試作\\textures\\bullet.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\bullet.png",
 			"name": "bullet.png",
 			"folder": "",
 			"namespace": "",
@@ -133,7 +136,7 @@
 			"saved": true,
 			"uuid": "d4264722-75e2-f338-9736-9de1cd8631d0",
 			"relative_path": "../../textures/bullet.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjeNkT8B8ABuwCxUh91AMAAAAASUVORK5CYII="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAMCAYAAABFohwTAAAAAXNSR0IArs4c6QAAAGdJREFUGFdjTEhI4Pj1/f93LpbvDH9YuTgZMQSiwuP/V4azMOh4+TKkJi9jYAQJJDt+ZHAK9GFILdoFESj0/cpgEuTBkJoKFSCsAqwlrJAhNXEikhl4BVKdXjE4xAZDbEmJDvvPgAQAMBRGJaIzndEAAAAASUVORK5CYII="
 		}
 	]
 }

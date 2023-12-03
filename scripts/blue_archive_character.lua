@@ -760,6 +760,26 @@ BlueArchiveCharacter = {
         }
 	},
 
+    ---吹き出しエモートガイド
+    BUBBLE = {
+        callbacks = {
+            ---吹き出しエモートが再生された時に実行されるコールバック関数（任意）
+            ---@type fun(type: Bubble.BubbleType)
+            ---@param type Bubble.BubbleType 再生された吹き出しアニメーションの種類
+            ---@param duration integer 吹き出しを再生する時間。-1は時間無制限を示す。
+            ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
+            onPlay = function(type, duration, showInGui)
+            end,
+
+            ---吹き出しアニメーション終了時に実行されるコールバック関数（任意）
+            ---@type fun(type: Bubble.BubbleType, forcedStop: boolean)
+            ---@param type Bubble.BubbleType 再生された吹き出しエモートの種類
+            ---@param forcedStop boolean 吹き出しエモートが途中終了した場合は"true"、吹き出しエモートが最後まで再生されて終了した場合は"false"が代入される。
+            onStop = function(type, forcedStop)
+            end
+        }
+    },
+
     ---物理演算データ
     PHYSICS = {
         --[[
