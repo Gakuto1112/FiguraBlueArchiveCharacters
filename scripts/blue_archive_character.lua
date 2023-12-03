@@ -2595,7 +2595,6 @@ events.RENDER:register(function ()
     end
 end)
 
-models.models.gun.Gun.Fox:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower}) do
     modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
 end
