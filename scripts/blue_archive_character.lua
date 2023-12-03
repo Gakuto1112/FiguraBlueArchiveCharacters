@@ -447,9 +447,10 @@ BlueArchiveCharacter = {
             end,
 
             ---吹き出しアニメーション終了時に実行されるコールバック関数（任意）
-            ---@type fun(type: Bubble.BubbleType)
-            ---@param type Bubble.BubbleType 再生された吹き出しアニメーションの種類
-            onStop = function(type)
+            ---@type fun(type: Bubble.BubbleType, forcedStop: boolean)
+            ---@param type Bubble.BubbleType 再生された吹き出しエモートの種類
+            ---@param forcedStop boolean 吹き出しエモートが途中終了した場合は"true"、吹き出しエモートが最後まで再生されて終了した場合は"false"が代入される。
+            onStop = function(type, forcedStop)
             end
         }
     },
