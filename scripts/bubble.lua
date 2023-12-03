@@ -28,6 +28,10 @@ Bubble = {
     ---@type number[]
     ReloadAnimationCounters = {0, 0},
 
+    ---吹き出しエモートが強制停止させられたかどうか
+    ---@type boolean
+    IsForcedStop = false,
+
     ---このワールドレンダーでレンダー処理を行ったかどうか
     ---[1]. 吹き出し用, [2]. アクションホイールのエモートガイド用
     ---@type boolean[]
@@ -90,8 +94,9 @@ Bubble = {
                                 events.TICK:remove("bubble_tick")
                                 events.RENDER:remove("bubble_render")
                                 if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onStop ~= nil then
-                                    BlueArchiveCharacter.BUBBLE.callbacks.onStop(type)
+                                    BlueArchiveCharacter.BUBBLE.callbacks.onStop(type, self.IsForcedStop)
                                 end
+                                self.IsForcedStop = false
                             end
                         end
                         if self.Emoji == "RELOAD" then
@@ -125,6 +130,9 @@ Bubble = {
 
     ---吹き出しエモートを停止する。
     stop = function (self)
+        if self.Counter >= 2 then
+            self.IsForcedStop = true
+        end
         self.Counter = 0
     end,
 
