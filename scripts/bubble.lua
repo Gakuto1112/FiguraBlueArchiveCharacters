@@ -64,6 +64,7 @@ Bubble = {
         if self.ShowInGui then
             models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
             models.models.bubble.Gui.FirstPersonBubble.Bullets:setVisible(self.Emoji == "RELOAD")
+            sounds:playSound("minecraft:entity.item.pickup", player:getPos())
         end
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
