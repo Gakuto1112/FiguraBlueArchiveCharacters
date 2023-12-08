@@ -15,10 +15,9 @@
 - [久田 イズナ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### 作成中
-なし
+- 伊落マリー（ #12 ）
 
 ### 作成予定
-- 伊落マリー（ #12 ）
 - 才羽モモイ（ #13 ）
 - 才羽ミドリ（ #14 ）
 

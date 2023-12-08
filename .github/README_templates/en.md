@@ -15,10 +15,9 @@ This branch is for **Shizuko Kawawa**.
 - [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### In progress
-None
+- Marie Iochi ( #12 )
 
 ### Planning
-- Marie Iochi ( #12 )
 - Momoi Saiba ( #13 )
 - Midori Saiba ( #14 )
 
