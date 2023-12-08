@@ -15,10 +15,9 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 - [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
 
 ### In progress
-None
+- Marie Iochi ( #12 )
 
 ### Planning
-- Marie Iochi ( #12 )
 - Momoi Saiba ( #13 )
 - Midori Saiba ( #14 )
 
