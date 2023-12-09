@@ -3084,12 +3084,12 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [-8, 16, 3],
-			"to": [8, 24, 3],
+			"from": [-8, 16, 2.25],
+			"to": [8, 24, 2.25],
 			"autouv": 0,
 			"color": 0,
 			"inflate": 0.001,
-			"origin": [0, 24, 0],
+			"origin": [0, 24, -0.75],
 			"faces": {
 				"north": {
 					"uv": [48, 60, 64, 68],
@@ -3801,7 +3801,6 @@
 							"autouv": 0,
 							"children": [
 								"907b90f5-20b4-4800-6864-d18e1d91360f",
-								"18e72db3-e816-2d4d-3f02-af7cec389731",
 								{
 									"name": "VeilEar",
 									"origin": [0, 30, 0],
@@ -3933,26 +3932,6 @@
 								"742e9ab7-8cdd-8d93-9a9a-88011f54d15b",
 								"2574fa9e-0d5f-502c-ce28-ef5cf30f41ec",
 								{
-									"name": "BackRibbon",
-									"origin": [0, 15, 2],
-									"rotation": [-25, 0, 0],
-									"color": 0,
-									"uuid": "52269359-07c0-2957-00ea-e609e9bb9413",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": [
-										"0a1fe62a-063b-e67f-e3f8-7b3b7ad2ddb7",
-										"31d8cbce-2ce0-ddfc-e24d-d262dd03afc6",
-										"ba8bdd8c-7c47-d739-2c38-6993a2d2c89c",
-										"e6305619-bf6c-0bbb-01a4-c923e21c80af",
-										"6c793e73-2c32-16c7-cd79-6dfedbb877d9"
-									]
-								},
-								{
 									"name": "FrontHair",
 									"origin": [0, 24, -2],
 									"color": 0,
@@ -3974,16 +3953,47 @@
 								},
 								{
 									"name": "VeilBody",
-									"origin": [0, 24, 0],
+									"origin": [0, 24, 2.25],
 									"color": 0,
-									"uuid": "d5a0061c-8a3c-a2dd-106d-419e8614c11b",
+									"uuid": "b9421d3c-d216-df38-f6cf-c28e125b6fc5",
 									"export": true,
 									"mirror_uv": false,
 									"isOpen": true,
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
-									"children": []
+									"children": ["18e72db3-e816-2d4d-3f02-af7cec389731"]
+								},
+								{
+									"name": "BackRibbon",
+									"origin": [0, 15, 2],
+									"rotation": [-25, 0, 0],
+									"color": 0,
+									"uuid": "52269359-07c0-2957-00ea-e609e9bb9413",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										"0a1fe62a-063b-e67f-e3f8-7b3b7ad2ddb7",
+										"31d8cbce-2ce0-ddfc-e24d-d262dd03afc6",
+										"ba8bdd8c-7c47-d739-2c38-6993a2d2c89c",
+										{
+											"name": "BackRibbonBottom",
+											"origin": [0, 14.25, 2.5],
+											"color": 0,
+											"uuid": "0da5a55a-eb37-201e-d52a-942c138747f7",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["e6305619-bf6c-0bbb-01a4-c923e21c80af", "6c793e73-2c32-16c7-cd79-6dfedbb877d9"]
+										}
+									]
 								},
 								{
 									"name": "Robe",
@@ -3992,7 +4002,7 @@
 									"uuid": "d19704ca-817d-20fe-9cd6-b1edbf8f3d77",
 									"export": true,
 									"mirror_uv": false,
-									"isOpen": true,
+									"isOpen": false,
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
