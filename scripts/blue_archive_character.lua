@@ -457,6 +457,27 @@ BlueArchiveCharacter = {
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
+            },
+
+            no_veil = {
+                ---コスチュームの表示名
+                name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Default (no veil)",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "デフォルト（ベールなし）"
+                },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "SPECIAL",
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 1
             }
         },
 
@@ -467,12 +488,30 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Ears"})) do
+                    modelPart:setVisible(true)
+                end
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody"})) do
+                    modelPart:setVisible(false)
+                end
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Accessory"})) do
+                    modelPart:setPos(0, -1, 0)
+                end
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Ears"})) do
+                    modelPart:setVisible(false)
+                end
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody"})) do
+                    modelPart:setVisible(true)
+                end
+                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Accessory"})) do
+                    modelPart:setPos()
+                end
             end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数
