@@ -47,6 +47,8 @@ DeathAnimation = {
                 end
                 if self.AnimationCount < 120 then
                     models.models.death_animation.DummyAvatar:setLight(world.getLightLevel(self.AnimationPos))
+                elseif self.AnimationCount == 120 then
+                    models.models.death_animation.DummyAvatar:setLight()
                 elseif self.AnimationCount >= 255 then
                     self:spawnHelicopterParticles()
                     self:stop()
