@@ -48,6 +48,9 @@ Skirt = {
             elseif not shouldAdjustLegs and self.LegAdjustedPrev then
                 events.RENDER:remove("skirt_render")
                 if not shouldHideLegs then
+                    for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
+                        modelPart:setRot()
+                    end
                     for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.Robe.Robe2, models.models.main.Avatar.UpperBody.Body.Robe.Robe2.Robe3}) do
                         modelPart:setScale()
                     end

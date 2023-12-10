@@ -479,6 +479,28 @@ BlueArchiveCharacter = {
             ---@type fun(index: integer)
             ---@param parts Armor.ArmorPart 変更された防具の部位
             armorChange = function(parts)
+                if parts == "CHEST_PLATE" then
+                    if Armor.ArmorVisible[2] then
+                        models.models.main.Avatar.UpperBody.Body.FrontHair:setPos(0, 0, -1)
+                        models.models.main.Avatar.UpperBody.Body.VeilBody:setPos(0, 0, 1)
+                    else
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.VeilBody}) do
+                            modelPart:setPos()
+                        end
+                    end
+                elseif parts == "LEGGINGS" then
+                    if Armor.ArmorVisible[3] then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.BackRibbon}) do
+                            modelPart:setVisible(false)
+                        end
+                        Skirt.LegAdjustmentEnabled = false
+                    else
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.BackRibbon}) do
+                            modelPart:setVisible(true)
+                        end
+                        Skirt.LegAdjustmentEnabled = true
+                    end
+                end
             end
         }
 	},
