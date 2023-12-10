@@ -78,7 +78,10 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
             TIED = {3, 0},
-            CLOSED = {4, 0}
+            CLOSED = {4, 0},
+            NARROW1 = {5, 0},
+            NARROW2 = {0, 1},
+            CLOSED2 = {1, 1}
         },
 
         ---左目
@@ -86,7 +89,10 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
             TIED = {2, 0},
-            CLOSED = {3, 0}
+            CLOSED = {3, 0},
+            NARROW1 = {5, 0},
+            NARROW2 = {-1, 1},
+            CLOSED2 = {0, 1}
         },
 
         ---口
@@ -364,6 +370,13 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
+                    if tick == 14 then
+                        FaceParts:setEmotion("NARROW1", "NARROW1", "CLOSED", 2, true)
+                    elseif tick == 16 then
+                        FaceParts:setEmotion("NARROW2", "NARROW2", "CLOSED", 2, true)
+                    elseif tick == 18 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 66, true)
+                    end
                 end
             }
 		}
