@@ -390,14 +390,18 @@ BlueArchiveCharacter = {
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill1ParticleAnchor3)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 50 do
-                            particles:newParticle("minecraft:dust 100000000 100000000 100000000 1", anchorPos:copy():add(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(math.random() * 360, 0, 1.25, 0, 0, 0, 1), 0, 1, 0))):setLifetime(100):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0, 0, math.random() * 0.1 + 0.05, 0, 1, 0))
+                            particles:newParticle("minecraft:dust 100000000 100000000 100000000 1", anchorPos:copy():add(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(math.random() * 360, 0, 1.25, 0, 0, 0, 1), 0, 1, 0))):setLifetime(40):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0, 0, math.random() * 0.1 + 0.05, 0, 1, 0))
                         end
+                        sounds:playSound("minecraft:block.beacon.activate", playerPos, 1, 1.5)
                     end
                     if tick >= 24 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ExSkill1ParticleAnchor2)
                         for _ = 1, 2 do
                             particles:newParticle("minecraft:wax_off", anchorPos:copy():add(math.random() * 0.4 - 0.2, 0, math.random() * 0.4 - 0.2)):setScale(0.15):setVelocity(0, math.random() * 0.025, 0):setColor(1, 1, 0.875)
                         end
+                    end
+                    if tick % 3 == 0 and tick <= 50 then
+                        sounds:playSound("minecraft:entity.parrot.ambient", player:getPos(), (50 - tick) / 50, 1.5)
                     end
                 end
             }
@@ -1541,12 +1545,5 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
-local init = false
-events.TICK:register(function ()
-    if not init then
-        ExSkill:play()
-        init = true
-    end
-end)
 
 return BlueArchiveCharacter
