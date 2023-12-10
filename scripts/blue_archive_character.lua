@@ -370,12 +370,34 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 14 then
+                    if tick == 5 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill1ParticleAnchor1)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 30 do
+                            particles:newParticle("minecraft:cherry_leaves", anchorPos:copy():add(math.random() - 0.5, math.random() * 2 - 1, math.random() - 0.5)):setColor(0.2, 1, 0.2):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0, 0, 0, 1, 0))
+                        end
+                    elseif tick == 14 then
                         FaceParts:setEmotion("NARROW1", "NARROW1", "CLOSED", 2, true)
                     elseif tick == 16 then
                         FaceParts:setEmotion("NARROW2", "NARROW2", "CLOSED", 2, true)
                     elseif tick == 18 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 66, true)
+                    elseif tick == 59 then
+                        local playerPos = player:getPos()
+                        for _ = 1, 100 do
+                            particles:newParticle("minecraft:dust 100000000 100000000 100000000 1", playerPos:copy():add(math.random() * 4 - 2, 0, math.random() * 4 - 2)):setLifetime(100):setVelocity()
+                        end
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill1ParticleAnchor3)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 50 do
+                            particles:newParticle("minecraft:dust 100000000 100000000 100000000 1", anchorPos:copy():add(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(math.random() * 360, 0, 1.25, 0, 0, 0, 1), 0, 1, 0))):setLifetime(100):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0, 0, math.random() * 0.1 + 0.05, 0, 1, 0))
+                        end
+                    end
+                    if tick >= 24 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ExSkill1ParticleAnchor2)
+                        for _ = 1, 2 do
+                            particles:newParticle("minecraft:wax_off", anchorPos:copy():add(math.random() * 0.4 - 0.2, 0, math.random() * 0.4 - 0.2)):setScale(0.15):setVelocity(0, math.random() * 0.025, 0):setColor(1, 1, 0.875)
+                        end
                     end
                 end
             }
