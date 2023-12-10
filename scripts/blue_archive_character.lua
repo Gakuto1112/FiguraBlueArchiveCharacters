@@ -307,18 +307,18 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Ex skill name",
+                en_us = "Holy Blessing",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
                 ---@type string
-                ja_jp = "Exスキル名"
+                ja_jp = "聖なる加護"
             },
 
             ---スキルの種類
             ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
             ---@type BlueArchiveCharacter.SkillType
-            skillType = "EXPLOSION",
+            skillType = "MYSTERY",
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
@@ -336,12 +336,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 28, -64),
+                    pos = vectors.vec3(25, 25, -21),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 180)
+                    rot = vectors.vec3(0, 150, -3)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -349,7 +349,7 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 28, -64),
+                    pos = vectors.vec3(0, 23, -36),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
@@ -360,6 +360,11 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                end
             }
 		}
 	},
@@ -408,7 +413,7 @@ BlueArchiveCharacter = {
 
                 ---この衣装での生徒の配置タイプ
                 ---@type BlueArchiveCharacter.FormationType
-                formationType = "STRIKER",
+                formationType = "SPECIAL",
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
@@ -1501,5 +1506,12 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+local init = false
+events.TICK:register(function ()
+    if not init then
+        ExSkill:play()
+        init = true
+    end
+end)
 
 return BlueArchiveCharacter
