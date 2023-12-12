@@ -527,6 +527,7 @@ BlueArchiveCharacter = {
                         modelPart:setVisible(false)
                     end
                 end
+                models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(not (costumeId == 2 and DeathAnimation ~= nil and DeathAnimation.AnimationCount < 120))
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
@@ -545,6 +546,9 @@ BlueArchiveCharacter = {
                 end
                 for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Accessory"})) do
                     modelPart:setPos()
+                end
+                if DeathAnimation ~= nil and DeathAnimation.AnimationCount < 120 then
+                    models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(false)
                 end
             end,
 
@@ -1640,5 +1644,12 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+events.TICK:register(function ()
+    if DeathAnimation.AnimationCount == 1 and Costume.CurrentCostume <= 2 then
+        models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(false)
+    elseif DeathAnimation.AnimationCount == 120 then
+        models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(true)
+    end
+end)
 
 return BlueArchiveCharacter
