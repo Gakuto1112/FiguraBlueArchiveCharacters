@@ -163,6 +163,14 @@
 		"models.models.placement_object.PlacementObject": {
 			"visible": false
 		},
+		"models.models.costume_tracksuit.CTracksuitH": {
+			"moveTo": "models.models.main.Avatar.Head",
+			"visible": false
+		},
+		"models.models.costume_tracksuit.CTracksuitB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Body",
+			"visible": false
+		},
 		"models.models.skull_default.Skull.HeadRing": {
 			"parentType": "None"
 		},
@@ -170,6 +178,12 @@
 			"visible": false
 		},
 		"models.models.skull_no_veil.Skull.HeadRing": {
+			"parentType": "None"
+		},
+		"models.models.skull_tracksuit": {
+			"visible": false
+		},
+		"models.models.skull_tracksuit.Skull.HeadRing": {
 			"parentType": "None"
 		},
 		"models.models.bubble.Camera.AvatarBubble": {

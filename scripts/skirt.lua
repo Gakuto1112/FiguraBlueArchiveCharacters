@@ -25,7 +25,8 @@ Skirt = {
             elseif not isCrouching and self.IsCrouchingPrev then
                 models.models.main.Avatar.UpperBody.Body.Robe:setRot()
             end
-            local shouldHideLegs = models.models.main.Avatar.UpperBody.Body.Robe:getVisible() and player:getVehicle() ~= nil
+            local robeVisible = models.models.main.Avatar.UpperBody.Body.Robe:getVisible()
+            local shouldHideLegs = robeVisible and player:getVehicle() ~= nil
             if shouldHideLegs and not self.ShouldHideLegsPrev then
                 models.models.main.Avatar.LowerBody.Legs:setVisible(false)
                 models.models.main.Avatar.UpperBody.Body.Robe:setScale(1.5, 0.35, 2)
@@ -33,7 +34,7 @@ Skirt = {
                 models.models.main.Avatar.LowerBody.Legs:setVisible(true)
                 models.models.main.Avatar.UpperBody.Body.Robe:setScale()
             end
-            local shouldAdjustLegs = self.LegAdjustmentEnabled and not shouldHideLegs
+            local shouldAdjustLegs = self.LegAdjustmentEnabled and robeVisible and not shouldHideLegs
             if shouldAdjustLegs and not self.LegAdjustedPrev then
                 events.RENDER:register(function ()
                     local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
