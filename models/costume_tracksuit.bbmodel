@@ -553,6 +553,47 @@
 			},
 			"type": "cube",
 			"uuid": "3df702e0-9161-b25d-216d-d67a920f4811"
+		},
+		{
+			"name": "HairBandRibbonCenter",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-1, 25, 4],
+			"to": [1, 26.5, 4.75],
+			"autouv": 0,
+			"color": 0,
+			"origin": [0, 25, 0],
+			"faces": {
+				"north": {
+					"uv": [21, 30, 25, 33],
+					"texture": 0
+				},
+				"east": {
+					"uv": [18, 30, 19.5, 33],
+					"texture": 0
+				},
+				"south": {
+					"uv": [18, 33, 22, 36],
+					"texture": 0
+				},
+				"west": {
+					"uv": [25, 30, 26.5, 33],
+					"texture": 0
+				},
+				"up": {
+					"uv": [18, 36, 22, 37.5],
+					"texture": 0
+				},
+				"down": {
+					"uv": [22, 36, 26, 37.5],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "26c83d14-ea47-62cf-34d6-4695fb852ee3"
 		}
 	],
 	"outliner": [
@@ -582,8 +623,61 @@
 					"visibility": true,
 					"autouv": 0,
 					"children": [
-						"ba783e23-e601-b1ff-8e66-98031c645e80",
-						"fdd279b8-a16e-491f-440e-25106912be55",
+						"26c83d14-ea47-62cf-34d6-4695fb852ee3",
+						{
+							"name": "HairBandRibbonTopLeftYPivot",
+							"origin": [-1.5, 26.5, 4.5],
+							"color": 0,
+							"uuid": "1840a813-ce61-0a7e-004b-e87c624c95dc",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "HairBandRibbonTopLeftZPivot",
+									"origin": [-1.5, 26.5, 4.5],
+									"color": 0,
+									"uuid": "ab0f2c82-551a-63f9-467d-73a5ebf307ce",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["ba783e23-e601-b1ff-8e66-98031c645e80"]
+								}
+							]
+						},
+						{
+							"name": "HairBandRibbonTopRightYPivot",
+							"origin": [1.5, 26.5, 4.5],
+							"color": 0,
+							"uuid": "e9acdedd-37ae-f856-5879-0b0fb3a02f77",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "HairBandRibbonTopRightZPivot",
+									"origin": [1.5, 26.5, 4.5],
+									"color": 0,
+									"uuid": "d38e4431-d898-316b-618e-37d4ace189d4",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["fdd279b8-a16e-491f-440e-25106912be55"]
+								}
+							]
+						},
 						{
 							"name": "HairBandRibbonBottom",
 							"origin": [0, 25.25, 4.5],
@@ -595,13 +689,68 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["abf5a78b-df7b-d86f-deb8-be94980580fb", "3df702e0-9161-b25d-216d-d67a920f4811"]
+							"children": [
+								{
+									"name": "HairBandRibbonBottomLeftXPivot",
+									"origin": [0, 25.25, 4.5],
+									"color": 0,
+									"uuid": "e6971ded-0ce5-b868-6dbe-22b25e27c5fe",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										{
+											"name": "HairBandRibbonBottomLeftZPivot",
+											"origin": [-1.5, 25.5, 4.5],
+											"color": 0,
+											"uuid": "75f08b9b-8303-ca55-4a2b-3702c36a650f",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["abf5a78b-df7b-d86f-deb8-be94980580fb"]
+										}
+									]
+								},
+								{
+									"name": "HairBandRibbonBottomRightXPivot",
+									"origin": [0, 25.25, 4.5],
+									"color": 0,
+									"uuid": "3f1ac4bc-e801-9ce6-731d-d472a46a5057",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										{
+											"name": "HairBandRibbonBottomRightZPivot",
+											"origin": [1.5, 25.5, 4.5],
+											"color": 0,
+											"uuid": "f5b93b89-3b0f-4cf9-952f-8c57453c07c5",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["3df702e0-9161-b25d-216d-d67a920f4811"]
+										}
+									]
+								}
+							]
 						}
 					]
 				},
 				{
 					"name": "HairTail",
-					"origin": [0, 24, 0],
+					"origin": [0, 28, 4],
 					"color": 0,
 					"uuid": "63a97729-5eb8-975e-dbc1-d79fee2a5068",
 					"export": true,
@@ -610,7 +759,21 @@
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
-					"children": ["0d801519-76c3-664d-9f0f-a0344943255f"]
+					"children": [
+						{
+							"name": "HairTailZPivot",
+							"origin": [0, 28, 4],
+							"color": 0,
+							"uuid": "3a37a29e-2844-7be7-3259-4f891dc3c329",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": ["0d801519-76c3-664d-9f0f-a0344943255f"]
+						}
+					]
 				}
 			]
 		},
@@ -674,7 +837,7 @@
 			"saved": true,
 			"uuid": "8b348af9-4c86-bad1-47f6-c93817331e9c",
 			"relative_path": "../../textures/costume_tracksuit.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAtCAYAAABS6WCiAAAAAXNSR0IArs4c6QAAAkRJREFUWEftl71KA0EQx3cJidFIxE/wEaytbOztBR8hKPgAIlgI4gMIipW1YG9v4xOID+EHGAhGQjiZgznn5mZ3di4YG9Mkd7c7v/n4z2zOu4RPlmUZLvPee75Fe87XVwzQBWiMgvg9uI49l2IKQrkxKTopalwX2y9CNWCKYVgTsqNCab0Syp8vwQyYoLyuvGaWa1NNQymUIo85UQtKa6OpOVULak2liNE4hUhAU0213gtBqYjM6uUbtMgsUeaOaW0Qi1qrcch2MjQ0X7maY1OqmN/WSLmaUyCmgR8bd9Y6UrCa3pgKrYdAcnonHe61JxIFS73I72k6SUqvZsT6/G+gdfrMGlmlZaQRJxnVThBpcoV62Ieg0ojjggoJSJpeJU7oeIp5rh0AUm+X9uAC7ViSnIudpzxTpegnFYVlPzo5tZapRPp8fZKt7h65hW47d/yjP3Qvd+duo3daODV8uCxeLdrbBxVnX98+i+cry7PRYDwHYro4WIOORj/vO2Cj2ay+8xQDf3B/kXvY2TkseYf3G51GUtkaW/uldRNBW2stNx6Mg2B0qrnZS9aHh4i++n23tHdc2vR+e5bNdLsuNVKpziFPPRjnQFwMz+bWF5PSa4LGLII4xo9X04OiGhEKdY2lunakXPbQNvNPNyUhARgdoN9c/bH0eAoCCP1Ak4PQEBQzZIJqkwT7VSusCaoZ+4fyDE0lvQChqTdBqXpxSPN79FCA3xTArzWN5P9QUL14ltKjDX5rZ2MKhK8phjxtnd+CIfwbQcw5PJZOFekAAAAASUVORK5CYII="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAtCAYAAABS6WCiAAAAAXNSR0IArs4c6QAAAmRJREFUWEftl7tKQ0EQhs8SEi+RiFfwEUSwFGysbOwFa0EURR9ABAtBfABBsbIW7O1tfALxIbyAwZBICEf2wKyzc2Z3dhLUxjTmnN2dby7/zBqTJXzyPM9hmzHG0CPSOt1fMoA3gDEMou/sc2ydiykIpca46LioYV/sPAuVgCmG7Z6QHRGK65VQ/mILZEAFpXWlNdM8q2oaSiEXecyJvqC4NpKaU7Ug1pSLGIxjCAdU1VTqvRAUi0itXnpAikwTZeGY1AaxqKUah2wnQ0Pzlao5NqXc/NZGStWcAlEN/Ni409YRg8X0xlSovQSS0zvocO97ImEw14v0naSTpPRKRrTrfwPtp8+0kZVahhtxnFHpBuEmV6iHTQjKjTgqqJCAuOnlcULXU8xz6QLgets7Axuka4lzLnaf0kx50Q8qCs15cPLXWqYU6dPVcT6zfpiNN4YLx9+bnez59iyb3zlxTnXuL9xPi+GVvZKzL69ttz49NRINxlAgpIuCJWi3+/17x9qoVsu/edzAb92dFx7W1w487+B9pV5JKltledfbNxC0NlvLeq1eEOycWtwu9nAwyAKsGRvRZ7OZTW4ceZG+3ZzmQ41Gpo00CWqNUyCEZddG5yaS0vuxsFkIkYOCyEBgUZXZtPQeLpOgqpqGLEIdAGrrGkt131Aqe9s2Y4/XnpAsGBzAf9tLW57/sV41GGQh+GMPWqEBKJbn2uq+t8zZcn0qTRLoV6mwKqhkLBVKh0vMrjjw/6E2nTgLqvRi9cI0oe/wpWC/YwB9ljRS/IcC6oW7FF9t9rt0N6ZA6B4nJNw6PwUD+BdVqU08EjT+KQAAAABJRU5ErkJggg=="
 		}
 	],
 	"reference_images": [
