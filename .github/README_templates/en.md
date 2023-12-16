@@ -64,6 +64,11 @@ This branch is for **Shizuko Kawawa**.
 
   ![Display name](../README_images/display_name.jpg)
 
+- A cake emoji will be added during the student's birthday.
+  - It won't be displayed if the display name is the player name.
+
+  ![Birth day](../README_images/birth_day.svg)
+
 ## The action wheel
 Figura provides the action wheel with which players can play some actions (emotes, animations, configs, and etc.). It will be shown when holding the action wheel key (default is B key). This avatar also has some actions.
 
