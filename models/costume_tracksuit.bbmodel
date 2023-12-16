@@ -1,19 +1,18 @@
 {
 	"meta": {
 		"format_version": "4.9",
-		"model_format": "free",
+		"model_format": "figura",
 		"box_uv": false
 	},
 	"name": "costume_tracksuit",
-	"model_identifier": "",
 	"visible_box": [1, 1, 0],
 	"variable_placeholders": "",
 	"variable_placeholder_buttons": [],
 	"timeline_setups": [],
 	"unhandled_root_fields": {},
 	"resolution": {
-		"width": 29,
-		"height": 45
+		"width": 30,
+		"height": 119
 	},
 	"elements": [
 		{
@@ -594,6 +593,1164 @@
 			},
 			"type": "cube",
 			"uuid": "26c83d14-ea47-62cf-34d6-4695fb852ee3"
+		},
+		{
+			"name": "BagBase",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-10, 9, -4],
+			"to": [-6, 15, 4],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-13, 7, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 97, 8, 109],
+					"texture": 0
+				},
+				"east": {
+					"uv": [8, 97, 24, 109],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 97, 8, 109],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 97, 24, 109],
+					"texture": 0
+				},
+				"up": {
+					"uv": [8, 89, 24, 97],
+					"rotation": 90,
+					"texture": 0
+				},
+				"down": {
+					"uv": [24, 89, 25, 97],
+					"rotation": 90,
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "ad005286-a9bf-f9ff-fb1d-fcaecfb30417"
+		},
+		{
+			"name": "BackPocket",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-10.5, 9.75, -3],
+			"to": [-10, 13.25, 3],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-13, 7, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 89, 3, 93],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 3, 93],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 3, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 89, 1, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "bb52c41f-8c0d-5ab1-09c8-f5ec3665d088"
+		},
+		{
+			"name": "TrinityLogo",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-10.51, 10, -1],
+			"to": [-10.51, 13.03, 1],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-13, 7, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 45, 29, 89],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "eb8e47ef-f4a0-553c-357c-61c7859e1f78"
+		},
+		{
+			"name": "BagHandle1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 15.25, -2],
+			"to": [-7.5, 15.5, 2],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.5, 15.25, -2],
+			"faces": {
+				"north": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"east": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "34c74684-e573-8723-5f3c-05a47a001500"
+		},
+		{
+			"name": "BagHandle2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 15.25, -3],
+			"to": [-7.5, 15.5, -2],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [-30, 0, 0],
+			"origin": [-8, 15.5, -2],
+			"faces": {
+				"north": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"east": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "2aa27156-8629-958f-8eed-6fe842191ad0"
+		},
+		{
+			"name": "BagHandle2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 15.25, 2],
+			"to": [-7.5, 15.5, 3],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [30, 0, 0],
+			"origin": [-8, 15.5, 2],
+			"faces": {
+				"north": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"east": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "cd1d0b29-d92c-7d2a-74f3-6859fdbf5f58"
+		},
+		{
+			"name": "BagHookNorth1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.55, 12.25, -4.05],
+			"to": [-8.45, 12.75, -3.95],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.55, 12.25, -4.1],
+			"faces": {
+				"north": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "e6ca3aba-37d9-d33f-c8b9-256fafe9fc75"
+		},
+		{
+			"name": "BagHookNorth2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-7.55, 12.25, -4.05],
+			"to": [-7.45, 12.75, -3.95],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.55, 12.25, -4.1],
+			"faces": {
+				"north": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "9e8296ad-76f1-a6e9-b9d0-d43f43729cf9"
+		},
+		{
+			"name": "BagHookNorth3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.45, 12.7, -4.05],
+			"to": [-7.55, 12.8, -3.95],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.55, 12.25, -4.1],
+			"faces": {
+				"north": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "7eecf17f-2153-12fa-df48-07846576e334"
+		},
+		{
+			"name": "BagHookSouth1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.55, 12.25, 3.95],
+			"to": [-8.45, 12.75, 4.05],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.55, 12.25, 4.1],
+			"faces": {
+				"north": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "053e2b5b-3fd6-9baa-4ea4-37ee1c15733c"
+		},
+		{
+			"name": "BagHookSouth2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-7.55, 12.25, 3.95],
+			"to": [-7.45, 12.75, 4.05],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.55, 12.25, 4.1],
+			"faces": {
+				"north": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "9a757c70-7b94-23c4-5baf-1a7f0aeef3b5"
+		},
+		{
+			"name": "BagHookSouth3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.45, 12.7, 3.95],
+			"to": [-7.55, 12.8, 4.05],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8.55, 12.25, 4.1],
+			"faces": {
+				"north": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "8ba76c57-86e2-1d24-d05d-c34c32ee99c7"
+		},
+		{
+			"name": "BagBeltNorthHook",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.05, 12.65, -4.165],
+			"to": [-7.95, 13.15, -4.015],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 102, 4, 103],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "e1e81e0d-3db3-8001-5936-a27e863d1f5b"
+		},
+		{
+			"name": "BagBeltNorth1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 13.15, -4.165],
+			"to": [-7.5, 20.15, -4.015],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"east": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"south": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"west": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [29, 118, 30, 119],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "bc5e73b9-5ce9-2b24-b3ac-7c3f2d66cfcb"
+		},
+		{
+			"name": "BagBeltSouthHook",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.05, 12.65, 4.015],
+			"to": [-7.95, 13.15, 4.165],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"east": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"south": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"west": {
+					"uv": [4, 102, 3, 103],
+					"texture": 0
+				},
+				"up": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				},
+				"down": {
+					"uv": [3, 103, 4, 102],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "813b1e20-93bc-393d-e7a1-4445e81e3f9c"
+		},
+		{
+			"name": "BagBeltSouth1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 13.15, 4.015],
+			"to": [-7.5, 20.15, 4.165],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"east": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"south": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"west": {
+					"uv": [29, 105, 30, 119],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [29, 118, 30, 119],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "82916e56-1f29-968f-4195-789b4408edbf"
+		},
+		{
+			"name": "BagBeltCenter",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.75, 28, -4.265],
+			"to": [-7.25, 28.15, 1.465],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 29.15, -4.165],
+			"faces": {
+				"north": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"east": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"west": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				},
+				"up": {
+					"uv": [24, 97, 30, 98],
+					"texture": 0
+				},
+				"down": {
+					"uv": [24, 97, 30, 98],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "76b57c32-8e80-19ee-c242-df3d8cbf37b5"
+		},
+		{
+			"name": "BagBeltNorth4",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.75, 26.15, -4.165],
+			"to": [-7.25, 28.15, -4.015],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [24, 97, 30, 105],
+					"texture": 0
+				},
+				"east": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				},
+				"south": {
+					"uv": [24, 97, 30, 105],
+					"texture": 0
+				},
+				"west": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "ae1d1fb6-4b22-8e6f-03f6-6e4cef28c83d"
+		},
+		{
+			"name": "BagBeltSouth3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.75, 26.15, 4.015],
+			"to": [-7.25, 28.15, 4.165],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [24, 97, 30, 105],
+					"texture": 0
+				},
+				"east": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				},
+				"south": {
+					"uv": [24, 97, 30, 105],
+					"texture": 0
+				},
+				"west": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [24, 97, 25, 98],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "c49a0855-bdce-2e9c-7027-f2628b8a74ff"
+		},
+		{
+			"name": "BagBeltNorth2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.75, 20.15, -4.165],
+			"to": [-7.25, 21.65, -4.015],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 109, 6, 115],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 109, 1, 110],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 109, 6, 115],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 109, 1, 110],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 109, 1, 110],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 109, 1, 110],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "221b8d4f-6c40-6dca-315a-9fe0c9e6ba6d"
+		},
+		{
+			"name": "BagBeltNorth3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 21.65, -4.165],
+			"to": [-7.5, 26.15, -4.015],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"east": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "326667df-48f5-40f4-35da-37fd65a04e8c"
+		},
+		{
+			"name": "IDCardHook",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-7.575, 11.9, -4],
+			"to": [-7.425, 12.4, -4],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-7.525, 15.25, 0.1],
+			"faces": {
+				"north": {
+					"uv": [6, 109, 7, 110],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"south": {
+					"uv": [6, 109, 7, 110],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "66c019ae-da1c-d9af-3aae-52f5f1c58ddb"
+		},
+		{
+			"name": "IDCard",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.25, 9.65, -4],
+			"to": [-6.75, 11.9, -4],
+			"autouv": 0,
+			"color": 0,
+			"inflate": 0.001,
+			"origin": [-7.5, 12.35, -4],
+			"faces": {
+				"north": {
+					"uv": [6, 109, 12, 118],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [6, 109, 12, 118],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "7e96ba1c-13d1-40fc-a93b-ced647d833b2"
+		},
+		{
+			"name": "TrinityLogo",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-7.96, 10.175, -4.01],
+			"to": [-7.04, 11.575, -4.01],
+			"autouv": 0,
+			"color": 0,
+			"origin": [0, 7, -13],
+			"faces": {
+				"north": {
+					"uv": [0, 44, 29, 88],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"rotation": 90,
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 89, 0, 89],
+					"rotation": 270,
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "c41cc07b-30ba-fa46-64a9-bb962e146fba"
+		},
+		{
+			"name": "BagBaseFastener1",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-9.375, 13.75, -4.1],
+			"to": [-9.125, 14.25, -4],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -10],
+			"origin": [-9.25, 14.25, -4],
+			"faces": {
+				"north": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"east": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"west": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "8e899c5c-17c9-6f19-bc77-94669ae92648"
+		},
+		{
+			"name": "BagBaseFastener2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-9.125, 13.75, -4.1],
+			"to": [-8.875, 14.25, -4],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, 20],
+			"origin": [-9, 14.25, -4],
+			"faces": {
+				"north": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"east": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"west": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "c997ae8b-0ff9-1f71-18c2-3fa3802bb718"
+		},
+		{
+			"name": "BagPacket",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-10.375, 10.25, -3.1],
+			"to": [-10.125, 10.75, -3],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, 0, -15],
+			"origin": [-10.25, 10.75, -3],
+			"faces": {
+				"north": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"east": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"west": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				},
+				"down": {
+					"uv": [1, 89, 2, 90],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "b7725831-ab34-7165-7f19-22d4d785f7b2"
+		},
+		{
+			"name": "BagBeltSouth2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-8.5, 20.15, 4.015],
+			"to": [-7.5, 26.15, 4.165],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-8, 16, 0],
+			"faces": {
+				"north": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"east": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"south": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"west": {
+					"uv": [8, 89, 9, 90],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				},
+				"down": {
+					"uv": [0, 89, 0, 89],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "efcd8424-1913-07bf-25da-097fdf5396f3"
 		}
 	],
 	"outliner": [
@@ -604,7 +1761,7 @@
 			"uuid": "6fe1cd31-8379-4e0a-6103-4954b417062f",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -618,7 +1775,7 @@
 					"uuid": "a10e5d8d-8a1f-c9e0-b6e3-2b23c0f63031",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -755,7 +1912,7 @@
 					"uuid": "63a97729-5eb8-975e-dbc1-d79fee2a5068",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -798,7 +1955,7 @@
 					"uuid": "b5cfe6c8-6c9a-0cb8-f7d5-e61f4547565f",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -807,6 +1964,174 @@
 						"c22e7425-7660-3449-6130-abcd22d17b12",
 						"554bfc5e-911e-40e1-9a32-2c712a56ff4f",
 						"24807490-4ab6-cfb0-e431-bb2a0bf4ca2a"
+					]
+				},
+				{
+					"name": "Bag",
+					"origin": [-8, 9, 0],
+					"rotation": [0, 0, -20],
+					"color": 0,
+					"uuid": "28e02cdb-b83e-e678-b660-ba086a8cfa20",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": [
+						"ad005286-a9bf-f9ff-fb1d-fcaecfb30417",
+						"8e899c5c-17c9-6f19-bc77-94669ae92648",
+						"c997ae8b-0ff9-1f71-18c2-3fa3802bb718",
+						{
+							"name": "BackPocket",
+							"origin": [-13, 7, 0],
+							"color": 0,
+							"uuid": "ec014358-7f2c-bc10-dd0e-295292fa4699",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": ["bb52c41f-8c0d-5ab1-09c8-f5ec3665d088", "eb8e47ef-f4a0-553c-357c-61c7859e1f78", "b7725831-ab34-7165-7f19-22d4d785f7b2"]
+						},
+						{
+							"name": "BagHandle",
+							"origin": [-8.5, 15.25, -2],
+							"color": 0,
+							"uuid": "45b72976-bd03-0657-b98d-4a60e90b3ffa",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": false,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": ["34c74684-e573-8723-5f3c-05a47a001500", "cd1d0b29-d92c-7d2a-74f3-6859fdbf5f58", "2aa27156-8629-958f-8eed-6fe842191ad0"]
+						},
+						{
+							"name": "BagHooks",
+							"origin": [-13, 7, 0],
+							"color": 0,
+							"uuid": "120586dc-630d-cb0f-74df-fda78102ca3c",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "BagHookNorth",
+									"origin": [-8, 12.25, -4],
+									"rotation": [-10, 0, 0],
+									"color": 0,
+									"uuid": "b0ff4076-4b0b-efdd-be88-83424df6d2a9",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										"e6ca3aba-37d9-d33f-c8b9-256fafe9fc75",
+										"9e8296ad-76f1-a6e9-b9d0-d43f43729cf9",
+										"7eecf17f-2153-12fa-df48-07846576e334",
+										{
+											"name": "IDCard",
+											"origin": [-7.5, 12.35, -4],
+											"rotation": [14.13272, -5.07855, 19.37006],
+											"color": 0,
+											"uuid": "e20e20d1-531c-79c4-3954-ff8cbc6a1349",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["66c019ae-da1c-d9af-3aae-52f5f1c58ddb", "7e96ba1c-13d1-40fc-a93b-ced647d833b2", "c41cc07b-30ba-fa46-64a9-bb962e146fba"]
+										}
+									]
+								},
+								{
+									"name": "BagHookSouth",
+									"origin": [-8, 12.25, 4],
+									"rotation": [10, 0, 0],
+									"color": 0,
+									"uuid": "b3c27a0d-c738-29ab-7815-989841ccaf11",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": false,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["053e2b5b-3fd6-9baa-4ea4-37ee1c15733c", "9a757c70-7b94-23c4-5baf-1a7f0aeef3b5", "8ba76c57-86e2-1d24-d05d-c34c32ee99c7"]
+								}
+							]
+						},
+						{
+							"name": "BagBelt",
+							"origin": [-8, 12.73, 0],
+							"rotation": [0, 0, -20],
+							"color": 0,
+							"uuid": "d71e3faa-91ec-59f4-9c97-8fb1ad0040fc",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								"e1e81e0d-3db3-8001-5936-a27e863d1f5b",
+								"813b1e20-93bc-393d-e7a1-4445e81e3f9c",
+								{
+									"name": "BagBeltNorth",
+									"origin": [-8, 13.15, -4.075],
+									"rotation": [5, 0, 0],
+									"color": 0,
+									"uuid": "e41b8015-d134-6b1b-6579-b44a63328e58",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										"bc5e73b9-5ce9-2b24-b3ac-7c3f2d66cfcb",
+										"221b8d4f-6c40-6dca-315a-9fe0c9e6ba6d",
+										"326667df-48f5-40f4-35da-37fd65a04e8c",
+										"ae1d1fb6-4b22-8e6f-03f6-6e4cef28c83d",
+										{
+											"name": "BagBeltCenter",
+											"origin": [-8, 29.15, -4.165],
+											"rotation": [-5, 0, 0],
+											"color": 0,
+											"uuid": "fa5e0bf4-f622-33ae-c246-c9be70923bad",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["76b57c32-8e80-19ee-c242-df3d8cbf37b5"]
+										}
+									]
+								},
+								{
+									"name": "BagBeltSouth",
+									"origin": [-8, 13.15, 4.075],
+									"rotation": [-5, 0, 0],
+									"color": 0,
+									"uuid": "39e76c0d-e0da-ae04-b2af-b84bce22f218",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["82916e56-1f29-968f-4195-789b4408edbf", "efcd8424-1913-07bf-25da-097fdf5396f3", "c49a0855-bdce-2e9c-7027-f2628b8a74ff"]
+								}
+							]
+						}
 					]
 				}
 			]
@@ -819,8 +2144,8 @@
 			"folder": "",
 			"namespace": "",
 			"id": "1",
-			"width": 29,
-			"height": 45,
+			"width": 30,
+			"height": 119,
 			"uv_width": 29,
 			"uv_height": 45,
 			"particle": false,
@@ -837,7 +2162,7 @@
 			"saved": true,
 			"uuid": "8b348af9-4c86-bad1-47f6-c93817331e9c",
 			"relative_path": "../../textures/costume_tracksuit.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAtCAYAAABS6WCiAAAAAXNSR0IArs4c6QAAAmRJREFUWEftl7tKQ0EQhs8SEi+RiFfwEUSwFGysbOwFa0EURR9ABAtBfABBsbIW7O1tfALxIbyAwZBICEf2wKyzc2Z3dhLUxjTmnN2dby7/zBqTJXzyPM9hmzHG0CPSOt1fMoA3gDEMou/sc2ydiykIpca46LioYV/sPAuVgCmG7Z6QHRGK65VQ/mILZEAFpXWlNdM8q2oaSiEXecyJvqC4NpKaU7Ug1pSLGIxjCAdU1VTqvRAUi0itXnpAikwTZeGY1AaxqKUah2wnQ0Pzlao5NqXc/NZGStWcAlEN/Ni409YRg8X0xlSovQSS0zvocO97ImEw14v0naSTpPRKRrTrfwPtp8+0kZVahhtxnFHpBuEmV6iHTQjKjTgqqJCAuOnlcULXU8xz6QLgets7Axuka4lzLnaf0kx50Q8qCs15cPLXWqYU6dPVcT6zfpiNN4YLx9+bnez59iyb3zlxTnXuL9xPi+GVvZKzL69ttz49NRINxlAgpIuCJWi3+/17x9qoVsu/edzAb92dFx7W1w487+B9pV5JKltledfbNxC0NlvLeq1eEOycWtwu9nAwyAKsGRvRZ7OZTW4ceZG+3ZzmQ41Gpo00CWqNUyCEZddG5yaS0vuxsFkIkYOCyEBgUZXZtPQeLpOgqpqGLEIdAGrrGkt131Aqe9s2Y4/XnpAsGBzAf9tLW57/sV41GGQh+GMPWqEBKJbn2uq+t8zZcn0qTRLoV6mwKqhkLBVKh0vMrjjw/6E2nTgLqvRi9cI0oe/wpWC/YwB9ljRS/IcC6oW7FF9t9rt0N6ZA6B4nJNw6PwUD+BdVqU08EjT+KQAAAABJRU5ErkJggg=="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAB3CAYAAAAUy/AwAAAAAXNSR0IArs4c6QAABNpJREFUaEPtWDtoFVEQ3TXko5GIX9DOUhRBxARBrYJiJyJYC6IoWimKCBaCCLaCYmUtiNiJYhUFiRJsFEs7Gz9gMCQhxJVZmHV23vzubl5C4L3m5e29d87MmTNzZ5NngU9RFAVuy/M850e8dQmiwwjdhAYpGH8Gv611LS4VmBuUopSix33eeRHYOxQ1btlxgWn+AnIotyATycA8zzyHKb+Tc6zRKTFgOdIYGA4iZZ7Ko9oo0yF5JBmgz6gjVj6Tc+zVpgZMhUWZSmogKRF6DCUBe+ICir2cW+VntkxJWBKdFMDqZrV9XlOwaExRMcdxI9ZE0iSvSRF76rS6XKscL8WF0EjVPCJNXFFRob1Qjj0BNllfOWB+26RS1iTaMl1S341eHJaivRpXgaV2SBVeiSQ4dfIAK2Ber9INxa9A6SKxejz2d/guxaU1e22yiNzH3CbVUgXcVCCp5yhDy1ZOYsRfHt0qtp66kW0YGSqD+D09l31/ejfbdf525djcxIPqNWboyMUOh3/8nK3Wt2xe6waUc1Ckj4N7wAsL/9+vwEZ/f+c7Vu12mnlxv/R0+Pjlmpf4vG+4L5TKvoMXavtaAw9sG8gWZxZV8MqxvefKPRIgskHXcohsfno623T6Zi3iX0/uFIMjI1lqxGFgAOCgGB6srdu+MUT1n91nSnFKwCg8KjpTfUDR4ruHIeDkHGtWMS8IDHm2aG8FzEsCSmr958c1cQE4OkG/Z0fP1mLwajmnYABEP3AYxIdgFucD45dqy5KtWh17HQfr2Ut0MrBnMArMG5Bn1+2pPWCkEKilbCRTTVWNXYc/oxcJ/E1B+G8vt9WshqrGu5hei/C3V49RIL6vEhctq24CVhE39fjr1LNi5/6TblVo9hsdRNA24MnAHKwpeBKwBtIEPAkY8rWsEVMwCzglcjViDSwK7DlhUi0djlDtgULKQjkGQ1iPUu1661ItdwCjEQCgf+Nh/kxiAPZq593O5dHVdr0WcaQjcdFhdBKdlr0KmG6i+aT5i/Z1SjOlneqjBLZo81TsrVNn6d5SQNYto4mHGqTno/bciCkjnsqjoLU6lnJMhSN1Mqu7cUa4UyFVa7XrKdxVtUYh5k4yoEVLGw3PPWXQbZmpnUkKwm2ZVuS0nqVItF6uOZIcMVd504HPvCS0fGlNx0qLOldb7dASkiey5PFWa4Wpz5OAvcZglUmUgbC4tGbAn3tt0x0EOEVR4OjV6UasOWApPgLeAzZZ0oQTFRQ1vnqo7lqvjijSGxAjNpKpjhiN7Fk5YHrB09Ek4nWbPdVc7ZVE6rq3XwW2ZidtDKJtlI9CvNfX3iRSL/zofqkEqzcJnl/twtfq2Bt7OEvLqmrq3LIBd0Q8P/+3+PbpebZjz4lscHBNhyOw3qZswLY0AufdBganpYBWFhip7AbVasRe/trmuAccnqvbUm2Wk5fntusATj/QM6r/V7Y1rp0HEBUYFqUPHtDWPWexI/aAqxwjlZOTH0v2xsb2ld9dp9rL1arNsRRYWU7dVLV0F0NT6gHX0sEL3xOhtK5SPTExJc5UV65eF3E+vH/dekAscwzAWLeIBPUMwG/fvKqBHzp8NOsBN8n7ylMted31HGtUHRgdL7oqLgt48uW12vLYsXtLp2oLWFpbsnJqosq2Z6B3/ANJ4lO9C+8EggAAAABJRU5ErkJggg=="
 		}
 	],
 	"animations": [
@@ -848,7 +2173,7 @@
 			"override": true,
 			"length": 5,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",

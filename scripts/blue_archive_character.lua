@@ -428,7 +428,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.main.Avatar.UpperBody.Body.Bag, models.models.main.Avatar.UpperBody.Arms.RightArm.DrinkBottle1, models.models.main.Avatar.UpperBody.Body.DrinkBottle2, models.models.main.Avatar.UpperBody.Body.DrinkBottle3, models.models.ex_skill_2.Mobs},
+			models = {models.models.main.Avatar.UpperBody.Arms.RightArm.DrinkBottle1, models.models.main.Avatar.UpperBody.Body.DrinkBottle2, models.models.main.Avatar.UpperBody.Body.DrinkBottle3, models.models.ex_skill_2.Mobs},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -442,12 +442,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(25, 25, -21),
+                    pos = vectors.vec3(),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 150, -3)
+                    rot = vectors.vec3()
                 },
 
                 ---Exスキルアニメーション終了時
@@ -455,12 +455,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 23, -36),
+                    pos = vectors.vec3(),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 180)
+                    rot = vectors.vec3()
                 }
             },
 
