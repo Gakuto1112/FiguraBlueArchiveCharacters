@@ -405,6 +405,68 @@ BlueArchiveCharacter = {
                     end
                 end
             }
+		},
+
+        {
+            ---Exスキルの名前
+            name = {
+                ---英語
+                ---日本語名を翻訳したものにする。
+                ---@type string
+                en_us = "Here's some water for you",
+
+                ---日本語
+                ---実際のスキルの名前と同じにする。
+                ---@type string
+                ja_jp = "お水をどうぞ"
+            },
+
+            ---スキルの種類
+            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
+            ---@type BlueArchiveCharacter.SkillType
+            skillType = "MYSTERY",
+
+            ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
+            ---@type ModelPart[]
+			models = {models.models.main.Avatar.UpperBody.Body.Bag, models.models.main.Avatar.UpperBody.Arms.RightArm.DrinkBottle1, models.models.main.Avatar.UpperBody.Body.DrinkBottle2, models.models.main.Avatar.UpperBody.Body.DrinkBottle3, models.models.ex_skill_2.Mobs},
+
+            ---Exスキルアニメーションが含まれるモデルファイル名
+            ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
+            ---@type string[]
+			animations = {"main", "costume_tracksuit", "ex_skill_2"},
+
+            ---Exスキルアニメーションでのカメラワークのデータ
+            camera = {
+                ---Exスキルアニメーション開始時
+                start = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(25, 25, -21),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3(0, 150, -3)
+                },
+
+                ---Exスキルアニメーション終了時
+                fin = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(0, 23, -36),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3(0, 180)
+                }
+            },
+
+            ---コールバック関数
+            callbacks = {
+            }
 		}
 	},
 
@@ -498,7 +560,7 @@ BlueArchiveCharacter = {
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
-                exSkill = 1
+                exSkill = 2
             }
         },
 
