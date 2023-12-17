@@ -529,12 +529,21 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag:moveTo(models.models.main)
                         models.models.main.Avatar.Head.FaceShadow:setVisible(true)
                         FaceParts:setEmotion("TIRED", "TIRED", "TIRED", 43, true)
+                        local bodyYaw = player:getBodyYaw()
+                        particles:newParticle("minecraft:soul", ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Mouth):add(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0.17, 0.35, 0, 1, 0))):setScale(0.75):setVelocity(vectors.rotateAroundAxis(-bodyYaw, -0.01, 0, 0, 0, 1, 0)):setLifetime(40)
+                        local playerPos = player:getPos()
+                        for _ = 1, 50 do
+                            particles:newParticle("minecraft:entity_effect", playerPos:copy():add(math.random() * 1.5 - 0.75, math.random() * 1.5 + 0.5, math.random() * 1.5 - 0.75)):setGravity(0.1):setLifetime(40)
+                        end
                     end
                     if tick >= 45 and tick <= 56 then
                         models.models.main.Avatar:setColor(vectors.vec3(1, 1, 1):scale(1 - math.map(tick, 45, 56, 0, 0.25)))
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.AnxiousFrame:setOpacity(math.map(tick, 45, 56, 0, 1))
                         end
+                    end
+                    if tick >= 8 and tick < 80 then
+                        particles:newParticle("minecraft:splash", ModelUtils.getModelWorldPos(models.models.main.Avatar.Head)):setPower(2)
                     end
                 end,
 
