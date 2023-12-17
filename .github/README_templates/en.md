@@ -13,9 +13,10 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 ### Done
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### In progress
-- Marie Iochi ( #12 )
+None
 
 ### Planning
 - Momoi Saiba ( #13 )
