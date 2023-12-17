@@ -13,9 +13,10 @@ This branch is for **Izuna Kuda**.
 ### Done
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### In progress
-- Marie Iochi ( #12 )
+None
 
 ### Planning
 - Momoi Saiba ( #13 )
@@ -118,3 +119,7 @@ Please used screenshots (not direct shots of the screen).
   - Used to decide the avatar's thumbnail.
 - Motivation
   - Motivation to "I will create it!".
+
+---
+
+![ID card](../README_images/id_card.jpg)
