@@ -499,7 +499,8 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 42 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "OPENED", 5, true)
-                    elseif tick == 47 then
+                    elseif tick == 45 then
+                        models.models.main.Avatar:setColor(0.75, 0.75, 0.75)
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 3, true)
                     elseif tick == 50 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "ANXIOUS", 6, true)
@@ -509,6 +510,8 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "INVERTED", "TRIANGLE", 5, true)
                     elseif tick == 71 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "TRIANGLE", 10, true)
+                    elseif tick == 80 then
+                        models.models.main.Avatar:setColor()
                     elseif tick == 81 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 4, true)
                     elseif tick == 85 then
@@ -519,7 +522,11 @@ BlueArchiveCharacter = {
                         end
                         BlueArchiveCharacter.EX_SKILL_2_STAIRS:setVisible(true)
                         models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag:moveTo(models.models.main)
+                        models.models.main.Avatar.Head.FaceShadow:setVisible(true)
                         FaceParts:setEmotion("TIRED", "TIRED", "TIRED", 43, true)
+                    end
+                    if tick >= 45 and tick <= 56 then
+                        models.models.main.Avatar:setColor(vectors.vec3(1, 1, 1):scale(1 - math.map(tick, 45, 56, 0, 0.25)))
                     end
                 end,
 
@@ -531,10 +538,14 @@ BlueArchiveCharacter = {
                         models.models.main.Bag:moveTo(models.models.main.Avatar.UpperBody.Body.CTracksuitB)
                     end
                     BlueArchiveCharacter.EX_SKILL_2_STAIRS:setVisible(false)
+                    models.models.main.Avatar.Head.FaceShadow:setVisible(false)
                     if host:isHost() then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1, models.models.ex_skill_2.Mobs.Mob4}) do
                             modelPart:setVisible(true)
                         end
+                    end
+                    if forcedStop then
+                        models.models.main.Avatar:setColor()
                     end
                 end
             }
@@ -2380,5 +2391,6 @@ end
 for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Body.Mob6BodyColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Body.Mob6BodyLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6RightArm.Mob6RightArmColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6RightArm.Mob6RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6LeftArm.Mob6LeftArmColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6LeftArm.Mob6LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6RightLeg.Mob6RightLegColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6RightLeg.Mob6RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6LeftLeg.Mob6LeftLegColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6LeftLeg.Mob6LeftLegLayerColor}) do
     modelPart:setColor(0.58, 0.231, 0.29)
 end
+models.models.main.Avatar.Head.FaceShadow:setOpacity(0.5)
 
 return BlueArchiveCharacter
