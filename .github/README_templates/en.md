@@ -11,8 +11,8 @@ This branch is for **Shizuko Kawawa**.
 
 ## Creation status
 ### Done
-- [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
-- [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [Shizuko Kawawa](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
+- [Izuna Kuda](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### In progress
