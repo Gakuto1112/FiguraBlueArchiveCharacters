@@ -77,27 +77,38 @@ BlueArchiveCharacter = {
         RightEye = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
-            TIED = {3, 0},
+            TIRED = {3, 0},
             CLOSED = {4, 0},
             NARROW1 = {5, 0},
             NARROW2 = {0, 1},
-            CLOSED2 = {1, 1}
+            CLOSED2 = {1, 1},
+            INVERTED = {2, 1},
+            TEAR = {4, 1}
         },
 
         ---左目
         LeftEye = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
-            TIED = {2, 0},
+            TIRED = {2, 0},
             CLOSED = {3, 0},
             NARROW1 = {5, 0},
             NARROW2 = {-1, 1},
-            CLOSED2 = {0, 1}
+            CLOSED2 = {0, 1},
+            INVERTED = {2, 1},
+            TEAR = {3, 1}
         },
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
+            CLOSED = {0, 0},
+            STRAIGHT = {4, 0},
+            SMILE = {0, 4},
+            OPENED = {4, 4},
+            ANXIOUS = {8, 4},
+            TRIANGLE = {12, 4},
+            TRIANGLE2 = {0, 8},
+            TIRED = {4, 8}
         }
     },
 
@@ -370,18 +381,20 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 5 then
+                    if tick == 0 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "STRAIGHT", 14, true)
+                    elseif tick == 5 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill1ParticleAnchor1)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 30 do
                             particles:newParticle("minecraft:cherry_leaves", anchorPos:copy():add(math.random() - 0.5, math.random() * 2 - 1, math.random() - 0.5)):setColor(0.2, 1, 0.2):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0, 0, 0, 1, 0))
                         end
                     elseif tick == 14 then
-                        FaceParts:setEmotion("NARROW1", "NARROW1", "CLOSED", 2, true)
+                        FaceParts:setEmotion("NARROW1", "NARROW1", "STRAIGHT", 2, true)
                     elseif tick == 16 then
-                        FaceParts:setEmotion("NARROW2", "NARROW2", "CLOSED", 2, true)
+                        FaceParts:setEmotion("NARROW2", "NARROW2", "STRAIGHT", 2, true)
                     elseif tick == 18 then
-                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 66, true)
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "STRAIGHT", 66, true)
                     elseif tick == 59 then
                         local playerPos = player:getPos()
                         for _ = 1, 100 do
@@ -470,16 +483,43 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 38 and host:isHost() then
+                    if tick == 0 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 7, true)
+                    elseif tick == 7 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 11, true)
+                    elseif tick == 18 then
+                        FaceParts:setEmotion("NORMAL", "INVERTED", "OPENED", 6, true)
+                    elseif tick == 24 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 8, true)
+                    elseif tick == 32 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 10, true)
+                    elseif tick == 38 and host:isHost() then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1, models.models.ex_skill_2.Mobs.Mob4}) do
                             modelPart:setVisible(false)
                         end
+                    elseif tick == 42 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "OPENED", 5, true)
+                    elseif tick == 47 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 3, true)
+                    elseif tick == 50 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "ANXIOUS", 6, true)
+                    elseif tick == 56 then
+                        FaceParts:setEmotion("NORMAL", "INVERTED", "ANXIOUS", 10, true)
+                    elseif tick == 66 then
+                        FaceParts:setEmotion("NORMAL", "INVERTED", "TRIANGLE", 5, true)
+                    elseif tick == 71 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "TRIANGLE", 10, true)
+                    elseif tick == 81 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 4, true)
+                    elseif tick == 85 then
+                        FaceParts:setEmotion("TEAR", "TEAR", "TRIANGLE2", 15, true)
                     elseif tick == 100 then
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.DrinkBottle2, models.models.main.Avatar.UpperBody.Body.DrinkBottle3, models.models.ex_skill_2.Mobs}) do
                             modelPart:setVisible(false)
                         end
                         BlueArchiveCharacter.EX_SKILL_2_STAIRS:setVisible(true)
                         models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag:moveTo(models.models.main)
+                        FaceParts:setEmotion("TIRED", "TIRED", "TIRED", 43, true)
                     end
                 end,
 
