@@ -13,9 +13,10 @@
 ### 作成済み
 - [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 - [久田 イズナ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### 作成中
-- 伊落マリー（ #12 ）
+なし
 
 ### 作成予定
 - 才羽モモイ（ #13 ）
@@ -134,3 +135,7 @@ Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[
   - アバターのサムネイル画像の決定に使います。
 - やる気
   - 「作ってやる！」という意欲
+
+---
+
+![IDカード](./README_images/id_card.jpg)
