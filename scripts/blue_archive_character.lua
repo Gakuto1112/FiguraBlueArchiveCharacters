@@ -761,8 +761,12 @@ BlueArchiveCharacter = {
             ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
             onPlay = function(type, duration, showInGui)
                 if duration > 0 then
-                    if type == "GOOD" or type == "HEART" then
-                        FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", duration, true)
+                    if type == "GOOD" then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", duration, true)
+                    elseif type == "HEART" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", duration, true)
+                    elseif type == "QUESTION" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "ANXIOUS", duration, true)
                     end
                 end
             end,
