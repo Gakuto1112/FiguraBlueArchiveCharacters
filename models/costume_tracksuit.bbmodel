@@ -1670,7 +1670,7 @@
 			"uuid": "c997ae8b-0ff9-1f71-18c2-3fa3802bb718"
 		},
 		{
-			"name": "BagPacket",
+			"name": "BackPocketFastener",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -1761,7 +1761,7 @@
 			"uuid": "6fe1cd31-8379-4e0a-6103-4954b417062f",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -1980,8 +1980,60 @@
 					"autouv": 0,
 					"children": [
 						"ad005286-a9bf-f9ff-fb1d-fcaecfb30417",
-						"8e899c5c-17c9-6f19-bc77-94669ae92648",
-						"c997ae8b-0ff9-1f71-18c2-3fa3802bb718",
+						{
+							"name": "BagBaseFastener1XPivot",
+							"origin": [-9.25, 14.25, -4],
+							"color": 0,
+							"uuid": "fbf46cae-d522-3a7c-aba6-5afd14f45323",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "BagBaseFastener1ZPivot",
+									"origin": [-9.25, 14.25, -4],
+									"color": 0,
+									"uuid": "6c52309f-e114-d67b-5d51-373a70da7436",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["8e899c5c-17c9-6f19-bc77-94669ae92648"]
+								}
+							]
+						},
+						{
+							"name": "BagBaseFastener2XPivot",
+							"origin": [-9, 14.25, -4],
+							"color": 0,
+							"uuid": "fd74991d-bbd5-a692-a133-3c6b58079873",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "BagBaseFastener2ZPivot",
+									"origin": [-9, 14.25, -4],
+									"color": 0,
+									"uuid": "87d0a36a-7928-8faf-6cfc-11a8d41719a8",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["c997ae8b-0ff9-1f71-18c2-3fa3802bb718"]
+								}
+							]
+						},
 						{
 							"name": "BackPocket",
 							"origin": [-13, 7, 0],
@@ -1993,7 +2045,37 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["bb52c41f-8c0d-5ab1-09c8-f5ec3665d088", "eb8e47ef-f4a0-553c-357c-61c7859e1f78", "b7725831-ab34-7165-7f19-22d4d785f7b2"]
+							"children": [
+								"bb52c41f-8c0d-5ab1-09c8-f5ec3665d088",
+								"eb8e47ef-f4a0-553c-357c-61c7859e1f78",
+								{
+									"name": "BackPocketFastenerXPivot",
+									"origin": [-10.25, 10.75, -3],
+									"color": 0,
+									"uuid": "41c12291-c49a-de22-49ee-fdd2034636c5",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": [
+										{
+											"name": "BackPocketFastenerZPivot",
+											"origin": [-10.25, 10.75, -3],
+											"color": 0,
+											"uuid": "df32f588-23b8-c83f-282c-c8bc8e1c80b5",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["b7725831-ab34-7165-7f19-22d4d785f7b2"]
+										}
+									]
+								}
+							]
 						},
 						{
 							"name": "BagHandle",
@@ -2048,7 +2130,35 @@
 											"locked": false,
 											"visibility": true,
 											"autouv": 0,
-											"children": ["66c019ae-da1c-d9af-3aae-52f5f1c58ddb", "7e96ba1c-13d1-40fc-a93b-ced647d833b2", "c41cc07b-30ba-fa46-64a9-bb962e146fba"]
+											"children": [
+												{
+													"name": "IDCardXPivot",
+													"origin": [-7.5, 12.35, -4],
+													"color": 0,
+													"uuid": "2b28bd83-11e0-f23e-1b8b-21c45ee12e61",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														{
+															"name": "IDCardZPivot",
+															"origin": [-7.5, 12.35, -4],
+															"color": 0,
+															"uuid": "cd173251-8131-87ca-2d91-0e618f09e128",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["66c019ae-da1c-d9af-3aae-52f5f1c58ddb", "7e96ba1c-13d1-40fc-a93b-ced647d833b2", "c41cc07b-30ba-fa46-64a9-bb962e146fba"]
+														}
+													]
+												}
+											]
 										}
 									]
 								},
@@ -2173,7 +2283,7 @@
 			"override": true,
 			"length": 5.05,
 			"snapping": 20,
-			"selected": false,
+			"selected": true,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
@@ -2881,6 +2991,50 @@
 								}
 							],
 							"uuid": "077eae11-f2cb-bc6f-06d0-9edc8df96a22",
+							"time": 5,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"e20e20d1-531c-79c4-3954-ff8cbc6a1349": {
+					"name": "IDCard",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "e83eff34-42dc-1cbf-5a0a-e18936887a69",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 0,
+									"y": 0,
+									"z": -20
+								}
+							],
+							"uuid": "b9c009a6-7e11-ed3c-0fa4-69f6dba321ae",
 							"time": 5,
 							"color": -1,
 							"interpolation": "linear",
