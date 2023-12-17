@@ -442,12 +442,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(),
+                    pos = vectors.vec3(-1, 27, -12),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(-5, 180, 0)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -455,17 +455,46 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(),
+                    pos = vectors.vec3(21, 20, -30),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(0, 150, 0)
                 }
             },
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    if tick == 38 and host:isHost() then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1, models.models.ex_skill_2.Mobs.Mob4}) do
+                            modelPart:setVisible(false)
+                        end
+                    elseif tick == 100 then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.DrinkBottle2, models.models.main.Avatar.UpperBody.Body.DrinkBottle3, models.models.ex_skill_2.Mobs}) do
+                            modelPart:setVisible(false)
+                        end
+                        BlueArchiveCharacter.EX_SKILL_2_STAIRS:setVisible(true)
+                        models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag:moveTo(models.models.main)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    models.models.main.Bag:moveTo(models.models.main.Avatar.UpperBody.Body.CTracksuitB)
+                    BlueArchiveCharacter.EX_SKILL_2_STAIRS:setVisible(false)
+                    if host:isHost() then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1, models.models.ex_skill_2.Mobs.Mob4}) do
+                            modelPart:setVisible(true)
+                        end
+                    end
+                end
             }
 		}
 	},
@@ -2251,9 +2280,11 @@ BlueArchiveCharacter = {
                 }
             }
         }
-    }
+    },
 
     --その他定数・変数
+    ---@diagnostic disable-next-line: undefined-field
+    EX_SKILL_2_STAIRS = models.models.main:newBlock("ex_skill_2_stairs"):setPos(6, 0, 6):setRot(0, 180, 0):setBlock("minecraft:oak_stairs"):setVisible(false)
 }
 
 --生徒固有初期化処理

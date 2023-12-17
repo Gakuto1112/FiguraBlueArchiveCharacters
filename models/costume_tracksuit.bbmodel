@@ -2171,9 +2171,9 @@
 			"name": "ex_skill_2",
 			"loop": "hold",
 			"override": true,
-			"length": 5,
+			"length": 5.05,
 			"snapping": 20,
-			"selected": false,
+			"selected": true,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
@@ -2703,8 +2703,8 @@
 						}
 					]
 				},
-				"bf46683d-6d5a-c0bb-805d-73d15459b2a0": {
-					"name": "CTracksuitB",
+				"b5cfe6c8-6c9a-0cb8-f7d5-e61f4547565f": {
+					"name": "FrontHair",
 					"type": "bone",
 					"keyframes": [
 						{
@@ -2716,7 +2716,7 @@
 									"z": "0"
 								}
 							],
-							"uuid": "c9c4c46b-ce37-7247-d523-3628cc5bc326",
+							"uuid": "909a0369-4e68-3aea-19fa-1aa06ec9bb1e",
 							"time": 4.1,
 							"color": -1,
 							"interpolation": "catmullrom",
@@ -2735,7 +2735,7 @@
 									"z": 0
 								}
 							],
-							"uuid": "6c51d8a2-cc2d-03c5-07da-a52fede827eb",
+							"uuid": "14c42805-ab6e-3de7-e899-4233b17155fd",
 							"time": 4.3,
 							"color": -1,
 							"interpolation": "step",
@@ -2754,7 +2754,133 @@
 									"z": 0
 								}
 							],
-							"uuid": "269fd389-0bac-6ae8-2b69-ab66768c7057",
+							"uuid": "0245589e-ff7c-98c6-8b41-62ab79ab7614",
+							"time": 5,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"28e02cdb-b83e-e678-b660-ba086a8cfa20": {
+					"name": "Bag",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "ed027339-15b0-0a58-64d0-9135d878e39a",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 0,
+									"y": 50,
+									"z": 20
+								}
+							],
+							"uuid": "b6791c06-85f6-82e7-07f9-bcf37ffbd1d2",
+							"time": 5,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "17621b7c-0ec5-63a4-4e3b-1c899bc620a6",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": 7,
+									"y": -9,
+									"z": 9
+								}
+							],
+							"uuid": "ff00a499-9bd0-6e8c-9bf4-8cd525b302e4",
+							"time": 5,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"d71e3faa-91ec-59f4-9c97-8fb1ad0040fc": {
+					"name": "BagBelt",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "24b79406-52a5-8038-6dd7-825ab83b6227",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 0,
+									"y": 0,
+									"z": -82.5
+								}
+							],
+							"uuid": "077eae11-f2cb-bc6f-06d0-9edc8df96a22",
 							"time": 5,
 							"color": -1,
 							"interpolation": "linear",
