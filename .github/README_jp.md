@@ -5,7 +5,7 @@
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![サムネイル](./README_images/thumbnail.jpg)
+![サムネイル](./README_images/thumbnail.png)
 
 **このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
 
@@ -13,9 +13,10 @@
 ### 作成済み
 - [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 - [久田 イズナ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### 作成中
-- 伊落マリー（ #12 ）
+なし
 
 ### 作成予定
 - 才羽モモイ（ #13 ）
@@ -134,3 +135,7 @@ Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[
   - アバターのサムネイル画像の決定に使います。
 - やる気
   - 「作ってやる！」という意欲
+
+---
+
+![IDカード](./README_images/id_card.jpg)

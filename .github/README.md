@@ -5,7 +5,7 @@ This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod 
 
 Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![Thumbnail](./README_images/thumbnail.jpg)
+![Thumbnail](./README_images/thumbnail.png)
 
 **This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "[Creation status](#creation-status)" section below.**
 
@@ -13,9 +13,10 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 ### Done
 - [Shizuko Kawawa](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### In progress
-- Marie Iochi ( #12 )
+None
 
 ### Planning
 - Momoi Saiba ( #13 )
@@ -136,3 +137,7 @@ Please used screenshots (not direct shots of the screen).
   - Used to decide the avatar's thumbnail.
 - Motivation
   - Motivation to "I will create it!".
+
+---
+
+![ID card](./README_images/id_card.jpg)
