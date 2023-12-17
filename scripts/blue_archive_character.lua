@@ -487,7 +487,9 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
-                    models.models.main.Bag:moveTo(models.models.main.Avatar.UpperBody.Body.CTracksuitB)
+                    if models.models.main.Bag ~= nil then
+                        models.models.main.Bag:moveTo(models.models.main.Avatar.UpperBody.Body.CTracksuitB)
+                    end
                     BlueArchiveCharacter.EX_SKILL_2_STAIRS:setVisible(false)
                     if host:isHost() then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1, models.models.ex_skill_2.Mobs.Mob4}) do
@@ -2295,5 +2297,48 @@ events.TICK:register(function ()
         models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(true)
     end
 end)
+
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1.Mob1Head.Mob1HeadColor, models.models.ex_skill_2.Mobs.Mob1.Mob1Head.Mob1HeadLayerColor}) do
+    modelPart:setColor(0.318, 0.235, 0.282)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1.Mob1UpperBody.Mob1Body.Mob1BodyColor, models.models.ex_skill_2.Mobs.Mob1.Mob1UpperBody.Mob1Body.Mob1BodyLayerColor, models.models.ex_skill_2.Mobs.Mob1.Mob1UpperBody.Mob1Arms.Mob1RightArm.Mob1RightArmColor, models.models.ex_skill_2.Mobs.Mob1.Mob1UpperBody.Mob1Arms.Mob1RightArm.Mob1RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob1.Mob1UpperBody.Mob1Arms.Mob1LeftArm.Mob1LeftArmColor, models.models.ex_skill_2.Mobs.Mob1.Mob1UpperBody.Mob1Arms.Mob1LeftArm.Mob1LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob1.Mob1LowerBody.Mob1Legs.Mob1RightLeg.Mob1RightLegColor, models.models.ex_skill_2.Mobs.Mob1.Mob1LowerBody.Mob1Legs.Mob1RightLeg.Mob1RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob1.Mob1LowerBody.Mob1Legs.Mob1LeftLeg.Mob1LeftLegColor, models.models.ex_skill_2.Mobs.Mob1.Mob1LowerBody.Mob1Legs.Mob1LeftLeg.Mob1LeftLegLayerColor}) do
+    modelPart:setColor(0.788, 0.263, 0.275)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1.Mob1Head.Mob1HeadRing, models.models.ex_skill_2.Mobs.Mob2.Mob2Head.Mob2HeadRing, models.models.ex_skill_2.Mobs.Mob3.Mob3Head.Mob3HeadRing}) do
+    modelPart:setColor(0.996, 0.824, 0.843)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob2.Mob2Head.Mob2HeadColor, models.models.ex_skill_2.Mobs.Mob2.Mob2Head.Mob2HeadLayerColor, models.models.ex_skill_2.Mobs.Mob2.Mob2Head.Mob2HairTail}) do
+    modelPart:setColor(0.502, 0.369, 0.408)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob2.Mob2UpperBody.Mob2Body.Mob2BodyColor, models.models.ex_skill_2.Mobs.Mob2.Mob2UpperBody.Mob2Body.Mob2BodyLayerColor, models.models.ex_skill_2.Mobs.Mob2.Mob2UpperBody.Mob2Arms.Mob2RightArm.Mob2RightArmColor, models.models.ex_skill_2.Mobs.Mob2.Mob2UpperBody.Mob2Arms.Mob2RightArm.Mob2RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob2.Mob2UpperBody.Mob2Arms.Mob2LeftArm.Mob2LeftArmColor, models.models.ex_skill_2.Mobs.Mob2.Mob2UpperBody.Mob2Arms.Mob2LeftArm.Mob2LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob2.Mob2LowerBody.Mob2Legs.Mob2RightLeg.Mob2RightLegColor, models.models.ex_skill_2.Mobs.Mob2.Mob2LowerBody.Mob2Legs.Mob2RightLeg.Mob2RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob2.Mob2LowerBody.Mob2Legs.Mob2LeftLeg.Mob2LeftLegColor, models.models.ex_skill_2.Mobs.Mob2.Mob2LowerBody.Mob2Legs.Mob2LeftLeg.Mob2LeftLegLayerColor}) do
+    modelPart:setColor(0.596, 0.6, 0.757)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob3.Mob3Head.Mob3HeadColor, models.models.ex_skill_2.Mobs.Mob3.Mob3Head.Mob3HeadLayerColor, models.models.ex_skill_2.Mobs.Mob3.Mob3Head.Mob3Bun}) do
+    modelPart:setColor(0.275, 0.212, 0.227)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob3.Mob3UpperBody.Mob3Body.Mob3BodyColor, models.models.ex_skill_2.Mobs.Mob3.Mob3UpperBody.Mob3Body.Mob3BodyLayerColor, models.models.ex_skill_2.Mobs.Mob3.Mob3UpperBody.Mob3Arms.Mob3RightArm.Mob3RightArmColor, models.models.ex_skill_2.Mobs.Mob3.Mob3UpperBody.Mob3Arms.Mob3RightArm.Mob3RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob3.Mob3UpperBody.Mob3Arms.Mob3LeftArm.Mob3LeftArmColor, models.models.ex_skill_2.Mobs.Mob3.Mob3UpperBody.Mob3Arms.Mob3LeftArm.Mob3LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob3.Mob3LowerBody.Mob3Legs.Mob3RightLeg.Mob3RightLegColor, models.models.ex_skill_2.Mobs.Mob3.Mob3LowerBody.Mob3Legs.Mob3RightLeg.Mob3RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob3.Mob3LowerBody.Mob3Legs.Mob3LeftLeg.Mob3LeftLegColor, models.models.ex_skill_2.Mobs.Mob3.Mob3LowerBody.Mob3Legs.Mob3LeftLeg.Mob3LeftLegLayerColor}) do
+    modelPart:setColor(0.231, 0.298, 0.22)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob4.Mob4Head.Mob4HeadColor, models.models.ex_skill_2.Mobs.Mob4.Mob4Head.Mob4HeadLayerColor, models.models.ex_skill_2.Mobs.Mob4.Mob4Head.Mob4Bun}) do
+    modelPart:setColor(0.345, 0.251, 0.251)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob4.Mob4UpperBody.Mob4Body.Mob4BodyColor, models.models.ex_skill_2.Mobs.Mob4.Mob4UpperBody.Mob4Body.Mob4BodyLayerColor, models.models.ex_skill_2.Mobs.Mob4.Mob4UpperBody.Mob4Arms.Mob4RightArm.Mob4RightArmColor, models.models.ex_skill_2.Mobs.Mob4.Mob4UpperBody.Mob4Arms.Mob4RightArm.Mob4RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob4.Mob4UpperBody.Mob4Arms.Mob4LeftArm.Mob4LeftArmColor, models.models.ex_skill_2.Mobs.Mob4.Mob4UpperBody.Mob4Arms.Mob4LeftArm.Mob4LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob4.Mob4LowerBody.Mob4Legs.Mob4RightLeg.Mob4RightLegColor, models.models.ex_skill_2.Mobs.Mob4.Mob4LowerBody.Mob4Legs.Mob4RightLeg.Mob4RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob4.Mob4LowerBody.Mob4Legs.Mob4LeftLeg.Mob4LeftLegColor, models.models.ex_skill_2.Mobs.Mob4.Mob4LowerBody.Mob4Legs.Mob4LeftLeg.Mob4LeftLegLayerColor}) do
+    modelPart:setColor(0.49, 0.42, 0.522)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob4.Mob4Head.Mob4HeadRing, models.models.ex_skill_2.Mobs.Mob5.Mob5Head.Mob5HeadRing, models.models.ex_skill_2.Mobs.Mob6.Mob6Head.Mob6HeadRing}) do
+    modelPart:setColor(1, 0.98, 0.804)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob5.Mob5Head.Mob5HeadColor, models.models.ex_skill_2.Mobs.Mob5.Mob5Head.Mob5HeadLayerColor}) do
+    modelPart:setColor(0.349, 0.286, 0.365)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob5.Mob5UpperBody.Mob5Body.Mob5BodyColor, models.models.ex_skill_2.Mobs.Mob5.Mob5UpperBody.Mob5Body.Mob5BodyLayerColor, models.models.ex_skill_2.Mobs.Mob5.Mob5UpperBody.Mob5Arms.Mob5RightArm.Mob5RightArmColor, models.models.ex_skill_2.Mobs.Mob5.Mob5UpperBody.Mob5Arms.Mob5RightArm.Mob5RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob5.Mob5UpperBody.Mob5Arms.Mob5LeftArm.Mob5LeftArmColor, models.models.ex_skill_2.Mobs.Mob5.Mob5UpperBody.Mob5Arms.Mob5LeftArm.Mob5LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob5.Mob5LowerBody.Mob5Legs.Mob5RightLeg.Mob5RightLegColor, models.models.ex_skill_2.Mobs.Mob5.Mob5LowerBody.Mob5Legs.Mob5RightLeg.Mob5RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob5.Mob5LowerBody.Mob5Legs.Mob5LeftLeg.Mob5LeftLegColor, models.models.ex_skill_2.Mobs.Mob5.Mob5LowerBody.Mob5Legs.Mob5LeftLeg.Mob5LeftLegLayerColor}) do
+    modelPart:setColor(0.294, 0.337, 0.49)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob6.Mob6Head.Mob6HeadColor, models.models.ex_skill_2.Mobs.Mob6.Mob6Head.Mob6HeadLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6Head.Mob6HairTail}) do
+    modelPart:setColor(0.506, 0.369, 0.322)
+end
+for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Body.Mob6BodyColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Body.Mob6BodyLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6RightArm.Mob6RightArmColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6RightArm.Mob6RightArmLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6LeftArm.Mob6LeftArmColor, models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob6Arms.Mob6LeftArm.Mob6LeftArmLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6RightLeg.Mob6RightLegColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6RightLeg.Mob6RightLegLayerColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6LeftLeg.Mob6LeftLegColor, models.models.ex_skill_2.Mobs.Mob6.Mob6LowerBody.Mob6Legs.Mob6LeftLeg.Mob6LeftLegLayerColor}) do
+    modelPart:setColor(0.58, 0.231, 0.29)
+end
 
 return BlueArchiveCharacter
