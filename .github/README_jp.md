@@ -11,8 +11,8 @@
 
 ## 作成状況
 ### 作成済み
-- [河和 シズコ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Shizuko)
-- [久田 イズナ](https://github.com/Gakuto1112/ShizukoPrototype/tree/Izuna)
+- [河和 シズコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
+- [久田 イズナ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### 作成中
