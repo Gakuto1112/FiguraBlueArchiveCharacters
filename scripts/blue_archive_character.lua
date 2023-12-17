@@ -727,12 +727,24 @@ BlueArchiveCharacter = {
             ---@type fun(index: integer)
             ---@param parts Armor.ArmorPart 変更された防具の部位
             armorChange = function(parts)
-                if parts == "CHEST_PLATE" then
+                if parts == "HELMET" then
+                    if Armor.ArmorVisible[1] then
+                        for _, modelPart in ipairs({models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon, models.models.main.Avatar.Head.CTracksuitH.HairTail}) do
+                            modelPart:setPos(0, 0, 1)
+                        end
+                    else
+                        for _, modelPart in ipairs({models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon, models.models.main.Avatar.Head.CTracksuitH.HairTail}) do
+                            modelPart:setPos()
+                        end
+                    end
+                elseif parts == "CHEST_PLATE" then
                     if Armor.ArmorVisible[2] then
-                        models.models.main.Avatar.UpperBody.Body.FrontHair:setPos(0, 0, -1)
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.CTracksuitB.FrontHair}) do
+                            modelPart:setPos(0, 0, -1)
+                        end
                         models.models.main.Avatar.UpperBody.Body.VeilBody:setPos(0, 0, 1)
                     else
-                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.VeilBody}) do
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.VeilBody, models.models.main.Avatar.UpperBody.Body.CTracksuitB.FrontHair}) do
                             modelPart:setPos()
                         end
                     end
@@ -741,12 +753,10 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.BackRibbon}) do
                             modelPart:setVisible(false)
                         end
-                        Skirt.LegAdjustmentEnabled = false
-                    else
+                    elseif Costume.CurrentCostume <= 2 then
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.BackRibbon}) do
                             modelPart:setVisible(true)
                         end
-                        Skirt.LegAdjustmentEnabled = true
                     end
                 end
             end
