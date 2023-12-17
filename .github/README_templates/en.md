@@ -118,3 +118,7 @@ Please used screenshots (not direct shots of the screen).
   - Used to decide the avatar's thumbnail.
 - Motivation
   - Motivation to "I will create it!".
+
+---
+
+![ID card](../README_images/id_card.jpg)
