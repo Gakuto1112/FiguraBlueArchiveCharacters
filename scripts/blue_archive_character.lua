@@ -500,8 +500,12 @@ BlueArchiveCharacter = {
                     elseif tick == 42 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "OPENED", 5, true)
                     elseif tick == 45 then
-                        models.models.main.Avatar:setColor(0.75, 0.75, 0.75)
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 3, true)
+                        if host:isHost() then
+                            local windowSize = client:getScaledWindowSize()
+                            models.models.ex_skill_2.Gui.AnxiousFrame:setScale(windowSize.x, windowSize.y, 1)
+                            models.models.ex_skill_2.Gui.AnxiousFrame:setVisible(true)
+                        end
                     elseif tick == 50 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "ANXIOUS", 6, true)
                     elseif tick == 56 then
@@ -512,6 +516,7 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("INVERTED", "NORMAL", "TRIANGLE", 10, true)
                     elseif tick == 80 then
                         models.models.main.Avatar:setColor()
+                        models.models.ex_skill_2.Gui.AnxiousFrame:setVisible(false)
                     elseif tick == 81 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 4, true)
                     elseif tick == 85 then
@@ -527,6 +532,9 @@ BlueArchiveCharacter = {
                     end
                     if tick >= 45 and tick <= 56 then
                         models.models.main.Avatar:setColor(vectors.vec3(1, 1, 1):scale(1 - math.map(tick, 45, 56, 0, 0.25)))
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.AnxiousFrame:setOpacity(math.map(tick, 45, 56, 0, 1))
+                        end
                     end
                 end,
 
@@ -546,6 +554,9 @@ BlueArchiveCharacter = {
                     end
                     if forcedStop then
                         models.models.main.Avatar:setColor()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.AnxiousFrame:setVisible(false)
+                        end
                     end
                 end
             }
