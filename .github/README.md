@@ -11,16 +11,23 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 
 ## Creation status
 ### Done
+The avatars for these characters are completed. Click on a character's name to go to the character's branch.
+
 - [Shizuko Kawawa](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### In progress
-None
+The avatars for these characters are worked in progress. It usually takes about 2~3 weeks. Click on the link in brackets to go to the issue about the character, where you can check the progress.
 
-### Planning
-- Momoi Saiba ( #13 )
-- Midori Saiba ( #14 )
+- Momoi Saiba ([#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13))
+
+### Planned
+Although the avatars for these characters are not created, there are plans to create them in the future. This is just a plan and is subject to change (I will close this project without creating them if I get bored to create them).
+
+- Midori Saiba ([#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14))
+- Shiroko Sunaokami ([#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16))
+- Hoshino Takanashi ([#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17))
 
 ## Features
 - Imitated ex skill cut-ins.
