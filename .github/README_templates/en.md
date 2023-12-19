@@ -16,11 +16,12 @@ Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.2
 - [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### In progress
-None
+- Momoi Saiba ([#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13))
 
-### Planning
-- Momoi Saiba ( #13 )
-- Midori Saiba ( #14 )
+### Planned
+- Midori Saiba ([#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14))
+- Shiroko Sunaokami ([#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16))
+- Hoshino Takanashi ([#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17))
 
 ## Features
 - Imitated ex skill cut-ins.

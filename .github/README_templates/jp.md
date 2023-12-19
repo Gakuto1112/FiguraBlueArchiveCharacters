@@ -16,11 +16,12 @@
 - [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### 作成中
-なし
+- 才羽モモイ（[#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13)）
 
 ### 作成予定
-- 才羽モモイ（ #13 ）
-- 才羽ミドリ（ #14 ）
+- 才羽ミドリ（[#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14)）
+- 砂狼シロコ（[#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16)）
+- 小鳥遊ホシノ（[#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17)）
 
 ## 特徴
 - Exスキルのカットインを再現しています。
