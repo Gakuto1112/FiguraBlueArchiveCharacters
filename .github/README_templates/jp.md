@@ -11,14 +11,20 @@
 
 ## 作成状況
 ### 作成済み
+これらのキャラクターのアバターは完成しました。キャラクターの名前をクリックするとそのキャラクターのブランチに移動できます。
+
 - [河和 シズコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [久田 イズナ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 
 ### 作成中
+これらのキャラクターのアバターは作成中です。通常2~3週間程要します。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
+
 - 才羽モモイ（[#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13)）
 
 ### 作成予定
+これらのキャラクターのアバターは作成していないものの、今後作成する予定です。これはあくまでも予定であり、変更される可能性があります（私が飽きたら終了です）。
+
 - 才羽ミドリ（[#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14)）
 - 砂狼シロコ（[#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16)）
 - 小鳥遊ホシノ（[#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17)）
