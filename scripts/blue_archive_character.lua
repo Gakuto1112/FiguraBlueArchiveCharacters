@@ -28,11 +28,11 @@ BlueArchiveCharacter = {
         firstName = {
             ---英語
             ---@type string
-            en_us = "Momoi",
+            en_us = "Midori",
 
             ---日本語
             ---@type string
-            ja_jp = "モモイ"
+            ja_jp = "ミドリ"
         },
 
         ---生徒の苗字
