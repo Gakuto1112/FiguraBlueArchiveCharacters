@@ -4156,11 +4156,10 @@
 									"children": ["38c80056-38bf-0791-5b8e-c3a3b2591654", "e5f18b5e-4093-76a4-d9ae-165f680424da"]
 								},
 								{
-									"name": "Tail",
+									"name": "TailXPivot",
 									"origin": [0, 14.5, 2],
-									"rotation": [15, 0, 0],
 									"color": 0,
-									"uuid": "9100b434-e831-96c3-9283-218e489cafe0",
+									"uuid": "1f725fe1-77d5-3eef-9db7-fe995fa9d773",
 									"export": true,
 									"mirror_uv": false,
 									"isOpen": true,
@@ -4168,20 +4167,49 @@
 									"visibility": true,
 									"autouv": 0,
 									"children": [
-										"50e61828-ccdd-ee8e-c621-0a193b35fd5e",
 										{
-											"name": "Tail2",
-											"origin": [0, 14, 8],
-											"rotation": [-40, 0, 0],
+											"name": "TailYPivot",
+											"origin": [0, 14.5, 2],
 											"color": 0,
-											"uuid": "feb531f7-26bb-8a9c-0e7a-1339231405db",
+											"uuid": "f94c7ac5-33cd-3413-d8aa-ff5430aa2fbd",
 											"export": true,
 											"mirror_uv": false,
 											"isOpen": true,
 											"locked": false,
 											"visibility": true,
 											"autouv": 0,
-											"children": ["4113cbe8-5856-27e8-5d63-4f6f3f13ccbd"]
+											"children": [
+												{
+													"name": "Tail",
+													"origin": [0, 14.5, 2],
+													"rotation": [15, 0, 0],
+													"color": 0,
+													"uuid": "9100b434-e831-96c3-9283-218e489cafe0",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": false,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														"50e61828-ccdd-ee8e-c621-0a193b35fd5e",
+														{
+															"name": "Tail2",
+															"origin": [0, 14, 8],
+															"rotation": [-40, 0, 0],
+															"color": 0,
+															"uuid": "feb531f7-26bb-8a9c-0e7a-1339231405db",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["4113cbe8-5856-27e8-5d63-4f6f3f13ccbd"]
+														}
+													]
+												}
+											]
 										}
 									]
 								}
