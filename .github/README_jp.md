@@ -21,11 +21,11 @@
 これらのキャラクターのアバターは作成中です。通常2~3週間程要します。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
 
 - 才羽モモイ（[#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13)）
+- 才羽ミドリ（[#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14)）
 
 ### 作成予定
 これらのキャラクターのアバターは作成していないものの、今後作成する予定です。これはあくまでも予定であり、変更される可能性があります（私が飽きたら終了です）。
 
-- 才羽ミドリ（[#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14)）
 - 砂狼シロコ（[#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16)）
 - 小鳥遊ホシノ（[#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17)）
 
