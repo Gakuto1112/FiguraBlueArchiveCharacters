@@ -50,7 +50,7 @@ BlueArchiveCharacter = {
         clubName = {
             ---英語
             ---@type string
-            en_us = "Game development club",
+            en_us = "Game development department",
 
             ---日本語
             ---@type string
