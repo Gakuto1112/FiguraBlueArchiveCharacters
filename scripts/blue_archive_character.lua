@@ -303,27 +303,27 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Ex skill name",
+                en_us = "Agony of creation",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
                 ---@type string
-                ja_jp = "Exスキル名"
+                ja_jp = "生みの苦しみ"
             },
 
             ---スキルの種類
             ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
             ---@type BlueArchiveCharacter.SkillType
-            skillType = "EXPLOSION",
+            skillType = "PIERCE",
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {},
+			models = {models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1, models.models.ex_skill_1.Midori},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main"},
+			animations = {"main", "ex_skill_1"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
