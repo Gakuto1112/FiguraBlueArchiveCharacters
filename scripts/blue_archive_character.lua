@@ -76,22 +76,32 @@ BlueArchiveCharacter = {
         ---右目
         RightEye = {
             NORMAL = {0, 0},
-            SURPLISED = {0, 0},
-            TIED = {0, 0},
-            CLOSED = {0, 0}
+            SURPLISED = {2, 0},
+            TIED = {4, 0},
+            CLOSED = {3, 0},
+            SURPLISED2 = {5, 0},
+            ANGRY = {6, 0},
+            ANXIOUS = {1, 1}
         },
 
         ---左目
         LeftEye = {
             NORMAL = {0, 0},
-            SURPLISED = {0, 0},
-            TIED = {0, 0},
-            CLOSED = {0, 0}
+            SURPLISED = {1, 0},
+            TIED = {3, 0},
+            CLOSED = {2, 0},
+            SURPLISED2 = {4, 0},
+            ANGRY = {-1, 1},
+            ANXIOUS = {1, 1}
         },
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
+            CLOSED = {0, 0},
+            FUN = {2, 0},
+            ANXIOUS = {4, 0},
+            SHOCK = {6, 0},
+            ANGRY = {8, 0}
         }
     },
 
@@ -332,12 +342,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 28, -64),
+                    pos = vectors.vec3(-12, 7, -28),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 180)
+                    rot = vectors.vec3(-10, 200, -25)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -345,17 +355,55 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 28, -64),
+                    pos = vectors.vec3(4, 18, 15),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 180)
+                    rot = vectors.vec3(10, 40, 0)
                 }
             },
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    if tick == 0 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "FUN", 16, true)
+                    elseif tick == 14 then
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels(12, 0)
+                        end
+                    elseif tick == 16 then
+                        FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 24, true)
+                    elseif tick == 38 then
+                        models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
+                        models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
+                    elseif tick == 40 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "ANXIOUS", 3, true)
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels()
+                        end
+                    elseif tick == 43 then
+                        FaceParts:setEmotion("SURPLISED2", "SURPLISED2", "SHOCK", 24, true)
+                    elseif tick == 66 then
+                        models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
+                        models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
+                    elseif tick == 67 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 41, true)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    for _, modelPart in ipairs({models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight}) do
+                        modelPart:setUVPixels()
+                    end
+                end
             }
 		}
 	},
