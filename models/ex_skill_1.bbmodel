@@ -4523,7 +4523,7 @@
 									"uuid": "4e80b5b4-7c04-8374-f8a7-526b3d36d050",
 									"export": true,
 									"mirror_uv": false,
-									"isOpen": true,
+									"isOpen": false,
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
@@ -5272,7 +5272,7 @@
 							"uuid": "83f24bc5-f0db-656e-2821-e6fec488d149",
 							"time": 1.9,
 							"color": -1,
-							"interpolation": "catmullrom",
+							"interpolation": "step",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
 							"bezier_left_value": [0, 0, 0],
@@ -5283,7 +5283,7 @@
 							"channel": "rotation",
 							"data_points": [
 								{
-									"x": 110,
+									"x": "100",
 									"y": 0,
 									"z": 0
 								}
@@ -5291,7 +5291,7 @@
 							"uuid": "e4f92479-d784-958d-3e0f-8c2dfb216142",
 							"time": 2,
 							"color": -1,
-							"interpolation": "catmullrom",
+							"interpolation": "linear",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
 							"bezier_left_value": [0, 0, 0],
@@ -5613,6 +5613,25 @@
 							],
 							"uuid": "16ab2982-02f8-f2f5-5762-e6f0b46d9c2f",
 							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": 0,
+									"y": -1.25,
+									"z": -5
+								}
+							],
+							"uuid": "10df905a-d889-b9e3-e3fe-1d1b15f12eb6",
+							"time": 2,
 							"color": -1,
 							"interpolation": "linear",
 							"bezier_linked": true,
