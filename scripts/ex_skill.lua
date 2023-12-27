@@ -53,10 +53,9 @@ ExSkill = {
     animationRender = function(self, delta)
         local bodyYaw = self.BodyYaw
         local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
-        local cameraRot = models.models.main.CameraAnchor:getAnimRot():mul(-1, -1, -1):add(0, bodyYaw % 360)
         renderer:setOffsetCameraPivot(cameraPos)
-        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
-        renderer:setCameraRot(cameraRot)
+        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), client:getCameraDir()) * -1)
+        renderer:setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
         ExSkill.RenderProcessed = true
     end,
 
@@ -86,7 +85,7 @@ ExSkill = {
                 end
             end
             renderer:setOffsetCameraPivot(targetCameraPos:scale(self.TransitionCount))
-            renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils.cameraRotToRotationVector(targetCameraRot):scale(-1)) * -1 * self.TransitionCount)
+            renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), client:getCameraDir():scale(-1)) * -1 * self.TransitionCount)
             renderer:setCameraRot(targetCameraRot:copy():sub(cameraRot):scale(self.TransitionCount):add(cameraRot))
 
             --フレーム演出
