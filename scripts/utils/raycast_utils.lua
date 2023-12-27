@@ -14,7 +14,7 @@ RaycastUtils = {
     ---@param worldDir Vector3 測定する向きを示すワールド回転
     getLengthBetweenPointAndCollision = function (self, worldPos, worldDir)
         local currentPos = worldPos:copy() --現在の測定位置
-        local debug = self.DEBUG_MODE and host:isHost() and client:isDebugOverlayEnabled()
+        local debug = self.DEBUG_MODE and host:isHost()
         if debug then
             particles:newParticle("electric_spark", currentPos):setScale(0.25):setColor(1, 0, 0):setLifetime(1)
         end
