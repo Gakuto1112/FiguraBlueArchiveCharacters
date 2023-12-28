@@ -1418,9 +1418,17 @@ BlueArchiveCharacter = {
                 }
             }
         }
-    }
+    },
 
     --その他定数・変数
+    ---@diagnostic disable-next-line: undefined-field
+    EX_SKILL_1_MOMOI_HP_NAME = models.models.ex_skill_1.Gui.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_name"):setText("MOMOI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    ---@diagnostic disable-next-line: undefined-field
+    EX_SKILL_1_MOMOI_HP_VALUE = models.models.ex_skill_1.Gui.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_value"):setText("12/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    ---@diagnostic disable-next-line: undefined-field
+    EX_SKILL_1_MIDORI_HP_NAME = models.models.ex_skill_1.Gui.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_name"):setText("MIDORI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    ---@diagnostic disable-next-line: undefined-field
+    EX_SKILL_1_MIDORI_HP_VALUE = models.models.ex_skill_1.Gui.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_value"):setText("14/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
 }
 
 --生徒固有初期化処理
