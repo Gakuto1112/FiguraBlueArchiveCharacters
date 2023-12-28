@@ -53,10 +53,8 @@ ExSkill = {
     animationRender = function(self, delta)
         local bodyYaw = self.BodyYaw
         local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16), 0, 1, 0):add(0, -1.62, 0)
-        local cameraRot = models.models.main.CameraAnchor:getAnimRot():mul(-1, -1, -1):add(0, bodyYaw % 360)
-        renderer:setOffsetCameraPivot(cameraPos)
-        renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(cameraPos:copy():add(player:getPos(delta)):add(0, 1.62, 0), CameraUtils.cameraRotToRotationVector(cameraRot):scale(-1)) * -1)
-        renderer:setCameraRot(cameraRot)
+        CameraManager.setCameraPivot(cameraPos)
+        CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
         ExSkill.RenderProcessed = true
     end,
 
@@ -87,9 +85,9 @@ ExSkill = {
                     targetCameraRot.y = targetCameraRot.y + 360
                 end
             end
-            renderer:setOffsetCameraPivot(targetCameraPos:scale(self.TransitionCount))
-            renderer:setCameraPos(0, 0, RaycastUtils:getLengthBetweenPointAndCollision(player:getPos(delta):add(targetCameraPos):add(0, 1.62), CameraUtils.cameraRotToRotationVector(targetCameraRot):scale(-1)) * -1 * self.TransitionCount)
-            renderer:setCameraRot(targetCameraRot:copy():sub(cameraRot):scale(self.TransitionCount):add(cameraRot))
+            CameraManager.setCameraPivot(targetCameraPos:scale(self.TransitionCount))
+            CameraManager.setCameraRot(targetCameraRot:copy():sub(cameraRot):scale(self.TransitionCount):add(cameraRot))
+            CameraManager:setThirdPersonCameraDistance(4 - self.TransitionCount * 4)
 
             --フレーム演出
             local windowSize = client:getScaledWindowSize()
@@ -172,6 +170,7 @@ ExSkill = {
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
         renderer:setRenderHUD(false)
+        CameraManager:setCameraCollisionDenial(true)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition ~= nil then
@@ -191,6 +190,7 @@ ExSkill = {
             if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation()
             end
+            CameraManager:setThirdPersonCameraDistance(0)
             events.TICK:register(self.animationTick, "ex_skill_tick")
             events.RENDER:register(function ()
                 self:animationRender()
@@ -226,9 +226,10 @@ ExSkill = {
             if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition(false)
             end
-            renderer:setCameraPos()
-            renderer:setOffsetCameraPivot()
-            renderer:setCameraRot()
+            CameraManager.setCameraPivot()
+            CameraManager.setCameraRot()
+            CameraManager:setThirdPersonCameraDistance(4)
+            CameraManager:setCameraCollisionDenial(false)
             renderer:setRenderHUD(true)
         end)
     end,
@@ -262,9 +263,10 @@ ExSkill = {
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition(true)
         end
         FaceParts:resetEmotion()
-        renderer:setCameraPos()
-        renderer:setOffsetCameraPivot()
-        renderer:setCameraRot()
+        CameraManager.setCameraPivot()
+        CameraManager.setCameraRot()
+        CameraManager:setThirdPersonCameraDistance(4)
+        CameraManager:setCameraCollisionDenial(false)
         renderer:setRenderHUD(true)
         renderer:setFOV()
         self.AnimationCount = -1
