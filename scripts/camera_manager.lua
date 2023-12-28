@@ -26,17 +26,6 @@ CameraManager = {
                         minDistance = math.min(RaycastUtils:getLengthBetweenPointAndCollision(vectors.rotateAroundAxis(i * 90 + 45, baseVector:copy(), cameraDir):add(cameraPivot), cameraDir:copy():scale(-1), math.max(self.ThirdPersonCameraDistance, 4)), minDistance)
                     end
                     renderer:setCameraPos(0, 0, (minDistance > self.ThirdPersonCameraDistance or self.IsCameraCollisionDenialEnabled) and self.ThirdPersonCameraDistance - minDistance or 0)
-
-                    ---デバッグコード
-                    --[[
-                    particles:newParticle("minecraft:electric_spark", cameraPivot):setScale(0.5):setColor(1, 0, 0):setLifetime(1)
-                    local currentPos = cameraPivot:copy()
-                    for _ = 1, 16 do
-                        currentPos:add(cameraDir:copy():scale(1 / 16 * -1))
-                        particles:newParticle("minecraft:electric_spark", currentPos):setScale(0.5):setColor(0, 1, 1):setLifetime(1)
-                    end
-                    --particles:newParticle("minecraft:electric_spark", ):setScale(0.5):setColor(0, 1, 0):setLifetime(1)
-                    ]]
                 end
             end, "camera_manager_render")
         elseif not enabled then
