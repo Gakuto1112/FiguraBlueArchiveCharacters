@@ -8,7 +8,6 @@ events.ENTITY_INIT:register(function ()
 	--ユーティリティクラス
 	PlayerUtils = require("scripts.utils.player_utils")
 	ModelUtils = require("scripts.utils.model_utils")
-	CameraUtils = require("scripts.utils.camera_utils")
 	RaycastUtils = require("scripts.utils.raycast_utils")
 
 	--パーツ別クラス
@@ -26,6 +25,7 @@ events.ENTITY_INIT:register(function ()
 	--機能別クラス
 	Costume = require("scripts.costume")
 	ActionWheel = require("scripts.action_wheel")
+	CameraManager = require("scripts.camera_manager")
 	ExSkill = require("scripts.ex_skill")
 	PlacementObject = require("scripts.placement_object.placement_object")
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
