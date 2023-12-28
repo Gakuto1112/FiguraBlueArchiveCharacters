@@ -328,7 +328,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1, models.models.ex_skill_1.Midori},
+			models = {models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1, models.models.ex_skill_1.Midori, models.models.ex_skill_1.Gui},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -366,6 +366,17 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    local windowSize = client:getScaledWindowSize()
+                    models.models.ex_skill_1.Gui.MidoriDamageIndicator:setPos(windowSize.x * -1 + 4, 0)
+                    local scale = vectors.vec3(1, 1, 0):scale(windowSize.x * 0.45 / 223):add(0, 0, 1)
+                    for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator, models.models.ex_skill_1.Gui.MidoriDamageIndicator}) do
+                        modelPart:setScale(scale)
+                    end
+                end,
+
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
@@ -393,6 +404,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
                     elseif tick == 67 then
+                        models.models.ex_skill_1.Gui:setVisible(false)
                         FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 41, true)
                     end
                 end,
