@@ -41,6 +41,7 @@ CameraManager = {
             end, "camera_manager_render")
         elseif not enabled then
             events.RENDER:remove("camera_manager_render")
+            renderer:setCameraPos()
         end
     end,
 
