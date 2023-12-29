@@ -392,12 +392,34 @@ BlueArchiveCharacter = {
                     elseif tick == 24 and host:isHost() then
                         models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar3:setVisible(false)
                         BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("8/20")
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                    elseif tick == 27 and host:isHost() then
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor()
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                            modelPart:setUVPixels()
+                        end
                     elseif tick == 31 and host:isHost() then
                         models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar2:setVisible(false)
                         BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("5/20")
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                    elseif tick == 34 and host:isHost() then
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor()
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                            modelPart:setUVPixels()
+                        end
                     elseif tick == 36 and host:isHost() then
                         models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
                         BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("0/20")
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes:setVisible(false)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(true)
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(32, -4)
                     elseif tick == 38 then
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
@@ -429,10 +451,18 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Midori.MidoriLowerBody.MidoriLegs.GameConsole2:moveTo(models.models.ex_skill_1.Midori.MidoriUpperBody.MidoriArms.MidoriLeftArm.MidoriLeftArmBottom)
                     end
                     if host:isHost() then
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar1, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar2, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar3, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes}) do
+                            modelPart:setVisible(true)
+                        end
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(false)
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("12/20")
                         for i = 1, 3 do
                             models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar["HpBar"..i]:setVisible(true)
                         end
-                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("12/20")
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor()
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                            modelPart:setUVPixels()
+                        end
                     end
                 end
             }
