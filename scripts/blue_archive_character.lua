@@ -385,6 +385,11 @@ BlueArchiveCharacter = {
                 animationTick = function(tick)
                     if tick == 0 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "FUN", 16, true)
+                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 1, 1.5)
+                    elseif tick == 1 then
+                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 1, 1.75)
+                    elseif tick == 2 then
+                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 1, 2)
                     elseif tick == 14 then
                         for _, modelPart in ipairs({models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels(12, 0)
@@ -400,6 +405,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         end
                     elseif tick == 27 and host:isHost() then
                         models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
@@ -415,6 +421,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         end
                     elseif tick == 34 and host:isHost() then
                         models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
@@ -423,6 +430,8 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 36 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
+                        local playerPos = player:getPos()
+                        sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
                             BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("0/20")
@@ -432,6 +441,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes:setVisible(false)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(true)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(32, -4)
+                            sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
                             local koAnimationCount = 0
                             events.RENDER:register(function ()
                                 BlueArchiveCharacter.EX_SKILL_1_KO:setScale(vectors.vec3(1, 1, 1):scale(koAnimationCount <= 0.75 and -3.3333 * koAnimationCount + 5 or (koAnimationCount <= 1 and 2 * koAnimationCount + 1 or 3)))
@@ -463,6 +473,14 @@ BlueArchiveCharacter = {
                                 models.models.ex_skill_1.Gui.TextAnchor:setPos(models.models.ex_skill_1.Gui.TextAnchor:getAnimPos():scale(windowSize.y / 2 / 100):add(0, windowSize.y * -1 + 30, 0))
                             end, "ex_skill_1_text_render")
                         end
+                    elseif tick == 83 then
+                        sounds:playSound("minecraft:entity.generic.explode", player:getPos(), 0.25, 0.5)
+                    end
+                    if tick <= 38 and math.random() >= 0.75 then
+                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 0.1, 2)
+                    end
+                    if tick <= 38 and tick % 3 == 0 and host:isHost() then
+                        sounds:playSound("minecraft:entity.player.attack.nodamage", player:getPos(), 0.25, 1)
                     end
                 end,
 
