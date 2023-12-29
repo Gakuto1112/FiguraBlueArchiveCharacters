@@ -369,11 +369,13 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
-                    local windowSize = client:getScaledWindowSize()
-                    models.models.ex_skill_1.Gui.MidoriDamageIndicator:setPos(windowSize.x * -1 + 4, 0)
-                    local scale = vectors.vec3(1, 1, 0):scale(windowSize.x * 0.45 / 223):add(0, 0, 1)
-                    for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator, models.models.ex_skill_1.Gui.MidoriDamageIndicator}) do
-                        modelPart:setScale(scale)
+                    if host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator:setPos(windowSize.x * -1 + 4, 0)
+                        local scale = vectors.vec3(1, 1, 0):scale(windowSize.x * 0.45 / 223):add(0, 0, 1)
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator, models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator}) do
+                            modelPart:setScale(scale)
+                        end
                     end
                 end,
 
@@ -389,40 +391,46 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 16 then
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 24, true)
-                    elseif tick == 24 and host:isHost() then
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar3:setVisible(false)
-                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("8/20")
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                    elseif tick == 24 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
+                        if host:isHost() then
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar3:setVisible(false)
+                            BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("8/20")
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                        end
                     elseif tick == 27 and host:isHost() then
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                        models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
                             modelPart:setUVPixels()
                         end
-                    elseif tick == 31 and host:isHost() then
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar2:setVisible(false)
-                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("5/20")
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                    elseif tick == 31 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
+                        if host:isHost() then
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar2:setVisible(false)
+                            BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("5/20")
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
+                        end
                     elseif tick == 34 and host:isHost() then
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                        models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
                             modelPart:setUVPixels()
                         end
-                    elseif tick == 36 and host:isHost() then
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
-                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("0/20")
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes:setVisible(false)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(true)
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(32, -4)
+                    elseif tick == 36 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
+                        if host:isHost() then
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
+                            BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("0/20")
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes:setVisible(false)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(true)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(32, -4)
+                        end
                     elseif tick == 38 then
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
@@ -438,8 +446,15 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
                     elseif tick == 67 then
-                        models.models.ex_skill_1.Gui:setVisible(false)
+                        models.models.ex_skill_1.Gui.DamageIndicators:setVisible(false)
                         FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 41, true)
+                        if host:isHost() then
+                            models.models.ex_skill_1.Gui.TextAnchor:setVisible(true)
+                            events.RENDER:register(function ()
+                                local windowSize = client:getScaledWindowSize()
+                                models.models.ex_skill_1.Gui.TextAnchor:setPos(models.models.ex_skill_1.Gui.TextAnchor:getAnimPos():scale(windowSize.y / 2 / 100):add(0, windowSize.y * -1 + 30, 0))
+                            end, "ex_skill_1_text_render")
+                        end
                     end
                 end,
 
@@ -453,24 +468,27 @@ BlueArchiveCharacter = {
                     if models.models.ex_skill_1.Midori.MidoriLowerBody.MidoriLegs.GameConsole2 ~= nil then
                         models.models.ex_skill_1.Midori.MidoriLowerBody.MidoriLegs.GameConsole2:moveTo(models.models.ex_skill_1.Midori.MidoriUpperBody.MidoriArms.MidoriLeftArm.MidoriLeftArmBottom)
                     end
+                    if forcedStop then
+                        for i = 1, 3 do
+                            BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[i]:stop()
+                        end
+                    end
                     if host:isHost() then
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar1, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar2, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar3, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes}) do
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar1, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar2, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar3, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes}) do
                             modelPart:setVisible(true)
                         end
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(false)
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye, models.models.ex_skill_1.Gui.TextAnchor}) do
+                            modelPart:setVisible(false)
+                        end
                         BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("12/20")
                         for i = 1, 3 do
-                            models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar["HpBar"..i]:setVisible(true)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar["HpBar"..i]:setVisible(true)
                         end
-                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                        models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
                             modelPart:setUVPixels()
                         end
-                        if forcedStop then
-                            for i = 1, 3 do
-                                BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[i]:stop()
-                            end
-                        end
+                        events.RENDER:remove("ex_skill_1_text_render")
                     end
                 end
             }
@@ -1475,14 +1493,16 @@ BlueArchiveCharacter = {
 
     --その他定数・変数
     ---@diagnostic disable-next-line: undefined-field
-    EX_SKILL_1_MOMOI_HP_NAME = models.models.ex_skill_1.Gui.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_name"):setText("MOMOI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    EX_SKILL_1_MOMOI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_name"):setText("MOMOI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
     ---@diagnostic disable-next-line: undefined-field
-    EX_SKILL_1_MOMOI_HP_VALUE = models.models.ex_skill_1.Gui.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_value"):setText("12/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    EX_SKILL_1_MOMOI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_value"):setText("12/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
     ---@diagnostic disable-next-line: undefined-field
-    EX_SKILL_1_MIDORI_HP_NAME = models.models.ex_skill_1.Gui.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_name"):setText("MIDORI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    EX_SKILL_1_MIDORI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_name"):setText("MIDORI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
     ---@diagnostic disable-next-line: undefined-field
-    EX_SKILL_1_MIDORI_HP_VALUE = models.models.ex_skill_1.Gui.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_value"):setText("14/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
-    EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")}
+    EX_SKILL_1_MIDORI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_value"):setText("14/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")},
+    ---@diagnostic disable-next-line: undefined-field
+    Ex_SKILL_1_TEXT = models.models.ex_skill_1.Gui.TextAnchor:newText("ex_skill_1:text"):setText("§d§lMOMOI"):setScale(4, 4, 4):setAlignment("RIGHT"):setOutline(true):setOutlineColor(1, 1, 1)
 }
 
 --生徒固有初期化処理

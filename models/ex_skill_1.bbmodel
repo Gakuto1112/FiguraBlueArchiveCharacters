@@ -10701,7 +10701,7 @@
 			"uuid": "e98e96cf-993b-878e-02b8-777c368bb888",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -11419,10 +11419,10 @@
 			"autouv": 0,
 			"children": [
 				{
-					"name": "MomoiDamageIndicator",
-					"origin": [-4, -5, 31],
+					"name": "DamageIndicators",
+					"origin": [0, 0, 0],
 					"color": 0,
-					"uuid": "38c899c6-a6bf-3d31-a2f8-7e2d6c98c661",
+					"uuid": "cb02c79c-4d8f-0597-95da-a9a4e15698d8",
 					"export": true,
 					"mirror_uv": false,
 					"isOpen": true,
@@ -11430,40 +11430,40 @@
 					"visibility": true,
 					"autouv": 0,
 					"children": [
-						"16047ac4-2116-1c00-67a2-7d0e69667628",
-						"a109ac40-514b-ec68-f09b-14148f64b374",
-						"9f72df22-5b3e-2579-678f-b83b9df1fbd3",
 						{
-							"name": "MomoiHPBar",
-							"origin": [-17, -5, 0],
+							"name": "MomoiDamageIndicator",
+							"origin": [-4, -5, 31],
 							"color": 0,
-							"uuid": "cf86b3c8-b051-f3bc-f2c7-bf62f1c0a281",
+							"uuid": "38c899c6-a6bf-3d31-a2f8-7e2d6c98c661",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": true,
-							"locked": false,
-							"visibility": true,
-							"autouv": 0,
-							"children": ["378fb5ca-7c47-9f67-dede-cfe53573e441", "b08f7ce7-3df4-a8e8-db48-0da0848e3d1e", "c3ab740d-6fe9-fb3c-4bf4-230b2bada2ce"]
-						},
-						{
-							"name": "MomoiPaperDoll",
-							"origin": [-49, -64, 12],
-							"rotation": [0, 20, 0],
-							"color": 0,
-							"uuid": "a403d9ed-b6d9-3b4a-ff57-c52d057f7c91",
-							"export": true,
-							"mirror_uv": false,
-							"isOpen": true,
+							"isOpen": false,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
 							"children": [
+								"16047ac4-2116-1c00-67a2-7d0e69667628",
+								"a109ac40-514b-ec68-f09b-14148f64b374",
+								"9f72df22-5b3e-2579-678f-b83b9df1fbd3",
 								{
-									"name": "MomoiPaperDollHead",
-									"origin": [-49, -28, 12],
+									"name": "MomoiHPBar",
+									"origin": [-17, -5, 0],
 									"color": 0,
-									"uuid": "33c58465-de0d-365e-4731-d2fcf07c642b",
+									"uuid": "cf86b3c8-b051-f3bc-f2c7-bf62f1c0a281",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["378fb5ca-7c47-9f67-dede-cfe53573e441", "b08f7ce7-3df4-a8e8-db48-0da0848e3d1e", "c3ab740d-6fe9-fb3c-4bf4-230b2bada2ce"]
+								},
+								{
+									"name": "MomoiPaperDoll",
+									"origin": [-49, -64, 12],
+									"rotation": [0, 20, 0],
+									"color": 0,
+									"uuid": "a403d9ed-b6d9-3b4a-ff57-c52d057f7c91",
 									"export": true,
 									"mirror_uv": false,
 									"isOpen": true,
@@ -11471,341 +11471,11 @@
 									"visibility": true,
 									"autouv": 0,
 									"children": [
-										"d7975a11-29a4-546d-e0ca-d5a08c3baba0",
-										"724a1202-3d6b-00ae-7217-841a73563411",
 										{
-											"name": "MomoiPaperDollHairRibbons",
+											"name": "MomoiPaperDollHead",
 											"origin": [-49, -28, 12],
 											"color": 0,
-											"uuid": "076a61e1-69a2-147f-1b73-24d8a65a8fe9",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": false,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": ["145ec3f4-d8ce-fbc4-e07d-2daebb5c1912", "b3ef2cb2-3646-cd48-d669-688e22e3efc1"]
-										},
-										{
-											"name": "MomoiPaperDollPhone",
-											"origin": [-49, -28, 12],
-											"color": 0,
-											"uuid": "1e5cf711-6f25-4fdc-b5d3-b37b61dc5854",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": false,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												"b0814c93-7612-9903-dd5b-bb718aca6b0f",
-												"1160656a-5880-3ea7-8614-4213255ac3e5",
-												"c311000d-87e9-6824-a338-1078f95fe47d",
-												"af5e97f9-5f78-8d83-ca76-a16fc1dde884",
-												"e03b0f2e-724d-debf-5e54-0640e28c1b42",
-												{
-													"name": "PhoneEars4",
-													"origin": [-49, -15.25, 10.5],
-													"color": 0,
-													"uuid": "2f66afc7-be69-9294-65eb-5552142b7863",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														{
-															"name": "PhoneEarRight4",
-															"origin": [-49, -15.25, 10.5],
-															"color": 0,
-															"uuid": "6db9aa4b-3cba-0247-4520-938ca5e69d61",
-															"export": true,
-															"mirror_uv": false,
-															"isOpen": true,
-															"locked": false,
-															"visibility": true,
-															"autouv": 0,
-															"children": [
-																{
-																	"name": "PhoneEarRightFront4",
-																	"origin": [-49, -15.25, 10.5],
-																	"color": 0,
-																	"uuid": "6460792e-f846-2a4d-c28c-086386e9fb90",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": [
-																		{
-																			"name": "PhoneEarRightFront1_12",
-																			"origin": [-49, -16, 10.5],
-																			"rotation": [0, 0, -35],
-																			"color": 0,
-																			"uuid": "663b2898-28ac-21c6-d4b2-edec643b2294",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"28be0eaa-b636-25a5-acb7-72aaf5de6394",
-																				"b9a7dc8f-b329-f6c3-bf06-c09ba0977f6e",
-																				"976bd31e-30b3-4068-2229-d1353a5d84f9",
-																				{
-																					"name": "PhoneEarRightFront1_11",
-																					"origin": [-49, -11.5, 10.5],
-																					"rotation": [0, 0, -25],
-																					"color": 0,
-																					"uuid": "6116d3ae-7e26-af46-4ebb-7d665697dab4",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"4875215e-ba9f-8c22-6f55-f49e06e20cff",
-																						"e8599b5c-655f-b6bf-94d6-c9f8a436efd1",
-																						"f1f0fdf1-94aa-1952-d985-86e1ec684952",
-																						{
-																							"name": "PhoneEarRightFront1_10",
-																							"origin": [-49, -8.365, 10.5],
-																							"rotation": [0, 0, -30],
-																							"color": 0,
-																							"uuid": "93c90355-b726-425b-b5bc-d8b77be54fcb",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["4c89a243-2b77-dc62-52cc-51ec7862c5c3", "8bbd289b-0bfd-b04b-dd29-2aec1ba21386", "bf118e16-a7ea-3996-4e93-79fa067ed1f7"]
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"name": "PhoneEarRightFront2_12",
-																			"origin": [-42.25, -19.75, 10.5],
-																			"rotation": [0, 0, -60],
-																			"color": 0,
-																			"uuid": "14c51902-8b72-0f8b-2549-310cc973e211",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"def81953-358e-a38c-6a2f-970233971cfd",
-																				"03e78c25-8f26-f9ee-6d2a-4c1766153a10",
-																				"33ee2d70-d898-a3fc-6050-ffded664f398",
-																				{
-																					"name": "PhoneEarRightFront2_11",
-																					"origin": [-42.25, -18.88, 10.5],
-																					"rotation": [0, 0, 60],
-																					"color": 0,
-																					"uuid": "a9cab2ac-13ed-85d6-c80d-aabd82ccc366",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"e3d924e7-2753-c8e7-c8b9-edd6d68dfd70",
-																						"4986a371-d9b5-8081-bc33-d3fa33e8cd50",
-																						"12e88575-3881-b783-b779-702422d30928",
-																						{
-																							"name": "PhoneEarRightFront2_10",
-																							"origin": [-42.25, -12.88, 10.5],
-																							"rotation": [0, 0, 20],
-																							"color": 0,
-																							"uuid": "02b7ae3b-b922-63e6-7b85-68a4bda85938",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["6b829890-15b7-eb9b-e83d-7ae3531f8d45", "1dd2e0f5-9934-6960-768a-5e3cb2a6ec38", "607a81bf-8e79-238b-dcc7-37be1b33cf09"]
-																						}
-																					]
-																				}
-																			]
-																		}
-																	]
-																},
-																{
-																	"name": "PhoneEarRightBack4",
-																	"origin": [-49, -15.25, 12],
-																	"color": 0,
-																	"uuid": "a080a920-27d1-357e-62b9-7f546d6ea92c",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": false,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": ["c366db06-917a-8ca1-b744-92a49eade07e", "9ed0976e-0012-9842-18a2-20569f5e8418"]
-																}
-															]
-														},
-														{
-															"name": "PhoneEarLeft4",
-															"origin": [-49, -15.25, 10.5],
-															"color": 0,
-															"uuid": "25f2b652-fbb7-892f-330c-4b744be62e86",
-															"export": true,
-															"mirror_uv": false,
-															"isOpen": true,
-															"locked": false,
-															"visibility": true,
-															"autouv": 0,
-															"children": [
-																{
-																	"name": "PhoneEarLeftFront4",
-																	"origin": [-49, -15.25, 10.5],
-																	"color": 0,
-																	"uuid": "e5987fec-b936-b110-6cf1-c4261b2d9b7a",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": [
-																		{
-																			"name": "PhoneEarLeftFront1_12",
-																			"origin": [-49, -16, 10.5],
-																			"rotation": [0, 0, 35],
-																			"color": 0,
-																			"uuid": "dec5ba86-e902-6047-4626-48464bd37f83",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"a275c4b1-75e9-7ee2-ab7d-1d85efa6312b",
-																				"50937aab-6437-9142-d5ac-f0a71a187b57",
-																				"b8b23c89-8879-fafb-c8b0-8655a31d9f29",
-																				{
-																					"name": "PhoneEarLeftFront1_11",
-																					"origin": [-49, -11.5, 10.5],
-																					"rotation": [0, 0, 25],
-																					"color": 0,
-																					"uuid": "47be98dc-7b34-50e3-e9aa-9f659b0d411c",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"b19e72a5-171d-84e5-111c-33b2caafb6ed",
-																						"a9e890aa-38e5-8f17-413e-143687d544a3",
-																						"42cfc8fa-8946-0d81-d449-2a3e05a54bc4",
-																						{
-																							"name": "PhoneEarLeftFront1_10",
-																							"origin": [-49, -8.365, 10.5],
-																							"rotation": [0, 0, 30],
-																							"color": 0,
-																							"uuid": "60977178-145b-2cb4-3353-86ad07334e67",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["57d18f38-257a-0674-c595-bf9d1781ada8", "6890d333-55ea-58a5-b782-753f2e8abd18", "330df046-21bb-4af6-eda7-58b463bd1752"]
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"name": "PhoneEarLeftFront2_12",
-																			"origin": [-55.75, -19.75, 10.5],
-																			"rotation": [0, 0, 60],
-																			"color": 0,
-																			"uuid": "e1b5dc8e-9a76-22a9-3916-3fa106be7e0e",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"9d113c6a-264f-b6fa-f192-d29c1b9ca8ae",
-																				"416100c4-302c-e473-0882-1e777f0db3d9",
-																				"228b1614-1b89-7730-6753-711c202f3436",
-																				{
-																					"name": "PhoneEarLeftFront2_11",
-																					"origin": [-55.75, -18.88, 10.5],
-																					"rotation": [0, 0, -60],
-																					"color": 0,
-																					"uuid": "8a86e33f-36a4-0205-d1d3-59040ae3e966",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"5e95d45e-b00d-101a-eb2d-8ef1494e18ef",
-																						"02677134-5668-0c84-50b3-c36cd866c4ff",
-																						"7d7144b1-b662-ba72-28dc-352ba8beacba",
-																						{
-																							"name": "PhoneEarLeftFront2_10",
-																							"origin": [-55.75, -12.88, 10.5],
-																							"rotation": [0, 0, -20],
-																							"color": 0,
-																							"uuid": "d97624c0-83e3-00ec-1dda-eef3f07ef27e",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["92f11b65-4136-4add-bc80-78238af7d668", "c390eaf3-9ce9-05ab-6d6f-0210475ac652", "4b0617ce-575a-e07b-9f84-81ae37c2155b"]
-																						}
-																					]
-																				}
-																			]
-																		}
-																	]
-																},
-																{
-																	"name": "PhoneEarLeftBack4",
-																	"origin": [-49, -15.25, 12],
-																	"color": 0,
-																	"uuid": "069ad9e0-dd71-9e0c-c08d-bb6e58b217e5",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": ["d62aa291-1852-2b1d-e8f0-a53e9c3e2786", "c74da8ad-52f7-71c7-d9e1-4d9ce0ad7ab2"]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"name": "MomoiPaperDollFaceParts",
-											"origin": [-49, -28, 12],
-											"color": 0,
-											"uuid": "0a137723-635f-97c5-3273-f3b69ff7506d",
+											"uuid": "33c58465-de0d-365e-4731-d2fcf07c642b",
 											"export": true,
 											"mirror_uv": false,
 											"isOpen": true,
@@ -11813,42 +11483,26 @@
 											"visibility": true,
 											"autouv": 0,
 											"children": [
+												"d7975a11-29a4-546d-e0ca-d5a08c3baba0",
+												"724a1202-3d6b-00ae-7217-841a73563411",
 												{
-													"name": "MomoiPaperDollEyes",
+													"name": "MomoiPaperDollHairRibbons",
 													"origin": [-49, -28, 12],
 													"color": 0,
-													"uuid": "f6c26cd3-4619-65e0-7187-8b4fa8f17094",
+													"uuid": "076a61e1-69a2-147f-1b73-24d8a65a8fe9",
 													"export": true,
 													"mirror_uv": false,
-													"isOpen": true,
+													"isOpen": false,
 													"locked": false,
 													"visibility": true,
 													"autouv": 0,
-													"children": ["4651a41e-1a30-3109-a41c-6ade00ae1d72", "639323e0-7bba-1d80-f23d-7a04e1042971"]
+													"children": ["145ec3f4-d8ce-fbc4-e07d-2daebb5c1912", "b3ef2cb2-3646-cd48-d669-688e22e3efc1"]
 												},
-												"4bd96106-1bef-07bd-237c-e248d6e1ab81",
-												"6470b0a7-3cee-0fca-a18a-92a187fb169d"
-											]
-										},
-										{
-											"name": "MomoiPaperDollHeadRing",
-											"origin": [-49, -22, 12],
-											"color": 0,
-											"uuid": "781d25c2-c71c-0c47-c3e1-7da70357378c",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												"ee1ee465-5b1a-76dc-3154-0771fcc17934",
 												{
-													"name": "RingParts4",
-													"origin": [-49, -22, 12],
-													"rotation": [35, 0, 0],
+													"name": "MomoiPaperDollPhone",
+													"origin": [-49, -28, 12],
 													"color": 0,
-													"uuid": "062e790a-5cea-ec46-4b49-6bc090e4f7c3",
+													"uuid": "1e5cf711-6f25-4fdc-b5d3-b37b61dc5854",
 													"export": true,
 													"mirror_uv": false,
 													"isOpen": false,
@@ -11856,93 +11510,16 @@
 													"visibility": true,
 													"autouv": 0,
 													"children": [
-														"71317038-1fcb-6146-4838-32f2003262d4",
-														"de6ee117-3a49-c91c-8291-78fbc0a24ec8",
-														"f7c8b01b-9a22-9e06-ef0d-f822bb547543",
-														"7b49afd0-afbb-7490-08e1-af826596ec23"
-													]
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "MomoiPaperDollUpperBody",
-									"origin": [-49, -64, 12],
-									"color": 0,
-									"uuid": "8531f9f3-82c1-cd43-b452-f49fff216492",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": [
-										{
-											"name": "MomoiPaperDollBody",
-											"origin": [-49, -28, 12],
-											"color": 0,
-											"uuid": "afe83672-a41a-4245-0079-89eaeed8ad6f",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												"ade137e5-f552-acbf-725b-6a81cbe78a84",
-												"80aaddba-f1b2-6a02-61ea-3026a19f3ca2",
-												{
-													"name": "MomoiPaperDollCoatRibbon",
-													"origin": [-49, -37.75, 8.76],
-													"color": 0,
-													"uuid": "fb052d58-1173-596d-fdb7-301d93701b7e",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														"27242421-10a1-c50d-e005-da4a329f0c81",
-														"d1719766-09da-e2a0-ac9d-afd179e58bd6",
-														"0922e08a-4e17-3e6d-8f26-4e12661017e3",
-														"d198c380-408c-2672-87c8-84fd8853877f",
-														"a14f0f89-0ea8-eeb9-adb6-6a66f364e78d"
-													]
-												},
-												{
-													"name": "MomoiPaperDollSkirt",
-													"origin": [-49, -43, 12],
-													"color": 0,
-													"uuid": "5ac5a6ec-74a2-8378-fa40-9a76db035fbb",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": ["0dc79bdf-4755-eb50-b618-a4158cbf4d5a", "d041cd1f-3625-0d4f-c048-6a8c64d5e871"]
-												},
-												{
-													"name": "MomoiPaperDollTail",
-													"origin": [-49, -42.25, 15],
-													"rotation": [15, 0, 0],
-													"color": 0,
-													"uuid": "4ec84fc4-a4f2-6163-5955-e2f9d7bcc543",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														"cc822fa9-f3fe-af27-a736-06892f8e5b67",
+														"b0814c93-7612-9903-dd5b-bb718aca6b0f",
+														"1160656a-5880-3ea7-8614-4213255ac3e5",
+														"c311000d-87e9-6824-a338-1078f95fe47d",
+														"af5e97f9-5f78-8d83-ca76-a16fc1dde884",
+														"e03b0f2e-724d-debf-5e54-0640e28c1b42",
 														{
-															"name": "TailRibbon4",
-															"origin": [-49, -41.875, 18.135],
+															"name": "PhoneEars4",
+															"origin": [-49, -15.25, 10.5],
 															"color": 0,
-															"uuid": "5794112f-de7a-931a-03e4-baff0c7689b1",
+															"uuid": "2f66afc7-be69-9294-65eb-5552142b7863",
 															"export": true,
 															"mirror_uv": false,
 															"isOpen": true,
@@ -11950,35 +11527,362 @@
 															"visibility": true,
 															"autouv": 0,
 															"children": [
-																"2c4808b5-ce65-9f6c-3558-cd7c8be389f7",
-																"7c84816d-c469-acb8-8e15-eac810914570",
-																"1bc669c0-f773-9fd4-9d70-6481debd66bb",
-																"723a73dd-cd20-207f-9529-6dc497742c9d"
+																{
+																	"name": "PhoneEarRight4",
+																	"origin": [-49, -15.25, 10.5],
+																	"color": 0,
+																	"uuid": "6db9aa4b-3cba-0247-4520-938ca5e69d61",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": [
+																		{
+																			"name": "PhoneEarRightFront4",
+																			"origin": [-49, -15.25, 10.5],
+																			"color": 0,
+																			"uuid": "6460792e-f846-2a4d-c28c-086386e9fb90",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": [
+																				{
+																					"name": "PhoneEarRightFront1_12",
+																					"origin": [-49, -16, 10.5],
+																					"rotation": [0, 0, -35],
+																					"color": 0,
+																					"uuid": "663b2898-28ac-21c6-d4b2-edec643b2294",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"28be0eaa-b636-25a5-acb7-72aaf5de6394",
+																						"b9a7dc8f-b329-f6c3-bf06-c09ba0977f6e",
+																						"976bd31e-30b3-4068-2229-d1353a5d84f9",
+																						{
+																							"name": "PhoneEarRightFront1_11",
+																							"origin": [-49, -11.5, 10.5],
+																							"rotation": [0, 0, -25],
+																							"color": 0,
+																							"uuid": "6116d3ae-7e26-af46-4ebb-7d665697dab4",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"4875215e-ba9f-8c22-6f55-f49e06e20cff",
+																								"e8599b5c-655f-b6bf-94d6-c9f8a436efd1",
+																								"f1f0fdf1-94aa-1952-d985-86e1ec684952",
+																								{
+																									"name": "PhoneEarRightFront1_10",
+																									"origin": [-49, -8.365, 10.5],
+																									"rotation": [0, 0, -30],
+																									"color": 0,
+																									"uuid": "93c90355-b726-425b-b5bc-d8b77be54fcb",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["4c89a243-2b77-dc62-52cc-51ec7862c5c3", "8bbd289b-0bfd-b04b-dd29-2aec1ba21386", "bf118e16-a7ea-3996-4e93-79fa067ed1f7"]
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"name": "PhoneEarRightFront2_12",
+																					"origin": [-42.25, -19.75, 10.5],
+																					"rotation": [0, 0, -60],
+																					"color": 0,
+																					"uuid": "14c51902-8b72-0f8b-2549-310cc973e211",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"def81953-358e-a38c-6a2f-970233971cfd",
+																						"03e78c25-8f26-f9ee-6d2a-4c1766153a10",
+																						"33ee2d70-d898-a3fc-6050-ffded664f398",
+																						{
+																							"name": "PhoneEarRightFront2_11",
+																							"origin": [-42.25, -18.88, 10.5],
+																							"rotation": [0, 0, 60],
+																							"color": 0,
+																							"uuid": "a9cab2ac-13ed-85d6-c80d-aabd82ccc366",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"e3d924e7-2753-c8e7-c8b9-edd6d68dfd70",
+																								"4986a371-d9b5-8081-bc33-d3fa33e8cd50",
+																								"12e88575-3881-b783-b779-702422d30928",
+																								{
+																									"name": "PhoneEarRightFront2_10",
+																									"origin": [-42.25, -12.88, 10.5],
+																									"rotation": [0, 0, 20],
+																									"color": 0,
+																									"uuid": "02b7ae3b-b922-63e6-7b85-68a4bda85938",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["6b829890-15b7-eb9b-e83d-7ae3531f8d45", "1dd2e0f5-9934-6960-768a-5e3cb2a6ec38", "607a81bf-8e79-238b-dcc7-37be1b33cf09"]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"name": "PhoneEarRightBack4",
+																			"origin": [-49, -15.25, 12],
+																			"color": 0,
+																			"uuid": "a080a920-27d1-357e-62b9-7f546d6ea92c",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": false,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": ["c366db06-917a-8ca1-b744-92a49eade07e", "9ed0976e-0012-9842-18a2-20569f5e8418"]
+																		}
+																	]
+																},
+																{
+																	"name": "PhoneEarLeft4",
+																	"origin": [-49, -15.25, 10.5],
+																	"color": 0,
+																	"uuid": "25f2b652-fbb7-892f-330c-4b744be62e86",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": [
+																		{
+																			"name": "PhoneEarLeftFront4",
+																			"origin": [-49, -15.25, 10.5],
+																			"color": 0,
+																			"uuid": "e5987fec-b936-b110-6cf1-c4261b2d9b7a",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": [
+																				{
+																					"name": "PhoneEarLeftFront1_12",
+																					"origin": [-49, -16, 10.5],
+																					"rotation": [0, 0, 35],
+																					"color": 0,
+																					"uuid": "dec5ba86-e902-6047-4626-48464bd37f83",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"a275c4b1-75e9-7ee2-ab7d-1d85efa6312b",
+																						"50937aab-6437-9142-d5ac-f0a71a187b57",
+																						"b8b23c89-8879-fafb-c8b0-8655a31d9f29",
+																						{
+																							"name": "PhoneEarLeftFront1_11",
+																							"origin": [-49, -11.5, 10.5],
+																							"rotation": [0, 0, 25],
+																							"color": 0,
+																							"uuid": "47be98dc-7b34-50e3-e9aa-9f659b0d411c",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"b19e72a5-171d-84e5-111c-33b2caafb6ed",
+																								"a9e890aa-38e5-8f17-413e-143687d544a3",
+																								"42cfc8fa-8946-0d81-d449-2a3e05a54bc4",
+																								{
+																									"name": "PhoneEarLeftFront1_10",
+																									"origin": [-49, -8.365, 10.5],
+																									"rotation": [0, 0, 30],
+																									"color": 0,
+																									"uuid": "60977178-145b-2cb4-3353-86ad07334e67",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["57d18f38-257a-0674-c595-bf9d1781ada8", "6890d333-55ea-58a5-b782-753f2e8abd18", "330df046-21bb-4af6-eda7-58b463bd1752"]
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"name": "PhoneEarLeftFront2_12",
+																					"origin": [-55.75, -19.75, 10.5],
+																					"rotation": [0, 0, 60],
+																					"color": 0,
+																					"uuid": "e1b5dc8e-9a76-22a9-3916-3fa106be7e0e",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"9d113c6a-264f-b6fa-f192-d29c1b9ca8ae",
+																						"416100c4-302c-e473-0882-1e777f0db3d9",
+																						"228b1614-1b89-7730-6753-711c202f3436",
+																						{
+																							"name": "PhoneEarLeftFront2_11",
+																							"origin": [-55.75, -18.88, 10.5],
+																							"rotation": [0, 0, -60],
+																							"color": 0,
+																							"uuid": "8a86e33f-36a4-0205-d1d3-59040ae3e966",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"5e95d45e-b00d-101a-eb2d-8ef1494e18ef",
+																								"02677134-5668-0c84-50b3-c36cd866c4ff",
+																								"7d7144b1-b662-ba72-28dc-352ba8beacba",
+																								{
+																									"name": "PhoneEarLeftFront2_10",
+																									"origin": [-55.75, -12.88, 10.5],
+																									"rotation": [0, 0, -20],
+																									"color": 0,
+																									"uuid": "d97624c0-83e3-00ec-1dda-eef3f07ef27e",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["92f11b65-4136-4add-bc80-78238af7d668", "c390eaf3-9ce9-05ab-6d6f-0210475ac652", "4b0617ce-575a-e07b-9f84-81ae37c2155b"]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"name": "PhoneEarLeftBack4",
+																			"origin": [-49, -15.25, 12],
+																			"color": 0,
+																			"uuid": "069ad9e0-dd71-9e0c-c08d-bb6e58b217e5",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": ["d62aa291-1852-2b1d-e8f0-a53e9c3e2786", "c74da8ad-52f7-71c7-d9e1-4d9ce0ad7ab2"]
+																		}
+																	]
+																}
 															]
-														},
+														}
+													]
+												},
+												{
+													"name": "MomoiPaperDollFaceParts",
+													"origin": [-49, -28, 12],
+													"color": 0,
+													"uuid": "0a137723-635f-97c5-3273-f3b69ff7506d",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
 														{
-															"name": "Tail5",
-															"origin": [-49, -43, 24],
-															"rotation": [-40, 0, 0],
+															"name": "MomoiPaperDollEyes",
+															"origin": [-49, -28, 12],
 															"color": 0,
-															"uuid": "a6cc642d-e3b1-14ab-7310-bd6c6a21fdcd",
+															"uuid": "f6c26cd3-4619-65e0-7187-8b4fa8f17094",
 															"export": true,
 															"mirror_uv": false,
 															"isOpen": true,
 															"locked": false,
 															"visibility": true,
 															"autouv": 0,
-															"children": ["fd1cdc33-f203-e110-6a43-e274e35bc1dd"]
+															"children": ["4651a41e-1a30-3109-a41c-6ade00ae1d72", "639323e0-7bba-1d80-f23d-7a04e1042971"]
+														},
+														"4bd96106-1bef-07bd-237c-e248d6e1ab81",
+														"6470b0a7-3cee-0fca-a18a-92a187fb169d"
+													]
+												},
+												{
+													"name": "MomoiPaperDollHeadRing",
+													"origin": [-49, -22, 12],
+													"color": 0,
+													"uuid": "781d25c2-c71c-0c47-c3e1-7da70357378c",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														"ee1ee465-5b1a-76dc-3154-0771fcc17934",
+														{
+															"name": "RingParts4",
+															"origin": [-49, -22, 12],
+															"rotation": [35, 0, 0],
+															"color": 0,
+															"uuid": "062e790a-5cea-ec46-4b49-6bc090e4f7c3",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": false,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"71317038-1fcb-6146-4838-32f2003262d4",
+																"de6ee117-3a49-c91c-8291-78fbc0a24ec8",
+																"f7c8b01b-9a22-9e06-ef0d-f822bb547543",
+																"7b49afd0-afbb-7490-08e1-af826596ec23"
+															]
 														}
 													]
 												}
 											]
 										},
 										{
-											"name": "MomoiPaperDollArms",
+											"name": "MomoiPaperDollUpperBody",
 											"origin": [-49, -64, 12],
 											"color": 0,
-											"uuid": "fdea0b2e-cbc9-6d7c-606b-d31a635e7df7",
+											"uuid": "8531f9f3-82c1-cd43-b452-f49fff216492",
 											"export": true,
 											"mirror_uv": false,
 											"isOpen": true,
@@ -11987,40 +11891,235 @@
 											"autouv": 0,
 											"children": [
 												{
-													"name": "MomoiPaperDollRightArm",
-													"origin": [-41.5, -31, 12],
+													"name": "MomoiPaperDollBody",
+													"origin": [-49, -28, 12],
 													"color": 0,
-													"uuid": "d454c0a0-4f70-72af-4181-aab7928b6a5e",
+													"uuid": "afe83672-a41a-4245-0079-89eaeed8ad6f",
 													"export": true,
 													"mirror_uv": false,
 													"isOpen": true,
 													"locked": false,
 													"visibility": true,
 													"autouv": 0,
-													"children": ["d7cdf344-597a-1124-3320-dbefe7752cde", "c851c76a-fb96-169b-f5e8-1c2110e117b9", "0c1a7a3e-c9c1-3a99-df18-191cffb2a9f6"]
+													"children": [
+														"ade137e5-f552-acbf-725b-6a81cbe78a84",
+														"80aaddba-f1b2-6a02-61ea-3026a19f3ca2",
+														{
+															"name": "MomoiPaperDollCoatRibbon",
+															"origin": [-49, -37.75, 8.76],
+															"color": 0,
+															"uuid": "fb052d58-1173-596d-fdb7-301d93701b7e",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"27242421-10a1-c50d-e005-da4a329f0c81",
+																"d1719766-09da-e2a0-ac9d-afd179e58bd6",
+																"0922e08a-4e17-3e6d-8f26-4e12661017e3",
+																"d198c380-408c-2672-87c8-84fd8853877f",
+																"a14f0f89-0ea8-eeb9-adb6-6a66f364e78d"
+															]
+														},
+														{
+															"name": "MomoiPaperDollSkirt",
+															"origin": [-49, -43, 12],
+															"color": 0,
+															"uuid": "5ac5a6ec-74a2-8378-fa40-9a76db035fbb",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["0dc79bdf-4755-eb50-b618-a4158cbf4d5a", "d041cd1f-3625-0d4f-c048-6a8c64d5e871"]
+														},
+														{
+															"name": "MomoiPaperDollTail",
+															"origin": [-49, -42.25, 15],
+															"rotation": [15, 0, 0],
+															"color": 0,
+															"uuid": "4ec84fc4-a4f2-6163-5955-e2f9d7bcc543",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"cc822fa9-f3fe-af27-a736-06892f8e5b67",
+																{
+																	"name": "TailRibbon4",
+																	"origin": [-49, -41.875, 18.135],
+																	"color": 0,
+																	"uuid": "5794112f-de7a-931a-03e4-baff0c7689b1",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": [
+																		"2c4808b5-ce65-9f6c-3558-cd7c8be389f7",
+																		"7c84816d-c469-acb8-8e15-eac810914570",
+																		"1bc669c0-f773-9fd4-9d70-6481debd66bb",
+																		"723a73dd-cd20-207f-9529-6dc497742c9d"
+																	]
+																},
+																{
+																	"name": "Tail5",
+																	"origin": [-49, -43, 24],
+																	"rotation": [-40, 0, 0],
+																	"color": 0,
+																	"uuid": "a6cc642d-e3b1-14ab-7310-bd6c6a21fdcd",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": ["fd1cdc33-f203-e110-6a43-e274e35bc1dd"]
+																}
+															]
+														}
+													]
 												},
 												{
-													"name": "MomoiPaperDollLeftArm",
-													"origin": [-56.5, -31, 12],
+													"name": "MomoiPaperDollArms",
+													"origin": [-49, -64, 12],
 													"color": 0,
-													"uuid": "331fe6e2-e322-7069-c1f0-f6655b4748f6",
+													"uuid": "fdea0b2e-cbc9-6d7c-606b-d31a635e7df7",
 													"export": true,
 													"mirror_uv": false,
 													"isOpen": true,
 													"locked": false,
 													"visibility": true,
 													"autouv": 0,
-													"children": ["dd9c46d1-4942-b5a9-8cfa-dfdbba6767f1", "8111ed6f-ff47-3ba8-314e-f228d69f73ff", "878ad178-6fec-1430-43a4-575d8dac6dfb"]
+													"children": [
+														{
+															"name": "MomoiPaperDollRightArm",
+															"origin": [-41.5, -31, 12],
+															"color": 0,
+															"uuid": "d454c0a0-4f70-72af-4181-aab7928b6a5e",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["d7cdf344-597a-1124-3320-dbefe7752cde", "c851c76a-fb96-169b-f5e8-1c2110e117b9", "0c1a7a3e-c9c1-3a99-df18-191cffb2a9f6"]
+														},
+														{
+															"name": "MomoiPaperDollLeftArm",
+															"origin": [-56.5, -31, 12],
+															"color": 0,
+															"uuid": "331fe6e2-e322-7069-c1f0-f6655b4748f6",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["dd9c46d1-4942-b5a9-8cfa-dfdbba6767f1", "8111ed6f-ff47-3ba8-314e-f228d69f73ff", "878ad178-6fec-1430-43a4-575d8dac6dfb"]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "MomoiPaperDollLowerBody",
+											"origin": [-49, -46, 12],
+											"color": 0,
+											"uuid": "20251fd7-0967-9c88-6b29-6ed24b98c1b3",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												{
+													"name": "MomoiPaperDollLegs",
+													"origin": [-49, -46, 12],
+													"color": 0,
+													"uuid": "63a729e2-318d-0d15-409a-8018e721a45d",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														{
+															"name": "MomoiPaperDollRightLeg",
+															"origin": [-46, -46, 12],
+															"color": 0,
+															"uuid": "295d14f2-30ed-e350-ecb9-28db1cc4c87e",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["f3de278e-6fe5-60b6-7872-52e05c34a19f", "4fa66a85-72c2-65af-9615-b124ea0947f5"]
+														},
+														{
+															"name": "MomoiPaperDollLeftLeg",
+															"origin": [-52, -46, 12],
+															"color": 0,
+															"uuid": "0478892c-990e-7676-8ebd-9258e47c7a8c",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["a4c22d86-49f5-d315-1c8f-4bd89d9c2fe7", "85f33a80-7e5e-b4a4-7d9c-796176ca27ef"]
+														}
+													]
 												}
 											]
 										}
 									]
+								}
+							]
+						},
+						{
+							"name": "MidoriDamageIndicator",
+							"origin": [0, -5, 31],
+							"color": 0,
+							"uuid": "f80c7b51-5596-4614-1237-374c9243c4ec",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": false,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								"d524f0c8-531c-941f-6b06-7157f0884aaa",
+								"3a947ec0-e103-8054-fdf5-bd570147ea84",
+								"d44aed6c-d19d-022f-f831-72b0ade91475",
+								{
+									"name": "MidoriHPBar",
+									"origin": [289, -5, 0],
+									"color": 0,
+									"uuid": "4fbab165-b170-b15e-f607-faa0536cfe19",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["79d1618f-2ccb-cb4d-ab40-be9562d1d210"]
 								},
 								{
-									"name": "MomoiPaperDollLowerBody",
-									"origin": [-49, -46, 12],
+									"name": "MidoriPaperDoll",
+									"origin": [45, -64, 12],
+									"rotation": [0, -20, 0],
 									"color": 0,
-									"uuid": "20251fd7-0967-9c88-6b29-6ed24b98c1b3",
+									"uuid": "40643ac5-d506-90e5-a95c-849d1e73e644",
 									"export": true,
 									"mirror_uv": false,
 									"isOpen": true,
@@ -12029,10 +12128,415 @@
 									"autouv": 0,
 									"children": [
 										{
-											"name": "MomoiPaperDollLegs",
-											"origin": [-49, -46, 12],
+											"name": "MidoriPaperDollHead",
+											"origin": [45, -28, 12],
 											"color": 0,
-											"uuid": "63a729e2-318d-0d15-409a-8018e721a45d",
+											"uuid": "d4455441-4c15-450c-0a78-8b5a12c1a152",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												"4159312f-5585-788d-bd45-60a2507dffbb",
+												"bf7827f1-eccc-7825-4c2e-513411a45d55",
+												{
+													"name": "MidoriPaperDollHairRibbons",
+													"origin": [45, -28, 12],
+													"color": 0,
+													"uuid": "290e68ee-ce91-08be-28c3-c2a0ae45d1c3",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": ["dbd63195-ee43-0cf9-2144-8e8749404c5e", "7f23ecbf-cb72-dfd1-0fb7-43cce5fb72da"]
+												},
+												{
+													"name": "MidoriPaperDollPhone",
+													"origin": [45, -28, 12],
+													"color": 0,
+													"uuid": "c7d307b1-9824-6b4e-9d27-702669d037f6",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": false,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														"db68b3ad-166e-9e03-6f79-de34605794c8",
+														"b9aa6581-3596-4d1d-6d8d-f48c5f98dd0d",
+														"74d76635-413d-ddbd-26af-2c7b2246853c",
+														"e7de45cc-73eb-06a2-ff52-373ac98f9391",
+														"d0fbeea0-f38e-51cc-b6e1-25a65570d912",
+														{
+															"name": "PhoneEars3",
+															"origin": [45, -15.25, 10.5],
+															"color": 0,
+															"uuid": "de2761e2-6700-f18b-ba42-2a84f771af0c",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																{
+																	"name": "PhoneEarRight3",
+																	"origin": [45, -15.25, 10.5],
+																	"color": 0,
+																	"uuid": "45812473-340c-0f4f-67b6-8a4165b3b58a",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": [
+																		{
+																			"name": "PhoneEarRightFront3",
+																			"origin": [45, -15.25, 10.5],
+																			"color": 0,
+																			"uuid": "c2777016-d63b-ba74-61d5-32a32365722a",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": [
+																				{
+																					"name": "PhoneEarRightFront1_7",
+																					"origin": [45, -16, 10.5],
+																					"rotation": [0, 0, -35],
+																					"color": 0,
+																					"uuid": "53f05a52-2322-b1a4-57e3-9fa8c9235df9",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"ac8bb3fd-8e43-d488-4a11-e8525054a3fd",
+																						"38d4a9c4-1dc2-9e8c-4a15-6772e75b3dcd",
+																						"4f5f1b51-52c7-2b65-baa1-ee21a41dfd88",
+																						{
+																							"name": "PhoneEarRightFront1_8",
+																							"origin": [45, -11.5, 10.5],
+																							"rotation": [0, 0, -25],
+																							"color": 0,
+																							"uuid": "3d70f9f9-6246-6ec8-b565-a0f44e4e492c",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"6860e157-a592-719f-6e7c-4c95c9d8d3a8",
+																								"10561bdc-960d-3b76-5165-4448e9867fe3",
+																								"408c9699-03a9-ab72-683c-a653dd805986",
+																								{
+																									"name": "PhoneEarRightFront1_9",
+																									"origin": [45, -8.365, 10.5],
+																									"rotation": [0, 0, -30],
+																									"color": 0,
+																									"uuid": "60c99030-1693-8581-39e8-2f1f532ff96c",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["1d64a0de-8c21-d27f-e15e-154ab653fee8", "3843d985-7ab3-9316-056e-5c053bd9e4c1", "9457d81a-5031-9645-cb63-04991a776527"]
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"name": "PhoneEarRightFront2_7",
+																					"origin": [51.75, -19.75, 10.5],
+																					"rotation": [0, 0, -60],
+																					"color": 0,
+																					"uuid": "072a937f-a7d8-3034-14c4-e2f3a40cd320",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"9174696d-ba42-3b82-e704-45a51a8d14fa",
+																						"23da3a9a-7f41-fa67-2e09-a642645997f9",
+																						"b342b9a0-1767-d95c-027e-d2305c8ab835",
+																						{
+																							"name": "PhoneEarRightFront2_8",
+																							"origin": [51.75, -18.88, 10.5],
+																							"rotation": [0, 0, 60],
+																							"color": 0,
+																							"uuid": "05cd45d6-c7bb-6d22-7ba0-2a9817db058a",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"c1e0ac3d-a867-57ba-04ff-83f0d4bbe0c7",
+																								"d3d8333f-9028-238e-5c2f-3605806c6362",
+																								"0a933746-ee7e-84ea-262e-bbfd8ddd57b0",
+																								{
+																									"name": "PhoneEarRightFront2_9",
+																									"origin": [51.75, -12.88, 10.5],
+																									"rotation": [0, 0, 20],
+																									"color": 0,
+																									"uuid": "063661e0-f98c-17bd-efa3-fc69c177de75",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["8615edd6-392c-89c8-024c-d0276b4127ee", "5c6f4812-62c6-62d7-9ce1-decb96413721", "a774f8ac-21cf-f42c-d741-71ad96ddc7dd"]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"name": "PhoneEarRightBack3",
+																			"origin": [45, -15.25, 12],
+																			"color": 0,
+																			"uuid": "88a9bfdd-1211-7a5a-01f0-be1269b15c02",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": ["3a11ef01-d713-666e-ffd2-70c6d5fe06fb", "14127962-6939-44be-7334-094152f2f5dd"]
+																		}
+																	]
+																},
+																{
+																	"name": "PhoneEarLeft3",
+																	"origin": [45, -15.25, 10.5],
+																	"color": 0,
+																	"uuid": "20a8590d-9717-f238-3ac2-2e69230af5b1",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": [
+																		{
+																			"name": "PhoneEarLeftFront3",
+																			"origin": [45, -15.25, 10.5],
+																			"color": 0,
+																			"uuid": "8d51e2d0-8c0b-f9c9-dbf1-20fcfe65cbca",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": [
+																				{
+																					"name": "PhoneEarLeftFront1_7",
+																					"origin": [45, -16, 10.5],
+																					"rotation": [0, 0, 35],
+																					"color": 0,
+																					"uuid": "eb6d0809-60b0-1bba-8ba3-225589d07530",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"9962ec87-5551-34d1-8814-336dd0f520e4",
+																						"a136a70b-68c0-bd70-1958-cf448e11132d",
+																						"7b6ce199-9c7a-a839-68c7-d0bb67b41fe1",
+																						{
+																							"name": "PhoneEarLeftFront1_8",
+																							"origin": [45, -11.5, 10.5],
+																							"rotation": [0, 0, 25],
+																							"color": 0,
+																							"uuid": "7b6af376-80e2-6d4e-e046-23be79ae4495",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"6000b638-6b84-de23-b257-e4c983964610",
+																								"150362a8-5d07-4cea-2145-7d6d684e2819",
+																								"96430fd7-00be-c50b-fce0-867171eaf347",
+																								{
+																									"name": "PhoneEarLeftFront1_9",
+																									"origin": [45, -8.365, 10.5],
+																									"rotation": [0, 0, 30],
+																									"color": 0,
+																									"uuid": "7e53daba-7f0b-1230-f573-208335bd08b9",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["e6d96b56-5f5d-a69d-428f-6a0ae6299b3e", "33ebe933-9633-e34c-e584-7fd72863b9f1", "8fa3b391-a699-06d8-edb7-42d6d9ba6de2"]
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"name": "PhoneEarLeftFront2_7",
+																					"origin": [38.25, -19.75, 10.5],
+																					"rotation": [0, 0, 60],
+																					"color": 0,
+																					"uuid": "bf8706f2-8ca9-c8db-d051-a74760c2274c",
+																					"export": true,
+																					"mirror_uv": false,
+																					"isOpen": true,
+																					"locked": false,
+																					"visibility": true,
+																					"autouv": 0,
+																					"children": [
+																						"437bbf91-420d-884d-b080-a523692a5000",
+																						"ec5588e2-d008-25b2-7063-ab1dbdb8cf51",
+																						"96d206f9-7666-b164-bf7c-7881ea820e1d",
+																						{
+																							"name": "PhoneEarLeftFront2_8",
+																							"origin": [38.25, -18.88, 10.5],
+																							"rotation": [0, 0, -60],
+																							"color": 0,
+																							"uuid": "58cf6a12-7ded-d91a-d6db-d6bc152be14a",
+																							"export": true,
+																							"mirror_uv": false,
+																							"isOpen": true,
+																							"locked": false,
+																							"visibility": true,
+																							"autouv": 0,
+																							"children": [
+																								"bd42937a-a363-a5a8-5ae8-2403d582677c",
+																								"85282159-ef41-b372-c3a4-d96864dca163",
+																								"60780b4d-c6bc-05b5-d617-f2bd8bd2b9d2",
+																								{
+																									"name": "PhoneEarLeftFront2_9",
+																									"origin": [38.25, -12.88, 10.5],
+																									"rotation": [0, 0, -20],
+																									"color": 0,
+																									"uuid": "b221e2e0-8c1f-abff-bd62-2bb6ea0dede5",
+																									"export": true,
+																									"mirror_uv": false,
+																									"isOpen": true,
+																									"locked": false,
+																									"visibility": true,
+																									"autouv": 0,
+																									"children": ["134366a0-3b2f-5627-dc63-d3cda5821c1c", "a3f2250d-e295-c731-ca38-152d6cb36d1c", "966dbe03-2be9-4bb9-691e-907b62d1e1a1"]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"name": "PhoneEarLeftBack3",
+																			"origin": [45, -15.25, 12],
+																			"color": 0,
+																			"uuid": "419ed8f6-35a7-fea5-c1e6-55932cdb2a4d",
+																			"export": true,
+																			"mirror_uv": false,
+																			"isOpen": true,
+																			"locked": false,
+																			"visibility": true,
+																			"autouv": 0,
+																			"children": ["01562243-6feb-30ca-0028-23795c7f1c1c", "1b9c9d33-9139-1cfc-83ff-e6ad8d5b0dd1"]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "MidoriPaperDollFaceParts",
+													"origin": [45, -28, 12],
+													"color": 0,
+													"uuid": "ff3cca39-8174-5cd5-b749-c6071e04ce72",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														{
+															"name": "Eyes3",
+															"origin": [45, -28, 12],
+															"color": 0,
+															"uuid": "1c21b7b0-af83-aec1-6a46-71e78eafc6e1",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["c0ea1ecc-08ff-1c85-cf2c-9c0e505bbecb", "e7a4d49b-9d4f-5c84-d008-483e7b172e88"]
+														}
+													]
+												},
+												{
+													"name": "MidoriPaperDollHeadRing",
+													"origin": [45, -22, 12],
+													"color": 0,
+													"uuid": "24f32eaf-2d0e-b2a3-cbc2-3821f014a343",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": false,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														"a35a7930-feab-d08a-d8c9-f4a079913221",
+														{
+															"name": "RingParts3",
+															"origin": [45, -22, 12],
+															"rotation": [35, 0, 0],
+															"color": 0,
+															"uuid": "fd1f3ae7-d465-d298-1340-4005066c9128",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"4994e0f9-0d9f-c4a7-0c69-9b503e239e14",
+																"ebbdec2d-bcc0-1d07-70cc-fc11c7517ad8",
+																"c8739a11-5b57-81fb-d3a0-7413573f5220",
+																"c15eff6f-345e-3bf9-aafb-127819c163bf"
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "MidoriPaperDollUpperBody",
+											"origin": [45, -64, 12],
+											"color": 0,
+											"uuid": "80d3304c-c7bf-4c90-897f-b9901dd44127",
 											"export": true,
 											"mirror_uv": false,
 											"isOpen": true,
@@ -12041,30 +12545,180 @@
 											"autouv": 0,
 											"children": [
 												{
-													"name": "MomoiPaperDollRightLeg",
-													"origin": [-46, -46, 12],
+													"name": "MidoriPaperDollBody",
+													"origin": [45, -28, 12],
 													"color": 0,
-													"uuid": "295d14f2-30ed-e350-ecb9-28db1cc4c87e",
+													"uuid": "c582e5a1-52ee-5d16-5c6c-523de8907e40",
 													"export": true,
 													"mirror_uv": false,
 													"isOpen": true,
 													"locked": false,
 													"visibility": true,
 													"autouv": 0,
-													"children": ["f3de278e-6fe5-60b6-7872-52e05c34a19f", "4fa66a85-72c2-65af-9615-b124ea0947f5"]
+													"children": [
+														"f01681e7-f017-290f-31ff-9f0e00282aaa",
+														"b2f703e1-d2cd-5a50-1070-406666ea7957",
+														{
+															"name": "MidoriPaperDollSkirt",
+															"origin": [45, -43, 12],
+															"color": 0,
+															"uuid": "f5458163-49b9-2e07-a744-8ed7b69ef001",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["8a9dcb88-b135-50fe-8ae5-f9c304cbd4f0", "5108cca8-699b-fa71-6e54-d97b6c2901a9"]
+														},
+														{
+															"name": "MidoriPaperDollTail",
+															"origin": [45, -42.25, 15],
+															"rotation": [15, 0, 0],
+															"color": 0,
+															"uuid": "ed4ca7f6-8858-6b37-867f-81247193aaa4",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": false,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"b96dab61-2a6c-4f51-e557-3f684a1ebe92",
+																{
+																	"name": "TailRibbon3",
+																	"origin": [45, -41.875, 18.135],
+																	"color": 0,
+																	"uuid": "1255d209-e310-28c4-536b-e3a22adef889",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": [
+																		"b99b5e5c-25d2-bdac-ef52-29ce363121a8",
+																		"d3b70fab-5424-c2a2-fdfe-da39ebe2674a",
+																		"28abb54d-13a5-0cf0-52bf-d870981dba9d",
+																		"d20decd2-44ed-c1b8-e72e-e27e0e90fb42"
+																	]
+																},
+																{
+																	"name": "Tail4",
+																	"origin": [45, -43, 24],
+																	"rotation": [-40, 0, 0],
+																	"color": 0,
+																	"uuid": "87da3c6a-ab66-f016-c654-a6ff064c5818",
+																	"export": true,
+																	"mirror_uv": false,
+																	"isOpen": true,
+																	"locked": false,
+																	"visibility": true,
+																	"autouv": 0,
+																	"children": ["e4f6fa28-6590-7517-c7ef-4c2e56583cfe"]
+																}
+															]
+														}
+													]
 												},
 												{
-													"name": "MomoiPaperDollLeftLeg",
-													"origin": [-52, -46, 12],
+													"name": "MidoriPaperDollArms",
+													"origin": [45, -64, 12],
 													"color": 0,
-													"uuid": "0478892c-990e-7676-8ebd-9258e47c7a8c",
+													"uuid": "6fa8c249-7a69-43bd-4acd-c0021bfa116f",
 													"export": true,
 													"mirror_uv": false,
 													"isOpen": true,
 													"locked": false,
 													"visibility": true,
 													"autouv": 0,
-													"children": ["a4c22d86-49f5-d315-1c8f-4bd89d9c2fe7", "85f33a80-7e5e-b4a4-7d9c-796176ca27ef"]
+													"children": [
+														{
+															"name": "MidoriPaperDollRightArm",
+															"origin": [52.5, -31, 12],
+															"color": 0,
+															"uuid": "8ee98c9b-1b4b-c95f-6563-b490ee1fd8cf",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": [
+																"53d4f989-70a7-054a-e609-2f50089aa112",
+																"f34ba9bc-54d8-6cfd-3e1a-4952d23c1ce1",
+																"8aad95b9-3858-cf56-362d-b480dbb4d468",
+																"9ee3ed07-e63d-8f98-cbed-d60e62ceda65"
+															]
+														},
+														{
+															"name": "MidoriPaperDollLeftArm",
+															"origin": [37.5, -31, 12],
+															"color": 0,
+															"uuid": "29652671-96b5-ea8a-7579-3f334938d78d",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["3550c3e2-6a16-cdee-c179-8c864cf06bd2", "47cb2460-6bad-474c-ac39-971af46859df", "bf6232dc-3a1e-b8ab-e9b4-c9ab1974dd3a"]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "MidoriPaperDollLowerBody",
+											"origin": [45, -46, 12],
+											"color": 0,
+											"uuid": "243703b3-116d-0319-36ec-f3ad72d2b2c0",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												{
+													"name": "MidoriPaperDollLegs",
+													"origin": [45, -46, 12],
+													"color": 0,
+													"uuid": "72d3d83a-e70a-9276-cc54-d8fe8a90edcf",
+													"export": true,
+													"mirror_uv": false,
+													"isOpen": true,
+													"locked": false,
+													"visibility": true,
+													"autouv": 0,
+													"children": [
+														{
+															"name": "MidoriPaperDollRightLeg",
+															"origin": [48, -46, 12],
+															"color": 0,
+															"uuid": "1ca64061-bff8-555f-0431-f4542c18bb40",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["465c34a0-2dcf-2f31-dd44-c09e5dd2baf9", "1e115d57-0093-c261-1174-c3b3075a419f"]
+														},
+														{
+															"name": "MidoriPaperDollLeftLeg",
+															"origin": [42, -46, 12],
+															"color": 0,
+															"uuid": "282cbe5d-5f26-8179-0883-268e14cda4dd",
+															"export": true,
+															"mirror_uv": false,
+															"isOpen": true,
+															"locked": false,
+															"visibility": true,
+															"autouv": 0,
+															"children": ["cf0d43d7-ff54-e457-bd66-0427f7f43ed4", "c77a2467-4ded-52a3-0f98-e83019dd4218"]
+														}
+													]
 												}
 											]
 										}
@@ -12075,644 +12729,17 @@
 					]
 				},
 				{
-					"name": "MidoriDamageIndicator",
-					"origin": [0, -5, 31],
+					"name": "TextAnchor",
+					"origin": [0, 0, 0],
 					"color": 0,
-					"uuid": "f80c7b51-5596-4614-1237-374c9243c4ec",
+					"uuid": "3d2b3a9b-6454-a7fd-e0ae-a90624029e9c",
 					"export": true,
 					"mirror_uv": false,
 					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
-					"children": [
-						"d524f0c8-531c-941f-6b06-7157f0884aaa",
-						"3a947ec0-e103-8054-fdf5-bd570147ea84",
-						"d44aed6c-d19d-022f-f831-72b0ade91475",
-						{
-							"name": "MidoriHPBar",
-							"origin": [289, -5, 0],
-							"color": 0,
-							"uuid": "4fbab165-b170-b15e-f607-faa0536cfe19",
-							"export": true,
-							"mirror_uv": false,
-							"isOpen": true,
-							"locked": false,
-							"visibility": true,
-							"autouv": 0,
-							"children": ["79d1618f-2ccb-cb4d-ab40-be9562d1d210"]
-						},
-						{
-							"name": "MidoriPaperDoll",
-							"origin": [45, -64, 12],
-							"rotation": [0, -20, 0],
-							"color": 0,
-							"uuid": "40643ac5-d506-90e5-a95c-849d1e73e644",
-							"export": true,
-							"mirror_uv": false,
-							"isOpen": true,
-							"locked": false,
-							"visibility": true,
-							"autouv": 0,
-							"children": [
-								{
-									"name": "MidoriPaperDollHead",
-									"origin": [45, -28, 12],
-									"color": 0,
-									"uuid": "d4455441-4c15-450c-0a78-8b5a12c1a152",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": [
-										"4159312f-5585-788d-bd45-60a2507dffbb",
-										"bf7827f1-eccc-7825-4c2e-513411a45d55",
-										{
-											"name": "MidoriPaperDollHairRibbons",
-											"origin": [45, -28, 12],
-											"color": 0,
-											"uuid": "290e68ee-ce91-08be-28c3-c2a0ae45d1c3",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": ["dbd63195-ee43-0cf9-2144-8e8749404c5e", "7f23ecbf-cb72-dfd1-0fb7-43cce5fb72da"]
-										},
-										{
-											"name": "MidoriPaperDollPhone",
-											"origin": [45, -28, 12],
-											"color": 0,
-											"uuid": "c7d307b1-9824-6b4e-9d27-702669d037f6",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": false,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												"db68b3ad-166e-9e03-6f79-de34605794c8",
-												"b9aa6581-3596-4d1d-6d8d-f48c5f98dd0d",
-												"74d76635-413d-ddbd-26af-2c7b2246853c",
-												"e7de45cc-73eb-06a2-ff52-373ac98f9391",
-												"d0fbeea0-f38e-51cc-b6e1-25a65570d912",
-												{
-													"name": "PhoneEars3",
-													"origin": [45, -15.25, 10.5],
-													"color": 0,
-													"uuid": "de2761e2-6700-f18b-ba42-2a84f771af0c",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														{
-															"name": "PhoneEarRight3",
-															"origin": [45, -15.25, 10.5],
-															"color": 0,
-															"uuid": "45812473-340c-0f4f-67b6-8a4165b3b58a",
-															"export": true,
-															"mirror_uv": false,
-															"isOpen": true,
-															"locked": false,
-															"visibility": true,
-															"autouv": 0,
-															"children": [
-																{
-																	"name": "PhoneEarRightFront3",
-																	"origin": [45, -15.25, 10.5],
-																	"color": 0,
-																	"uuid": "c2777016-d63b-ba74-61d5-32a32365722a",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": [
-																		{
-																			"name": "PhoneEarRightFront1_7",
-																			"origin": [45, -16, 10.5],
-																			"rotation": [0, 0, -35],
-																			"color": 0,
-																			"uuid": "53f05a52-2322-b1a4-57e3-9fa8c9235df9",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"ac8bb3fd-8e43-d488-4a11-e8525054a3fd",
-																				"38d4a9c4-1dc2-9e8c-4a15-6772e75b3dcd",
-																				"4f5f1b51-52c7-2b65-baa1-ee21a41dfd88",
-																				{
-																					"name": "PhoneEarRightFront1_8",
-																					"origin": [45, -11.5, 10.5],
-																					"rotation": [0, 0, -25],
-																					"color": 0,
-																					"uuid": "3d70f9f9-6246-6ec8-b565-a0f44e4e492c",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"6860e157-a592-719f-6e7c-4c95c9d8d3a8",
-																						"10561bdc-960d-3b76-5165-4448e9867fe3",
-																						"408c9699-03a9-ab72-683c-a653dd805986",
-																						{
-																							"name": "PhoneEarRightFront1_9",
-																							"origin": [45, -8.365, 10.5],
-																							"rotation": [0, 0, -30],
-																							"color": 0,
-																							"uuid": "60c99030-1693-8581-39e8-2f1f532ff96c",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["1d64a0de-8c21-d27f-e15e-154ab653fee8", "3843d985-7ab3-9316-056e-5c053bd9e4c1", "9457d81a-5031-9645-cb63-04991a776527"]
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"name": "PhoneEarRightFront2_7",
-																			"origin": [51.75, -19.75, 10.5],
-																			"rotation": [0, 0, -60],
-																			"color": 0,
-																			"uuid": "072a937f-a7d8-3034-14c4-e2f3a40cd320",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"9174696d-ba42-3b82-e704-45a51a8d14fa",
-																				"23da3a9a-7f41-fa67-2e09-a642645997f9",
-																				"b342b9a0-1767-d95c-027e-d2305c8ab835",
-																				{
-																					"name": "PhoneEarRightFront2_8",
-																					"origin": [51.75, -18.88, 10.5],
-																					"rotation": [0, 0, 60],
-																					"color": 0,
-																					"uuid": "05cd45d6-c7bb-6d22-7ba0-2a9817db058a",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"c1e0ac3d-a867-57ba-04ff-83f0d4bbe0c7",
-																						"d3d8333f-9028-238e-5c2f-3605806c6362",
-																						"0a933746-ee7e-84ea-262e-bbfd8ddd57b0",
-																						{
-																							"name": "PhoneEarRightFront2_9",
-																							"origin": [51.75, -12.88, 10.5],
-																							"rotation": [0, 0, 20],
-																							"color": 0,
-																							"uuid": "063661e0-f98c-17bd-efa3-fc69c177de75",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["8615edd6-392c-89c8-024c-d0276b4127ee", "5c6f4812-62c6-62d7-9ce1-decb96413721", "a774f8ac-21cf-f42c-d741-71ad96ddc7dd"]
-																						}
-																					]
-																				}
-																			]
-																		}
-																	]
-																},
-																{
-																	"name": "PhoneEarRightBack3",
-																	"origin": [45, -15.25, 12],
-																	"color": 0,
-																	"uuid": "88a9bfdd-1211-7a5a-01f0-be1269b15c02",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": ["3a11ef01-d713-666e-ffd2-70c6d5fe06fb", "14127962-6939-44be-7334-094152f2f5dd"]
-																}
-															]
-														},
-														{
-															"name": "PhoneEarLeft3",
-															"origin": [45, -15.25, 10.5],
-															"color": 0,
-															"uuid": "20a8590d-9717-f238-3ac2-2e69230af5b1",
-															"export": true,
-															"mirror_uv": false,
-															"isOpen": true,
-															"locked": false,
-															"visibility": true,
-															"autouv": 0,
-															"children": [
-																{
-																	"name": "PhoneEarLeftFront3",
-																	"origin": [45, -15.25, 10.5],
-																	"color": 0,
-																	"uuid": "8d51e2d0-8c0b-f9c9-dbf1-20fcfe65cbca",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": [
-																		{
-																			"name": "PhoneEarLeftFront1_7",
-																			"origin": [45, -16, 10.5],
-																			"rotation": [0, 0, 35],
-																			"color": 0,
-																			"uuid": "eb6d0809-60b0-1bba-8ba3-225589d07530",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"9962ec87-5551-34d1-8814-336dd0f520e4",
-																				"a136a70b-68c0-bd70-1958-cf448e11132d",
-																				"7b6ce199-9c7a-a839-68c7-d0bb67b41fe1",
-																				{
-																					"name": "PhoneEarLeftFront1_8",
-																					"origin": [45, -11.5, 10.5],
-																					"rotation": [0, 0, 25],
-																					"color": 0,
-																					"uuid": "7b6af376-80e2-6d4e-e046-23be79ae4495",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"6000b638-6b84-de23-b257-e4c983964610",
-																						"150362a8-5d07-4cea-2145-7d6d684e2819",
-																						"96430fd7-00be-c50b-fce0-867171eaf347",
-																						{
-																							"name": "PhoneEarLeftFront1_9",
-																							"origin": [45, -8.365, 10.5],
-																							"rotation": [0, 0, 30],
-																							"color": 0,
-																							"uuid": "7e53daba-7f0b-1230-f573-208335bd08b9",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["e6d96b56-5f5d-a69d-428f-6a0ae6299b3e", "33ebe933-9633-e34c-e584-7fd72863b9f1", "8fa3b391-a699-06d8-edb7-42d6d9ba6de2"]
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"name": "PhoneEarLeftFront2_7",
-																			"origin": [38.25, -19.75, 10.5],
-																			"rotation": [0, 0, 60],
-																			"color": 0,
-																			"uuid": "bf8706f2-8ca9-c8db-d051-a74760c2274c",
-																			"export": true,
-																			"mirror_uv": false,
-																			"isOpen": true,
-																			"locked": false,
-																			"visibility": true,
-																			"autouv": 0,
-																			"children": [
-																				"437bbf91-420d-884d-b080-a523692a5000",
-																				"ec5588e2-d008-25b2-7063-ab1dbdb8cf51",
-																				"96d206f9-7666-b164-bf7c-7881ea820e1d",
-																				{
-																					"name": "PhoneEarLeftFront2_8",
-																					"origin": [38.25, -18.88, 10.5],
-																					"rotation": [0, 0, -60],
-																					"color": 0,
-																					"uuid": "58cf6a12-7ded-d91a-d6db-d6bc152be14a",
-																					"export": true,
-																					"mirror_uv": false,
-																					"isOpen": true,
-																					"locked": false,
-																					"visibility": true,
-																					"autouv": 0,
-																					"children": [
-																						"bd42937a-a363-a5a8-5ae8-2403d582677c",
-																						"85282159-ef41-b372-c3a4-d96864dca163",
-																						"60780b4d-c6bc-05b5-d617-f2bd8bd2b9d2",
-																						{
-																							"name": "PhoneEarLeftFront2_9",
-																							"origin": [38.25, -12.88, 10.5],
-																							"rotation": [0, 0, -20],
-																							"color": 0,
-																							"uuid": "b221e2e0-8c1f-abff-bd62-2bb6ea0dede5",
-																							"export": true,
-																							"mirror_uv": false,
-																							"isOpen": true,
-																							"locked": false,
-																							"visibility": true,
-																							"autouv": 0,
-																							"children": ["134366a0-3b2f-5627-dc63-d3cda5821c1c", "a3f2250d-e295-c731-ca38-152d6cb36d1c", "966dbe03-2be9-4bb9-691e-907b62d1e1a1"]
-																						}
-																					]
-																				}
-																			]
-																		}
-																	]
-																},
-																{
-																	"name": "PhoneEarLeftBack3",
-																	"origin": [45, -15.25, 12],
-																	"color": 0,
-																	"uuid": "419ed8f6-35a7-fea5-c1e6-55932cdb2a4d",
-																	"export": true,
-																	"mirror_uv": false,
-																	"isOpen": true,
-																	"locked": false,
-																	"visibility": true,
-																	"autouv": 0,
-																	"children": ["01562243-6feb-30ca-0028-23795c7f1c1c", "1b9c9d33-9139-1cfc-83ff-e6ad8d5b0dd1"]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"name": "MidoriPaperDollFaceParts",
-											"origin": [45, -28, 12],
-											"color": 0,
-											"uuid": "ff3cca39-8174-5cd5-b749-c6071e04ce72",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												{
-													"name": "Eyes3",
-													"origin": [45, -28, 12],
-													"color": 0,
-													"uuid": "1c21b7b0-af83-aec1-6a46-71e78eafc6e1",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": ["c0ea1ecc-08ff-1c85-cf2c-9c0e505bbecb", "e7a4d49b-9d4f-5c84-d008-483e7b172e88"]
-												}
-											]
-										},
-										{
-											"name": "MidoriPaperDollHeadRing",
-											"origin": [45, -22, 12],
-											"color": 0,
-											"uuid": "24f32eaf-2d0e-b2a3-cbc2-3821f014a343",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": false,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												"a35a7930-feab-d08a-d8c9-f4a079913221",
-												{
-													"name": "RingParts3",
-													"origin": [45, -22, 12],
-													"rotation": [35, 0, 0],
-													"color": 0,
-													"uuid": "fd1f3ae7-d465-d298-1340-4005066c9128",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														"4994e0f9-0d9f-c4a7-0c69-9b503e239e14",
-														"ebbdec2d-bcc0-1d07-70cc-fc11c7517ad8",
-														"c8739a11-5b57-81fb-d3a0-7413573f5220",
-														"c15eff6f-345e-3bf9-aafb-127819c163bf"
-													]
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "MidoriPaperDollUpperBody",
-									"origin": [45, -64, 12],
-									"color": 0,
-									"uuid": "80d3304c-c7bf-4c90-897f-b9901dd44127",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": [
-										{
-											"name": "MidoriPaperDollBody",
-											"origin": [45, -28, 12],
-											"color": 0,
-											"uuid": "c582e5a1-52ee-5d16-5c6c-523de8907e40",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												"f01681e7-f017-290f-31ff-9f0e00282aaa",
-												"b2f703e1-d2cd-5a50-1070-406666ea7957",
-												{
-													"name": "MidoriPaperDollSkirt",
-													"origin": [45, -43, 12],
-													"color": 0,
-													"uuid": "f5458163-49b9-2e07-a744-8ed7b69ef001",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": ["8a9dcb88-b135-50fe-8ae5-f9c304cbd4f0", "5108cca8-699b-fa71-6e54-d97b6c2901a9"]
-												},
-												{
-													"name": "MidoriPaperDollTail",
-													"origin": [45, -42.25, 15],
-													"rotation": [15, 0, 0],
-													"color": 0,
-													"uuid": "ed4ca7f6-8858-6b37-867f-81247193aaa4",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": false,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														"b96dab61-2a6c-4f51-e557-3f684a1ebe92",
-														{
-															"name": "TailRibbon3",
-															"origin": [45, -41.875, 18.135],
-															"color": 0,
-															"uuid": "1255d209-e310-28c4-536b-e3a22adef889",
-															"export": true,
-															"mirror_uv": false,
-															"isOpen": true,
-															"locked": false,
-															"visibility": true,
-															"autouv": 0,
-															"children": [
-																"b99b5e5c-25d2-bdac-ef52-29ce363121a8",
-																"d3b70fab-5424-c2a2-fdfe-da39ebe2674a",
-																"28abb54d-13a5-0cf0-52bf-d870981dba9d",
-																"d20decd2-44ed-c1b8-e72e-e27e0e90fb42"
-															]
-														},
-														{
-															"name": "Tail4",
-															"origin": [45, -43, 24],
-															"rotation": [-40, 0, 0],
-															"color": 0,
-															"uuid": "87da3c6a-ab66-f016-c654-a6ff064c5818",
-															"export": true,
-															"mirror_uv": false,
-															"isOpen": true,
-															"locked": false,
-															"visibility": true,
-															"autouv": 0,
-															"children": ["e4f6fa28-6590-7517-c7ef-4c2e56583cfe"]
-														}
-													]
-												}
-											]
-										},
-										{
-											"name": "MidoriPaperDollArms",
-											"origin": [45, -64, 12],
-											"color": 0,
-											"uuid": "6fa8c249-7a69-43bd-4acd-c0021bfa116f",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												{
-													"name": "MidoriPaperDollRightArm",
-													"origin": [52.5, -31, 12],
-													"color": 0,
-													"uuid": "8ee98c9b-1b4b-c95f-6563-b490ee1fd8cf",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": [
-														"53d4f989-70a7-054a-e609-2f50089aa112",
-														"f34ba9bc-54d8-6cfd-3e1a-4952d23c1ce1",
-														"8aad95b9-3858-cf56-362d-b480dbb4d468",
-														"9ee3ed07-e63d-8f98-cbed-d60e62ceda65"
-													]
-												},
-												{
-													"name": "MidoriPaperDollLeftArm",
-													"origin": [37.5, -31, 12],
-													"color": 0,
-													"uuid": "29652671-96b5-ea8a-7579-3f334938d78d",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": ["3550c3e2-6a16-cdee-c179-8c864cf06bd2", "47cb2460-6bad-474c-ac39-971af46859df", "bf6232dc-3a1e-b8ab-e9b4-c9ab1974dd3a"]
-												}
-											]
-										}
-									]
-								},
-								{
-									"name": "MidoriPaperDollLowerBody",
-									"origin": [45, -46, 12],
-									"color": 0,
-									"uuid": "243703b3-116d-0319-36ec-f3ad72d2b2c0",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": [
-										{
-											"name": "MidoriPaperDollLegs",
-											"origin": [45, -46, 12],
-											"color": 0,
-											"uuid": "72d3d83a-e70a-9276-cc54-d8fe8a90edcf",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": [
-												{
-													"name": "MidoriPaperDollRightLeg",
-													"origin": [48, -46, 12],
-													"color": 0,
-													"uuid": "1ca64061-bff8-555f-0431-f4542c18bb40",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": ["465c34a0-2dcf-2f31-dd44-c09e5dd2baf9", "1e115d57-0093-c261-1174-c3b3075a419f"]
-												},
-												{
-													"name": "MidoriPaperDollLeftLeg",
-													"origin": [42, -46, 12],
-													"color": 0,
-													"uuid": "282cbe5d-5f26-8179-0883-268e14cda4dd",
-													"export": true,
-													"mirror_uv": false,
-													"isOpen": true,
-													"locked": false,
-													"visibility": true,
-													"autouv": 0,
-													"children": ["cf0d43d7-ff54-e457-bd66-0427f7f43ed4", "c77a2467-4ded-52a3-0f98-e83019dd4218"]
-												}
-											]
-										}
-									]
-								}
-							]
-						}
-					]
+					"children": []
 				}
 			]
 		}
@@ -19657,6 +19684,88 @@
 							"bezier_left_value": [0, 0, 0],
 							"bezier_right_time": [0.1, 0.1, 0.1],
 							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"3d2b3a9b-6454-a7fd-e0ae-a90624029e9c": {
+					"name": "TextAnchor",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "-10"
+								}
+							],
+							"uuid": "4557a41e-eb5c-1f34-f03d-0916c2b757ce",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "77b0698d-354e-2766-cc9e-0cab2721f494",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "-8",
+									"y": 0,
+									"z": 0
+								}
+							],
+							"uuid": "6b480500-c5d1-7d86-9da1-44099669d200",
+							"time": 4,
+							"color": -1,
+							"interpolation": "bezier",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "100",
+									"y": "17.6",
+									"z": 0
+								}
+							],
+							"uuid": "5f80d5e8-f879-8cf8-61bf-2b97fa9b6136",
+							"time": 4.75,
+							"color": -1,
+							"interpolation": "bezier",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.69667, -0.69667, -0.1],
+							"bezier_left_value": [0, -0.54822, 0],
+							"bezier_right_time": [0.69667, 0.69667, 0.1],
+							"bezier_right_value": [0, 0.54822, 0]
 						}
 					]
 				}
