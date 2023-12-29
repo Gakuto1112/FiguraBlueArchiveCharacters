@@ -1,5 +1,6 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
+	ExSkillTextAnimation = require("scripts.ex_skill_text_animation")
 	BlueArchiveCharacter = require("scripts.blue_archive_character")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
