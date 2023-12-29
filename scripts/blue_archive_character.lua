@@ -426,10 +426,17 @@ BlueArchiveCharacter = {
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
                             BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("0/20")
+                            BlueArchiveCharacter.EX_SKILL_1_KO:setPos(client:getScaledWindowSize().x / 2 * -1, -20)
+                            BlueArchiveCharacter.EX_SKILL_1_KO:setVisible(true)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes:setVisible(false)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(true)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(32, -4)
+                            local koAnimationCount = 0
+                            events.RENDER:register(function ()
+                                BlueArchiveCharacter.EX_SKILL_1_KO:setScale(vectors.vec3(1, 1, 1):scale(koAnimationCount <= 0.75 and -3.3333 * koAnimationCount + 5 or (koAnimationCount <= 1 and 2 * koAnimationCount + 1 or 3)))
+                                koAnimationCount = koAnimationCount + 8 / client.getFPS()
+                            end, "ex_skill_1_ko_render")
                         end
                     elseif tick == 38 then
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
@@ -482,6 +489,7 @@ BlueArchiveCharacter = {
                             modelPart:setVisible(false)
                         end
                         BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("12/20")
+                        BlueArchiveCharacter.EX_SKILL_1_KO:setVisible(false)
                         for i = 1, 3 do
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar["HpBar"..i]:setVisible(true)
                         end
@@ -489,7 +497,9 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
                             modelPart:setUVPixels()
                         end
-                        events.RENDER:remove("ex_skill_1_text_render")
+                        for _, eventName in ipairs ({"ex_skill_1_text_render", "ex_skill_1_ko_render"}) do
+                            events.RENDER:remove(eventName)
+                        end
                     end
                 end
             }
@@ -1501,6 +1511,8 @@ BlueArchiveCharacter = {
     EX_SKILL_1_MIDORI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_name"):setText("MIDORI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
     ---@diagnostic disable-next-line: undefined-field
     EX_SKILL_1_MIDORI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_value"):setText("14/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"),
+    ---@diagnostic disable-next-line: undefined-field
+    EX_SKILL_1_KO = models.models.ex_skill_1.Gui.DamageIndicators:newText("ex_skill_1_ko"):setText("§cK.O."):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"):setOutline(true):setVisible(false),
     EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")},
     ---@diagnostic disable-next-line: undefined-field
     Ex_SKILL_1_TEXT = models.models.ex_skill_1.Gui.TextAnchor:newText("ex_skill_1:text"):setText("§d§lMOMOI"):setScale(4, 4, 4):setAlignment("RIGHT"):setOutline(true):setOutlineColor(1, 1, 1)
