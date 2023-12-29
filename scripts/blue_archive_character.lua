@@ -389,6 +389,15 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 16 then
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 24, true)
+                    elseif tick == 24 and host:isHost() then
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar3:setVisible(false)
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("8/20")
+                    elseif tick == 31 and host:isHost() then
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar2:setVisible(false)
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("5/20")
+                    elseif tick == 36 and host:isHost() then
+                        models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("0/20")
                     elseif tick == 38 then
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
@@ -418,6 +427,12 @@ BlueArchiveCharacter = {
                     end
                     if models.models.ex_skill_1.Midori.MidoriLowerBody.MidoriLegs.GameConsole2 ~= nil then
                         models.models.ex_skill_1.Midori.MidoriLowerBody.MidoriLegs.GameConsole2:moveTo(models.models.ex_skill_1.Midori.MidoriUpperBody.MidoriArms.MidoriLeftArm.MidoriLeftArmBottom)
+                    end
+                    if host:isHost() then
+                        for i = 1, 3 do
+                            models.models.ex_skill_1.Gui.MomoiDamageIndicator.MomoiHPBar["HpBar"..i]:setVisible(true)
+                        end
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("12/20")
                     end
                 end
             }

@@ -7208,14 +7208,14 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [-225, -50, 30],
+			"from": [-120, -50, 30],
 			"to": [-85, -30, 30],
 			"autouv": 0,
 			"color": 0,
 			"origin": [-17, -5, 0],
 			"faces": {
 				"north": {
-					"uv": [2, 190, 142, 210],
+					"uv": [2, 190, 37, 210],
 					"texture": 0
 				},
 				"east": {
@@ -7249,14 +7249,14 @@
 			"locked": false,
 			"render_order": "default",
 			"allow_mirror_modeling": true,
-			"from": [81, -50, 30],
+			"from": [123, -50, 30],
 			"to": [221, -30, 30],
 			"autouv": 0,
 			"color": 0,
 			"origin": [289, -5, 0],
 			"faces": {
 				"north": {
-					"uv": [2, 190, 142, 210],
+					"uv": [2, 190, 100, 210],
 					"texture": 0
 				},
 				"east": {
@@ -10567,6 +10567,88 @@
 			},
 			"type": "cube",
 			"uuid": "724a1202-3d6b-00ae-7217-841a73563411"
+		},
+		{
+			"name": "HpBar2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-141, -50, 30],
+			"to": [-120, -30, 30],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-17, -5, 0],
+			"faces": {
+				"north": {
+					"uv": [37, 190, 58, 210],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "b08f7ce7-3df4-a8e8-db48-0da0848e3d1e"
+		},
+		{
+			"name": "HpBar3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-169, -50, 30],
+			"to": [-141, -30, 30],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-17, -5, 0],
+			"faces": {
+				"north": {
+					"uv": [58, 190, 86, 210],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "c3ab740d-6fe9-fb3c-4bf4-230b2bada2ce"
 		}
 	],
 	"outliner": [
@@ -11316,11 +11398,11 @@
 							"uuid": "cf86b3c8-b051-f3bc-f2c7-bf62f1c0a281",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["378fb5ca-7c47-9f67-dede-cfe53573e441"]
+							"children": ["378fb5ca-7c47-9f67-dede-cfe53573e441", "b08f7ce7-3df4-a8e8-db48-0da0848e3d1e", "c3ab740d-6fe9-fb3c-4bf4-230b2bada2ce"]
 						},
 						{
 							"name": "MomoiPaperDoll",
@@ -12654,7 +12736,7 @@
 			"override": true,
 			"length": 5.4,
 			"snapping": 20,
-			"selected": false,
+			"selected": true,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
