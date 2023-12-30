@@ -51,7 +51,7 @@ events.TICK:register(function ()
 	end
 	local damageStatus = PlayerUtils:getDamageStatus()
 	if damageStatus == "DAMAGE" then
-		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 8, true)
+		FaceParts:setEmotion("SURPLISED", "SURPLISED", "SHOCK", 8, true)
 	elseif damageStatus == "DIED" then
 		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 20, true)
 	elseif player:getPose() == "SLEEPING" then
