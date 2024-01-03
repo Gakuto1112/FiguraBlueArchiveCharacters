@@ -5,9 +5,9 @@ This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod 
 
 Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![Thumbnail](./README_images/thumbnail.jpg)
+![Thumbnail](./README_images/thumbnail.png)
 
-**This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "[Creation status](#creation-status)" section below.**
+This branch is for **Momoi Saiba**.
 
 ## Creation status
 ### Done
@@ -16,11 +16,11 @@ The avatars for these characters are completed. Click on a character's name to g
 - [Shizuko Kawawa](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
+- [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 
 ### In progress
 The avatars for these characters are worked in progress. It usually takes about 2~3 weeks. Click on the link in brackets to go to the issue about the character, where you can check the progress.
 
-- Momoi Saiba ([#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13))
 - Midori Saiba ([#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14))
 
 ### Planned

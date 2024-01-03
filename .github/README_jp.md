@@ -5,9 +5,9 @@
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![サムネイル](./README_images/thumbnail.jpg)
+![サムネイル](./README_images/thumbnail.png)
 
-**このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
+このブランチは**才羽 モモイ**のブランチです。
 
 ## 作成状況
 ### 作成済み
@@ -16,18 +16,18 @@
 - [河和 シズコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [久田 イズナ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
+- [才羽 モモイ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 
 ### 作成中
 これらのキャラクターのアバターは作成中です。通常2~3週間程要します。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
 
-- 才羽モモイ（[#13](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/13)）
-- 才羽ミドリ（[#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14)）
+- 才羽 ミドリ（[#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14)）
 
 ### 作成予定
 これらのキャラクターのアバターは作成していないものの、今後作成する予定です。これはあくまでも予定であり、変更される可能性があります（私が飽きたら終了です）。
 
-- 砂狼シロコ（[#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16)）
-- 小鳥遊ホシノ（[#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17)）
+- 砂狼 シロコ（[#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16)）
+- 小鳥遊 ホシノ（[#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17)）
 
 ## 特徴
 - Exスキルのカットインを再現しています。
