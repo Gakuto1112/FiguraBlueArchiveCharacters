@@ -76,22 +76,33 @@ BlueArchiveCharacter = {
         ---右目
         RightEye = {
             NORMAL = {0, 0},
-            SURPLISED = {0, 0},
-            TIED = {0, 0},
-            CLOSED = {0, 0}
+            SURPLISED = {2, 0},
+            TIRED = {4, 0},
+            CLOSED = {3, 0},
+            ANXIOUS = {5, 0},
+            CLOSED2 = {0, 1},
+            FRUST = {1, 1},
+            STARE = {2, 1}
         },
 
         ---左目
         LeftEye = {
             NORMAL = {0, 0},
-            SURPLISED = {0, 0},
-            TIED = {0, 0},
-            CLOSED = {0, 0}
+            SURPLISED = {1, 0},
+            TIRED = {3, 0},
+            CLOSED = {2, 0},
+            ANXIOUS = {5, 0},
+            CLOSED2 = {-1, 1},
+            STARE = {2, 1}
         },
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
+            CLOSED = {0, 0},
+            NORMAL = {2, 0},
+            FRUST = {4, 0},
+            ANXIOUS = {6, 0},
+            NORMAL2 = {8, 0},
         }
     },
 
@@ -356,18 +367,49 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 15, true)
+                end,
+
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 37 then
+                    if tick == 12 then
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels(12, 0)
+                        end
+                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(8, 0)
+                    elseif tick == 15 then
+                        FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "NORMAL", 22, true)
+                    elseif tick == 36 then
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 11, true)
+                    elseif tick == 37 then
                         models.models.ex_skill_1.Momoi.MomoiUpperBody.MomoiArms.MomoiLeftArm.MomoiLeftArmBottom.GameConsole2:setVisible(false)
+                    elseif tick == 47 then
+                        FaceParts:setEmotion("FRUST", "TIRED", "FRUST", 12, true)
+                    elseif tick == 49 then
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels(24, 0)
+                        end
+                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(24, 0)
                     elseif tick == 59 then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1:setVisible(false)
                         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
                         Gun.TargetModel:setPos()
                         Gun.TargetModel:setRot()
                         Gun.TargetModel:setVisible(true)
+                        FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 13, true)
+                    elseif tick == 72 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "ANXIOUS", 8, true)
+                    elseif tick == 80 then
+                        FaceParts:setEmotion("STARE", "STARE", "NORMAL2", 25, true)
                     end
                 end,
 
@@ -377,6 +419,9 @@ BlueArchiveCharacter = {
                 postAnimation = function(forcedStop)
                     Gun.TargetModel:setVisible(false)
                     models.models.ex_skill_1.Momoi.MomoiUpperBody.MomoiArms.MomoiLeftArm.MomoiLeftArmBottom.GameConsole2:setVisible(true)
+                    for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth}) do
+                        modelPart:setUVPixels(12, 0)
+                    end
                 end
 
             }
