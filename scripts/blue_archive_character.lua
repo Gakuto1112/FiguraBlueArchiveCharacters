@@ -103,7 +103,8 @@ BlueArchiveCharacter = {
             FRUST = {4, 0},
             ANXIOUS = {6, 0},
             NORMAL2 = {8, 0},
-            SMILE = {10, 0}
+            SMILE = {10, 0},
+            SHOCK = {6, -2},
         }
     },
 
