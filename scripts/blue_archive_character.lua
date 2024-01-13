@@ -393,19 +393,19 @@ BlueArchiveCharacter = {
                     elseif tick == 37 then
                         models.models.ex_skill_1.Momoi.MomoiUpperBody.MomoiArms.MomoiLeftArm.MomoiLeftArmBottom.GameConsole2:setVisible(false)
                     elseif tick == 47 then
-                        FaceParts:setEmotion("FRUST", "TIRED", "FRUST", 12, true)
+                        FaceParts:setEmotion("FRUST", "TIRED", "FRUST", 17, true)
                     elseif tick == 49 then
                         for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels(24, 0)
                         end
                         models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(24, 0)
-                    elseif tick == 59 then
+                    elseif tick == 64 then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1:setVisible(false)
                         Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
                         Gun.TargetModel:setPos()
                         Gun.TargetModel:setRot()
                         Gun.TargetModel:setVisible(true)
-                        FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 13, true)
+                        FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 8, true)
                     elseif tick == 72 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "ANXIOUS", 8, true)
                     elseif tick == 80 then
