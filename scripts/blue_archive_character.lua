@@ -345,7 +345,7 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(34, 31, -5),
+                    pos = vectors.vec3(29, 29, -8),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
