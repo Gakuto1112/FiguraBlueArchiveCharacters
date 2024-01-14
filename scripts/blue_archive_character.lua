@@ -630,7 +630,7 @@ BlueArchiveCharacter = {
             ---@param parts Armor.ArmorPart 変更された防具の部位
             armorChange = function(parts)
                 if parts == "HELMET" then
-                    models.models.main.Avatar.Head.EffectPanel:setPos(0, 0, Armor.ArmorVisible[1] and -1 or 0)
+                    models.models.main.Avatar.Head.Sweat:setPos(0, 0, Armor.ArmorVisible[1] and -1 or 0)
                 elseif parts == "LEGGINGS" then
                     models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
                 end
