@@ -17,11 +17,10 @@ The avatars for these characters are completed. Click on a character's name to g
 - [Izuna Kuda](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
 - [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 - [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
+- [Midori Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 
 ### In progress
 The avatars for these characters are worked in progress. It usually takes about 2~3 weeks. Click on the link in brackets to go to the issue about the character, where you can check the progress.
-
-- Midori Saiba ([#14](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/14))
 
 ### Planned
 Although the avatars for these characters are not created, there are plans to create them in the future. This is just a plan and is subject to change (I will close this project without creating them if I get bored to create them).
