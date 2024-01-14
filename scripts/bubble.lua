@@ -216,12 +216,13 @@ Bubble = {
                 end
                 isActionWheelEnabledPrev = isActionWheelEnabled
             end)
-            events.WORLD_RENDER:register(function ()
-                for i = 1, 2 do
-                    self.IsRenderProcessed[i] = false
-                end
-            end)
         end
+
+        events.WORLD_RENDER:register(function ()
+            for i = 1, 2 do
+                self.IsRenderProcessed[i] = false
+            end
+        end)
     end
 }
 
