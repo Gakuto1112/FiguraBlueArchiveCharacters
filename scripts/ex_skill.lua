@@ -29,7 +29,9 @@ ExSkill = {
     canPlayAnimation = function(self)
         local velocity = player:getVelocity()
         local bodyYawPrev = self.BodyYaw
-        self.BodyYaw = player:getBodyYaw() % 360
+        if host:isHost() then
+            self.BodyYaw = player:getBodyYaw() % 360
+        end
         return player:getPose() == "STANDING" and velocity:length() < 0.01 and bodyYawPrev == self.BodyYaw and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
     end,
 
@@ -279,6 +281,14 @@ end)
 events.WORLD_RENDER:register(function()
     ExSkill.RenderProcessed = false
 end)
+
+if not host:isHost() then
+    events.TICK:register(function ()
+        if ExSkill.AnimationCount == -1 then
+            ExSkill.BodyYaw = player:getBodyYaw() % 360
+        end
+    end)
+end
 
 for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
 	exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
