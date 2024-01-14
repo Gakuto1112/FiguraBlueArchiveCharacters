@@ -304,18 +304,18 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Ex skill name",
+                en_us = "Drawing art",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
                 ---@type string
-                ja_jp = "Exスキル名"
+                ja_jp = "ドローイングアート"
             },
 
             ---スキルの種類
             ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
             ---@type BlueArchiveCharacter.SkillType
-            skillType = "EXPLOSION",
+            skillType = "PIERCE",
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
