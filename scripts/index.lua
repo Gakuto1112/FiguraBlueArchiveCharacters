@@ -23,8 +23,8 @@ events.ENTITY_INIT:register(function ()
 
 	--機能別クラス
 	Costume = require("scripts.costume")
-	ActionWheel = require("scripts.action_wheel")
 	CameraManager = require("scripts.camera_manager")
+	ActionWheel = require("scripts.action_wheel")
 	ExSkill = require("scripts.ex_skill")
 	PlacementObject = require("scripts.placement_object.placement_object")
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
