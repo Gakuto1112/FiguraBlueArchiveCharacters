@@ -84,6 +84,10 @@ Figura provides the action wheel with which players can play some actions (emote
 ### Action 1. Ex skill
 Plays the ex skill animation. Only in the third person view.
 
+**Notes about Ex skill animations**
+- Ex skill animations are designed for the case where the screen ratio is 16:9. Although you can play them in a screen ratio other than 16:9, but some parts may be crowded out of the screen.
+- Ex skill animations are design for the case where the field of view (FOV) is standard (70). The FOV will be temporarily adjusted to the standard if it is not standard. However, use of some other mods or FOV changes because of changes of the player's movement speed prevents the script from adjusting it.
+
 ![Ex skill](./README_images/ex_skill.jpg)
 
 ### Action 2. Change costume
