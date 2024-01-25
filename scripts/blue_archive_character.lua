@@ -28,44 +28,44 @@ BlueArchiveCharacter = {
         firstName = {
             ---英語
             ---@type string
-            en_us = "FirstName",
+            en_us = "Shiroko",
 
             ---日本語
             ---@type string
-            ja_jp = "名前"
+            ja_jp = "シロコ"
         },
 
         ---生徒の苗字
         lastName = {
             ---英語
             ---@type string
-            en_us = "LastName",
+            en_us = "Sunaokami",
 
             ---日本語
             ---@type string
-            ja_jp = "苗字"
+            ja_jp = "砂狼"
         },
 
         ---生徒所属の部活名
         clubName = {
             ---英語
             ---@type string
-            en_us = "ClubName",
+            en_us = "Task force committee",
 
             ---日本語
             ---@type string
-            ja_jp = "部活名",
+            ja_jp = "対策委員会",
         },
 
         ---生徒の誕生日
         birth = {
             ---誕生月
             ---@type integer
-            month = 1,
+            month = 5,
 
             ---誕生日
             ---@type integer
-            day = 1
+            day = 16
         }
     },
 
