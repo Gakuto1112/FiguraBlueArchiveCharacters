@@ -534,7 +534,7 @@ BlueArchiveCharacter = {
                         end
                         local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
                         local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
-                        if particleBlock ~= "minecraft:air" then
+                        if particleBlock ~= "minecraft:air" and particleBlock ~= "minecraft:void_air" then
                             for _ = 1, 50 do
                                 particles:newParticle("minecraft:block "..particleBlock, anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
                             end
@@ -2598,5 +2598,33 @@ end)
 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower}) do
     modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
 end
+
+---前ティックのプレイヤーの位置
+---@type Vector3
+local playerPosPrev = player:getPos()
+
+---前ティックの体の向き
+---@type integer
+local bodyYawPrev = player:getBodyYaw()
+
+events.TICK:register(function ()
+    local playerPos = player:getPos()
+    local playerPosDelta = playerPos:copy():sub(playerPosPrev):length()
+    if playerPosDelta > math.max(player:getVelocity():length(), 6) then
+        PlacementObjectManager:removeAll()
+        if math.random() >= 0.95 then
+            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+        else
+            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("PRIMARY")
+        end
+        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], playerPosPrev, bodyYawPrev * -1 + 180)
+        for _ = 1, 70 do
+            particles:newParticle("minecraft:poof", playerPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+            particles:newParticle("minecraft:poof", playerPosPrev:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+        end
+    end
+    playerPosPrev = playerPos
+    bodyYawPrev = player:getBodyYaw()
+end)
 
 return BlueArchiveCharacter
