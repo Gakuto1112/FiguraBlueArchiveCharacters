@@ -457,6 +457,7 @@ BlueArchiveCharacter = {
                             BlueArchiveCharacter.EX_SKILL_1_KO:setVisible(true)
                             models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes:setVisible(false)
                             models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.DeadEye:setVisible(true)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.Mouth:setUVPixels(32, -4)
                             sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
                             local koAnimationCount = 0
                             events.RENDER:register(function ()
