@@ -1936,7 +1936,7 @@
 			"autouv": 0,
 			"color": 0,
 			"inflate": 0.001,
-			"origin": [0, 24, 0],
+			"origin": [2.75, 21.75, -2.3],
 			"faces": {
 				"north": {
 					"uv": [48, 26, 54, 38],
@@ -1974,7 +1974,6 @@
 			"autouv": 0,
 			"color": 0,
 			"inflate": 0.001,
-			"rotation": [2, 0, 0],
 			"origin": [-0.25, 21.75, -2.3],
 			"faces": {
 				"north": {
@@ -2695,7 +2694,36 @@
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
-									"children": ["4d907850-473e-b8b4-9742-6cde05d9d80f", "77d3dae1-986a-f1ca-1a68-dff72e6be7d8", "fdffe47f-b66c-395e-2cd3-75e7fafa085f"]
+									"children": [
+										"4d907850-473e-b8b4-9742-6cde05d9d80f",
+										{
+											"name": "Scarf2",
+											"origin": [2.75, 21.75, -2.3],
+											"color": 0,
+											"uuid": "6101f8d5-b970-b28b-9e12-ecd9dcd9a6a9",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["77d3dae1-986a-f1ca-1a68-dff72e6be7d8"]
+										},
+										{
+											"name": "Scarf3",
+											"origin": [-0.25, 21.75, -2.3],
+											"rotation": [2, 0, 0],
+											"color": 0,
+											"uuid": "e36cdff1-4949-f823-2012-f9a108379e69",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": ["fdffe47f-b66c-395e-2cd3-75e7fafa085f"]
+										}
+									]
 								},
 								{
 									"name": "Skirt",
@@ -2724,7 +2752,7 @@
 									"children": [
 										{
 											"name": "FrontHair",
-											"origin": [0, 24, 0],
+											"origin": [0, 24, -2.25],
 											"color": 0,
 											"uuid": "7d75fb32-75be-dc29-9085-7821897ce3ce",
 											"export": true,
@@ -2742,7 +2770,7 @@
 										},
 										{
 											"name": "BackHair",
-											"origin": [0, 24, 0],
+											"origin": [0, 24, 2.25],
 											"color": 0,
 											"uuid": "982f9d44-5c5e-570d-2128-90f9f75297f4",
 											"export": true,
