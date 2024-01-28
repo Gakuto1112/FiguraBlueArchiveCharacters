@@ -76,22 +76,30 @@ BlueArchiveCharacter = {
         ---右目
         RightEye = {
             NORMAL = {0, 0},
-            SURPLISED = {0, 0},
-            TIRED = {0, 0},
-            CLOSED = {0, 0}
+            SURPLISED = {2, 0},
+            TIRED = {4, 0},
+            CLOSED = {6, 0},
+            CLOSED2 = {7, 0},
+            HALF = {8, 0},
+            ANGRY = {0, 1}
         },
 
         ---左目
         LeftEye = {
             NORMAL = {0, 0},
-            SURPLISED = {0, 0},
-            TIRED = {0, 0},
-            CLOSED = {0, 0}
+            SURPLISED = {2, 0},
+            TIRED = {4, 0},
+            CLOSED = {5, 0},
+            CLOSED2 = {6, 0},
+            HALF = {8, 0},
+            ANGRY = {0, 1}
         },
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
+            CLOSED = {0, 0},
+            NORMAL = {4, 0},
+            ANGRY = {8, 0}
         }
     },
 
@@ -356,6 +364,26 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 20, true)
+                end,
+
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    if tick == 20 then
+                        FaceParts:setEmotion("HALF", "HALF", "NORMAL", 5, true)
+                    elseif tick == 25 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 10, true)
+                    elseif tick == 35 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "ANGRY", 10, true)
+                    elseif tick == 40 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 30, true)
+                    end
+                end,
             }
 		}
 	},
