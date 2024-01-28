@@ -368,6 +368,7 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 20, true)
+                    models.models.ex_skill_1.Drone.LauncherRight.ShineEffects:setColor(client:hasIrisShader() and vectors.vec3(0.5, 1, 1) or vectors.vec3(1, 1, 1))
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
