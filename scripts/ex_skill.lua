@@ -295,4 +295,14 @@ for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
 	exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16 *  0.9375)
 end
 
+local init = true
+
+events.TICK:register(function ()
+    if init then
+        ExSkill.BodyYaw = player:getBodyYaw() % 360
+        ExSkill:play()
+        init = false
+    end
+end)
+
 return ExSkill
