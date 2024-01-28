@@ -2139,6 +2139,48 @@
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAaCAYAAADMp76xAAAAAXNSR0IArs4c6QAAAb5JREFUWEfVlrFOwzAQhu0NtVGzAi/AGyChdmMjExNCgg1egImJmYkXQEwgISamMiAxwUvwAGVPlVZsRbbqyHbO8fl0rkSWNpbv8vnP3Z+T9bxeCeC6WozE3XAu1O/FthAHUkpoH3FNPZOUT85+ZiDw9WJL3A5/xY3c1UwPO2zABpYELWMKT8aV2H//5AL2IZOhQeCmacA3XRRFZ70cldhXa8OF/kcrTANXx6fOxpfHezDw5PzSWZ++PosEYDs2WVkTDAJHj7nekAAcKwX0ARzg5bJ2WAeDUt+H1hOAVRr+ksgEDKnbvmFLIZTKuRXugyVB5wS2/RbbFspxepXO1XShh0IfKcgWg9CbBjbNB5UDyvZylESfukZNzIcDzMMNjIH1LQ66N2p38nECo2xpTULeyw2McQPbCcBJEUjSNmaupsOAk/ZwDT9GKbupfCfw52BbXdva/FyOs3CMlyqh3/2QC0DAKXFaADk5PArW0dfHG2bW9eNNjcY+vX2HgoYlzauB956mnXr6PqtEAjBGKczEFvPnVQusAM2lDsAAjFE4tMcvs3YfBzCp26lB/xfYP3FCSVDFIsVxuATpwdSgP6L/TSjFInGvAAAAAElFTkSuQmCC"
 		}
 	],
+	"animations": [
+		{
+			"uuid": "346f4fa7-7be3-e5cd-b917-f04058b549cd",
+			"name": "ex_skill_1",
+			"loop": "hold",
+			"override": true,
+			"length": 0,
+			"snapping": 20,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"09dc82c1-3b16-20db-4375-0b9ea34661d0": {
+					"name": "Drone",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": -3,
+									"y": "0",
+									"z": -12
+								}
+							],
+							"uuid": "3ef78bbc-d0f2-f2dc-975f-121781bcf30b",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				}
+			}
+		}
+	],
 	"reference_images": [
 		{
 			"name": "Pasted",

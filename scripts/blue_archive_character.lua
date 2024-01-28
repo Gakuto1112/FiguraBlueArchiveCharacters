@@ -303,12 +303,12 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Ex skill name",
+                en_us = "Drone summons: Fire support",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
                 ---@type string
-                ja_jp = "Exスキル名"
+                ja_jp = "ドローン召喚：火力支援"
             },
 
             ---スキルの種類
@@ -318,12 +318,12 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {},
+			models = {models.models.ex_skill_1.Drone},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main"},
+			animations = {"main", "ex_skill_1"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
