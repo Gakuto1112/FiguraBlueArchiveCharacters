@@ -2603,6 +2603,10 @@ end
 ---@type Vector3
 local playerPosPrev = player:getPos()
 
+---前ティックに立っていたかどうか
+---@type boolean
+local isStandingPrev = player:getPose() == "STANDING" and player:getVehicle() == nil
+
 ---前ティックの体の向き
 ---@type integer
 local bodyYawPrev = player:getBodyYaw()
@@ -2610,7 +2614,8 @@ local bodyYawPrev = player:getBodyYaw()
 events.TICK:register(function ()
     local playerPos = player:getPos()
     local playerPosDelta = playerPos:copy():sub(playerPosPrev):length()
-    if playerPosDelta > math.max(player:getVelocity():length(), 6) then
+    local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
+    if playerPosDelta > player:getVelocity():length() and isStanding and isStandingPrev then
         PlacementObjectManager:removeAll()
         if math.random() >= 0.95 then
             models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
@@ -2624,6 +2629,7 @@ events.TICK:register(function ()
         end
     end
     playerPosPrev = playerPos
+    isStandingPrev = isStanding
     bodyYawPrev = player:getBodyYaw()
 end)
 
