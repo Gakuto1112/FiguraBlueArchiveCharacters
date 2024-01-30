@@ -40,28 +40,28 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるティック関数
-    animationTick = function()
+    animationTick = function(self)
         if not client:isPaused() then
-            if ExSkill.AnimationCount == ExSkill.AnimationLength - 1 then
-                ExSkill:stop()
-            elseif ExSkill:canPlayAnimation() then
+            if self.AnimationCount == self.AnimationLength - 1 then
+                self:stop()
+            elseif self:canPlayAnimation() and animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:isPlaying() then
                 if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick ~= nil then
-                    BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick(ExSkill.AnimationCount)
+                    BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick(self.AnimationCount)
                 end
-                ExSkill.AnimationCount = ExSkill.AnimationCount > -1 and ExSkill.AnimationCount + 1 or ExSkill.AnimationCount
-            else
-                ExSkill:forceStop()
+                self.AnimationCount = self.AnimationCount > -1 and self.AnimationCount + 1 or self.AnimationCount
+            elseif not self:canPlayAnimation() then
+                self:forceStop()
             end
         end
     end,
 
     ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function(self, delta)
+    animationRender = function(self)
         local bodyYaw = self.BodyYaw
         local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
         CameraManager.setCameraPivot(cameraPos)
         CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
-        ExSkill.RenderProcessed = true
+        self.RenderProcessed = true
     end,
 
     ---Exスキルのアニメーションの前後のカメラのトランジションを行う関数
@@ -138,7 +138,7 @@ ExSkill = {
             end
 
             --カウンター更新
-            if not client:isPaused() and not ExSkill.RenderProcessed then
+            if not client:isPaused() and not self.RenderProcessed then
                 self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 4 / client:getFPS(), 1) or math.max(self.TransitionCount - 4 / client:getFPS(), 0)
             end
             if (direction == "PRE" and self.TransitionCount == 1) or (direction == "POST" and self.TransitionCount == 0) then
@@ -201,7 +201,9 @@ ExSkill = {
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preAnimation()
             end
             CameraManager:setThirdPersonCameraDistance(0)
-            events.TICK:register(self.animationTick, "ex_skill_tick")
+            events.TICK:register(function ()
+                self:animationTick()
+            end, "ex_skill_tick")
             events.RENDER:register(function ()
                 self:animationRender()
             end, "ex_skill_render")
@@ -229,7 +231,7 @@ ExSkill = {
         end
         events.TICK:remove("ex_skill_tick")
         events.RENDER:remove("ex_skill_render")
-        ExSkill.AnimationCount = -1
+        self.AnimationCount = -1
         Physics:enable()
         renderer:setFOV()
         self:transition("POST", function()
