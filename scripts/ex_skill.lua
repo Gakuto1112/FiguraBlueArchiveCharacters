@@ -300,8 +300,8 @@ ExSkill = {
         end
 
         for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-            exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16 * 0.9375)
-            exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16 * 0.9375)
+            exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16)
+            exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16)
         end
 
         if self.AUTO_PLAY then
