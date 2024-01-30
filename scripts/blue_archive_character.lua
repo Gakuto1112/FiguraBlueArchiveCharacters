@@ -479,7 +479,7 @@ BlueArchiveCharacter = {
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
                 models.models.main.Avatar.Head.CMaskedH:setVisible(true)
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
                     modelPart:setVisible(false)
                 end
             end,
@@ -489,7 +489,7 @@ BlueArchiveCharacter = {
             ---@type fun()
             reset = function()
                 models.models.main.Avatar.Head.CMaskedH:setVisible(false)
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
                     modelPart:setVisible(true)
                 end
             end,
