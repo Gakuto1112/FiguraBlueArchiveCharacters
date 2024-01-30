@@ -383,6 +383,8 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "ANGRY", 10, true)
                     elseif tick == 40 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 30, true)
+                    elseif tick == 41 then
+                        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 0.5, 1.5)
                     end
                 end,
             }
