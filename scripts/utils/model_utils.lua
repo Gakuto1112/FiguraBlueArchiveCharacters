@@ -1,5 +1,9 @@
 ---@class ModelUtils モデルに関するユーティリティ関数群
 ModelUtils = {
+    ---モデルが見つからない場合の警告メッセージを表示する。デバッグ用。
+    ---@type boolean
+    SHOW_WARN_MESSAGES = false,
+
     ---指定したモデルのワールド位置を返す。
     ---@param model ModelPart ワールド位置を取得するモデルパーツ
     ---@return Vector3 worldPos モデルのワールド位置
@@ -11,7 +15,7 @@ ModelUtils = {
     ---プレイヤーアバターとダミーアバターから指定されたモデルパスのモデルパーツの配列を返す。
     ---@param modelPaths string[] 取得対象のモデルパスの配列（"models.models.main.Avatar."に続く部分）
     ---@return ModelPart[] modelParts 取得したモデルパーツの配列
-    getPlayerModels = function (modelPaths)
+    getPlayerModels = function (self, modelPaths)
         local result = {}
         for index, rootModelPart in ipairs({models.models.main.Avatar, models.models.death_animation.DummyAvatar}) do
             for _, modelPath in ipairs(modelPaths) do
@@ -26,7 +30,9 @@ ModelUtils = {
                         modelPart = modelPart[modelPathChunks[1]]
                         table.remove(modelPathChunks, 1)
                     else
-                        print("Warning! \""..(index == 1 and "models.models.main.Avatar" or "models.models.death_animation.DummyAvatar").."."..modelPath.."\" does not exist!")
+                        if self.SHOW_WARN_MESSAGES then
+                            print("Warning! \""..(index == 1 and "models.models.main.Avatar" or "models.models.death_animation.DummyAvatar").."."..modelPath.."\" does not exist!")
+                        end
                         modelPart = nil
                         break
                     end
