@@ -675,21 +675,21 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Ears"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Ears"})) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody"})) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Accessory"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Accessory"})) do
                     modelPart:setPos(0, -1, 0)
                 end
                 if costumeId == 3 then
                     Costume.setCostumeTextureOffset(1)
-                    for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.CTracksuitH", "UpperBody.Body.CTracksuitB"})) do
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CTracksuitH", "UpperBody.Body.CTracksuitB"})) do
                         modelPart:setVisible(true)
                     end
-                    for _, modelPart in ipairs(ModelUtils.getPlayerModels({"UpperBody.Body.TrinityLogo", "UpperBody.Body.FrontHair", "UpperBody.Body.Robe", "UpperBody.Body.BackRibbon"})) do
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.TrinityLogo", "UpperBody.Body.FrontHair", "UpperBody.Body.Robe", "UpperBody.Body.BackRibbon"})) do
                         modelPart:setVisible(false)
                     end
                 end
@@ -701,16 +701,16 @@ BlueArchiveCharacter = {
             ---@type fun()
             reset = function()
                 Costume.setCostumeTextureOffset(0)
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Ears", "Head.CTracksuitH", "UpperBody.Body.CTracksuitB"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Ears", "Head.CTracksuitH", "UpperBody.Body.CTracksuitB"})) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody", "UpperBody.Body.TrinityLogo", "UpperBody.Body.FrontHair"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody", "UpperBody.Body.TrinityLogo", "UpperBody.Body.FrontHair"})) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"UpperBody.Body.Robe", "UpperBody.Body.BackRibbon"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Robe", "UpperBody.Body.BackRibbon"})) do
                     modelPart:setVisible(not Armor.ArmorVisible[3])
                 end
-                for _, modelPart in ipairs(ModelUtils.getPlayerModels({"Head.Accessory"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Accessory"})) do
                     modelPart:setPos()
                 end
                 if DeathAnimation ~= nil and DeathAnimation.AnimationCount < 120 then
