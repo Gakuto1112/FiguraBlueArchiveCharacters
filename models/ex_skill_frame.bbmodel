@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"format_version": "4.5",
+		"format_version": "4.9",
 		"model_format": "free",
 		"box_uv": false
 	},
@@ -12,8 +12,8 @@
 	"timeline_setups": [],
 	"unhandled_root_fields": {},
 	"resolution": {
-		"width": 48,
-		"height": 48
+		"width": 32,
+		"height": 16
 	},
 	"elements": [
 		{
@@ -112,7 +112,8 @@
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [32, 0, 48, 16],
+					"uv": [0, 0, 16, 16],
+					"rotation": 90,
 					"texture": 0
 				},
 				"east": {
@@ -153,7 +154,8 @@
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 16, 16, 32],
+					"uv": [16, 0, 32, 16],
+					"rotation": 270,
 					"texture": 0
 				},
 				"east": {
@@ -194,7 +196,8 @@
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [32, 16, 48, 32],
+					"uv": [16, 0, 32, 16],
+					"rotation": 90,
 					"texture": 0
 				},
 				"east": {
@@ -235,7 +238,8 @@
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [0, 32, 16, 48],
+					"uv": [0, 0, 16, 16],
+					"rotation": 270,
 					"texture": 0
 				},
 				"east": {
@@ -276,7 +280,8 @@
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [16, 32, 32, 48],
+					"uv": [16, 0, 32, 16],
+					"rotation": 180,
 					"texture": 0
 				},
 				"east": {
@@ -317,7 +322,8 @@
 			"origin": [0, 0, 0],
 			"faces": {
 				"north": {
-					"uv": [32, 32, 48, 48],
+					"uv": [0, 0, 16, 16],
+					"rotation": 180,
 					"texture": 0
 				},
 				"east": {
@@ -358,7 +364,8 @@
 			"origin": [-6, 4, 1],
 			"faces": {
 				"north": {
-					"uv": [32, 16, 48, 32],
+					"uv": [16, 0, 32, 16],
+					"rotation": 90,
 					"texture": 0
 				},
 				"east": {
@@ -399,7 +406,8 @@
 			"origin": [-6, 4, 1],
 			"faces": {
 				"north": {
-					"uv": [0, 16, 16, 32],
+					"uv": [16, 0, 32, 16],
+					"rotation": 270,
 					"texture": 0
 				},
 				"east": {
@@ -481,12 +489,18 @@
 	],
 	"textures": [
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\ex_skill_frame.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\ex_skill_frame.png",
 			"name": "ex_skill_frame.png",
 			"folder": "",
 			"namespace": "",
 			"id": "0",
+			"width": 32,
+			"height": 16,
+			"uv_width": 32,
+			"uv_height": 16,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -494,11 +508,11 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "d4a6d900-994d-d2db-a2a9-40eeb7363089",
 			"relative_path": "../../textures/ex_skill_frame.png",
-			"source": "data:image/png;base64,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"
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAYAAAB3AH1ZAAAAAXNSR0IArs4c6QAAAbdJREFUSEutVYtuwjAMtFOJ///KbbwLY4wJJZ6uxOzitmwSi1SlaVznend2te/7s4io/Ayjtd9jxvA4X/uzuO/ZOC7G3hJWAG8EgG/nEiMGe6nOnrzMgAdwXJxvuAeATxF5FZGNiOTAhB8QmfCwmHjqO/jg0T4zAADrO3dmN4SqamaGmfd4PdBRYzD7ezOsMnhjBrYislJVgHDUrHn0Ceef8hB7iT3BuQcAMCEk2FUAYGIf5OADXH82VTTnHKCRkRsPmNkqpbQtpfSYZ5jgJL+wPDJd/JDGhC7BhgD0fEIpRVNKTWn5s6k9vMvPYyzWUwwAwKEy0JdSTkEONpHL8dDp9BGjPtJUgUtQPQAf7AFAVY9/6BOxgTVunzO2A1jWElyrqksAUwLAu6ri+gCjXnJNCVCJ8r6XqpfmVFnHRjQAqAzsIIWIHCuAU84ZIP51jBoR+kD1gDMACQ6qes45n1JKADHVVpv6foCy8Ysz8CIi21iGlQHQ3wDIOX8tFotBjmdH0wnNbFndPxiQPAAZ7gwAQNd1+Ic8PRoGYMQJCcBAA6DrukvO+XK9Xi/+r7hbvhqSjRf3GPU3orWFV48IG9oAAAAASUVORK5CYII="
 		}
 	]
 }
