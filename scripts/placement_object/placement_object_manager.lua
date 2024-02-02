@@ -9,6 +9,7 @@ PlacementObjectManager = {
     Objects = {},
 
     ---レンダーイベントを処理したかどうか
+    ---@type boolean
     IsRenderProcessed = false,
 
     ---今ある全ての設置物を削除する。
