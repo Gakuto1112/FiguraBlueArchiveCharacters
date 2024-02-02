@@ -30,7 +30,7 @@ ExSkill = {
 
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
-    canPlayAnimation = function(self)
+    canPlayAnimation = function (self)
         local velocity = player:getVelocity()
         local bodyYawPrev = self.BodyYaw
         if host:isHost() then
@@ -40,7 +40,7 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるティック関数
-    animationTick = function(self)
+    animationTick = function (self)
         if not client:isPaused() then
             if self.AnimationCount == self.AnimationLength - 1 then
                 self:stop()
@@ -56,7 +56,7 @@ ExSkill = {
     end,
 
     ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function(self)
+    animationRender = function (self)
         local bodyYaw = self.BodyYaw
         local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
         CameraManager.setCameraPivot(cameraPos)
@@ -67,7 +67,15 @@ ExSkill = {
     ---Exスキルのアニメーションの前後のカメラのトランジションを行う関数
     ---@param direction ExSkill.TransitionPhase カメラのトランジションの向き
     ---@param callback function トランジション終了時に呼び出されるコールバック関数
-    transition = function(self, direction, callback)
+    transition = function (self, direction, callback)
+        events.TICK:register(function ()
+            local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
+            local windowSizeY = client:getScaledWindowSize().y
+            for _ = 1, windowSizeY / 10 do
+                local particleOffset = math.random() * windowSizeY
+                FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset))
+            end
+        end, "ex_skill_transition_tick")
         events.RENDER:register(function (delta)
             --カメラのトランジション
             if host:isHost() then
@@ -139,7 +147,7 @@ ExSkill = {
 
             --カウンター更新
             if not client:isPaused() and not self.RenderProcessed then
-                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 4 / client:getFPS(), 1) or math.max(self.TransitionCount - 4 / client:getFPS(), 0)
+                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 2 / client:getFPS(), 1) or math.max(self.TransitionCount - 2 / client:getFPS(), 0)
             end
             if (direction == "PRE" and self.TransitionCount == 1) or (direction == "POST" and self.TransitionCount == 0) then
                 if host:isHost() then
@@ -167,18 +175,19 @@ ExSkill = {
                     end
                 end
                 callback()
-                events.RENDER:remove("ex_skill_transition")
+                events.TICK:remove("ex_skill_transition_tick")
+                events.RENDER:remove("ex_skill_transition_render")
             end
             self.RenderProcessed = true
-        end, "ex_skill_transition")
+        end, "ex_skill_transition_render")
     end,
 
     ---アニメーションを再生する。
-    play = function(self)
+    play = function (self)
         PlacementObjectManager:removeAll()
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
-        renderer:setRenderHUD(false)
+        --renderer:setRenderHUD(false)
         CameraManager:setCameraCollisionDenial(true)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
@@ -186,7 +195,7 @@ ExSkill = {
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition()
         end
         models.models.ex_skill_frame.Gui.FrameBar:setScale(1, client:getScaledWindowSize().y * math.sqrt(2) / 16 + 1, 1)
-        self:transition("PRE", function()
+        self:transition("PRE", function ()
             Physics.disable()
             for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
                 itemModel:setVisible(false)
@@ -213,7 +222,7 @@ ExSkill = {
     end,
 
     ---アニメーションを停止する。
-    stop = function(self)
+    stop = function (self)
         if host:isHost() then
             sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
         end
@@ -234,7 +243,7 @@ ExSkill = {
         self.AnimationCount = -1
         Physics:enable()
         renderer:setFOV()
-        self:transition("POST", function()
+        self:transition("POST", function ()
             if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postTransition(false)
             end
@@ -247,7 +256,7 @@ ExSkill = {
     end,
 
     ---アニメーションを停止させる。終了時のトランジションも無効
-    forceStop = function(self)
+    forceStop = function (self)
         for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
             itemModel:setVisible(true)
         end
@@ -258,7 +267,10 @@ ExSkill = {
             animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:stop()
         end
         events.TICK:remove("ex_skill_tick")
-        for _, eventName in ipairs({"ex_skill_render", "ex_skill_transition"}) do
+        for _, eventName in ipairs({"ex_skill_tick", "ex_skill_transition_tick"}) do
+            events.TICK:remove(eventName)
+        end
+        for _, eventName in ipairs({"ex_skill_render", "ex_skill_transition_render"}) do
             events.RENDER:remove(eventName)
         end
         Physics:enable()
@@ -287,7 +299,7 @@ ExSkill = {
 
     ---Exスキルスクリプトの初期化関数
     init = function (self)
-        events.WORLD_RENDER:register(function()
+        events.WORLD_RENDER:register(function ()
             self.RenderProcessed = false
         end)
 
