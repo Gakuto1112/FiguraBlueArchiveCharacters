@@ -175,6 +175,11 @@ ExSkill = {
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.preTransition()
         end
         models.models.ex_skill_frame.Gui.FrameBar:setScale(1, client:getScaledWindowSize().y * math.sqrt(2) / 16 + 1, 1)
+        events.TICK:register(function ()
+            if not self:canPlayAnimation() then
+                self:forceStop()
+            end
+        end, "ex_skill_tick")
         self:transition("PRE", function ()
             Physics.disable()
             for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
@@ -199,8 +204,6 @@ ExSkill = {
                             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick(self.AnimationCount)
                         end
                         self.AnimationCount = self.AnimationCount > -1 and self.AnimationCount + 1 or self.AnimationCount
-                    elseif not self:canPlayAnimation() then
-                        self:forceStop()
                     end
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
@@ -213,7 +216,7 @@ ExSkill = {
                         end
                     end
                 end
-            end, "ex_skill_tick")
+            end, "ex_skill_animation_tick")
             if host:isHost() then
                 events.RENDER:register(function ()
                     if not client:isPaused() then
@@ -222,7 +225,7 @@ ExSkill = {
                         CameraManager.setCameraPivot(cameraPos)
                         CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
                     end
-                end, "ex_skill_render")
+                end, "ex_skill_animation_render")
             end
             self.AnimationCount = 0
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20)
@@ -246,9 +249,9 @@ ExSkill = {
         if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation(false)
         end
-        events.TICK:remove("ex_skill_tick")
+        events.TICK:remove("ex_skill_animation_tick")
         if host:isHost() then
-            events.RENDER:remove("ex_skill_render")
+            events.RENDER:remove("ex_skill_animation_render")
         end
         self.AnimationCount = -1
         Physics:enable()
@@ -262,6 +265,7 @@ ExSkill = {
             CameraManager:setThirdPersonCameraDistance(4)
             CameraManager:setCameraCollisionDenial(false)
             renderer:setRenderHUD(true)
+            events.TICK:remove("ex_skill_tick")
         end)
     end,
 
@@ -276,13 +280,16 @@ ExSkill = {
         for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].animations) do
             animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:stop()
         end
-        events.TICK:remove("ex_skill_tick")
+        for _, eventName in ipairs({"ex_skill_tick", "ex_skill_animation_tick"}) do
+            events.TICK:remove(eventName)
+        end
         events.RENDER:remove("ex_skill_transition_render")
         if host:isHost() then
             events.TICK:remove("ex_skill_transition_tick")
-            events.RENDER:remove("ex_skill_render")
+            events.RENDER:remove("ex_skill_animation_render")
         end
         Physics:enable()
+        models.models.ex_skill_frame.Gui.FrameBar:setPos()
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
             modelPart:setVisible(false)
         end
