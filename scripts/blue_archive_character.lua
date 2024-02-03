@@ -399,9 +399,12 @@ BlueArchiveCharacter = {
                     elseif tick == 49 then
                         sounds:playSound("minecraft:entity.player.attack.sweep", player:getPos(), 0.5, 1.5)
                     elseif tick == 50 and host:isHost() then
-                        models.models.main.CameraAnchor.Background:setVisible(true)
+                        models.models.main.CameraBackground:setVisible(true)
+                        local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.75)), 0, 1, 0):scale(16 / 0.9375)
+                        models.models.main.CameraBackground:setOffsetPivot(backgroundPos)
+                        models.models.main.CameraBackground.Background:setPos(backgroundPos)
                         local windowSize = client:getWindowSize()
-                        models.models.main.CameraAnchor.Background:setScale(windowSize.x / windowSize.y * 40, 40, 1)
+                        models.models.main.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(40))
                         models.models.main.Avatar:setColor(0, 0, 0)
                         for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
                             textAnimation:setBlack(true)
@@ -410,7 +413,7 @@ BlueArchiveCharacter = {
                     elseif tick == 51 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 10, true)
                     elseif tick == 53 and host:isHost() then
-                        models.models.main.CameraAnchor.Background:setVisible(false)
+                        models.models.main.CameraBackground:setVisible(false)
                         models.models.main.Avatar:setColor(1, 1, 1)
                         for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
                             textAnimation:setBlack(false)
@@ -460,7 +463,7 @@ BlueArchiveCharacter = {
                             textAnimation:stop()
                         end
                         if host:isHost() then
-                            models.models.main.CameraAnchor.Background:setVisible(false)
+                            models.models.main.CameraBackground:setVisible(false)
                             models.models.main.Avatar:setColor(1, 1, 1)
                         end
                     end
@@ -580,9 +583,14 @@ BlueArchiveCharacter = {
                         end
                         sounds:playSound("minecraft:item.bucket.empty", avatarPos, 1 - math.map(tick, 45, 60, 0, 0.5), 0.75)
                     elseif tick == 79 and host:isHost() then
-                        models.models.main.CameraAnchor.Background:setVisible(true)
+                        models.models.main.CameraBackground:setVisible(true)
                         local windowSize = client:getWindowSize()
-                        models.models.main.CameraAnchor.Background:setScale(windowSize.x / windowSize.y * 120, 120, 1)
+                        models.models.main.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(45))
+                        events.RENDER:register(function (delta)
+                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(2)), 0, 1, 0):scale(16 / 0.9375)
+                            models.models.main.CameraBackground:setOffsetPivot(backgroundPos)
+                            models.models.main.CameraBackground.Background:setPos(backgroundPos)
+                        end, "ex_skill_2_background_render")
                         models.models.main.Avatar:setColor(0, 0, 0)
                         for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
                             modelPart:setColor(0, 0, 0)
@@ -608,7 +616,8 @@ BlueArchiveCharacter = {
                             end
                         end
                         if host:isHost() then
-                            models.models.main.CameraAnchor.Background:setVisible(false)
+                            models.models.main.CameraBackground:setVisible(false)
+                            events.RENDER:remove("ex_skill_2_background_render")
                             for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
                                 modelPart:setColor()
                             end
@@ -645,7 +654,8 @@ BlueArchiveCharacter = {
                     models.models.costume_swimsuit.BeachBall:setUVPixels()
                     models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("CUTOUT")
                     if forcedStop and host:isHost() then
-                        models.models.main.CameraAnchor.Background:setVisible(false)
+                        events.RENDER:remove("ex_skill_2_background_render")
+                        models.models.main.CameraBackground:setVisible(false)
                         for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
                             modelPart:setColor()
                         end
