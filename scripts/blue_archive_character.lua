@@ -468,6 +468,27 @@ BlueArchiveCharacter = {
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
+            },
+
+            swimsuit = {
+                ---コスチュームの表示名
+                name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Swimsuit",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "水着"
+                },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "SPECIAL",
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 1
             }
         },
 
@@ -478,9 +499,26 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                models.models.main.Avatar.Head.CMaskedH:setVisible(true)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
-                    modelPart:setVisible(false)
+                if costumeId == 2 then
+                    --覆面水着団
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH"})) do
+                        modelPart:setVisible(true)
+                    end
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                        modelPart:setVisible(false)
+                    end
+                elseif costumeId == 3 then
+                    --水着
+                    Costume.setCostumeTextureOffset(1)
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                        modelPart:setUVPixels(0, 16)
+                    end
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH"})) do
+                        modelPart:setVisible(true)
+                    end
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairEnds", "UpperBody.Body.Scarf", "UpperBody.Body.Skirt", "UpperBody.Body.Hairs", "UpperBody.Body.IDCard"})) do
+                        modelPart:setVisible(false)
+                    end
                 end
             end,
 
@@ -488,8 +526,14 @@ BlueArchiveCharacter = {
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
-                models.models.main.Avatar.Head.CMaskedH:setVisible(false)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                Costume.setCostumeTextureOffset(0)
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                    modelPart:setUVPixels()
+                end
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH", "Head.CSwimsuitH"})) do
+                    modelPart:setVisible(false)
+                end
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs", "UpperBody.Body.Scarf", "UpperBody.Body.Skirt", "UpperBody.Body.IDCard"})) do
                     modelPart:setVisible(true)
                 end
             end,
