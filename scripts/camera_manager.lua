@@ -1,5 +1,9 @@
 ---@class CameraManager カメラ制御全般を管理するクラス
 CameraManager = {
+    ---カメラの当たり判定打ち消し機能を無効にする。撮影用。
+    ---@type boolean
+    COLLISION_DENIAL_DISABLE = false,
+
     ---三人称視点でのカメラと回転軸の距離
     ---@type number
     ThirdPersonCameraDistance = 4,
@@ -26,8 +30,10 @@ CameraManager = {
                     local cameraDir = client:getCameraDir()
                     local baseVector = vectors.rotateAroundAxis(math.deg(math.asin(cameraDir.y)), 0, 0.21, 0, vectors.rotateAroundAxis(math.deg(math.atan2(cameraDir.z, cameraDir.x)) * -1 - 90, 1, 0, 0, 0, 1, 0))
                     local minDistance = math.max(self.ThirdPersonCameraDistance, 4)
-                    for i = 0, 3 do
-                        minDistance = math.min(RaycastUtils:getLengthBetweenPointAndCollision(vectors.rotateAroundAxis(i * 90 + 45, baseVector:copy(), cameraDir):add(cameraPivot), cameraDir:copy():scale(-1), math.max(self.ThirdPersonCameraDistance, 4), 2 ^ (self.CameraAccuracy + 3)), minDistance)
+                    if not self.COLLISION_DENIAL_DISABLE then
+                        for i = 0, 3 do
+                            minDistance = math.min(RaycastUtils:getLengthBetweenPointAndCollision(vectors.rotateAroundAxis(i * 90 + 45, baseVector:copy(), cameraDir):add(cameraPivot), cameraDir:copy():scale(-1), math.max(self.ThirdPersonCameraDistance, 4), 2 ^ (self.CameraAccuracy + 3)), minDistance)
+                        end
                     end
                     renderer:setCameraPos(0, 0, (minDistance > self.ThirdPersonCameraDistance or self.IsCameraCollisionDenialEnabled) and self.ThirdPersonCameraDistance - minDistance or 0)
                 end
