@@ -39,44 +39,21 @@ ExSkill = {
         return player:getPose() == "STANDING" and velocity:length() < 0.01 and bodyYawPrev == self.BodyYaw and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
     end,
 
-    ---アニメーション再生中のみ実行されるティック関数
-    animationTick = function (self)
-        if not client:isPaused() then
-            if self.AnimationCount == self.AnimationLength - 1 then
-                self:stop()
-            elseif self:canPlayAnimation() and animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:isPlaying() then
-                if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick ~= nil then
-                    BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick(self.AnimationCount)
-                end
-                self.AnimationCount = self.AnimationCount > -1 and self.AnimationCount + 1 or self.AnimationCount
-            elseif not self:canPlayAnimation() then
-                self:forceStop()
-            end
-        end
-    end,
-
-    ---アニメーション再生中のみ実行されるレンダー関数
-    animationRender = function (self)
-        local bodyYaw = self.BodyYaw
-        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
-        CameraManager.setCameraPivot(cameraPos)
-        CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
-        self.RenderProcessed = true
-    end,
-
     ---Exスキルのアニメーションの前後のカメラのトランジションを行う関数
     ---@param direction ExSkill.TransitionPhase カメラのトランジションの向き
     ---@param callback function トランジション終了時に呼び出されるコールバック関数
     transition = function (self, direction, callback)
-        events.TICK:register(function ()
-            local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
-            local windowSizeY = client:getScaledWindowSize().y
-            for _ = 1, windowSizeY / 20 do
-                local particleOffset = math.random() * windowSizeY
-                FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
-            end
-        end, "ex_skill_transition_tick")
-        events.RENDER:register(function (delta)
+        if host:isHost() then
+            events.TICK:register(function ()
+                local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
+                local windowSizeY = client:getScaledWindowSize().y
+                for _ = 1, windowSizeY / 20 do
+                    local particleOffset = math.random() * windowSizeY
+                    FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
+                end
+            end, "ex_skill_transition_tick")
+        end
+        events.RENDER:register(function ()
             --カメラのトランジション
             if host:isHost() then
                 local bodyYaw = -self.BodyYaw
@@ -173,9 +150,9 @@ ExSkill = {
                             modelPart:setScale(0, 0, 0)
                         end
                     end
+                    events.TICK:remove("ex_skill_transition_tick")
                 end
                 callback()
-                events.TICK:remove("ex_skill_transition_tick")
                 events.RENDER:remove("ex_skill_transition_render")
             end
             self.RenderProcessed = true
@@ -211,11 +188,29 @@ ExSkill = {
             end
             CameraManager:setThirdPersonCameraDistance(0)
             events.TICK:register(function ()
-                self:animationTick()
+                if not client:isPaused() then
+                    if self.AnimationCount == self.AnimationLength - 1 then
+                        self:stop()
+                    elseif self:canPlayAnimation() and animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:isPlaying() then
+                        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick ~= nil then
+                            BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.animationTick(self.AnimationCount)
+                        end
+                        self.AnimationCount = self.AnimationCount > -1 and self.AnimationCount + 1 or self.AnimationCount
+                    elseif not self:canPlayAnimation() then
+                        self:forceStop()
+                    end
+                end
             end, "ex_skill_tick")
-            events.RENDER:register(function ()
-                self:animationRender()
-            end, "ex_skill_render")
+            if host:isHost() then
+                events.RENDER:register(function ()
+                    if not client:isPaused() then
+                        local bodyYaw = self.BodyYaw
+                        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
+                        CameraManager.setCameraPivot(cameraPos)
+                        CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
+                    end
+                end, "ex_skill_render")
+            end
             self.AnimationCount = 0
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:getLength() * 20)
         end)
@@ -239,7 +234,9 @@ ExSkill = {
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].callbacks.postAnimation(false)
         end
         events.TICK:remove("ex_skill_tick")
-        events.RENDER:remove("ex_skill_render")
+        if host:isHost() then
+            events.RENDER:remove("ex_skill_render")
+        end
         self.AnimationCount = -1
         Physics:enable()
         renderer:setFOV()
@@ -267,11 +264,10 @@ ExSkill = {
             animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill]:stop()
         end
         events.TICK:remove("ex_skill_tick")
-        for _, eventName in ipairs({"ex_skill_tick", "ex_skill_transition_tick"}) do
-            events.TICK:remove(eventName)
-        end
-        for _, eventName in ipairs({"ex_skill_render", "ex_skill_transition_render"}) do
-            events.RENDER:remove(eventName)
+        events.RENDER:remove("ex_skill_transition_render")
+        if host:isHost() then
+            events.TICK:remove("ex_skill_transition_tick")
+            events.RENDER:remove("ex_skill_render")
         end
         Physics:enable()
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
