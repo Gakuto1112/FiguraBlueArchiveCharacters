@@ -1,4 +1,4 @@
----@class 単一の設置物を管理するクラス
+---@class PlacementObject 単一の設置物を管理するクラス
 PlacementObject = {
     ---設置物のインスタンスを新しく生成する。
     ---@param objectData table 設置物のデータ
