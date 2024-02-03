@@ -55,7 +55,7 @@ FrameParticleManager = {
     ---初期化関数
     init = function ()
         ---@diagnostic disable-next-line: discard-returns
-        models:newPart("script_ex_skill_frame_particles", "Gui")
+        models.models.ex_skill_frame.Gui:newPart("script_ex_skill_frame_particles")
     end
 }
 

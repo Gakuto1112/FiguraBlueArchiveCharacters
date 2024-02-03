@@ -46,10 +46,10 @@ FrameParticle = {
 
         ---パーティクルを削除する。パーティクルを削除するとパーティクルの再生成ができないのでこのインスタンスは破棄する。
         instance.remove = function (self)
-            models.script_ex_skill_frame_particles:removeChild(self.particle)
+            models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:removeChild(self.particle)
         end
 
-        models.script_ex_skill_frame_particles:addChild(instance.particle)
+        models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:addChild(instance.particle)
         instance.particle:setPos(screenPos:augmented(1):scale(-1))
         instance.particle:setRot(90, math.map(math.random(), 0, 1, 0, 360), 180)
 
