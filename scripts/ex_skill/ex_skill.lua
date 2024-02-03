@@ -205,7 +205,7 @@ ExSkill = {
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         local windowCenter = windowSize:copy():scale(0.5)
-                        for _ = 1, (windowSize.x * 2 + windowSize.y * 2) / 50 do
+                        for _ = 1, (windowSize.x * 2 + windowSize.y * 2) / 100 do
                             local particlePos = vectors.vec2(math.random() * (windowSize.x * 2 + windowSize.y * 2), math.random() * 16)
                             particlePos = particlePos.x <= windowSize.x and particlePos or (particlePos.x <= windowSize.x + windowSize.y and vectors.vec2(windowSize.x - particlePos.y, particlePos.x - windowSize.x) or (particlePos.x <= windowSize.x * 2 + windowSize.y and vectors.vec2(particlePos.x - (windowSize.x + windowSize.y), windowSize.y - particlePos.y) or vectors.vec2(particlePos.y, particlePos.x - (windowSize.x * 2 + windowSize.y))))
                             FrameParticleManager:spawn(particlePos, windowCenter:copy():sub(particlePos):scale(0.25))
