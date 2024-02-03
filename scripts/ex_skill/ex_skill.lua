@@ -45,17 +45,20 @@ ExSkill = {
     transition = function (self, direction, callback)
         if host:isHost() then
             events.TICK:register(function ()
-                local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
-                local windowSizeY = client:getScaledWindowSize().y
-                for _ = 1, windowSizeY / 20 do
-                    local particleOffset = math.random() * windowSizeY
-                    FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
+                if not client:isPaused() then
+                    local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
+                    local windowSizeY = client:getScaledWindowSize().y
+                    for _ = 1, windowSizeY / 20 do
+                        local particleOffset = math.random() * windowSizeY
+                        FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
+                    end
                 end
             end, "ex_skill_transition_tick")
         end
         events.RENDER:register(function ()
             --カメラのトランジション
-            if host:isHost() then
+            local isPaused = client:isPaused()
+            if host:isHost() and not isPaused then
                 local bodyYaw = -self.BodyYaw
                 local lookDir = player:getLookDir()
                 local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
@@ -123,37 +126,37 @@ ExSkill = {
             end
 
             --カウンター更新
-            if not client:isPaused() and not self.RenderProcessed then
+            if not (isPaused or self.RenderProcessed) then
                 self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 2 / client:getFPS(), 1) or math.max(self.TransitionCount - 2 / client:getFPS(), 0)
-            end
-            if (direction == "PRE" and self.TransitionCount == 1) or (direction == "POST" and self.TransitionCount == 0) then
-                if host:isHost() then
-                    local windowSize = client:getScaledWindowSize()
-                    models.models.ex_skill_frame.Gui.FrameBar:setPos(0, 0, 0)
-                    if direction == "PRE" then
-                        for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
-                            modelPart:setVisible(true)
+                if (direction == "PRE" and self.TransitionCount == 1) or (direction == "POST" and self.TransitionCount == 0) then
+                    if host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.ex_skill_frame.Gui.FrameBar:setPos(0, 0, 0)
+                        if direction == "PRE" then
+                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
+                                modelPart:setVisible(true)
+                            end
+                            models.models.ex_skill_frame.Gui.Frame.FrameTop:setPos(-windowSize.x + 16, -16)
+                            models.models.ex_skill_frame.Gui.Frame.FrameTop:setScale(windowSize.x / 16 - 2, 1, 1)
+                            models.models.ex_skill_frame.Gui.Frame.FrameLeft:setPos(-16, -windowSize.y + 16)
+                            models.models.ex_skill_frame.Gui.Frame.FrameLeft:setScale(1, windowSize.y / 16 - 2, 1)
+                            models.models.ex_skill_frame.Gui.Frame.FrameBottom:setPos(-windowSize.x + 16, -windowSize.y)
+                            models.models.ex_skill_frame.Gui.Frame.FrameBottom:setScale(windowSize.x / 16 - 2, 1, 1)
+                            models.models.ex_skill_frame.Gui.Frame.FrameRight:setPos(-windowSize.x, -windowSize.y + 16)
+                            models.models.ex_skill_frame.Gui.Frame.FrameRight:setScale(1, windowSize.y / 16 - 2, 1)
+                        else
+                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
+                                modelPart:setVisible(false)
+                            end
+                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
+                                modelPart:setScale(0, 0, 0)
+                            end
                         end
-                        models.models.ex_skill_frame.Gui.Frame.FrameTop:setPos(-windowSize.x + 16, -16)
-                        models.models.ex_skill_frame.Gui.Frame.FrameTop:setScale(windowSize.x / 16 - 2, 1, 1)
-                        models.models.ex_skill_frame.Gui.Frame.FrameLeft:setPos(-16, -windowSize.y + 16)
-                        models.models.ex_skill_frame.Gui.Frame.FrameLeft:setScale(1, windowSize.y / 16 - 2, 1)
-                        models.models.ex_skill_frame.Gui.Frame.FrameBottom:setPos(-windowSize.x + 16, -windowSize.y)
-                        models.models.ex_skill_frame.Gui.Frame.FrameBottom:setScale(windowSize.x / 16 - 2, 1, 1)
-                        models.models.ex_skill_frame.Gui.Frame.FrameRight:setPos(-windowSize.x, -windowSize.y + 16)
-                        models.models.ex_skill_frame.Gui.Frame.FrameRight:setScale(1, windowSize.y / 16 - 2, 1)
-                    else
-                        for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
-                            modelPart:setVisible(false)
-                        end
-                        for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
-                            modelPart:setScale(0, 0, 0)
-                        end
+                        events.TICK:remove("ex_skill_transition_tick")
                     end
-                    events.TICK:remove("ex_skill_transition_tick")
+                    callback()
+                    events.RENDER:remove("ex_skill_transition_render")
                 end
-                callback()
-                events.RENDER:remove("ex_skill_transition_render")
             end
             self.RenderProcessed = true
         end, "ex_skill_transition_render")
