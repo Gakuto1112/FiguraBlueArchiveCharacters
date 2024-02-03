@@ -82,7 +82,7 @@ if host:isHost() then
         local actionWheelOpened = action_wheel:isEnabled()
         if actionWheelOpened then
             --EXスキルが再生可能か確認
-            if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 then
+            if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 and ExSkill.TransitionCount == 0 then
                 mainPage:getAction(1):title(Language:getTranslate("action_wheel__main__action_1__title").."\n§b"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill)):color(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].skillType == "EXPLOSION" and vectors.vec3(0.55, 0, 0.03) or (BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].skillType == "PIERCE" and vectors.vec3(0.72, 0.55, 0.2) or (BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].skillType == "MYSTERY" and vectors.vec3(0.16, 0.43, 0.6) or vectors.vec3(0.58, 0.28, 0.64)))):hoverColor(1, 1, 1)
             else
                 mainPage:getAction(1):title("§7"..Language:getTranslate("action_wheel__main__action_1__title").."\n"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill)):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33)
@@ -114,7 +114,7 @@ if host:isHost() then
     --アクションの設定
     --アクション1. Exスキル
     mainPage:newAction(1):item("minecraft:diamond"):onLeftClick(function()
-        if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 then
+        if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 and ExSkill.TransitionCount == 0 then
             pings.action_wheel_main_action1_left()
         elseif renderer:isFirstPerson() then
             print(Language:getTranslate("action_wheel__main__action_1__unavailable_firstperson"))
