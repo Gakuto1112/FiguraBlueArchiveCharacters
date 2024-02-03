@@ -9,14 +9,19 @@ FrameParticle = {
     ---@param particleId integer スポーンさせるパーティのID。一意の値にする。
     ---@param screenPos Vector2 パーティクルをスポーンさせるスクリーン上の座標。GUIスケールも考慮される。
     ---@param type FrameParticle.ParticleType このインスタンスのパーティクルの種類
+    ---@param velocity Vector2 パーティクルの秒間移動距離（ピクセル）
     ---@return table フレームパーティクルのインスタンス
-    spawn = function (particleId, screenPos, type)
+    spawn = function (particleId, screenPos, type, velocity)
         local instance = {}
 
         ---パーティクルのモデルパーツ
         ---@type ModelPart
         ---@diagnostic disable-next-line: redundant-parameter
         instance.particle = models.models.ex_skill_frame.Particles["Particle"..(type == "NORMAL" and 1 or 2)]:copy("Particle_"..particleId)
+
+        ---パーティクルの秒間移動距離（ピクセル）
+        ---@type Vector2
+        instance.velocity = velocity
 
         ---パーティクルのアニメーションを制御するためのカウンター。
         ---@type number
@@ -25,8 +30,12 @@ FrameParticle = {
         ---レンダーイベントで実行する関数
         ---@return boolean canDiscardInstance このインスタンスを破棄してもよいか
         instance.render = function (self)
-            self.particle:scale(vectors.vec3(1, 1, 1):scale(1 - self.counter))
-            instance.counter = math.min(self.counter + 4 / client:getFPS(), 1)
+            local fps = client:getFPS()
+            if self.velocity ~= vectors.vec2(0, 0) then
+                self.particle:setPos(self.particle:getPos():add(self.velocity:augmented(0):scale(-1 / fps)))
+            end
+            self.particle:setScale(vectors.vec3(1, 1, 1):scale(1 - self.counter))
+            instance.counter = math.min(self.counter + 4 / fps , 1)
             if instance.counter == 1 then
                 instance:remove()
                 return true
@@ -41,7 +50,7 @@ FrameParticle = {
         end
 
         models.script_ex_skill_frame_particles:addChild(instance.particle)
-        instance.particle:setPos(screenPos:copy():augmented(1):scale(-1))
+        instance.particle:setPos(screenPos:augmented(1):scale(-1))
         instance.particle:setRot(90, math.map(math.random(), 0, 1, 0, 360), 180)
 
         return instance

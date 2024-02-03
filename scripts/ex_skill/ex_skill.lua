@@ -71,9 +71,9 @@ ExSkill = {
         events.TICK:register(function ()
             local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
             local windowSizeY = client:getScaledWindowSize().y
-            for _ = 1, windowSizeY / 10 do
+            for _ = 1, windowSizeY / 20 do
                 local particleOffset = math.random() * windowSizeY
-                FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset))
+                FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
             end
         end, "ex_skill_transition_tick")
         events.RENDER:register(function (delta)
@@ -187,7 +187,7 @@ ExSkill = {
         PlacementObjectManager:removeAll()
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
-        --renderer:setRenderHUD(false)
+        renderer:setRenderHUD(false)
         CameraManager:setCameraCollisionDenial(true)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)

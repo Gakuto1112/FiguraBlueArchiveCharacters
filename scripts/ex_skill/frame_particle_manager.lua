@@ -37,8 +37,9 @@ FrameParticleManager = {
 
     ---パーティクルをスポーンさせる。
     ---@param screenPos Vector2 パーティクルをスポーンさせるスクリーン上の座標。GUIスケールも考慮される。
-    spawn = function (self, screenPos)
-        local instance = FrameParticle.spawn(self.IdCounter, screenPos, math.random() > 0.9999 and "FIGURA" or "NORMAL")
+    ---@param velocity Vector2 パーティクルの秒間移動距離（ピクセル）
+    spawn = function (self, screenPos, velocity)
+        local instance = FrameParticle.spawn(self.IdCounter, screenPos, math.random() > 0.9999 and "FIGURA" or "NORMAL", velocity)
         table.insert(self.Particles, instance)
         self.IdCounter = self.IdCounter + 1
         if #self.Particles == 1 then
