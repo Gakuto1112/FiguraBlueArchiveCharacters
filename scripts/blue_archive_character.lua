@@ -418,7 +418,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.ex_skill_2.UnderWater},
+			models = {models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.FishingRod, models.models.ex_skill_2.UnderWater, models.models.ex_skill_2.Stage},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -432,7 +432,7 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(10, 31, -29),
+                    pos = vectors.vec3(13, 34, -33),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
@@ -476,7 +476,7 @@ BlueArchiveCharacter = {
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:underwater", finPos:copy():add(math.random() * 0.1 - 0.05, math.random() * 0.1 - 0.05, 0)):setScale(0.2)
                         end
-                    elseif tick >= 37 and tick < 80 then
+                    elseif tick >= 37 and tick < 75 then
                         local headPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.FrontBody.Head)
                         local tunaRotY = models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:getAnimRot().y
                         local cameraRotY = renderer:getCameraRot().y
@@ -486,16 +486,19 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 80 then
                         models.models.ex_skill_2.UnderWater:setVisible(false)
+                    elseif tick == 175 then
+                        models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
                     end
+                end,
 
-                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
-                    --"<>"内を適切な値で置換すること。
-                    if tick == 80 then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[2].animations) do
-                            animations["models."..animation]["ex_skill_"..2]:pause()
-                        end
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    if models.models.ex_skill_2.Tuna ~= nil then
+                        models.models.ex_skill_2.Tuna:moveTo(models.models.ex_skill_2.UnderWater.ForCameraOffset)
                     end
-                end
+                end,
             }
 		}
 	},

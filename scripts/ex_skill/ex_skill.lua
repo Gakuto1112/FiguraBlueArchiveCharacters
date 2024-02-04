@@ -6,7 +6,7 @@
 ExSkill = {
     ---アバター読み込み時に自動的にExスキルが再生される。デバッグ用。
     ---@type boolean
-    AUTO_PLAY = true,
+    AUTO_PLAY = false,
 
     ---そのレンダーで既にレンダー処理したかどうか
     ---@type boolean
@@ -167,7 +167,7 @@ ExSkill = {
         PlacementObjectManager:removeAll()
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
-        --renderer:setRenderHUD(false)
+        renderer:setRenderHUD(false)
         CameraManager:setCameraCollisionDenial(true)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
