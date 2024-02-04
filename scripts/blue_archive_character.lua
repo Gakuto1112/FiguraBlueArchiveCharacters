@@ -432,12 +432,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 42, 0),
+                    pos = vectors.vec3(10, 31, -29),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(0, 160, 0)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -459,11 +459,12 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
-                    local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos:copy():add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
-                    models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
-                    models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
                     local windowSize = client:getWindowSize()
                     models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
+                    local bodyYaw = player:getBodyYaw()
+                    local backgroundPos = vectors.rotateAroundAxis(bodyYaw + 180, vectors.rotateAroundAxis(bodyYaw * -1 + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos, 0, 1, 0):add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
+                    models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
+                    models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -477,15 +478,24 @@ BlueArchiveCharacter = {
                         end
                     elseif tick >= 37 and tick < 80 then
                         local headPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.FrontBody.Head)
-                        local particleAngle = models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:getAnimRot().y + renderer:getCameraRot().y
+                        local tunaRotY = models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:getAnimRot().y
+                        local cameraRotY = renderer:getCameraRot().y
                         local particleCount = math.max(tick - 52, 0)
                         for i = 0, 2 * math.pi, math.pi / 6 do
-                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 "..(particleCount / 27 + 1), vectors.rotateAroundAxis(particleAngle, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(particleAngle + 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
+                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 "..(particleCount / 27 + 1), vectors.rotateAroundAxis(tunaRotY + cameraRotY, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(tunaRotY - cameraRotY - 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
                         end
                     elseif tick == 80 then
                         models.models.ex_skill_2.UnderWater:setVisible(false)
                     end
-                end,
+
+                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
+                    --"<>"内を適切な値で置換すること。
+                    if tick == 80 then
+                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[2].animations) do
+                            animations["models."..animation]["ex_skill_"..2]:pause()
+                        end
+                    end
+                end
             }
 		}
 	},
