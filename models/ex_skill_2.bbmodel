@@ -231,7 +231,7 @@
 			"to": [17, 3, 2],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-5, -4, 9],
+			"origin": [12, 0, 0],
 			"faces": {
 				"north": {
 					"uv": [4, 32, 10, 37],
@@ -272,6 +272,7 @@
 			"to": [17, -2, 2],
 			"autouv": 0,
 			"color": 0,
+			"rotation": [0, 0, -20],
 			"origin": [11, -2, 0],
 			"faces": {
 				"north": {
@@ -894,19 +895,7 @@
 									"children": [
 										"944883ee-4e65-dd27-a2b6-9e6bf5e8eda4",
 										"8be796ee-4b03-81a4-0a6b-c3189d715401",
-										{
-											"name": "Mouth",
-											"origin": [11, -2, 9],
-											"color": 0,
-											"uuid": "ffb1736b-f729-23b2-0063-f4f66b9036f6",
-											"export": true,
-											"mirror_uv": false,
-											"isOpen": true,
-											"locked": false,
-											"visibility": true,
-											"autouv": 0,
-											"children": ["d63e7f84-6e07-0dfe-a29a-d60421029698"]
-										},
+										"d63e7f84-6e07-0dfe-a29a-d60421029698",
 										"0ed1e33e-21fd-c413-93a4-be11365f1fa9",
 										{
 											"name": "FrontBodyTopFin",
@@ -915,7 +904,7 @@
 											"uuid": "ca708fa7-9e5d-8efe-08de-8d286b1ce64f",
 											"export": true,
 											"mirror_uv": false,
-											"isOpen": true,
+											"isOpen": false,
 											"locked": false,
 											"visibility": true,
 											"autouv": 0,
@@ -928,7 +917,7 @@
 											"uuid": "6c134cd2-3ccd-3738-8f9f-20b71f5bbc3f",
 											"export": true,
 											"mirror_uv": false,
-											"isOpen": true,
+											"isOpen": false,
 											"locked": false,
 											"visibility": true,
 											"autouv": 0,
@@ -1010,7 +999,7 @@
 										},
 										{
 											"name": "TailFin",
-											"origin": [-5, -4, 15],
+											"origin": [-23, 0, 0],
 											"color": 0,
 											"uuid": "d073c1ac-d847-7047-3642-1b64a6ca30d6",
 											"export": true,
@@ -1992,31 +1981,6 @@
 							"time": 2.85,
 							"color": -1,
 							"uniform": true,
-							"interpolation": "linear",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						}
-					]
-				},
-				"ffb1736b-f729-23b2-0063-f4f66b9036f6": {
-					"name": "Mouth",
-					"type": "bone",
-					"keyframes": [
-						{
-							"channel": "rotation",
-							"data_points": [
-								{
-									"x": "0",
-									"y": "0",
-									"z": -20
-								}
-							],
-							"uuid": "460ccf2d-d2ae-0a1f-5d28-a907f8b7311d",
-							"time": 0,
-							"color": -1,
 							"interpolation": "linear",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
