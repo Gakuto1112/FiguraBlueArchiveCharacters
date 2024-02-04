@@ -5839,6 +5839,46 @@
 					]
 				}
 			}
+		},
+		{
+			"uuid": "69852078-929f-561a-4638-947b594cfa24",
+			"name": "ex_skill_2",
+			"loop": "once",
+			"override": true,
+			"length": 10.3,
+			"snapping": 20,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"4ad021e9-2857-4e55-337b-f61da0762800": {
+					"name": "CameraAnchor",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": 42,
+									"z": "0"
+								}
+							],
+							"uuid": "316f73cc-7b67-3ec7-90e6-cb580cf9ca7e",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				}
+			}
 		}
 	],
 	"reference_images": [

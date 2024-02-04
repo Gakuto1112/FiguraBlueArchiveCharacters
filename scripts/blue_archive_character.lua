@@ -395,6 +395,77 @@ BlueArchiveCharacter = {
                     end
                 end,
             }
+		},
+
+        {
+            ---Exスキルの名前
+            name = {
+                ---英語
+                ---日本語名を翻訳したものにする。
+                ---@type string
+                en_us = "It's a big catch!",
+
+                ---日本語
+                ---実際のスキルの名前と同じにする。
+                ---@type string
+                ja_jp = "大物だ"
+            },
+
+            ---スキルの種類
+            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
+            ---@type BlueArchiveCharacter.SkillType
+            skillType = "MYSTERY",
+
+            ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
+            ---@type ModelPart[]
+			models = {models.models.ex_skill_2.UnderWater},
+
+            ---Exスキルアニメーションが含まれるモデルファイル名
+            ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
+            ---@type string[]
+			animations = {"main", "ex_skill_2"},
+
+            ---Exスキルアニメーションでのカメラワークのデータ
+            camera = {
+                ---Exスキルアニメーション開始時
+                start = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(0, 42, 0),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3()
+                },
+
+                ---Exスキルアニメーション終了時
+                fin = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3()
+                }
+            },
+
+            ---コールバック関数
+            callbacks = {
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos:copy():add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
+                    models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
+                    models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
+                    local windowSize = client:getWindowSize()
+                    models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
+                end
+            }
 		}
 	},
 
@@ -488,7 +559,7 @@ BlueArchiveCharacter = {
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
-                exSkill = 1
+                exSkill = 2
             }
         },
 
