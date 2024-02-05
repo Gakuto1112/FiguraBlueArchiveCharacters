@@ -607,7 +607,7 @@ BlueArchiveCharacter = {
                     elseif tick == 84 then
                         renderer:setPostEffect()
                     elseif tick == 85 then
-                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 58, true)
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", 16, true)
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
                         models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
                         sounds:playSound("minecraft:entity.blaze.death", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 2)
@@ -636,6 +636,7 @@ BlueArchiveCharacter = {
                         local particleAxis = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(30, 0, 0, 1, 1, 0, 0), 0, 1, 0)
                         local particleVelocityDirection = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(-50, 0, 0, 1, 1, 0, 0), 0, 1, 0)
                         if tick == 101 then
+                            FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 42, true)
                             models.models.costume_swimsuit.BeachBall:setUVPixels(0, 14)
                             for i = 1, 60 do
                                 local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
