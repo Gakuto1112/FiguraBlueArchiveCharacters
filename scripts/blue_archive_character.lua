@@ -667,13 +667,17 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar:setVisible(true)
                     models.models.costume_swimsuit.BeachBall:setUVPixels()
                     models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("CUTOUT")
-                    if forcedStop and host:isHost() then
-                        events.RENDER:remove("ex_skill_2_background_render")
-                        models.models.main.CameraBackground:setVisible(false)
-                        for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
-                            modelPart:setColor()
+                    if host:isHost() then
+                        models.models.main.CameraBackground.Background:setColor()
+                        models.models.main.CameraBackground.Background:setOpacity(1)
+                        if forcedStop then
+                            events.RENDER:remove("ex_skill_2_background_render")
+                            models.models.main.CameraBackground:setVisible(false)
+                            for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
+                                modelPart:setColor()
+                            end
+                            renderer:setPostEffect()
                         end
-                        renderer:setPostEffect()
                     end
                 end
             }
