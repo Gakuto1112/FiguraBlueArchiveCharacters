@@ -583,12 +583,12 @@ BlueArchiveCharacter = {
                         end
                         sounds:playSound("minecraft:item.bucket.empty", avatarPos, 1 - math.map(tick, 45, 60, 0, 0.5), 0.75)
                     elseif tick == 70 and host:isHost() then
-                        models.models.main.CameraBackground:setVisible(true)
                         local windowSize = client:getWindowSize()
                         models.models.main.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(205))
                         models.models.main.CameraBackground.Background:setColor(1, 0.35, 0.6)
                         models.models.main.CameraBackground.Background:setOpacity(0.05)
-                        events.RENDER:register(function (delta)
+                        events.RENDER:register(function (delta, context)
+                            models.models.main.CameraBackground:setVisible(context == "RENDER")
                             local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(9)), 0, 1, 0):scale(16 / 0.9375)
                             models.models.main.CameraBackground:setOffsetPivot(backgroundPos)
                             models.models.main.CameraBackground.Background:setPos(backgroundPos)
