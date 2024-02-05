@@ -80,9 +80,9 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
             TIED = {3, 0},
-            CLOSED = {0, 1},
+            CLOSED = {3, 1},
             ANGRY = {1, 1},
-            CLOSED2 = {3, 1}
+            SMILE = {0, 1}
         },
 
         ---左目
@@ -90,9 +90,9 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
             TIED = {2, 0},
-            CLOSED = {-1, 1},
+            CLOSED = {2, 1},
             ANGRY = {1, 1},
-            CLOSED2 = {2, 1}
+            SMILE = {-1, 1}
         },
 
         ---口
@@ -377,7 +377,7 @@ BlueArchiveCharacter = {
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
                     if tick == 0 then
-                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED", 19, true)
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", 19, true)
                     elseif tick == 19 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 3, true)
                     elseif tick == 22 then
@@ -430,7 +430,7 @@ BlueArchiveCharacter = {
                         end
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 12, true)
                     elseif tick == 73 then
-                        FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 27, true)
+                        FaceParts:setEmotion("NORMAL", "SMILE", "OPENED", 27, true)
                         local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
                         for _ = 1, 100 do
                             local offset = vectors.vec3(math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1)
@@ -540,7 +540,7 @@ BlueArchiveCharacter = {
                         elseif tick == 19 then
                             FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 2, true)
                         elseif tick == 21 then
-                            FaceParts:setEmotion("CLOSED2", "CLOSED2", "CIRCLE", 22, true)
+                            FaceParts:setEmotion("CLOSED", "CLOSED", "CIRCLE", 22, true)
                         end
                         local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
                         local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
@@ -636,7 +636,7 @@ BlueArchiveCharacter = {
                         local particleAxis = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(30, 0, 0, 1, 1, 0, 0), 0, 1, 0)
                         local particleVelocityDirection = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(-50, 0, 0, 1, 1, 0, 0), 0, 1, 0)
                         if tick == 101 then
-                            FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 42, true)
+                            FaceParts:setEmotion("SMILE", "SMILE", "OPENED", 42, true)
                             models.models.costume_swimsuit.BeachBall:setUVPixels(0, 14)
                             for i = 1, 60 do
                                 local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
@@ -835,7 +835,7 @@ BlueArchiveCharacter = {
                     if type == "GOOD" then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", duration, true)
                     elseif type == "HEART" then
-                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", duration, true)
+                        FaceParts:setEmotion("SMILE", "SMILE", "OPENED", duration, true)
                     end
                 end
             end,
