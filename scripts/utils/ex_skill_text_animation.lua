@@ -91,7 +91,7 @@ ExSkillTextAnimation = {
                             end
                         end
                         if self.AnimationCount >= 0.1 and not self.PonPointPassed then
-                            sounds:playSound("minecraft:block.bone_block.place", player:getPos())
+                            sounds:playSound("minecraft:block.bone_block.place", player:getPos(), 1, 0.75)
                             self.PonPointPassed = true
                         end
                         self.AnimationCount = self.AnimationCount + 1 / client:getFPS()
