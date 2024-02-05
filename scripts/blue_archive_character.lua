@@ -20,7 +20,7 @@
 ---| "STRIKER" ストライカー（前衛）
 ---| "SPECIAL" スペシャル（後方支援）
 
-ExSkillTextAnimation = require("scripts.ex_skill_text_animation")
+ExSkillTextAnimation = require("scripts.utils.ex_skill_text_animation")
 
 ---@class BlueArchiveCharacter （今後別のキャラを作る時に備えて、）キャラクター変数を保持するクラス。別のキャラクターに対してもここを変更するだけで対応できるようにする。
 BlueArchiveCharacter = {
