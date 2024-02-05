@@ -582,15 +582,22 @@ BlueArchiveCharacter = {
                             end
                         end
                         sounds:playSound("minecraft:item.bucket.empty", avatarPos, 1 - math.map(tick, 45, 60, 0, 0.5), 0.75)
-                    elseif tick == 79 and host:isHost() then
+                    elseif tick == 70 and host:isHost() then
                         models.models.main.CameraBackground:setVisible(true)
                         local windowSize = client:getWindowSize()
-                        models.models.main.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(45))
+                        models.models.main.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(205))
+                        models.models.main.CameraBackground.Background:setColor(1, 0.35, 0.6)
+                        models.models.main.CameraBackground.Background:setOpacity(0.05)
                         events.RENDER:register(function (delta)
-                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(2)), 0, 1, 0):scale(16 / 0.9375)
+                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(9)), 0, 1, 0):scale(16 / 0.9375)
                             models.models.main.CameraBackground:setOffsetPivot(backgroundPos)
                             models.models.main.CameraBackground.Background:setPos(backgroundPos)
                         end, "ex_skill_2_background_render")
+                    elseif tick >= 71 and tick <= 78 and host:isHost() then
+                        models.models.main.CameraBackground.Background:setOpacity(0.045 * tick - 3.1)
+                    elseif tick == 79 and host:isHost() then
+                        models.models.main.CameraBackground.Background:setColor()
+                        models.models.main.CameraBackground.Background:setOpacity(1)
                         models.models.main.Avatar:setColor(0, 0, 0)
                         for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
                             modelPart:setColor(0, 0, 0)
@@ -616,8 +623,8 @@ BlueArchiveCharacter = {
                             end
                         end
                         if host:isHost() then
-                            models.models.main.CameraBackground:setVisible(false)
-                            events.RENDER:remove("ex_skill_2_background_render")
+                            models.models.main.CameraBackground.Background:setColor(1, 0.35, 0.6)
+                            models.models.main.CameraBackground.Background:setOpacity(0.5)
                             for _, modelPart in ipairs({models.models.main.Avatar, models.models.costume_swimsuit.BeachBall}) do
                                 modelPart:setColor()
                             end
@@ -636,6 +643,11 @@ BlueArchiveCharacter = {
                                 end
                             end
                             sounds:playSound("minecraft:entity.lightning_bolt.thunder", ModelUtils.getModelWorldPos(models.models.costume_swimsuit.BeachBall), 1, 2)
+                        elseif tick >= 105 and tick <= 125 and host:isHost() then
+                            models.models.main.CameraBackground.Background:setOpacity(-0.0225 * tick + 2.8625)
+                        elseif tick == 126 and host:isHost() then
+                            models.models.main.CameraBackground:setVisible(false)
+                            events.RENDER:remove("ex_skill_2_background_render")
                         end
                         for _ = 1, 10 do
                             particles:newParticle("minecraft:dust 1000000000 1 1 1", anchor2Pos:copy():add(particleAxis:copy():scale(7.5)):add(vectors.rotateAroundAxis(-bodyYaw, -0.3, 0, 0, 0, 1, 0)):add(math.random() * 0.2 - 0.1, math.random() * 0.2 - 0.1 - 0.4, math.random() * 0.2 - 0.1)):setVelocity(particleAxis:copy():scale(-1))
@@ -2649,5 +2661,7 @@ events.TICK:register(function ()
     isStandingPrev = isStanding
     bodyYawPrev = player:getBodyYaw()
 end)
+
+models.models.main.CameraBackground:setLight(15, 15)
 
 return BlueArchiveCharacter
