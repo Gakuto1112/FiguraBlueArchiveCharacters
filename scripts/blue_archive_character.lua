@@ -383,7 +383,7 @@ BlueArchiveCharacter = {
                     elseif tick == 22 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CIRCLE", 5, true)
                     elseif tick == 27 then
-                        FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED", 24, true)
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "SMILE", 24, true)
                     elseif tick == 29 then
                         sounds:playSound("minecraft:entity.player.attack.weak", player:getPos(), 0.5, 1.5)
                     elseif tick == 31 then
