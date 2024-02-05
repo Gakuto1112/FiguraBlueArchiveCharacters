@@ -98,9 +98,9 @@ BlueArchiveCharacter = {
         ---口
         Mouth = {
             CLOSED = {0, 0},
-            OPENED = {1, 0},
-            CIRCLE = {2, 0},
-            SMILE = {3, 0}
+            OPENED = {2, 0},
+            CIRCLE = {4, 0},
+            SMILE = {6, 0}
         }
     },
 
@@ -562,7 +562,7 @@ BlueArchiveCharacter = {
                         renderer:setPostEffect()
                     elseif tick == 43 then
                         models.models.main.Avatar:setVisible(true)
-                        FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", 100, true)
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "SMILE", 42, true)
                     elseif tick == 44 then
                         local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, -1.5, 0)
                         for _ = 1, 30 do
@@ -607,6 +607,7 @@ BlueArchiveCharacter = {
                     elseif tick == 84 then
                         renderer:setPostEffect()
                     elseif tick == 85 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 58, true)
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
                         models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
                         sounds:playSound("minecraft:entity.blaze.death", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 2)
