@@ -418,7 +418,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.FishingRod, models.models.ex_skill_2.UnderWater, models.models.ex_skill_2.Stage},
+			models = {models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.FishingRod, models.models.ex_skill_2.UnderWater},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -459,6 +459,9 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
                 ---@type fun()
                 preTransition = function()
+                    models.models.ex_skill_2.Stage.Ocean:setColor(world.getBiome(player:getPos()):getWaterColor())
+                    models.models.ex_skill_2.Stage:setVisible(true)
+                    models.models.main.Avatar:setPos(0, 8, 0)
                     if BlueArchiveCharacter.PHOTO_MODE and host:isHost() then
                         host:sendChatCommand("/weather thunder")
                     end
@@ -467,7 +470,7 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
-                    models.models.ex_skill_2.Stage.Ocean:setColor(world.getBiome(player:getPos()):getWaterColor())
+                    models.models.main.Avatar:setPos()
                     if host:isHost() then
                         local windowSize = client:getWindowSize()
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
@@ -552,8 +555,18 @@ BlueArchiveCharacter = {
                     if forcedStop and host:isHost() then
                         models.models.ex_skill_2.Flash:setVisible(false)
                         renderer:setPostEffect()
+                    elseif not forcedStop then
+                        models.models.main.Avatar:setPos(0, 8, 0)
                     end
                 end,
+
+                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postTransition = function(forcedStop)
+                    models.models.ex_skill_2.Stage:setVisible(false)
+                    models.models.main.Avatar:setPos()
+                end
             }
 		}
 	},
