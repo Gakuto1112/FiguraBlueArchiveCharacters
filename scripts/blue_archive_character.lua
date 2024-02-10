@@ -561,6 +561,14 @@ BlueArchiveCharacter = {
                             particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset - 0.5, 0, 0, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset * 0.5 - 0.25, math.random() * 0.5 + 0.25, math.random() * 0.25 - 0.125, 0, 1, 0)):setGravity(1):setLifetime(40)
                         end
                     end
+                    if tick <= 139 or tick % 2 == 0 then
+                        local currentFrame = models.models.ex_skill_2.Stage.Ocean:getUVPixels().y / 16
+                        if currentFrame < 31 then
+                            models.models.ex_skill_2.Stage.Ocean:setUVPixels(0, (currentFrame + 1) * 16)
+                        else
+                            models.models.ex_skill_2.Stage.Ocean:setUVPixels()
+                        end
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
