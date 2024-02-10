@@ -191,6 +191,18 @@
 			"moveTo": "models.models.main.Avatar.Head",
 			"visible": false
 		},
+		"models.models.costume_riding.CRidingB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Body",
+			"visible": false
+		},
+		"models.models.costume_riding.CRidingRA": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm",
+			"visible": false
+		},
+		"models.models.costume_riding.CRidingLA": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.LeftArm",
+			"visible": false
+		},
 		"models.models.placement_object.PlacementObject": {
 			"visible": false
 		},
@@ -207,6 +219,12 @@
 			"visible": false
 		},
 		"models.models.skull_swimsuit.Skull.HeadRing": {
+			"parentType": "None"
+		},
+		"models.models.skull_riding.Skull": {
+			"visible": false
+		},
+		"models.models.skull_riding.Skull.HeadRing": {
 			"parentType": "None"
 		},
 		"models.models.ex_skill_frame.Particles": {
