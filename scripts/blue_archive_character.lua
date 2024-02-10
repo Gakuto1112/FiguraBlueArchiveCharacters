@@ -2117,6 +2117,7 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+models.models.ex_skill_2.UnderWater:setLight(15)
 models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
 models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
 
