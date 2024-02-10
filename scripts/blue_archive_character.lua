@@ -459,24 +459,26 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
-                    local windowSize = client:getWindowSize()
-                    models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
-                    local bodyYaw = player:getBodyYaw()
-                    local backgroundPos = vectors.rotateAroundAxis(bodyYaw + 180, vectors.rotateAroundAxis(bodyYaw * -1 + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos, 0, 1, 0):add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
-                    models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
-                    models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
+                    if host:isHost() then
+                        local windowSize = client:getWindowSize()
+                        models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
+                        local bodyYaw = player:getBodyYaw()
+                        local backgroundPos = vectors.rotateAroundAxis(bodyYaw + 180, vectors.rotateAroundAxis(bodyYaw * -1 + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos, 0, 1, 0):add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
+                        models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
+                        models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
+                    end
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick <= 28 then
+                    if tick <= 28 and host:isHost() then
                         local finPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.RearBody.TailFin)
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:underwater", finPos:copy():add(math.random() * 0.1 - 0.05, math.random() * 0.1 - 0.05, 0)):setScale(0.2)
                         end
-                    elseif tick >= 37 and tick < 75 then
+                    elseif tick >= 37 and tick < 75 and host:isHost() then
                         local headPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.FrontBody.Head)
                         local tunaRotY = models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:getAnimRot().y
                         local cameraRotY = renderer:getCameraRot().y
@@ -484,8 +486,17 @@ BlueArchiveCharacter = {
                         for i = 0, 2 * math.pi, math.pi / 6 do
                             particles:newParticle("minecraft:dust 100 1000000000 1000000000 "..(particleCount / 27 + 1), vectors.rotateAroundAxis(tunaRotY + cameraRotY, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(tunaRotY - cameraRotY - 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
                         end
-                    elseif tick == 80 then
+                    elseif tick == 80 and host:isHost() then
                         models.models.ex_skill_2.UnderWater:setVisible(false)
+                    elseif tick == 139 and host:isHost() then
+                        local windowSize = client:getWindowSize()
+                        models.models.ex_skill_2.Flash.ForCameraOffset2.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
+                        local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy()), 0, 1, 0):scale(16 / 0.9375)
+                        models.models.ex_skill_2.Flash:setOffsetPivot(backgroundPos)
+                        models.models.ex_skill_2.Flash.ForCameraOffset2:setPos(backgroundPos)
+                        models.models.ex_skill_2.Flash:setVisible(true)
+                    elseif tick == 148 and host:isHost() then
+                        models.models.ex_skill_2.Flash:setVisible(false)
                     elseif tick == 175 then
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
                     end
@@ -504,6 +515,9 @@ BlueArchiveCharacter = {
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
                     models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2.UnderWater.ForCameraOffset)
+                    if forcedStop and host:isHost() then
+                        models.models.ex_skill_2.Flash:setVisible(false)
+                    end
                 end,
             }
 		}
