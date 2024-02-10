@@ -509,13 +509,18 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 175 then
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
+                    elseif tick == 180 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Tuna)
+                        for _ = 1, 50 do
+                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 3", anchorPos:copy()):setVelocity(vectors.rotateAroundAxis(player:getBodyYaw() * -1, math.random() * 0.2, math.random() * 0.25 + 0.125, math.random() * 0.2 - 0.1, 0, 1, 0)):setGravity(0.5):setLifetime(25)
+                        end
                     end
-                    if tick % 35 == 24 then
+                    if tick % 35 == 24 and tick <= 160 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Stage.Reef.ExSkill2ParticleAnchor)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 50 do
                             local particleOffset = math.random()
-                            particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 1", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset - 0.5, 0, 0, 0, 1, 0))):setScale(5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset * 0.5 - 0.25, math.random() * 0.5 + 0.25, math.random() * 0.25 - 0.125, 0, 1, 0)):setGravity(1):setLifetime(40)
+                            particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset - 0.5, 0, 0, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset * 0.5 - 0.25, math.random() * 0.5 + 0.25, math.random() * 0.25 - 0.125, 0, 1, 0)):setGravity(1):setLifetime(40)
                         end
                     end
                 end,
