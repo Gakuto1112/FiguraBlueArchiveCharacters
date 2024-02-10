@@ -424,7 +424,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.FishingRod, models.models.ex_skill_2.UnderWater},
+			models = {models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.FishingRod},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -485,6 +485,9 @@ BlueArchiveCharacter = {
                         local backgroundPos = vectors.rotateAroundAxis(bodyYaw + 180, vectors.rotateAroundAxis(bodyYaw * -1 + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos, 0, 1, 0):add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
                         models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
                         models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
+                        events.RENDER:register(function (_, context)
+                            models.models.ex_skill_2.UnderWater:setVisible(context == "RENDER")
+                        end, "ex_skill_2_render")
                         if BlueArchiveCharacter.PHOTO_MODE then
                             host:sendChatCommand("/fill ~-2 ~3 ~-2 ~2 ~3 ~2 minecraft:barrier")
                         end
@@ -511,6 +514,7 @@ BlueArchiveCharacter = {
                         end
                         sounds:playSound("minecraft:entity.squid.ambient", player:getPos(), 1, 0.75)
                     elseif tick == 80 and host:isHost() then
+                        events.RENDER:remove("ex_skill_2_render")
                         models.models.ex_skill_2.UnderWater:setVisible(false)
                         if BlueArchiveCharacter.PHOTO_MODE then
                             host:sendChatCommand("/fill ~-2 ~3 ~-2 ~2 ~3 ~2 minecraft:air")
@@ -597,7 +601,10 @@ BlueArchiveCharacter = {
                 postAnimation = function(forcedStop)
                     models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2.UnderWater.ForCameraOffset)
                     if forcedStop and host:isHost() then
-                        models.models.ex_skill_2.Flash:setVisible(false)
+                        events.RENDER:remove("ex_skill_2_render")
+                        for _, modelPart in ipairs({models.models.ex_skill_2.UnderWater, models.models.ex_skill_2.Flash}) do
+                            modelPart:setVisible(false)
+                        end
                         renderer:setPostEffect()
                     elseif not forcedStop then
                         models.models.main.Avatar:setPos(0, 8, 0)
@@ -2106,7 +2113,7 @@ BlueArchiveCharacter = {
 
     ---Exスキル撮影用変数。チートコマンドを用いるため、Figura設定で「チャットコマンド」を有効にすること。雷を利用するため、雷による火災には要注意！！
     ---@type boolean
-    PHOTO_MODE = false
+    PHOTO_MODE = true
 }
 
 --生徒固有初期化処理
