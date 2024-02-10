@@ -81,7 +81,10 @@ BlueArchiveCharacter = {
             CLOSED = {6, 0},
             CLOSED2 = {7, 0},
             HALF = {8, 0},
-            ANGRY = {0, 1}
+            ANGRY = {0, 1},
+            CENTER = {2, 1},
+            NARROW_CENTER = {3, 1},
+            NARROW_ANGRY_CENTER = {5, 1}
         },
 
         ---左目
@@ -92,14 +95,17 @@ BlueArchiveCharacter = {
             CLOSED = {5, 0},
             CLOSED2 = {6, 0},
             HALF = {8, 0},
-            ANGRY = {0, 1}
+            ANGRY = {0, 1},
+            NARROW = {3, 1},
+            NARROW_ANGRY = {5, 1},
         },
 
         ---口
         Mouth = {
             CLOSED = {0, 0},
             NORMAL = {4, 0},
-            ANGRY = {8, 0}
+            ANGRY = {8, 0},
+            CLOSED2 = {12, 0}
         }
     },
 
@@ -471,6 +477,7 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     models.models.main.Avatar:setPos()
+                    FaceParts:setEmotion("CENTER", "NORMAL", "CLOSED2", 107, true)
                     if host:isHost() then
                         local windowSize = client:getWindowSize()
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
@@ -508,8 +515,12 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 98 and BlueArchiveCharacter.PHOTO_MODE and host:isHost() then
                         host:sendChatCommand("/summon minecraft:lightning_bolt ^-50 ^0 ^-100")
+                    elseif tick == 107 then
+                        FaceParts:setEmotion("NARROW_CENTER", "NARROW", "CLOSED2", 27, true)
                     elseif tick == 120 and BlueArchiveCharacter.PHOTO_MODE and host:isHost() then
                         host:sendChatCommand("/weather clear")
+                    elseif tick == 134 then
+                        FaceParts:setEmotion("NARROW_ANGRY_CENTER", "NARROW_ANGRY", "NORMAL", 16, true)
                     elseif tick == 139 and host:isHost() then
                         local windowSize = client:getWindowSize()
                         models.models.ex_skill_2.Flash.ForCameraOffset2.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
@@ -519,8 +530,13 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Flash:setVisible(true)
                     elseif tick == 148 and host:isHost() then
                         models.models.ex_skill_2.Flash:setVisible(false)
-                    elseif tick == 150 and host:isHost() then
-                        renderer:setPostEffect("phosphor")
+                    elseif tick == 150 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED2", 8, true)
+                        if host:isHost() then
+                            renderer:setPostEffect("phosphor")
+                        end
+                    elseif tick == 158 then
+                        FaceParts:setEmotion("CENTER", "NORMAL", "CLOSED2", 48, true)
                     elseif tick >= 160 and tick <= 170 and host:isHost() then
                         local cameraPos = renderer:getCameraOffsetPivot()
                         for i = 0, 8 do
