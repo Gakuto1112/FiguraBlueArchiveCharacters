@@ -489,7 +489,7 @@ BlueArchiveCharacter = {
                     elseif tick == 175 then
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
                     end
-                    if tick > 5 and tick % 35 == 5 then
+                    if tick % 35 == 24 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Stage.Reef.ExSkill2ParticleAnchor)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 50 do
