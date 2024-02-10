@@ -488,6 +488,7 @@ BlueArchiveCharacter = {
                         if BlueArchiveCharacter.PHOTO_MODE then
                             host:sendChatCommand("/fill ~-2 ~3 ~-2 ~2 ~3 ~2 minecraft:barrier")
                         end
+                        sounds:playSound("minecraft:block.bubble_column.upwards_inside", player:getPos(), 1, 0.5)
                     end
                 end,
 
@@ -508,6 +509,7 @@ BlueArchiveCharacter = {
                         for i = 0, 2 * math.pi, math.pi / 6 do
                             particles:newParticle("minecraft:dust 100 1000000000 1000000000 "..(particleCount / 27 + 1), vectors.rotateAroundAxis(tunaRotY + cameraRotY, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(tunaRotY - cameraRotY - 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
                         end
+                        sounds:playSound("minecraft:entity.squid.ambient", player:getPos(), 1, 0.75)
                     elseif tick == 80 and host:isHost() then
                         models.models.ex_skill_2.UnderWater:setVisible(false)
                         if BlueArchiveCharacter.PHOTO_MODE then
@@ -528,6 +530,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Flash:setOffsetPivot(backgroundPos)
                         models.models.ex_skill_2.Flash.ForCameraOffset2:setPos(backgroundPos)
                         models.models.ex_skill_2.Flash:setVisible(true)
+                        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1.5)
                     elseif tick == 148 and host:isHost() then
                         models.models.ex_skill_2.Flash:setVisible(false)
                     elseif tick == 150 then
@@ -535,6 +538,8 @@ BlueArchiveCharacter = {
                         if host:isHost() then
                             renderer:setPostEffect("phosphor")
                         end
+                    elseif tick == 157 then
+                        sounds:playSound("minecraft:entity.player.attack.sweep", player:getPos(), 0.5, 2)
                     elseif tick == 158 then
                         FaceParts:setEmotion("CENTER", "NORMAL", "CLOSED2", 48, true)
                     elseif tick >= 160 and tick <= 170 and host:isHost() then
@@ -542,11 +547,18 @@ BlueArchiveCharacter = {
                         for i = 0, 8 do
                             particles:newParticle("minecraft:dust 100 1000000000 1000000000 4", cameraPos:copy():add(player:getPos()):add((i % 3 - 1) * 0.25, 1.25, (math.floor(i / 3) - 1) * 0.25)):setLifetime(5):setVelocity(0, 0.25, 0)
                         end
-                        if tick == 170 then
+                        if tick == 160 then
+                            local playerPos = player:getPos()
+                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.25)
+                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.5)
+                        elseif tick == 170 then
                             renderer:setPostEffect()
                         end
                     elseif tick == 175 then
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
+                        local playerPos = player:getPos()
+                        sounds:playSound("minecraft:entity.generic.splash", playerPos, 1, 0.5)
+                        sounds:playSound("minecraft:ambient.underwater.exit", playerPos, 0.5, 0.5)
                     elseif tick == 180 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Tuna)
                         for _ = 1, 50 do
@@ -560,6 +572,11 @@ BlueArchiveCharacter = {
                             local particleOffset = math.random()
                             particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset - 0.5, 0, 0, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset * 0.5 - 0.25, math.random() * 0.5 + 0.25, math.random() * 0.25 - 0.125, 0, 1, 0)):setGravity(1):setLifetime(40)
                         end
+                        if tick >= 80 or not host:isHost() then
+                            local playerPos = player:getPos()
+                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.25)
+                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.5)
+                        end
                     end
                     if tick <= 139 or tick % 2 == 0 then
                         local currentFrame = models.models.ex_skill_2.Stage.Ocean:getUVPixels().y / 16
@@ -568,6 +585,9 @@ BlueArchiveCharacter = {
                         else
                             models.models.ex_skill_2.Stage.Ocean:setUVPixels()
                         end
+                    end
+                    if (tick >= 83 and tick < 110) or (tick >= 110 and tick <= 130 and tick % 2 == 0) then
+                        sounds:playSound("minecraft:block.dispenser.fail", player:getPos(), 0.5, 5)
                     end
                 end,
 
