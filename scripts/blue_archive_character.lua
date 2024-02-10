@@ -497,6 +497,16 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Flash:setVisible(true)
                     elseif tick == 148 and host:isHost() then
                         models.models.ex_skill_2.Flash:setVisible(false)
+                    elseif tick == 150 and host:isHost() then
+                        renderer:setPostEffect("phosphor")
+                    elseif tick >= 160 and tick <= 170 and host:isHost() then
+                        local cameraPos = renderer:getCameraOffsetPivot()
+                        for i = 0, 8 do
+                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 4", cameraPos:copy():add(player:getPos()):add((i % 3 - 1) * 0.25, 1.25, (math.floor(i / 3) - 1) * 0.25)):setLifetime(5):setVelocity(0, 0.25, 0)
+                        end
+                        if tick == 170 then
+                            renderer:setPostEffect()
+                        end
                     elseif tick == 175 then
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
                     end
@@ -517,6 +527,7 @@ BlueArchiveCharacter = {
                     models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2.UnderWater.ForCameraOffset)
                     if forcedStop and host:isHost() then
                         models.models.ex_skill_2.Flash:setVisible(false)
+                        renderer:setPostEffect()
                     end
                 end,
             }
