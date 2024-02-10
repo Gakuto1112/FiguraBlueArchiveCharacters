@@ -480,7 +480,7 @@ BlueArchiveCharacter = {
                     FaceParts:setEmotion("CENTER", "NORMAL", "CLOSED2", 107, true)
                     if host:isHost() then
                         local windowSize = client:getWindowSize()
-                        models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
+                        models.models.ex_skill_2.UnderWater.ForCameraOffset.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(23))
                         local bodyYaw = player:getBodyYaw()
                         local backgroundPos = vectors.rotateAroundAxis(bodyYaw + 180, vectors.rotateAroundAxis(bodyYaw * -1 + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos, 0, 1, 0):add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
                         models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
