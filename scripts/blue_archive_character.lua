@@ -2113,7 +2113,7 @@ BlueArchiveCharacter = {
 
     ---Exスキル撮影用変数。チートコマンドを用いるため、Figura設定で「チャットコマンド」を有効にすること。雷を利用するため、雷による火災には要注意！！
     ---@type boolean
-    PHOTO_MODE = true
+    PHOTO_MODE = false
 }
 
 --生徒固有初期化処理
