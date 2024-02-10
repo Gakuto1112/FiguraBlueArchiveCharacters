@@ -456,6 +456,14 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                    if BlueArchiveCharacter.PHOTO_MODE and host:isHost() then
+                        host:sendChatCommand("/weather thunder")
+                    end
+                end,
+
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
@@ -467,6 +475,9 @@ BlueArchiveCharacter = {
                         local backgroundPos = vectors.rotateAroundAxis(bodyYaw + 180, vectors.rotateAroundAxis(bodyYaw * -1 + 180, BlueArchiveCharacter.EX_SKILL[2].camera.start.pos, 0, 1, 0):add(client:getCameraDir()), 0, 1, 0):scale(16 / 0.9375)
                         models.models.ex_skill_2.UnderWater:setOffsetPivot(backgroundPos)
                         models.models.ex_skill_2.UnderWater.ForCameraOffset:setPos(backgroundPos)
+                        if BlueArchiveCharacter.PHOTO_MODE then
+                            host:sendChatCommand("/fill ~-2 ~3 ~-2 ~2 ~3 ~2 minecraft:barrier")
+                        end
                     end
                 end,
 
@@ -489,6 +500,13 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 80 and host:isHost() then
                         models.models.ex_skill_2.UnderWater:setVisible(false)
+                        if BlueArchiveCharacter.PHOTO_MODE then
+                            host:sendChatCommand("/fill ~-2 ~3 ~-2 ~2 ~3 ~2 minecraft:air")
+                        end
+                    elseif tick == 98 and BlueArchiveCharacter.PHOTO_MODE and host:isHost() then
+                        host:sendChatCommand("/summon minecraft:lightning_bolt ^-50 ^0 ^-100")
+                    elseif tick == 120 and BlueArchiveCharacter.PHOTO_MODE and host:isHost() then
+                        host:sendChatCommand("/weather clear")
                     elseif tick == 139 and host:isHost() then
                         local windowSize = client:getWindowSize()
                         models.models.ex_skill_2.Flash.ForCameraOffset2.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
@@ -2025,9 +2043,13 @@ BlueArchiveCharacter = {
                 }
             }
         }
-    }
+    },
 
     --その他定数・変数
+
+    ---Exスキル撮影用変数。チートコマンドを用いるため、Figura設定で「チャットコマンド」を有効にすること。雷を利用するため、雷による火災には要注意！！
+    ---@type boolean
+    PHOTO_MODE = false
 }
 
 --生徒固有初期化処理
