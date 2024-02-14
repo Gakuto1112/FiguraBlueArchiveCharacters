@@ -504,7 +504,7 @@ BlueArchiveCharacter = {
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:underwater", finPos:copy():add(math.random() * 0.1 - 0.05, math.random() * 0.1 - 0.05, 0)):setScale(0.2)
                         end
-                    elseif tick >= 37 and tick < 75 and host:isHost() then
+                    elseif tick >= 37 and tick < 73 and host:isHost() then
                         local headPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.FrontBody.Head)
                         local tunaRotY = models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:getAnimRot().y
                         local cameraRotY = renderer:getCameraRot().y
@@ -513,7 +513,7 @@ BlueArchiveCharacter = {
                             particles:newParticle("minecraft:dust 100 1000000000 1000000000 "..(particleCount / 27 + 1), vectors.rotateAroundAxis(tunaRotY + cameraRotY, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(tunaRotY - cameraRotY - 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
                         end
                         sounds:playSound("minecraft:entity.squid.ambient", player:getPos(), 1, 0.75)
-                    elseif tick == 80 and host:isHost() then
+                    elseif tick == 78 and host:isHost() then
                         events.RENDER:remove("ex_skill_2_render")
                         models.models.ex_skill_2.UnderWater:setVisible(false)
                         if BlueArchiveCharacter.PHOTO_MODE then
