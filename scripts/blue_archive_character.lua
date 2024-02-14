@@ -39,7 +39,7 @@ BlueArchiveCharacter = {
         lastName = {
             ---英語
             ---@type string
-            en_us = "Sunaokami",
+            en_us = "Sunaookami",
 
             ---日本語
             ---@type string
