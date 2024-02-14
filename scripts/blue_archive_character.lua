@@ -1998,7 +1998,7 @@ BlueArchiveCharacter = {
         {
             ---この物理演算データを適用させるモデルパーツ
             ---@type ModelPart | ModelPart[]
-            modelPart = {models.models.main.Avatar.UpperBody.Body.Scarf.Scarf2.Scarf2, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf3.Scarf3},
+            modelPart = {models.models.main.Avatar.UpperBody.Body.Scarf.Scarf2.Scarf2, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf3.Scarf3, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf4.Scarf4},
 
              ---z軸回転における物理演算データ（省略可）
             z = {
@@ -2030,6 +2030,75 @@ BlueArchiveCharacter = {
                         ---@type number
                         max = 90
                     },
+                }
+            }
+        },
+
+        {
+            ---この物理演算データを適用させるモデルパーツ
+            ---@type ModelPart | ModelPart[]
+            modelPart = models.models.main.Avatar.UpperBody.Body.Scarf.Scarf4,
+
+            ---x軸回転における物理演算データ（省略可）
+            x = {
+                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                vertical = {
+                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                    ---@type number
+                    min = -140,
+
+                    ---このモデルパーツ、回転軸の中立の回転位置（度）
+                    ---@type number
+                    neutral = 0,
+
+                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                    ---@type number
+                    max = 0,
+
+                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                    bodyX = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = -160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = -90,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 0
+                    },
+
+                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                    bodyY = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = 160,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = -140,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 0
+                    },
+
+                    ---体の回転によるによるモデルパーツの回転データ（省略可）
+                    bodyRot = {
+                        ---この回転事象がモデルパーツに与える回転の倍率
+                        ---@type number
+                        multiplayer = 0.05,
+
+                        ---この回転事象がモデルパーツに与える回転の最小値
+                        ---@type number
+                        min = -90,
+
+                        ---この回転事象がモデルパーツに与える回転の最大値
+                        ---@type number
+                        max = 0
+                    }
                 }
             }
         },
