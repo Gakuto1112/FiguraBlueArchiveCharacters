@@ -684,7 +684,17 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
+                    if tick == 82 then
+                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    end
                 end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8)
+                end
             }
 		}
 	},

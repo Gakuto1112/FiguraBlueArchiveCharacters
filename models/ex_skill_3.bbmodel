@@ -9342,7 +9342,7 @@
 			"uuid": "3ff46f25-6916-cfeb-6cc4-58426a6f2cc7"
 		},
 		{
-			"name": "WaterBottole1",
+			"name": "WaterBottle1",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -9385,7 +9385,7 @@
 			"uuid": "36564f6a-5fd3-fab1-b7b7-b8671eb69913"
 		},
 		{
-			"name": "WaterBottole2",
+			"name": "WaterBottle2",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -9493,7 +9493,7 @@
 					"uuid": "0c6a9ce4-e442-42b3-60f9-c470081f824c",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -9719,8 +9719,8 @@
 								"5868c8a5-ae30-8c2b-56e3-e371a08c61ca",
 								"5b9ed420-b754-6dfa-9ec1-0e3047d572eb",
 								{
-									"name": "WaterBottole",
-									"origin": [0, 5.5, 0.5],
+									"name": "WaterBottle",
+									"origin": [0, 7.5, -5.5],
 									"color": 0,
 									"uuid": "fa18e1b9-d76e-815b-1b1d-592274c6592d",
 									"export": true,
@@ -10539,6 +10539,88 @@
 							"time": 2.75,
 							"color": -1,
 							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				},
+				"fa18e1b9-d76e-815b-1b1d-592274c6592d": {
+					"name": "WaterBottle",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": "0",
+									"y": "0",
+									"z": "0"
+								}
+							],
+							"uuid": "ca47cc82-c8c0-cf3f-ce76-63f50b6eae7c",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 0,
+									"y": "0",
+									"z": "180"
+								}
+							],
+							"uuid": "b7d91b83-15b1-fad7-ca08-a29e739855a1",
+							"time": 4.1,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": -5.5,
+									"y": 4,
+									"z": 4
+								}
+							],
+							"uuid": "840a5809-18b5-0b18-a621-b2e3a24615c6",
+							"time": 4.1,
+							"color": -1,
+							"interpolation": "linear",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": 0,
+									"y": 0,
+									"z": 0
+								}
+							],
+							"uuid": "5d05c205-792e-63ba-0859-8eb3ae68f962",
+							"time": 0,
+							"color": -1,
+							"interpolation": "step",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
 							"bezier_left_value": [0, 0, 0],
