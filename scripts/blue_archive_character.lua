@@ -84,7 +84,8 @@ BlueArchiveCharacter = {
             ANGRY = {0, 1},
             CENTER = {2, 1},
             NARROW_CENTER = {3, 1},
-            NARROW_ANGRY_CENTER = {5, 1}
+            NARROW_ANGRY_CENTER = {5, 1},
+            NARROW_ANGRY = {8, 1}
         },
 
         ---左目
@@ -98,6 +99,10 @@ BlueArchiveCharacter = {
             ANGRY = {0, 1},
             NARROW = {3, 1},
             NARROW_ANGRY = {5, 1},
+            CENTER = {6, 1},
+            NARROW_ANGRY_INVERTED = {8, 1},
+            INVERTED = {-1, 2},
+            ANGRY_INVERTED = {0, 2}
         },
 
         ---口
@@ -105,7 +110,8 @@ BlueArchiveCharacter = {
             CLOSED = {0, 0},
             NORMAL = {4, 0},
             ANGRY = {8, 0},
-            CLOSED2 = {12, 0}
+            CLOSED2 = {12, 0},
+            CLOSED3 = {0, 4}
         }
     },
 
@@ -680,12 +686,27 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED3", 40, true)
+                end,
+
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 82 then
+                    if tick == 40 then
+                        FaceParts:setEmotion("NORMAL", "INVERTED", "CLOSED3", 7, true)
+                    elseif tick == 47 then
+                        FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "NORMAL", 35, true)
+                    elseif tick == 82 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 15, true)
                         models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    elseif tick == 97 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 4, true)
+                    elseif tick == 101 then
+                        FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "CLOSED3", 26, true)
                     end
                 end,
 
