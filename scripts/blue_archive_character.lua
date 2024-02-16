@@ -690,6 +690,7 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED3", 40, true)
+                    BlueArchiveCharacter.EX_SKILL_3_SOUND_1 = sounds:playSound("minecraft:item.elytra.flying", player:getPos(), 0.05, 2)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -698,9 +699,15 @@ BlueArchiveCharacter = {
                 animationTick = function(tick)
                     if tick == 40 then
                         FaceParts:setEmotion("NORMAL", "INVERTED", "CLOSED3", 7, true)
+                    elseif tick == 27 and host:isHost() then
+                        sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.1, 0.75)
                     elseif tick == 47 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "NORMAL", 35, true)
                     elseif tick >= 58 and tick < 80 then
+                        if tick == 58 then
+                            BlueArchiveCharacter.EX_SKILL_3_SOUND_1:stop()
+                            BlueArchiveCharacter.EX_SKILL_3_SOUND_1 = nil
+                        end
                         local bicycleYaw = models.models.main.Avatar:getAnimRot().y + player:getBodyYaw() * -1
                         local bicyclePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.Bicycle)
                         local frontWheelPos = vectors.rotateAroundAxis(bicycleYaw, 0, 0, 0.5625, 0, 1, 0):add(bicyclePos)
@@ -718,6 +725,8 @@ BlueArchiveCharacter = {
                                 particles:newParticle("minecraft:block "..particleBlock, backWheelPos)
                             end
                         end
+                        sounds:playSound("minecraft:block.gravel.hit", bicyclePos, 0.1, 0.5)
+                        sounds:playSound("minecraft:block.grindstone.use", bicyclePos, 0.1, 3)
                     elseif tick == 82 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 15, true)
                         models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
@@ -732,9 +741,11 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_3.CameraBackground:setOffsetPivot(backgroundPos)
                         models.models.ex_skill_3.CameraBackground.Background:setPos(backgroundPos)
                         models.models.ex_skill_3.CameraBackground:setVisible(true)
+                        sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.25, 0.5)
                     end
                     if tick < 58 then
                         models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(tick % 2, 0)
+                        BlueArchiveCharacter.EX_SKILL_3_SOUND_1:setVolume(math.clamp(16 - client:getCameraPos():sub(ModelUtils.getModelWorldPos(models.models.main.Avatar)):length(), 0, 8) / 160)
                     end
                     if tick < 69 then
                         local bodyYaw = player:getBodyYaw()
@@ -2355,7 +2366,11 @@ BlueArchiveCharacter = {
 
     ---Exスキル撮影用変数。チートコマンドを用いるため、Figura設定で「チャットコマンド」を有効にすること。雷を利用するため、雷による火災には要注意！！
     ---@type boolean
-    PHOTO_MODE = false
+    PHOTO_MODE = false,
+
+    ---Exスキル3で使用する風切り音。
+    ---@type Sound|nil
+    EX_SKILL_3_SOUND_1 = nil
 }
 
 --生徒固有初期化処理
