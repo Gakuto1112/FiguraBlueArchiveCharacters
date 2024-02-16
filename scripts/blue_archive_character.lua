@@ -209,18 +209,6 @@ BlueArchiveCharacter = {
             boundingBox = vectors.vec3(8, 8, 8)
         }
         ]]
-
-        {
-            ---設置物として扱うモデル
-            ---指定したモデルをコピーして設置物とする。
-            ---@type ModelPart
-            model = models.models.placement_object.PlacementObject,
-
-            ---設置物の当たり判定
-            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
-            ---@type Vector3
-            boundingBox = vectors.vec3(8, 8, 8)
-        }
     },
 
 	---Exスキル
