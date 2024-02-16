@@ -680,7 +680,7 @@ BlueArchiveCharacter = {
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 40, -10)
+                    rot = vectors.vec3(0, 40, -25)
                 }
             },
 
@@ -700,6 +700,24 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "INVERTED", "CLOSED3", 7, true)
                     elseif tick == 47 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "NORMAL", 35, true)
+                    elseif tick >= 58 and tick < 80 then
+                        local bicycleYaw = models.models.main.Avatar:getAnimRot().y + player:getBodyYaw() * -1
+                        local bicyclePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.Bicycle)
+                        local frontWheelPos = vectors.rotateAroundAxis(bicycleYaw, 0, 0, 0.5625, 0, 1, 0):add(bicyclePos)
+                        local backWheelPos = vectors.rotateAroundAxis(bicycleYaw, 0, 0, -0.5625, 0, 1, 0):add(bicyclePos)
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", frontWheelPos):setColor(0.973, 0.714, 0.29):setScale(0.5):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.25, math.random() * 0.5 - 0.25)
+                            particles:newParticle("minecraft:electric_spark", backWheelPos):setColor(0.973, 0.714, 0.29):setScale(0.5):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.25, math.random() * 0.5 - 0.25)
+                            particles:newParticle("minecraft:campfire_cosy_smoke", frontWheelPos):setVelocity(math.random() * 0.2 - 0.1, 0.015, math.random() * 0.2 - 0.1)
+                            particles:newParticle("minecraft:campfire_cosy_smoke", backWheelPos):setVelocity(math.random() * 0.2 - 0.1, 0.015, math.random() * 0.2 - 0.1)
+                        end
+                        local particleBlock = world.getBlockState(bicyclePos:copy():sub(0, 0.5, 0)).id
+                        if particleBlock ~= "minecraft:air" and particleBlock ~= "minecraft:void_air" then
+                            for _ = 1, 5 do
+                                particles:newParticle("minecraft:block "..particleBlock, frontWheelPos)
+                                particles:newParticle("minecraft:block "..particleBlock, backWheelPos)
+                            end
+                        end
                     elseif tick == 82 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 15, true)
                         models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
@@ -707,9 +725,21 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 4, true)
                     elseif tick == 101 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "CLOSED3", 26, true)
+                    elseif tick == 109 and host:isHost() then
+                        local windowSize = client:getWindowSize()
+                        models.models.ex_skill_3.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(33.5))
+                        local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.5)), 0, 1, 0):scale(16 / 0.9375)
+                        models.models.ex_skill_3.CameraBackground:setOffsetPivot(backgroundPos)
+                        models.models.ex_skill_3.CameraBackground.Background:setPos(backgroundPos)
+                        models.models.ex_skill_3.CameraBackground:setVisible(true)
                     end
                     if tick < 58 then
                         models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(tick % 2, 0)
+                    end
+                    if tick < 69 then
+                        local bodyYaw = player:getBodyYaw()
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
+                        particles:newParticle("minecraft:cloud", vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 8 - 4, math.random() * 4, 10, 0, 1, 0):add(avatarPos)):setColor(1, 1, 1, 0.25):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.5, 0, 1, 0))
                     end
                 end,
 
@@ -718,6 +748,9 @@ BlueArchiveCharacter = {
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
                     models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8)
+                    if host:isHost() then
+                        models.models.ex_skill_3.CameraBackground:setVisible(false)
+                    end
                 end
             }
 		}

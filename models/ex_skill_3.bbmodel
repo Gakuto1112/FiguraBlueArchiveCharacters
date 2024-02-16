@@ -9471,6 +9471,48 @@
 			},
 			"type": "cube",
 			"uuid": "eec30c42-caca-51d2-eca9-c78eff715449"
+		},
+		{
+			"name": "Background",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-0.5, -0.5, 0],
+			"to": [0.5, 0.5, 0],
+			"autouv": 0,
+			"color": 0,
+			"inflate": 0.001,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [3, 0, 4, 1],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "2bf66eb8-966c-e2c1-7c3c-718fe02a348f"
 		}
 	],
 	"outliner": [
@@ -9481,7 +9523,7 @@
 			"uuid": "ca187cc6-059a-9127-470e-f76c6d5dc5ff",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -9493,7 +9535,7 @@
 					"uuid": "0c6a9ce4-e442-42b3-60f9-c470081f824c",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -9505,7 +9547,7 @@
 							"uuid": "9e3b0bf8-d6d7-f627-aea1-13eedb3b7517",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -9780,7 +9822,7 @@
 							"uuid": "6516bcac-c985-5966-0756-e7510f1d2e15",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -10018,6 +10060,19 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "CameraBackground",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "cc01c588-a9f4-a99b-f1dc-385af75de4ff",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": ["2bf66eb8-966c-e2c1-7c3c-718fe02a348f"]
 		}
 	],
 	"textures": [
@@ -10045,7 +10100,7 @@
 			"saved": true,
 			"uuid": "c2172e1b-4639-4f77-0742-29c9b587d1b3",
 			"relative_path": "../../textures/ex_skill_3.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAHCAYAAACRM7SNAAAAAXNSR0IArs4c6QAAANRJREFUOE9jNNB3+t/YUMiww9qBYboYLyMDdvAfSRhZDUwcJoZNHbIYyBiQWpAYsh6YGLLt6GYyMoIcy8XFz/Dt20cGXPSFi/tgloBomEW4LMTmCPRAQPYkNvNgjkaxgzHz1Wd0n4MVHnf1Z7hwcR+hEMMXOsToRXc0zJHo5oIDCRyyIJbl7o0MU0XYwYqz3/zE5lh8IYYeOthCHTmKCcUK9pBFdiyyaUSELCxJYEsi6MkFPS2Sl2ZByQDkMFAme/fhHYOQgNCgpTHSLFqI4igcBkYYADBPqBfe6A2yAAAAAElFTkSuQmCC"
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAHCAYAAACRM7SNAAAAAXNSR0IArs4c6QAAANhJREFUOE9jNNB3+t/YUMiww9qBYZooDwMjIyMjAyb4jySELA8Th4lhU4csBjIGpBYkhqwHJoZsM7qZjIwgx3Jx8TN8+/aRARd94eI+mCUgGmYRLguxOQI9AJA9ic08mKNR7GDMfPUZ3edghcdd/RkuXNxHKMTwhQ4xetEdDXMkurngQAKHLIhluXsjw1QRdrDi7Dc/sTkWX4ihhw62UEeOYkKxgj1kkR2LbBoRIQtLEtiSCHpyQU+L5KVZUDIAOQyUyd59eMcgJCA0aGmMNIsWolgKhoETAgAwP6gXxQSelgAAAABJRU5ErkJggg=="
 		}
 	],
 	"animations": [
