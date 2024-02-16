@@ -23,10 +23,15 @@ The avatars for these characters are completed. Click on a character's name to g
 ### In progress
 The avatars for these characters are worked in progress. It usually takes about 2~3 weeks. Click on the link in brackets to go to the issue about the character, where you can check the progress.
 
+(There are no avatars currently being created.)
+
 ### Planned
-Although the avatars for these characters are not created, there are plans to create them in the future. This is just a plan and is subject to change (I will close this project without creating them if I get bored to create them).
+Although the avatars for these characters are not created, there are plans to create them in the future. They will be created in order from top to bottom. This is just a plan and the order may change or creation may be discontinued.
 
 - Hoshino Takanashi ([#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17))
+- Serika Kuromi（[#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37)）
+- Serina Sumi（[#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38)）
+- Hihumi Ajitani（[#39](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/39)）
 
 ## Features
 - Imitated ex skill cut-ins.
@@ -149,7 +154,7 @@ Please used screenshots (not direct shots of the screen).
 - The character's initial rarity (★1, ★2, ★3)
   - Used to decide the avatar's thumbnail.
 - Motivation
-  - Motivation to "I will create it!".
+  - Willingness to create.
 
 ---
 
