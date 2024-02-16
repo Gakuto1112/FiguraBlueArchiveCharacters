@@ -708,6 +708,9 @@ BlueArchiveCharacter = {
                     elseif tick == 101 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "CLOSED3", 26, true)
                     end
+                    if tick < 58 then
+                        models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(tick % 2, 0)
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
