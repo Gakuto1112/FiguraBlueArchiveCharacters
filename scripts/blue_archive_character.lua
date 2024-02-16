@@ -521,14 +521,16 @@ BlueArchiveCharacter = {
                         host:sendChatCommand("/weather clear")
                     elseif tick == 134 then
                         FaceParts:setEmotion("NARROW_ANGRY_CENTER", "NARROW_ANGRY", "NORMAL", 16, true)
-                    elseif tick == 139 and host:isHost() then
-                        local windowSize = client:getWindowSize()
-                        models.models.ex_skill_2.Flash.ForCameraOffset2.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
-                        local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy()), 0, 1, 0):scale(16 / 0.9375)
-                        models.models.ex_skill_2.Flash:setOffsetPivot(backgroundPos)
-                        models.models.ex_skill_2.Flash.ForCameraOffset2:setPos(backgroundPos)
-                        models.models.ex_skill_2.Flash:setVisible(true)
+                    elseif tick == 139 then
                         sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1.5)
+                        if host:isHost() then
+                            local windowSize = client:getWindowSize()
+                            models.models.ex_skill_2.Flash.ForCameraOffset2.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
+                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy()), 0, 1, 0):scale(16 / 0.9375)
+                            models.models.ex_skill_2.Flash:setOffsetPivot(backgroundPos)
+                            models.models.ex_skill_2.Flash.ForCameraOffset2:setPos(backgroundPos)
+                            models.models.ex_skill_2.Flash:setVisible(true)
+                        end
                     elseif tick == 148 and host:isHost() then
                         models.models.ex_skill_2.Flash:setVisible(false)
                     elseif tick == 150 then
@@ -722,14 +724,16 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 4, true)
                     elseif tick == 101 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "CLOSED3", 26, true)
-                    elseif tick == 109 and host:isHost() then
-                        local windowSize = client:getWindowSize()
-                        models.models.ex_skill_3.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(33.5))
-                        local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.5)), 0, 1, 0):scale(16 / 0.9375)
-                        models.models.ex_skill_3.CameraBackground:setOffsetPivot(backgroundPos)
-                        models.models.ex_skill_3.CameraBackground.Background:setPos(backgroundPos)
-                        models.models.ex_skill_3.CameraBackground:setVisible(true)
+                    elseif tick == 109 then
                         sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.25, 0.5)
+                        if host:isHost() then
+                            local windowSize = client:getWindowSize()
+                            models.models.ex_skill_3.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(33.5))
+                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.5)), 0, 1, 0):scale(16 / 0.9375)
+                            models.models.ex_skill_3.CameraBackground:setOffsetPivot(backgroundPos)
+                            models.models.ex_skill_3.CameraBackground.Background:setPos(backgroundPos)
+                            models.models.ex_skill_3.CameraBackground:setVisible(true)
+                        end
                     end
                     if tick < 58 then
                         models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(tick % 2, 0)
