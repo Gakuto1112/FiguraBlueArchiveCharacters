@@ -5,9 +5,9 @@
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![サムネイル](./README_images/thumbnail.jpg)
+![サムネイル](./README_images/thumbnail.png)
 
-**このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
+このブランチは**砂狼 シロコ**のブランチです。
 
 ## 作成状況
 ### 作成済み
@@ -18,11 +18,10 @@
 - [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 - [才羽 モモイ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [才羽 ミドリ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
+- [砂狼 シロコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
 
 ### 作成中
 これらのキャラクターのアバターは作成中です。通常2~3週間程要します。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
-
-- 砂狼 シロコ（[#16](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/16)）
 
 ### 作成予定
 これらのキャラクターのアバターは作成していないものの、今後作成する予定です。これはあくまでも予定であり、変更される可能性があります（私が飽きたら終了です）。
