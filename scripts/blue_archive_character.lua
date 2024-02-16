@@ -892,12 +892,10 @@ BlueArchiveCharacter = {
                 if costumeId == 2 then
                     --ライディング
                     Costume.setCostumeTextureOffset(2)
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Hairs.FrontHair"})) do
-                        modelPart:setPos(0, 0, 0.25)
-                    end
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Hairs.BackHair"})) do
-                        modelPart:setPos(0, 0, -0.25)
-                    end
+                    models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, Armor.ArmorVisible[2] and -0.75 or 0.25)
+                    models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, Armor.ArmorVisible[2] and 0.75 or -0.25)
+                    models.models.death_animation.DummyAvatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, 0.25)
+                    models.models.death_animation.DummyAvatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, -0.25)
                     for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.CRidingB", "UpperBody.Arms.RightArm.CRidingRA", "UpperBody.Arms.LeftArm.CRidingLA"})) do
                         modelPart:setVisible(true)
                     end
@@ -915,15 +913,14 @@ BlueArchiveCharacter = {
                 elseif costumeId == 4 then
                     --水着
                     Costume.setCostumeTextureOffset(1)
-                    for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Head", "Head.HatLayer"})) do
                         modelPart:setUVPixels(0, 16)
-                    end
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH"})) do
-                        modelPart:setVisible(true)
                     end
                     for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairEnds", "UpperBody.Body.Scarf", "UpperBody.Body.Skirt", "UpperBody.Body.Hairs", "UpperBody.Body.IDCard"})) do
                         modelPart:setVisible(false)
                     end
+                    models.models.main.Avatar.Head.CSwimsuitH:setVisible(not Armor.ArmorVisible[1])
+                    models.models.death_animation.DummyAvatar.Head.CSwimsuitH:setVisible(true)
                 end
             end,
 
@@ -935,14 +932,27 @@ BlueArchiveCharacter = {
                 for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Hairs.FrontHair", "UpperBody.Body.Hairs.BackHair"})) do
                     modelPart:setPos()
                 end
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Head", "Head.HatLayer"})) do
                     modelPart:setUVPixels()
                 end
                 for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH", "Head.CSwimsuitH", "UpperBody.Body.CRidingB", "UpperBody.Arms.RightArm.CRidingRA", "UpperBody.Arms.LeftArm.CRidingLA"})) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs", "UpperBody.Body.Scarf", "UpperBody.Body.Skirt", "UpperBody.Body.IDCard"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs", "UpperBody.Body.Scarf", "UpperBody.Body.IDCard"})) do
                     modelPart:setVisible(true)
+                end
+                models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setVisible(true)
+                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Scarf.Scarf2, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf3, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf4}) do
+                    modelPart:setVisible(not Armor.ArmorVisible[2])
+                end
+                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.UpperBody.Body.Scarf.Scarf2, models.models.death_animation.DummyAvatar.UpperBody.Body.Scarf.Scarf3, models.models.death_animation.DummyAvatar.UpperBody.Body.Scarf.Scarf4}) do
+                    modelPart:setVisible(true)
+                end
+                models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, Armor.ArmorVisible[2] and -0.75 or 0)
+                models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, Armor.ArmorVisible[2] and 0.75 or 0)
+                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.UpperBody.Body.Hairs.FrontHair, models.models.death_animation.DummyAvatar.UpperBody.Body.Hairs.BackHair}) do
+                    modelPart:setPos()
                 end
             end,
 
@@ -950,6 +960,37 @@ BlueArchiveCharacter = {
             ---@type fun(index: integer)
             ---@param parts Armor.ArmorPart 変更された防具の部位
             armorChange = function(parts)
+                if parts == "HELMET" then
+                    if Armor.ArmorVisible[1] then
+                        models.models.main.Avatar.Head.CSwimsuitH:setVisible(false)
+                    elseif Costume.CurrentCostume == 4 then
+                        models.models.main.Avatar.Head.CSwimsuitH:setVisible(true)
+                    end
+                elseif parts == "CHEST_PLATE" then
+                    if Armor.ArmorVisible[2] then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Scarf.Scarf2, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf3, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf4}) do
+                            modelPart:setVisible(false)
+                        end
+                        models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, -0.75)
+                        models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, 0.75)
+                    else
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Scarf.Scarf2, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf3, models.models.main.Avatar.UpperBody.Body.Scarf.Scarf4}) do
+                            modelPart:setVisible(true)
+                        end
+                        if Costume.CurrentCostume == 2 then
+                            models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, -0.75)
+                            models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, 0.75)
+                        else
+                            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
+                                modelPart:setPos()
+                            end
+                        end
+                        models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, 0.25)
+                        models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, -0.25)
+                    end
+                elseif parts == "LEGGINGS" then
+                    models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                end
             end
         }
 	},
