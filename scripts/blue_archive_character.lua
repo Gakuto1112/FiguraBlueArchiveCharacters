@@ -1648,7 +1648,7 @@ BlueArchiveCharacter = {
 
                     ---このモデルパーツ、回転軸の中立の回転位置（度）
                     ---@type number
-                    neutral = 30,
+                    neutral = 45,
 
                     ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
                     ---@type number
@@ -2088,7 +2088,7 @@ BlueArchiveCharacter = {
         {
             ---この物理演算データを適用させるモデルパーツ
             ---@type ModelPart | ModelPart[]
-            modelPart = {models.models.main.Avatar.Head.HairTails.HairTailRight, models.models.main.Avatar.Head.HairTails.HairTailLeft},
+            modelPart = models.models.main.Avatar.Head.HairAccessories.HairAccessoryRight.HairTail,
 
             ---z軸回転における物理演算データ（省略可）
             x = {
@@ -2161,7 +2161,7 @@ BlueArchiveCharacter = {
         {
             ---この物理演算データを適用させるモデルパーツ
             ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.HairTails.HairTailRight.HairTailRightZPivot,
+            modelPart = models.models.main.Avatar.Head.HairAccessories.HairAccessoryRight.HairTail.HairTailZPivot,
 
             ---z軸回転における物理演算データ（省略可）
             z = {
@@ -2222,75 +2222,6 @@ BlueArchiveCharacter = {
                         ---この回転事象がモデルパーツに与える回転の最大値
                         ---@type number
                         max = 60
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.HairTails.HairTailLeft.HairTailLeftZPivot,
-
-            ---z軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -60,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 0,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headZ = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -60,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.05,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -60,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -60,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
                     }
                 }
             }
