@@ -682,22 +682,19 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                if costumeId == 2 then
-                    --水着
-                    Costume.setCostumeTextureOffset(1)
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Brim", "UpperBody.Body.Skirt", "UpperBody.Body.Hairs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom"})) do
-                        modelPart:setVisible(false)
-                    end
+                Costume.setCostumeTextureOffset(1)
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Brim", "UpperBody.Body.BackRibbon", "UpperBody.Body.Skirt", "UpperBody.Body.Hairs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom"})) do
+                    modelPart:setVisible(false)
+                end
 
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB"})) do
-                        modelPart:setVisible(true)
-                    end
-                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
-                        modelPart:setVisible(not Armor.ArmorVisible[1])
-                    end
-                    for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.CSwimsuitH.Brim, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.EarAccessories}) do
-                        modelPart:setVisible(true)
-                    end
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB"})) do
+                    modelPart:setVisible(true)
+                end
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
+                    modelPart:setVisible(not Armor.ArmorVisible[1])
+                end
+                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.CSwimsuitH.Brim, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.EarAccessories}) do
+                    modelPart:setVisible(true)
                 end
             end,
 
@@ -712,8 +709,10 @@ BlueArchiveCharacter = {
                     modelPart:setVisible(false)
                 end
                 models.models.main.Avatar.Head.Brim:setVisible(not Armor.ArmorVisible[1])
-                models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[2])
-                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.Brim, models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.BackRibbon, models.models.main.Avatar.UpperBody.Body.Skirt}) do
+                    modelPart:setVisible(not Armor.ArmorVisible[2])
+                end
+                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.Brim, models.models.death_animation.DummyAvatar.UpperBody.Body.BackRibbon, models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt}) do
                     modelPart:setVisible(true)
                 end
             end,
@@ -739,7 +738,9 @@ BlueArchiveCharacter = {
                     end
                 elseif parts == "CHEST_PLATE" then
                     if Armor.ArmorVisible[2] then
-                        models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(false)
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.BackRibbon, models.models.main.Avatar.UpperBody.Body.Skirt}) do
+                            modelPart:setVisible(false)
+                        end
                         models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, -1)
                         models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, 1)
                         BlueArchiveCharacter.PHYSICS[1].x.vertical.neutral = 0
@@ -750,7 +751,11 @@ BlueArchiveCharacter = {
                         BlueArchiveCharacter.PHYSICS[1].x.horizontal.neutral = 0
                         BlueArchiveCharacter.PHYSICS[1].x.horizontal.max = 0
                     else
-                        models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(Costume.CurrentCostume == 1)
+                        if Costume.CurrentCostume == 1 then
+                            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.BackRibbon, models.models.main.Avatar.UpperBody.Body.Skirt}) do
+                                modelPart:setVisible(true)
+                            end
+                        end
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
                             modelPart:setPos()
                         end
