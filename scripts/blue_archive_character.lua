@@ -2582,6 +2582,7 @@ events.TICK:register(function ()
             particles:newParticle("minecraft:poof", playerPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
             particles:newParticle("minecraft:poof", playerPosPrev:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
         end
+        sounds:playSound("minecraft:entity.shulker.shoot", playerPos, 1, 2)
     end
     playerPosPrev = playerPos
     isStandingPrev = isStanding
