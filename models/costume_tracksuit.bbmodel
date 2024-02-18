@@ -1751,6 +1751,47 @@
 			},
 			"type": "cube",
 			"uuid": "efcd8424-1913-07bf-25da-097fdf5396f3"
+		},
+		{
+			"name": "HairTailBottom",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-1.5, 16, 3],
+			"to": [1.5, 16, 5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [0, 24, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [10, 27, 13, 29],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "e79ff80d-15e0-a0d2-91ce-27648026105e"
 		}
 	],
 	"outliner": [
@@ -1912,7 +1953,7 @@
 					"uuid": "63a97729-5eb8-975e-dbc1-d79fee2a5068",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -1928,7 +1969,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["0d801519-76c3-664d-9f0f-a0344943255f"]
+							"children": ["0d801519-76c3-664d-9f0f-a0344943255f", "e79ff80d-15e0-a0d2-91ce-27648026105e"]
 						}
 					]
 				}
@@ -2283,7 +2324,7 @@
 			"override": true,
 			"length": 5.05,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
