@@ -1544,5 +1544,8 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+events.TICK:register(function()
+    models.models.main.Avatar.UpperBody.Body.Skirt:setRot(player:getPose() == "CROUCHING" and 30 or 0)
+end)
 
 return BlueArchiveCharacter
