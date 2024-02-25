@@ -99,7 +99,7 @@ BlueArchiveCharacter = {
     GUN = {
         ---銃の大きさの倍率（省略可）
         ---@type number
-        scale = 1.2,
+        scale = 1.3,
 
         ---構えている時
         hold = {
@@ -111,11 +111,11 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-1.5, 10, 7),
+                right = vectors.vec3(-0.75, 5, 3),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-4.5, 10, 7)
+                left = vectors.vec3(0.75, 5, 3)
             },
 
             --[[
@@ -136,36 +136,38 @@ BlueArchiveCharacter = {
         put = {
             ---構えていない時の銃の扱い方
             ---@type BlueArchiveCharacter.GunPutType
-            type = "BODY",
+            type = "HIDDEN",
 
+            --[[
             ---位置オフセット（省略可）
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(1.5, 6, 8),
+                right = vectors.vec3(),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-7.5, 6, 8)
+                left = vectors.vec3()
             },
 
             ---向きオフセット（省略可）
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(90, 180, -90),
+                right = vectors.vec3(),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(90, 180, -90)
+                left = vectors.vec3()
             }
+            ]]
         },
 
         ---射撃音
         sound = {
             ---使用するゲームの音源名
             ---@type Minecraft.soundID
-            name = "minecraft:entity.iron_golem.hurt",
+            name = "minecraft:entity.generic.explode",
 
             ---音源のピッチ（0.5 ~ 2）
             ---@type number
