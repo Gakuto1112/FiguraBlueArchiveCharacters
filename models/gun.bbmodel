@@ -2278,7 +2278,7 @@
 			"uuid": "da1f5584-3579-ec6b-9aba-5145a81173c5"
 		},
 		{
-			"name": "AmmoHolder",
+			"name": "AmmoHolder1",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -2317,6 +2317,88 @@
 			},
 			"type": "cube",
 			"uuid": "7f61d459-a293-722d-9c7e-6008dc9f8f15"
+		},
+		{
+			"name": "AmmoHolder2",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [0.45, 2.925, 0.45],
+			"to": [0.7, 3.425, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [3, -1.5, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				},
+				"west": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				},
+				"up": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				},
+				"down": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "108aaff2-5b12-e56b-1ac9-d77f3b716250"
+		},
+		{
+			"name": "AmmoHolder3",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [4.3, 2.925, 0.45],
+			"to": [4.55, 3.425, 0.5],
+			"autouv": 0,
+			"color": 0,
+			"origin": [3, -1.5, 0],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"east": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				},
+				"south": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				},
+				"down": {
+					"uv": [1, 1, 2, 2],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "bd8563ae-2391-e37b-7e56-bb2a7d0b1f43"
 		}
 	],
 	"outliner": [
@@ -2410,7 +2492,9 @@
 						"b630e0a5-cb37-7be1-da27-c152b30d4b37",
 						"36bb3ff5-8724-f60f-4d5c-ab5dd2adacf4",
 						"da1f5584-3579-ec6b-9aba-5145a81173c5",
-						"7f61d459-a293-722d-9c7e-6008dc9f8f15"
+						"7f61d459-a293-722d-9c7e-6008dc9f8f15",
+						"108aaff2-5b12-e56b-1ac9-d77f3b716250",
+						"bd8563ae-2391-e37b-7e56-bb2a7d0b1f43"
 					]
 				},
 				{
