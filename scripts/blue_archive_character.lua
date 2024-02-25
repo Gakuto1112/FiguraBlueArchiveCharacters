@@ -2570,7 +2570,7 @@ events.TICK:register(function ()
     local playerPos = player:getPos()
     local playerPosDelta = playerPos:copy():sub(playerPosPrev):length()
     local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
-    if playerPosDelta > player:getVelocity():length() and isStanding and isStandingPrev then
+    if playerPosDelta - 1 > player:getVelocity():length() and isStanding and isStandingPrev then
         PlacementObjectManager:removeAll()
         if math.random() >= 0.95 then
             models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
