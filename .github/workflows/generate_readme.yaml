@@ -4,12 +4,7 @@ on:
   push:
     branches:
       - base
-      - Shizuko
-      - Izuna
-      - Marie
-      - Momoi
-      - Midori
-      - Shiroko
+      - '[A-Z]*'
     paths:
       - .github/README_templates/**
       - .github/workflows/generate_readme.yaml
