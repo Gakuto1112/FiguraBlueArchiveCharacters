@@ -242,6 +242,12 @@
 		"models.models.bounding_box.BoundingBox": {
 			"visible": false,
 			"primaryRenderType": "LINES"
+		},
+		"models.models.memorial_lobby.StampCard": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom"
+		},
+		"models.models.memorial_lobby.GreenBack": {
+			"parentType": "Camera"
 		}
 	}
 }

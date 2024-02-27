@@ -1554,5 +1554,10 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
+    modelPart:setParentType("Body")
+end
+
+renderer:setOffsetCameraRot(0, 0, -10)
 
 return BlueArchiveCharacter
