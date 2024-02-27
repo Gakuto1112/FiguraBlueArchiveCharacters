@@ -156,29 +156,31 @@ BlueArchiveCharacter = {
         put = {
             ---構えていない時の銃の扱い方
             ---@type BlueArchiveCharacter.GunPutType
-            type = "BODY",
+            type = "HIDDEN",
 
+            --[[
             ---位置オフセット（省略可）
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(0, 2, 3),
+                right = vectors.vec3(),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(0, 2, 3)
+                left = vectors.vec3()
             },
 
             ---向きオフセット（省略可）
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(0, 180, -130),
+                right = vectors.vec3(),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(0, 0, 130)
+                left = vectors.vec3()
             }
+            ]]
         },
 
         ---射撃音
@@ -2422,5 +2424,9 @@ BlueArchiveCharacter = {
 models.models.ex_skill_2.UnderWater:setLight(15)
 models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
 models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+
+for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
+    modelPart:setParentType("Body")
+end
 
 return BlueArchiveCharacter
