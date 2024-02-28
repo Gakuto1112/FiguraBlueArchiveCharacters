@@ -5,7 +5,7 @@
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
-![サムネイル](./README_images/thumbnail.jpg)
+![サムネイル](./README_images/thumbnail.png)
 
 **このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
 
