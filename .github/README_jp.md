@@ -132,27 +132,6 @@ Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[
 - 不具合がありましたら、[Issues](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues)までご連絡下さい。
 - アバター関係で私に連絡したい方は[Discussions](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/discussions)または、[Discord](https://discord.com/)でご連絡下さい。私のDiscordのアカウント名は「vinny_san」で表示名は「ばにーさん」です。[FiguraのDiscordサーバー](https://discord.gg/figuramc)での表示名は「BunnySan/ばにーさん」です。
 
-## アバター作成に必要なもの
-画面直撮りはやめて下さい。
-
-- キャラクターイラスト（スクリーンショット等）
-  - 見えない部分は想像で補います。
-  - 衣装違いなどもあれば一緒に用意して下さい。
-- Exスキルのカットイン（画面録画）
-  - 倍速は無効にして下さい。
-  - スキル使用後の様子も収めて下さい。
-  - 戦闘の最初から最後までが収めてあるとアバター作成時に役立つ可能性があります。
-  - 衣装違いがあればその分も収めてください。
-- 生徒の基本情報（名前、誕生日など）
-  - 生徒情報画面の下側にボタンがあります。
-- Exスキルの名前（スキル強化の画面）
-- 固有武器（固有武器強化の画面）
-  - 生徒を★5にしなくてもこの画面は見れます。
-- 生徒の初期レアリティ（★1、★2、★3）
-  - アバターのサムネイル画像の決定に使います。
-- やる気
-  - 「作りたい」という意欲
-
 ---
 
 ![IDカード](./README_images/id_card.jpg)
