@@ -134,27 +134,6 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 - Please [report an issue](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues) if you find it.
 - Please contact me via [Discussions](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/discussions) or [Discord](https://discord.com/) if you want to do for my avatars. My Discord name is "vinny_san" and display name is "ばにーさん". My display name in [Figura Discord server](https://discord.gg/figuramc) is "BunnySan/ばにーさん".
 
-## Things needed to create a new character
-Please used screenshots (not direct shots of the screen).
-
-- Character illustrations (screenshots, etc.)
-  - The parts which aren't appear in them will be made up by my imagination.
-  - Include costume-difference illustrations if the character has multiple costumes.
-- Ex skill cut-ins (screen recordings)
-  - Disable fast forward.
-  - Include the scene after the ex skills.
-  - It may be helpful when creating avatars if they include the whole battle.
-  - Include costume-difference cut-ins if the character has multiple costumes.
-- Basic information of the character (name, birthday, etc.)
-  - There is a button to show them at the bottom of the student information screen.
-- The name of the ex skills (skill upgrades screen)
-- The characters's specific weapon (weapon upgrades screen)
-  - You can see this screen even if the characters is not ★5.
-- The character's initial rarity (★1, ★2, ★3)
-  - Used to decide the avatar's thumbnail.
-- Motivation
-  - Willingness to create.
-
 ---
 
 ![ID card](./README_images/id_card.jpg)
