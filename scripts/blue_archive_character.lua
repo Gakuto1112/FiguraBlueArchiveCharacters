@@ -1554,7 +1554,7 @@ events.TICK:register(function()
     models.models.main.Avatar.UpperBody.Body.Skirt:setRot(player:getPose() == "CROUCHING" and 30 or 0)
 
     local hasShieldPrev = BlueArchiveCharacter.HasShield
-    BlueArchiveCharacter.HasShield = player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield"
+    BlueArchiveCharacter.HasShield = (player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1
     if BlueArchiveCharacter.HasShield and not hasShieldPrev then
         models.models.main.Avatar.UpperBody.Body.Shield:setParentType("Item")
         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
