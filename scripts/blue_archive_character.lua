@@ -1587,37 +1587,37 @@ events.ITEM_RENDER:register(function (item, mode)
         if mode == "FIRST_PERSON_LEFT_HAND" then
             local leftHanded = player:isLeftHanded()
             if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(8, -17.75, 2.5)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(8, -20.25, 2.5)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
             else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20, 2.5)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -22.5, 2.5)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, 5)
             end
         elseif mode == "FIRST_PERSON_RIGHT_HAND" then
             local leftHanded = player:isLeftHanded()
             if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(0, -16.75, 2.5)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(0, -19.25, 2.5)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, 5)
             else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20, 2.5)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -22.5, 2.5)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
             end
         elseif mode == "THIRD_PERSON_LEFT_HAND" then
             local leftHanded = player:isLeftHanded()
             if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -18, -2)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, -2)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, 30, 30)
             else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -18, 2.5)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, 2.5)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
             end
         elseif mode == "THIRD_PERSON_RIGHT_HAND" then
             local leftHanded = player:isLeftHanded()
             if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -18, -2)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, -2)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, -30, -30)
             else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -18, 2.5)
+                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, 2.5)
                 models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, -90, 0)
             end
         end
