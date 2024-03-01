@@ -339,12 +339,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 28, -64),
+                    pos = vectors.vec3(-4.5, 7.75, -44.5),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 180)
+                    rot = vectors.vec3(0, -160, 0)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -352,12 +352,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(0, 28, -64),
+                    pos = vectors.vec3(-13.5, 13.5, -25),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3(0, 180)
+                    rot = vectors.vec3(-15, 215, 0)
                 }
             },
 
