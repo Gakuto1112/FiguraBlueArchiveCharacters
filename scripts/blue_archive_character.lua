@@ -79,7 +79,8 @@ BlueArchiveCharacter = {
             SURPLISED = {2, 0},
             TIRED = {4, 0},
             CLOSED = {6, 0},
-            ANGRY = {7, 0}
+            ANGRY = {7, 0},
+            CLOSED2 = {0, 1}
         },
 
         ---左目
@@ -96,7 +97,9 @@ BlueArchiveCharacter = {
         ---口
         Mouth = {
             CLOSED = {0, 0},
-            CLOSED2 = {4, 0}
+            CLOSED2 = {4, 0},
+            W = {8, 0},
+            YAWN = {12, 0}
         }
     },
 
@@ -496,6 +499,17 @@ BlueArchiveCharacter = {
             ---@param duration integer 吹き出しを再生する時間。-1は時間無制限を示す。
             ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
             onPlay = function(type, duration, showInGui)
+                if duration > 0 then
+                    if type == "GOOD" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "W", duration, true)
+                    elseif type == "HEART" then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "W", duration, true)
+                    elseif type == "RELOAD" then
+                        FaceParts:resetEmotion()
+                    elseif type == "QUESTION" then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", duration, true)
+                    end
+                end
             end,
 
             ---吹き出しアニメーション終了時に実行されるコールバック関数（任意）
@@ -503,6 +517,9 @@ BlueArchiveCharacter = {
             ---@param type Bubble.BubbleType 再生された吹き出しエモートの種類
             ---@param forcedStop boolean 吹き出しエモートが途中終了した場合は"true"、吹き出しエモートが最後まで再生されて終了した場合は"false"が代入される。
             onStop = function(type, forcedStop)
+                if forcedStop then
+                    FaceParts:resetEmotion()
+                end
             end
         }
     },
