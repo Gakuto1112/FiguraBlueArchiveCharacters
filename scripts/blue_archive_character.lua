@@ -76,22 +76,27 @@ BlueArchiveCharacter = {
         ---右目
         RightEye = {
             NORMAL = {0, 0},
-            SURPLISED = {1, 0},
-            TIRED = {2, 0},
-            CLOSED = {3, 0}
+            SURPLISED = {2, 0},
+            TIRED = {4, 0},
+            CLOSED = {6, 0},
+            ANGRY = {7, 0}
         },
 
         ---左目
         LeftEye = {
             NORMAL = {0, 0},
-            SURPLISED = {1, 0},
-            TIRED = {2, 0},
-            CLOSED = {3, 0}
+            SURPLISED = {2, 0},
+            TIRED = {4, 0},
+            CLOSED = {5, 0},
+            ANGRY = {7, 0},
+            ANGRY_CENTER = {8, 0},
+            CLOSED2 = {-1, 1}
         },
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
+            CLOSED = {0, 0},
+            CLOSED2 = {4, 0}
         }
     },
 
@@ -363,6 +368,12 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED2", 53, true)
+                end,
+
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
@@ -374,6 +385,9 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
                     elseif tick == 53 then
                         models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                        FaceParts:setEmotion("ANGRY", "ANGRY_CENTER", "CLOSED2", 19, true)
+                    elseif tick == 72 then
+                        FaceParts:setEmotion("ANGRY", "CLOSED2", "CLOSED2", 32, true)
                     end
                 end,
 
