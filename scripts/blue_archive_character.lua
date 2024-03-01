@@ -330,7 +330,7 @@ BlueArchiveCharacter = {
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main"},
+			animations = {"main", "gun"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
@@ -363,6 +363,37 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    if tick == 0 then
+                        models.models.gun.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                        Gun.TargetModel:setPos()
+                        Gun.TargetModel:setRot()
+                        models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
+                    elseif tick == 53 then
+                        models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    models.models.gun.Gun:moveTo(models.models.gun)
+                    if player:isLeftHanded() then
+                        Gun.TargetModel:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.left))
+                        Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.put.rot.left)
+                    else
+                        Gun.TargetModel:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.right))
+                        Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.put.rot.right)
+                    end
+                    models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    if ExSkill.AnimationCount >= 0 then
+                        models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
+                    end
+                end
             }
 		}
 	},
@@ -1560,7 +1591,7 @@ events.TICK:register(function()
             modelPart:setRot()
         end
         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder3.GasPiston3, models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder4.GasPiston4, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2}) do
-            modelPart:setPos(0, -1, 0)
+            modelPart:setPos(0, -1.4, 0)
         end
         models.models.main.Avatar.UpperBody.Body.Shield.Section3.Handle2:setPos(0, 0.25, 0)
         models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.Handle:setPos(0, -0.25, 0)
