@@ -55,7 +55,7 @@ events.TICK:register(function ()
 	elseif damageStatus == "DIED" then
 		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 20, true)
 	elseif player:getPose() == "SLEEPING" then
-		FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", 1, true)
+		FaceParts:setEmotion("CLOSED", "CLOSED", "YAWN", 1, true)
 	elseif FaceParts.EmotionCount == 0 then
 		FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 0, false)
 	end
