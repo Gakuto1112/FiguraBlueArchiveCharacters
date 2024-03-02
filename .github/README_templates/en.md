@@ -1,7 +1,7 @@
 <!-- $inject(locale_link) -->
 
 # FiguraBlueArchiveCharacters
-This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod for [Minecraft](https://www.minecraft.net/en-us), which are imitated characters who appear in "[Blue Archive](https://bluearchive.jp/)" the game for mobile devices.
+This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod for [Minecraft](https://www.minecraft.net/en-us) Java Edition, which are imitated characters who appear in "[Blue Archive](https://bluearchive.jp/)" the game for mobile devices.
 
 Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
