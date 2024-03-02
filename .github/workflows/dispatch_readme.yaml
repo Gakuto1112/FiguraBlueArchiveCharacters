@@ -19,8 +19,10 @@ jobs:
       - id: result
         name: Get target branches
         run: |
-          git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\///' | sed -z 's/\r//g; s/\n/, /g' | sed 's/, $//g' > ./branch_list.txt
-          echo "target_branch_array=[$(<branch_list.txt)]" >> "$GITHUB_OUTPUT"
+          echo '["base", ' > ./branch_list.txt
+          git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\//"/' | sed -z 's/\r//g; s/\n/", /g' | sed 's/, $//g' >> ./branch_list.txt
+          echo ']' >> ./branch_list.txt
+          echo target_branch_array=$(<./branch_list.txt) >> '$GITHUB_OUTPUT'
       - name: Remove temporary files
         run: rm ./branch_list.txt
   generate:
