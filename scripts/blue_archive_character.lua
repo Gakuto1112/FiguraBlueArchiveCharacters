@@ -387,6 +387,8 @@ BlueArchiveCharacter = {
                         Gun.TargetModel:setPos()
                         Gun.TargetModel:setRot()
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
+                    elseif tick == 8 or tick == 15 then
+                        sounds:playSound("minecraft:block.chest.locked", player:getPos(), 1, 2)
                     elseif tick == 12 then
                         local bodyYaw = player:getBodyYaw()
                         local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 3.66, -1, 0, 1, 0):scale(0.0625))
@@ -399,18 +401,8 @@ BlueArchiveCharacter = {
                         for _ = 1, 10 do
                             particles:newParticle("minecraft:electric_spark", particlePos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.6 - 0.3, math.random() * 0.2 - 0.1, 0, 0, 1, 0)):setColor(1, 0.64, 0.59):setLifetime(4)
                         end
-                        --[[
-                        if host:isHost() then
-                            models.models.ex_skill_1.CameraBackground:setVisible(true)
-                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.75)), 0, 1, 0):scale(16 / 0.9375)
-                            models.models.ex_skill_1.CameraBackground:setOffsetPivot(backgroundPos)
-                            models.models.ex_skill_1.CameraBackground.Background:setPos(backgroundPos)
-                            local windowSize = client:getWindowSize()
-                            models.models.ex_skill_1.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(40))
-                        end
-                    elseif tick == 23 and host:isHost() then
-                        models.models.ex_skill_1.CameraBackground:setVisible(false)
-                        ]]
+                    elseif tick == 36 or tick == 45 then
+                        sounds:playSound("minecraft:block.anvil.place", player:getPos(), 1, 2)
                     elseif tick == 38 then
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2}) do
                             local bodyYaw = player:getBodyYaw()
@@ -436,14 +428,17 @@ BlueArchiveCharacter = {
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 0, 1, 0)):setColor(0.973, 0.714, 0.29):setLifetime(2)
                         end
+                        sounds:playSound("minecraft:block.anvil.place", player:getPos(), 0.25, 4)
                     elseif tick == 70 then
                         local bodyYaw = player:getBodyYaw()
                         local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, -2, 3, 4, 0, 1, 0):scale(0.0625))
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 0, 1, 0)):setColor(0.973, 0.714, 0.29):setLifetime(2)
                         end
+                        sounds:playSound("minecraft:block.anvil.place", player:getPos(), 0.25, 4)
                     elseif tick == 72 then
                         FaceParts:setEmotion("ANGRY", "CLOSED2", "CLOSED2", 32, true)
+                        sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)
                     elseif tick == 79 then
                         local particlePos = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 1, 0, -3, 0, 1, 0))
                         particles:newParticle("minecraft:explosion_emitter", particlePos)
@@ -457,6 +452,10 @@ BlueArchiveCharacter = {
                                 particles:newParticle("minecraft:block "..particleBlock, particlePos):setScale(0.75):setVelocity(math.random() * 0.8 - 0.4, math.random() * 1, math.random() * 0.8 - 0.4):setLifetime(40)
                             end
                         end
+                        local playerPos = player:getPos()
+                        sounds:playSound("minecraft:block.iron_door.open", playerPos, 1, 2)
+                        sounds:playSound("minecraft:entity.player.levelup", playerPos, 0.5, 1.5)
+                        sounds:playSound("minecraft:entity.generic.explode", playerPos, 0.5, 0.5)
                     end
                     if tick % 2 == 0 then
                         ---銃弾を表現するパーティクル
