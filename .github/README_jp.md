@@ -119,7 +119,9 @@ Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[
 1. 使用したいModローダーをインストールし、Modを使用できる状態にします。
 2. [Figura](https://modrinth.com/mod/figura)を追加します。Modの依存関係にご注意ください。
 3. 使用したいキャラクターのダウンロードページに移動します。
-4. ページ上部の緑色のボタン「**Code**」から「**Download ZIP**」からこのレポジトリのファイルをダウンロードします。（または、このレポジトリをクローンします。）
+4. ページ上部の緑色のボタン「**Code**」から「**Download ZIP**」からこのレポジトリのファイルをダウンロードします。
+   - ページ上部にダウンロードボタンがない場合は[レポジトリのトップページ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/base)に戻ってください。
+   - Gitの知識がある方は、レポジトリをクローンすることでもダウンロードできます。
 5. 圧縮ファイルの場合は展開します。
 6. `<マインクラフトのゲームフォルダ>/figura/avatars/`にアバターのデータを配置します。
    - Figuraを導入した状態で一度ゲームを起動すると自動的に作成されます。存在しない場合は手動での作成も可能です。
