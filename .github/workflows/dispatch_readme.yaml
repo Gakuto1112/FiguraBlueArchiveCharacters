@@ -24,7 +24,6 @@ jobs:
           echo '["base", ' > ./branch_list.json
           git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\//"/' | sed -z 's/\r//g; s/\n/", /g' | sed 's/, $//g' >> ./branch_list.json
           echo ']' >> ./branch_list.json
-          cat ./branch_list.json
           echo target_branch_array=$(<./branch_list.json) >> $GITHUB_OUTPUT
       - name: Remove temporary files
         run: rm ./branch_list.json
