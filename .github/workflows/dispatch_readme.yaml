@@ -16,16 +16,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
       - id: result
         name: Get target branches
         run: |
-          echo '["base", ' > ./branch_list.txt
-          git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\//"/' | sed -z 's/\r//g; s/\n/", /g' | sed 's/, $//g' >> ./branch_list.txt
-          echo ']' >> ./branch_list.txt
-          cat ./branch_list.txt
-          echo target_branch_array=$(<./branch_list.txt) >> $GITHUB_OUTPUT
+          echo '["base", ' > ./branch_list.json
+          git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\//"/' | sed -z 's/\r//g; s/\n/", /g' | sed 's/, $//g' >> ./branch_list.json
+          echo ']' >> ./branch_list.json
+          cat ./branch_list.json
+          echo target_branch_array=$(<./branch_list.json) >> $GITHUB_OUTPUT
       - name: Remove temporary files
-        run: rm ./branch_list.txt
+        run: rm ./branch_list.json
   generate:
     name: Generate README
     needs: branches
