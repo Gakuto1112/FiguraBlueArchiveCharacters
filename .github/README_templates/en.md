@@ -19,7 +19,7 @@ The avatars for these characters are completed. Click on a character's name to g
 - [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [Midori Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [Shiroko Sunaookami](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
-- [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17) (*1)
+- [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Hoshino) (*1)
 
 *1: The swimsuit costume is not implemented now. It will be implemented later. Be patient.
 
