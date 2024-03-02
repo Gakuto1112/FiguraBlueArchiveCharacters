@@ -1,7 +1,7 @@
 言語: 　[English](./README.md)　|　**日本語**
 
 # FiguraBlueArchiveCharacters
-スマートフォンゲーム「[ブルーアーカイブ](https://bluearchive.jp/)」に登場するキャラクターを再現した、MinecraftのスキンMod「[Figura](https://modrinth.com/mod/figura)」で使用できるアバターデータです。
+スマートフォンゲーム「[ブルーアーカイブ](https://bluearchive.jp/)」に登場するキャラクターを再現した、[Minecraft](https://www.minecraft.net/ja-jp) Java EditionのスキンMod「[Figura](https://modrinth.com/mod/figura)」で使用できるアバターデータです。
 
 ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
 
