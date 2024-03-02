@@ -19,11 +19,14 @@
 - [才羽 モモイ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [才羽 ミドリ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [砂狼 シロコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
+- [小鳥遊 ホシノ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Hoshino)（※1）
+
+※1: 現在、水着衣装は実装されていません。後程実装します。しばらくお待ちください。
 
 ### 作成中
 これらのキャラクターのアバターは作成中です。通常2~3週間程要します。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
 
-- 小鳥遊 ホシノ（[#17](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17)）
+（現在作成中のアバターはありません。）
 
 ### 作成予定
 これらのキャラクターのアバターは作成していないものの、今後作成する予定です。上から順に作成予定です。これはあくまでも予定であり、順番が変更されたり作成を中止したりする可能性があります。
