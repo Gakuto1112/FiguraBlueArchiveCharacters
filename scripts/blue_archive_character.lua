@@ -549,6 +549,27 @@ BlueArchiveCharacter = {
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
+            },
+
+            masked = {
+                ---コスチュームの表示名
+                name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Masked Swimsuit Group",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "覆面水着団"
+                },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 1
             }
         },
 
@@ -559,12 +580,24 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH"})) do
+                    modelPart:setVisible(true)
+                end
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                    modelPart:setVisible(false)
+                end
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH"})) do
+                    modelPart:setVisible(false)
+                end
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                    modelPart:setVisible(true)
+                end
             end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数
