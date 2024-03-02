@@ -333,12 +333,12 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {},
+			models = {models.models.gun.Gun.Barrel.ShineEffect},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main", "gun"},
+			animations = {"main", "gun", "ex_skill_1"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
@@ -375,6 +375,7 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED2", 53, true)
+                    models.models.gun.Gun.Barrel.ShineEffect:setColor(client:hasIrisShader() and vectors.vec3(1, 0.5, 0.5) or vectors.vec3(1, 1, 1))
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -386,11 +387,96 @@ BlueArchiveCharacter = {
                         Gun.TargetModel:setPos()
                         Gun.TargetModel:setRot()
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
+                    elseif tick == 12 then
+                        local bodyYaw = player:getBodyYaw()
+                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 3.66, -1, 0, 1, 0):scale(0.0625))
+                        for _ = 1, 10 do
+                            particles:newParticle("minecraft:electric_spark", particlePos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.6 - 0.3, math.random() * 0.2 - 0.1, 0, 0, 1, 0)):setColor(1, 0.64, 0.59):setLifetime(4)
+                        end
+                    elseif tick == 19 then
+                        local bodyYaw = player:getBodyYaw()
+                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 3.66, -1, 0, 1, 0):scale(0.0625))
+                        for _ = 1, 10 do
+                            particles:newParticle("minecraft:electric_spark", particlePos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.6 - 0.3, math.random() * 0.2 - 0.1, 0, 0, 1, 0)):setColor(1, 0.64, 0.59):setLifetime(4)
+                        end
+                        --[[
+                        if host:isHost() then
+                            models.models.ex_skill_1.CameraBackground:setVisible(true)
+                            local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.75)), 0, 1, 0):scale(16 / 0.9375)
+                            models.models.ex_skill_1.CameraBackground:setOffsetPivot(backgroundPos)
+                            models.models.ex_skill_1.CameraBackground.Background:setPos(backgroundPos)
+                            local windowSize = client:getWindowSize()
+                            models.models.ex_skill_1.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(40))
+                        end
+                    elseif tick == 23 and host:isHost() then
+                        models.models.ex_skill_1.CameraBackground:setVisible(false)
+                        ]]
+                    elseif tick == 38 then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2}) do
+                            local bodyYaw = player:getBodyYaw()
+                            local particlePos = ModelUtils.getModelWorldPos(modelPart):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.5, 0, 1, 0):scale(0.0625))
+                            for _ = 1, 5 do
+                                particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.25):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.06 - 0.03, -0.05, 0, 0, 1, 0)):setColor(1, 0.64, 0.59):setLifetime(4)
+                            end
+                        end
+                    elseif tick == 47 then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder3.GasPiston3, models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder4.GasPiston4}) do
+                            local bodyYaw = player:getBodyYaw()
+                            local particlePos = ModelUtils.getModelWorldPos(modelPart):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.5, 0, 1, 0):scale(0.0625))
+                            for _ = 1, 5 do
+                                particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.25):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.06 - 0.03, -0.025, 0, 0, 1, 0)):setColor(1, 0.64, 0.59):setLifetime(4)
+                            end
+                        end
                     elseif tick == 53 then
                         models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                         FaceParts:setEmotion("ANGRY", "ANGRY_CENTER", "CLOSED2", 19, true)
+                    elseif tick == 55 then
+                        local bodyYaw = player:getBodyYaw()
+                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 10, 4, 0, 1, 0):scale(0.0625))
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 0, 1, 0)):setColor(0.973, 0.714, 0.29):setLifetime(2)
+                        end
+                    elseif tick == 70 then
+                        local bodyYaw = player:getBodyYaw()
+                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, -2, 3, 4, 0, 1, 0):scale(0.0625))
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 0, 1, 0)):setColor(0.973, 0.714, 0.29):setLifetime(2)
+                        end
                     elseif tick == 72 then
                         FaceParts:setEmotion("ANGRY", "CLOSED2", "CLOSED2", 32, true)
+                    elseif tick == 79 then
+                        local particlePos = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 1, 0, -3, 0, 1, 0))
+                        particles:newParticle("minecraft:explosion_emitter", particlePos)
+                        for _ = 1, 100 do
+                            local particleOffset = vectors.vec3(math.random() - 0.5, math.random() * 0.5, math.random() - 0.5)
+                            particles:newParticle("minecraft:poof", particlePos:copy():add(particleOffset)):setScale(5):setVelocity(particleOffset)
+                        end
+                        local particleBlock = world.getBlockState(particlePos:copy():add(0, -1, 0)).id
+                        if particleBlock ~= "minecraft:air" and particleBlock ~= "minecraft:void_air" then
+                            for _ = 1, 50 do
+                                particles:newParticle("minecraft:block "..particleBlock, particlePos):setScale(0.75):setVelocity(math.random() * 0.8 - 0.4, math.random() * 1, math.random() * 0.8 - 0.4):setLifetime(40)
+                            end
+                        end
+                    end
+                    if tick % 2 == 0 then
+                        ---銃弾を表現するパーティクル
+                        ---@param pos Vector3 パーティクルをスポーンさせる場所
+                        local function ammoParticle(pos)
+                            local bodyYaw = player:getBodyYaw()
+                            particles:newParticle("minecraft:flame", pos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -1, 0, 1, 0)):setLifetime(20)
+                            local smokePos = pos:copy()
+                            for _ = 1, 5 do
+                                particles:newParticle("minecraft:smoke", smokePos:add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, 0.5, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.5, 0, 1, 0)):setGravity(0):setLifetime(20)
+                            end
+                        end
+                        local particlePos = math.random()
+                        if particlePos < 0.4 then
+                            ammoParticle(player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, -1, particlePos * 7.5, 4, 0, 1, 0)))
+                        elseif particlePos < 0.6 then
+                            ammoParticle(player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, (particlePos - 0.4) * 10 - 1, 3, 4, 0, 1, 0)))
+                        else
+                            ammoParticle(player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 1, (particlePos - 0.6) * 7.5, 4, 0, 1, 0)))
+                        end
                     end
                 end,
 
