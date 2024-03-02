@@ -19,7 +19,7 @@ The avatars for these characters are completed. Click on a character's name to g
 - [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [Midori Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [Shiroko Sunaookami](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
-- [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/17) (*1)
+- [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Hoshino) (*1)
 
 *1: The swimsuit costume is not implemented now. It will be implemented later. Be patient.
 
@@ -122,7 +122,7 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 2. Install [Figura](https://modrinth.com/mod/figura). Note the mod dependencies.
 3. Go to the download page for the character which you want to download.
 4. Click green "**<>Code**" button at the top of this page and "**Download ZIP**" to download the repository files.
-   - If you cannot find the button. Go back to [the top page of this repository](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/base).
+   - If you cannot find the button. Go back to [the top page of this repository](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko).
    - If you are familiar with Git, you can also download them by cloning this repository.
 5. Extract the file if it is a zipped file.
 6. Put avatar files at `<minecraft_instance_directory>/figura/avatars/`.
