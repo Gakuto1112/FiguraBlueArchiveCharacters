@@ -398,8 +398,32 @@ BlueArchiveCharacter = {
                             FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
                         elseif tick == 46 then
                             FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 9, true)
+                        elseif tick == 56 then
+                            if host:isHost() then
+                                models.models.ex_skill_1.CameraBackground:setVisible(true)
+                                local windowSize = client:getWindowSize()
+                                models.models.ex_skill_1.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(45))
+                                events.RENDER:register(function (delta, context)
+                                    models.models.ex_skill_1.CameraBackground:setVisible(context == "RENDER")
+                                    local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.75)), 0, 1, 0):scale(16 / 0.9375)
+                                    models.models.ex_skill_1.CameraBackground:setOffsetPivot(backgroundPos)
+                                    models.models.ex_skill_1.CameraBackground.Background:setPos(backgroundPos)
+                                end, "ex_skill_1_background_render")
+                            end
+                            local particleAnchor = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, 5, 0)
+                            local fireworkColor = vectors.hsvToRGB(math.random(), 0.8, 1)
+                            particles:newParticle("minecraft:flash", particleAnchor):setColor(fireworkColor)
+                            for _ = 1, 400 do
+                                local particleAngleX = math.random() * math.pi * 2
+                                    local particleAngleY = math.random() * math.pi * 2
+                                    particles:newParticle("minecraft:firework", particleAnchor):setVelocity(math.cos(particleAngleX) * math.cos(particleAngleY) * 0.2, math.sin(particleAngleY) * 0.2, math.sin(particleAngleX) * math.cos(particleAngleY) * 0.2):setColor(fireworkColor)
+                            end
+                            sounds:playSound("minecraft:entity.firework_rocket.large_blast", player:getPos())
                         elseif tick == 57 then
                             FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
+                        elseif tick == 69 and host:isHost() then
+                            models.models.ex_skill_1.CameraBackground:setVisible(false)
+                            events.RENDER:remove("ex_skill_1_background_render")
                         elseif tick == 76 then
                             FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
                             sounds:playSound("minecraft:entity.generic.small_fall", player:getPos(), 1)
@@ -438,7 +462,12 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
-                    if not forcedStop then
+                    if forcedStop then
+                        if host:isHost() then
+                            models.models.ex_skill_1.CameraBackground:setVisible(false)
+                            events.RENDER:remove("ex_skill_1_background_render")
+                        end
+                    else
                         local bodyYaw = player:getBodyYaw() % 360
                         PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], vectors.rotateAroundAxis(bodyYaw * -1, -7.9375, 0, -0.5625, 0, 1, 0):add(player:getPos()), 195 + bodyYaw * -1)
                     end

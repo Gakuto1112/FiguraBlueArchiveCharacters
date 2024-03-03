@@ -9988,6 +9988,47 @@
 			},
 			"type": "cube",
 			"uuid": "c3aa904d-cb1f-b445-92d0-778d3e061e84"
+		},
+		{
+			"name": "Background",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-0.5, -0.5, 0],
+			"to": [0.5, 0.5, 0],
+			"autouv": 0,
+			"color": 0,
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [59, 12, 60, 13],
+					"texture": 0
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"up": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "7daaaec2-a587-fb5b-ec2a-aa5d0fbe4840"
 		}
 	],
 	"outliner": [
@@ -10195,7 +10236,7 @@
 			"uuid": "6a370a80-95f9-87c0-000e-338735c0f7f4",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -11484,6 +11525,19 @@
 					"children": []
 				}
 			]
+		},
+		{
+			"name": "CameraBackground",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "2a5814fe-8561-2e76-2032-4b1f917c3b08",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": ["7daaaec2-a587-fb5b-ec2a-aa5d0fbe4840"]
 		}
 	],
 	"textures": [
@@ -11511,7 +11565,7 @@
 			"saved": true,
 			"uuid": "d85735f0-f463-5389-f8bf-ffe33c0d0e05",
 			"relative_path": "../../textures/placement_object.png",
-			"source": "data:image/png;base64,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"
+			"source": "data:image/png;base64,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"
 		},
 		{
 			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\water_still.png",
@@ -11548,7 +11602,7 @@
 			"override": false,
 			"length": 5,
 			"snapping": 24,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
