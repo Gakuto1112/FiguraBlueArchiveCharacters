@@ -12,10 +12,6 @@ CameraManager = {
     ---@type boolean
     IsCameraCollisionDenialEnabled = false,
 
-    ---カメラの当たり判定検出の精度
-    ---@type integer
-    CameraAccuracy = Config.loadConfig("camera_accuracy", 1),
-
     ---CameraManagerのレンダー関数を設定する。
     ---@param enabled boolean CameraManagerのレンダー関数を有効化するかどうか
     setCameraManagerRender = function (self, enabled)
