@@ -32,7 +32,10 @@ CameraManager = {
                     local minDistance = math.max(self.ThirdPersonCameraDistance, 4)
                     if not self.COLLISION_DENIAL_DISABLE then
                         for i = 0, 3 do
-                            minDistance = math.min(RaycastUtils:getLengthBetweenPointAndCollision(vectors.rotateAroundAxis(i * 90 + 45, baseVector:copy(), cameraDir):add(cameraPivot), cameraDir:copy():scale(-1), math.max(self.ThirdPersonCameraDistance, 4), 2 ^ (self.CameraAccuracy + 3)), minDistance)
+                            local startPos = vectors.rotateAroundAxis(i * 90 + 45, baseVector, cameraDir):add(cameraPivot)
+                            ---@diagnostic disable-next-line: undefined-global
+                            local _, pos = raycast:block(startPos, startPos:copy():add(cameraDir:copy():scale(math.max(self.ThirdPersonCameraDistance, 4) * -1)), "VISUAL")
+                            minDistance = pos:sub(startPos):length()
                         end
                     end
                     renderer:setCameraPos(0, 0, (minDistance > self.ThirdPersonCameraDistance or self.IsCameraCollisionDenialEnabled) and self.ThirdPersonCameraDistance - minDistance or 0)
