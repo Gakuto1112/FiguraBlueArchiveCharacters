@@ -7,7 +7,8 @@ PlacementObject = {
 
         ---設置物として生成したモデルパーツ
         ---@type ModelPart
-        instance.object = objectData.model:copy("PlacementObject_"..client:getSystemTime())
+        ---@diagnostic disable-next-line: undefined-field
+        instance.object = objectData.model:copy(client.intUUIDToString(client:generateUUID()))
 
         ---設置物の当たり判定の大きさ
         ---@type Vector3

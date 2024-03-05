@@ -12,6 +12,7 @@ FrameParticleManager = {
     ---@param screenPos Vector2 パーティクルをスポーンさせるスクリーン上の座標。GUIスケールも考慮される。
     ---@param velocity Vector2 パーティクルの秒間移動距離（ピクセル）
     spawn = function (self, screenPos, velocity)
+        ---@diagnostic disable-next-line: undefined-field
         local instance = FrameParticle.spawn(client.intUUIDToString(client:generateUUID()), screenPos, math.random() > 0.9999 and "FIGURA" or "NORMAL", velocity)
         table.insert(self.Particles, instance)
         if #self.Particles == 1 then
