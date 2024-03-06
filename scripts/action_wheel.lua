@@ -20,6 +20,10 @@ local selectingNameState = Nameplate.CurrentName
 ---@type boolean
 local selectingShowClubName = Nameplate.ClubShown
 
+---現在選択中のカメラワーク精度
+---@type integer
+local selectingCameraAccuracy = CameraManager.CameraAccuracy
+
 --関数
 ---衣装変更アクションのタイトルを更新する。
 local function refreshCostumeChangeActionTitle()
@@ -41,6 +45,11 @@ local function refreshNameChangeActionTitle()
     else
         mainPage:getAction(3):title(Language:getTranslate("action_wheel__main__action_3__title").."§b"..Nameplate:getName(selectingNameState).."\n§7"..Language:getTranslate("action_wheel__main__action_3__title_2")..Language:getTranslate("action_wheel__toggle_"..(selectingShowClubName and "on" or "off")))
     end
+end
+
+---Exスキルアニメーションのカメラワークの精度のタイトルを更新する。
+local function refreshCameraAccuracyTitle()
+    mainPage:getAction(5):title(Language:getTranslate("action_wheel__main__action_5__title").."§b"..(selectingCameraAccuracy == 1 and Language:getTranslate("action_wheel__main__action_5__option_1") or (selectingCameraAccuracy == 2 and Language:getTranslate("action_wheel__main__action_5__option_2") or (selectingCameraAccuracy == 3 and Language:getTranslate("action_wheel__main__action_5__option_3") or Language:getTranslate("action_wheel__main__action_5__option_4")))))
 end
 
 --ping関数
@@ -91,6 +100,12 @@ if host:isHost() then
                 Config.saveConfig("costume", selectingCostume)
                 sounds:playSound("minecraft:item.armor.equip_leather", player:getPos())
                 print(Language:getTranslate("action_wheel__main__action_2__done_first")..Costume.getCostumeLocalName(selectingCostume)..Language:getTranslate("action_wheel__main__action_2__done_last"))
+            end
+            if selectingCameraAccuracy ~= CameraManager.CameraAccuracy then
+                CameraManager.CameraAccuracy = selectingCameraAccuracy
+                Config.saveConfig("camera_accuracy", selectingCameraAccuracy)
+                sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 0.5)
+                print(Language:getTranslate("action_wheel__main__action_5__done_first")..Language:getTranslate("action_wheel__main__action_5__option_"..selectingCameraAccuracy)..Language:getTranslate("action_wheel__main__action_5__done_last"))
             end
         end
         actionWheelOpenedPrev = actionWheelOpened
@@ -173,8 +188,25 @@ if host:isHost() then
         action:hoverColor(0.33, 1, 0.33)
     end
 
+    --アクション5. Exスキルアニメーションのカメラワークの精度
+    mainPage:newAction(5):item("minecraft:spyglass"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function(direction)
+        if direction < 0 then
+            selectingCameraAccuracy = selectingCameraAccuracy == 4 and 1 or selectingCameraAccuracy + 1
+        else
+            selectingCameraAccuracy = selectingCameraAccuracy == 1 and 4 or selectingCameraAccuracy - 1
+        end
+        refreshCameraAccuracyTitle()
+    end):onLeftClick(function ()
+        selectingCameraAccuracy = CameraManager.CameraAccuracy
+        refreshCameraAccuracyTitle()
+    end):onRightClick(function ()
+        selectingCameraAccuracy = 1
+        refreshCameraAccuracyTitle()
+    end)
+
     refreshCostumeChangeActionTitle()
     refreshNameChangeActionTitle()
+    refreshCameraAccuracyTitle()
 
     action_wheel:setPage(mainPage)
 end
