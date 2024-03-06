@@ -17,7 +17,6 @@ events.ENTITY_INIT:register(function ()
 	Physics = require("scripts.physics")
 	HeadRing = require("scripts.head_ring")
 	Gun = require("scripts.gun")
-	Bullet = require("scripts.bullet")
 	Nameplate = require("scripts.nameplate")
 
 	--機能別クラス
