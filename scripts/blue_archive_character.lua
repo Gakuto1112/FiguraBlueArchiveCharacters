@@ -1729,7 +1729,7 @@ BlueArchiveCharacter = {
 
 --生徒固有初期化処理
 events.TICK:register(function()
-    models.models.main.Avatar.UpperBody.Body.Skirt:setRot(player:getPose() == "CROUCHING" and 30 or 0)
+    models.models.main.Avatar.UpperBody.Body.Skirt:setRot(player:isCrouching() and 30 or 0)
 
     local hasShieldPrev = BlueArchiveCharacter.HasShield
     BlueArchiveCharacter.HasShield = (player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1
