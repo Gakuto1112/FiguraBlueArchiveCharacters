@@ -276,7 +276,7 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
             else
                 local particleAnchor = ModelUtils.getModelWorldPos(Gun.TargetModel["MuzzleAnchor"])
                 for _ = 1, 5 do
-                    particles:newParticle("minecraft:smoke", particleAnchor):setScale(0.25)
+                    particles:newParticle("minecraft:smoke", particleAnchor)
                 end
                 sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos:copy():add(velocity), 1, BlueArchiveCharacter.GUN.sound.pitch)
             end
