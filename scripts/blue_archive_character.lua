@@ -1809,4 +1809,16 @@ events.ITEM_RENDER:register(function (item, mode)
     end
 end)
 
+events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
+    if path ~= nil then
+        if id == "minecraft:item.shield.block" then
+            local playerPos = player:getPos()
+            local velocity = player:getVelocity()
+            sounds:playSound("minecraft:block.anvil.place", playerPos:copy():add(velocity), 1, 4)
+            ---@diagnostic disable-next-line: redundant-return-value
+            return math.abs(pos:copy():sub(playerPos):length() - velocity:length()) < 0.2 and player:getActiveItem().id == "minecraft:shield"
+        end
+    end
+end)
+
 return BlueArchiveCharacter
