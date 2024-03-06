@@ -266,7 +266,7 @@ events.TICK:register(function()
     end
 end)
 
-events.ON_PLAY_SOUND:register(function (id, pos, volume, pitch, loop, category, path)
+events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
     if path ~= nil then
         if id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot" then
             local playerPos = player:getPos()
@@ -274,9 +274,9 @@ events.ON_PLAY_SOUND:register(function (id, pos, volume, pitch, loop, category, 
             if id == "minecraft:item.crossbow.loading_end" then
                 sounds:playSound("minecraft:block.dispenser.fail", playerPos:copy():add(velocity), 1, 2)
             else
-                local particleAnchor = ModelUtils.getModelWorldPos(Gun.TargetModel)
+                local particleAnchor = ModelUtils.getModelWorldPos(Gun.TargetModel["MuzzleAnchor"])
                 for _ = 1, 5 do
-                    particles:newParticle("smoke", particleAnchor:copy():add(math.random() * 0.4 - 0.2, math.random() * 0.4 - 0.2, math.random() * 0.4 - 0.2))
+                    particles:newParticle("minecraft:smoke", particleAnchor):setScale(0.25)
                 end
                 sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos:copy():add(velocity), 1, BlueArchiveCharacter.GUN.sound.pitch)
             end
