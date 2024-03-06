@@ -375,7 +375,8 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 20, true)
-                    models.models.ex_skill_1.Drone.LauncherRight.ShineEffects:setColor(client:hasIrisShader() and vectors.vec3(0.5, 1, 1) or vectors.vec3(1, 1, 1))
+                    ---@diagnostic disable-next-line: undefined-field
+                    models.models.ex_skill_1.Drone.LauncherRight.ShineEffects:setColor(client:hasShaderPack() and vectors.vec3(0.5, 1, 1) or vectors.vec3(1, 1, 1))
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -595,7 +596,9 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
-                    models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2.UnderWater.ForCameraOffset)
+                    if models.models.ex_skill_2.Tuna ~= nil then
+                        models.models.ex_skill_2.Tuna:moveTo(models.models.ex_skill_2.UnderWater.ForCameraOffset)
+                    end
                     if forcedStop and host:isHost() then
                         events.RENDER:remove("ex_skill_2_render")
                         for _, modelPart in ipairs({models.models.ex_skill_2.UnderWater, models.models.ex_skill_2.Flash}) do
@@ -750,7 +753,9 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
-                    models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8)
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.WaterBottle ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.WaterBottle:moveTo(models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8)
+                    end
                     if host:isHost() then
                         models.models.ex_skill_3.CameraBackground:setVisible(false)
                     end
