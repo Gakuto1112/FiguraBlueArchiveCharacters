@@ -1,10 +1,11 @@
 {
 	"meta": {
 		"format_version": "4.9",
-		"model_format": "figura",
+		"model_format": "free",
 		"box_uv": false
 	},
 	"name": "gun",
+	"model_identifier": "",
 	"visible_box": [1, 1, 0],
 	"variable_placeholders": "",
 	"variable_placeholder_buttons": [],
@@ -1524,7 +1525,7 @@
 					"uuid": "b635d5fa-a419-f748-9c9e-5397f2e1f78b",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -1642,6 +1643,19 @@
 							"children": ["af4603ea-5218-8f18-4232-f421c208fcfa", "470028ca-2ed9-bf89-1330-b1584ea95a78"]
 						}
 					]
+				},
+				{
+					"name": "MuzzleAnchor",
+					"origin": [-8, 0.2625, 0],
+					"color": 0,
+					"uuid": "86806c85-5ce7-83f9-6df1-e87cdcc2a979",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": []
 				}
 			]
 		}
@@ -1655,8 +1669,8 @@
 			"id": "0",
 			"width": 98,
 			"height": 37,
-			"uv_width": 12,
-			"uv_height": 11,
+			"uv_width": 98,
+			"uv_height": 37,
 			"particle": false,
 			"layers_enabled": false,
 			"sync_to_project": "80f1453d-2d32-acd0-fff6-165d9439a3ab",
