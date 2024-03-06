@@ -19,7 +19,7 @@ Skirt = {
     ---初期化処理
     init = function (self)
         events.TICK:register(function ()
-            local isCrouching = player:getPose() == "CROUCHING"
+            local isCrouching = player:isCrouching()
             if isCrouching and not self.IsCrouchingPrev then
                 models.models.main.Avatar.UpperBody.Body.Robe:setRot(30, 0, 0)
             elseif not isCrouching and self.IsCrouchingPrev then
