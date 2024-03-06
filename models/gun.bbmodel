@@ -1,10 +1,11 @@
 {
 	"meta": {
 		"format_version": "4.9",
-		"model_format": "figura",
+		"model_format": "free",
 		"box_uv": false
 	},
 	"name": "gun",
+	"model_identifier": "",
 	"visible_box": [1, 1, 0],
 	"variable_placeholders": "",
 	"variable_placeholder_buttons": [],
@@ -2569,6 +2570,19 @@
 						"b114345b-ca20-3325-61df-451132260841",
 						"f56624bf-871f-1db0-b110-bb54a328c8ee"
 					]
+				},
+				{
+					"name": "MuzzleAnchor",
+					"origin": [-8, 3.338, 0],
+					"color": 0,
+					"uuid": "99d3ecd3-b825-dc3b-c762-f9b30c0db07b",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": []
 				}
 			]
 		}
@@ -2582,8 +2596,8 @@
 			"id": "0",
 			"width": 60,
 			"height": 40,
-			"uv_width": 12,
-			"uv_height": 11,
+			"uv_width": 60,
+			"uv_height": 40,
 			"particle": false,
 			"layers_enabled": false,
 			"sync_to_project": "",
@@ -2609,7 +2623,7 @@
 			"override": true,
 			"length": 4.6,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
