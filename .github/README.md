@@ -3,7 +3,9 @@ Language: 　**English**　|　[日本語](./README_jp.md)
 # FiguraBlueArchiveCharacters
 This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod for [Minecraft](https://www.minecraft.net/en-us) Java Edition, which are imitated characters who appear in "[Blue Archive](https://bluearchive.jp/)" the game for mobile devices.
 
-Target figura version: [0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
+Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.20.1)
+
+(Some avatar functions don't work correctly in Minecraft 1.20.4 doe to a bug in Figura. I recommend using in Minecraft 1.20.1.)
 
 ![Thumbnail](./README_images/thumbnail.png)
 
@@ -111,9 +113,6 @@ Changes the player's display name. Scroll to select the name and closing the act
 Toggles whether equipped armors are visible or not. Some costumes will be hidden not to interfere with the armors while equips them. This setting will only affects to vanilla armors.
 
 I recommend to hide armors because they hide the avatar.
-
-### Action 5. Change accuracy of camera during ex skill animations
-Changes the accuracy of the camera collision detection used during ex skill animations. Increasing the accuracy reduces camera wobble but increases the processing load. Scroll to select the option and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
 
 ## How to use
 Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Fabric](https://fabricmc.net/), and [Quilt](https://quiltmc.org/).
