@@ -8,7 +8,6 @@ events.ENTITY_INIT:register(function ()
 	--ユーティリティクラス
 	PlayerUtils = require("scripts.utils.player_utils")
 	ModelUtils = require("scripts.utils.model_utils")
-	RaycastUtils = require("scripts.utils.raycast_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")
@@ -18,11 +17,11 @@ events.ENTITY_INIT:register(function ()
 	Physics = require("scripts.physics")
 	HeadRing = require("scripts.head_ring")
 	Gun = require("scripts.gun")
-	Bullet = require("scripts.bullet")
 	Nameplate = require("scripts.nameplate")
 	Skirt = require("scripts.skirt")
 
 	--機能別クラス
+	DeathAnimation = require("scripts.death_animation")
 	Costume = require("scripts.costume")
 	CameraManager = require("scripts.camera_manager")
 	ActionWheel = require("scripts.action_wheel")
@@ -33,7 +32,6 @@ events.ENTITY_INIT:register(function ()
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
-	DeathAnimation = require("scripts.death_animation")
 
 	--require("scripts.hypixel_zombies")
 end)

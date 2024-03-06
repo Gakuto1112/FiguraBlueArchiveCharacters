@@ -1,5 +1,9 @@
 ---@class DeathAnimation プレイヤーが死亡した際の、キャラクターがヘリコプターで回収されるアニメーションを管理するクラス
 DeathAnimation = {
+    ---死亡アニメーションに使用されるダミーのアバターのルート
+    ---@type ModelPart
+    DummyAvatarRoot = models.models.death_animation.DummyAvatar,
+
     ---死亡アニメーションの再生カウンター
     ---@type number
     AnimationCount = 0,
@@ -47,13 +51,6 @@ DeathAnimation = {
                 end
                 if self.AnimationCount < 120 then
                     models.models.death_animation.DummyAvatar:setLight(world.getLightLevel(self.AnimationPos))
-                elseif self.AnimationCount == 120 then
-                    models.models.death_animation.DummyAvatar:setLight()
-                elseif self.AnimationCount >= 255 then
-                    self:spawnHelicopterParticles()
-                    self:stop()
-                elseif self.AnimationCount >= 120 and models.models.death_animation.DummyAvatar:getParent() == models.models.death_animation then
-                    models.models.death_animation.DummyAvatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
                 end
                 if self.AnimationCount == 1 then
                     self:spawnHelicopterParticles()
@@ -61,8 +58,14 @@ DeathAnimation = {
                     sounds:playSound("minecraft:block.iron_door.open", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 elseif self.AnimationCount >= 57 and self.AnimationCount < 76 then
                     sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14), 0.25, -0.056 * (self.AnimationCount - 57) + 2)
+                elseif self.AnimationCount == 120 then
+                    models.models.death_animation.DummyAvatar:setLight()
+                    self.DummyAvatarRoot = models.models.death_animation.DummyAvatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
                 elseif self.AnimationCount == 230 then
                     sounds:playSound("minecraft:block.iron_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                elseif self.AnimationCount == 255 then
+                    self:spawnHelicopterParticles()
+                    self:stop()
                 end
             end, "death_animation_tick")
         end
@@ -76,8 +79,9 @@ DeathAnimation = {
     ---死亡アニメーションを停止する。
     stop = function (self)
         models.models.death_animation:setVisible(false)
-        if models.models.death_animation.DummyAvatar:getParent() == models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14 then
-            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar:moveTo(models.models.death_animation)
+        if models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar ~= nil then
+            print("B")
+            self.DummyAvatarRoot = models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar:moveTo(models.models.death_animation)
         end
         animations["models.death_animation"]["death_animation"]:stop()
         events.TICK:remove("death_animation_tick")
