@@ -46,7 +46,7 @@ FrameParticle = {
 
         ---パーティクルを削除する。パーティクルを削除するとパーティクルの再生成ができないのでこのインスタンスは破棄する。
         instance.remove = function (self)
-            models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:removeChild(self.particle)
+            self.particle:remove()
         end
 
         models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:addChild(instance.particle)
