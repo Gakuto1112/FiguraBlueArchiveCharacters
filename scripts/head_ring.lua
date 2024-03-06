@@ -37,7 +37,7 @@ events.RENDER:register(function()
             local headRingPos = math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25
             models.models.main.Avatar.Head.HeadRing:setPos(0, headRingPos)
             if DeathAnimation.AnimationCount > 0 then
-                models.models.death_animation.DummyAvatar.Head.HeadRing:setPos(0, headRingPos)
+                DeathAnimation.DummyAvatarRoot["Head"]["HeadRing"]:setPos(0, headRingPos)
             end
         end
         renderProcessed = true
