@@ -363,7 +363,8 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED2", 53, true)
-                    models.models.gun.Gun.Barrel.ShineEffect:setColor(client:hasIrisShader() and vectors.vec3(1, 0.5, 0.5) or vectors.vec3(1, 1, 1))
+                    ---@diagnostic disable-next-line: undefined-field
+                    Gun.TargetModel["Barrel"]["ShineEffect"]:setColor(client:hasShaderPack() and vectors.vec3(1, 0.5, 0.5) or vectors.vec3(1, 1, 1))
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -371,7 +372,7 @@ BlueArchiveCharacter = {
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
                     if tick == 0 then
-                        models.models.gun.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                        Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
                         Gun.TargetModel:setPos()
                         Gun.TargetModel:setRot()
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
@@ -412,14 +413,14 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY_CENTER", "CLOSED2", 19, true)
                     elseif tick == 55 then
                         local bodyYaw = player:getBodyYaw()
-                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 10, 4, 0, 1, 0):scale(0.0625))
+                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 10, 4, 0, 1, 0):scale(0.0625))
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 0, 1, 0)):setColor(0.973, 0.714, 0.29):setLifetime(2)
                         end
                         sounds:playSound("minecraft:block.anvil.place", player:getPos(), 0.25, 4)
                     elseif tick == 70 then
                         local bodyYaw = player:getBodyYaw()
-                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, -2, 3, 4, 0, 1, 0):scale(0.0625))
+                        local particlePos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield.Section2):add(vectors.rotateAroundAxis(bodyYaw * -1, -2, 3, 4, 0, 1, 0):scale(0.0625))
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:electric_spark", particlePos):setScale(0.5):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 0, 1, 0)):setColor(0.973, 0.714, 0.29):setLifetime(2)
                         end
@@ -471,7 +472,9 @@ BlueArchiveCharacter = {
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
-                    models.models.gun.Gun:moveTo(models.models.gun)
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun ~= nil then
+                        Gun.TargetModel = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.gun)
+                    end
                     if player:isLeftHanded() then
                         Gun.TargetModel:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.left))
                         Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.put.rot.left)
@@ -479,7 +482,9 @@ BlueArchiveCharacter = {
                         Gun.TargetModel:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.right))
                         Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.put.rot.right)
                     end
-                    models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
                     if ExSkill.AnimationCount >= 0 then
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
                     end
