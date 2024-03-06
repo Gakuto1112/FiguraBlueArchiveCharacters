@@ -6,18 +6,18 @@
 ---@class FrameParticle Exスキルのフレームで使用するパーティクルの単一を管理するクラス
 FrameParticle = {
     ---フレームパーティクルのインスタンスを新しく生成する。
-    ---@param particleId integer スポーンさせるパーティのID。一意の値にする。
+    ---@param particleUUID string スポーンさせるパーティクルのUUID
     ---@param screenPos Vector2 パーティクルをスポーンさせるスクリーン上の座標。GUIスケールも考慮される。
     ---@param type FrameParticle.ParticleType このインスタンスのパーティクルの種類
     ---@param velocity Vector2 パーティクルの秒間移動距離（ピクセル）
     ---@return table フレームパーティクルのインスタンス
-    spawn = function (particleId, screenPos, type, velocity)
+    spawn = function (particleUUID, screenPos, type, velocity)
         local instance = {}
 
         ---パーティクルのモデルパーツ
         ---@type ModelPart
         ---@diagnostic disable-next-line: redundant-parameter
-        instance.particle = models.models.ex_skill_frame.Particles["Particle"..(type == "NORMAL" and 1 or 2)]:copy("Particle_"..particleId)
+        instance.particle = models.models.ex_skill_frame.Particles["Particle"..(type == "NORMAL" and 1 or 2)]:copy(particleUUID)
 
         ---パーティクルの秒間移動距離（ピクセル）
         ---@type Vector2
@@ -46,7 +46,7 @@ FrameParticle = {
 
         ---パーティクルを削除する。パーティクルを削除するとパーティクルの再生成ができないのでこのインスタンスは破棄する。
         instance.remove = function (self)
-            models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:removeChild(self.particle)
+            self.particle:remove()
         end
 
         models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:addChild(instance.particle)

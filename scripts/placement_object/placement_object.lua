@@ -7,7 +7,8 @@ PlacementObject = {
 
         ---設置物として生成したモデルパーツ
         ---@type ModelPart
-        instance.object = objectData.model:copy("PlacementObject_"..client:getSystemTime())
+        ---@diagnostic disable-next-line: undefined-field
+        instance.object = objectData.model:copy(client.intUUIDToString(client:generateUUID()))
 
         ---設置物の当たり判定の大きさ
         ---@type Vector3
@@ -101,12 +102,12 @@ PlacementObject = {
         instance.remove = function (self)
             if PlacementObjectManager.DEBUG_MODE then
                 local objectName = self.object:getName()
-                models.script_placement_object[objectName].Debug:removeChild(models.script_placement_object[objectName].Debug.BoundingBox)
+                models.script_placement_object[objectName].Debug.BoundingBox:remove()
                 while #models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren() > 0 do
-                    models.script_placement_object[objectName].Debug.CollisionBlocks:removeChild(models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1])
+                    models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1]:remove()
                 end
             end
-            models.script_placement_object:removeChild(self.object)
+            self.object:remove()
         end
 
         ---設置物のワールド座標を返す。
@@ -144,7 +145,7 @@ PlacementObject = {
                 local objectName = self.object:getName()
                 models.script_placement_object[objectName].Debug.BoundingBox:setColor()
                 while #models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren() > 0 do
-                    models.script_placement_object[objectName].Debug.CollisionBlocks:removeChild(models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1])
+                    models.script_placement_object[objectName].Debug.CollisionBlocks:getChildren()[1]:remove()
                 end
             end
 
