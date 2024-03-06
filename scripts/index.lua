@@ -20,6 +20,7 @@ events.ENTITY_INIT:register(function ()
 	Nameplate = require("scripts.nameplate")
 
 	--機能別クラス
+	DeathAnimation = require("scripts.death_animation")
 	Costume = require("scripts.costume")
 	CameraManager = require("scripts.camera_manager")
 	ActionWheel = require("scripts.action_wheel")
@@ -30,7 +31,6 @@ events.ENTITY_INIT:register(function ()
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
-	DeathAnimation = require("scripts.death_animation")
 
 	--require("scripts.hypixel_zombies")
 end)
