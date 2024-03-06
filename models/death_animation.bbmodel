@@ -7650,47 +7650,6 @@
 			"uuid": "470ef220-8411-b1ab-bd89-435e22de7206"
 		},
 		{
-			"name": "EyeLeft",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [1, 25, -4.01],
-			"to": [4, 28, -4.01],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [12, 16, 18, 22],
-					"texture": 1
-				},
-				"east": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"south": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"west": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				},
-				"down": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
-				}
-			},
-			"type": "cube",
-			"uuid": "6f521494-9314-6db5-48df-c2874d61815c"
-		},
-		{
 			"name": "Skirt2",
 			"box_uv": false,
 			"rescale": false,
@@ -15220,7 +15179,7 @@
 					"uuid": "22d40862-bd19-a16d-9e33-79364e6656d8",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -16106,12 +16065,11 @@
 									"uuid": "3ec07bf1-6029-2fe3-9014-9c02923b388d",
 									"export": true,
 									"mirror_uv": false,
-									"isOpen": false,
+									"isOpen": true,
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
 									"children": [
-										"6f521494-9314-6db5-48df-c2874d61815c",
 										"7aefd90a-c9cc-238a-c274-e85ccf2085f3",
 										"52a7cd14-63e1-6a0b-8970-2e3e0c119a65",
 										"f9bd4b9d-f584-6eb8-4ef5-8f40fa241e5b",
@@ -16202,7 +16160,8 @@
 													]
 												}
 											]
-										}
+										},
+										"470ef220-8411-b1ab-bd89-435e22de7206"
 									]
 								},
 								{
@@ -16614,7 +16573,7 @@
 					"uuid": "2f61e368-1c06-648e-26d4-aee94647e4da",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -16797,7 +16756,7 @@
 			"override": false,
 			"length": 12.75,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",

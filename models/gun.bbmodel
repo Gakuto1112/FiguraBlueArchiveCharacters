@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"format_version": "4.5",
+		"format_version": "4.9",
 		"model_format": "free",
 		"box_uv": false
 	},
@@ -700,7 +700,7 @@
 					"uuid": "698cf81b-c99b-d4d8-75ce-96fd1d7313f6",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -715,7 +715,7 @@
 					"uuid": "fc6484a3-f837-9d0d-b56d-a78d7091ba1c",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -729,7 +729,7 @@
 					"uuid": "34e34d32-b312-45dc-c07a-673d308d4ee5",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -758,7 +758,7 @@
 					"uuid": "dffa553c-14f2-0214-dffc-e4257c182611",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -768,18 +768,37 @@
 						"f42fe1e8-d60e-cb7c-70ba-d66b0d6d0567",
 						"4db15fb1-55b0-1ca7-82dc-cf4af78bf7d0"
 					]
+				},
+				{
+					"name": "MuzzleAnchor",
+					"origin": [-8, 3.5, 0],
+					"color": 0,
+					"uuid": "354c8964-86f0-9d47-9d18-c58eac5720c1",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": []
 				}
 			]
 		}
 	],
 	"textures": [
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\シズコ試作\\textures\\gun.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\gun.png",
 			"name": "gun.png",
 			"folder": "",
 			"namespace": "",
 			"id": "0",
+			"width": 12,
+			"height": 12,
+			"uv_width": 12,
+			"uv_height": 12,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -787,7 +806,7 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "7bd4b824-3db6-476b-99e3-dde805a618f1",
 			"relative_path": "../../textures/gun.png",
