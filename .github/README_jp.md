@@ -3,7 +3,9 @@
 # FiguraBlueArchiveCharacters
 スマートフォンゲーム「[ブルーアーカイブ](https://bluearchive.jp/)」に登場するキャラクターを再現した、[Minecraft](https://www.minecraft.net/ja-jp) Java EditionのスキンMod「[Figura](https://modrinth.com/mod/figura)」で使用できるアバターデータです。
 
-ターゲットFiguraバージョン：[0.1.2](https://modrinth.com/mod/figura/version/0.1.2+1.20.1)
+ターゲットFiguraバージョン：[0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.20.1)
+
+（Minecraft 1.20.4ではFiguraの不具合により一部機能が正しく動作しません。Minecraft 1.20.1での利用をお勧めします。）
 
 ![サムネイル](./README_images/thumbnail.jpg)
 
@@ -109,9 +111,6 @@ Exスキルアニメーションを再生します。三人称視点でのみ再
 
 ### アクション4. 防具の表示の切り替え
 防具を表示するかどうかを設定できます。ただし、折角のアバターが隠れてしまうので、防具を非表示にすることをお勧めします。
-
-### アクション5. Exスキルアニメーション中のカメラワークの精度の変更
-Exスキルアニメーション中に使用されるカメラの当たり判定の検出の精度を変更します。精度を高くするとカメラのがたつきが軽減される一方で処理の負荷が増加します。スクロールで精度を変更し、アクションホイールを閉じると確定します。選択中に左クリックをすると現在の設定値に、右クリックすると初期値にリセットされます。
 
 ## 使用方法
 Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[Fabric](https://fabricmc.net/)、[Quilt](https://quiltmc.org/)に対応しています。
