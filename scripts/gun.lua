@@ -266,6 +266,34 @@ events.TICK:register(function()
     end
 end)
 
+events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
+    if path ~= nil then
+        if id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot" then
+            local playerPos = player:getPos()
+            local velocity = player:getVelocity()
+            if id == "minecraft:item.crossbow.loading_end" then
+                sounds:playSound("minecraft:block.dispenser.fail", playerPos:copy():add(velocity), 1, 2)
+            else
+                local particleAnchor = ModelUtils.getModelWorldPos(Gun.TargetModel["MuzzleAnchor"])
+                for _ = 1, 5 do
+                    particles:newParticle("minecraft:smoke", particleAnchor)
+                end
+                sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos:copy():add(velocity), 1, BlueArchiveCharacter.GUN.sound.pitch)
+            end
+            ---@diagnostic disable-next-line: redundant-return-value
+            return math.abs(pos:copy():sub(playerPos):length() - velocity:length()) < 0.5
+        elseif id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" then
+            local playerPos = player:getPos()
+            local velocity = player:getVelocity()
+            if id == "minecraft:item.crossbow.loading_start" then
+                sounds:playSound("minecraft:item.flintandsteel.use", playerPos:copy():add(velocity), 1, 2)
+            end
+            ---@diagnostic disable-next-line: redundant-return-value
+            return math.abs(pos:copy():sub(playerPos):length() - velocity:length()) < 2 and player:getActiveItem().id == "minecraft:crossbow"
+        end
+    end
+end)
+
 if BlueArchiveCharacter.GUN.scale ~= nil then
     Gun.TargetModel:setScale(vectors.vec3(1, 1, 1):scale(BlueArchiveCharacter.GUN.scale))
 end

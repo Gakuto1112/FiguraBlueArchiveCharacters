@@ -17,7 +17,7 @@ ModelUtils = {
     ---@return ModelPart[] modelParts 取得したモデルパーツの配列
     getPlayerModels = function (self, modelPaths)
         local result = {}
-        for index, rootModelPart in ipairs({models.models.main.Avatar, models.models.death_animation.DummyAvatar}) do
+        for index, rootModelPart in ipairs({models.models.main.Avatar, DeathAnimation.DummyAvatarRoot}) do
             for _, modelPath in ipairs(modelPaths) do
                 local modelPart = rootModelPart
                 local modelPathChunks = {}
