@@ -269,27 +269,23 @@ end)
 events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
     if path ~= nil then
         if id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot" then
-            local playerPos = player:getPos()
-            local velocity = player:getVelocity()
             if id == "minecraft:item.crossbow.loading_end" then
-                sounds:playSound("minecraft:block.dispenser.fail", playerPos:copy():add(velocity), 1, 2)
+                sounds:playSound("minecraft:block.dispenser.fail", pos, 1, 2)
             else
                 local particleAnchor = ModelUtils.getModelWorldPos(Gun.TargetModel["MuzzleAnchor"])
                 for _ = 1, 5 do
                     particles:newParticle("minecraft:smoke", particleAnchor)
                 end
-                sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos:copy():add(velocity), 1, BlueArchiveCharacter.GUN.sound.pitch)
+                sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
             end
             ---@diagnostic disable-next-line: redundant-return-value
-            return math.abs(pos:copy():sub(playerPos):length() - velocity:length()) < 0.5
+            return math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.5
         elseif id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" then
-            local playerPos = player:getPos()
-            local velocity = player:getVelocity()
             if id == "minecraft:item.crossbow.loading_start" then
-                sounds:playSound("minecraft:item.flintandsteel.use", playerPos:copy():add(velocity), 1, 2)
+                sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
             end
             ---@diagnostic disable-next-line: redundant-return-value
-            return math.abs(pos:copy():sub(playerPos):length() - velocity:length()) < 2 and player:getActiveItem().id == "minecraft:crossbow"
+            return math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 2 and player:getActiveItem().id == "minecraft:crossbow"
         end
     end
 end)
