@@ -149,13 +149,13 @@ BlueArchiveCharacter = {
         put = {
             ---構えていない時の銃の扱い方
             ---@type BlueArchiveCharacter.GunPutType
-            type = "HIDDEN",
+            type = "BODY",
 
             ---位置オフセット（省略可）
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(-22, 0, -3),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
@@ -166,7 +166,7 @@ BlueArchiveCharacter = {
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(0, -10, -90),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
@@ -1455,118 +1455,6 @@ BlueArchiveCharacter = {
             }
         }
         ]]
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.UpperBody.Body.TailXPivot,
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -40,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 40,
-
-                    ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
-                    ---@type number
-                    sneakOffset = 15,
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 40,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -40,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 40
-                    }
-                },
-
-                ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
-                horizontal = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -40,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 40,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 40,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -40,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 40
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.UpperBody.Body.TailXPivot.TailYPivot,
-
-            ---y軸回転における物理演算データ（省略可）
-            y = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -40,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 40,
-
-                    ---体を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
-                    bodyZ = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -40,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 40
-                    }
-                }
-            }
-        }
     },
 
     --その他定数・変数
@@ -1586,5 +1474,8 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
+renderer:setCameraPos(0, 0, -4)
+renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 1, 0.4, -0.1, 0, 1, 0))
+renderer:setOffsetCameraRot(30, 60, 0)
 
 return BlueArchiveCharacter
