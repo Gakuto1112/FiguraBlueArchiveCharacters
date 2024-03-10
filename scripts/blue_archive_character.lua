@@ -156,7 +156,7 @@ BlueArchiveCharacter = {
         put = {
             ---構えていない時の銃の扱い方
             ---@type BlueArchiveCharacter.GunPutType
-            type = "BODY",
+            type = "HIDDEN",
 
             ---位置オフセット（省略可）
             pos = {
@@ -2427,5 +2427,14 @@ BlueArchiveCharacter = {
 models.models.ex_skill_2.UnderWater:setLight(15)
 models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
 models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Basket:newItem("basket_content_1"):setItem("minecraft:nautilus_shell"):setPos(1, -10, 1):setRot(90, 0, 0):setScale(0.25)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Basket:newItem("basket_content_2"):setItem("minecraft:nautilus_shell"):setPos(-1, -9.75, -1):setRot(90, 0, 0):setScale(0.25)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Basket:newItem("basket_content_3"):setItem("minecraft:heart_of_the_sea"):setPos(0, -9.5, -0):setRot(90, 0, 0):setScale(0.4)
+models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Basket:newItem("basket_content_4"):setItem("minecraft:cod"):setPos(0, -9.25, -0):setRot(90, 0, 0):setScale(0.4)
+
+renderer:setCameraPos(0, 0, -4)
+renderer:setOffsetCameraPivot(-0.1, 0.2, -1)
+renderer:setOffsetCameraRot(20, 170, -30)
 
 return BlueArchiveCharacter

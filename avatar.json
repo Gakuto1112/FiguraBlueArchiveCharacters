@@ -296,6 +296,12 @@
 		"models.models.bounding_box.BoundingBox": {
 			"visible": false,
 			"primaryRenderType": "LINES"
+		},
+		"models.models.memorial_lobby.Snorkel": {
+			"moveTo": "models.models.main.Avatar.Head"
+		},
+		"models.models.memorial_lobby.Basket": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom"
 		}
 	}
 }
