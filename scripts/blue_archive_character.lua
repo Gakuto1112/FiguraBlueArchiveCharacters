@@ -156,7 +156,7 @@ BlueArchiveCharacter = {
         put = {
             ---構えていない時の銃の扱い方
             ---@type BlueArchiveCharacter.GunPutType
-            type = "BODY",
+            type = "HIDDEN",
 
             ---位置オフセット（省略可）
             pos = {
@@ -2427,5 +2427,9 @@ BlueArchiveCharacter = {
 models.models.ex_skill_2.UnderWater:setLight(15)
 models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
 models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+
+renderer:setCameraPos(0, 0, -4)
+renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0, -0.5, 0.8, 0, 1, 0))
+renderer:setOffsetCameraRot(20, 180, 60)
 
 return BlueArchiveCharacter
