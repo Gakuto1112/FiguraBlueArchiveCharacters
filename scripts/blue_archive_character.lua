@@ -2437,4 +2437,12 @@ renderer:setCameraPos(0, 0, -4)
 renderer:setOffsetCameraPivot(-0.1, 0.2, -1)
 renderer:setOffsetCameraRot(20, 170, -30)
 
+events.TICK:register(function ()
+        local bodyYaw = player:getBodyYaw()
+        local playerPos = player:getPos()
+        for _ = 1, 2 do
+            particles:newParticle("minecraft:falling_water", vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 1 + 1, 0.5, 0, 1, 0):add(playerPos)):setScale(0.25):setColor(0.75, 1, 1)
+        end
+end)
+
 return BlueArchiveCharacter
