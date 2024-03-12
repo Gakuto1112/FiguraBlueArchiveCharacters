@@ -26,13 +26,6 @@ Arms = {
             if events.RENDER:getRegisteredCount("bow_pose_render") == 0 then
                 events.RENDER:register(bowPoseRender, "bow_pose_render")
             end
-        else
-            models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("RightArm")
-            models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("LeftArm")
-            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
-                modelPart:setRot()
-            end
-            events.RENDER:remove("bow_pose_render")
         end
     end
 }
