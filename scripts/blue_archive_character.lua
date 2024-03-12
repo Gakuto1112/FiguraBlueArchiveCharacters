@@ -2373,7 +2373,7 @@ BlueArchiveCharacter = {
         {
             ---この物理演算データを適用させるモデルパーツ
             ---@type ModelPart | ModelPart[]
-            modelPart = {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagHooks.BagHookNorth.IDCard.IDCardXPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot},
+            modelPart = {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot},
 
             ---x軸回転における物理演算データ（省略可）
             x = {
@@ -2446,7 +2446,7 @@ BlueArchiveCharacter = {
         {
             ---この物理演算データを適用させるモデルパーツ
             ---@type ModelPart | ModelPart[]
-            modelPart =  {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagHooks.BagHookNorth.IDCard.IDCardXPivot.IDCardZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot.BagBaseFastener1ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot.BagBaseFastener2ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot.BackPocketFastenerZPivot},
+            modelPart =  {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot.BagBaseFastener1ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot.BagBaseFastener2ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot.BackPocketFastenerZPivot},
 
             ---x軸回転における物理演算データ（省略可）
             z = {
@@ -2540,5 +2540,8 @@ for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob
     modelPart:setColor(0.58, 0.231, 0.29)
 end
 models.models.main.Avatar.Head.FaceShadow:setOpacity(0.5)
+
+renderer:setCameraPos(-0.1, -0.85, -3.2)
+renderer:setOffsetCameraRot(10, 170, -40)
 
 return BlueArchiveCharacter
