@@ -2541,4 +2541,11 @@ for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob
 end
 models.models.main.Avatar.Head.FaceShadow:setOpacity(0.5)
 
+renderer:setCameraPos(0.1, -0.76, -3.25)
+renderer:setOffsetCameraRot(-10, 140, 0)
+
+events.RENDER:register(function (_, context)
+    models.models.main.Camera.GreenBack:setVisible(context ~= "OTHER")
+end)
+
 return BlueArchiveCharacter

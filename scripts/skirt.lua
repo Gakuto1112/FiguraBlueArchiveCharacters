@@ -25,7 +25,7 @@ Skirt = {
             elseif not isCrouching and self.IsCrouchingPrev then
                 models.models.main.Avatar.UpperBody.Body.Robe:setRot()
             end
-            local robeVisible = models.models.main.Avatar.UpperBody.Body.Robe:getVisible()
+            local robeVisible = false
             local shouldHideLegs = robeVisible and player:getVehicle() ~= nil
             if shouldHideLegs and not self.ShouldHideLegsPrev then
                 models.models.main.Avatar.LowerBody.Legs:setVisible(false)
