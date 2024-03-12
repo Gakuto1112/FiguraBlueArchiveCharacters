@@ -1633,8 +1633,8 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
     end
 end)
 
-renderer:setCameraPos(0, 0, -4)
-renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0.75, 0.1, 0.6, 0, 1, 0))
-renderer:setOffsetCameraRot(10, 120, 0)
+renderer:setCameraPos(-0.05, -0.1, -3)
+--renderer:setOffsetCameraPivot(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0.75, 0.1, 0.6, 0, 1, 0))
+renderer:setOffsetCameraRot(10, 130, 0)
 
 return BlueArchiveCharacter
