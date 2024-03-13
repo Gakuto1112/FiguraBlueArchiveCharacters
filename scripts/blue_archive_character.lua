@@ -1811,10 +1811,10 @@ end)
 
 events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
     if path ~= nil then
-        if id == "minecraft:item.shield.block" then
+        if id == "minecraft:item.shield.block" and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.2 and player:getActiveItem().id == "minecraft:shield" then
             sounds:playSound("minecraft:block.anvil.place", pos, 1, 4)
             ---@diagnostic disable-next-line: redundant-return-value
-            return math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.2 and player:getActiveItem().id == "minecraft:shield"
+            return true
         end
     end
 end)
