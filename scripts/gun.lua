@@ -268,7 +268,7 @@ end)
 
 events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
     if path ~= nil then
-        if id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot" then
+        if (id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot") and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.5 then
             if id == "minecraft:item.crossbow.loading_end" then
                 sounds:playSound("minecraft:block.dispenser.fail", pos, 1, 2)
             else
@@ -279,13 +279,13 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
                 sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
             end
             ---@diagnostic disable-next-line: redundant-return-value
-            return math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.5
-        elseif id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" then
+            return true
+        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle") and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 2 and player:getActiveItem().id == "minecraft:crossbow" then
             if id == "minecraft:item.crossbow.loading_start" then
                 sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
             end
             ---@diagnostic disable-next-line: redundant-return-value
-            return math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 2 and player:getActiveItem().id == "minecraft:crossbow"
+            return true
         end
     end
 end)
