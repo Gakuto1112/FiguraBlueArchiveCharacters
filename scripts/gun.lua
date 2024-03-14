@@ -280,11 +280,19 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
             end
             ---@diagnostic disable-next-line: redundant-return-value
             return true
-        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$")) and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 1 and player:getActiveItem().id == "minecraft:crossbow" then
+        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 1 and player:getActiveItem().id == "minecraft:crossbow" then
             local activeItemTime = player:getActiveItemTime()
-            local quickChageLevel = tonumber(id:match("^minecraft:item%.crossbow%.quick_charge_([1-3])$"))
-            quickChageLevel = quickChageLevel == nil and 0 or quickChageLevel
-            if (id == "minecraft:item.crossbow.loading_start" and activeItemTime == 6) or activeItemTime + quickChageLevel == 6 then
+            local quickChageLevel = 0
+            local activeItem = player:getActiveItem()
+            if activeItem.tag.Enchantments ~= nil then
+                for _, enchant in ipairs(activeItem.tag.Enchantments) do
+                    if enchant.id == "minecraft:quick_charge" then
+                        quickChageLevel = enchant.lvl
+                        break
+                    end
+                end
+            end
+            if (quickChageLevel <= 4 and activeItemTime + quickChageLevel == 6) or (quickChageLevel == 5 and activeItemTime == 2) then
                 sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
                 ---@diagnostic disable-next-line: redundant-return-value
                 return true
