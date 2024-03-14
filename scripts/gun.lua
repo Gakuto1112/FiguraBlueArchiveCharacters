@@ -280,12 +280,26 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
             end
             ---@diagnostic disable-next-line: redundant-return-value
             return true
-        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle") and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 2 and player:getActiveItem().id == "minecraft:crossbow" then
-            if id == "minecraft:item.crossbow.loading_start" then
-                sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
+        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 1 and player:getActiveItem().id == "minecraft:crossbow" then
+            local activeItemTime = player:getActiveItemTime()
+            local quickChageLevel = 0
+            local activeItem = player:getActiveItem()
+            if activeItem.tag.Enchantments ~= nil then
+                for _, enchant in ipairs(activeItem.tag.Enchantments) do
+                    if enchant.id == "minecraft:quick_charge" then
+                        quickChageLevel = enchant.lvl
+                        break
+                    end
+                end
             end
-            ---@diagnostic disable-next-line: redundant-return-value
-            return true
+            if (quickChageLevel <= 4 and activeItemTime + quickChageLevel == 6) or (quickChageLevel == 5 and activeItemTime == 2) then
+                sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
+                ---@diagnostic disable-next-line: redundant-return-value
+                return true
+            elseif id == "minecraft:item.crossbow.loading_middle" then
+                ---@diagnostic disable-next-line: redundant-return-value
+                return true
+            end
         end
     end
 end)
