@@ -754,7 +754,7 @@ BlueArchiveCharacter = {
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
                 Costume.setCostumeTextureOffset(1)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Skirt", "UpperBody.Body.Scarfs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
+                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairAccessories.FoxAccessory", "UpperBody.Body.Skirt", "UpperBody.Body.Scarfs", "UpperBody.Body.BackRibbon", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "LowerBody.Legs.RightLeg.Kunais"})) do
                     modelPart:setVisible(false)
                 end
                 for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.CSwimsuitB"})) do
@@ -777,6 +777,7 @@ BlueArchiveCharacter = {
                 end
                 models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
                 models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setVisible(true)
+                models.models.main.Avatar.UpperBody.Body.BackRibbon:setVisible(not (Armor.ArmorVisible[2] or Armor.ArmorVisible[3]))
                 for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB", "LowerBody.Legs.LeftLeg.CSwimsuitLL"})) do
                     modelPart:setVisible(false)
                 end
@@ -796,19 +797,23 @@ BlueArchiveCharacter = {
                     if Armor.ArmorVisible[2] then
                         models.models.main.Avatar.UpperBody.Body.Scarfs:setPos(0, 0, 1)
                         models.models.main.Avatar.UpperBody.Body.CSwimsuitB:setPos(0, 0, -1)
+                        models.models.main.Avatar.UpperBody.Body.BackRibbon:setVisible(false)
                     else
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Scarfs, models.models.main.Avatar.UpperBody.Body.CSwimsuitB}) do
                             modelPart:setPos()
                         end
+                        models.models.main.Avatar.UpperBody.Body.BackRibbon:setVisible(Costume.CurrentCostume == 1 and not Armor.ArmorVisible[3])
                     end
                 elseif parts == "LEGGINGS" then
                     if Armor.ArmorVisible[3] then
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
                             modelPart:setVisible(false)
                         end
+                        models.models.main.Avatar.UpperBody.Body.BackRibbon:setVisible(false)
                     else
                         models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(Costume.CurrentCostume == 1)
                         models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL:setVisible(Costume.CurrentCostume == 2)
+                        models.models.main.Avatar.UpperBody.Body.BackRibbon:setVisible(Costume.CurrentCostume == 1 and not Armor.ArmorVisible[2])
                     end
                 end
             end
