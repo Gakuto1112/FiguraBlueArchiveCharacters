@@ -116,7 +116,7 @@ Exスキルアニメーションを再生します。三人称視点でのみ再
 Exスキルアニメーション中に使用されるカメラの当たり判定の検出の精度を変更します。精度を高くするとカメラのがたつきが軽減される一方で処理の負荷が増加します。スクロールで精度を変更し、アクションホイールを閉じると確定します。選択中に左クリックをすると現在の設定値に、右クリックすると初期値にリセットされます。
 
 ## 使用方法
-Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[Fabric](https://fabricmc.net/)、[Quilt](https://quiltmc.org/)に対応しています。
+Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[Fabric](https://fabricmc.net/)、[NeoForge](https://neoforged.net/)に対応しています。
 
 1. 使用したいModローダーをインストールし、Modを使用できる状態にします。
 2. [Figura](https://modrinth.com/mod/figura)を追加します。Modの依存関係にご注意ください。

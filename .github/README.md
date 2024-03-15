@@ -118,7 +118,7 @@ I recommend to hide armors because they hide the avatar.
 Changes the accuracy of the camera collision detection used during ex skill animations. Increasing the accuracy reduces camera wobble but increases the processing load. Scroll to select the option and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
 
 ## How to use
-Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Fabric](https://fabricmc.net/), and [Quilt](https://quiltmc.org/).
+Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Fabric](https://fabricmc.net/) and [NeoForge](https://neoforged.net/).
 
 1. Install the mod loader which you want to use and make the mods available.
 2. Install [Figura](https://modrinth.com/mod/figura). Note the mod dependencies.
