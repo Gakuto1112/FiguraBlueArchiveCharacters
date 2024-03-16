@@ -12,14 +12,6 @@ local actionWheelOpenedPrev = false
 ---@type integer
 local selectingCostume = Costume.CurrentCostume
 
----現在選択中の表示名
----@type integer
-local selectingNameState = Nameplate.CurrentName
-
----現在選択中の「部活名を表示するかどうか」
----@type boolean
-local selectingShowClubName = Nameplate.ClubShown
-
 ---現在選択中のカメラワーク精度
 ---@type integer
 local selectingCameraAccuracy = CameraManager.CameraAccuracy
@@ -31,19 +23,6 @@ local function refreshCostumeChangeActionTitle()
         mainPage:getAction(2):title(Language:getTranslate("action_wheel__main__action_2__title").."§b"..Costume.getCostumeLocalName(selectingCostume))
     else
         mainPage:getAction(2):title("§7"..Language:getTranslate("action_wheel__main__action_2__title")..Costume.getCostumeLocalName(selectingCostume))
-    end
-end
-
----名前変更アクションのタイトルを更新する。
-local function refreshNameChangeActionTitle()
-    if selectingNameState >= 2 then
-        if selectingShowClubName then
-            mainPage:getAction(3):title(Language:getTranslate("action_wheel__main__action_3__title").."§b"..Nameplate:getName(selectingNameState).."\n§r"..Language:getTranslate("action_wheel__main__action_3__title_2").."§a"..Language:getTranslate("action_wheel__toggle_on"))
-        else
-            mainPage:getAction(3):title(Language:getTranslate("action_wheel__main__action_3__title").."§b"..Nameplate:getName(selectingNameState).."\n§r"..Language:getTranslate("action_wheel__main__action_3__title_2").."§c"..Language:getTranslate("action_wheel__toggle_off"))
-        end
-    else
-        mainPage:getAction(3):title(Language:getTranslate("action_wheel__main__action_3__title").."§b"..Nameplate:getName(selectingNameState).."\n§7"..Language:getTranslate("action_wheel__main__action_3__title_2")..Language:getTranslate("action_wheel__toggle_"..(selectingShowClubName and "on" or "off")))
     end
 end
 
@@ -69,10 +48,6 @@ function pings.action_wheel_main_action2_changeCostume(costumeId)
     end
 end
 
-function pings.action_wheel_main_action3_changeName(typeId, showClubName)
-    Nameplate:setName(typeId, showClubName)
-end
-
 function pings.action_wheel_main_action4(toggled)
     Armor.ShowArmor = toggled
 end
@@ -88,13 +63,6 @@ if host:isHost() then
                 mainPage:getAction(1):title("§7"..Language:getTranslate("action_wheel__main__action_1__title").."\n"..Language:getTranslate("action_wheel__main__action_1__title_2_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill)):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33)
             end
         elseif actionWheelOpenedPrev then
-            if selectingNameState ~= Nameplate.CurrentName or selectingShowClubName ~= Nameplate.ClubShown then
-                pings.action_wheel_main_action3_changeName(selectingNameState, selectingShowClubName)
-                Config.saveConfig("name", selectingNameState)
-                Config.saveConfig("showClubName", selectingShowClubName)
-                sounds:playSound("minecraft:ui.cartography_table.take_result", player:getPos())
-                print(Language:getTranslate("action_wheel__main__action_3__done_first")..Nameplate:getName(selectingNameState)..Language:getTranslate("action_wheel__main__action_3__done_last"))
-            end
             if selectingCostume ~= Costume.CurrentCostume then
                 pings.action_wheel_main_action2_changeCostume(selectingCostume)
                 Config.saveConfig("costume", selectingCostume)
@@ -156,20 +124,12 @@ if host:isHost() then
     end
 
     --アクション3. 表示名の変更
-    mainPage:newAction(3):item("minecraft:name_tag"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function(direction)
-        if direction < 0 then
-            selectingNameState = selectingNameState == 6 and 1 or selectingNameState + 1
-        else
-            selectingNameState = selectingNameState == 1 and 6 or selectingNameState - 1
-        end
-        refreshNameChangeActionTitle()
+    mainPage:newAction(3):title(Language:getTranslate("action_wheel__main__action_3__title").."§7"..BlueArchiveCharacter.BASIC.firstName.en_us.."\n§r"..Language:getTranslate("action_wheel__main__action_3__title_2").."§7"..Language:getTranslate("action_wheel__toggle_off")):item("minecraft:name_tag"):color(0.16, 0.16, 0.16):hoverColor(1, 0.33, 0.33):onScroll(function(direction)
+        print(Language:getTranslate("action_wheel__option_unavailable"))
     end):onLeftClick(function()
-        selectingShowClubName = not selectingShowClubName
-        refreshNameChangeActionTitle()
+        print(Language:getTranslate("action_wheel__option_unavailable"))
     end):onRightClick(function()
-        selectingNameState = 1
-        selectingShowClubName = false
-        refreshNameChangeActionTitle()
+        print(Language:getTranslate("action_wheel__option_unavailable"))
     end)
 
     --アクション4. 防具の表示
@@ -205,7 +165,6 @@ if host:isHost() then
     end)
 
     refreshCostumeChangeActionTitle()
-    refreshNameChangeActionTitle()
     refreshCameraAccuracyTitle()
 
     action_wheel:setPage(mainPage)

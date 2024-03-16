@@ -47,11 +47,8 @@ local nextSyncCount = 0
 
 --ping関数
 ---アバター設定を他Figuraクライアントと同期する。
----@param nameTypeId integer 表示名の種類ID
----@param showClubName boolean 部活名を表示するかどうか
-function pings.syncAvatarConfig(nameTypeId, showClubName)
+function pings.syncAvatarConfig()
 	if not isSynced then
-		Nameplate:setName(nameTypeId, showClubName)
 		isSynced = true
 	end
 end
@@ -60,7 +57,7 @@ if host:isHost() then
 	config:setName("BlueArchive_"..BlueArchiveCharacter.BASIC.firstName.en_us..BlueArchiveCharacter.BASIC.lastName.en_us)
 	events.TICK:register(function ()
 		if nextSyncCount == 0 then
-			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown)
+			--pings.syncAvatarConfig()
 			nextSyncCount = 300
 		else
 			nextSyncCount = nextSyncCount - 1
