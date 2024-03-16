@@ -64,11 +64,9 @@ end
 
 ---右手に銃を持った際のティック処理
 local function rightGunTick()
-    Gun.TargetModel:setSecondaryRenderType(player:getHeldItem(player:isLeftHanded()):hasGlint() and "GLINT" or "NONE")
 end
 ---左手に銃を持った際のティック処理
 local function leftGunTick()
-    Gun.TargetModel:setSecondaryRenderType(player:getHeldItem(not player:isLeftHanded()):hasGlint() and "GLINT" or "NONE")
 end
 
 ---右手に銃を持った際のレンダー処理
