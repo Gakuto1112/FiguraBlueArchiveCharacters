@@ -34,7 +34,7 @@ events.ENTITY_INIT:register(function ()
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
 
-	--require("scripts.hypixel_zombies")
+	require("scripts.hypixel_zombies")
 end)
 
 print("§3[Information]§r This avatar has been modified for PV recordings. This avatar is not for general use.")
