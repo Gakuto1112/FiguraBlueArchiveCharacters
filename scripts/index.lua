@@ -9,6 +9,7 @@ events.ENTITY_INIT:register(function ()
 	PlayerUtils = require("scripts.utils.player_utils")
 	ModelUtils = require("scripts.utils.model_utils")
 	RaycastUtils = require("scripts.utils.raycast_utils")
+	PvUtils = require("scripts.utils.pv_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")

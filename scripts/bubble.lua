@@ -247,6 +247,10 @@ end
 ---@type boolean
 local reloadByCrossbow = false
 
+---前ティックの体力
+---@type integer
+local healthPrev = player:getHealth()
+
 events.TICK:register(function ()
     local isCrossbowActive = player:getActiveItem().id == "minecraft:crossbow"
     if isCrossbowActive and Bubble.Counter == 0 then
@@ -256,6 +260,12 @@ events.TICK:register(function ()
         Bubble:stop()
         reloadByCrossbow = false
     end
+
+    local health = player:getHealth()
+    if health > healthPrev and PvUtils.getIsInBattle() and not PvUtils:getIsDied() then
+        Bubble:play("GOOD", 50, true)
+    end
+    healthPrev = health
 end)
 
 Bubble:init()
