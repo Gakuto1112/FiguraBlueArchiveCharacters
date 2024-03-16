@@ -1,12 +1,13 @@
 ---@class Nameplate プレイヤーの表示名を制御するクラス
----@field CurrentName integer 現在の表示名: 1. プレイヤー名, 2. 名のみ（英語）, 3. 名のみ（日本語）, 4. 名性（英語）, 5. 性名（英語）, 6. 性名（日本語）
----@field ClubShown boolean 部活名を表示するかどうか
 Nameplate = {
-    --変数
+    ---現在の表示名: 1. プレイヤー名, 2. 名のみ（英語）, 3. 名のみ（日本語）, 4. 名性（英語）, 5. 性名（英語）, 6. 性名（日本語）
+    ---@type integer
     CurrentName = Config.loadConfig("name", 1),
+
+    ---部活名を表示するかどうか
+    ---@type boolean
     ClubShown = Config.loadConfig("showClubName", false),
 
-    --関数
     ---指定されたtypeIdでの表示名を返す。
     ---@param typeId integer 表示名の種類: 1. プレイヤー名, 2. 名のみ（英語）, 3. 名のみ（日本語）, 4. 名性（英語）, 5. 性名（英語）, 6. 性名（日本語）
     ---@return string displayName 指定されたtypeIdでの表示名
@@ -30,7 +31,16 @@ Nameplate = {
         end
         self.CurrentName = typeId
         self.ClubShown = showClubName
+    end,
+
+    ---初期化処理
+    init = function(self)
+        if self.CurrentName >= 2 then
+            self:setName(self.CurrentName, self.ClubShown)
+        end
     end
 }
+
+Nameplate:init()
 
 return Nameplate
