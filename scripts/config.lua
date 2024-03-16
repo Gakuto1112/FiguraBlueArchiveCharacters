@@ -39,7 +39,7 @@ Config = {
 
 ---アバターの設定がホストと同期されたかどうか
 ---@type boolean
-local isSynced = false
+local isSynced = host:isHost()
 
 ---次の同期pingまでのカウンター
 ---@type integer
@@ -49,9 +49,15 @@ local nextSyncCount = 0
 ---アバター設定を他Figuraクライアントと同期する。
 ---@param nameTypeId integer 表示名の種類ID
 ---@param showClubName boolean 部活名を表示するかどうか
-function pings.syncAvatarConfig(nameTypeId, showClubName)
+---@param costumeId integer 現在の衣装ID
+---@param isArmorShown boolean 防具が見えているかどうか
+function pings.syncAvatarConfig(nameTypeId, showClubName, costumeId, isArmorShown)
 	if not isSynced then
 		Nameplate:setName(nameTypeId, showClubName)
+		Armor.ShowArmor = isArmorShown
+		if costumeId >= 2 then
+			Costume:setCostume(costumeId)
+		end
 		isSynced = true
 	end
 end
@@ -60,7 +66,7 @@ if host:isHost() then
 	config:setName("BlueArchive_"..BlueArchiveCharacter.BASIC.firstName.en_us..BlueArchiveCharacter.BASIC.lastName.en_us)
 	events.TICK:register(function ()
 		if nextSyncCount == 0 then
-			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown)
+			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown, Costume.CurrentCostume, Armor.ShowArmor)
 			nextSyncCount = 300
 		else
 			nextSyncCount = nextSyncCount - 1
