@@ -31,7 +31,6 @@ DeathAnimation = {
     ---死亡アニメーションを再生する。
     play = function (self)
         self:stop()
-        self.AnimationPos = player:getPos()
         models.models.death_animation:setPos(self.AnimationPos:copy():scale(16))
         self.AnimationRot = (-player:getBodyYaw() + 180) % 360
         models.models.death_animation:setRot(0, self.AnimationRot)
@@ -108,8 +107,23 @@ DeathAnimation = {
     end
 }
 
+---前ティックのプレイヤーの位置
+---@type Vector3
+local playerPosPrev = player:getPos()
+
+---前ティックのプレイヤーの向き
+---@type number
+local playerRotPrev = (player:getBodyYaw() * -1 + 180) % 360
+
 events.TICK:register(function ()
     DeathAnimation:onTick()
+    if PvUtils:getIsDied() and PvUtils.getIsInBattle() then
+        DeathAnimation.AnimationPos = playerPosPrev
+        DeathAnimation.AnimationRot = playerRotPrev
+        DeathAnimation:play()
+    end
+    playerPosPrev = player:getPos()
+    playerRotPrev = (player:getBodyYaw() * -1 + 180) % 360
 end)
 
 ---@diagnostic disable-next-line: redundant-parameter
