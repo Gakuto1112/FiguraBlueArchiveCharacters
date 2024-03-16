@@ -117,12 +117,13 @@ local playerRotPrev = (player:getBodyYaw() * -1 + 180) % 360
 
 events.TICK:register(function ()
     DeathAnimation:onTick()
-    if PvUtils:getIsDied() and PvUtils.getIsInBattle() then
+    local playerPos = player:getPos()
+    if PvUtils:getIsDied() and PvUtils.getIsInBattle() and playerPos >= vectors.vec3(25, -60, -36) and playerPos <= vectors.vec3(29, -59, -32) then
         DeathAnimation.AnimationPos = playerPosPrev
         DeathAnimation.AnimationRot = playerRotPrev
         DeathAnimation:play()
     end
-    playerPosPrev = player:getPos()
+    playerPosPrev = playerPos
     playerRotPrev = (player:getBodyYaw() * -1 + 180) % 360
 end)
 
