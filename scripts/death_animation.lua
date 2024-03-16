@@ -32,7 +32,6 @@ DeathAnimation = {
     play = function (self)
         self:stop()
         models.models.death_animation:setPos(self.AnimationPos:copy():scale(16))
-        self.AnimationRot = (-player:getBodyYaw() + 180) % 360
         models.models.death_animation:setRot(0, self.AnimationRot)
         models.models.death_animation:setVisible(true)
         animations["models.death_animation"]["death_animation"]:play()
