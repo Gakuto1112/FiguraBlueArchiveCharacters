@@ -268,7 +268,9 @@ end)
 
 events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
     if path ~= nil then
-        if (id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot") and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.5 then
+        local velocityDistance = player:getVelocity():length()
+        local distanceFromSound = math.abs(pos:copy():sub(player:getPos()):length() - velocityDistance)
+        if (id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot") and math.abs(velocityDistance - distanceFromSound) < 1 then
             if id == "minecraft:item.crossbow.loading_end" then
                 sounds:playSound("minecraft:block.dispenser.fail", pos, 1, 2)
             else
@@ -280,7 +282,7 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
             end
             ---@diagnostic disable-next-line: redundant-return-value
             return true
-        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 1 and player:getActiveItem().id == "minecraft:crossbow" then
+        elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and distanceFromSound < 1 and player:getActiveItem().id == "minecraft:crossbow" then
             local activeItemTime = player:getActiveItemTime()
             local quickChageLevel = 0
             local activeItem = player:getActiveItem()
@@ -292,7 +294,7 @@ events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
                     end
                 end
             end
-            if (quickChageLevel <= 4 and activeItemTime + quickChageLevel == 6) or (quickChageLevel == 5 and activeItemTime == 2) then
+            if (quickChageLevel <= 4 and activeItemTime + quickChageLevel >= 4 and activeItemTime + quickChageLevel <= 6) or (quickChageLevel == 5 and activeItemTime <= 2) then
                 sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
                 ---@diagnostic disable-next-line: redundant-return-value
                 return true
