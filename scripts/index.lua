@@ -37,4 +37,4 @@ events.ENTITY_INIT:register(function ()
 	require("scripts.hypixel_zombies")
 end)
 
-print("§3[Information]§r This avatar has been modified for PV recordings. This avatar is not for general use.")
+print("§3[Information]§r v1.0.1 This avatar has been modified for PV recordings. This avatar is not for general use.")
