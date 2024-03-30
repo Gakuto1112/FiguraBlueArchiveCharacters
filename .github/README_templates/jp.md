@@ -7,7 +7,9 @@
 
 （Minecraft 1.20.4では[Figuraの不具合](https://github.com/FiguraMC/Figura/issues/197)により一部機能が正しく動作しません。Minecraft 1.20.1での利用をお勧めします。）
 
-![サムネイル](../README_images/thumbnail.jpg)
+[![サムネイル](../README_images/thumbnail.jpg)](https://youtu.be/JrPhLR34mLA)
+
+（上記画像をクリックすると紹介映像が見れます。）
 
 **このブランチ（base）は新たなキャラクターを作成しやすくする目的で作られた汎用アバターとなっています。下の「[作成状況](#作成状況)」から特定のキャラクターのブランチに移動して下さい。**
 

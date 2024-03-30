@@ -7,7 +7,9 @@ Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.2
 
 (Some avatar functions don't work correctly in Minecraft 1.20.4 doe to [a bug in Figura](https://github.com/FiguraMC/Figura/issues/197). I recommend using in Minecraft 1.20.1.)
 
-![Thumbnail](../README_images/thumbnail.jpg)
+[![Thumbnail](../README_images/thumbnail.jpg)](https://youtu.be/JrPhLR34mLA)
+
+(You can watch the introduction video by clicking the above image.)
 
 **This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "[Creation status](#creation-status)" section below.**
 
