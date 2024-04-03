@@ -1,0 +1,14 @@
+name: Trigger request review action
+
+on:
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+
+jobs:
+  call_workflow:
+    name: Call workflow
+    uses: Gakuto1112/PublicPullRequestWorkflows/.github/workflows/request_review_trigger_core.yml@main
+    with:
+      reviewer: Gakuto1112
