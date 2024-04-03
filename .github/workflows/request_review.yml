@@ -1,14 +1,17 @@
 name: Request review
 
 on:
-  pull_request_target:
+  workflow_run:
+    workflows:
+      - Trigger request review action
     types:
-      - opened
-      - reopened
+      - completed
 
 jobs:
   call_workflow:
     name: Call workflow
     permissions:
       pull-requests: write
-    uses: Gakuto1112/MyAutoRequestReview/.github/workflows/request_review.yml@main
+    uses: Gakuto1112/PublicPullRequestWorkflows/.github/workflows/request_review_core.yml@main
+    with:
+      reviewer: Gakuto1112
