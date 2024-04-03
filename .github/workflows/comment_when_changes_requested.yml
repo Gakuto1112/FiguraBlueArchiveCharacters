@@ -1,0 +1,15 @@
+name: Comment when changes requested
+
+on:
+  workflow_run:
+    workflows:
+      - Trigger comment action
+    types:
+      - completed
+
+jobs:
+  call_workflow:
+    name: Call workflow
+    permissions:
+      pull-requests: write
+    uses: Gakuto1112/PublicPullRequestWorkflows/.github/workflows/comment_when_changes_requested_core.yml@main

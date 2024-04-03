@@ -1,0 +1,11 @@
+name: Trigger comment action
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+
+jobs:
+  call_workflow:
+    name: Call workflow
+    uses: Gakuto1112/PublicPullRequestWorkflows/.github/workflows/comment_when_changes_requested_trigger_core.yml@main
