@@ -1,0 +1,22 @@
+name: Get target branches
+
+on: workflow_call
+
+jobs:
+  get_target_branches:
+    name: Get target branches
+    runs-on: ubuntu-latest
+    outputs:
+      target_branches: ${{ steps.output_target_branches.outputs.target_branches }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - name: Output target branches
+        id: output_target_branches
+        run: |
+          echo '["base", ' > ./branch_list.json
+          git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\//"/' | sed -z 's/\r//g; s/\n/", /g' | sed 's/, $//g' >> ./branch_list.json
+          echo ']' >> ./branch_list.json
+          echo target_branches=$(<./branch_list.json) >> $GITHUB_OUTPUT
