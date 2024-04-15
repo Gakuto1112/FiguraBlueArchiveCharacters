@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
       - name: Check if the specified branch is not avatar branch
         id: check_2
-        run: echo is_avatar_branch=$(${TARGET_BRANCHES} | jq "contains([\"${BRANCH_NAME}\"])") >> $GITHUB_OUTPUT
+        run: echo is_avatar_branch=$(echo ${TARGET_BRANCHES} | jq "contains([\"${BRANCH_NAME}\"])") >> $GITHUB_OUTPUT
         env:
           TARGET_BRANCHES: ${{ needs.get_avatar_branches.outputs.target_branches }}
           BRANCH_NAME: ${{ github.ref_name }}
@@ -37,7 +37,7 @@ jobs:
       contents: write
     strategy:
       matrix:
-        target_branch: ${{ fromJSON(needs.get_target_branches.outputs.target_branches) }}
+        target_branch: ${{ fromJSON(needs.get_avatar_branches.outputs.target_branches) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
