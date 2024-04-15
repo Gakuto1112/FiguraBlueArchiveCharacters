@@ -6,35 +6,17 @@ on:
       - dispatch_readme
 
 jobs:
-  branches:
+  get_target_branches:
     name: Get target branches
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    outputs:
-      target_branch_array: ${{ steps.result.outputs.target_branch_array }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0
-      - id: result
-        name: Get target branches
-        run: |
-          echo '["base", ' > ./branch_list.json
-          git branch -r | grep '  origin/[A-Z][a-z]' | sed 's/  origin\//"/' | sed -z 's/\r//g; s/\n/", /g' | sed 's/, $//g' >> ./branch_list.json
-          echo ']' >> ./branch_list.json
-          echo target_branch_array=$(<./branch_list.json) >> $GITHUB_OUTPUT
-      - name: Remove temporary files
-        run: rm ./branch_list.json
+    uses: ./.github/workflows/get_target_branches.yml
   generate:
     name: Generate README
-    needs: branches
+    needs: get_target_branches
     permissions:
       contents: write
     strategy:
       matrix:
-        target-branch: ${{ fromJSON(needs.branches.outputs.target_branch_array) }}
+        target-branch: ${{ fromJSON(needs.get_target_branches.outputs.target_branches) }}
     uses: Gakuto1112/FiguraAvatarsReadmeTemplate/.github/workflows/generate_my_figura_avatar_readme.yml@main
     with:
       branch-name: ${{ matrix.target-branch }}
