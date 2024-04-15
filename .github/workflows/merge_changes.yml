@@ -51,7 +51,7 @@ jobs:
           git config user.email github-actions[bot]@users.noreply.github.com
       - name: Merge branch
         id: merge_branch
-        run: git merge ${BRANCH_NAME}
+        run: git merge origin/${BRANCH_NAME}
         env:
           BRANCH_NAME: ${{ github.ref_name }}
         continue-on-error: true
