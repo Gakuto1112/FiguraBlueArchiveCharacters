@@ -1,0 +1,91 @@
+name: Merge changes to all target branches
+
+on:
+  workflow_dispatch:
+    inputs:
+      merge_branch_name:
+        description: The name of the merge target branch
+        required: true
+        type: string
+
+jobs:
+  check_input_1:
+    name: Check if the specified branch exists
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - name: Check if the specified branch exists
+        id: check_1
+        run: git branch -r | grep "^\s\sorigin/${BRANCH_NAME}$"
+        env:
+          BRANCH_NAME: ${{ inputs.merge_branch_name }}
+        continue-on-error: true
+      - name: Output error
+        if: ${{ steps.check_1.outcome == 'failure' }}
+        run: |
+          echo "::error::The specified branch does not exist."
+          exit 1
+  get_avatar_branches:
+    name: Get avatar branches
+    uses: ./.github/workflows/get_target_branches.yml
+  check_input_2:
+    name: Check if the specified branch is not avatar branch
+    needs: get_avatar_branches
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - name: Check if the specified branch is not avatar branch
+        id: check_2
+        run: echo is_avatar_branch=$(${TARGET_BRANCHES} | jq "contains([\"${BRANCH_NAME}\"])") >> $GITHUB_OUTPUT
+        env:
+          TARGET_BRANCHES: ${{ needs.get_avatar_branches.outputs.target_branches }}
+          BRANCH_NAME: ${{ inputs.merge_branch_name }}
+      - name: Output error
+        if: ${{ steps.check_2.outputs.is_avatar_branch == 'true' }}
+        run: |
+          echo "::error::Cannot specify an avatar branch as a merge branch."
+          exit 1
+  merge_branch:
+    name: Merge branch to avatar branches
+    needs:
+      - check_input_1
+      - get_avatar_branches
+      - check_input_2
+    if: ${{ needs.check_input_1.result == 'success' && needs.check_input_2.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        target_branch: ${{ fromJSON(needs.get_target_branches.outputs.target_branches) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.merge_branch_name }}
+      - name: Configure Git user
+        run: |
+          git remote set-url origin https://github-actions:${{ github.token }}@github.com/${{ github.repository }}
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+      - name: Merge branch
+        id: merge_branch
+        run: git merge ${BRANCH_NAME}
+        env:
+          BRANCH_NAME: ${{ inputs.merge_branch_name }}
+        continue-on-error: true
+      - name: Push changes
+        if: ${{ steps.merge_branch.outcome == 'success' }}
+        run: git push origin
+      - name: Output error
+        if: ${{ steps.merge_branch.outcome == 'failure' }}
+        run: |
+          echo "::error::Failed to merge \"${MERGE_BRANCH}\" to \"${BASE_BRANCH}\" because of merge conflicts. You need to resolve conflicts manually."
+          exit 1
