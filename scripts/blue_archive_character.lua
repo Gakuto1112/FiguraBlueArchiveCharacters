@@ -2559,39 +2559,48 @@ for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerA
     modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
 end
 
----前ティックのプレイヤーの位置
----@type Vector3
-local playerPosPrev = player:getPos()
-
----前ティックに立っていたかどうか
----@type boolean
-local isStandingPrev = player:getPose() == "STANDING" and player:getVehicle() == nil
-
----前ティックの体の向き
----@type integer
-local bodyYawPrev = player:getBodyYaw()
-
-events.TICK:register(function ()
-    local playerPos = player:getPos()
-    local playerPosDelta = playerPos:copy():sub(playerPosPrev):length()
-    local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
-    if playerPosDelta - 1 > player:getVelocity():length() and isStanding and isStandingPrev then
-        PlacementObjectManager:removeAll()
-        if math.random() >= 0.95 then
-            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
-        else
-            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("PRIMARY")
-        end
-        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], playerPosPrev, bodyYawPrev * -1 + 180)
-        for _ = 1, 70 do
-            particles:newParticle("minecraft:poof", playerPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
-            particles:newParticle("minecraft:poof", playerPosPrev:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
-        end
-        sounds:playSound("minecraft:entity.shulker.shoot", playerPos, 1, 2)
+---テレポート時の演出（パーティクル、狐の人形）
+---@param currentPos Vector3 テレポート先のワールド座標
+---@param previousPos Vector3 テレポート元のワークフロー座標
+---@param previousRot number テレポート時の体の向き
+function pings.teleport(currentPos, previousPos, previousRot)
+    PlacementObjectManager:removeAll()
+    if math.random() >= 0.95 then
+        models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+    else
+        models.models.ex_skill_1.PlacementObject:setPrimaryTexture("PRIMARY")
     end
-    playerPosPrev = playerPos
-    isStandingPrev = isStanding
-    bodyYawPrev = player:getBodyYaw()
-end)
+    PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], previousPos, previousRot * -1 + 180)
+    for _ = 1, 70 do
+        particles:newParticle("minecraft:poof", currentPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+        particles:newParticle("minecraft:poof", previousPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+    end
+    sounds:playSound("minecraft:entity.shulker.shoot", currentPos, 1, 2)
+end
+
+if host:isHost() then
+    ---前ティックのプレイヤーの位置
+    ---@type Vector3
+    local playerPosPrev = player:getPos()
+
+    ---前ティックに立っていたかどうか
+    ---@type boolean
+    local isStandingPrev = player:getPose() == "STANDING" and player:getVehicle() == nil
+
+    ---前ティックの体の向き
+    ---@type integer
+    local bodyYawPrev = player:getBodyYaw()
+
+    events.TICK:register(function ()
+        local playerPos = player:getPos()
+        local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
+        if playerPos:copy():sub(playerPosPrev):length() - 1 > player:getVelocity():length() and isStanding and isStandingPrev then
+            pings.teleport(playerPos, playerPosPrev, bodyYawPrev)
+        end
+        playerPosPrev = playerPos
+        isStandingPrev = isStanding
+        bodyYawPrev = player:getBodyYaw()
+    end)
+end
 
 return BlueArchiveCharacter
