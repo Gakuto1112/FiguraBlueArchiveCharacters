@@ -80,9 +80,9 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
             TIED = {3, 0},
-            CLOSED = {3, 1},
-            ANGRY = {1, 1},
-            SMILE = {0, 1}
+            CLOSED = {7, 0},
+            ANGRY = {5, 0},
+            SMILE = {4, 0}
         },
 
         ---左目
@@ -90,17 +90,17 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
             TIED = {2, 0},
-            CLOSED = {2, 1},
-            ANGRY = {1, 1},
-            SMILE = {-1, 1}
+            CLOSED = {6, 0},
+            ANGRY = {5, 0},
+            SMILE = {3, 0}
         },
 
         ---口
         Mouth = {
             CLOSED = {0, 0},
-            OPENED = {2, 0},
-            CIRCLE = {4, 0},
-            SMILE = {6, 0}
+            OPENED = {4, 0},
+            CIRCLE = {8, 0},
+            SMILE = {12, 0}
         }
     },
 
