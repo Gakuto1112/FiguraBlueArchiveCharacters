@@ -9,6 +9,8 @@ jobs:
   get_target_branches:
     name: Get target branches
     uses: ./.github/workflows/get_target_branches.yml
+    with:
+      include_base: true
   generate:
     name: Generate README
     needs: get_target_branches

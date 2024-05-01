@@ -6,6 +6,8 @@ jobs:
   get_avatar_branches:
     name: Get avatar branches
     uses: ./.github/workflows/get_target_branches.yml
+    with:
+      include_base: true
   check:
     name: Check if the specified branch is not avatar branch
     needs: get_avatar_branches
