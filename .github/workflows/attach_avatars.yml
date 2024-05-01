@@ -7,15 +7,17 @@ on:
       - prereleased
 
 jobs:
-  get_avatar_branches:
-    name: Get avatar branches
+  get_target_branches:
+    name: Get target branches
     uses: ./.github/workflows/get_target_branches.yml
     with:
       include_base: false
-  build:
-    name: Build avatar data
-    needs: get_avatar_branches
+  attach_avatars:
+    name: Attach avatars to release
+    needs: get_target_branches
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         avatar_name: ${{ fromJSON(needs.get_target_branches.outputs.target_branches) }}
@@ -44,8 +46,10 @@ jobs:
         run: |
           cat << EOF > ./out/README.txt
           Please read README at the link below for instructions and notes for the avatar.
+          https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/blob/base/.github/README.md
+
           アバターの使用方法や注意事項などは下記のリンクのREADMEをお読みください。
-          https://github.com/Gakuto1112/FiguraBlueArchiveCharacters?tab=readme-ov-file#figurabluearchivecharacters
+          https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/blob/base/.github/README_jp.md
           EOF
       - name: Upload artifact
         uses: actions/upload-artifact@v4.3.3
@@ -53,7 +57,8 @@ jobs:
           name: ${{ matrix.avatar_name }}
           path: ./out
       - name: Zip artifact
-        run: zip -r ./out/${AVATAR_NAME}.zip ./out
+        run: zip -r ./${AVATAR_NAME}.zip ./
+        working-directory: ./out
         env:
           AVATAR_NAME: ${{ matrix.avatar_name }}
       - name: Attach artifact to release
