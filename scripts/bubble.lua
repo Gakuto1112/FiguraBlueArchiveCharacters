@@ -9,7 +9,7 @@
 Bubble = {
     ---吹き出しの表示時間を測るカウンター
     ---@type number
-    Counter = 0,
+    BubbleCounter = 0,
 
     ---吹き出しのトランジションを測るカウンター
     ---@type number
@@ -145,28 +145,6 @@ Bubble = {
             modelPart:setScale(0, 0, 0)
         end
 
-        --キーバインドに登録
-        KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_up()
-            end
-        end)
-        KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_right()
-            end
-        end)
-        KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_down()
-            end
-        end)
-        KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_left()
-            end
-        end)
-
         --エモートガイド
         if host:isHost() then
             models.models.bubble.Gui.BubbleGuide:setScale(2, 2, 2)
@@ -216,6 +194,26 @@ Bubble = {
                 end
                 isActionWheelEnabledPrev = isActionWheelEnabled
             end)
+            KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_up()
+                end
+            end)
+            KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_right()
+                end
+            end)
+            KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_down()
+                end
+            end)
+            KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_left()
+                end
+            end)
         end
 
         events.WORLD_RENDER:register(function ()
@@ -249,7 +247,7 @@ local reloadByCrossbow = false
 
 events.TICK:register(function ()
     local isCrossbowActive = player:getActiveItem().id == "minecraft:crossbow"
-    if isCrossbowActive and Bubble.Counter == 0 then
+    if isCrossbowActive and Bubble.BubbleCounter == 0 then
         Bubble:play("RELOAD", -1, false)
         reloadByCrossbow = true
     elseif not isCrossbowActive and reloadByCrossbow then
