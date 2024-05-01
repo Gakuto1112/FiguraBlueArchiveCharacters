@@ -178,7 +178,7 @@ if host:isHost() then
         selectingCameraAccuracy = CameraManager.CameraAccuracy
         refreshCameraAccuracyTitle()
     end):onRightClick(function ()
-        selectingCameraAccuracy = 1
+        selectingCameraAccuracy = 4
         refreshCameraAccuracyTitle()
     end)
 
