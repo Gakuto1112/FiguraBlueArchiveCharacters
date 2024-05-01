@@ -24,19 +24,14 @@ ExSkill = {
     ---@type number
     TransitionCount = 0,
 
-    ---Exスキルアニメーション開始時のプレイヤーのBodyYaw
-    ---@type number
-    BodyYaw = 0,
+    ---プレイヤーの体の回転
+    ---@type number[]
+    BodyYaw = {},
 
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
     canPlayAnimation = function (self)
-        local velocity = player:getVelocity()
-        local bodyYawPrev = self.BodyYaw
-        if host:isHost() then
-            self.BodyYaw = player:getBodyYaw() % 360
-        end
-        return player:getPose() == "STANDING" and velocity:length() < 0.01 and bodyYawPrev == self.BodyYaw and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
+        return player:getPose() == "STANDING" and player:getVelocity():length() < 0.01 and self.BodyYaw[1] == self.BodyYaw[2] and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
     end,
 
     ---Exスキルのアニメーションの前後のカメラのトランジションを行う関数
@@ -59,17 +54,16 @@ ExSkill = {
             --カメラのトランジション
             local isPaused = client:isPaused()
             if host:isHost() and not isPaused then
-                local bodyYaw = -self.BodyYaw
                 local lookDir = player:getLookDir()
                 local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
                 local targetCameraPos = vectors.vec3()
                 local targetCameraRot = vectors.vec3()
                 if direction == "PRE" then
-                    targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.start.pos, 0, 1):add(0, -1.62)
-                    targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.start.rot:copy():add(0, -bodyYaw, 0)
+                    targetCameraPos = vectors.rotateAroundAxis(self.BodyYaw[2] * -1 + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.start.pos, 0, 1):add(0, -1.62)
+                    targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.start.rot:copy():add(0, self.BodyYaw[2], 0)
                 else
-                    targetCameraPos = vectors.rotateAroundAxis(bodyYaw + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.pos, 0, 1):add(0, -1.62)
-                    targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.rot:copy():add(0, -bodyYaw, 0)
+                    targetCameraPos = vectors.rotateAroundAxis(self.BodyYaw[2] * -1 + 180, BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.pos, 0, 1):add(0, -1.62)
+                    targetCameraRot = BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill].camera.fin.rot:copy():add(0, self.BodyYaw[2], 0)
                 end
                 if math.abs(cameraRot.y - targetCameraRot.y) >= 180 then
                     if cameraRot.y < targetCameraRot.y then
@@ -220,10 +214,8 @@ ExSkill = {
             if host:isHost() then
                 events.RENDER:register(function ()
                     if not client:isPaused() then
-                        local bodyYaw = self.BodyYaw
-                        local cameraPos = vectors.rotateAroundAxis(-bodyYaw % 360 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0)
-                        CameraManager.setCameraPivot(cameraPos)
-                        CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, bodyYaw % 360, 0))
+                        CameraManager.setCameraPivot(vectors.rotateAroundAxis(self.BodyYaw[2] * -1 + 180, models.models.main.CameraAnchor:getAnimPos():scale(1 / 16 * 0.9375), 0, 1, 0):add(0, -1.62, 0))
+                        CameraManager.setCameraRot(models.models.main.CameraAnchor:getAnimRot():scale(-1):add(0, self.BodyYaw[2], 0))
                     end
                 end, "ex_skill_animation_render")
             end
@@ -315,35 +307,47 @@ ExSkill = {
 
     ---Exスキルスクリプトの初期化関数
     init = function (self)
-        events.WORLD_RENDER:register(function ()
-            self.RenderProcessed = false
-        end)
-
-        if not host:isHost() then
-            events.TICK:register(function ()
-                if self.AnimationCount == -1 then
-                    self.BodyYaw = player:getBodyYaw() % 360
-                end
-            end)
-        end
-
         for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
             exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16 * 0.9375)
             exSkill.camera.fin.pos:mul(-1, 1, 1):scale(1 / 16 *  0.9375)
         end
-
+        if host:isHost() then
+            KeyManager:register("ex_skill", Config.loadConfig("keybind.ex_skill", "key.keyboard.v"), function ()
+                if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 and ExSkill.TransitionCount == 0 then
+                    pings.ex_skill()
+                else
+                    print(Language:getTranslate("key_bind__ex_skill__unavailable"..(renderer:isFirstPerson() and "_firstperson" or "")))
+                    sounds:playSound("minecraft:block.note_block.bass", player:getPos(), 1, 0.5)
+                end
+            end)
+        end
         if self.AUTO_PLAY then
             local init = true
             events.TICK:register(function ()
                 if init then
-                    self.BodyYaw = player:getBodyYaw() % 360
                     self:play()
                     init = false
                 end
             end)
         end
+        table.insert(self.BodyYaw, player:getBodyYaw() % 360)
+        events.TICK:register(function ()
+            if not renderer:isFirstPerson() then
+                table.insert(self.BodyYaw, player:getBodyYaw() % 360)
+                if #self.BodyYaw == 3 then
+                    table.remove(self.BodyYaw, 1)
+                end
+            end
+        end)
+        events.WORLD_RENDER:register(function ()
+            self.RenderProcessed = false
+        end)
     end
 }
+
+function pings.ex_skill()
+    ExSkill:play()
+end
 
 ExSkill:init()
 
