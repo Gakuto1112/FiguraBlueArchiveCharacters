@@ -64,7 +64,7 @@ ActionWheelGui = {
                     end
                     local windowSize = client:getScaledWindowSize()
                     models.models.action_wheel_gui.Gui.BubbleGuide:setPos(windowSize.x * -0.5 + 44, windowSize.y * -0.5 + 5, 0)
-                    models.models.action_wheel_gui.Gui.ExSkillGuide:setPos(-30, windowSize.y * -0.5 + 5, 0)
+                    models.models.action_wheel_gui.Gui.ExSkillGuide:setPos(windowSize.x * -0.5 + 57, -21, 0)
                 elseif not isActionWheelEnabled and isActionWheelEnabledPrev then
                     models.models.action_wheel_gui.Gui:setVisible(false)
                     events.RENDER:remove("bubble_guide_render")
