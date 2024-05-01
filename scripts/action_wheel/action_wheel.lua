@@ -51,15 +51,7 @@ local function refreshCameraAccuracyTitle()
 end
 
 --ping関数
-function pings.action_wheel_main_action1_left()
-    ExSkill:play()
-end
-
-function pings.action_wheel_main_action1_right()
-    PlacementObjectManager:removeAll()
-end
-
-function pings.action_wheel_main_action2_changeCostume(costumeId)
+function pings.action_wheel_main_action1_changeCostume(costumeId)
     if costumeId >= 2 then
         Costume:setCostume(costumeId)
     else
@@ -67,11 +59,11 @@ function pings.action_wheel_main_action2_changeCostume(costumeId)
     end
 end
 
-function pings.action_wheel_main_action3_changeName(typeId, showClubName)
+function pings.action_wheel_main_action2_changeName(typeId, showClubName)
     Nameplate:setName(typeId, showClubName)
 end
 
-function pings.action_wheel_main_action4(toggled)
+function pings.action_wheel_main_action3(toggled)
     Armor.ShowArmor = toggled
 end
 
@@ -80,14 +72,14 @@ if host:isHost() then
         local actionWheelOpened = action_wheel:isEnabled()
         if not actionWheelOpened and actionWheelOpenedPrev then
             if selectingNameState ~= Nameplate.CurrentName or selectingShowClubName ~= Nameplate.ClubShown then
-                pings.action_wheel_main_action3_changeName(selectingNameState, selectingShowClubName)
+                pings.action_wheel_main_action2_changeName(selectingNameState, selectingShowClubName)
                 Config.saveConfig("name", selectingNameState)
                 Config.saveConfig("showClubName", selectingShowClubName)
                 sounds:playSound("minecraft:ui.cartography_table.take_result", player:getPos())
                 print(Language:getTranslate("action_wheel__main__action_2__done_first")..Nameplate:getName(selectingNameState)..Language:getTranslate("action_wheel__main__action_2__done_last"))
             end
             if selectingCostume ~= Costume.CurrentCostume then
-                pings.action_wheel_main_action2_changeCostume(selectingCostume)
+                pings.action_wheel_main_action1_changeCostume(selectingCostume)
                 Config.saveConfig("costume", selectingCostume)
                 sounds:playSound("minecraft:item.armor.equip_leather", player:getPos())
                 print(Language:getTranslate("action_wheel__main__action_1__done_first")..Costume.getCostumeLocalName(selectingCostume)..Language:getTranslate("action_wheel__main__action_1__done_last"))
@@ -152,11 +144,11 @@ if host:isHost() then
 
     --アクション3. 防具の表示
     mainPage:newAction(3):title(Language:getTranslate("action_wheel__main__action_3__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_3__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:iron_chestplate"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
-        pings.action_wheel_main_action4(true)
+        pings.action_wheel_main_action3(true)
         action:hoverColor(0.33, 1, 0.33)
         Config.saveConfig("showArmor", true)
     end):onUntoggle(function(_, action)
-        pings.action_wheel_main_action4(false)
+        pings.action_wheel_main_action3(false)
         action:hoverColor(1, 0.33, 0.33)
         Config.saveConfig("showArmor", false)
     end)
