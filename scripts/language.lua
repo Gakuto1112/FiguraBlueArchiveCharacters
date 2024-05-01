@@ -21,7 +21,10 @@ Language = {
 			action_wheel__main__action_4__option_4 = "Ultra high",
 			action_wheel__main__action_4__done_first = "Changed camera accuracy during ex skill animations to §b",
 			action_wheel__main__action_4__done_last = "§r.",
-			bubble_guide__title = "§0Bubble emote guide",
+			action_wheel_gui__bubble_guide__title = "§0Bubble emote guide",
+			action_wheel_gui__ex_skill_guide__title = "§0Ex skill guide",
+			action_wheel_gui__ex_skill_guide__key_pre = "Press \"",
+			action_wheel_gui__ex_skill_guide__key_post = "\"key to play",
 			key_name__ex_skill = "Ex skill",
 			key_name__bubble_up = "Bubble: Good",
 			key_name__bubble_right = "Bubble: Heart",
@@ -49,7 +52,10 @@ Language = {
 			action_wheel__main__action_4__option_4 = "非常に高い",
 			action_wheel__main__action_4__done_first = "Exスキルアニメーション中のカメラの精度を§b",
 			action_wheel__main__action_4__done_last = "§rに変更しました。",
-			bubble_guide__title = "§0吹き出しエモートガイド",
+			action_wheel_gui__bubble_guide__title = "§0吹き出しエモートガイド",
+			action_wheel_gui__ex_skill_guide__title = "§0Exスキルガイド",
+			action_wheel_gui__ex_skill_guide__key_pre = "\"",
+			action_wheel_gui__ex_skill_guide__key_post = "\"キーで再生",
 			key_name__ex_skill = "Exスキル",
 			key_name__bubble_up = "吹き出し：いいね",
 			key_name__bubble_right = "吹き出し：ハート",
@@ -73,8 +79,8 @@ Language.LanguageData.en_us["namepalte__club_name"] = BlueArchiveCharacter.BASIC
 Language.LanguageData.ja_jp["namepalte__club_name"] = BlueArchiveCharacter.BASIC.clubName.ja_jp
 if host:isHost() then
 	for index, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
-		Language.LanguageData.en_us["action_wheel__main__action_1__title_2_"..index] = exSkill.name.en_us
-		Language.LanguageData.ja_jp["action_wheel__main__action_1__title_2_"..index] = exSkill.name.ja_jp
+		Language.LanguageData.en_us["action_wheel_gui__ex_skill_guide__ex_skill_"..index.."__name"] = exSkill.name.en_us
+		Language.LanguageData.ja_jp["action_wheel_gui__ex_skill_guide__ex_skill_"..index.."__name"] = exSkill.name.ja_jp
 	end
 	for name, costume in pairs(BlueArchiveCharacter.COSTUME.costumes) do
 		Language.LanguageData.en_us["costume__"..name] = costume.name.en_us
