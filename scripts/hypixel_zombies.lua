@@ -10,7 +10,7 @@ events.TICK:register(function ()
     local heldItem = player:getHeldItem()
     local maxDamage = heldItem:getMaxDamage()
         local damagePercent = (maxDamage - heldItem:getDamage()) / maxDamage
-        if maxDamage > 0 and damagePercent >= 0.05 and damagePercent < 1 and Bubble.Counter == 0 then
+        if maxDamage > 0 and damagePercent >= 0.05 and damagePercent < 1 and Bubble.BubbleCounter == 0 then
             Bubble:play("RELOAD", -1, false)
             reloadByZombies = true
         elseif (damagePercent < 0.05 or damagePercent == 1 or maxDamage == 0) and reloadByZombies then
