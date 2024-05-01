@@ -101,6 +101,9 @@ Ex skill cut-ins are only visual and have no effect. However, some Ex skills lea
 ## The action wheel
 Figura provides the action wheel with which players can play some actions (emotes, animations, configs, and etc.). It will be shown when holding the action wheel key (default is B key). This avatar also has some actions.
 
+> [!IMPORTANT]
+> The Ex skill action has been changed to play on key press.
+
 ![Action wheel](../README_images/action_wheel.jpg)
 
 ### Action 1. Change costume
