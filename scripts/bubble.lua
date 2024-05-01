@@ -9,7 +9,7 @@
 Bubble = {
     ---吹き出しの表示時間を測るカウンター
     ---@type number
-    Counter = 0,
+    BubbleCounter = 0,
 
     ---吹き出しのトランジションを測るカウンター
     ---@type number
@@ -24,33 +24,16 @@ Bubble = {
     Emoji = "GOOD",
 
     ---リロード絵文字のアニメーションのタイミングを測るカウンター
-    ---[1]. 吹き出し用, [2]. アクションホイールのエモートガイド用
-    ---@type number[]
-    ReloadAnimationCounters = {0, 0},
+    ---@type number
+    ReloadAnimationCounters = 0,
 
     ---吹き出しエモートが強制停止させられたかどうか
     ---@type boolean
     IsForcedStop = false,
 
     ---このワールドレンダーでレンダー処理を行ったかどうか
-    ---[1]. 吹き出し用, [2]. アクションホイールのエモートガイド用
-    ---@type boolean[]
-    IsRenderProcessed = {false, false},
-
-    ---リロード絵文字アニメーションの処理を行う。
-    ---@param counterIndex number アニメーションカウンターのインデクス番号
-    ---@param rootModels ModelPart[] 弾薬のイラストモデルのルートモデルのテーブル
-    processReloadAnimation = function (self, counterIndex, rootModels)
-        local bulletCounters = {math.clamp(self.ReloadAnimationCounters[counterIndex] * 2 - 2, 0, 1), math.clamp(self.ReloadAnimationCounters[counterIndex] * 2 - 4, 0, 1), math.clamp(self.ReloadAnimationCounters[counterIndex] * 2 - 6, 0, 1)}
-        for _, rootModel in ipairs(rootModels) do
-            for index, bulletModel in ipairs(rootModel:getChildren()) do
-                bulletModel:setPos(0, 1 - bulletCounters[index], 0)
-                bulletModel:setOpacity(bulletCounters[index])
-            end
-        end
-        self.ReloadAnimationCounters[counterIndex] = self.ReloadAnimationCounters[counterIndex] + 4 / client:getFPS()
-        self.ReloadAnimationCounters[counterIndex] = self.ReloadAnimationCounters[counterIndex] >= 5 and self.ReloadAnimationCounters[counterIndex] - 5 or self.ReloadAnimationCounters[counterIndex]
-    end,
+    ---@type boolean
+    IsRenderProcessed = false,
 
     ---吹き出しエモートを再生する。
     ---@param type Bubble.BubbleType 再生する絵文字の種類
@@ -59,9 +42,9 @@ Bubble = {
     play = function (self, type, duration, showInGui)
         self.Emoji = type
         self.ShowInGui = showInGui
-        self.Counter = duration
+        self.BubbleCounter = duration
         self.TransitionCounter = 0
-        self.ReloadAnimationCounters[1] = 0
+        self.ReloadAnimationCounters = 0
         local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
         models.models.bubble.Camera.AvatarBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
         models.models.bubble.Camera.AvatarBubble.Bullets:setVisible(self.Emoji == "RELOAD")
@@ -73,17 +56,17 @@ Bubble = {
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
                 models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShowInGui and renderer:isFirstPerson())
-                if not client:isPaused() and self.Counter >= 0 then
-                    self.Counter = math.max(self.Counter - 1, 0)
+                if not client:isPaused() and self.BubbleCounter >= 0 then
+                    self.BubbleCounter = math.max(self.BubbleCounter - 1, 0)
                 end
             end, "bubble_tick")
         end
         if events.RENDER:getRegisteredCount("bubble_render") == 0 then
             events.RENDER:register(function (delta, context)
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
-                if not self.IsRenderProcessed[1] then
+                if not self.IsRenderProcessed then
                     if not client:isPaused() then
-                        if self.Counter ~= 0 then
+                        if self.BubbleCounter ~= 0 then
                             self.TransitionCounter = math.min(self.TransitionCounter + 32 / client:getFPS(), 1)
                         else
                             self.TransitionCounter = math.max(self.TransitionCounter - 32 / client:getFPS(), 0)
@@ -100,7 +83,16 @@ Bubble = {
                             end
                         end
                         if self.Emoji == "RELOAD" then
-                            self:processReloadAnimation(1, self.ShowInGui and {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets} or {models.models.bubble.Camera.AvatarBubble.Bullets})
+                            local bulletCounters = {math.clamp(self.ReloadAnimationCounters * 2 - 2, 0, 1), math.clamp(self.ReloadAnimationCounters * 2 - 4, 0, 1), math.clamp(self.ReloadAnimationCounters * 2 - 6, 0, 1)}
+                            local rootModels = self.ShowInGui and {models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets} or {models.models.bubble.Camera.AvatarBubble.Bullets}
+                            for _, rootModel in ipairs(rootModels) do
+                                for index, bulletModel in ipairs(rootModel:getChildren()) do
+                                    bulletModel:setPos(0, 1 - bulletCounters[index], 0)
+                                    bulletModel:setOpacity(bulletCounters[index])
+                                end
+                            end
+                            self.ReloadAnimationCounters = self.ReloadAnimationCounters + 4 / client:getFPS()
+                            self.ReloadAnimationCounters = self.ReloadAnimationCounters >= 5 and self.ReloadAnimationCounters - 5 or self.ReloadAnimationCounters
                         end
                     end
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
@@ -119,7 +111,7 @@ Bubble = {
                     end
                     models.models.bubble.Camera:setOffsetPivot(avatarBubblePos)
                     models.models.bubble.Camera.AvatarBubble:setPos(avatarBubblePos)
-                    self.IsRenderProcessed[1] = true
+                    self.IsRenderProcessed = true
                 end
             end, "bubble_render")
         end
@@ -130,98 +122,47 @@ Bubble = {
 
     ---吹き出しエモートを停止する。
     stop = function (self)
-        if self.Counter >= 2 then
+        if self.BubbleCounter >= 2 then
             self.IsForcedStop = true
         end
-        self.Counter = 0
+        self.BubbleCounter = 0
     end,
 
     ---初期化関数
     init = function (self)
-        ---@diagnostic disable-next-line: redundant-parameter
+        models.models.bubble:addChild(models:newPart("Gui", "Gui"))
         models.models.bubble.Gui:addChild(models.models.bubble.Camera.AvatarBubble:copy("FirstPersonBubble"))
         models.models.bubble.Gui.FirstPersonBubble:setVisible(false)
         for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble, models.models.bubble.Gui.FirstPersonBubble}) do
             modelPart:setScale(0, 0, 0)
         end
 
-        --キーバインドに登録
-        KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_up()
-            end
-        end)
-        KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_right()
-            end
-        end)
-        KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_down()
-            end
-        end)
-        KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
-            if ExSkill.AnimationCount == -1 then
-                pings.bubble_left()
-            end
-        end)
-
         --エモートガイド
         if host:isHost() then
-            models.models.bubble.Gui.BubbleGuide:setScale(2, 2, 2)
-            local bubbleGuideTitle = models.models.bubble.Gui.BubbleGuide:newText("bubble_guide.title")
-            bubbleGuideTitle:setScale(0.5, 0.5, 0.5)
-            bubbleGuideTitle:setText(Language:getTranslate("bubble_guide__title"))
-            bubbleGuideTitle:setAlignment("CENTER")
-            local bubbleKeyNames = {models.models.bubble.Gui.BubbleGuide.GoodEmoji:newText("bubble_guide.bubble_up.key_name"), models.models.bubble.Gui.BubbleGuide.HeartEmoji:newText("bubble_guide.bubble_right.key_name"), models.models.bubble.Gui.BubbleGuide.ReloadEmoji:newText("bubble_guide.bubble_down.key_name"), models.models.bubble.Gui.BubbleGuide.QuestionEmoji:newText("bubble_guide.bubble_left.key_name")}
-            for _, keyNameText in ipairs(bubbleKeyNames) do
-                keyNameText:setPos(-15, 1.5, 0)
-                keyNameText:setScale(0.5, 0.5, 0.5)
-                keyNameText:setWidth(60)
-                keyNameText:setAlignment("CENTER")
-            end
-            local isActionWheelEnabledPrev = false
-            events.TICK:register(function ()
-                local isActionWheelEnabled = action_wheel:isEnabled() and ExSkill.AnimationCount == -1
-                if isActionWheelEnabled then
-                    if not isActionWheelEnabledPrev then
-                        models.models.bubble.Gui.BubbleGuide:setVisible(true)
-                        for keyName, keybind in pairs(keybinds:getKeybinds()) do
-                            if keyName == Language:getTranslate("key_name__bubble_up") then
-                                bubbleKeyNames[1]:setText("§0"..keybind:getKeyName())
-                            elseif keyName == Language:getTranslate("key_name__bubble_right") then
-                                bubbleKeyNames[2]:setText("§0"..keybind:getKeyName())
-                            elseif keyName == Language:getTranslate("key_name__bubble_down") then
-                                bubbleKeyNames[3]:setText("§0"..keybind:getKeyName())
-                            elseif keyName == Language:getTranslate("key_name__bubble_left") then
-                                bubbleKeyNames[4]:setText("§0"..keybind:getKeyName())
-                            end
-                        end
-                        if events.RENDER:getRegisteredCount("bubble_guide_render") == 0 then
-                            events.RENDER:register(function ()
-                                if not self.IsRenderProcessed[2] then
-                                    self:processReloadAnimation(2, {models.models.bubble.Gui.BubbleGuide.ReloadEmoji.GuideBullets})
-                                    self.IsRenderProcessed[2] = true
-                                end
-                            end, "bubble_guide_render")
-                        end
-                    end
-                    local windowSize = client:getScaledWindowSize()
-                    models.models.bubble.Gui.BubbleGuide:setPos(-windowSize.x + 76, -windowSize.y + 51, 0)
-                elseif not isActionWheelEnabled and isActionWheelEnabledPrev then
-                    models.models.bubble.Gui.BubbleGuide:setVisible(false)
-                    events.RENDER:remove("bubble_guide_render")
-                    self.ReloadAnimationCounters[2] = 0
+            KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_up()
                 end
-                isActionWheelEnabledPrev = isActionWheelEnabled
+            end)
+            KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_right()
+                end
+            end)
+            KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_down()
+                end
+            end)
+            KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_left()
+                end
             end)
         end
 
         events.WORLD_RENDER:register(function ()
-            for i = 1, 2 do
-                self.IsRenderProcessed[i] = false
-            end
+            self.IsRenderProcessed = false
         end)
     end
 }
@@ -249,7 +190,7 @@ local reloadByCrossbow = false
 
 events.TICK:register(function ()
     local isCrossbowActive = player:getActiveItem().id == "minecraft:crossbow"
-    if isCrossbowActive and Bubble.Counter == 0 then
+    if isCrossbowActive and Bubble.BubbleCounter == 0 then
         Bubble:play("RELOAD", -1, false)
         reloadByCrossbow = true
     elseif not isCrossbowActive and reloadByCrossbow then
