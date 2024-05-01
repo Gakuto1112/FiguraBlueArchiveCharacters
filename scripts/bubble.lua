@@ -59,7 +59,7 @@ Bubble = {
     play = function (self, type, duration, showInGui)
         self.Emoji = type
         self.ShowInGui = showInGui
-        self.Counter = duration
+        self.BubbleCounter = duration
         self.TransitionCounter = 0
         self.ReloadAnimationCounters[1] = 0
         local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
@@ -73,8 +73,8 @@ Bubble = {
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
                 models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShowInGui and renderer:isFirstPerson())
-                if not client:isPaused() and self.Counter >= 0 then
-                    self.Counter = math.max(self.Counter - 1, 0)
+                if not client:isPaused() and self.BubbleCounter >= 0 then
+                    self.BubbleCounter = math.max(self.BubbleCounter - 1, 0)
                 end
             end, "bubble_tick")
         end
@@ -83,7 +83,7 @@ Bubble = {
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
                 if not self.IsRenderProcessed[1] then
                     if not client:isPaused() then
-                        if self.Counter ~= 0 then
+                        if self.BubbleCounter ~= 0 then
                             self.TransitionCounter = math.min(self.TransitionCounter + 32 / client:getFPS(), 1)
                         else
                             self.TransitionCounter = math.max(self.TransitionCounter - 32 / client:getFPS(), 0)
@@ -130,10 +130,10 @@ Bubble = {
 
     ---吹き出しエモートを停止する。
     stop = function (self)
-        if self.Counter >= 2 then
+        if self.BubbleCounter >= 2 then
             self.IsForcedStop = true
         end
-        self.Counter = 0
+        self.BubbleCounter = 0
     end,
 
     ---初期化関数

@@ -22,10 +22,13 @@ Language = {
 			action_wheel__main__action_4__done_first = "Changed camera accuracy during ex skill animations to §b",
 			action_wheel__main__action_4__done_last = "§r.",
 			bubble_guide__title = "§0Bubble emote guide",
+			key_name__ex_skill = "Ex skill",
 			key_name__bubble_up = "Bubble: Good",
 			key_name__bubble_right = "Bubble: Heart",
 			key_name__bubble_down = "Bubble: Reload ammo",
-			key_name__bubble_left = "Bubble: Question"
+			key_name__bubble_left = "Bubble: Question",
+			key_bind__ex_skill__unavailable = "You cannot do this now.",
+			key_bind__ex_skill__unavailable_firstperson = "You cannot do this in first person.",
 		},
 		ja_jp = {
 			action_wheel__toggle_off = "オフ",
@@ -47,10 +50,13 @@ Language = {
 			action_wheel__main__action_4__done_first = "Exスキルアニメーション中のカメラの精度を§b",
 			action_wheel__main__action_4__done_last = "§rに変更しました。",
 			bubble_guide__title = "§0吹き出しエモートガイド",
+			key_name__ex_skill = "Exスキル",
 			key_name__bubble_up = "吹き出し：いいね",
 			key_name__bubble_right = "吹き出し：ハート",
 			key_name__bubble_down = "吹き出し：弾薬補充",
-			key_name__bubble_left = "吹き出し：はてな"
+			key_name__bubble_left = "吹き出し：はてな",
+			key_bind__ex_skill__unavailable = "今は再生できません。",
+			key_bind__ex_skill__unavailable_firstperson = "一人称視点では再生できません。",
 		}
 	},
 
