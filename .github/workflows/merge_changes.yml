@@ -66,67 +66,16 @@ jobs:
       - name: Push changes
         if: ${{ steps.merge_branch.outcome == 'success' }}
         run: git push origin
-      - name: Check if readme templates have been changed
-        id: check_readme_changes
-        if: ${{ steps.merge_branch.outcome == 'success' }}
-        run: git diff HEAD~ --name-only | grep -e '.github/README_templates/*' -e '.github/workflows/generate_readme.yml'
-        continue-on-error: true
-      - name: Output readme status
-        if: ${{ steps.merge_branch.outcome == 'success' && steps.check_readme_changes.outcome == 'success' }}
-        run: |
-          echo '{"generate_required": true}' > ./${BRANCH_NAME}.json
-        env:
-          BRANCH_NAME: ${{ matrix.target_branch }}
-      - name: Output readme status
-        if: ${{ steps.merge_branch.outcome != 'success' || steps.check_readme_changes.outcome != 'success' }}
-        run: |
-          echo '{"generate_required": false}' > ./${BRANCH_NAME}.json
-        env:
-          BRANCH_NAME: ${{ matrix.target_branch }}
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.3.3
-        with:
-          name: ${{ matrix.target_branch }}
-          path: ./${{ matrix.target_branch }}.json
-          retention-days: 1
-  get_readme_array:
-    name: Get array of branches that are required to generate readme
-    needs: merge_branch
-    runs-on: ubuntu-latest
-    outputs:
-      branch_array: ${{ steps.output_branch_array.outputs.branch_array }}
-      branch_count: ${{ steps.output_branch_array.outputs.branch_count }}
-    steps:
-      - name: Prepare artifacts directory
-        run: mkdir ./branches
-      - name: Download artifacts
-        uses: actions/download-artifact@v4.1.7
-        with:
-          path: ./branches
-      - name: Get generate readme branch array
-        run: |
-          echo -n '[' > ./readme_array.json
-          for file in $(ls ./branches); do
-            result=$(cat ./branches/${file}/${file}.json | jq '.generate_required')
-            if [ ${result} = 'true' ]; then
-              echo "\"${file}\", " | sed -z 's/.json//g; s/\r//g; s/\n//g' >> ./readme_array.json
-            fi
-          done
-          echo $(cat ./readme_array.json | sed 's/, $//g')] > ./readme_array.json
-      - name: Output generate readme branch array
-        id: output_branch_array
-        run: |
-          echo branch_array=$(<./readme_array.json) >> $GITHUB_OUTPUT
-          echo branch_count=$(cat ./readme_array.json | jq length) >> $GITHUB_OUTPUT
   generate_readme:
     name: Generate readme
-    needs: get_readme_array
-    if: ${{ needs.get_readme_array.outputs.branch_count > 0 }}
+    needs:
+      - get_avatar_branches
+      - merge_branch
     permissions:
       contents: write
     strategy:
       matrix:
-        target_branch: ${{ fromJSON(needs.get_readme_array.outputs.branch_array) }}
+        target_branch: ${{ fromJSON(needs.get_avatar_branches.outputs.target_branches) }}
     uses: Gakuto1112/FiguraAvatarsReadmeTemplate/.github/workflows/generate_my_figura_avatar_readme.yml@main
     with:
       branch-name: ${{ matrix.target_branch }}
