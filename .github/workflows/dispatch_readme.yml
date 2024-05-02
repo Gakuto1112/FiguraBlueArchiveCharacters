@@ -1,4 +1,4 @@
-name: Dispatch README
+name: Dispatch readme
 
 on:
   repository_dispatch:
@@ -9,8 +9,10 @@ jobs:
   get_target_branches:
     name: Get target branches
     uses: ./.github/workflows/get_target_branches.yml
+    with:
+      include_base: true
   generate:
-    name: Generate README
+    name: Generate readme
     needs: get_target_branches
     permissions:
       contents: write
