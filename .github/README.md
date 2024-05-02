@@ -85,36 +85,41 @@ Although the avatars for these characters are not created, there are plans to cr
 
   ![Birth day](./README_images/birth_day.svg)
 
-## The action wheel
-Figura provides the action wheel with which players can play some actions (emotes, animations, configs, and etc.). It will be shown when holding the action wheel key (default is B key). This avatar also has some actions.
-
-![Action wheel](./README_images/action_wheel.jpg)
-
-### Action 1. Ex skill
-Plays the ex skill animation. Only in the third person view.
-
-**Notes about Ex skill animations**
-- Ex skill animations are designed for the case where the screen ratio is 16:9. Although you can play them in a screen ratio other than 16:9, but some parts may be crowded out of the screen.
-- Ex skill animations are design for the case where the field of view (FOV) is standard (70). The FOV will be temporarily adjusted to the standard if it is not standard. However, use of some other mods or FOV changes because of changes of the player's movement speed prevents the script from adjusting it.
+## Ex Skill
+The familiar Ex skill cut-in from the original game is imitated. To play Ex skill cut-in, press the Ex skill key (default is "V" key) while in the **third-person perspective**.
 
 ![Ex skill](./README_images/ex_skill.jpg)
 
-### Action 2. Change costume
+Ex skill cut-ins are only visual and have no effect. However, some Ex skills leave objects in place after the cut-in (also only visual).
+
+> [!NOTE]
+> - Ex skill animations are designed for the case where the screen ratio is 16:9. Although you can play them in a screen ratio other than 16:9, but some parts may be crowded out of the screen.
+> - Ex skill animations are design for the case where the field of view (FOV) is standard (70). The FOV will be temporarily adjusted to the standard if it is not standard. However, use of some other mods or FOV changes because of changes of the player's movement speed prevents the script from adjusting it.
+
+## The action wheel
+Figura provides the action wheel with which players can play some actions (emotes, animations, configs, and etc.). It will be shown when holding the action wheel key (default is B key). This avatar also has some actions.
+
+> [!IMPORTANT]
+> The Ex skill action has been changed to play on key press.
+
+![Action wheel](./README_images/action_wheel.jpg)
+
+### Action 1. Change costume
 Changes costume if the character has multiple costumes. Scroll to select the costume and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
 
 ![Costume](./README_images/costume.jpg)
 
-### Action 3. Change display name
+### Action 2. Change display name
 Changes the player's display name. Scroll to select the name and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection. However, **Other players also need to install Figura and give enough permissions** to see your display name.
 
 ![Display name](./README_images/display_name_2.jpg)
 
-### Action 4. Toggle armors visible
+### Action 3. Toggle armors visible
 Toggles whether equipped armors are visible or not. Some costumes will be hidden not to interfere with the armors while equips them. This setting will only affects to vanilla armors.
 
 I recommend to hide armors because they hide the avatar.
 
-### Action 5. Change accuracy of camera during ex skill animations
+### Action 4. Change accuracy of camera during ex skill animations
 Changes the accuracy of the camera collision detection used during ex skill animations. Increasing the accuracy reduces camera wobble but increases the processing load. Scroll to select the option and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
 
 ## How to use
