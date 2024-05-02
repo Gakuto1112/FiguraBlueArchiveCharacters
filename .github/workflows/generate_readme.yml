@@ -1,4 +1,4 @@
-name: Generate README
+name: Generate readme
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   generate-readme:
-    name: Generate README
+    name: Generate readme
     permissions:
       contents: write
     uses: Gakuto1112/FiguraAvatarsReadmeTemplate/.github/workflows/generate_my_figura_avatar_readme.yml@main
