@@ -69,7 +69,7 @@ jobs:
       - name: Check if readme templates have been changed
         id: check_readme_changes
         if: ${{ steps.merge_branch.outcome == 'success' }}
-        run: git diff HEAD~ --name-only | grep .github/README_templates/*
+        run: git diff HEAD~ --name-only | grep -e '.github/README_templates/*' -e '.github/workflows/generate_readme.yml'
         continue-on-error: true
       - name: Output readme status
         if: ${{ steps.merge_branch.outcome == 'success' && steps.check_readme_changes.outcome == 'success' }}
@@ -106,11 +106,11 @@ jobs:
       - name: Get generate readme branch array
         run: |
           echo -n '[' > ./readme_array.json
-          for file in $(ls ./branches | grep .json); do
-              result=$(cat ./branches/${file} | jq '.generate_required')
-              if [ ${result} = 'true' ]; then
-                  echo "\"${file}\", " | sed -z 's/.json//g; s/\r//g; s/\n//g' >> ./readme_array.json
-              fi
+          for file in $(ls ./branches); do
+            result=$(cat ./branches/${file}/${file}.json | jq '.generate_required')
+            if [ ${result} = 'true' ]; then
+              echo "\"${file}\", " | sed -z 's/.json//g; s/\r//g; s/\n//g' >> ./readme_array.json
+            fi
           done
           echo $(cat ./readme_array.json | sed 's/, $//g')] > ./readme_array.json
       - name: Output generate readme branch array
