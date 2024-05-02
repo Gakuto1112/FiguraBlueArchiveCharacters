@@ -126,6 +126,9 @@ Changes the accuracy of the camera collision detection used during ex skill anim
 
 <!-- $inject(how_to_use) -->
 
+#### Additional note
+In addition to the avatar download method described here, you can also download avatar files from the "Releases" section on the right side of the repository's top page. A zip file of each avatar is attached to the "Assets" section of each release note.
+
 <!-- $inject(notes) -->
 
 ---
