@@ -92,6 +92,7 @@ Gun = {
                 animations["models.main"]["gun_hold_left"]:stop()
                 animations["models.main"]["gun_hold_right"]:play()
             end
+            models.models.main.Avatar.UpperBody.Body.Gun:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("Item")
             if not client:isPaused() then
                 sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)
@@ -123,6 +124,7 @@ Gun = {
                 animations["models.main"]["gun_hold_right"]:stop()
                 animations["models.main"]["gun_hold_left"]:play()
             end
+            models.models.main.Avatar.UpperBody.Body.Gun:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("Item")
             if not client:isPaused() then
                 sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)

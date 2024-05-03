@@ -116,17 +116,15 @@ BlueArchiveCharacter = {
             type = "NORMAL",
 
             ---一人称視点での位置オフセット（省略可）
-            --[[
             first_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(-1, 0, -8),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
-            }
-            ]]
+                left = vectors.vec3(1, 0, -8)
+            },
 
             --[[
             ---一人称視点での向きオフセット（省略可）
@@ -142,17 +140,15 @@ BlueArchiveCharacter = {
             ]]
 
             ---三人称視点での位置オフセット（省略可）
-            --[[
             third_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(-1.75, 0, -8),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
+                left = vectors.vec3(1.75, 0, -8)
             }
-            ]]
 
             --[[
             ---三人称視点での向きオフセット（省略可）
@@ -167,16 +163,18 @@ BlueArchiveCharacter = {
             }
             ]]
 
+            --[[
             ---装填済みクロスボウの位置オフセット（省略可）
             charged_crossbow_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-8.95, 1, 0),
+                right = vectors.vec3(),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(9.05, 1, 0)
+                left = vectors.vec3()
             }
+            ]]
 
             ---装填済みクロスボウの向きオフセット（省略可）
             --[[
@@ -202,22 +200,22 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(4.5, -3, 4),
+                right = vectors.vec3(3.5, 4, 3),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-4.5, -3, 4)
+                left = vectors.vec3(-3.5, 4, 3)
             },
 
             ---向きオフセット（省略可）
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-90, 0, 0),
+                right = vectors.vec3(-45, 90, 0),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-90, 0, 0)
+                left = vectors.vec3(-45, -90, 0)
             }
         },
 
@@ -373,7 +371,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.gun.Gun.Barrel.ShineEffect},
+			models = {models.models.main.Avatar.UpperBody.Body.Gun.Barrel.ShineEffect},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -416,7 +414,7 @@ BlueArchiveCharacter = {
                 preAnimation = function()
                     FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED2", 53, true)
                     ---@diagnostic disable-next-line: undefined-field
-                    Gun.TargetModel["Barrel"]["ShineEffect"]:setColor(client:hasShaderPack() and vectors.vec3(1, 0.5, 0.5) or vectors.vec3(1, 1, 1))
+                    models.models.main.Avatar.UpperBody.Body.Gun.Barrel.ShineEffect:setColor(client:hasShaderPack() and vectors.vec3(1, 0.5, 0.5) or vectors.vec3(1, 1, 1))
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -424,9 +422,9 @@ BlueArchiveCharacter = {
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
                     if tick == 0 then
-                        Gun.TargetModel = Gun.TargetModel:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
-                        Gun.TargetModel:setPos()
-                        Gun.TargetModel:setRot()
+                        models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setPos()
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setRot()
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
                     elseif tick == 8 or tick == 15 then
                         sounds:playSound("minecraft:block.chest.locked", player:getPos(), 1, 2)
@@ -525,14 +523,14 @@ BlueArchiveCharacter = {
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
                     if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun ~= nil then
-                        Gun.TargetModel = models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.gun)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo( models.models.main.Avatar.UpperBody.Body)
                     end
                     if player:isLeftHanded() then
-                        Gun.TargetModel:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.left))
-                        Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.put.rot.left)
+                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.left))
+                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(BlueArchiveCharacter.GUN.put.rot.left)
                     else
-                        Gun.TargetModel:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.right))
-                        Gun.TargetModel:setRot(BlueArchiveCharacter.GUN.put.rot.right)
+                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.right))
+                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(BlueArchiveCharacter.GUN.put.rot.right)
                     end
                     if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
