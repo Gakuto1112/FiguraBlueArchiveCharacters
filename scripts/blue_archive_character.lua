@@ -124,20 +124,72 @@ BlueArchiveCharacter = {
             ---@type BlueArchiveCharacter.GunHoldType
             type = "NORMAL",
 
-            ---位置オフセット（省略可）
-            pos = {
+            ---一人称視点での位置オフセット（省略可）
+            --[[
+            first_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(1, -3, -2),
+                right = vectors.vec3(),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(1.5, -3, -2)
-            },
+                left = vectors.vec3()
+            }
+            ]]
 
             --[[
-            ---向きオフセット（省略可）
-            rot = {
+            ---一人称視点での向きオフセット（省略可）
+            first_person_rot = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3()
+            }
+            ]]
+
+            ---三人称視点での位置オフセット（省略可）
+            --[[
+            third_person_pos = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3()
+            }
+            ]]
+
+            --[[
+            ---三人称視点での向きオフセット（省略可）
+            third_person_rot = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3()
+            }
+            ]]
+
+            ---装填済みクロスボウの位置オフセット（省略可）
+            charged_crossbow_pos = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(-8.95, 1, 0),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3(9.05, 1, 0)
+            }
+
+            ---装填済みクロスボウの向きオフセット（省略可）
+            --[[
+            charged_crossbow_rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
                 right = vectors.vec3(),
@@ -160,11 +212,11 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(4.5, -3, 4),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
+                left = vectors.vec3(-4.5, -3, 4)
             },
             ]]
 
@@ -173,11 +225,11 @@ BlueArchiveCharacter = {
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(90, 180, -90),
+                right = vectors.vec3(-90, 0, 0),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(90, 180, -90)
+                left = vectors.vec3(-90, 0, 0)
             }
             ]]
         },
