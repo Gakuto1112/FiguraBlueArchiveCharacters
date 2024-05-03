@@ -23,6 +23,10 @@ local selectingShowClubName = Nameplate.ClubShown
 ---@type integer
 local selectingCameraAccuracy = CameraManager.CameraAccuracy
 
+---現在選択中のExスキルフレームのパーティクル量
+---@type integer
+local selectingExSkillFrameParticleAmount = ExSkill.FrameParticleAmount
+
 ---衣装変更アクションのタイトルを更新する。
 local function refreshCostumeChangeActionTitle()
     if #Costume.CostumeList >= 2 then
@@ -46,8 +50,13 @@ local function refreshNameChangeActionTitle()
 end
 
 ---Exスキルアニメーションのカメラワークの精度のタイトルを更新する。
-local function refreshCameraAccuracyTitle()
-    mainPage:getAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§b"..(selectingCameraAccuracy == 1 and Language:getTranslate("action_wheel__main__action_4__option_1") or (selectingCameraAccuracy == 2 and Language:getTranslate("action_wheel__main__action_4__option_2") or (selectingCameraAccuracy == 3 and Language:getTranslate("action_wheel__main__action_4__option_3") or Language:getTranslate("action_wheel__main__action_4__option_4")))))
+local function refreshCameraAccuracyActionTitle()
+    mainPage:getAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§b"..Language:getTranslate("action_wheel__main__action_4__option_"..selectingCameraAccuracy))
+end
+
+---Exスキルアニメーションのパーティクル量調整アクションのタイトルを更新する。
+local function refreshExSkillParticleActionTitle()
+    mainPage:getAction(5):title(Language:getTranslate("action_wheel__main__action_5__title").."§b"..Language:getTranslate("action_wheel__main__action_5__option_"..selectingExSkillFrameParticleAmount))
 end
 
 --ping関数
@@ -89,6 +98,12 @@ if host:isHost() then
                 Config.saveConfig("camera_accuracy", selectingCameraAccuracy)
                 sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 0.5)
                 print(Language:getTranslate("action_wheel__main__action_4__done_first")..Language:getTranslate("action_wheel__main__action_4__option_"..selectingCameraAccuracy)..Language:getTranslate("action_wheel__main__action_4__done_last"))
+            end
+            if selectingExSkillFrameParticleAmount ~= ExSkill.FrameParticleAmount then
+                ExSkill.FrameParticleAmount = selectingExSkillFrameParticleAmount
+                Config.saveConfig("ex_skill_frame_particle_amount", selectingExSkillFrameParticleAmount)
+                sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 0.5)
+                print(Language:getTranslate("action_wheel__main__action_5__done_first")..Language:getTranslate("action_wheel__main__action_5__option_"..selectingExSkillFrameParticleAmount)..Language:getTranslate("action_wheel__main__action_5__done_last"))
             end
         end
         actionWheelOpenedPrev = actionWheelOpened
@@ -165,16 +180,30 @@ if host:isHost() then
         else
             selectingCameraAccuracy = selectingCameraAccuracy == 1 and 4 or selectingCameraAccuracy - 1
         end
-        refreshCameraAccuracyTitle()
+        refreshCameraAccuracyActionTitle()
     end):onLeftClick(function ()
         selectingCameraAccuracy = CameraManager.CameraAccuracy
-        refreshCameraAccuracyTitle()
+        refreshCameraAccuracyActionTitle()
     end):onRightClick(function ()
         selectingCameraAccuracy = 4
-        refreshCameraAccuracyTitle()
+        refreshCameraAccuracyActionTitle()
     end)
 
     --アクション5. Exスキルフレームのパーティクルの量
+    mainPage:newAction(5):item("minecraft:glowstone_dust"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function (direction)
+        if direction < 0 then
+            selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 3 and 1 or selectingExSkillFrameParticleAmount + 1
+        else
+            selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 1 and 3 or selectingExSkillFrameParticleAmount - 1
+        end
+        refreshExSkillParticleActionTitle()
+    end):onLeftClick(function ()
+        selectingExSkillFrameParticleAmount = ExSkill.FrameParticleAmount
+        refreshExSkillParticleActionTitle()
+    end):onRightClick(function ()
+        selectingExSkillFrameParticleAmount = 1
+        refreshExSkillParticleActionTitle()
+    end)
 
     --アクション6. 一人称時の武器モデルの有効化
 
@@ -184,7 +213,8 @@ if host:isHost() then
 
     refreshCostumeChangeActionTitle()
     refreshNameChangeActionTitle()
-    refreshCameraAccuracyTitle()
+    refreshCameraAccuracyActionTitle()
+    refreshExSkillParticleActionTitle()
 
     action_wheel:setPage(mainPage)
 end
