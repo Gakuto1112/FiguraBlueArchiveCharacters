@@ -69,7 +69,13 @@ jobs:
       - name: Check if readme templates have been changed
         id: check_readme_changes
         if: ${{ steps.merge_branch.outcome == 'success' }}
-        run: git diff HEAD~ --name-only | grep -e '.github/README_templates/*' -e '.github/workflows/generate_readme.yml'
+        run: |
+          if [ ${BRANCH_NAME} = 'base' ]; then
+            result=$(git diff --name-only $(git show-branch --merge-base base))
+          else
+            result=$(git diff HEAD~ --name-only)
+          fi
+          echo ${result} | grep -e '.github/README/' -e '.github/workflows/generate_readme.yml'
         continue-on-error: true
       - name: Output readme status
         if: ${{ steps.merge_branch.outcome == 'success' && steps.check_readme_changes.outcome == 'success' }}
