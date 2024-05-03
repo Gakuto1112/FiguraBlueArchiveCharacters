@@ -119,8 +119,16 @@ Toggles whether equipped armors are visible or not. Some costumes will be hidden
 
 I recommend to hide armors because they hide the avatar.
 
-### Action 4. Change accuracy of camera during ex skill animations
+### Action 4. Toggle first-person weapon models
+Toggles whether weapon models (including students' guns) are visible or not in first person perspective. If toggled off, Minecraft items will be displayed instead. Regardless of this setting, weapon models are always displayed in third person perspective.
+
+![First-person weapon models](./README_images/first_person_weapons.jpg)
+
+### Action 5. Change accuracy of camera during ex skill animations
 Changes the accuracy of the camera collision detection used during ex skill animations. Increasing the accuracy reduces camera wobble but increases the processing load. Scroll to select the option and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
+
+### Action 6. Change amount of Ex skill frame particles
+Changes the amount of triangular particles that appear from the red or blue borders that appear during Ex skill animations. Reducing or disabling particles may improve performance.
 
 ## How to use
 Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Fabric](https://fabricmc.net/) and [NeoForge](https://neoforged.net/).
