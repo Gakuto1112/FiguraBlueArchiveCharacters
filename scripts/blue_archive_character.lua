@@ -1828,7 +1828,7 @@ events.TICK:register(function()
 end)
 
 events.ITEM_RENDER:register(function (item, mode)
-    if item.id == "minecraft:shield" and mode ~= "HEAD" and BlueArchiveCharacter.HasShield then
+    if item.id == "minecraft:shield" and mode ~= "HEAD" and BlueArchiveCharacter.HasShield and (Gun.ShowWeaponInFirstPerson or mode == "THIRD_PERSON_LEFT_HAND" or mode == "THIRD_PERSON_RIGHT_HAND") then
         if mode == "FIRST_PERSON_LEFT_HAND" then
             local leftHanded = player:isLeftHanded()
             if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
