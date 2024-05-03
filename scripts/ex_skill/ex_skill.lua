@@ -28,6 +28,13 @@ ExSkill = {
     ---@type number[]
     BodyYaw = {},
 
+    ---Exスキルフレームのパーティクルの量
+    --- 1. 標準
+    --- 2. 少なめ
+    --- 3. なし
+    ---@type number
+    FrameParticleAmount = 1,
+
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
     canPlayAnimation = function (self)
@@ -43,9 +50,11 @@ ExSkill = {
                 if not client:isPaused() then
                     local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
                     local windowSizeY = client:getScaledWindowSize().y
-                    for _ = 1, windowSizeY / 20 do
-                        local particleOffset = math.random() * windowSizeY
-                        FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
+                    if self.FrameParticleAmount < 3 then
+                        for _ = 1, windowSizeY / (self.FrameParticleAmount == 1 and 20 or 100) do
+                            local particleOffset = math.random() * windowSizeY
+                            FrameParticleManager:spawn(vectors.vec2(barPos - particleOffset - math.random() * 50, particleOffset), vectors.vec2(500, 0))
+                        end
                     end
                 end
             end, "ex_skill_transition_tick")
@@ -202,11 +211,12 @@ ExSkill = {
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         local windowCenter = windowSize:copy():scale(0.5)
-                        for _ = 1, (windowSize.x * 2 + windowSize.y * 2) / 100 do
-                            local particlePos = vectors.vec2(math.random() * (windowSize.x * 2 + windowSize.y * 2), math.random() * 16)
-                            particlePos = particlePos.x <= windowSize.x and particlePos or (particlePos.x <= windowSize.x + windowSize.y and vectors.vec2(windowSize.x - particlePos.y, particlePos.x - windowSize.x) or (particlePos.x <= windowSize.x * 2 + windowSize.y and vectors.vec2(particlePos.x - (windowSize.x + windowSize.y), windowSize.y - particlePos.y) or vectors.vec2(particlePos.y, particlePos.x - (windowSize.x * 2 + windowSize.y))))
-                            FrameParticleManager:spawn(particlePos, windowCenter:copy():sub(particlePos):scale(0.25))
-
+                        if self.FrameParticleAmount < 3 then
+                            for _ = 1, (windowSize.x * 2 + windowSize.y * 2) / (self.FrameParticleAmount == 1 and 100 or 500) do
+                                local particlePos = vectors.vec2(math.random() * (windowSize.x * 2 + windowSize.y * 2), math.random() * 16)
+                                particlePos = particlePos.x <= windowSize.x and particlePos or (particlePos.x <= windowSize.x + windowSize.y and vectors.vec2(windowSize.x - particlePos.y, particlePos.x - windowSize.x) or (particlePos.x <= windowSize.x * 2 + windowSize.y and vectors.vec2(particlePos.x - (windowSize.x + windowSize.y), windowSize.y - particlePos.y) or vectors.vec2(particlePos.y, particlePos.x - (windowSize.x * 2 + windowSize.y))))
+                                FrameParticleManager:spawn(particlePos, windowCenter:copy():sub(particlePos):scale(0.25))
+                            end
                         end
                     end
                 end
