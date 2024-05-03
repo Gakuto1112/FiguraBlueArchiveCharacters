@@ -732,9 +732,13 @@ BlueArchiveCharacter = {
                 exSkill = 1
             },
 
-            swimsuit = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "swimsuit",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Swimsuit",
