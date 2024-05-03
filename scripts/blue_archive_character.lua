@@ -131,11 +131,11 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-1.5, -1.5, -3.5),
+                right = vectors.vec3(0, -1.5, -5),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(1.5, -1.5, -3.5)
+                left = vectors.vec3(0.05, -1.5, -5)
             },
 
             --[[
@@ -162,22 +162,22 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(1.5, 6, 8),
+                right = vectors.vec3(0, 2, 2.75),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-7.5, 6, 8)
+                left = vectors.vec3(0, 2, 2.75)
             },
 
             ---向きオフセット（省略可）
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(90, 180, -90),
+                right = vectors.vec3(-135, -90, 0),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(90, 180, -90)
+                left = vectors.vec3(-135, 90, 0)
             }
         },
 
