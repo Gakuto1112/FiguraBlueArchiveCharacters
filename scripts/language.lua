@@ -82,9 +82,9 @@ if host:isHost() then
 		Language.LanguageData.en_us["action_wheel_gui__ex_skill_guide__ex_skill_"..index.."__name"] = exSkill.name.en_us
 		Language.LanguageData.ja_jp["action_wheel_gui__ex_skill_guide__ex_skill_"..index.."__name"] = exSkill.name.ja_jp
 	end
-	for name, costume in pairs(BlueArchiveCharacter.COSTUME.costumes) do
-		Language.LanguageData.en_us["costume__"..name] = costume.name.en_us
-		Language.LanguageData.ja_jp["costume__"..name] = costume.name.ja_jp
+	for _, costume in ipairs(BlueArchiveCharacter.COSTUME.costumes) do
+		Language.LanguageData.en_us["costume__"..costume.name] = costume.display_name.en_us
+		Language.LanguageData.ja_jp["costume__"..costume.name] = costume.display_name.ja_jp
 	end
 end
 
