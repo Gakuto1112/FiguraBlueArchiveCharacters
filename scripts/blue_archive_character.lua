@@ -116,8 +116,9 @@ BlueArchiveCharacter = {
             ---@type BlueArchiveCharacter.GunHoldType
             type = "NORMAL",
 
-            ---位置オフセット（省略可）
-            pos = {
+            ---一人称視点での位置オフセット（省略可）
+            --[[
+            first_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
                 right = vectors.vec3(0.85, 0.25),
@@ -128,8 +129,58 @@ BlueArchiveCharacter = {
             },
 
             --[[
-            ---向きオフセット（省略可）
-            rot = {
+            ---一人称視点での向きオフセット（省略可）
+            first_person_rot = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3()
+            }
+            ]]
+
+            ---三人称視点での位置オフセット（省略可）
+            --[[
+            third_person_pos = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3()
+            }
+            ]]
+
+            --[[
+            ---三人称視点での向きオフセット（省略可）
+            third_person_rot = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3()
+            }
+            ]]
+
+            ---装填済みクロスボウの位置オフセット（省略可）
+            charged_crossbow_pos = {
+                ---右手で構える場合（省略可）
+                ---@type Vector3
+                right = vectors.vec3(-8.95, 1, 0),
+
+                ---左手で構える場合（省略可）
+                ---@type Vector3
+                left = vectors.vec3(9.05, 1, 0)
+            }
+
+            ---装填済みクロスボウの向きオフセット（省略可）
+            --[[
+            charged_crossbow_rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
                 right = vectors.vec3(),
