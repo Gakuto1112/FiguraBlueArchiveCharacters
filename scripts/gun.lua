@@ -35,15 +35,6 @@ Gun = {
             end
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("None")
             models.models.main.Avatar.UpperBody.Body.Gun:setSecondaryRenderType("NONE")
-            if ExSkill ~= nil and ExSkill.AnimationCount > -1 then
-                for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
-                    itemModel:setVisible(false)
-                end
-            else
-                for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
-                    itemModel:setVisible(true)
-                end
-            end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
                 Arms:setBowPose(false, false)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
@@ -92,6 +83,7 @@ Gun = {
                 animations["models.main"]["gun_hold_left"]:stop()
                 animations["models.main"]["gun_hold_right"]:play()
             end
+            models.models.main.Avatar.UpperBody.Body.Gun:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("Item")
             if not client:isPaused() then
                 sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)
@@ -123,6 +115,7 @@ Gun = {
                 animations["models.main"]["gun_hold_right"]:stop()
                 animations["models.main"]["gun_hold_left"]:play()
             end
+            models.models.main.Avatar.UpperBody.Body.Gun:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("Item")
             if not client:isPaused() then
                 sounds:playSound("minecraft:item.flintandsteel.use", player:getPos(), 1, 2)
