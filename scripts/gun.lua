@@ -35,15 +35,6 @@ Gun = {
             end
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("None")
             models.models.main.Avatar.UpperBody.Body.Gun:setSecondaryRenderType("NONE")
-            if ExSkill ~= nil and ExSkill.AnimationCount > -1 then
-                for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
-                    itemModel:setVisible(false)
-                end
-            else
-                for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
-                    itemModel:setVisible(true)
-                end
-            end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
                 Arms:setBowPose(false, false)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
