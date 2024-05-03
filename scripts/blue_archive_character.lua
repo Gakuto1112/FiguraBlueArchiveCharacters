@@ -552,9 +552,13 @@ BlueArchiveCharacter = {
                 exSkill = 1
             },
 
-            masked = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "masked",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Masked Swimsuit Group",
