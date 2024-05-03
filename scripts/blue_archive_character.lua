@@ -145,6 +145,7 @@ BlueArchiveCharacter = {
             },
 
             ---装填済みクロスボウの向きオフセット（省略可）
+            --[[
             charged_crossbow_rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
@@ -154,6 +155,7 @@ BlueArchiveCharacter = {
                 ---@type Vector3
                 left = vectors.vec3()
             }
+            ]]
         },
 
         ---構えていない時
