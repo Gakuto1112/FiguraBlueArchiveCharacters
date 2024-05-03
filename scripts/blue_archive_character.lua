@@ -633,9 +633,13 @@ BlueArchiveCharacter = {
                 exSkill = 1
             },
 
-            no_veil = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "no_veil",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Default (no veil)",
@@ -654,9 +658,13 @@ BlueArchiveCharacter = {
                 exSkill = 1
             },
 
-            tracksuit = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "tracksuit",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Tracksuit",
