@@ -639,8 +639,12 @@ BlueArchiveCharacter = {
             --[[
             ======== データテンプレート ========
             costume_name = {
+                ---コスチュームの内部名
+                ---@type string
+                name = "costume_name"
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Costume",
@@ -660,9 +664,13 @@ BlueArchiveCharacter = {
             }
             ]]
 
-            default = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "default",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Default",

@@ -46,7 +46,7 @@ ActionWheelGui = {
                         bubbleKeyNames[2]:setText("§0"..keybindTable[Language:getTranslate("key_name__bubble_right")]:getKeyName())
                         bubbleKeyNames[3]:setText("§0"..keybindTable[Language:getTranslate("key_name__bubble_down")]:getKeyName())
                         bubbleKeyNames[4]:setText("§0"..keybindTable[Language:getTranslate("key_name__bubble_left")]:getKeyName())
-                        exSkillGuideBody:setText("§0§l\""..Language:getTranslate("action_wheel_gui__ex_skill_guide__ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CostumeList[Costume.CurrentCostume]].exSkill.."__name").."\"§r\n§0"..Language:getTranslate("action_wheel_gui__ex_skill_guide__key_pre")..keybindTable[Language:getTranslate("key_name__ex_skill")]:getKeyName()..Language:getTranslate("action_wheel_gui__ex_skill_guide__key_post"))
+                        exSkillGuideBody:setText("§0§l\""..Language:getTranslate("action_wheel_gui__ex_skill_guide__ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill.."__name").."\"§r\n§0"..Language:getTranslate("action_wheel_gui__ex_skill_guide__key_pre")..keybindTable[Language:getTranslate("key_name__ex_skill")]:getKeyName()..Language:getTranslate("action_wheel_gui__ex_skill_guide__key_post"))
                         if events.RENDER:getRegisteredCount("bubble_guide_render") == 0 then
                             events.RENDER:register(function ()
                                 if not self.IsRenderProcessed then
