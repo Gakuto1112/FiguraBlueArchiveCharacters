@@ -46,8 +46,8 @@ Costume = {
 	end
 }
 
-for name, _ in pairs(BlueArchiveCharacter.COSTUME.costumes) do
-	table.insert(Costume.CostumeList, name)
+for _, costume in ipairs(BlueArchiveCharacter.COSTUME.costumes) do
+	table.insert(Costume.CostumeList, costume.name)
 end
 
 if Costume.CurrentCostume >= 2 then

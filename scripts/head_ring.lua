@@ -49,8 +49,8 @@ events.WORLD_RENDER:register(function()
 end)
 
 models.models.main.Avatar.Head.HeadRing:setLight(15)
-for costumeName, _ in pairs(BlueArchiveCharacter.COSTUME.costumes) do
-    models.models["skull_"..costumeName].Skull.HeadRing:setLight(15)
+for _, costume in ipairs(BlueArchiveCharacter.COSTUME.costumes) do
+    models.models["skull_"..costume.name].Skull.HeadRing:setLight(15)
 end
 
 return HeadRing
