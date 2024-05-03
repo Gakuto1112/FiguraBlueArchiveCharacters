@@ -173,6 +173,22 @@ if host:isHost() then
         action:hoverColor(0.33, 1, 0.33)
     end
 
+    --アクション4. 一人称視点での武器モデルの表示
+    mainPage:newAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_4__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:bow"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+        Gun.ShowWeaponInFirstPerson = true
+        action:hoverColor(0.33, 1, 0.33)
+        Config.saveConfig("firstPersonWeapon", true)
+    end):onUntoggle(function (_, action)
+        Gun.ShowWeaponInFirstPerson = false
+        action:hoverColor(1, 0.33, 0.33)
+        Config.saveConfig("firstPersonWeapon", false)
+    end)
+    if Config.loadConfig("firstPersonWeapon", true) then
+        local action = mainPage:getAction(4)
+        action:toggled(true)
+        action:hoverColor(0.33, 1, 0.33)
+    end
+
     --アクション5. Exスキルアニメーションのカメラワークの精度
     mainPage:newAction(5):item("minecraft:spyglass"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function(direction)
         if direction < 0 then

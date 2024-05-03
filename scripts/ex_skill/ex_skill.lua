@@ -33,7 +33,7 @@ ExSkill = {
     --- 2. 少なめ
     --- 3. なし
     ---@type number
-    FrameParticleAmount = Config.loadConfig("ex_skill_frame_particle_amount", 1),
+    FrameParticleAmount = Config.loadConfig("exSkillFrameParticleAmount", 1),
 
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか

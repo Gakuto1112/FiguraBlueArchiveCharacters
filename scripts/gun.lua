@@ -10,6 +10,10 @@ Gun = {
     ---@type Minecraft.itemID[]
     GUN_ITEMS = {"minecraft:bow", "minecraft:crossbow"},
 
+    ---一人称で武器（銃を含む）のモデル
+    ---@type boolean
+    ShowWeaponInFirstPerson = Config.loadConfig("firstPersonWeapon", true),
+
     ---現在の銃の位置
     ---@type Gun.GunPosition
     CurrentGunPosition = "NONE",
@@ -241,7 +245,7 @@ Gun = {
         end)
 
         events.ITEM_RENDER:register(function (item, mode, pos, rot , scale, lefthanded)
-            if mode ~= "HEAD" and self.CurrentGunPosition == (lefthanded and "LEFT" or "RIGHT") then
+            if mode ~= "HEAD" and self.CurrentGunPosition == (lefthanded and "LEFT" or "RIGHT") and (self.ShowWeaponInFirstPerson or mode =="THIRD_PERSON_LEFT_HAND" or mode == "THIRD_PERSON_RIGHT_HAND") then
                 for _, gunItem in ipairs(self.GUN_ITEMS) do
                     if item.id == gunItem then
                         if lefthanded then
