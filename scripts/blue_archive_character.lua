@@ -125,17 +125,15 @@ BlueArchiveCharacter = {
             type = "NORMAL",
 
             ---一人称視点での位置オフセット（省略可）
-            --[[
             first_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(-0.5, 0, -5),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
-            }
-            ]]
+                left = vectors.vec3(1, 0, -5)
+            },
 
             --[[
             ---一人称視点での向きオフセット（省略可）
@@ -151,17 +149,15 @@ BlueArchiveCharacter = {
             ]]
 
             ---三人称視点での位置オフセット（省略可）
-            --[[
             third_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(0, -0.5, -5),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
-            }
-            ]]
+                left = vectors.vec3(0, -0.5, -5)
+            },
 
             --[[
             ---三人称視点での向きオフセット（省略可）
@@ -180,11 +176,11 @@ BlueArchiveCharacter = {
             charged_crossbow_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-8.95, 1, 0),
+                right = vectors.vec3(-8.1, 1, 1.6),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(9.05, 1, 0)
+                left = vectors.vec3(8.25, 1, 0)
             }
 
             ---装填済みクロスボウの向きオフセット（省略可）
@@ -217,7 +213,7 @@ BlueArchiveCharacter = {
                 ---左手で構える場合（省略可）
                 ---@type Vector3
                 left = vectors.vec3(-4.5, -3, 4)
-            },
+            }
             ]]
 
             --[[
