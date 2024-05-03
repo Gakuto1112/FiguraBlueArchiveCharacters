@@ -268,8 +268,13 @@ Gun = {
                                     models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, 0.25, 4.25):add(offsetPos))
                                     models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
                                 elseif item.id == "minecraft:crossbow" and item.tag.Charged == 1 then
-                                    models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(-1.15, 0, 5):add(offsetPos))
-                                    models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 10, 0):add(offsetRot))
+                                    if player:isLeftHanded() then
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(-1.15, 0, 5):add(offsetPos))
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 10, 0):add(offsetRot))
+                                    else
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(8.95, 0, 5):add(offsetPos))
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
+                                    end
                                 end
                             elseif mode == "THIRD_PERSON_LEFT_HAND" then
                                 models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, -4.25, 4.25):add(offsetPos))
@@ -295,8 +300,13 @@ Gun = {
                                     models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, 0.25, 4.25):add(offsetPos))
                                     models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
                                 elseif item.id == "minecraft:crossbow" and item.tag.Charged == 1 then
-                                    models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(-9, 0, 5):add(offsetPos))
-                                    models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
+                                    if player:isLeftHanded() then
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(-9, 0, 5):add(offsetPos))
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
+                                    else
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(1.07, 0, 5):add(offsetPos))
+                                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, -10, 0):add(offsetRot))
+                                    end
                                 end
                             elseif mode == "THIRD_PERSON_RIGHT_HAND" then
                                 models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, -4.25, 4.25):add(offsetPos))
