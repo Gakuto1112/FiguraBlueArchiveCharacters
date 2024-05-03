@@ -823,9 +823,13 @@ BlueArchiveCharacter = {
                 exSkill = 1
             },
 
-            masked = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "masked",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Masked Swimsuit Group",
@@ -844,9 +848,13 @@ BlueArchiveCharacter = {
                 exSkill = 1
             },
 
-            swimsuit = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "swimsuit",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Swimsuit",
@@ -865,9 +873,13 @@ BlueArchiveCharacter = {
                 exSkill = 2
             },
 
-            riding = {
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "riding",
+
                 ---コスチュームの表示名
-                name = {
+                display_name = {
                     ---英語
                     ---@type string
                     en_us = "Riding",
@@ -894,7 +906,7 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                if costumeId == 2 then
+                if costumeId == 4 then
                     --ライディング
                     Costume.setCostumeTextureOffset(2)
                     models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, Armor.ArmorVisible[2] and -0.75 or 0.25)
@@ -907,7 +919,7 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Scarf", "UpperBody.Body.Skirt", "UpperBody.Body.IDCard"})) do
                         modelPart:setVisible(false)
                     end
-                elseif costumeId == 3 then
+                elseif costumeId == 2 then
                     --覆面水着団
                     for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH"})) do
                         modelPart:setVisible(true)
@@ -915,7 +927,7 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairPin", "Head.HairEnds", "UpperBody.Body.Hairs"})) do
                         modelPart:setVisible(false)
                     end
-                elseif costumeId == 4 then
+                elseif costumeId == 3 then
                     --水着
                     Costume.setCostumeTextureOffset(1)
                     for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Head", "Head.HatLayer"})) do
