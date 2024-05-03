@@ -249,15 +249,15 @@ Gun = {
                 for _, gunItem in ipairs(self.GUN_ITEMS) do
                     if item.id == gunItem then
                         if lefthanded then
-                            local offsetPos = vectors.vec3()
-                            if BlueArchiveCharacter.GUN.hold.pos ~= nil and BlueArchiveCharacter.GUN.hold.pos.left ~= nil then
-                                offsetPos = BlueArchiveCharacter.GUN.hold.pos.left
-                            end
-                            local offsetRot = vectors.vec3()
-                            if BlueArchiveCharacter.GUN.hold.rot ~= nil and BlueArchiveCharacter.GUN.hold.rot.left ~= nil then
-                                offsetRot = BlueArchiveCharacter.GUN.hold.rot.left
-                            end
                             if mode == "FIRST_PERSON_LEFT_HAND" then
+                                local offsetPos = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.first_person_pos ~= nil and BlueArchiveCharacter.GUN.hold.first_person_pos.left ~= nil then
+                                    offsetPos = BlueArchiveCharacter.GUN.hold.first_person_pos.left
+                                end
+                                local offsetRot = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.first_person_rot ~= nil and BlueArchiveCharacter.GUN.hold.first_person_rot.left ~= nil then
+                                    offsetRot = BlueArchiveCharacter.GUN.hold.first_person_rot.left
+                                end
                                 models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, -1.25, 4.25):add(offsetPos))
                                 models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
                                 local activeItemId = player:getActiveItem().id
@@ -285,19 +285,27 @@ Gun = {
                                     end
                                 end
                             elseif mode == "THIRD_PERSON_LEFT_HAND" then
+                                local offsetPos = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.third_person_pos ~= nil and BlueArchiveCharacter.GUN.hold.third_person_pos.left ~= nil then
+                                    offsetPos = BlueArchiveCharacter.GUN.hold.third_person_pos.left
+                                end
+                                local offsetRot = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.third_person_rot ~= nil and BlueArchiveCharacter.GUN.hold.third_person_rot.left ~= nil then
+                                    offsetRot = BlueArchiveCharacter.GUN.hold.third_person_rot.left
+                                end
                                 models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, -4.25, 4.25):add(offsetPos))
                                 models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
                             end
                         else
-                            local offsetPos = vectors.vec3()
-                            if BlueArchiveCharacter.GUN.hold.pos ~= nil and BlueArchiveCharacter.GUN.hold.pos.right ~= nil then
-                                offsetPos = BlueArchiveCharacter.GUN.hold.pos.right
-                            end
-                            local offsetRot = vectors.vec3()
-                            if BlueArchiveCharacter.GUN.hold.rot ~= nil and BlueArchiveCharacter.GUN.hold.rot.right ~= nil then
-                                offsetRot = BlueArchiveCharacter.GUN.hold.rot.right
-                            end
                             if mode == "FIRST_PERSON_RIGHT_HAND" then
+                                local offsetPos = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.first_person_pos ~= nil and BlueArchiveCharacter.GUN.hold.first_person_pos.right ~= nil then
+                                    offsetPos = BlueArchiveCharacter.GUN.hold.first_person_pos.right
+                                end
+                                local offsetRot = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.first_person_rot ~= nil and BlueArchiveCharacter.GUN.hold.first_person_rot.right ~= nil then
+                                    offsetRot = BlueArchiveCharacter.GUN.hold.first_person_rot.right
+                                end
                                 models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, -1.25, 4.25):add(offsetPos))
                                 models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
                                 local activeItemId = player:getActiveItem().id
@@ -325,6 +333,14 @@ Gun = {
                                     end
                                 end
                             elseif mode == "THIRD_PERSON_RIGHT_HAND" then
+                                local offsetPos = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.third_person_pos ~= nil and BlueArchiveCharacter.GUN.hold.third_person_pos.right ~= nil then
+                                    offsetPos = BlueArchiveCharacter.GUN.hold.third_person_pos.right
+                                end
+                                local offsetRot = vectors.vec3()
+                                if BlueArchiveCharacter.GUN.hold.third_person_rot ~= nil and BlueArchiveCharacter.GUN.hold.third_person_rot.right ~= nil then
+                                    offsetRot = BlueArchiveCharacter.GUN.hold.third_person_rot.right
+                                end
                                 models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, -4.25, 4.25):add(offsetPos))
                                 models.models.main.Avatar.UpperBody.Body.Gun:setRot(vectors.vec3(0, 0, 0):add(offsetRot))
                             end
