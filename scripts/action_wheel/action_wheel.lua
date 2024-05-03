@@ -51,12 +51,12 @@ end
 
 ---Exスキルアニメーションのカメラワークの精度のタイトルを更新する。
 local function refreshCameraAccuracyActionTitle()
-    mainPage:getAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§b"..Language:getTranslate("action_wheel__main__action_4__option_"..selectingCameraAccuracy))
+    mainPage:getAction(5):title(Language:getTranslate("action_wheel__main__action_5__title").."§b"..Language:getTranslate("action_wheel__main__action_5__option_"..selectingCameraAccuracy))
 end
 
 ---Exスキルアニメーションのパーティクル量調整アクションのタイトルを更新する。
 local function refreshExSkillParticleActionTitle()
-    mainPage:getAction(5):title(Language:getTranslate("action_wheel__main__action_5__title").."§b"..Language:getTranslate("action_wheel__main__action_5__option_"..selectingExSkillFrameParticleAmount))
+    mainPage:getAction(6):title(Language:getTranslate("action_wheel__main__action_6__title").."§b"..Language:getTranslate("action_wheel__main__action_6__option_"..selectingExSkillFrameParticleAmount))
 end
 
 --ping関数
@@ -97,13 +97,13 @@ if host:isHost() then
                 CameraManager.CameraAccuracy = selectingCameraAccuracy
                 Config.saveConfig("camera_accuracy", selectingCameraAccuracy)
                 sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 0.5)
-                print(Language:getTranslate("action_wheel__main__action_4__done_first")..Language:getTranslate("action_wheel__main__action_4__option_"..selectingCameraAccuracy)..Language:getTranslate("action_wheel__main__action_4__done_last"))
+                print(Language:getTranslate("action_wheel__main__action_5__done_first")..Language:getTranslate("action_wheel__main__action_5__option_"..selectingCameraAccuracy)..Language:getTranslate("action_wheel__main__action_5__done_last"))
             end
             if selectingExSkillFrameParticleAmount ~= ExSkill.FrameParticleAmount then
                 ExSkill.FrameParticleAmount = selectingExSkillFrameParticleAmount
                 Config.saveConfig("ex_skill_frame_particle_amount", selectingExSkillFrameParticleAmount)
                 sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 0.5)
-                print(Language:getTranslate("action_wheel__main__action_5__done_first")..Language:getTranslate("action_wheel__main__action_5__option_"..selectingExSkillFrameParticleAmount)..Language:getTranslate("action_wheel__main__action_5__done_last"))
+                print(Language:getTranslate("action_wheel__main__action_6__done_first")..Language:getTranslate("action_wheel__main__action_6__option_"..selectingExSkillFrameParticleAmount)..Language:getTranslate("action_wheel__main__action_6__done_last"))
             end
         end
         actionWheelOpenedPrev = actionWheelOpened
@@ -173,8 +173,24 @@ if host:isHost() then
         action:hoverColor(0.33, 1, 0.33)
     end
 
-    --アクション4. Exスキルアニメーションのカメラワークの精度
-    mainPage:newAction(4):item("minecraft:spyglass"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function(direction)
+    --アクション4. 一人称視点での武器モデルの表示
+    mainPage:newAction(4):title(Language:getTranslate("action_wheel__main__action_4__title").."§c"..Language:getTranslate("action_wheel__toggle_off")):toggleTitle(Language:getTranslate("action_wheel__main__action_4__title").."§a"..Language:getTranslate("action_wheel__toggle_on")):item("minecraft:bow"):color(0.67, 0, 0):hoverColor(1, 0.33, 0.33):toggleColor(0, 0.67, 0):onToggle(function (_, action)
+        Gun.ShowWeaponInFirstPerson = true
+        action:hoverColor(0.33, 1, 0.33)
+        Config.saveConfig("firstPersonWeapon", true)
+    end):onUntoggle(function (_, action)
+        Gun.ShowWeaponInFirstPerson = false
+        action:hoverColor(1, 0.33, 0.33)
+        Config.saveConfig("firstPersonWeapon", false)
+    end)
+    if Config.loadConfig("firstPersonWeapon", true) then
+        local action = mainPage:getAction(4)
+        action:toggled(true)
+        action:hoverColor(0.33, 1, 0.33)
+    end
+
+    --アクション5. Exスキルアニメーションのカメラワークの精度
+    mainPage:newAction(5):item("minecraft:spyglass"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function(direction)
         if direction < 0 then
             selectingCameraAccuracy = selectingCameraAccuracy == 4 and 1 or selectingCameraAccuracy + 1
         else
@@ -189,8 +205,8 @@ if host:isHost() then
         refreshCameraAccuracyActionTitle()
     end)
 
-    --アクション5. Exスキルフレームのパーティクルの量
-    mainPage:newAction(5):item("minecraft:glowstone_dust"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function (direction)
+    --アクション6. Exスキルフレームのパーティクルの量
+    mainPage:newAction(6):item("minecraft:glowstone_dust"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function (direction)
         if direction < 0 then
             selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 3 and 1 or selectingExSkillFrameParticleAmount + 1
         else
@@ -204,8 +220,6 @@ if host:isHost() then
         selectingExSkillFrameParticleAmount = 1
         refreshExSkillParticleActionTitle()
     end)
-
-    --アクション6. 一人称時の武器モデルの有効化
 
     --アクション7. （空欄）
 
