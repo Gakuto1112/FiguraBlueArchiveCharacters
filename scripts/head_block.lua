@@ -21,6 +21,9 @@ HeadBlock = {
             models.script_head_block:addChild(copiedPart)
             models.script_head_block.Head:setParentType("Skull")
             models.script_head_block.Head:setPos(0, -24, 0)
+            if models.script_head_block.Head.ArmorH ~= nil then
+                models.script_head_block.Head.ArmorH:remove()
+            end
             models.script_head_block.Head.HeadRing:setRot()
             models.script_head_block.Head.HeadRing:setLight(15)
             for _, modelPart in ipairs({models.script_head_block.Head.FaceParts.Eyes.EyeRight, models.script_head_block.Head.FaceParts.Eyes.EyeLeft}) do
