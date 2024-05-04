@@ -28,6 +28,7 @@ Costume = {
 		self:resetCostume()
 		BlueArchiveCharacter.COSTUME.callbacks.change(costume)
 		HeadBlock.generateHeadBlockModel()
+		Portrait.generatePortraitModel()
 		self.CurrentCostume = costume
 	end,
 
@@ -39,6 +40,7 @@ Costume = {
 		self.setCostumeTextureOffset(0)
 		BlueArchiveCharacter.COSTUME.callbacks.reset()
 		HeadBlock.generateHeadBlockModel()
+		Portrait.generatePortraitModel()
 		self.CurrentCostume = 1
 	end
 }
@@ -51,6 +53,7 @@ if Costume.CurrentCostume >= 2 then
 	Costume:setCostume(Costume.CurrentCostume)
 else
 	HeadBlock.generateHeadBlockModel()
+	Portrait.generatePortraitModel()
 end
 
 return Costume
