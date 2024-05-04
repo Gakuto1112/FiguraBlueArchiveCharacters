@@ -38,7 +38,7 @@ ExSkill = {
     ---アニメーションが再生可能かどうかを返す。
     ---@return boolean animationPlayable Exスキルアニメーションが再生可能かどうか
     canPlayAnimation = function (self)
-        return player:getPose() == "STANDING" and player:getVelocity():length() < 0.01 and self.BodyYaw[1] == self.BodyYaw[2] and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE"
+        return player:getPose() == "STANDING" and player:getVelocity():length() < 0.01 and self.BodyYaw[1] == self.BodyYaw[2] and player:isOnGround() and not player:isInWater() and not player:isInLava() and not renderer:isFirstPerson() and PlayerUtils:getDamageStatus() == "NONE" and  player:getActiveItem().id == "minecraft:air"
     end,
 
     ---Exスキルのアニメーションの前後のカメラのトランジションを行う関数
