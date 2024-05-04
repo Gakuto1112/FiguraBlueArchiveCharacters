@@ -36,6 +36,9 @@ events.RENDER:register(function()
             HeadRing.FloatCount = HeadRing.FloatCount > 1 and HeadRing.FloatCount - 1 or HeadRing.FloatCount
             local headRingPos = math.sin(HeadRing.FloatCount * 2 * math.pi) * 0.25
             models.models.main.Avatar.Head.HeadRing:setPos(0, headRingPos)
+            if models.script_head_block.Head ~= nil then
+                models.script_head_block.Head.HeadRing:setPos(0, headRingPos)
+            end
             if DeathAnimation.AnimationCount > 0 then
                 DeathAnimation.DummyAvatarRoot["Head"]["HeadRing"]:setPos(0, headRingPos)
             end
@@ -49,8 +52,5 @@ events.WORLD_RENDER:register(function()
 end)
 
 models.models.main.Avatar.Head.HeadRing:setLight(15)
-for _, costume in ipairs(BlueArchiveCharacter.COSTUME.costumes) do
-    models.models["skull_"..costume.name].Skull.HeadRing:setLight(15)
-end
 
 return HeadRing
