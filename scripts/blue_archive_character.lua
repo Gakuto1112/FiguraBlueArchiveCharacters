@@ -77,8 +77,8 @@ BlueArchiveCharacter = {
         RightEye = {
             NORMAL = {0, 0},
             INVERSED = {2, 0},
-            SURPLISED = {4, 0},
-            TIRED = {3, 0},
+            SURPLISED = {3, 0},
+            TIRED = {4, 0},
             CLOSED = {0, 1},
             UNEQUAL = {1, 1}
         },
@@ -87,7 +87,7 @@ BlueArchiveCharacter = {
         LeftEye = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
-            TIRED = {4, 0},
+            TIRED = {3, 0},
             CLOSED = {-1, 1},
             UNEQUAL = {0, 1}
         },
@@ -918,7 +918,7 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {},
+        excludeModels = {models.models.main.Avatar.Head.FaceLayer},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
