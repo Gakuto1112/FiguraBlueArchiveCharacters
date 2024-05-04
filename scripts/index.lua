@@ -21,6 +21,7 @@ events.ENTITY_INIT:register(function ()
 	Nameplate = require("scripts.nameplate")
 	require("scripts.skirt")
 	HeadBlock = require("scripts.head_block")
+	Portrait = require("scripts.portrait")
 
 	--機能別クラス
 	DeathAnimation = require("scripts.death_animation")
