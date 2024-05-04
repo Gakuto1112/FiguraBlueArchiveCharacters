@@ -95,8 +95,10 @@ BlueArchiveCharacter = {
         ---口
         Mouth = {
             CLOSED = {0, 0},
-            OPENED = {1, 0},
-            TRIANGLE = {2, 0}
+            OPENED = {0, 4},
+            TRIANGLE = {4, 4},
+            SMILE = {0, 8},
+            SAD = {4, 8}
         }
     },
 
@@ -650,9 +652,7 @@ BlueArchiveCharacter = {
                     elseif tick >= 34 and tick <= 69 then
                         sounds:playSound("minecraft:item.bucket.empty", ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.Wave.ExSkill2SoundAnchor2), math.clamp(tick <= 43 and (tick * 0.056 - 1.904) or (tick >= 60 and (tick * -0.056 + 3.86) or 0.5), 0, 0.5), 0.75)
                     elseif tick == 75 then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 13, true)
-                    elseif tick == 88 then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 4, true)
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 17, true)
                     elseif tick == 92 then
                         FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 18, true)
                         local bodyYaw = player:getBodyYaw()
