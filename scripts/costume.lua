@@ -30,6 +30,7 @@ Costume = {
 			models.models["skull_"..name].Skull:setVisible(index == costume)
 		end
 		BlueArchiveCharacter.COSTUME.callbacks.change(costume)
+		HeadBlock.generateHeadBlockModel()
 		self.CurrentCostume = costume
 	end,
 
@@ -42,6 +43,7 @@ Costume = {
 		BlueArchiveCharacter.COSTUME.callbacks.reset()
 		models.models["skull_"..self.CostumeList[self.CurrentCostume]].Skull:setVisible(false)
 		models.models.skull_default.Skull:setVisible(true)
+		HeadBlock.generateHeadBlockModel()
 		self.CurrentCostume = 1
 	end
 }
@@ -53,5 +55,6 @@ end
 if Costume.CurrentCostume >= 2 then
 	Costume:setCostume(Costume.CurrentCostume)
 end
+HeadBlock.generateHeadBlockModel()
 
 return Costume
