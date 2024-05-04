@@ -739,25 +739,24 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Ears"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Ears}) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Veil, models.models.main.Avatar.UpperBody.Body.VeilBody}) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Accessory"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Accessory}) do
                     modelPart:setPos(0, -1, 0)
                 end
                 if costumeId == 3 then
                     Costume.setCostumeTextureOffset(1)
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CTracksuitH", "UpperBody.Body.CTracksuitB"})) do
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CTracksuitH, models.models.main.Avatar.UpperBody.Body.CTracksuitB}) do
                         modelPart:setVisible(true)
                     end
-                    for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.TrinityLogo", "UpperBody.Body.FrontHair", "UpperBody.Body.Robe", "UpperBody.Body.BackRibbon"})) do
+                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.TrinityLogo, models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.BackRibbon}) do
                         modelPart:setVisible(false)
                     end
                 end
-                models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(not (costumeId == 2 and DeathAnimation ~= nil and DeathAnimation.AnimationCount < 120))
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
@@ -765,20 +764,17 @@ BlueArchiveCharacter = {
             ---@type fun()
             reset = function()
                 Costume.setCostumeTextureOffset(0)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Ears", "Head.CTracksuitH", "UpperBody.Body.CTracksuitB"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Ears, models.models.main.Avatar.Head.CTracksuitH, models.models.main.Avatar.UpperBody.Body.CTracksuitB}) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Veil", "UpperBody.Body.VeilBody", "UpperBody.Body.TrinityLogo", "UpperBody.Body.FrontHair"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Veil, models.models.main.Avatar.UpperBody.Body.VeilBody, models.models.main.Avatar.UpperBody.Body.TrinityLogo, models.models.main.Avatar.UpperBody.Body.FrontHair}) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Robe", "UpperBody.Body.BackRibbon"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.BackRibbon}) do
                     modelPart:setVisible(not Armor.ArmorVisible[3])
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Accessory"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Accessory}) do
                     modelPart:setPos()
-                end
-                if DeathAnimation ~= nil and DeathAnimation.AnimationCount < 120 then
-                    models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(false)
                 end
             end,
 
@@ -884,21 +880,41 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase1 = function (costume)
-        end
-        ]]
+            if costume == 1 then
+                models.models.death_animation.DummyAvatar.Head.Veil.VeilEar.RightVeilEarPivot:setRot(-30, 0, 0)
+                models.models.death_animation.DummyAvatar.Head.Veil.VeilEar.LeftVeilEarPivot:setRot(-30, 0, 0)
+            else
+                models.models.death_animation.DummyAvatar.Head.Ears.RightEarPivot:setRot(-30, 0, 0)
+                models.models.death_animation.DummyAvatar.Head.Ears.LeftEarPivot:setRot(-30, 0, 0)
+            end
+            if costume == 3 then
+                models.models.death_animation.DummyAvatar.Head.CTracksuitH.HairTail:setRot(17.5, 0, 0)
+                models.models.death_animation.DummyAvatar.UpperBody.Body.CTracksuitB.Bag:setPos(3, 2, 0)
+                models.models.death_animation.DummyAvatar.UpperBody.Body.CTracksuitB.Bag:setRot(0, 0, -25)
+            else
+                models.models.death_animation.DummyAvatar.LowerBody:setVisible(false)
+                models.models.death_animation.DummyAvatar.UpperBody.Body.Robe:setScale(1.5, 0.35, 2)
+            end
+        end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase2 = function (costume)
+            if costume == 3 then
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.Head.CTracksuitH.HairTail:setRot(-5, 0, -17.5)
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.CTracksuitB.Bag:setPos()
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.CTracksuitB.Bag:setRot()
+            else
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.LowerBody:setVisible(true)
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Robe:setRot(30, 0, 0)
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Robe:setScale(1.2, 1, 1)
+            end
         end
-        ]]
     },
 
     ---物理演算データ
