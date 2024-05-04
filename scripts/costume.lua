@@ -26,22 +26,19 @@ Costume = {
 	---@param costume integer 設定するコスチューム
 	setCostume = function(self, costume)
 		self:resetCostume()
-		for index, name in ipairs(self.CostumeList) do
-			models.models["skull_"..name].Skull:setVisible(index == costume)
-		end
 		BlueArchiveCharacter.COSTUME.callbacks.change(costume)
+		HeadBlock.generateHeadBlockModel()
 		self.CurrentCostume = costume
 	end,
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
 	resetCostume = function(self)
-		if ExSkill ~= nil then
+		if ExSkill ~= nil and ExSkill.TransitionCount > 0 then
 			ExSkill:forceStop()
 		end
 		self.setCostumeTextureOffset(0)
 		BlueArchiveCharacter.COSTUME.callbacks.reset()
-		models.models["skull_"..self.CostumeList[self.CurrentCostume]].Skull:setVisible(false)
-		models.models.skull_default.Skull:setVisible(true)
+		HeadBlock.generateHeadBlockModel()
 		self.CurrentCostume = 1
 	end
 }
@@ -52,6 +49,8 @@ end
 
 if Costume.CurrentCostume >= 2 then
 	Costume:setCostume(Costume.CurrentCostume)
+else
+	HeadBlock.generateHeadBlockModel()
 end
 
 return Costume
