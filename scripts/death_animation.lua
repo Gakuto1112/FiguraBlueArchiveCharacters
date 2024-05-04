@@ -43,6 +43,10 @@ DeathAnimation = {
             excludeModelsVisibleList[index] = modelPart:getVisible()
             modelPart:setVisible(false)
         end
+        local hasShield = BlueArchiveCharacter.HasShield
+        if hasShield then
+            BlueArchiveCharacter:setShield(false, false)
+        end
         Physics:disable()
 
         ---指定されたモデルパーツの子パーツをすべて削除した上でコピー元のモデルからディープコピーする。
@@ -130,6 +134,9 @@ DeathAnimation = {
             if excludeModelsVisibleList[index] then
                 modelPart:setVisible(true)
             end
+        end
+        if hasShield then
+            BlueArchiveCharacter:setShield(true, false)
         end
         Physics:enable()
 

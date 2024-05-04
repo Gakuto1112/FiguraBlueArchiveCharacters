@@ -635,10 +635,10 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH"})) do
+                for _, modelPart in ipairs({models.models.main.Head.CMaskedH}) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                for _, modelPart in ipairs({models.models.main.Head.HairEnds, models.models.main.UpperBody.Body.Hairs}) do
                     modelPart:setVisible(false)
                 end
             end,
@@ -647,10 +647,10 @@ BlueArchiveCharacter = {
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CMaskedH"})) do
+                for _, modelPart in ipairs({models.models.main.Head.CMaskedH}) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.HairEnds", "UpperBody.Body.Hairs"})) do
+                for _, modelPart in ipairs({models.models.main.Head.HairEnds, UpperBody.Body.Hairs}) do
                     modelPart:setVisible(true)
                 end
             end,
@@ -737,21 +737,30 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase1 = function (costume)
-        end
-        ]]
+            models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setRot(25, 0, 0)
+            models.models.death_animation.DummyAvatar.UpperBody.Body.Shield:setPos(4.5, -2.5, 0)
+            models.models.death_animation.DummyAvatar.UpperBody.Body.Shield:setRot(70, 90, 0)
+            models.models.death_animation.DummyAvatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setRot(-55, 0, 0)
+            if costume == 1 then
+                models.models.death_animation.DummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-35, 0, 0)
+            end
+        end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase2 = function (costume)
+            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Shield:setPos()
+            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Shield:setRot(0, 90, 0)
+            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setRot()
+            if costume == 1 then
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-9.6599, -3.2113, -12.0868)
+            end
         end
-        ]]
     },
 
     ---物理演算データ
@@ -1836,40 +1845,47 @@ BlueArchiveCharacter = {
 
     ---盾を手に持っているかどうか
     ---@type boolean
-    HasShield = false
+    HasShield = false,
+
+    ---盾の展開状態を設定する。
+    ---@param newValue boolean 新しい値
+    ---@param playShieldSound boolean 盾の展開音を再生するかどうか
+    setShield = function (self, newValue, playShieldSound)
+        if newValue and not self.HasShield then
+            models.models.main.Avatar.UpperBody.Body.Shield:setParentType("Item")
+            models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1}) do
+                modelPart:setRot()
+            end
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder3.GasPiston3, models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder4.GasPiston4, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2}) do
+                modelPart:setPos(0, -1.4, 0)
+            end
+            models.models.main.Avatar.UpperBody.Body.Shield.Section3.Handle2:setPos(0, 0.25, 0)
+            models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.Handle:setPos(0, -0.25, 0)
+            if playShieldSound then
+                sounds:playSound("minecraft:block.anvil.place", player:getPos(), 0.1, 2)
+            end
+        elseif not newValue and self.HasShield then
+            models.models.main.Avatar.UpperBody.Body.Shield:setParentType("Body")
+            models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
+            models.models.main.Avatar.UpperBody.Body.Shield:setPos()
+            models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1}) do
+                modelPart:setRot(-180, 0, 0)
+            end
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder3.GasPiston3, models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder4.GasPiston4, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2, models.models.main.Avatar.UpperBody.Body.Shield.Section3.Handle2, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.Handle}) do
+                modelPart:setPos()
+            end
+            models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType("NONE")
+        end
+        self.HasShield = newValue
+    end
 }
 
 --生徒固有初期化処理
 events.TICK:register(function()
     models.models.main.Avatar.UpperBody.Body.Skirt:setRot(player:isCrouching() and 30 or 0)
-
-    local hasShieldPrev = BlueArchiveCharacter.HasShield
-    BlueArchiveCharacter.HasShield = (player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1
-    if BlueArchiveCharacter.HasShield and not hasShieldPrev then
-        models.models.main.Avatar.UpperBody.Body.Shield:setParentType("Item")
-        models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
-        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1}) do
-            modelPart:setRot()
-        end
-        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder3.GasPiston3, models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder4.GasPiston4, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2}) do
-            modelPart:setPos(0, -1.4, 0)
-        end
-        models.models.main.Avatar.UpperBody.Body.Shield.Section3.Handle2:setPos(0, 0.25, 0)
-        models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.Handle:setPos(0, -0.25, 0)
-        sounds:playSound("minecraft:block.anvil.place", player:getPos(), 0.1, 2)
-    elseif not BlueArchiveCharacter.HasShield and hasShieldPrev then
-        models.models.main.Avatar.UpperBody.Body.Shield:setParentType("Body")
-        models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
-        models.models.main.Avatar.UpperBody.Body.Shield:setPos()
-        models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
-        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1}) do
-            modelPart:setRot(-180, 0, 0)
-        end
-        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder3.GasPiston3, models.models.main.Avatar.UpperBody.Body.Shield.Section2.GasCylinder4.GasPiston4, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder1.GasPiston1, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.GasCylinder2.GasPiston2, models.models.main.Avatar.UpperBody.Body.Shield.Section3.Handle2, models.models.main.Avatar.UpperBody.Body.Shield.Section2.Section1.Handle}) do
-            modelPart:setPos()
-        end
-        models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType("NONE")
-    end
+    BlueArchiveCharacter:setShield((player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1, true)
 end)
 
 events.ITEM_RENDER:register(function (item, mode)
