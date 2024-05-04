@@ -182,11 +182,14 @@ Bubble = {
         end
 
         events.TICK:register(function ()
-            self.IsChatOpened[1] = host:isChatOpen()
-            if self.IsChatOpened[1] and not self.IsChatOpened[2] then
-                pings.setChatOpen(self.IsChatOpened[1])
-            elseif not self.IsChatOpened[1] and self.IsChatOpened[2] then
-                pings.setChatOpen(self.IsChatOpened[2])
+            if host:isHost() then
+                self.IsChatOpened[1] = host:isChatOpen()
+                if self.IsChatOpened[1] and not self.IsChatOpened[2] then
+                    pings.setChatOpen(self.IsChatOpened[1])
+                elseif not self.IsChatOpened[1] and self.IsChatOpened[2] then
+                    pings.setChatOpen(self.IsChatOpened[1])
+                end
+                self.IsChatOpened[2] = self.IsChatOpened[1]
             end
 
             if player:getActiveItem().id == "minecraft:crossbow" then
