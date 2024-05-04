@@ -874,6 +874,13 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", duration, true)
                     elseif type == "HEART" then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", duration, true)
+                    elseif type == "NOTE" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", duration, true)
+                    elseif type == "QUESTION" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SAD", duration, true)
+                    elseif type == "SWEAT" then
+                        FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", duration, true)
+                        models.models.main.Avatar.Head.FaceLayer:setVisible(true)
                     end
                 end
             end,
@@ -886,6 +893,7 @@ BlueArchiveCharacter = {
                 if not forcedStop then
                     FaceParts:resetEmotion()
                 end
+                models.models.main.Avatar.Head.FaceLayer:setVisible(false)
             end
         }
     },
