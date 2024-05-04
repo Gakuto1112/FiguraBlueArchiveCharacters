@@ -11,7 +11,9 @@ Portrait = {
         local excludeModelsVisibleList = {}
         for index, modelPart in ipairs(BlueArchiveCharacter.PORTRAIT.excludeModels) do
             excludeModelsVisibleList[index] = modelPart:getVisible()
-            modelPart:setVisible(false)
+            if excludeModelsVisibleList[index] then
+                modelPart:setVisible(false)
+            end
         end
         Physics:disable()
 
