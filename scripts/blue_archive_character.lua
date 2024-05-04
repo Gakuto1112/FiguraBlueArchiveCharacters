@@ -771,18 +771,15 @@ BlueArchiveCharacter = {
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
                 Costume.setCostumeTextureOffset(1)
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.Brim", "UpperBody.Body.BackRibbon", "UpperBody.Body.Skirt", "UpperBody.Body.Hairs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Brim, models.models.main.Avatar.UpperBody.Body.BackRibbon, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom}) do
                     modelPart:setVisible(false)
                 end
 
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB}) do
                     modelPart:setVisible(true)
                 end
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.Brim, models.models.main.Avatar.Head.CSwimsuitH.EarAccessories}) do
                     modelPart:setVisible(not Armor.ArmorVisible[1])
-                end
-                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.CSwimsuitH.Brim, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.EarAccessories}) do
-                    modelPart:setVisible(true)
                 end
             end,
 
@@ -790,18 +787,15 @@ BlueArchiveCharacter = {
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"UpperBody.Body.Hairs", "UpperBody.Arms.RightArm.RightSleeveTop", "UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom", "UpperBody.Arms.LeftArm.LeftSleeveTop", "UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeveTop, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightSleeveBottom, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeveTop, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftSleeveBottom}) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs(ModelUtils:getPlayerModels({"Head.CSwimsuitH", "UpperBody.Body.CSwimsuitB"})) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB}) do
                     modelPart:setVisible(false)
                 end
                 models.models.main.Avatar.Head.Brim:setVisible(not Armor.ArmorVisible[1])
                 for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.BackRibbon, models.models.main.Avatar.UpperBody.Body.Skirt}) do
                     modelPart:setVisible(not Armor.ArmorVisible[2])
-                end
-                for _, modelPart in ipairs({models.models.death_animation.DummyAvatar.Head.Brim, models.models.death_animation.DummyAvatar.UpperBody.Body.BackRibbon, models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt}) do
-                    modelPart:setVisible(true)
                 end
             end,
 
