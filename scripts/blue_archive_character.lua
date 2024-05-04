@@ -938,7 +938,7 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {models.models.main.Avatar.Head.Ears, models.models.main.Avatar.Head.HairAccessories.HairAccessoryRight, models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory}
     },
 
     ---物理演算データ
