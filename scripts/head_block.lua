@@ -3,18 +3,41 @@ HeadBlock = {
     ---頭ブロックのモデルを生成する。
     generateHeadBlockModel = function ()
         --既存の頭ブロックのモデルを削除する。
-        if models.script_head_block.Skull ~= nil then
-            models.script_head_block.Skull:remove()
+        if models.script_head_block.Head ~= nil then
+            models.script_head_block.Head:remove()
+        end
+
+        --頭ブロックから除外するモデルパーツを予め非表示にする。
+        local excludeModelsVisibleList = {}
+        for index, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.excludeModels) do
+            excludeModelsVisibleList[index] = modelPart:getVisible()
+            modelPart:setVisible(false)
         end
 
         --現在の衣装を基に新たな頭ブロックのモデルを生成する。
-        models.script_head_block:addChild(ModelUtils:copyModel(models.models.main.Avatar.Head))
-        models.script_head_block.Head:setParentType("Skull")
-        models.script_head_block.Head:setPos(0, -24, 0)
-        models.script_head_block.Head.HeadRing:setLight(15)
-        for _, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.includeModels[Costume.CurrentCostume]) do
-            local copiedPart = ModelUtils:copyModel(modelPart)
-            models.script_head_block.Head:addChild(copiedPart)
+        local copiedPart = ModelUtils:copyModel(models.models.main.Avatar.Head)
+        if copiedPart ~= nil then
+            models.script_head_block:addChild(copiedPart)
+            models.script_head_block.Head:setParentType("Skull")
+            models.script_head_block.Head:setPos(0, -24, 0)
+            models.script_head_block.Head.HeadRing:setLight(15)
+            for _, modelPart in ipairs({models.script_head_block.Head.FaceParts.EyeRight, models.script_head_block.Head.FaceParts.EyeLeft}) do
+                modelPart:setUVPixels()
+            end
+            models.script_head_block.Head.FaceParts.Mouth:remove()
+            for _, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.includeModels) do
+                local copiedIncludePart = ModelUtils:copyModel(modelPart)
+                if copiedIncludePart:getVisible() then
+                    models.script_head_block.Head:addChild(copiedPart)
+                end
+            end
+        end
+
+        --非表示にしたモデルを元に戻す。
+        for index, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.excludeModels) do
+            if excludeModelsVisibleList[index] then
+                modelPart:setVisible(true)
+            end
         end
     end,
 

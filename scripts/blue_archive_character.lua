@@ -525,11 +525,12 @@ BlueArchiveCharacter = {
     ---頭ブロック
     HEAD_BLOCK = {
         ---頭以外のモデルパーツで頭ブロックにアタッチしたいモデルパーツを配列形式で列挙する。
-        ---インデックスは衣装リストと同じ順番
-        ---@type table<table<ModelPart>>
-        includeModels = {
-            {}
-        }
+        ---@type ModelPart>[]
+        includeModels = {},
+
+        ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        excludeModels = {}
     },
 
     ---物理演算データ

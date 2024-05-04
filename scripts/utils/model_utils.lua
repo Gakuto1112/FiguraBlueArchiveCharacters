@@ -46,18 +46,22 @@ ModelUtils = {
         return result
     end,
 
-    ---モデルパーツをディープコピーする。
+    ---モデルパーツをディープコピーする。非表示のモデルパーツはコピーしない。
     ---@param modelPart ModelPart コピーするモデルパーツ
-    ---@return ModelPart copiedModelPart コピーされたモデルパーツ
+    ---@return ModelPart? copiedModelPart コピーされたモデルパーツ。入力されたモデルパーツが非表示の場合はnilが返る。
     copyModel = function (self, modelPart)
-        local copy = modelPart:copy(modelPart:getName())
-        for _, child in ipairs(copy:getChildren()) do
-            copy:removeChild(child)
-            local childModel = self:copyModel(child)
-            childModel:setParentType("None")
-            copy:addChild(childModel)
+        if modelPart:getVisible() then
+            local copy = modelPart:copy(modelPart:getName())
+            copy:setParentType("None")
+            for _, child in ipairs(copy:getChildren()) do
+                copy:removeChild(child)
+                local childModel = self:copyModel(child)
+                if childModel ~= nil then
+                    copy:addChild(childModel)
+                end
+            end
+            return copy
         end
-        return copy
     end
 }
 
