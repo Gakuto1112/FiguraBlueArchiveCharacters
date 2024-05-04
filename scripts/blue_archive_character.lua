@@ -762,21 +762,19 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {models.models.main.Avatar.Head.FaceParts.Mouth2},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase1 = function (costume)
-        end
-        ]]
+            models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+        end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase2 = function (costume)
+            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
         end
-        ]]
     },
 
     ---物理演算データ
