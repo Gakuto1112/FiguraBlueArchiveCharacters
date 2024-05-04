@@ -544,6 +544,27 @@ BlueArchiveCharacter = {
         excludeModels = {}
     },
 
+    ---死亡アニメーションのダミーアバター
+    DEATH_ANIMATION = {
+        ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        excludeModels = {}
+
+        ---死亡アニメーションが再生された直後に実行される関数（省略可）
+        ---@type function
+        --[[
+        onPhase1 = function ()
+        end
+        ]]
+
+        ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
+        ---@type function
+        --[[
+        onPhase2 = function ()
+        end
+        ]]
+    },
+
     ---物理演算データ
     PHYSICS = {
         --[[
