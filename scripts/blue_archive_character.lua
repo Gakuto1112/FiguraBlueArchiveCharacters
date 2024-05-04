@@ -862,7 +862,7 @@ BlueArchiveCharacter = {
     HEAD_BLOCK = {
         ---頭以外のモデルパーツで頭ブロックにアタッチしたいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        includeModels = {},
+        includeModels = {models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.VeilBody, models.models.main.Avatar.UpperBody.Body.CTracksuitB.FrontHair},
 
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
