@@ -77,8 +77,8 @@ BlueArchiveCharacter = {
         RightEye = {
             NORMAL = {0, 0},
             INVERSED = {2, 0},
-            SURPLISED = {3, 0},
-            TIRED = {4, 0},
+            SURPLISED = {4, 0},
+            TIRED = {3, 0},
             CLOSED = {0, 1},
             UNEQUAL = {1, 1}
         },
@@ -87,7 +87,7 @@ BlueArchiveCharacter = {
         LeftEye = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
-            TIRED = {3, 0},
+            TIRED = {4, 0},
             CLOSED = {-1, 1},
             UNEQUAL = {0, 1}
         },
@@ -918,21 +918,30 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase1 = function (costume)
-        end
-        ]]
+            if costume == 1 then
+                models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setRot(35, 0, 0)
+            elseif costume == 2 then
+                models.models.death_animation.DummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight:setRot(29.3063, 5.6842, -13.9042)
+                models.models.death_animation.DummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft:setRot(29.3063, -5.6842, 13.9042)
+            end
+        end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase2 = function (costume)
+            if costume == 1 then
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Skirt:setRot(15, 0, 0)
+            elseif costume == 2 then
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight:setRot(1.5523, -7.3011, -23.9759)
+                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft:setRot(-10.0014, -13.1248, -21.4687)
+            end
+
         end
-        ]]
     },
 
     ---物理演算データ
