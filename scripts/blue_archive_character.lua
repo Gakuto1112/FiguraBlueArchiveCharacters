@@ -77,7 +77,7 @@ BlueArchiveCharacter = {
         RightEye = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
-            TIED = {4, 0},
+            TIRED = {4, 0},
             CLOSED = {3, 0},
             SURPLISED2 = {5, 0},
             ANGRY = {6, 0},
@@ -89,7 +89,7 @@ BlueArchiveCharacter = {
         LeftEye = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
-            TIED = {3, 0},
+            TIRED = {3, 0},
             CLOSED = {2, 0},
             SURPLISED2 = {4, 0},
             ANGRY = {-1, 1},
@@ -726,21 +726,19 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase1 = function (costume)
-        end
-        ]]
+            models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+        end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param costume integer コスチュームのインデックス
-        --[[
         onPhase2 = function (costume)
+            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
         end
-        ]]
     },
 
     ---物理演算データ
