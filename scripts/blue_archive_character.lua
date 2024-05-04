@@ -711,6 +711,17 @@ BlueArchiveCharacter = {
         excludeModels = {}
     },
 
+    ---ポートレート
+    PORTRAIT = {
+        ---頭以外のモデルパーツでポートレートにアタッチしたいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        includeModels = {},
+
+        ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        excludeModels = {}
+    },
+
     ---物理演算データ
     PHYSICS = {
         --[[
