@@ -927,16 +927,16 @@ BlueArchiveCharacter = {
         excludeModels = {}
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
-        ---@type function
+        ---@param costume integer コスチュームのインデックス
         --[[
-        onPhase1 = function ()
+        onPhase1 = function (costume)
         end
         ]]
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
-        ---@type function
+        ---@param costume integer コスチュームのインデックス
         --[[
-        onPhase2 = function ()
+        onPhase2 = function (costume)
         end
         ]]
     },

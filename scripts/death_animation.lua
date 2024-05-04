@@ -18,7 +18,11 @@ DeathAnimation = {
 
     ---プレイヤーモデルが不可視かどうか
     ---@type boolean
-    playerInvisible = false,
+    PlayerInvisible = false,
+
+    ---死亡アニメーションのコスチュームのインデックス
+    ---@type integer
+    CostumeIndex = 1,
 
     ---ヘリコプターの出現/消滅パーティクルを生成する。
     spawnHelicopterParticles = function (self)
@@ -31,6 +35,7 @@ DeathAnimation = {
     ---死亡アニメーションを再生する。
     play = function (self)
         self:stop()
+        self.CostumeIndex = Costume.CurrentCostume
 
         --ダミーアバターを生成する。
         local excludeModelsVisibleList = {}
@@ -135,6 +140,9 @@ DeathAnimation = {
         models.models.death_animation:setRot(0, self.AnimationRot)
         models.models.death_animation:setVisible(true)
         animations["models.death_animation"]["death_animation"]:play()
+        if BlueArchiveCharacter.DEATH_ANIMATION.onPhase1 ~= nil then
+            BlueArchiveCharacter.DEATH_ANIMATION.onPhase1(self.CostumeIndex)
+        end
         if events.TICK:getRegisteredCount("death_animation_tick") == 0 then
             events.TICK:register(function ()
                 local particleAnchorPos = ModelUtils.getModelWorldPos(models.models.death_animation.DeathAnimationParticleAnchor)
@@ -160,7 +168,7 @@ DeathAnimation = {
                     models.models.death_animation.DummyAvatar:setLight()
                     self.DummyAvatarRoot = models.models.death_animation.DummyAvatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
                     if BlueArchiveCharacter.DEATH_ANIMATION.onPhase2 ~= nil then
-                        BlueArchiveCharacter.DEATH_ANIMATION.onPhase2()
+                        BlueArchiveCharacter.DEATH_ANIMATION.onPhase2(self.CostumeIndex)
                     end
                 elseif self.AnimationCount == 230 then
                     sounds:playSound("minecraft:block.iron_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
@@ -201,14 +209,14 @@ DeathAnimation = {
                 for _, vanillaModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM, vanilla_model.ELYTRA}) do
                     vanillaModel:setVisible(false)
                 end
-                self.playerInvisible = true
+                self.PlayerInvisible = true
             end
-            if self.playerInvisible and player:getHealth() > 0 then
+            if self.PlayerInvisible and player:getHealth() > 0 then
                 models.models.main:setVisible(true)
                 for _, vanillaModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM, vanilla_model.ELYTRA}) do
                     vanillaModel:setVisible(true)
                 end
-                self.playerInvisible = false
+                self.PlayerInvisible = false
             end
         end)
     end
