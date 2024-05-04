@@ -2,7 +2,9 @@
 ---@alias Bubble.BubbleType
 ---| "GOOD" 👍
 ---| "HEART" 💗
+---| "NOTE" 🎵
 ---| "QUESTION" ❓
+---| "SWEAT" 💦
 ---| "RELOAD" 弾薬をリロードする絵文字
 
 ---@class Bubble 吹き出しエモートを管理するクラス
@@ -98,7 +100,7 @@ Bubble = {
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
                     if host:isHost() and self.ShowInGui then
                         local windowSize = client:getScaledWindowSize()
-                        models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 105 or 10), 0)
+                        models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 125 or 10), 0)
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
                     end
                     local avatarBubblePos = vectors.vec3(0, 32, 0)
@@ -139,24 +141,29 @@ Bubble = {
 
         --エモートガイド
         if host:isHost() then
-            KeyManager:register("bubble_up", Config.loadConfig("keybind.bubble_up", "key.keyboard.up"), function ()
+            KeyManager:register("bubble_1", Config.loadConfig("keybind.bubble_1", "key.keyboard.j"), function ()
                 if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
-                    pings.bubble_up()
+                    pings.bubble_1()
                 end
             end)
-            KeyManager:register("bubble_right", Config.loadConfig("keybind.bubble_right", "key.keyboard.right"), function ()
+            KeyManager:register("bubble_2", Config.loadConfig("keybind.bubble_2", "key.keyboard.k"), function ()
                 if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
-                    pings.bubble_right()
+                    pings.bubble_2()
                 end
             end)
-            KeyManager:register("bubble_down", Config.loadConfig("keybind.bubble_down", "key.keyboard.down"), function ()
+            KeyManager:register("bubble_3", Config.loadConfig("keybind.bubble_3", "key.keyboard.n"), function ()
                 if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
-                    pings.bubble_down()
+                    pings.bubble_3()
                 end
             end)
-            KeyManager:register("bubble_left", Config.loadConfig("keybind.bubble_left", "key.keyboard.left"), function ()
+            KeyManager:register("bubble_4", Config.loadConfig("keybind.bubble_4", "key.keyboard.m"), function ()
                 if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
-                    pings.bubble_left()
+                    pings.bubble_4()
+                end
+            end)
+            KeyManager:register("bubble_5", Config.loadConfig("keybind.bubble_5", "key.keyboard.comma"), function ()
+                if ExSkill.AnimationCount == -1 and self.TransitionCounter == 0 then
+                    pings.bubble_5()
                 end
             end)
         end
@@ -168,20 +175,24 @@ Bubble = {
 }
 
 --ping関数
-function pings.bubble_up()
+function pings.bubble_1()
     Bubble:play("GOOD", 50, true)
 end
 
-function pings.bubble_right()
+function pings.bubble_2()
     Bubble:play("HEART", 50, true)
 end
 
-function pings.bubble_down()
-    Bubble:play("RELOAD", 50, true)
+function pings.bubble_3()
+    Bubble:play("NOTE", 50, true)
 end
 
-function pings.bubble_left()
+function pings.bubble_4()
     Bubble:play("QUESTION", 50, true)
+end
+
+function pings.bubble_5()
+    Bubble:play("SWEAT", 50, true)
 end
 
 ---リロードの吹き出しエモートがクロスボウによって再生されたかどうか
