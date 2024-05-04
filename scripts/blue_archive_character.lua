@@ -81,7 +81,6 @@ BlueArchiveCharacter = {
             CLOSED = {3, 0},
             ANXIOUS = {5, 0},
             CLOSED2 = {0, 1},
-            FRUST = {1, 1},
             STARE = {2, 1}
         },
 
@@ -93,7 +92,8 @@ BlueArchiveCharacter = {
             CLOSED = {2, 0},
             ANXIOUS = {5, 0},
             CLOSED2 = {-1, 1},
-            STARE = {2, 1}
+            STARE = {2, 1},
+            STARE2 = {0, 1},
         },
 
         ---口
@@ -529,7 +529,7 @@ BlueArchiveCharacter = {
                     elseif tick == 37 then
                         models.models.ex_skill_1.Momoi.MomoiUpperBody.MomoiArms.MomoiLeftArm.MomoiLeftArmBottom.GameConsole2:setVisible(false)
                     elseif tick == 47 then
-                        FaceParts:setEmotion("FRUST", "TIRED", "FRUST", 17, true)
+                        FaceParts:setEmotion("STARE", "TIRED", "FRUST", 17, true)
                     elseif tick == 49 then
                         for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels(24, 0)
@@ -708,13 +708,17 @@ BlueArchiveCharacter = {
             onPlay = function(type, duration, showInGui)
                 if duration > 0 then
                     if type == "GOOD" then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", duration, true)
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", duration, true)
+                        models.models.main.Avatar.Head.FaceParts.Mouth2:setVisible(true)
                     elseif type == "HEART" then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", duration, true)
-                    elseif type == "RELOAD" then
-                        FaceParts:resetEmotion()
+                        models.models.main.Avatar.Head.FaceParts.Mouth2:setVisible(true)
+                    elseif type == "NOTE" then
+                        FaceParts:setEmotion("STARE", "STARE2", "NORMAL2", duration, true)
                     elseif type == "QUESTION" then
-                        FaceParts:setEmotion("FRUST", "TIRED", "FRUST", duration, true)
+                        FaceParts:setEmotion("SURPLISED", "SURPLISED", "SHOCK", duration, true)
+                    elseif type == "SWEAT" then
+                        FaceParts:setEmotion("STARE", "TIRED", "FRUST", duration, true)
                     end
                 end
             end,
@@ -727,6 +731,7 @@ BlueArchiveCharacter = {
                 if forcedStop then
                     FaceParts:resetEmotion()
                 end
+                models.models.main.Avatar.Head.FaceParts.Mouth2:setVisible(false)
             end
         }
     },
