@@ -733,6 +733,27 @@ BlueArchiveCharacter = {
         excludeModels = {models.models.main.Avatar.Head.Cowlick, models.models.main.Avatar.Head.HairEnds}
     },
 
+    ---死亡アニメーションのダミーアバター
+    DEATH_ANIMATION = {
+        ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        excludeModels = {}
+
+        ---死亡アニメーションが再生された直後に実行される関数（省略可）
+        ---@param costume integer コスチュームのインデックス
+        --[[
+        onPhase1 = function (costume)
+        end
+        ]]
+
+        ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
+        ---@param costume integer コスチュームのインデックス
+        --[[
+        onPhase2 = function (costume)
+        end
+        ]]
+    },
+
     ---物理演算データ
     PHYSICS = {
         --[[
