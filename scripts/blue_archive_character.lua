@@ -700,6 +700,17 @@ BlueArchiveCharacter = {
         }
     },
 
+    ---頭ブロック
+    HEAD_BLOCK = {
+        ---頭以外のモデルパーツで頭ブロックにアタッチしたいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        includeModels = {},
+
+        ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
+        ---@type ModelPart>[]
+        excludeModels = {}
+    },
+
     ---物理演算データ
     PHYSICS = {
         --[[
