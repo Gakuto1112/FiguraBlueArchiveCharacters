@@ -688,11 +688,13 @@ BlueArchiveCharacter = {
                     if type == "GOOD" then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "W", duration, true)
                     elseif type == "HEART" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "YAWN", duration, true)
+                    elseif type == "NOTE" then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "W", duration, true)
-                    elseif type == "RELOAD" then
-                        FaceParts:resetEmotion()
                     elseif type == "QUESTION" then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", duration, true)
+                    elseif type == "SWEAT" then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED2", duration, true)
                     end
                 end
             end,
