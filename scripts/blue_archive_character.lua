@@ -2635,9 +2635,7 @@ events.RENDER:register(function ()
     end
 end)
 
-for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.skull_swimsuit.Skull.CSwimsuitH.SunflowerAccessory.Sunflower, models.models.death_animation.DummyAvatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower}) do
-    modelPart:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
-end
+models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower:setPrimaryTexture("RESOURCE", "textures/block/sunflower_front.png")
 
 ---テレポート時の演出（パーティクル、狐の人形）
 ---@param currentPos Vector3 テレポート先のワールド座標
