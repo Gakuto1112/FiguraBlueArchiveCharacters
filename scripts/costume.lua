@@ -33,7 +33,7 @@ Costume = {
 
 	---コスチュームをリセットし、デフォルトのコスチュームにする。
 	resetCostume = function(self)
-		if ExSkill ~= nil then
+		if ExSkill ~= nil and ExSkill.TransitionCount > 0 then
 			ExSkill:forceStop()
 		end
 		self.setCostumeTextureOffset(0)

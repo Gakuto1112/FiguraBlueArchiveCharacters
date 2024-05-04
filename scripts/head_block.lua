@@ -23,7 +23,7 @@ HeadBlock = {
             models.script_head_block.Head:setPos(0, -24, 0)
             models.script_head_block.Head.HeadRing:setRot()
             models.script_head_block.Head.HeadRing:setLight(15)
-            for _, modelPart in ipairs({models.script_head_block.Head.FaceParts.EyeRight, models.script_head_block.Head.FaceParts.EyeLeft}) do
+            for _, modelPart in ipairs({models.script_head_block.Head.FaceParts.Eyes.EyeRight, models.script_head_block.Head.FaceParts.Eyes.EyeLeft}) do
                 modelPart:setUVPixels()
             end
             models.script_head_block.Head.FaceParts.Mouth:remove()
