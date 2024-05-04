@@ -194,7 +194,7 @@ Bubble = {
                     self:play("RELOAD", -1, false)
                     self.IsAutoBubble = true
                 end
-            elseif self.IsChatOpened[1] then
+            elseif self.IsChatOpened[1] and ExSkill.TransitionCount == 0 then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "DOTS") then
                     self:play("DOTS", -1, false)
                     self.IsAutoBubble = true
