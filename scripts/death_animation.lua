@@ -75,8 +75,8 @@ DeathAnimation = {
 
         --頭
         removeAndCopyModels(models.models.death_animation.DummyAvatar.Head, models.models.main.Avatar.Head)
-        models.models.death_animation.DummyAvatar.Head.FaceParts.Eyes.EyeRight:setUVPixels(BlueArchiveCharacter.FACE_PARTS.RightEye.TIRED[1] * 6, BlueArchiveCharacter.FACE_PARTS.RightEye.TIRED[2] * 6)
-        models.models.death_animation.DummyAvatar.Head.FaceParts.Eyes.EyeLeft:setUVPixels(BlueArchiveCharacter.FACE_PARTS.LeftEye.TIRED[1] * 6, BlueArchiveCharacter.FACE_PARTS.LeftEye.TIRED[2] * 6)
+        models.models.death_animation.DummyAvatar.Head.FaceParts.Eyes.EyeRight:setUVPixels(BlueArchiveCharacter.FACE_PARTS.LeftEye.TIRED[1] * 6, BlueArchiveCharacter.FACE_PARTS.LeftEye.TIRED[2] * 6)
+        models.models.death_animation.DummyAvatar.Head.FaceParts.Eyes.EyeLeft:setUVPixels(BlueArchiveCharacter.FACE_PARTS.RightEye.TIRED[1] * 6, BlueArchiveCharacter.FACE_PARTS.RightEye.TIRED[2] * 6)
         models.models.death_animation.DummyAvatar.Head.FaceParts.Mouth:remove()
         models.models.death_animation.DummyAvatar.Head.HeadRing:setRot()
         removeUnsafeModel(models.models.death_animation.DummyAvatar.Head.ArmorH)
