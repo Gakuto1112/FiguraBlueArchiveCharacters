@@ -51,10 +51,12 @@ local nextSyncCount = 0
 ---@param showClubName boolean 部活名を表示するかどうか
 ---@param costumeId integer 現在の衣装ID
 ---@param isArmorShown boolean 防具が見えているかどうか
-function pings.syncAvatarConfig(nameTypeId, showClubName, costumeId, isArmorShown)
+---@param IsChatOpened boolean チャット欄を開いているかどうか
+function pings.syncAvatarConfig(nameTypeId, showClubName, costumeId, isArmorShown, IsChatOpened)
 	if not isSynced then
 		Nameplate:setName(nameTypeId, showClubName)
 		Armor.ShowArmor = isArmorShown
+		Bubble.IsChatOpened[1] = IsChatOpened
 		if costumeId >= 2 then
 			Costume:setCostume(costumeId)
 		end
@@ -66,7 +68,7 @@ if host:isHost() then
 	config:setName("BlueArchive_"..BlueArchiveCharacter.BASIC.firstName.en_us..BlueArchiveCharacter.BASIC.lastName.en_us)
 	events.TICK:register(function ()
 		if nextSyncCount == 0 then
-			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown, Costume.CurrentCostume, Armor.ShowArmor)
+			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown, Costume.CurrentCostume, Armor.ShowArmor, Bubble.IsChatOpened[1])
 			nextSyncCount = 300
 		else
 			nextSyncCount = nextSyncCount - 1
