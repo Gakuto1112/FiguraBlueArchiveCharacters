@@ -100,7 +100,8 @@ BlueArchiveCharacter = {
             CLOSED = {0, 0},
             OPENED = {4, 0},
             CIRCLE = {8, 0},
-            SMILE = {12, 0}
+            SMILE = {12, 0},
+            SAD = {8, 4}
         }
     },
 
@@ -896,6 +897,12 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", duration, true)
                     elseif type == "HEART" then
                         FaceParts:setEmotion("SMILE", "SMILE", "OPENED", duration, true)
+                    elseif type == "NOTE" then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", duration, true)
+                    elseif type == "QUESTION" then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SAD", duration, true)
+                    elseif type == "SWEAT" then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "SAD", duration, true)
                     end
                 end
             end,
