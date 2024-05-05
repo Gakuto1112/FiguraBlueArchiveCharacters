@@ -75,7 +75,7 @@ jobs:
           else
             result=$(git diff HEAD~ --name-only)
           fi
-          echo ${result} | grep -e '.github/README/' -e '.github/workflows/generate_readme.yml'
+          echo ${result} | grep -e '.github/README_templates/' -e '.github/workflows/generate_readme.yml'
         env:
           BRANCH_NAME: ${{ matrix.target_branch }}
         continue-on-error: true
