@@ -100,6 +100,25 @@ BlueArchiveCharacter = {
             SMILE = {0, 8},
             SAD = {4, 8}
         }
+
+        ---表情のセット（省略可）
+        --[[
+        FacePartsSets = {
+            ---ダメージを受けた時の表情（省略可）
+            onDamage = {
+                RightEye = "SURPLISED",
+                LeftEye = "SURPLISED",
+                Mouth = "CLOSED"
+            },
+
+            ---寝ている時の表情（省略可）
+            onSleep = {
+                RightEye = "NORMAL",
+                LeftEye = "CLOSED",
+                Mouth = "CLOSED"
+            }
+        }
+        ]]
     },
 
     ---銃
@@ -901,6 +920,18 @@ BlueArchiveCharacter = {
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.FaceLayer}
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---ポートレート
@@ -912,6 +943,18 @@ BlueArchiveCharacter = {
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.FaceLayer, models.models.main.Avatar.Head.Brim, models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.CSwimsuitH}
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---死亡アニメーションのダミーアバター
@@ -942,6 +985,18 @@ BlueArchiveCharacter = {
             end
 
         end
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---物理演算データ
