@@ -124,10 +124,7 @@ Toggles whether weapon models (including students' guns) are visible or not in f
 
 ![First-person weapon models](./README_images/first_person_weapons.jpg)
 
-### Action 5. Change accuracy of camera during ex skill animations
-Changes the accuracy of the camera collision detection used during ex skill animations. Increasing the accuracy reduces camera wobble but increases the processing load. Scroll to select the option and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
-
-### Action 6. Change amount of Ex skill frame particles
+### Action 5. Change amount of Ex skill frame particles
 Changes the amount of triangular particles that appear from the red or blue borders that appear during Ex skill animations. Reducing or disabling particles may improve performance.
 
 ## How to use
@@ -146,6 +143,7 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 8. Select the avatar from the avatar list at the left of the Figura menu.
 9. Sets your permission if you need.
 10. Other Figura players can see your avatar after uploading your avatar to the Figura server.
+    - **If your Minecraft is Pirated (cracked, unlicensed, free), you cannot upload your avatar.** This is a Figura specification and I cannot help you with this.
 
 #### Additional note
 In addition to the avatar download method described here, you can also download avatar files from the "Releases" section on the right side of the repository's top page. A zip file of each avatar is attached to the "Assets" section of each release note.
