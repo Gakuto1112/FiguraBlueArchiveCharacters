@@ -51,11 +51,17 @@ events.TICK:register(function ()
 	end
 	local damageStatus = PlayerUtils:getDamageStatus()
 	if damageStatus == "DAMAGE" then
-		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 8, true)
-	elseif damageStatus == "DIED" then
-		FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 20, true)
+		if BlueArchiveCharacter.FACE_PARTS.FacePartsSets ~= nil and BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onDamage ~= nil then
+			FaceParts:setEmotion(BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onDamage.LeftEye, BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onDamage.RightEye, BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onDamage.Mouth, 8, true)
+		else
+			FaceParts:setEmotion("SURPLISED", "SURPLISED", "CLOSED", 8, true)
+		end
 	elseif player:getPose() == "SLEEPING" then
-		FaceParts:setEmotion("CLOSED", "CLOSED", "YAWN", 1, true)
+		if BlueArchiveCharacter.FACE_PARTS.FacePartsSets ~= nil and BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onSleep ~= nil then
+			FaceParts:setEmotion(BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onSleep.LeftEye, BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onSleep.RightEye, BlueArchiveCharacter.FACE_PARTS.FacePartsSets.onSleep.Mouth, 8, true)
+		else
+			FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", 1, true)
+		end
 	elseif FaceParts.EmotionCount == 0 then
 		FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", 0, false)
 	end

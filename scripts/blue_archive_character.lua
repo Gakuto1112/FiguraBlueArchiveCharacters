@@ -101,6 +101,25 @@ BlueArchiveCharacter = {
             W = {8, 0},
             YAWN = {12, 0}
         }
+
+        ---表情のセット（省略可）
+        --[[
+        FacePartsSets = {
+            ---ダメージを受けた時の表情（省略可）
+            onDamage = {
+                RightEye = "SURPLISED",
+                LeftEye = "SURPLISED",
+                Mouth = "CLOSED"
+            },
+
+            ---寝ている時の表情（省略可）
+            onSleep = {
+                RightEye = "NORMAL",
+                LeftEye = "CLOSED",
+                Mouth = "CLOSED"
+            }
+        }
+        ]]
     },
 
     ---銃
@@ -720,6 +739,18 @@ BlueArchiveCharacter = {
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
         excludeModels = {}
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---ポートレート
@@ -731,6 +762,18 @@ BlueArchiveCharacter = {
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.Cowlick, models.models.main.Avatar.Head.HairEnds}
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---死亡アニメーションのダミーアバター
@@ -761,6 +804,18 @@ BlueArchiveCharacter = {
                 models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-9.6599, -3.2113, -12.0868)
             end
         end
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---物理演算データ

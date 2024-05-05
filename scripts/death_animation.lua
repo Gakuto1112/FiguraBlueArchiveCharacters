@@ -48,6 +48,9 @@ DeathAnimation = {
             BlueArchiveCharacter:setShield(false, false)
         end
         Physics:disable()
+        if BlueArchiveCharacter.DEATH_ANIMATION.onBeforeModelCopy ~= nil then
+            BlueArchiveCharacter.DEATH_ANIMATION.onBeforeModelCopy()
+        end
 
         ---指定されたモデルパーツの子パーツをすべて削除した上でコピー元のモデルからディープコピーする。
         ---@param destination ModelPart コピー先のモデルパーツ
@@ -139,6 +142,9 @@ DeathAnimation = {
             BlueArchiveCharacter:setShield(true, false)
         end
         Physics:enable()
+        if BlueArchiveCharacter.DEATH_ANIMATION.onAfterModelCopy ~= nil then
+            BlueArchiveCharacter.DEATH_ANIMATION.onAfterModelCopy()
+        end
 
         --死亡アニメーションを生成する。
         self.AnimationPos = player:getPos()
