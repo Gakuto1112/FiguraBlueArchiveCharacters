@@ -126,10 +126,7 @@ Toggles whether weapon models (including students' guns) are visible or not in f
 
 ![First-person weapon models](../README_images/first_person_weapons.jpg)
 
-### Action 5. Change accuracy of camera during ex skill animations
-Changes the accuracy of the camera collision detection used during ex skill animations. Increasing the accuracy reduces camera wobble but increases the processing load. Scroll to select the option and closing the action wheel to confirm. Left-click to reset to current selection, and right-clock to reset to default during selection.
-
-### Action 6. Change amount of Ex skill frame particles
+### Action 5. Change amount of Ex skill frame particles
 Changes the amount of triangular particles that appear from the red or blue borders that appear during Ex skill animations. Reducing or disabling particles may improve performance.
 
 <!-- $inject(how_to_use) -->
