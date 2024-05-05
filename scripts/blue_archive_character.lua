@@ -131,6 +131,13 @@ BlueArchiveCharacter = {
         ]]
     },
 
+    ---スカート
+    SKIRT = {
+        ---スカートとして制御するモデルの配列
+        ---@type ModelPart
+        SkirtModels = {models.models.main.Avatar.UpperBody.Body.Robe}
+    },
+
     ---銃
     GUN = {
         ---銃の大きさの倍率（省略可）
