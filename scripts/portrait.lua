@@ -16,6 +16,9 @@ Portrait = {
             end
         end
         Physics:disable()
+        if BlueArchiveCharacter.PORTRAIT.onBeforeModelCopy ~= nil then
+            BlueArchiveCharacter.PORTRAIT.onBeforeModelCopy()
+        end
 
         --現在の衣装を基に新たな頭ブロックのモデルを生成する。
         local copiedPart = ModelUtils:copyModel(models.models.main.Avatar.Head)
@@ -46,6 +49,9 @@ Portrait = {
             end
         end
         Physics:enable()
+        if BlueArchiveCharacter.PORTRAIT.onAfterModelCopy ~= nil then
+            BlueArchiveCharacter.PORTRAIT.onAfterModelCopy()
+        end
     end,
 
     ---初期化関数

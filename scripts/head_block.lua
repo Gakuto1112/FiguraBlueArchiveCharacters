@@ -16,6 +16,9 @@ HeadBlock = {
             end
         end
         Physics:disable()
+        if BlueArchiveCharacter.HEAD_BLOCK.onBeforeModelCopy ~= nil then
+            BlueArchiveCharacter.HEAD_BLOCK.onBeforeModelCopy()
+        end
 
         --現在の衣装を基に新たな頭ブロックのモデルを生成する。
         local copiedPart = ModelUtils:copyModel(models.models.main.Avatar.Head)
@@ -47,6 +50,9 @@ HeadBlock = {
             end
         end
         Physics:enable()
+        if BlueArchiveCharacter.HEAD_BLOCK.onAfterModelCopy ~= nil then
+            BlueArchiveCharacter.HEAD_BLOCK.onAfterModelCopy()
+        end
     end,
 
     ---初期化関数
