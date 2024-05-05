@@ -205,7 +205,7 @@ Gun = {
                     if id == "minecraft:item.crossbow.loading_end" then
                         sounds:playSound("minecraft:block.dispenser.fail", pos, 1, 2)
                     else
-                        local particleAnchor = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Gun["MuzzleAnchor"])
+                        local particleAnchor = ModelUtils.getModelWorldPos(renderer:isFirstPerson() and (Gun.CurrentGunPosition == "RIGHT" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot or models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot) or models.models.main.Avatar.UpperBody.Body.Gun.MuzzleAnchor)
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:smoke", particleAnchor)
                         end
