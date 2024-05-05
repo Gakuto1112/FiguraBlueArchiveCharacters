@@ -93,6 +93,25 @@ BlueArchiveCharacter = {
         Mouth = {
             CLOSED = {0, 0}
         }
+
+        ---表情のセット（省略可）
+        --[[
+        FacePartsSets = {
+            ---ダメージを受けた時の表情（省略可）
+            onDamage = {
+                RightEye = "SURPLISED",
+                LeftEye = "SURPLISED",
+                Mouth = "CLOSED"
+            },
+
+            ---寝ている時の表情（省略可）
+            onSleep = {
+                RightEye = "NORMAL",
+                LeftEye = "CLOSED",
+                Mouth = "CLOSED"
+            }
+        }
+        ]]
     },
 
     ---銃
