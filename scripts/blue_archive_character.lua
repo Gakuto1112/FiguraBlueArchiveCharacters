@@ -2678,14 +2678,6 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
-events.TICK:register(function ()
-    if DeathAnimation.AnimationCount == 1 and Costume.CurrentCostume <= 2 then
-        models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(false)
-    elseif DeathAnimation.AnimationCount == 120 then
-        models.models.death_animation.DummyAvatar.LowerBody.Legs:setVisible(true)
-    end
-end)
-
 for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob1.Mob1Head.Mob1HeadColor, models.models.ex_skill_2.Mobs.Mob1.Mob1Head.Mob1HeadLayerColor}) do
     modelPart:setColor(0.318, 0.235, 0.282)
 end
@@ -2729,5 +2721,54 @@ for _, modelPart in ipairs({models.models.ex_skill_2.Mobs.Mob6.Mob6UpperBody.Mob
     modelPart:setColor(0.58, 0.231, 0.29)
 end
 models.models.main.Avatar.Head.FaceShadow:setOpacity(0.5)
+
+---脚と丈の長いスカートの調整が有効かどうか
+---@type boolean
+local legAdjustmentEnabled = true
+
+---前ティックに脚とスカートの調整をしたかどうか
+---@type boolean
+local legAdjustedPrev = false
+
+---前ティックは脚を隠すべきだったかどうか
+---@type boolean
+local shouldHideLegsPrev = false
+
+events.TICK:register(function ()
+    local robeVisible = models.models.main.Avatar.UpperBody.Body.Robe:getVisible()
+    local shouldHideLegs = robeVisible and player:getVehicle() ~= nil
+    if shouldHideLegs and not shouldHideLegsPrev then
+        models.models.main.Avatar.LowerBody.Legs:setVisible(false)
+        models.models.main.Avatar.UpperBody.Body.Robe:setScale(1.5, 0.35, 2)
+    elseif not shouldHideLegs and shouldHideLegsPrev then
+        models.models.main.Avatar.LowerBody.Legs:setVisible(true)
+        models.models.main.Avatar.UpperBody.Body.Robe:setScale()
+    end
+    local shouldAdjustLegs = legAdjustmentEnabled and robeVisible and not shouldHideLegs
+    if shouldAdjustLegs and not legAdjustedPrev then
+        events.RENDER:register(function ()
+            local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
+            models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.55, 0, 0)
+            models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.55, 0, 0)
+            local rightLegRotAbs = math.abs(rightLegRotX)
+            models.models.main.Avatar.UpperBody.Body.Robe:setScale(1, 1, rightLegRotAbs * 0.0025 + 1)
+            local robeScale2 = vectors.vec3(rightLegRotAbs * -0.000625 + 1, 1, rightLegRotAbs * 0.00125 + 1)
+            models.models.main.Avatar.UpperBody.Body.Robe.Robe2:setScale(robeScale2)
+            models.models.main.Avatar.UpperBody.Body.Robe.Robe2.Robe3:setScale(robeScale2)
+        end, "skirt_render")
+    elseif not shouldAdjustLegs and legAdjustedPrev then
+        events.RENDER:remove("skirt_render")
+        for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
+            modelPart:setRot()
+        end
+        if not shouldHideLegs then
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Robe, models.models.main.Avatar.UpperBody.Body.Robe.Robe2, models.models.main.Avatar.UpperBody.Body.Robe.Robe2.Robe3}) do
+                modelPart:setScale()
+            end
+        end
+    end
+    shouldHideLegsPrev = shouldHideLegs
+    legAdjustedPrev = shouldAdjustLegs
+end)
 
 return BlueArchiveCharacter
