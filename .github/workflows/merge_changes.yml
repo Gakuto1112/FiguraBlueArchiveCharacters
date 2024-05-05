@@ -48,9 +48,19 @@ jobs:
           ref: ${{ matrix.target_branch }}
       - name: Configure Git user
         run: |
-          git remote set-url origin https://github-actions:${{ github.token }}@github.com/${{ github.repository }}
+          git remote set-url origin https://github-actions:${TOKEN}@github.com/${REPOSITORY}
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
+        env:
+          TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+      - name: Check if readme templates have been changed (base)
+        id: check_readme_changes_base
+        if: ${{ matrix.target_branch == 'base' }}
+        run: git diff --name-only origin/${MERGE_BRANCH} | grep -e '.github/README_templates/' -e '.github/workflows/generate_readme.yml'
+        env:
+          MERGE_BRANCH: ${{ github.ref_name }}
+        continue-on-error: true
       - name: Merge branch
         id: merge_branch
         run: git merge origin/${BRANCH_NAME}
@@ -70,12 +80,14 @@ jobs:
         id: check_readme_changes
         if: ${{ steps.merge_branch.outcome == 'success' }}
         run: |
-          if [ ${BRANCH_NAME} = 'base' ]; then
-            result=$(git diff --name-only $(git show-branch --merge-base base))
+          if [ ${BASE_BRANCH} = 'base' ]; then
+            echo ${BASE_RESULT} | grep 'success'
           else
-            result=$(git diff HEAD~ --name-only)
+            git diff --name-only HEAD~ | grep -e '.github/README_templates/' -e '.github/workflows/generate_readme.yml'
           fi
-          echo ${result} | grep -e '.github/README/' -e '.github/workflows/generate_readme.yml'
+        env:
+          BASE_RESULT: ${{ steps.check_readme_changes_base.outcome }}
+          BASE_BRANCH: ${{ matrix.target_branch }}
         continue-on-error: true
       - name: Output readme status
         if: ${{ steps.merge_branch.outcome == 'success' && steps.check_readme_changes.outcome == 'success' }}
