@@ -531,6 +531,18 @@ BlueArchiveCharacter = {
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
         excludeModels = {}
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---ポートレート
@@ -542,6 +554,18 @@ BlueArchiveCharacter = {
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
         excludeModels = {}
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
+        end
+        ]]
     },
 
     ---死亡アニメーションのダミーアバター
@@ -561,6 +585,18 @@ BlueArchiveCharacter = {
         ---@param costume integer コスチュームのインデックス
         --[[
         onPhase2 = function (costume)
+        end
+        ]]
+
+        ---モデルのコピー直前に実行される関数（省略可）
+        --[[
+        onBeforeModelCopy = function ()
+        end
+        ]]
+
+        ---モデルのコピー直後に実行される関数（省略可）
+        --[[
+        onAfterModelCopy = function ()
         end
         ]]
     },
