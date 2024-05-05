@@ -119,7 +119,7 @@ BlueArchiveCharacter = {
             ---寝ている時の表情（省略可）
             --[[
             onSleep = {
-                RightEye = "NORMAL",
+                RightEye = "CLOSED",
                 LeftEye = "CLOSED",
                 Mouth = "CLOSED"
             }
