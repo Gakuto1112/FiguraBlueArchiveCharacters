@@ -122,6 +122,13 @@ BlueArchiveCharacter = {
         }
     },
 
+    ---スカート
+    SKIRT = {
+        ---スカートとして制御するモデルの配列
+        ---@type ModelPart
+        SkirtModels = {models.models.main.Avatar.UpperBody.Body.Skirt}
+    },
+
     ---銃
     GUN = {
         ---銃の大きさの倍率（省略可）
@@ -1939,7 +1946,6 @@ BlueArchiveCharacter = {
 
 --生徒固有初期化処理
 events.TICK:register(function()
-    models.models.main.Avatar.UpperBody.Body.Skirt:setRot(player:isCrouching() and 30 or 0)
     BlueArchiveCharacter:setShield((player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1, true)
 end)
 
