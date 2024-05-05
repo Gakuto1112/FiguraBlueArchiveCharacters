@@ -191,6 +191,7 @@ if host:isHost() then
     end)
 
     --アクション6. （空欄）
+    mainPage:newAction(6):color(0.16, 0.16, 0.16):hoverColor(0.16, 0.16, 0.16)
 
     --アクション7. （空欄）
 
