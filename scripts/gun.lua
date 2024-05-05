@@ -204,6 +204,8 @@ Gun = {
                 if (id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot") and math.abs(velocityDistance - distanceFromSound) < 1 then
                     if id == "minecraft:item.crossbow.loading_end" then
                         sounds:playSound("minecraft:block.dispenser.fail", pos, 1, 2)
+                    elseif player:isUnderwater() then
+                        sounds:playSound("minecraft:entity.generic.extinguish_fire", pos, 0.5, 1.5)
                     else
                         local particleAnchor = ModelUtils.getModelWorldPos(renderer:isFirstPerson() and (Gun.CurrentGunPosition == "RIGHT" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot or models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot) or models.models.main.Avatar.UpperBody.Body.Gun.MuzzleAnchor)
                         for _ = 1, 5 do
@@ -211,7 +213,6 @@ Gun = {
                         end
                         sounds:playSound(BlueArchiveCharacter.GUN.sound.name, pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
                     end
-                    ---@diagnostic disable-next-line: redundant-return-value
                     return true
                 elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and distanceFromSound < 1 and player:getActiveItem().id == "minecraft:crossbow" then
                     local activeItemTime = player:getActiveItemTime()
@@ -227,10 +228,8 @@ Gun = {
                     end
                     if (quickChageLevel <= 4 and activeItemTime + quickChageLevel >= 4 and activeItemTime + quickChageLevel <= 6) or (quickChageLevel == 5 and activeItemTime <= 2) then
                         sounds:playSound("minecraft:item.flintandsteel.use", pos, 1, 2)
-                        ---@diagnostic disable-next-line: redundant-return-value
                         return true
                     elseif id == "minecraft:item.crossbow.loading_middle" then
-                        ---@diagnostic disable-next-line: redundant-return-value
                         return true
                     end
                 end
