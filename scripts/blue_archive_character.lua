@@ -2726,16 +2726,43 @@ BlueArchiveCharacter = {
     },
 
     --その他定数・変数
-
-    ---Exスキル1で使用するテキストアニメーションインスタンスのテーブル。4つ合わせて「神出鬼没」。
-    ---@type table[]
-    EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("ex_skill_1_text_1", vectors.vec3(2, 5.5, -5), "神"), ExSkillTextAnimation.new("ex_skill_1_text_2", vectors.vec3(2, 0.5, -5), "出"), ExSkillTextAnimation.new("ex_skill_1_text_3", vectors.vec3(-5.5, 5.5, -5), "鬼"), ExSkillTextAnimation.new("ex_skill_1_text_4", vectors.vec3(-5.5, 0.5, -5), "没")}
 }
 
 --生徒固有初期化処理
 events.RENDER:register(function ()
     if models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL:getVisible() then
         models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL:setRot((vanilla_model.LEFT_LEG:getOriginRot().x + models.models.main.Avatar.LowerBody.Legs.LeftLeg:getTrueRot().x) * -1, 0, 0)
+    end
+end)
+
+events.ENTITY_INIT:register(function ()
+    ---Exスキル1で使用するテキストアニメーションインスタンスのテーブル。4つ合わせて「神出鬼没」。
+    ---@type table[]
+    BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("ex_skill_1_text_1", vectors.vec3(2, 5.5, -5), "神"), ExSkillTextAnimation.new("ex_skill_1_text_2", vectors.vec3(2, 0.5, -5), "出"), ExSkillTextAnimation.new("ex_skill_1_text_3", vectors.vec3(-5.5, 5.5, -5), "鬼"), ExSkillTextAnimation.new("ex_skill_1_text_4", vectors.vec3(-5.5, 0.5, -5), "没")}
+
+    if host:isHost() then
+        ---前ティックのプレイヤーの位置
+        ---@type Vector3
+        local playerPosPrev = player:getPos()
+
+        ---前ティックに立っていたかどうか
+        ---@type boolean
+        local isStandingPrev = player:getPose() == "STANDING" and player:getVehicle() == nil
+
+        ---前ティックの体の向き
+        ---@type integer
+        local bodyYawPrev = player:getBodyYaw()
+
+        events.TICK:register(function ()
+            local playerPos = player:getPos()
+            local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
+            if playerPos:copy():sub(playerPosPrev):length() - 1 > player:getVelocity():length() and isStanding and isStandingPrev then
+                pings.teleport(playerPos, playerPosPrev, bodyYawPrev)
+            end
+            playerPosPrev = playerPos
+            isStandingPrev = isStanding
+            bodyYawPrev = player:getBodyYaw()
+        end)
     end
 end)
 
@@ -2758,31 +2785,6 @@ function pings.teleport(currentPos, previousPos, previousRot)
         particles:newParticle("minecraft:poof", previousPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
     end
     sounds:playSound("minecraft:entity.shulker.shoot", currentPos, 1, 2)
-end
-
-if host:isHost() then
-    ---前ティックのプレイヤーの位置
-    ---@type Vector3
-    local playerPosPrev = player:getPos()
-
-    ---前ティックに立っていたかどうか
-    ---@type boolean
-    local isStandingPrev = player:getPose() == "STANDING" and player:getVehicle() == nil
-
-    ---前ティックの体の向き
-    ---@type integer
-    local bodyYawPrev = player:getBodyYaw()
-
-    events.TICK:register(function ()
-        local playerPos = player:getPos()
-        local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
-        if playerPos:copy():sub(playerPosPrev):length() - 1 > player:getVelocity():length() and isStanding and isStandingPrev then
-            pings.teleport(playerPos, playerPosPrev, bodyYawPrev)
-        end
-        playerPosPrev = playerPos
-        isStandingPrev = isStanding
-        bodyYawPrev = player:getBodyYaw()
-    end)
 end
 
 return BlueArchiveCharacter
