@@ -46,7 +46,7 @@ Arms = {
                         end
                         if events.RENDER:getRegisteredCount("bow_pose_render") == 0 then
                             events.RENDER:register(function ()
-                                if not self.IsRenderProcessed then
+                                if not self.IsRenderProcessed and not client:isPaused() then
                                     self.ArmSwingCounter = self.ArmSwingCounter + 0.2 / client:getFPS()
                                     if self.ArmSwingCounter > 1 then
                                         self.ArmSwingCounter = self.ArmSwingCounter - 1
