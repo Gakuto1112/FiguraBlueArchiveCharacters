@@ -1,5 +1,9 @@
 ---@class HeadBlock 頭ブロックのモデルを制御するクラス
 HeadBlock = {
+    ---強制的に頭ブロックを生成するまでのカウンター。これが発火するのはアバタープレイヤーがオフラインの時のみ。
+    ---@type integer
+    ForceGenerateCount = 2,
+
     ---頭ブロックのモデルを生成する。
     generateHeadBlockModel = function ()
         --既存の頭ブロックのモデルを削除する。
@@ -15,7 +19,9 @@ HeadBlock = {
                 modelPart:setVisible(false)
             end
         end
-        Physics:disable()
+        if player:isLoaded() then
+            Physics:disable()
+        end
         if BlueArchiveCharacter.HEAD_BLOCK.onBeforeModelCopy ~= nil then
             BlueArchiveCharacter.HEAD_BLOCK.onBeforeModelCopy()
         end
@@ -49,16 +55,33 @@ HeadBlock = {
                 modelPart:setVisible(true)
             end
         end
-        Physics:enable()
+        if player:isLoaded() then
+            Physics:enable()
+        end
         if BlueArchiveCharacter.HEAD_BLOCK.onAfterModelCopy ~= nil then
             BlueArchiveCharacter.HEAD_BLOCK.onAfterModelCopy()
         end
+
+        events.WORLD_TICK:remove("head_block_world_tick")
     end,
 
     ---初期化関数
-    init = function ()
+    init = function (self)
         ---@diagnostic disable-next-line: discard-returns
         models:newPart("script_head_block", "None")
+        self.generateHeadBlockModel()
+        events.WORLD_TICK:register(function ()
+            self.ForceGenerateCount = self.ForceGenerateCount - 1
+            if self.ForceGenerateCount == 0 then
+                self.generateHeadBlockModel()
+                events.WORLD_RENDER:register(function ()
+                    if not player:isLoaded() then
+
+                    end
+                end)
+                events.WORLD_TICK:remove("head_block_world_tick")
+            end
+        end, "head_block_world_tick")
     end
 }
 

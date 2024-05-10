@@ -1,13 +1,8 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
-	BlueArchiveCharacter = require("scripts.blue_archive_character")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
 	KeyManager = require("scripts.key_manager")
-
-	--ユーティリティクラス
-	PlayerUtils = require("scripts.utils.player_utils")
-	ModelUtils = require("scripts.utils.model_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")
@@ -16,10 +11,8 @@ events.ENTITY_INIT:register(function ()
 	Armor = require("scripts.armor")
 	FaceParts = require("scripts.face_parts")
 	Physics = require("scripts.physics")
-	HeadRing = require("scripts.head_ring")
 	Gun = require("scripts.gun")
 	Nameplate = require("scripts.nameplate")
-	HeadBlock = require("scripts.head_block")
 	Portrait = require("scripts.portrait")
 
 	--機能別クラス
@@ -38,3 +31,10 @@ events.ENTITY_INIT:register(function ()
 
 	--require("scripts.hypixel_zombies")
 end)
+
+--ENTITY_INITを待たず読み込むクラス
+PlayerUtils = require("scripts.utils.player_utils")
+ModelUtils = require("scripts.utils.model_utils")
+BlueArchiveCharacter = require("scripts.blue_archive_character")
+HeadRing = require("scripts.head_ring")
+HeadBlock = require("scripts.head_block")
