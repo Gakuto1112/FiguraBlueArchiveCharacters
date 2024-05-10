@@ -33,8 +33,10 @@ HeadRing = {
                 end
 
                 --頭の輪っかの浮遊アニメーション
-                self.FloatCount = self.FloatCount + 0.25 / fps
-                self.FloatCount = self.FloatCount > 1 and self.FloatCount - 1 or self.FloatCount
+                if not client:isPaused() then
+                    self.FloatCount = self.FloatCount + 0.25 / fps
+                    self.FloatCount = self.FloatCount > 1 and self.FloatCount - 1 or self.FloatCount
+                end
                 local floatingOffset = math.sin(self.FloatCount * 2 * math.pi) * 0.25
 
                 --頭の輪っかの位置・角度を設定
