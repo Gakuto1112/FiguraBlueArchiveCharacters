@@ -543,6 +543,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.CameraBackground:setVisible(false)
                             events.RENDER:remove("ex_skill_1_background_render")
                         end
+                        BlueArchiveCharacter.EX_SKILL_1_TEXT_1:setVisible(false)
                     else
                         local bodyYaw = player:getBodyYaw() % 360
                         PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], vectors.rotateAroundAxis(bodyYaw * -1, -7.9375, 0, -0.5625, 0, 1, 0):add(player:getPos()), 195 + bodyYaw * -1)
