@@ -29,4 +29,6 @@ PlayerUtils = {
     end
 }
 
+PlayerUtils:init()
+
 return PlayerUtils
