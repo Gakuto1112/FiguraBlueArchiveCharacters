@@ -7,7 +7,6 @@ on:
       - prereleased
 
 jobs:
-
   get_target_branches:
     name: Get target branches
     uses: ./.github/workflows/get_target_branches.yml
