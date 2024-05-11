@@ -23,10 +23,12 @@ PlayerUtils = {
         end
         events.TICK:register(function()
             local health = player:getHealth()
-            self.DamageStatus = healthPrev and (health == 0 and "DIED" or "DAMAGE") or "NONE"
+            self.DamageStatus = healthPrev > health and (health == 0 and "DIED" or "DAMAGE") or "NONE"
             healthPrev = health
         end)
     end
 }
+
+PlayerUtils:init()
 
 return PlayerUtils
