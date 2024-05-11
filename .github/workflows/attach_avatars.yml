@@ -1,4 +1,4 @@
-name: Attach avatars to release
+name: Attach avatars to release assets
 
 on:
   release:
@@ -7,62 +7,17 @@ on:
       - prereleased
 
 jobs:
+
   get_target_branches:
     name: Get target branches
     uses: ./.github/workflows/get_target_branches.yml
     with:
       include_base: false
-  attach_avatars:
-    name: Attach avatars to release
+  attach_avatar:
+    name: Attach avatars to release assets
     needs: get_target_branches
-    runs-on: ubuntu-latest
     permissions:
       contents: write
-    strategy:
-      matrix:
-        avatar_name: ${{ fromJSON(needs.get_target_branches.outputs.target_branches) }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        with:
-          ref: ${{ matrix.avatar_name }}
-      - name: Prepare output directory
-        run: |
-          mkdir ./out
-          mkdir ./out/${AVATAR_NAME}
-        env:
-          AVATAR_NAME: ${{ matrix.avatar_name }}
-      - name: Move necessary files
-        run: |
-          cp -r ./models ./out/${AVATAR_NAME}/models
-          cp -r ./scripts ./out/${AVATAR_NAME}/scripts
-          cp -r ./textures ./out/${AVATAR_NAME}/textures
-          cp ./avatar.json ./out/${AVATAR_NAME}/avatar.json
-          cp ./avatar.png ./out/${AVATAR_NAME}/avatar.png
-          cp ./LICENSE ./out/LICENSE
-        env:
-          AVATAR_NAME: ${{ matrix.avatar_name }}
-      - name: Create README.txt
-        run: |
-          cat << EOF > ./out/README.txt
-          Please read README at the link below for instructions and notes for the avatar.
-          https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/blob/base/.github/README.md
-
-          アバターの使用方法や注意事項などは下記のリンクのREADMEをお読みください。
-          https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/blob/base/.github/README_jp.md
-          EOF
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.3.3
-        with:
-          name: ${{ matrix.avatar_name }}
-          path: ./out
-      - name: Zip artifact
-        run: zip -r ./${AVATAR_NAME}.zip ./
-        working-directory: ./out
-        env:
-          AVATAR_NAME: ${{ matrix.avatar_name }}
-      - name: Attach artifact to release
-        run: gh release upload ${{ github.event.release.tag_name }} ./out/${AVATAR_NAME}.zip --repo ${{ github.repository }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          AVATAR_NAME: ${{ matrix.avatar_name }}
+    uses: Gakuto1112/MyFiguraAvatarPacker/.github/workflows/attach_avatars.yml@main
+    with:
+      target_branches: ${{ needs.get_target_branches.outputs.target_branches }}
