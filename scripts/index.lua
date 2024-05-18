@@ -29,7 +29,7 @@ events.ENTITY_INIT:register(function ()
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
 
-	--require("scripts.hypixel_zombies")
+	--HypixelZombies = require("scripts.hypixel_zombies")
 end)
 
 --ENTITY_INITを待たず読み込むクラス
