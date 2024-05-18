@@ -661,10 +661,10 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                for _, modelPart in ipairs({models.models.main.Head.CMaskedH}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH}) do
                     modelPart:setVisible(true)
                 end
-                for _, modelPart in ipairs({models.models.main.Head.HairEnds, models.models.main.UpperBody.Body.Hairs}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs}) do
                     modelPart:setVisible(false)
                 end
             end,
@@ -673,10 +673,10 @@ BlueArchiveCharacter = {
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
-                for _, modelPart in ipairs({models.models.main.Head.CMaskedH}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH}) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs({models.models.main.Head.HairEnds, UpperBody.Body.Hairs}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs}) do
                     modelPart:setVisible(true)
                 end
             end,
