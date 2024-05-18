@@ -144,9 +144,6 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 10. Other Figura players can see your avatar after uploading your avatar to the Figura server.
     - **If your Minecraft is Pirated (cracked, unlicensed, free), you cannot upload your avatar.** This is a Figura specification and I cannot help you with this.
 
-#### Additional note
-In addition to the avatar download method described here, you can also download avatar files from the "Releases" section on the right side of the repository's top page. A zip file of each avatar is attached to the "Assets" section of each release note.
-
 ## Notes
 - I'm not responsible for any damages caused by using this avatar.
 - This avatar is designed for work with no resource pack and no other mods are installed. An unexpected issue may occurs when you use it with any resource packs and mods (texture and armor inconsistencies, etc.). However, I may not support you in these cases.
