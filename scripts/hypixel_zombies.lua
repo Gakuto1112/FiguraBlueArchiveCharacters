@@ -1,20 +1,37 @@
 ---@class HypixelZombies Hypixelの「Zombies」にアバターを対応させるパッチ
+HypixelZombies = {
+    ---前ティック以前のツールの耐久度割合
+    ---@type number[]
+    DamagerPercentPrev = {1, 1},
 
-Gun.GUN_ITEMS = {"minecraft:bow", "minecraft:crossbow", "minecraft:wooden_hoe", "minecraft:stone_hoe", "minecraft:iron_hoe", "minecraft:wooden_shovel", "minecraft:stone_shovel", "minecraft:shears", "minecraft:diamond_hoe", "minecraft:golden_hoe", "minecraft:iron_shovel", "minecraft:diamond_pickaxe", "minecraft:golden_pickaxe", "minecraft:golden_hoe", "minecraft:flint_and_steel"}
+    ---初期化処理
+    ---@param self HypixelZombies
+    init = function(self)
+        Gun.GUN_ITEMS = {"minecraft:bow", "minecraft:crossbow", "minecraft:wooden_hoe", "minecraft:stone_hoe", "minecraft:iron_hoe", "minecraft:wooden_shovel", "minecraft:stone_shovel", "minecraft:shears", "minecraft:diamond_hoe", "minecraft:golden_hoe", "minecraft:iron_shovel", "minecraft:diamond_pickaxe", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:flint_and_steel"}
+        events.TICK:register(function ()
+            local heldItem = player:getHeldItem()
+            local maxDamage = heldItem:getMaxDamage()
+            local damagePercent = (maxDamage - heldItem:getDamage()) / maxDamage
+            if maxDamage > 0 then
+                if damagePercent - self.DamagerPercentPrev[1] > 0 and damagePercent - self.DamagerPercentPrev[1] <= 0.2 then
+                    if Bubble.BubbleCounter == 0 then
+                        Bubble:play("RELOAD", -1, false)
+                    end
+                elseif Bubble.Emoji == "RELOAD" then
+                    Bubble:stop()
+                end
+                table.insert(self.DamagerPercentPrev, damagePercent)
+            else
+                if Bubble.Emoji == "RELOAD" then
+                    Bubble:stop()
+                end
+                table.insert(self.DamagerPercentPrev, 1)
+            end
+            table.remove(self.DamagerPercentPrev, 1)
+        end)
+    end
+}
 
----リロードの吹き出しエモートがZombies機能によって再生されたかどうか
----@type boolean
-local reloadByZombies = false
+HypixelZombies:init()
 
-events.TICK:register(function ()
-    local heldItem = player:getHeldItem()
-    local maxDamage = heldItem:getMaxDamage()
-        local damagePercent = (maxDamage - heldItem:getDamage()) / maxDamage
-        if maxDamage > 0 and damagePercent >= 0.05 and damagePercent < 1 and Bubble.BubbleCounter == 0 then
-            Bubble:play("RELOAD", -1, false)
-            reloadByZombies = true
-        elseif (damagePercent < 0.05 or damagePercent == 1 or maxDamage == 0) and reloadByZombies then
-            Bubble:stop()
-            reloadByZombies = false
-        end
-end)
+return HypixelZombies
