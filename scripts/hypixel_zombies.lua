@@ -7,7 +7,7 @@ HypixelZombies = {
     ---初期化処理
     ---@param self HypixelZombies
     init = function(self)
-        Gun.GUN_ITEMS = {"minecraft:bow", "minecraft:crossbow", "minecraft:wooden_hoe", "minecraft:stone_hoe", "minecraft:iron_hoe", "minecraft:wooden_shovel", "minecraft:stone_shovel", "minecraft:shears", "minecraft:diamond_hoe", "minecraft:golden_hoe", "minecraft:iron_shovel", "minecraft:diamond_pickaxe", "minecraft:golden_pickaxe", "minecraft:golden_hoe", "minecraft:flint_and_steel"}
+        Gun.GUN_ITEMS = {"minecraft:bow", "minecraft:crossbow", "minecraft:wooden_hoe", "minecraft:stone_hoe", "minecraft:iron_hoe", "minecraft:wooden_shovel", "minecraft:stone_shovel", "minecraft:shears", "minecraft:diamond_hoe", "minecraft:golden_hoe", "minecraft:iron_shovel", "minecraft:diamond_pickaxe", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:flint_and_steel"}
         events.TICK:register(function ()
             local heldItem = player:getHeldItem()
             local maxDamage = heldItem:getMaxDamage()
