@@ -651,6 +651,30 @@ BlueArchiveCharacter = {
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
+            },
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "swimsuit",
+
+                ---コスチュームの表示名
+                display_name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Swimsuit",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "水着"
+                },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 1
             }
         },
 
@@ -661,11 +685,24 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH}) do
-                    modelPart:setVisible(true)
-                end
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs}) do
-                    modelPart:setVisible(false)
+                if costumeId == 2 then
+                    --覆面水着団
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH}) do
+                        modelPart:setVisible(true)
+                    end
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs}) do
+                        modelPart:setVisible(false)
+                    end
+                elseif costumeId == 3 then
+                    --水着
+                    Costume.setCostumeTextureOffset(1)
+                    models.models.main.Avatar.Head.HatLayer:setUVPixels(0, 16)
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                        modelPart:setVisible(true)
+                    end
+                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.BackHair, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
+                        modelPart:setVisible(false)
+                    end
                 end
             end,
 
@@ -673,10 +710,12 @@ BlueArchiveCharacter = {
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH}) do
+                Costume.setCostumeTextureOffset(0)
+                models.models.main.Avatar.Head.HatLayer:setUVPixels()
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH, models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
                     modelPart:setVisible(true)
                 end
             end,
