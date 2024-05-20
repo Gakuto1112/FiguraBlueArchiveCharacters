@@ -700,7 +700,7 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs({models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
                         modelPart:setVisible(true)
                     end
-                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.BackHair, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
+                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
                         modelPart:setVisible(false)
                     end
                 end
@@ -715,7 +715,7 @@ BlueArchiveCharacter = {
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH, models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
                     modelPart:setVisible(false)
                 end
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
                     modelPart:setVisible(true)
                 end
             end,
@@ -726,12 +726,9 @@ BlueArchiveCharacter = {
             armorChange = function(parts)
                 if parts == "CHEST_PLATE" then
                     if Armor.ArmorVisible[2] then
-                        models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, -1)
                         models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, 1)
                     else
-                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
-                            modelPart:setPos()
-                        end
+                        models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos()
                     end
                 elseif parts == "LEGGINGS" then
                     models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
@@ -1732,109 +1729,6 @@ BlueArchiveCharacter = {
                     ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
                     ---@type number
                     max = -5
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair,
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 150,
-
-                    ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
-                    ---@type number
-                    sneakOffset = 30,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 90
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 150
-                    },
-
-                    ---体の回転によるによるモデルパーツの回転データ（省略可）
-                    bodyRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -0.05,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 90
-                    }
-                },
-
-                ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
-                horizontal = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 90,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 150,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 150
-                    }
                 }
             }
         },
