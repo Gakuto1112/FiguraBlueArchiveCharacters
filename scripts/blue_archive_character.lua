@@ -1880,6 +1880,9 @@ BlueArchiveCharacter = {
 --生徒固有初期化処理
 events.TICK:register(function()
     BlueArchiveCharacter:setShield((player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1, true)
+    if Costume.CurrentCostume == 3 and not BlueArchiveCharacter.HasShield then
+        models.models.main.Avatar.UpperBody.Body.Shield:setVisible(false)
+    end
 end)
 
 events.ITEM_RENDER:register(function (item, mode)
@@ -1922,6 +1925,7 @@ events.ITEM_RENDER:register(function (item, mode)
             end
         end
         models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType(item:hasGlint() and "GLINT" or "NONE")
+        models.models.main.Avatar.UpperBody.Body.Shield:setVisible(true)
         return models.models.main.Avatar.UpperBody.Body.Shield
     end
 end)
