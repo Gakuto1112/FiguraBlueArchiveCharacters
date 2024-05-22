@@ -429,8 +429,8 @@
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -470,8 +470,8 @@
 					"texture": null
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -511,8 +511,8 @@
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -552,8 +552,8 @@
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -832,7 +832,7 @@
 					"texture": 0
 				},
 				"south": {
-					"uv": [21, 32, 20, 33],
+					"uv": [20, 32, 21, 33],
 					"texture": 0
 				},
 				"west": {
@@ -840,8 +840,8 @@
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -881,8 +881,8 @@
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -922,8 +922,8 @@
 					"texture": 0
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -963,8 +963,8 @@
 					"texture": null
 				},
 				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": null
+					"uv": [20, 32, 21, 33],
+					"texture": 0
 				},
 				"down": {
 					"uv": [0, 0, 0, 0],
@@ -1179,8 +1179,8 @@
 							"children": [
 								"dedf3f79-f6cd-8775-e7f5-bcdee4848284",
 								{
-									"name": "HairBandLeft",
-									"origin": [-4, 28.575, 4],
+									"name": "HairLeftBottom",
+									"origin": [-2, 23.5, 2.5],
 									"color": 0,
 									"uuid": "2115a404-0049-5ecf-d492-5695654865ec",
 									"export": true,
@@ -1190,16 +1190,30 @@
 									"visibility": true,
 									"autouv": 0,
 									"children": [
-										"3a3261ee-80ce-0d80-394d-a78210cbfe55",
-										"6ec3e34a-a4fe-d1db-c3ec-1b5505630c0d",
-										"caa0430a-d94d-8f96-948e-da1bd2c4f2a3",
-										"28b825bf-6b3c-f5b0-8797-8191d92020d8"
+										{
+											"name": "HairLeftBottomZ",
+											"origin": [-2, 23.5, 2.5],
+											"color": 0,
+											"uuid": "0b1047ab-39a5-b5ea-1851-cdb55ec14887",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												"3a3261ee-80ce-0d80-394d-a78210cbfe55",
+												"6ec3e34a-a4fe-d1db-c3ec-1b5505630c0d",
+												"caa0430a-d94d-8f96-948e-da1bd2c4f2a3",
+												"28b825bf-6b3c-f5b0-8797-8191d92020d8",
+												"4bf618ab-96a0-23c3-fd33-5dacb2fed861",
+												"621c9c7f-5413-783a-675d-189d5ad0139b",
+												"eb770e2e-cd3a-28cd-a446-ab5c7832f786",
+												"b8707576-ee4b-8bbd-48ea-f20fd848b925"
+											]
+										}
 									]
-								},
-								"4bf618ab-96a0-23c3-fd33-5dacb2fed861",
-								"621c9c7f-5413-783a-675d-189d5ad0139b",
-								"eb770e2e-cd3a-28cd-a446-ab5c7832f786",
-								"b8707576-ee4b-8bbd-48ea-f20fd848b925"
+								}
 							]
 						},
 						{
@@ -1217,8 +1231,8 @@
 							"children": [
 								"1b9b5086-154a-9f68-d2ff-fcca78213c77",
 								{
-									"name": "HairBandRight",
-									"origin": [4, 28.575, 4],
+									"name": "HairRightBottom",
+									"origin": [2, 23.5, 2.5],
 									"color": 0,
 									"uuid": "42c1823b-88c9-018b-adb1-e6d9177c1c8e",
 									"export": true,
@@ -1228,16 +1242,30 @@
 									"visibility": true,
 									"autouv": 0,
 									"children": [
-										"a9b17050-3c0d-2d0a-e9f8-398e8915018b",
-										"b774236b-3310-5ffa-9944-7a1a8b63c5ce",
-										"7ee88f4a-7b1b-92ac-fee7-395bb4231794",
-										"e7137437-93b7-e1cc-2b25-a4c8ec6a4732"
+										{
+											"name": "HairRightBottomZ",
+											"origin": [2, 23.5, 2.5],
+											"color": 0,
+											"uuid": "004ad456-bfa6-27e4-c663-509d06b1f775",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": [
+												"a9b17050-3c0d-2d0a-e9f8-398e8915018b",
+												"b774236b-3310-5ffa-9944-7a1a8b63c5ce",
+												"7ee88f4a-7b1b-92ac-fee7-395bb4231794",
+												"e7137437-93b7-e1cc-2b25-a4c8ec6a4732",
+												"984646b2-975d-01a0-62da-789b3bdc4339",
+												"7f3ac78a-dc0c-5bb8-61f8-8056a516340a",
+												"1f20b062-9442-7e22-303e-23424efdde0c",
+												"3dc8ca8a-d421-0529-e91d-59b4df19601d"
+											]
+										}
 									]
-								},
-								"984646b2-975d-01a0-62da-789b3bdc4339",
-								"7f3ac78a-dc0c-5bb8-61f8-8056a516340a",
-								"1f20b062-9442-7e22-303e-23424efdde0c",
-								"3dc8ca8a-d421-0529-e91d-59b4df19601d"
+								}
 							]
 						}
 					]
