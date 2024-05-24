@@ -1930,30 +1930,15 @@ BlueArchiveCharacter = {
                 horizontal = {
                     ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
                     ---@type number
-                    min = -165,
+                    min = -155,
 
                     ---このモデルパーツ、回転軸の中立の回転位置（度）
                     ---@type number
-                    neutral = 45,
+                    neutral = -45,
 
                     ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
                     ---@type number
-                    max = 10,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -45,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 10
-                    }
+                    max = -45
                 }
             }
         },
@@ -2087,30 +2072,15 @@ BlueArchiveCharacter = {
                 horizontal = {
                     ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
                     ---@type number
-                    min = -165,
+                    min = -155,
 
                     ---このモデルパーツ、回転軸の中立の回転位置（度）
                     ---@type number
-                    neutral = 45,
+                    neutral = -45,
 
                     ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
                     ---@type number
-                    max = 10,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -45,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 10
-                    }
+                    max = -45
                 }
             }
         },
