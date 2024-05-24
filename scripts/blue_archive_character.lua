@@ -254,7 +254,6 @@ BlueArchiveCharacter = {
         ---利き手が変更された時に呼び出される関数。利き手に応じた銃やアクセサリーの変更に利用できる。
         ---@param direction Gun.HandDirection 新たな利き手
         onMainHandChange = function (direction)
-            print(direction)
         end
         ]]
     },
