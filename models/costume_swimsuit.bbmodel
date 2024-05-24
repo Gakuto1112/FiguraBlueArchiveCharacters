@@ -1846,6 +1846,47 @@
 			},
 			"type": "cube",
 			"uuid": "9f0bde6a-1832-2441-eb80-26149c058942"
+		},
+		{
+			"name": "BagBase",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-0.14277, 15.68934, 1.6],
+			"to": [2.35723, 21.68934, 2],
+			"autouv": 0,
+			"color": 0,
+			"origin": [-1.39277, 4.18934, 2],
+			"faces": {
+				"north": {
+					"uv": [45.5, 4, 43, 10],
+					"texture": 0
+				},
+				"east": {
+					"uv": [44, 0, 45, 1],
+					"texture": 0
+				},
+				"south": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"west": {
+					"uv": [44, 0, 45, 1],
+					"texture": 0
+				},
+				"up": {
+					"uv": [44, 0, 45, 1],
+					"texture": 0
+				},
+				"down": {
+					"uv": [44, 0, 45, 1],
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "b3dc2663-a866-7874-1030-57657b6dd617"
 		}
 	],
 	"outliner": [
@@ -2021,6 +2062,7 @@
 					"autouv": 0,
 					"children": [
 						"c4dd19ec-5a67-9996-7d5b-f9affdf25bfe",
+						"b3dc2663-a866-7874-1030-57657b6dd617",
 						{
 							"name": "BagTop",
 							"origin": [1.60723, 24.18934, 3],
