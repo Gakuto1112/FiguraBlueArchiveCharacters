@@ -254,14 +254,27 @@ BlueArchiveCharacter = {
             ---音源のピッチ（0.5 ~ 2）
             ---@type number
             pitch = 2
-        }
+        },
 
-        --[[
         ---利き手が変更された時に呼び出される関数。利き手に応じた銃やアクセサリーの変更に利用できる。
         ---@param direction Gun.HandDirection 新たな利き手
         onMainHandChange = function (direction)
+            if direction == "RIGHT" then
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag:setPos()
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag:setRot(0, 0, 45)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.ShoulderRope:setRot(0, 0, -2.5)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.ShoulderRope.ShoulderRopeKnob:setRot()
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.BagTop.WhaleStrap:setPos()
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.BagTop.WhaleStrap:setRot(0, 0, -45)
+            else
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag:setPos(6, 0, 0)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag:setRot(0, 180, -45)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.ShoulderRope:setRot(0, 180, 1)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.ShoulderRope.ShoulderRopeKnob:setRot(0, 180, 0)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.BagTop.WhaleStrap:setPos(0, 0, 2.3)
+                models.models.main.Avatar.UpperBody.Body.CSwimsuitB.GunBag.BagTop.WhaleStrap:setRot(0, 180, -45)
+            end
         end
-        ]]
     },
 
     ---設置物
