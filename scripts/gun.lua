@@ -351,6 +351,9 @@ Gun = {
         end
 
         self:setGunPosition("NONE")
+        if BlueArchiveCharacter.GUN.onMainHandChange ~= nil then
+            BlueArchiveCharacter.GUN.onMainHandChange(self.LeftHandedPrev and "LEFT" or "RIGHT")
+        end
     end
 }
 
