@@ -127,6 +127,8 @@ Figuraには、アクションホイールキー（デフォルトは「B」キ�
 ### アクション5. Exスキルフレームのパーティクル量の変更
 Exスキルアニメーション中に表示される赤や青の枠から出現する三角形のパーティクルの量を調整できます。パーティクルを減らしたり無効にしたりすることで、パフォーマンスが改善されるかもしれません。
 
+追加のオプションとして、Exスキルアニメーション中のフレーム表示をなくすオプションを追加しました。この状態が本家に一番近い状態です。
+
 ## 使用方法
 Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[Fabric](https://fabricmc.net/)、[NeoForge](https://neoforged.net/)に対応しています。
 
