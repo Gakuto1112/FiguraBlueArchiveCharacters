@@ -607,7 +607,7 @@
 			"uuid": "f8239839-d31b-5a25-59d2-d5c26e5817e0",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -634,6 +634,45 @@
 					"visibility": true,
 					"autouv": 0,
 					"children": ["3abfcbc9-981d-6511-cad2-21cc95bac707", "c7d96471-e422-4149-77d2-6088056417cc"]
+				},
+				{
+					"name": "WhaleParticleAnchor1",
+					"origin": [3, 0, -8],
+					"color": 0,
+					"uuid": "05394c14-fab1-8a2d-b6a4-49d994008952",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": []
+				},
+				{
+					"name": "WhaleParticleAnchor2",
+					"origin": [3, 0, 6],
+					"color": 0,
+					"uuid": "853687bf-15d1-36ac-b2ba-3661a2be6d99",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": []
+				},
+				{
+					"name": "WhaleParticleAnchor3",
+					"origin": [3, 12, -8],
+					"color": 0,
+					"uuid": "334b2166-a794-94e9-77fa-7caaf47e24fc",
+					"export": true,
+					"mirror_uv": false,
+					"isOpen": true,
+					"locked": false,
+					"visibility": true,
+					"autouv": 0,
+					"children": []
 				}
 			]
 		},
@@ -674,7 +713,22 @@
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
-					"children": ["a06d8bf6-c443-077e-9a43-59c54edb829d"]
+					"children": [
+						"a06d8bf6-c443-077e-9a43-59c54edb829d",
+						{
+							"name": "Wave2ParticleAnchor",
+							"origin": [96, 96, -362],
+							"color": 0,
+							"uuid": "5bf9c249-4fd6-5e36-90ab-1fe8bee8553b",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						}
+					]
 				},
 				"20558450-5b9f-d772-b69d-85608f96b0ef"
 			]
@@ -768,7 +822,7 @@
 			"override": true,
 			"length": 2.05,
 			"snapping": 20,
-			"selected": false,
+			"selected": true,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",

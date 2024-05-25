@@ -664,7 +664,18 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 13 then
+                    if tick == 3 then
+                        local modelPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Waves.Wave1):add(0, 7, 0)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 500 do
+                            local offset = vectors.vec3(math.random() * 32 - 16, 0, math.random() * 5)
+                            local particleOffset = offset:copy()
+                            particleOffset.x = particleOffset.x * (math.random() * 0.025 + 0.025)
+                            particleOffset.y = 0.25
+                            particleOffset.z = (particleOffset.z - 2.5) * (math.random() * 0.025 + 0.025)
+                            particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", modelPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, offset, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset, 0, 1, 0)):setGravity(1):setLifetime(40)
+                        end
+                    elseif tick == 13 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 29, true)
                     elseif tick == 42 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "W", 13, true)
@@ -680,12 +691,29 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("INVERTED", "CLOSED", "OPENED", 28, true)
                     end
 
+                    if tick >= 8 and tick < 28 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Waves.Wave2.Wave2ParticleAnchor)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 20 do
+                            particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 32 - 16, 0, 0, 0, 1, 0))):setVelocity(math.random() * 0.2 - 0.1, 0.5, math.random() * 0.2 - 0.1):setGravity(1):setLifetime(20)
+                        end
+                    elseif tick >= 41 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1)
+                        local dirVector = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor2):sub(anchorPos):normalize()
+                        local YVector = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor3):sub(anchorPos):normalize()
+                        for _ = 1, 20 do
+                            local particleDirection = math.random() * 60 - 30
+                            particleDirection = particleDirection > 0 and particleDirection + 30 or particleDirection - 30
+                            particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 3", anchorPos):setVelocity(vectors.rotateAroundAxis(particleDirection, dirVector, YVector):add(YVector:copy():scale(math.random())):normalize():scale(0.5)):setGravity(0.5):setLifetime(10)
+                        end
+                    end
+
                     if tick % 2 == 0 then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Waves.Surface, models.models.ex_skill_2.Waves.Wave1}) do
                             modelPart:setUVPixels(0, modelPart:getUVPixels().y + 16)
                         end
                     end
-                    models.models.ex_skill_2.Waves.Wave2:setUVPixels(0, models.models.ex_skill_2.Waves.Wave2:getUVPixels().y + 16)
+                    models.models.ex_skill_2.Waves.Wave2:setUVPixels(0, models.models.ex_skill_2.Waves.Wave2.Wave2:getUVPixels().y + 16)
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
