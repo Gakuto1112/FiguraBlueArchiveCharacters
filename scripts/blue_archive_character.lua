@@ -675,20 +675,28 @@ BlueArchiveCharacter = {
                             particleOffset.z = (particleOffset.z - 2.5) * (math.random() * 0.025 + 0.025)
                             particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", modelPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, offset, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset, 0, 1, 0)):setGravity(1):setLifetime(40)
                         end
+                        sounds:playSound("minecraft:item.bucket.empty", modelPos, 1, 0.5)
                     elseif tick == 13 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 29, true)
+                    elseif tick == 39 then
+                        sounds:playSound("minecraft:entity.generic.splash", ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1), 1, 0.5)
                     elseif tick == 42 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "W", 13, true)
+                    elseif tick == 52 then
+                        sounds:playSound("minecraft:entity.generic.swim", ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1), 1, 0.5)
                     elseif tick == 55 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "W", 13, true)
                     elseif tick == 68 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 2, true)
                     elseif tick == 70 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", 12, true)
+                        sounds:playSound("minecraft:entity.generic.swim", ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1), 1, 0.5)
                     elseif tick == 82 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 4, true)
                     elseif tick == 85 then
                         FaceParts:setEmotion("INVERTED", "CLOSED", "OPENED", 28, true)
+                    elseif tick == 86 then
+                        sounds:playSound("minecraft:item.bucket.empty", ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1), 1, 0.5)
                     end
 
                     if tick >= 8 and tick < 28 then
@@ -697,6 +705,7 @@ BlueArchiveCharacter = {
                         for _ = 1, 20 do
                             particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 32 - 16, 0, 0, 0, 1, 0))):setVelocity(math.random() * 0.2 - 0.1, 0.5, math.random() * 0.2 - 0.1):setGravity(1):setLifetime(20)
                         end
+                        sounds:playSound("minecraft:item.bucket.empty", anchorPos, 1, 0.5)
                     elseif tick >= 41 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1)
                         local dirVector = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor2):sub(anchorPos):normalize()
@@ -705,6 +714,9 @@ BlueArchiveCharacter = {
                             local particleDirection = math.random() * 60 - 30
                             particleDirection = particleDirection > 0 and particleDirection + 30 or particleDirection - 30
                             particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 3", anchorPos):setVelocity(vectors.rotateAroundAxis(particleDirection, dirVector, YVector):add(YVector:copy():scale(math.random())):normalize():scale(0.5)):setGravity(0.5):setLifetime(10)
+                        end
+                        if tick % 2 == 0 then
+                            sounds:playSound("minecraft:item.bucket.empty", anchorPos, 0.1, 0.5)
                         end
                     end
 
