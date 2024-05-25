@@ -648,14 +648,10 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
-                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
-                ---@type fun()
-                preTransition = function()
-                end,
-
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
+                    BlueArchiveCharacter.resetExSkill2Feature()
                     models.models.ex_skill_2.Waves:setColor(world.getBiome(player:getPos()):getWaterColor())
                     FaceParts:setEmotion("NORMAL", "NORMAL", "W", 13, true)
                 end,
@@ -728,16 +724,32 @@ BlueArchiveCharacter = {
                     models.models.ex_skill_2.Waves.Wave2:setUVPixels(0, models.models.ex_skill_2.Waves.Wave2.Wave2:getUVPixels().y + 16)
                 end,
 
-                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
-                ---@type fun(forcedStop: boolean)
-                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
-                postAnimation = function(forcedStop)
-                end,
-
                 ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postTransition = function(forcedStop)
+                    if not forcedStop then
+                        local playerPos = player:getPos()
+                        for i = 1, 6 do
+                            for j = 0, 71 do
+                                particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 2", playerPos):setVelocity(vectors.rotateAroundAxis(j * 6, 0, 0, i * 0.1, 0, 1, 0)):setPower(0.25):setColor((i - 1) * 0.2, 1, 1)
+                            end
+                        end
+                        sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.5)
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CSwimsuitB.RashGuardB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                            modelPart:setVisible(false)
+                        end
+                        models.models.main.Avatar.Head.CSwimsuitH.Glasses:setPos(0, -4, 0)
+                        BlueArchiveCharacter.ExSkill_2_CostumeChangeTimer = 1000
+                        events.TICK:register(function ()
+                            if not client:isPaused() then
+                                if BlueArchiveCharacter.ExSkill_2_CostumeChangeTimer == 0 then
+                                    BlueArchiveCharacter.resetExSkill2Feature()
+                                end
+                                BlueArchiveCharacter.ExSkill_2_CostumeChangeTimer = BlueArchiveCharacter.ExSkill_2_CostumeChangeTimer - 1
+                            end
+                        end, "ex_skill_2_post_tick")
+                    end
                 end
             }
 		}
@@ -886,6 +898,7 @@ BlueArchiveCharacter = {
             reset = function()
                 Costume.setCostumeTextureOffset(0)
                 models.models.main.Avatar.Head.HatLayer:setUVPixels()
+                BlueArchiveCharacter.resetExSkill2Feature()
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH, models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
                     modelPart:setVisible(false)
                 end
@@ -2332,6 +2345,19 @@ BlueArchiveCharacter = {
             models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType("NONE")
         end
         self.HasShield = newValue
+    end,
+
+    ---Exスキル2で衣装を変化させる時間を測るタイマー
+    ---@type integer
+    ExSkill_2_CostumeChangeTimer = 1000,
+
+    ---Exスキル2の衣装変化機能をリセットする。
+    resetExSkill2Feature = function ()
+        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CSwimsuitB.RashGuardB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+            modelPart:setVisible(true)
+        end
+        models.models.main.Avatar.Head.CSwimsuitH.Glasses:setPos()
+        events.TICK:remove("ex_skill_2_post_tick")
     end
 }
 
