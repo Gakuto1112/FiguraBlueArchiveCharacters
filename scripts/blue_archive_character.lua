@@ -958,14 +958,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -981,14 +981,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.Ears, models.models.main.Avatar.Head.HairAccessories.HairAccessoryRight, models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
+            --[[
         ---モデルのコピー直後に実行される関数（省略可）
-        --[[
         onAfterModelCopy = function ()
         end
         ]]
@@ -1001,41 +1001,43 @@ BlueArchiveCharacter = {
         excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase1 = function (costume)
-            models.models.death_animation.DummyAvatar.Head.Ears.RightEarPivot:setRot(-49.02, -11.44, -9.77)
-            models.models.death_animation.DummyAvatar.Head.Ears.LeftEarPivot:setRot(-49.02, 11.44, 9.77)
-            models.models.death_animation.DummyAvatar.Head.HairAccessories.HairAccessoryRight.HairTail:setRot(30, 0, 0)
-            models.models.death_animation.DummyAvatar.Head.HairAccessories.HairAccessoryRight.Braid:setRot(30, 0, 0)
-            models.models.death_animation.DummyAvatar.UpperBody.Body.Tail:setRot(25, 0, 0)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase1 = function (dummyAvatar, costume)
+            dummyAvatar.Head.Ears.RightEarPivot:setRot(-49.02, -11.44, -9.77)
+            dummyAvatar.Head.Ears.LeftEarPivot:setRot(-49.02, 11.44, 9.77)
+            dummyAvatar.Head.HairAccessories.HairAccessoryRight.HairTail:setRot(30, 0, 0)
+            dummyAvatar.Head.HairAccessories.HairAccessoryRight.Braid:setRot(30, 0, 0)
+            dummyAvatar.UpperBody.Body.Tail:setRot(25, 0, 0)
             if costume == 1 then
-                models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setRot(30, 0, 0)
-                models.models.death_animation.DummyAvatar.UpperBody.Body.Scarfs.Scarf1:setRot(40, 0, 0)
-                models.models.death_animation.DummyAvatar.UpperBody.Body.Scarfs.Scarf2:setRot(40, 0, 0)
+                dummyAvatar.UpperBody.Body.Skirt:setRot(30, 0, 0)
+                dummyAvatar.UpperBody.Body.Scarfs.Scarf1:setRot(40, 0, 0)
+                dummyAvatar.UpperBody.Body.Scarfs.Scarf2:setRot(40, 0, 0)
             end
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase2 = function (costume)
-            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.Head.HairAccessories.HairAccessoryRight.HairTail:setRot(-15, 0, 0)
-            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.Head.HairAccessories.HairAccessoryRight.Braid:setRot(-15, 0, 0)
-            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Tail:setRot(30, 0, 0)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase2 = function (dummyAvatar, costume)
+            dummyAvatar.Head.HairAccessories.HairAccessoryRight.HairTail:setRot(-15, 0, 0)
+            dummyAvatar.Head.HairAccessories.HairAccessoryRight.Braid:setRot(-15, 0, 0)
+            dummyAvatar.UpperBody.Body.Tail:setRot(30, 0, 0)
             if costume == 1 then
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Scarfs.Scarf1:setRot(75, 20, 0)
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Scarfs.Scarf1.Scarf1YPivot:setRot(0, 0, -20)
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Scarfs.Scarf2:setRot(75, 20, 0)
+                dummyAvatar.UpperBody.Body.Scarfs.Scarf1:setRot(75, 20, 0)
+                dummyAvatar.UpperBody.Body.Scarfs.Scarf1.Scarf1YPivot:setRot(0, 0, -20)
+                dummyAvatar.UpperBody.Body.Scarfs.Scarf2:setRot(75, 20, 0)
             end
         end
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
