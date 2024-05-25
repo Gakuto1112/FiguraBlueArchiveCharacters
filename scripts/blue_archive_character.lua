@@ -936,14 +936,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.FaceLayer}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -959,14 +959,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.FaceLayer, models.models.main.Avatar.Head.Brim, models.models.main.Avatar.Head.HairTails, models.models.main.Avatar.CSwimsuitH}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
+            --[[
         ---モデルのコピー直後に実行される関数（省略可）
-        --[[
         onAfterModelCopy = function ()
         end
         ]]
@@ -979,36 +979,37 @@ BlueArchiveCharacter = {
         excludeModels = {models.models.main.Avatar.Head.FaceLayer},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase1 = function (costume)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase1 = function (dummyAvatar, costume)
             if costume == 1 then
-                models.models.death_animation.Avatar.UpperBody.Body.Skirt:setRot(35, 0, 0)
+                dummyAvatar.UpperBody.Body.Skirt:setRot(35, 0, 0)
             elseif costume == 2 then
-                models.models.death_animation.Avatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight:setRot(29.3063, 5.6842, -13.9042)
-                models.models.death_animation.Avatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft:setRot(29.3063, -5.6842, 13.9042)
+                dummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight:setRot(29.3063, 5.6842, -13.9042)
+                dummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft:setRot(29.3063, -5.6842, 13.9042)
             end
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase2 = function (costume)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase2 = function (dummyAvatar, costume)
             if costume == 1 then
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar.UpperBody.Body.Skirt:setRot(15, 0, 0)
+                dummyAvatar.UpperBody.Body.Skirt:setRot(15, 0, 0)
             elseif costume == 2 then
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight:setRot(1.5523, -7.3011, -23.9759)
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft:setRot(-10.0014, -13.1248, -21.4687)
+                dummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomRight:setRot(1.5523, -7.3011, -23.9759)
+                dummyAvatar.Head.CSwimsuitH.HairTailsBottom.HairTailBottomLeft:setRot(-10.0014, -13.1248, -21.4687)
             end
-
         end
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
