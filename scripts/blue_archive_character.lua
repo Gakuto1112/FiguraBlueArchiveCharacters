@@ -656,6 +656,7 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
+                    models.models.ex_skill_2.Waves:setColor(world.getBiome(player:getPos()):getWaterColor())
                     FaceParts:setEmotion("NORMAL", "NORMAL", "W", 13, true)
                 end,
 
@@ -678,6 +679,13 @@ BlueArchiveCharacter = {
                     elseif tick == 85 then
                         FaceParts:setEmotion("INVERTED", "CLOSED", "OPENED", 28, true)
                     end
+
+                    if tick % 2 == 0 then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Waves.Surface, models.models.ex_skill_2.Waves.Wave1}) do
+                            modelPart:setUVPixels(0, modelPart:getUVPixels().y + 16)
+                        end
+                    end
+                    models.models.ex_skill_2.Waves.Wave2:setUVPixels(0, models.models.ex_skill_2.Waves.Wave2:getUVPixels().y + 16)
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
@@ -2288,66 +2296,73 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
-events.TICK:register(function()
-    BlueArchiveCharacter:setShield((player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1, true)
-    if Costume.CurrentCostume == 3 and not BlueArchiveCharacter.HasShield then
-        models.models.main.Avatar.UpperBody.Body.Shield:setVisible(false)
-    end
-end)
+events.ENTITY_INIT:register(function ()
+    events.TICK:register(function()
+        BlueArchiveCharacter:setShield((player:getHeldItem().id == "minecraft:shield" or player:getHeldItem(true).id == "minecraft:shield") and ExSkill.AnimationCount == -1, true)
+        if Costume.CurrentCostume == 3 and not BlueArchiveCharacter.HasShield then
+            models.models.main.Avatar.UpperBody.Body.Shield:setVisible(false)
+        end
+    end)
 
-events.ITEM_RENDER:register(function (item, mode)
-    if item.id == "minecraft:shield" and mode ~= "HEAD" and BlueArchiveCharacter.HasShield and (Gun.ShowWeaponInFirstPerson or mode == "THIRD_PERSON_LEFT_HAND" or mode == "THIRD_PERSON_RIGHT_HAND") then
-        if mode == "FIRST_PERSON_LEFT_HAND" then
-            local leftHanded = player:isLeftHanded()
-            if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(8, -20.25, 2.5)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
-            else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -22.5, 2.5)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, 5)
+    events.ITEM_RENDER:register(function (item, mode)
+        if item.id == "minecraft:shield" and mode ~= "HEAD" and BlueArchiveCharacter.HasShield and (Gun.ShowWeaponInFirstPerson or mode == "THIRD_PERSON_LEFT_HAND" or mode == "THIRD_PERSON_RIGHT_HAND") then
+            if mode == "FIRST_PERSON_LEFT_HAND" then
+                local leftHanded = player:isLeftHanded()
+                if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(8, -20.25, 2.5)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
+                else
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -22.5, 2.5)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, 5)
+                end
+            elseif mode == "FIRST_PERSON_RIGHT_HAND" then
+                local leftHanded = player:isLeftHanded()
+                if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(0, -19.25, 2.5)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, 5)
+                else
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -22.5, 2.5)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
+                end
+            elseif mode == "THIRD_PERSON_LEFT_HAND" then
+                local leftHanded = player:isLeftHanded()
+                if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, -2)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, 30, 30)
+                else
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, 2.5)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
+                end
+            elseif mode == "THIRD_PERSON_RIGHT_HAND" then
+                local leftHanded = player:isLeftHanded()
+                if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, -2)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, -30, -30)
+                else
+                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, 2.5)
+                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, -90, 0)
+                end
             end
-        elseif mode == "FIRST_PERSON_RIGHT_HAND" then
-            local leftHanded = player:isLeftHanded()
-            if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(0, -19.25, 2.5)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, 5)
-            else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -22.5, 2.5)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
-            end
-        elseif mode == "THIRD_PERSON_LEFT_HAND" then
-            local leftHanded = player:isLeftHanded()
-            if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, -2)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, 30, 30)
-            else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, 2.5)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
-            end
-        elseif mode == "THIRD_PERSON_RIGHT_HAND" then
-            local leftHanded = player:isLeftHanded()
-            if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, -2)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, -30, -30)
-            else
-                models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, 2.5)
-                models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, -90, 0)
+            models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType(item:hasGlint() and "GLINT" or "NONE")
+            models.models.main.Avatar.UpperBody.Body.Shield:setVisible(true)
+            return models.models.main.Avatar.UpperBody.Body.Shield
+        end
+    end)
+
+    events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
+        if path ~= nil then
+            if id == "minecraft:item.shield.block" and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.2 and player:getActiveItem().id == "minecraft:shield" then
+                sounds:playSound("minecraft:block.anvil.place", pos, 1, 4)
+                ---@diagnostic disable-next-line: redundant-return-value
+                return true
             end
         end
-        models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType(item:hasGlint() and "GLINT" or "NONE")
-        models.models.main.Avatar.UpperBody.Body.Shield:setVisible(true)
-        return models.models.main.Avatar.UpperBody.Body.Shield
-    end
-end)
+    end)
 
-events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
-    if path ~= nil then
-        if id == "minecraft:item.shield.block" and math.abs(pos:copy():sub(player:getPos()):length() - player:getVelocity():length()) < 0.2 and player:getActiveItem().id == "minecraft:shield" then
-            sounds:playSound("minecraft:block.anvil.place", pos, 1, 4)
-            ---@diagnostic disable-next-line: redundant-return-value
-            return true
-        end
+    for _, modelPart in ipairs({models.models.ex_skill_2.Waves.Surface, models.models.ex_skill_2.Waves.Wave1}) do
+        modelPart:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
     end
+    models.models.ex_skill_2.Waves.Wave2:setPrimaryTexture("RESOURCE", "textures/block/water_flow.png")
 end)
 
 return BlueArchiveCharacter
