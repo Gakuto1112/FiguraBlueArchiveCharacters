@@ -987,7 +987,7 @@ BlueArchiveCharacter = {
         end
         ]]
 
-            --[[
+        --[[
         ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
