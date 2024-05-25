@@ -612,7 +612,6 @@ BlueArchiveCharacter = {
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase1 = function (dummyAvatar, costume)
-            print(dummyAvatar)
         end
         ]]
 
