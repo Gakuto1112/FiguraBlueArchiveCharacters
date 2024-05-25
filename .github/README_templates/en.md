@@ -23,9 +23,7 @@ The avatars for these characters are completed. Click on a character's name to g
 - [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [Midori Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [Shiroko Sunaookami](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
-- [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Hoshino) (*1)
-
-*1: The swimsuit costume is not implemented now. It will be implemented later. Be patient.
+- [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Hoshino)
 
 ### In progress
 The avatars for these characters are worked in progress. It usually takes about 2~3 weeks. Click on the link in brackets to go to the issue about the character, where you can check the progress.
@@ -35,6 +33,8 @@ The avatars for these characters are worked in progress. It usually takes about 
 ### Planned
 Although the avatars for these characters are not created, there are plans to create them in the future. They will be created in order from top to bottom. This is just a plan and the order may change or creation may be discontinued.
 
+- Momoi Saiba (maid) ([#51](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/51))
+- Midori Saiba (maid) ([#52](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/52))
 - Serika Kuromi（[#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37)）
 - Serina Sumi（[#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38)）
 - Hihumi Ajitani（[#39](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/39)）
