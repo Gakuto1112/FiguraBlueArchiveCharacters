@@ -1131,14 +1131,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -1154,14 +1154,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.Ears, models.models.main.Avatar.Head.CSwimsuitH}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -1174,31 +1174,33 @@ BlueArchiveCharacter = {
         excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase1 = function (costume)
-            models.models.death_animation.Avatar.Head.Ears.RightEarPivot:setRot(-49.02, -11.44, -9.77)
-            models.models.death_animation.Avatar.Head.Ears.LeftEarPivot:setRot(-49.02, 11.44, 9.77)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase1 = function (dummyAvatar, costume)
+            dummyAvatar.Head.Ears.RightEarPivot:setRot(-49.02, -11.44, -9.77)
+            dummyAvatar.Head.Ears.LeftEarPivot:setRot(-49.02, 11.44, 9.77)
             if costume <= 2 then
-                models.models.death_animation.Avatar.UpperBody.Body.Skirt:setRot(27.5, 0, 0)
+                dummyAvatar.UpperBody.Body.Skirt:setRot(27.5, 0, 0)
             end
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase2 = function (costume)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase2 = function (dummyAvatar, costume)
             if costume <= 2 then
-                models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar.UpperBody.Body.Skirt:setRot(12.5, 0, 0)
+                dummyAvatar.UpperBody.Body.Skirt:setRot(12.5, 0, 0)
             end
         end
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
