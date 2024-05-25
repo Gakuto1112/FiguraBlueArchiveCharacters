@@ -1016,12 +1016,18 @@ BlueArchiveCharacter = {
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase1 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(25, 0, 0)
-            dummyAvatar.UpperBody.Body.Shield:setPos(4.5, -2.5, 0)
-            dummyAvatar.UpperBody.Body.Shield:setRot(70, 90, 0)
-            dummyAvatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setRot(-55, 0, 0)
-            if costume == 1 then
-                dummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-35, 0, 0)
+            if costume <= 2 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(25, 0, 0)
+                dummyAvatar.UpperBody.Body.Shield:setPos(4.5, -2.5, 0)
+                dummyAvatar.UpperBody.Body.Shield:setRot(70, 90, 0)
+                dummyAvatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setRot(-55, 0, 0)
+                if costume == 1 then
+                    dummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-35, 0, 0)
+                end
+            else
+                for _, modelPart in ipairs({dummyAvatar.Head.CSwimsuitH.HairTails.HairTailLeft.HairLeftBottom, dummyAvatar.Head.CSwimsuitH.HairTails.HairTailRight.HairRightBottom}) do
+                    modelPart:setRot(25, 0, 0)
+                end
             end
         end,
 
@@ -1029,11 +1035,16 @@ BlueArchiveCharacter = {
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase2 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Shield:setPos()
-            dummyAvatar.UpperBody.Body.Shield:setRot(0, 90, 0)
-            dummyAvatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setRot()
-            if costume == 1 then
-                dummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-9.6599, -3.2113, -12.0868)
+            if costume <= 2 then
+                dummyAvatar.UpperBody.Body.Shield:setPos()
+                dummyAvatar.UpperBody.Body.Shield:setRot(0, 90, 0)
+                dummyAvatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setRot()
+                if costume == 1 then
+                    dummyAvatar.UpperBody.Body.Hairs.BackHair:setRot(-9.6599, -3.2113, -12.0868)
+                end
+            else
+                dummyAvatar.Head.CSwimsuitH.HairTails.HairTailLeft.HairLeftBottom:setRot(-15, 0, 30)
+                dummyAvatar.Head.CSwimsuitH.HairTails.HairTailRight.HairRightBottom:setRot(-15, 0, -10)
             end
         end
 
