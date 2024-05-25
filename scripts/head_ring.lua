@@ -57,7 +57,7 @@ HeadRing = {
                     models.models.main.Avatar.Head.HeadRing:setPos(Physics.VelocityAverage[3] * -3, math.cos(math.rad(headRot)) * Physics.VelocityAverage[2] * -1 + math.sin(math.rad(headRot)) * Physics.VelocityAverage[1] + self.FloatOffset, math.cos(math.rad(headRot)) * Physics.VelocityAverage[1] * 3 + math.sin(math.rad(headRot)) * Physics.VelocityAverage[2])
                 end
                 models.script_head_block.Head.HeadRing:setPos(0, self.FloatOffset, 0)
-                if DeathAnimation.AnimationCount > 0 then
+                if DeathAnimation.DummyAvatarRoot ~= nil then
                     DeathAnimation.DummyAvatarRoot["Head"]["HeadRing"]:setPos(0, self.FloatOffset, 0)
                 end
                 models.models.main.Avatar.Head.HeadRing:setRot(self.HeadRotAverage - headRot, 0, 0)
