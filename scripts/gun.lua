@@ -4,6 +4,11 @@
 ---| "RIGHT"
 ---| "LEFT"
 
+---手の方向（右手か左手か）を示す列挙型
+---@alias Gun.HandDirection
+---| "RIGHT"
+---| "LEFT"
+
 ---@class Gun 生徒の銃を制御するクラス
 Gun = {
     ---銃のモデルを適用するアイテムIDのテーブル
@@ -43,24 +48,13 @@ Gun = {
                 end
             end
             if BlueArchiveCharacter.GUN.put.type == "BODY" then
-                if events.TICK:getRegisteredCount("body_gun_tick") == 0 then
-                    events.TICK:register(function ()
-                        local leftHanded = player:isLeftHanded()
-                        if leftHanded ~= self.LeftHandedPrev then
-                            self.setBodyGunPos()
-                            self.LeftHandedPrev = leftHanded
-                        end
-                    end, "body_gun_tick")
-                end
                 self.setBodyGunPos()
             elseif BlueArchiveCharacter.GUN.put.type == "HIDDEN" then
                 models.models.main.Avatar.UpperBody.Body.Gun:setVisible(false)
             end
             self.CurrentGunPosition = "NONE"
         elseif GunPosition == "RIGHT" then
-            for _, tickName in ipairs({"body_gun_tick", "left_gun_tick"}) do
-                events.TICK:remove(tickName)
-            end
+            events.TICK:remove("left_gun_tick")
             if events.TICK:getRegisteredCount("right_gun_tick") == 0 then
                 events.TICK:register(function ()
                     local heldItem = player:getHeldItem(player:isLeftHanded())
@@ -90,9 +84,7 @@ Gun = {
             end
             self.CurrentGunPosition = "RIGHT"
         else
-            for _, tickName in ipairs({"body_gun_tick", "right_gun_tick"}) do
-                events.TICK:remove(tickName)
-            end
+            events.TICK:remove("right_gun_tick")
             if events.TICK:getRegisteredCount("left_gun_tick") == 0 then
                 events.TICK:register(function ()
                     local heldItem = player:getHeldItem(not player:isLeftHanded())
@@ -148,16 +140,18 @@ Gun = {
     end,
 
     ---初期化関数
+    ---@param self Gun
     init = function (self)
         events.TICK:register(function()
             local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem("minecraft:air"), world.newItem("minecraft:air")}
             local targetItemFound = false
+            local isLeftHanded = player:isLeftHanded()
             if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id then
                 for _, gunItem in ipairs(Gun.GUN_ITEMS) do
                     if heldItems[1].id == gunItem then
                         --メインハンドに対象アイテムを持つ
                         targetItemFound = true
-                        if player:isLeftHanded() then
+                        if isLeftHanded then
                             if self.CurrentGunPosition ~= "LEFT" then
                                 self:setGunPosition("LEFT")
                             end
@@ -174,7 +168,7 @@ Gun = {
                         if heldItems[2].id == gunItem then
                             --オフハンドに対象アイテムを持つ
                             targetItemFound = true
-                            if player:isLeftHanded() then
+                            if isLeftHanded then
                                 if self.CurrentGunPosition ~= "RIGHT" then
                                     self:setGunPosition("RIGHT")
                                 end
@@ -194,6 +188,15 @@ Gun = {
                     end
                 end
                 self.HeldItemsPrev = heldItems
+            end
+            if isLeftHanded ~= self.LeftHandedPrev then
+                if self.CurrentGunPosition == "NONE" then
+                    self.setBodyGunPos()
+                end
+                if BlueArchiveCharacter.GUN.onMainHandChange ~= nil then
+                    BlueArchiveCharacter.GUN.onMainHandChange(isLeftHanded and "LEFT" or "RIGHT")
+                end
+                self.LeftHandedPrev = isLeftHanded
             end
         end)
 
@@ -348,6 +351,9 @@ Gun = {
         end
 
         self:setGunPosition("NONE")
+        if BlueArchiveCharacter.GUN.onMainHandChange ~= nil then
+            BlueArchiveCharacter.GUN.onMainHandChange(self.LeftHandedPrev and "LEFT" or "RIGHT")
+        end
     end
 }
 
