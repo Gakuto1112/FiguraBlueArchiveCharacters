@@ -25,6 +25,7 @@ DeathAnimation = {
     CostumeIndex = 1,
 
     ---ヘリコプターの出現/消滅パーティクルを生成する。
+    ---@param self DeathAnimation
     spawnHelicopterParticles = function (self)
         local helicopterPos = ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter)
         for _ = 1, 100 do
@@ -33,6 +34,7 @@ DeathAnimation = {
     end,
 
     ---死亡アニメーションを再生する。
+    ---@param self DeathAnimation
     play = function (self)
         self:stop()
         self.CostumeIndex = Costume.CurrentCostume
@@ -164,18 +166,18 @@ DeathAnimation = {
     end,
 
     ---死亡アニメーションを停止する。
+    ---@param self DeathAnimation
     stop = function (self)
         models.models.death_animation:setVisible(false)
-        if models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar ~= nil then
-            self.DummyAvatarRoot = models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar:moveTo(models.models.death_animation)
-        end
         animations["models.death_animation"]["death_animation"]:stop()
         events.TICK:remove("death_animation_tick")
         events.WORLD_TICK:remove("death_animation_world_tick")
+        self.DummyAvatarRoot = nil
         self.AnimationCount = 0
     end,
 
     ---初期化関数
+    ---@param self DeathAnimation
     init = function (self)
         events.TICK:register(function ()
             if PlayerUtils:getDamageStatus() == "DIED" then
