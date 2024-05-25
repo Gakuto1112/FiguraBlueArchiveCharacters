@@ -565,14 +565,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -588,14 +588,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
+            --[[
         ---モデルのコピー直後に実行される関数（省略可）
-        --[[
         onAfterModelCopy = function ()
         end
         ]]
@@ -607,28 +607,31 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {}
 
+        --[[
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        --[[
-        onPhase1 = function (costume)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase1 = function (dummyAvatar, costume)
+            print(dummyAvatar)
         end
         ]]
 
+        --[[
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        --[[
-        onPhase2 = function (costume)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase2 = function (dummyAvatar, costume)
         end
         ]]
 
+            --[[
         ---モデルのコピー直前に実行される関数（省略可）
-        --[[
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]

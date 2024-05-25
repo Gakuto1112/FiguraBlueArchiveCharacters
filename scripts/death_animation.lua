@@ -149,7 +149,7 @@ DeathAnimation = {
         models.models.death_animation:setVisible(true)
         animations["models.death_animation"]["death_animation"]:play()
         if BlueArchiveCharacter.DEATH_ANIMATION.onPhase1 ~= nil then
-            BlueArchiveCharacter.DEATH_ANIMATION.onPhase1(self.CostumeIndex)
+            BlueArchiveCharacter.DEATH_ANIMATION.onPhase1(models.models.death_animation.Avatar, self.CostumeIndex)
         end
         if events.TICK:getRegisteredCount("death_animation_tick") == 0 then
             events.TICK:register(function ()
@@ -176,7 +176,7 @@ DeathAnimation = {
                     self.DummyAvatarRoot = models.models.death_animation.Avatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
                     self.setPhase2Pose(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar)
                     if BlueArchiveCharacter.DEATH_ANIMATION.onPhase2 ~= nil then
-                        BlueArchiveCharacter.DEATH_ANIMATION.onPhase2(self.CostumeIndex)
+                        BlueArchiveCharacter.DEATH_ANIMATION.onPhase2(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar, self.CostumeIndex)
                     end
                 elseif self.AnimationCount == 230 then
                     sounds:playSound("minecraft:block.iron_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
@@ -232,6 +232,9 @@ DeathAnimation = {
                 self.resetDummyAvatar(models.script_death_animation_debug.Avatar)
                 self.setPhase1Pose(models.script_death_animation_debug.Avatar)
                 models.script_death_animation_debug.Avatar:setPos(player:getPos():add(0, -0.75, 0):scale(16))
+                if BlueArchiveCharacter.DEATH_ANIMATION.onPhase1 ~= nil then
+                    BlueArchiveCharacter.DEATH_ANIMATION.onPhase1(models.script_death_animation_debug.Avatar, Costume.CurrentCostume)
+                end
             end)
             keybinds:newKeybind("[DEBUG] Spawn death animation phase2 model", "key.keyboard.c"):onPress(function ()
                 self.removeUnsafeModel(models.script_death_animation_debug.Avatar)
@@ -239,6 +242,9 @@ DeathAnimation = {
                 self.resetDummyAvatar(models.script_death_animation_debug.Avatar)
                 self.setPhase2Pose(models.script_death_animation_debug.Avatar)
                 models.script_death_animation_debug.Avatar:setPos(player:getPos():scale(16))
+                if BlueArchiveCharacter.DEATH_ANIMATION.onPhase2 ~= nil then
+                    BlueArchiveCharacter.DEATH_ANIMATION.onPhase2(models.script_death_animation_debug.Avatar, Costume.CurrentCostume)
+                end
             end)
         end
     end
