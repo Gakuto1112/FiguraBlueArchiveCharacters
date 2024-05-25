@@ -743,14 +743,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -766,14 +766,14 @@ BlueArchiveCharacter = {
         ---@type ModelPart>[]
         excludeModels = {models.models.main.Avatar.Head.Phone}
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
@@ -786,25 +786,27 @@ BlueArchiveCharacter = {
         excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase1 = function (costume)
-            models.models.death_animation.DummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase1 = function (dummyAvatar, costume)
+            dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
-        ---@param costume integer コスチュームのインデックス
-        onPhase2 = function (costume)
-            models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.DummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+        ---@param dummyAvatar ModelPart ダミーアバターのルート
+        ---@param costume integer ダミーアバターのコスチュームのインデックス
+        onPhase2 = function (dummyAvatar, costume)
+            dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
         end
 
-        ---モデルのコピー直前に実行される関数（省略可）
         --[[
+        ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
         end
         ]]
 
-        ---モデルのコピー直後に実行される関数（省略可）
         --[[
+        ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
         end
         ]]
