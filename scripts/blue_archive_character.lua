@@ -662,13 +662,11 @@ BlueArchiveCharacter = {
                 animationTick = function(tick)
                     --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
                     --"<>"内を適切な値で置換すること。
-                    --[[
-                    if tick == <tick_int> then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[<ex_skill_index>].animations) do
-                            animations["models."..animation]["ex_skill_"..<ex_skill_index>]:pause()
+                    if tick == 88 then
+                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[2].animations) do
+                            animations["models."..animation]["ex_skill_"..2]:pause()
                         end
                     end
-                    ]]
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
