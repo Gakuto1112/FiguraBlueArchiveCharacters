@@ -40,7 +40,9 @@ HeadBlock = {
             for _, modelPart in ipairs({models.script_head_block.Head.FaceParts.Eyes.EyeRight, models.script_head_block.Head.FaceParts.Eyes.EyeLeft}) do
                 modelPart:setUVPixels()
             end
-            models.script_head_block.Head.FaceParts.Mouth:remove()
+            if models.script_head_block.Head.FaceParts.Mouth ~= nil then
+                models.script_head_block.Head.FaceParts.Mouth:remove()
+            end
             for _, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.includeModels) do
                 local copiedIncludePart = ModelUtils:copyModel(modelPart)
                 if copiedIncludePart ~= nil and copiedIncludePart:getVisible() then
@@ -74,11 +76,6 @@ HeadBlock = {
             self.ForceGenerateCount = self.ForceGenerateCount - 1
             if self.ForceGenerateCount == 0 then
                 self.generateHeadBlockModel()
-                events.WORLD_RENDER:register(function ()
-                    if not player:isLoaded() then
-
-                    end
-                end)
                 events.WORLD_TICK:remove("head_block_world_tick")
             end
         end, "head_block_world_tick")
