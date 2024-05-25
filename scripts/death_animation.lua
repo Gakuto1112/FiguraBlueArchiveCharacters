@@ -249,6 +249,9 @@ DeathAnimation = {
                 self.resetDummyAvatar(models.script_death_animation_debug.Avatar)
                 self.setPhase2Pose(models.script_death_animation_debug.Avatar)
                 models.script_death_animation_debug.Avatar:setPos(player:getPos():scale(16))
+                if BlueArchiveCharacter.DEATH_ANIMATION.onPhase1 ~= nil then
+                    BlueArchiveCharacter.DEATH_ANIMATION.onPhase1(models.script_death_animation_debug.Avatar, Costume.CurrentCostume)
+                end
                 if BlueArchiveCharacter.DEATH_ANIMATION.onPhase2 ~= nil then
                     BlueArchiveCharacter.DEATH_ANIMATION.onPhase2(models.script_death_animation_debug.Avatar, Costume.CurrentCostume)
                 end
