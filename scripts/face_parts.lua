@@ -24,7 +24,12 @@ FaceParts = {
 
 			--口
 			if mouth ~= "HOLD" then
-				models.models.main.Avatar.Head.FaceParts.Mouth:setUVPixels(BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][1] * 4, BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][2] * 2)
+				if mouth ~= "CLOSED" then
+					models.models.main.Avatar.Head.FaceParts.Mouth:setVisible(true)
+					models.models.main.Avatar.Head.FaceParts.Mouth:setUVPixels(BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][1] * 4, BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][2] * 2)
+				else
+					models.models.main.Avatar.Head.FaceParts.Mouth:setVisible(false)
+				end
 			end
 
 			self.EmotionCount = duration
