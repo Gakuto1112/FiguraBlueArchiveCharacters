@@ -33,7 +33,9 @@ Portrait = {
             for _, modelPart in ipairs({models.script_portrait.Head.FaceParts.Eyes.EyeRight, models.script_portrait.Head.FaceParts.Eyes.EyeLeft}) do
                 modelPart:setUVPixels()
             end
-            models.script_portrait.Head.FaceParts.Mouth:remove()
+            if models.script_head_block.Head.FaceParts.Mouth ~= nil then
+                models.script_head_block.Head.FaceParts.Mouth:remove()
+            end
             for _, modelPart in ipairs(BlueArchiveCharacter.PORTRAIT.includeModels) do
                 local copiedIncludePart = ModelUtils:copyModel(modelPart)
                 if copiedIncludePart ~= nil and copiedIncludePart:getVisible() then
