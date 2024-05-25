@@ -1,9 +1,5 @@
 ---@class ModelUtils モデルに関するユーティリティ関数群
 ModelUtils = {
-    ---モデルが見つからない場合の警告メッセージを表示する。デバッグ用。
-    ---@type boolean
-    SHOW_WARN_MESSAGES = false,
-
     ---指定したモデルのワールド位置を返す。
     ---@param model ModelPart ワールド位置を取得するモデルパーツ
     ---@return Vector3 worldPos モデルのワールド位置
