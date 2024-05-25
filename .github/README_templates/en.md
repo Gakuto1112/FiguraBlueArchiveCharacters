@@ -127,6 +127,8 @@ Toggles whether weapon models (including students' guns) are visible or not in f
 ### Action 5. Change amount of Ex skill frame particles
 Changes the amount of triangular particles that appear from the red or blue borders that appear during Ex skill animations. Reducing or disabling particles may improve performance.
 
+As an additional option, I have added an option to disable the frame during the Ex skill animations. This is the closest to the original one.
+
 <!-- $inject(how_to_use) -->
 
 <!-- $inject(notes) -->
