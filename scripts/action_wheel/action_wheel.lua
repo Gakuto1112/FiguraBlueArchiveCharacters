@@ -177,9 +177,9 @@ if host:isHost() then
     --アクション5. Exスキルフレームのパーティクルの量
     mainPage:newAction(5):item("minecraft:glowstone_dust"):color(0.78, 0.78, 0.78):hoverColor(1, 1, 1):onScroll(function (direction)
         if direction < 0 then
-            selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 3 and 1 or selectingExSkillFrameParticleAmount + 1
+            selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 4 and 1 or selectingExSkillFrameParticleAmount + 1
         else
-            selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 1 and 3 or selectingExSkillFrameParticleAmount - 1
+            selectingExSkillFrameParticleAmount = selectingExSkillFrameParticleAmount == 1 and 4 or selectingExSkillFrameParticleAmount - 1
         end
         refreshExSkillParticleActionTitle()
     end):onLeftClick(function ()
