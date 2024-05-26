@@ -101,19 +101,18 @@ BlueArchiveCharacter = {
 
         ---口
         Mouth = {
-            CLOSED = {0, 0},
-            STRAIGHT = {4, 0},
-            SMILE = {0, 4},
-            OPENED = {4, 4},
-            ANXIOUS = {8, 4},
-            TRIANGLE = {12, 4},
-            TRIANGLE2 = {0, 8},
-            TIRED = {4, 8}
+            STRAIGHT = {1, 0},
+            SMILE = {0, 1},
+            OPENED = {1, 1},
+            ANXIOUS = {2, 1},
+            TRIANGLE = {3, 1},
+            TRIANGLE2 = {0, 2},
+            TIRED = {1, 2}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
         ---@type number
-        MouthResolutionMultiplayer = 1
+        MouthResolutionMultiplayer = 4
 
         ---表情のセット（省略可）
         --[[
