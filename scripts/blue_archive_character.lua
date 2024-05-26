@@ -107,6 +107,10 @@ BlueArchiveCharacter = {
             SHOCK = {6, -2},
         },
 
+        ---口のテクスチャの解像度の倍率。4x2を基準とする。
+        ---@type number
+        MouthResolutionMultiplayer = 1,
+
         ---表情のセット（省略可）
         FacePartsSets = {
             ---ダメージを受けた時の表情（省略可）
