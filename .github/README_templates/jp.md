@@ -26,12 +26,11 @@
 ### 作成中
 これらのキャラクターのアバターは作成中です。通常2~3週間程要します。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
 
-（現在作成中のアバターはありません。）
+- 才羽 モモイ（メイド）（[#51](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/51)）
 
 ### 作成予定
 これらのキャラクターのアバターは作成していないものの、今後作成する予定です。上から順に作成予定です。これはあくまでも予定であり、順番が変更されたり作成を中止したりする可能性があります。
 
-- 才羽 モモイ（メイド）（[#51](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/51)）
 - 才羽 ミドリ（メイド）（[#52](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/52)）
 - 黒見 セリカ（[#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37)）
 - 鷲見 セリナ（[#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38)）
