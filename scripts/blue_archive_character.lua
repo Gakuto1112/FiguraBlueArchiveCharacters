@@ -107,7 +107,6 @@ BlueArchiveCharacter = {
 
         ---口
         Mouth = {
-            CLOSED = {0, 0},
             NORMAL = {1, 0},
             ANGRY = {2, 0},
             CLOSED2 = {3, 0},
