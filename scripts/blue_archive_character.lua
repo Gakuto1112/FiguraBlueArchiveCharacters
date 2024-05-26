@@ -91,7 +91,6 @@ BlueArchiveCharacter = {
 
         ---口
         Mouth = {
-            CLOSED = {0, 0}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
