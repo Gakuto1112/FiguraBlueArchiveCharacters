@@ -28,7 +28,7 @@ BlueArchiveCharacter = {
         firstName = {
             ---英語
             ---@type string
-            en_us = "Marie",
+            en_us = "Mari",
 
             ---日本語
             ---@type string

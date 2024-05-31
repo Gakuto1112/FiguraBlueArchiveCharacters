@@ -9,7 +9,7 @@ Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.2
 
 ![Thumbnail](../README_images/thumbnail.png)
 
-This branch is for **Marie Iochi**.
+This branch is for **Mari Iochi**.
 
 ## Creation status
 ### Done
@@ -17,7 +17,7 @@ The avatars for these characters are completed. Click on a character's name to g
 
 - [Shizuko Kawawa](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
-- [Marie Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
+- [Mari Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
 - [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [Midori Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [Shiroko Sunaookami](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
