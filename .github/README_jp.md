@@ -19,7 +19,7 @@
 
 - [河和 シズコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [久田 イズナ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
-- [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
+- [伊落 マリー](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Mari)
 - [才羽 モモイ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [才羽 ミドリ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [砂狼 シロコ](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
