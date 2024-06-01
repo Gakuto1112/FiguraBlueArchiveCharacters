@@ -19,7 +19,7 @@ The avatars for these characters are completed. Click on a character's name to g
 
 - [Shizuko Kawawa](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shizuko)
 - [Izuna Kuda](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Izuna)
-- [Mari Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Marie)
+- [Mari Iochi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Mari)
 - [Momoi Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Momoi)
 - [Midori Saiba](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Midori)
 - [Shiroko Sunaookami](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Shiroko)
