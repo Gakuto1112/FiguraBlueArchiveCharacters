@@ -767,7 +767,7 @@
 			"uuid": "4a4353a6-3e3e-ddf5-073b-2b5aa53b7eac"
 		},
 		{
-			"name": "OOLogo",
+			"name": "OOLogoRight",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -1223,6 +1223,47 @@
 			},
 			"type": "cube",
 			"uuid": "bfd9bcde-df77-5688-71ad-f9e6de0a52d7"
+		},
+		{
+			"name": "OOLogoLeft",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-6.26, 5.85, 0.68],
+			"to": [-6.26, 6.85, 1.823],
+			"autouv": 0,
+			"color": 0,
+			"origin": [5, 18, 2],
+			"faces": {
+				"north": {
+					"uv": [0, 16, 0, 16],
+					"texture": null
+				},
+				"east": {
+					"uv": [0, 0, 0, 0],
+					"texture": null
+				},
+				"south": {
+					"uv": [0, 16, 0, 16],
+					"texture": null
+				},
+				"west": {
+					"uv": [27, 74, 43, 88],
+					"texture": 0
+				},
+				"up": {
+					"uv": [0, 16, 0, 16],
+					"texture": null
+				},
+				"down": {
+					"uv": [0, 16, 0, 16],
+					"texture": null
+				}
+			},
+			"type": "cube",
+			"uuid": "03baf98e-5025-226b-5d56-5eb8b57dd379"
 		}
 	],
 	"outliner": [
@@ -1523,7 +1564,8 @@
 												"1e8a9fce-e1fb-7b7e-7eb2-4a793ebcd958",
 												"4a4353a6-3e3e-ddf5-073b-2b5aa53b7eac",
 												"1795ac0b-b779-832b-a965-2dc00d907490",
-												"6e195df0-bf76-310c-06fd-394a4ff07e7f"
+												"6e195df0-bf76-310c-06fd-394a4ff07e7f",
+												"03baf98e-5025-226b-5d56-5eb8b57dd379"
 											]
 										}
 									]
