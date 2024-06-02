@@ -27,7 +27,7 @@ Physics = {
     disable = function()
         events.RENDER:remove("physics_render")
         events.WORLD_RENDER:remove("physics_world_render")
-        for _, physicData in ipairs(BlueArchiveCharacter.PHYSICS) do
+        for _, physicData in ipairs(BlueArchiveCharacter.PHYSICS.data) do
             local initialRot = vectors.vec3()
             if physicData.x ~= nil and physicData.x.vertical ~= nil then
                 initialRot.x = physicData.x.vertical.neutral
@@ -113,7 +113,7 @@ Physics = {
         local waterMultiplayer = player:isInWater() and 2 or 1
         local headRot = math.deg(math.asin(player:getLookDir().y))
         local isSneaking = player:isCrouching()
-        for _, physicData in ipairs(BlueArchiveCharacter.PHYSICS) do
+        for _, physicData in ipairs(BlueArchiveCharacter.PHYSICS.data) do
             local modelParts = {}
             if type(physicData.modelPart) == "ModelPart" then
                 table.insert(modelParts, physicData.modelPart)
@@ -315,6 +315,9 @@ Physics = {
                         end
                     end
                     modelPart:setRot(rotX, rotY, rotZ)
+                    if BlueArchiveCharacter.PHYSICS.callback ~= nil then
+                        BlueArchiveCharacter.PHYSICS.callback(modelPart)
+                    end
                 end
             end
         end
