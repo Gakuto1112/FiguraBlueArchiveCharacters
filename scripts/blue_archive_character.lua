@@ -1779,6 +1779,910 @@ BlueArchiveCharacter = {
                 }
             }
             ]]
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.VeilBody,
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -80,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = {models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.CTracksuitB.FrontHair},
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
+                        ---@type number
+                        sneakOffset = 30,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -0.05,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 80,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.BackRibbon.BackRibbonBottom,
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -150,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -65,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -150,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -65,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairTail,
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -170,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 30,
+
+                        ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
+                        ---@type number
+                        sneakOffset = -20,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -1,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 10
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.05,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -170,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -135,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = -30,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = -30,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -45,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = -30
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairTail.HairTailZPivot,
+
+                ---x軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -80,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---頭を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
+                        headZ = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopLeftYPivot,
+
+                ---x軸回転における物理演算データ（省略可）
+                y = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = 0.5,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopLeftYPivot.HairBandRibbonTopLeftZPivot,
+
+                ---x軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -40,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 40,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -40,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 40
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopRightYPivot,
+
+                ---x軸回転における物理演算データ（省略可）
+                y = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -80,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -0.5,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopRightYPivot.HairBandRibbonTopRightZPivot,
+
+                ---x軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -40,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 40,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -40,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 40
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = {models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomLeftXPivot, models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomRightXPivot},
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -170,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -1,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -170,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomLeftXPivot.HairBandRibbonBottomLeftZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 30,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 30
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 30
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 30
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomRightXPivot.HairBandRibbonBottomRightZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -30,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -30,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -30,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -30,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagHooks.BagHookNorth.IDCard.IDCardXPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot},
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
+                        ---@type number
+                        sneakOffset = 30,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -0.1,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart =  {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagHooks.BagHookNorth.IDCard.IDCardXPivot.IDCardZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot.BagBaseFastener1ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot.BagBaseFastener2ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot.BackPocketFastenerZPivot},
+
+                ---x軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -80,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---頭を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
+                        headZ = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -160,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    }
+                }
+            }
         }
 
         --[[
@@ -1787,910 +2691,6 @@ BlueArchiveCharacter = {
         callback = function (modelPart)
         end
         ]]
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.UpperBody.Body.VeilBody,
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -80,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 0,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体の回転によるによるモデルパーツの回転データ（省略可）
-                    bodyRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = {models.models.main.Avatar.UpperBody.Body.FrontHair, models.models.main.Avatar.UpperBody.Body.CTracksuitB.FrontHair},
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 80,
-
-                    ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
-                    ---@type number
-                    sneakOffset = 30,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    },
-
-                    ---体の回転によるによるモデルパーツの回転データ（省略可）
-                    bodyRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -0.05,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    }
-                },
-
-                ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
-                horizontal = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 80,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 80,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.UpperBody.Body.BackRibbon.BackRibbonBottom,
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -150,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 0,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -65,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -150,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体の回転によるによるモデルパーツの回転データ（省略可）
-                    bodyRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -65,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairTail,
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -170,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 30,
-
-                    ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
-                    ---@type number
-                    sneakOffset = -20,
-
-                    ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
-                    ---@type number
-                    headRotMultiplayer = -1,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -90,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 10
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.05,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -90,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -170,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    }
-                },
-
-                ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
-                horizontal = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -135,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = -30,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = -30,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -45,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = -30
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairTail.HairTailZPivot,
-
-            ---x軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -80,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 80,
-
-                    ---頭を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
-                    headZ = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopLeftYPivot,
-
-            ---x軸回転における物理演算データ（省略可）
-            y = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 80,
-
-                    ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
-                    ---@type number
-                    headRotMultiplayer = 0.5,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopLeftYPivot.HairBandRibbonTopLeftZPivot,
-
-            ---x軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -40,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 40,
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 20,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -40,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 40
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopRightYPivot,
-
-            ---x軸回転における物理演算データ（省略可）
-            y = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -80,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 0,
-
-                    ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
-                    ---@type number
-                    headRotMultiplayer = -0.5,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonTopRightYPivot.HairBandRibbonTopRightZPivot,
-
-            ---x軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -40,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 40,
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -20,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -40,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 40
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = {models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomLeftXPivot, models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomRightXPivot},
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -170,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 0,
-
-                    ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
-                    ---@type number
-                    headRotMultiplayer = -1,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -170,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomLeftXPivot.HairBandRibbonBottomLeftZPivot,
-
-            ---z軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 30,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 20,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 30
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 30
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 20,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 30
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = models.models.main.Avatar.Head.CTracksuitH.HairBandRibbon.HairBandRibbonBottom.HairBandRibbonBottomRightXPivot.HairBandRibbonBottomRightZPivot,
-
-            ---z軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -30,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 0,
-
-                    ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    headX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -20,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -30,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---頭の回転によるによるモデルパーツの回転データ（省略可）
-                    headRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = 0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -30,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -20,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -30,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 0
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart = {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagHooks.BagHookNorth.IDCard.IDCardXPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot},
-
-            ---x軸回転における物理演算データ（省略可）
-            x = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = 0,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 80,
-
-                    ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
-                    ---@type number
-                    sneakOffset = 30,
-
-                    ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
-                    bodyX = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    },
-
-                    ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
-                    bodyY = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    },
-
-                    ---体の回転によるによるモデルパーツの回転データ（省略可）
-                    bodyRot = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -0.1,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = 0,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    }
-                }
-            }
-        },
-
-        {
-            ---この物理演算データを適用させるモデルパーツ
-            ---@type ModelPart | ModelPart[]
-            modelPart =  {models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagHooks.BagHookNorth.IDCard.IDCardXPivot.IDCardZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener1XPivot.BagBaseFastener1ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BagBaseFastener2XPivot.BagBaseFastener2ZPivot, models.models.main.Avatar.UpperBody.Body.CTracksuitB.Bag.BackPocket.BackPocketFastenerXPivot.BackPocketFastenerZPivot},
-
-            ---x軸回転における物理演算データ（省略可）
-            z = {
-                ---体が垂直方向である時（通常時）の物理演算データ（省略可）
-                vertical = {
-                    ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
-                    ---@type number
-                    min = -80,
-
-                    ---このモデルパーツ、回転軸の中立の回転位置（度）
-                    ---@type number
-                    neutral = 0,
-
-                    ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
-                    ---@type number
-                    max = 80,
-
-                    ---頭を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
-                    headZ = {
-                        ---この回転事象がモデルパーツに与える回転の倍率
-                        ---@type number
-                        multiplayer = -160,
-
-                        ---この回転事象がモデルパーツに与える回転の最小値
-                        ---@type number
-                        min = -80,
-
-                        ---この回転事象がモデルパーツに与える回転の最大値
-                        ---@type number
-                        max = 80
-                    }
-                }
-            }
-        }
     },
 
     --その他定数・変数
