@@ -1233,7 +1233,7 @@
 			"uuid": "a3859b2c-af09-f7c0-1150-02c09ca10436",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -1265,7 +1265,7 @@
 					"children": [
 						{
 							"name": "RightHairTail",
-							"origin": [0, 24, 0],
+							"origin": [4, 27.25, 2.25],
 							"color": 0,
 							"uuid": "4e1d8716-18b2-f21b-a98a-35037a9991ff",
 							"export": true,
@@ -1275,27 +1275,30 @@
 							"visibility": true,
 							"autouv": 0,
 							"children": [
-								"518baf41-6a47-6309-199f-e9775c87849a",
-								"d1c01e63-84c8-848d-1d9e-431dcb9e8e42",
-								"0aa2fa13-09da-60b2-545b-89dc095ffb2c",
 								{
-									"name": "RightHairTailTip",
-									"origin": [4.25, 27.75, 2.25],
+									"name": "RightHairTailZPivot",
+									"origin": [4, 27.25, 2.25],
 									"color": 0,
-									"uuid": "859ee604-5de3-b799-afd3-0f8362256be4",
+									"uuid": "0ba356d7-a772-c62b-675b-9853ae51203c",
 									"export": true,
 									"mirror_uv": false,
 									"isOpen": true,
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
-									"children": ["620a23d4-a300-8580-4b6f-bcf728d903ae", "e53dc319-97f2-156c-fc11-ada7f8d75d8c"]
+									"children": [
+										"518baf41-6a47-6309-199f-e9775c87849a",
+										"d1c01e63-84c8-848d-1d9e-431dcb9e8e42",
+										"0aa2fa13-09da-60b2-545b-89dc095ffb2c",
+										"620a23d4-a300-8580-4b6f-bcf728d903ae",
+										"e53dc319-97f2-156c-fc11-ada7f8d75d8c"
+									]
 								}
 							]
 						},
 						{
 							"name": "LeftHairTail",
-							"origin": [0, 24, 0],
+							"origin": [-4, 27.25, 2.25],
 							"color": 0,
 							"uuid": "587c95a0-0bb8-655e-a1e6-9252c6ca49ff",
 							"export": true,
@@ -1305,21 +1308,24 @@
 							"visibility": true,
 							"autouv": 0,
 							"children": [
-								"cd609289-6de9-4a18-47b1-a208d8b446c9",
-								"2b622d2f-2f11-e864-32aa-71087b18b069",
-								"5c937338-321a-582b-c088-36acfe602aa1",
 								{
-									"name": "LeftHairTailTip",
-									"origin": [-4.25, 27.75, 2.25],
+									"name": "LeftHairTailZPivot",
+									"origin": [-4, 27.25, 2.25],
 									"color": 0,
-									"uuid": "a151c28b-713d-d59d-c83e-bf123b8bee93",
+									"uuid": "b50248ff-7930-0ea0-4d97-8f50b95aeff5",
 									"export": true,
 									"mirror_uv": false,
 									"isOpen": true,
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
-									"children": ["be114fb7-8179-bb32-fcbc-a81b3aec646c", "990bc7d5-85d5-c0db-ab54-6cc63eac6079"]
+									"children": [
+										"cd609289-6de9-4a18-47b1-a208d8b446c9",
+										"2b622d2f-2f11-e864-32aa-71087b18b069",
+										"5c937338-321a-582b-c088-36acfe602aa1",
+										"be114fb7-8179-bb32-fcbc-a81b3aec646c",
+										"990bc7d5-85d5-c0db-ab54-6cc63eac6079"
+									]
 								}
 							]
 						}
@@ -1347,14 +1353,66 @@
 					"uuid": "331e943c-54b9-5bd9-1968-6f7399ae9886",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
 					"children": [
 						"b984c931-e06a-4a7b-03ee-8402dbbf3150",
-						"c346cb04-2149-cdf6-7c2d-2f066237567c",
-						"d3f2aef2-36ba-e71f-7f32-160b01ad665b",
+						{
+							"name": "RibbonLeft",
+							"origin": [-0.5, 15, 2.5],
+							"color": 0,
+							"uuid": "fb477e58-8b46-eb97-914d-87feaa95a0c8",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "RibbonLeftZPivot",
+									"origin": [-0.5, 15, 2.5],
+									"color": 0,
+									"uuid": "da5b46f5-2ae1-dace-1db8-909b856a2c37",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["c346cb04-2149-cdf6-7c2d-2f066237567c"]
+								}
+							]
+						},
+						{
+							"name": "RibbonRight",
+							"origin": [0.5, 15, 2.5],
+							"color": 0,
+							"uuid": "75c4d2c8-3b97-1317-ae3f-823f28cab67c",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								{
+									"name": "RibbonRightZPivot",
+									"origin": [0.5, 15, 2.5],
+									"color": 0,
+									"uuid": "4df76c0b-d416-7655-5b7f-508a57bf37fd",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["d3f2aef2-36ba-e71f-7f32-160b01ad665b"]
+								}
+							]
+						},
 						{
 							"name": "RibbonBottomRight",
 							"origin": [0.5, 14.5, 2.5],
@@ -1366,7 +1424,21 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["d398e136-305b-ff2e-9e3e-f24bb46043e3"]
+							"children": [
+								{
+									"name": "RibbonBottomRightZPivot",
+									"origin": [0.5, 14.5, 2.5],
+									"color": 0,
+									"uuid": "1d85102e-06f5-dab6-4e38-b9b14875331b",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["d398e136-305b-ff2e-9e3e-f24bb46043e3"]
+								}
+							]
 						},
 						{
 							"name": "RibbonBottomLeft",
@@ -1379,7 +1451,21 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["0f145497-236a-8d3e-289e-49bd0ba364b5"]
+							"children": [
+								{
+									"name": "RibbonBottomLeftZPivot",
+									"origin": [-0.5, 14.5, 2.5],
+									"color": 0,
+									"uuid": "35d0a712-7020-5db1-9fe8-8efd4812dd32",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": true,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": ["0f145497-236a-8d3e-289e-49bd0ba364b5"]
+								}
+							]
 						}
 					]
 				},

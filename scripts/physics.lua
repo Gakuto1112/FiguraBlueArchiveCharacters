@@ -169,7 +169,7 @@ Physics = {
                                 rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.vertical.bodyX.multiplayer, physicData.x.vertical.bodyX.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyX.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyY then
-                                rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer, physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer + rotX , physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral) - rotX
                             end
                             if physicData.x.vertical.bodyZ then
                                 rotX = rotX + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.x.vertical.bodyZ.multiplayer, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
