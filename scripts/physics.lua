@@ -127,25 +127,25 @@ Physics = {
                         if isHorizontal and physicData.x.horizontal then
                             rotX = physicData.x.horizontal.neutral
                             if physicData.x.horizontal.headX then
-                                rotX = math.clamp(Physics.VelocityAverage[1] * physicData.x.horizontal.headX.multiplayer * waterMultiplayer + rotX, physicData.x.horizontal.headX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headX.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.horizontal.headX.multiplayer * waterMultiplayer, physicData.x.horizontal.headX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headX.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.headZ then
-                                rotX = math.clamp(Physics.VelocityAverage[3] * physicData.x.horizontal.headZ.multiplayer * waterMultiplayer + rotX, physicData.x.horizontal.headZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headZ.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[3] * physicData.x.horizontal.headZ.multiplayer * waterMultiplayer, physicData.x.horizontal.headZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headZ.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.headRot then
-                                rotX = math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.x.horizontal.headRot.multiplayer + rotX, physicData.x.horizontal.headRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headRot.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.x.horizontal.headRot.multiplayer, physicData.x.horizontal.headRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.headRot.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.bodyX then
-                                rotX = math.clamp(Physics.VelocityAverage[5] * physicData.x.horizontal.bodyX.multiplayer * waterMultiplayer + rotX, physicData.x.horizontal.bodyX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyX.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyX.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyX.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.bodyY then
-                                rotX = math.clamp(Physics.VelocityAverage[2] * physicData.x.horizontal.bodyY.multiplayer * waterMultiplayer + rotX, physicData.x.horizontal.bodyY.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyY.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyY.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyY.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.bodyZ then
-                                rotX = math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.x.horizontal.bodyZ.multiplayer * waterMultiplayer + rotX, physicData.x.horizontal.bodyZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyZ.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.x.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.x.horizontal.bodyZ.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyZ.max - physicData.x.horizontal.neutral)
                             end
                             if physicData.x.horizontal.bodyRot then
-                                rotX = math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.horizontal.bodyRot.multiplayer + rotX, physicData.x.horizontal.bodyRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyRot.max - physicData.x.horizontal.neutral)
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.horizontal.bodyRot.multiplayer, physicData.x.horizontal.bodyRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyRot.max - physicData.x.horizontal.neutral)
                             end
                             rotX = math.clamp(rotX, physicData.x.horizontal.min, physicData.x.horizontal.max)
                             if physicData.x.horizontal.headRotMultiplayer then
@@ -157,25 +157,25 @@ Physics = {
                         elseif physicData.x.vertical then
                             rotX = physicData.x.vertical.neutral
                             if physicData.x.vertical.headX then
-                                rotX = math.clamp(Physics.VelocityAverage[1] * physicData.x.vertical.headX.multiplayer + rotX, physicData.x.vertical.headX.min - physicData.x.vertical.neutral, physicData.x.vertical.headX.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[1] * physicData.x.vertical.headX.multiplayer, physicData.x.vertical.headX.min - physicData.x.vertical.neutral, physicData.x.vertical.headX.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.headZ then
-                                rotX = math.clamp(Physics.VelocityAverage[3] * physicData.x.vertical.headZ.multiplayer + rotX, physicData.x.vertical.headZ.min - physicData.x.vertical.neutral, physicData.x.vertical.headZ.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[3] * physicData.x.vertical.headZ.multiplayer, physicData.x.vertical.headZ.min - physicData.x.vertical.neutral, physicData.x.vertical.headZ.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.headRot then
-                                rotX = math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.x.vertical.headRot.multiplayer + rotX, physicData.x.vertical.headRot.min - physicData.x.vertical.neutral, physicData.x.vertical.headRot.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.x.vertical.headRot.multiplayer, physicData.x.vertical.headRot.min - physicData.x.vertical.neutral, physicData.x.vertical.headRot.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyX then
-                                rotX = math.clamp(Physics.VelocityAverage[5] * physicData.x.vertical.bodyX.multiplayer + rotX, physicData.x.vertical.bodyX.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyX.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[5] * physicData.x.vertical.bodyX.multiplayer, physicData.x.vertical.bodyX.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyX.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyY then
-                                rotX = math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer + rotX, physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[2] * physicData.x.vertical.bodyY.multiplayer, physicData.x.vertical.bodyY.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyY.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyZ then
-                                rotX = math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.x.vertical.bodyZ.multiplayer + rotX, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.x.vertical.bodyZ.multiplayer, physicData.x.vertical.bodyZ.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyZ.max - physicData.x.vertical.neutral)
                             end
                             if physicData.x.vertical.bodyRot then
-                                rotX = math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.vertical.bodyRot.multiplayer + rotX, physicData.x.vertical.bodyRot.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyRot.max - physicData.x.vertical.neutral)
+                                rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.vertical.bodyRot.multiplayer, physicData.x.vertical.bodyRot.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyRot.max - physicData.x.vertical.neutral)
                             end
                             rotX = math.clamp(rotX, physicData.x.vertical.min, physicData.x.vertical.max)
                             if physicData.x.vertical.headRotMultiplayer then
@@ -191,25 +191,25 @@ Physics = {
                         if isHorizontal and physicData.y.horizontal then
                             rotY = physicData.y.horizontal.neutral
                             if physicData.y.horizontal.headX then
-                                rotY = math.clamp(Physics.VelocityAverage[1] * physicData.y.horizontal.headX.multiplayer * waterMultiplayer + rotY, physicData.y.horizontal.headX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headX.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.horizontal.headX.multiplayer * waterMultiplayer, physicData.y.horizontal.headX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headX.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.headZ then
-                                rotY = math.clamp(Physics.VelocityAverage[3] * physicData.y.horizontal.headZ.multiplayer * waterMultiplayer + rotY, physicData.y.horizontal.headZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headZ.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[3] * physicData.y.horizontal.headZ.multiplayer * waterMultiplayer, physicData.y.horizontal.headZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headZ.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.headRot then
-                                rotY = math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.y.horizontal.headRot.multiplayer + rotY, physicData.y.horizontal.headRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headRot.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.y.horizontal.headRot.multiplayer, physicData.y.horizontal.headRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.headRot.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.bodyX then
-                                rotY = math.clamp(Physics.VelocityAverage[5] * physicData.y.horizontal.bodyX.multiplayer * waterMultiplayer + rotY, physicData.y.horizontal.bodyX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyX.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[5] * physicData.y.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyX.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyX.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.bodyY then
-                                rotY = math.clamp(Physics.VelocityAverage[2] * physicData.y.horizontal.bodyY.multiplayer * waterMultiplayer + rotY, physicData.y.horizontal.bodyY.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyY.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyY.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyY.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.bodyZ then
-                                rotY = math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.y.horizontal.bodyZ.multiplayer * waterMultiplayer + rotY, physicData.y.horizontal.bodyZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyZ.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.y.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.y.horizontal.bodyZ.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyZ.max - physicData.y.horizontal.neutral)
                             end
                             if physicData.y.horizontal.bodyRot then
-                                rotY = math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.horizontal.bodyRot.multiplayer + rotY, physicData.y.horizontal.bodyRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyRot.max - physicData.y.horizontal.neutral)
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.horizontal.bodyRot.multiplayer, physicData.y.horizontal.bodyRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyRot.max - physicData.y.horizontal.neutral)
                             end
                             rotY = math.clamp(rotY, physicData.y.horizontal.min, physicData.y.horizontal.max)
                             if physicData.y.horizontal.headRotMultiplayer then
@@ -221,25 +221,25 @@ Physics = {
                         elseif physicData.y.vertical then
                             rotY = physicData.y.vertical.neutral
                             if physicData.y.vertical.headX then
-                                rotY = math.clamp(Physics.VelocityAverage[1] * physicData.y.vertical.headX.multiplayer + rotY, physicData.y.vertical.headX.min - physicData.y.vertical.neutral, physicData.y.vertical.headX.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[1] * physicData.y.vertical.headX.multiplayer, physicData.y.vertical.headX.min - physicData.y.vertical.neutral, physicData.y.vertical.headX.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.headZ then
-                                rotY = math.clamp(Physics.VelocityAverage[3] * physicData.y.vertical.headZ.multiplayer + rotY, physicData.y.vertical.headZ.min - physicData.y.vertical.neutral, physicData.y.vertical.headZ.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[3] * physicData.y.vertical.headZ.multiplayer, physicData.y.vertical.headZ.min - physicData.y.vertical.neutral, physicData.y.vertical.headZ.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.headRot then
-                                rotY = math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.y.vertical.headRot.multiplayer + rotY, physicData.y.vertical.headRot.min - physicData.y.vertical.neutral, physicData.y.vertical.headRot.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.y.vertical.headRot.multiplayer, physicData.y.vertical.headRot.min - physicData.y.vertical.neutral, physicData.y.vertical.headRot.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.bodyX then
-                                rotY = math.clamp(Physics.VelocityAverage[5] * physicData.y.vertical.bodyX.multiplayer + rotY, physicData.y.vertical.bodyX.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyX.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[5] * physicData.y.vertical.bodyX.multiplayer, physicData.y.vertical.bodyX.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyX.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.bodyY then
-                                rotY = math.clamp(Physics.VelocityAverage[2] * physicData.y.vertical.bodyY.multiplayer + rotY, physicData.y.vertical.bodyY.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyY.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[2] * physicData.y.vertical.bodyY.multiplayer, physicData.y.vertical.bodyY.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyY.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.bodyZ then
-                                rotY = math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.y.vertical.bodyZ.multiplayer + rotY, physicData.y.vertical.bodyZ.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyZ.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.y.vertical.bodyZ.multiplayer, physicData.y.vertical.bodyZ.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyZ.max - physicData.y.vertical.neutral)
                             end
                             if physicData.y.vertical.bodyRot then
-                                rotY = math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.vertical.bodyRot.multiplayer + rotY, physicData.y.vertical.bodyRot.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyRot.max - physicData.y.vertical.neutral)
+                                rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.vertical.bodyRot.multiplayer, physicData.y.vertical.bodyRot.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyRot.max - physicData.y.vertical.neutral)
                             end
                             rotY = math.clamp(rotY, physicData.y.vertical.min, physicData.y.vertical.max)
                             if physicData.y.vertical.headRotMultiplayer then
@@ -255,25 +255,25 @@ Physics = {
                         if isHorizontal and physicData.z.horizontal then
                             rotZ = physicData.z.horizontal.neutral
                             if physicData.z.horizontal.headX then
-                                rotZ = math.clamp(Physics.VelocityAverage[1] * physicData.z.horizontal.headX.multiplayer * waterMultiplayer + rotZ, physicData.z.horizontal.headX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headX.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.horizontal.headX.multiplayer * waterMultiplayer, physicData.z.horizontal.headX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headX.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.headZ then
-                                rotZ = math.clamp(Physics.VelocityAverage[3] * physicData.z.horizontal.headZ.multiplayer * waterMultiplayer + rotZ, physicData.z.horizontal.headZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headZ.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[3] * physicData.z.horizontal.headZ.multiplayer * waterMultiplayer, physicData.z.horizontal.headZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headZ.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.headRot then
-                                rotZ = math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.z.horizontal.headRot.multiplayer + rotZ, physicData.z.horizontal.headRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headRot.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.z.horizontal.headRot.multiplayer, physicData.z.horizontal.headRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.headRot.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.bodyX then
-                                rotZ = math.clamp(Physics.VelocityAverage[5] * physicData.z.horizontal.bodyX.multiplayer * waterMultiplayer + rotZ, physicData.z.horizontal.bodyX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyX.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[5] * physicData.z.horizontal.bodyX.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyX.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyX.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.bodyY then
-                                rotZ = math.clamp(Physics.VelocityAverage[2] * physicData.z.horizontal.bodyY.multiplayer * waterMultiplayer + rotZ, physicData.z.horizontal.bodyY.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyY.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.horizontal.bodyY.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyY.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyY.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.bodyZ then
-                                rotZ = math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.z.horizontal.bodyZ.multiplayer * waterMultiplayer + rotZ, physicData.z.horizontal.bodyZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyZ.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.z.horizontal.bodyZ.multiplayer * waterMultiplayer, physicData.z.horizontal.bodyZ.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyZ.max - physicData.z.horizontal.neutral)
                             end
                             if physicData.z.horizontal.bodyRot then
-                                rotZ = math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.horizontal.bodyRot.multiplayer + rotZ, physicData.z.horizontal.bodyRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyRot.max - physicData.z.horizontal.neutral)
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.horizontal.bodyRot.multiplayer, physicData.z.horizontal.bodyRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyRot.max - physicData.z.horizontal.neutral)
                             end
                             rotZ = math.clamp(rotZ, physicData.z.horizontal.min, physicData.z.horizontal.max)
                             if physicData.z.horizontal.headRotMultiplayer then
@@ -285,25 +285,25 @@ Physics = {
                         elseif physicData.z.vertical then
                             rotZ = physicData.z.vertical.neutral
                             if physicData.z.vertical.headX then
-                                rotZ = math.clamp(Physics.VelocityAverage[1] * physicData.z.vertical.headX.multiplayer + rotZ, physicData.z.vertical.headX.min - physicData.z.vertical.neutral, physicData.z.vertical.headX.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[1] * physicData.z.vertical.headX.multiplayer, physicData.z.vertical.headX.min - physicData.z.vertical.neutral, physicData.z.vertical.headX.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.headZ then
-                                rotZ = math.clamp(Physics.VelocityAverage[3] * physicData.z.vertical.headZ.multiplayer + rotZ, physicData.z.vertical.headZ.min - physicData.z.vertical.neutral, physicData.z.vertical.headZ.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[3] * physicData.z.vertical.headZ.multiplayer, physicData.z.vertical.headZ.min - physicData.z.vertical.neutral, physicData.z.vertical.headZ.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.headRot then
-                                rotZ = math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.z.vertical.headRot.multiplayer + rotZ, physicData.z.vertical.headRot.min - physicData.z.vertical.neutral, physicData.z.vertical.headRot.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[4]) * physicData.z.vertical.headRot.multiplayer, physicData.z.vertical.headRot.min - physicData.z.vertical.neutral, physicData.z.vertical.headRot.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.bodyX then
-                                rotZ = math.clamp(Physics.VelocityAverage[5] * physicData.z.vertical.bodyX.multiplayer + rotZ, physicData.z.vertical.bodyX.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyX.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[5] * physicData.z.vertical.bodyX.multiplayer, physicData.z.vertical.bodyX.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyX.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.bodyY then
-                                rotZ = math.clamp(Physics.VelocityAverage[2] * physicData.z.vertical.bodyY.multiplayer + rotZ, physicData.z.vertical.bodyY.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyY.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[2] * physicData.z.vertical.bodyY.multiplayer, physicData.z.vertical.bodyY.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyY.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.bodyZ then
-                                rotZ = math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.z.vertical.bodyZ.multiplayer + rotZ, physicData.z.vertical.bodyZ.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyZ.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(Physics.VelocityAverage[player:getVehicle() == nil and 6 or 3] * physicData.z.vertical.bodyZ.multiplayer, physicData.z.vertical.bodyZ.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyZ.max - physicData.z.vertical.neutral)
                             end
                             if physicData.z.vertical.bodyRot then
-                                rotZ = math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.vertical.bodyRot.multiplayer + rotZ, physicData.z.vertical.bodyRot.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyRot.max - physicData.z.vertical.neutral)
+                                rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.vertical.bodyRot.multiplayer, physicData.z.vertical.bodyRot.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyRot.max - physicData.z.vertical.neutral)
                             end
                             rotZ = math.clamp(rotZ, physicData.z.vertical.min, physicData.z.vertical.max)
                             if physicData.z.vertical.headRotMultiplayer then
