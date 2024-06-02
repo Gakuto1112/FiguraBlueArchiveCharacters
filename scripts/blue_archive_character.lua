@@ -1433,7 +1433,6 @@ BlueArchiveCharacter = {
         ---物理演算処理後に実行されるコールバック関数（省略可）。ここでモデルパーツの向きを上書きできる。
         ---@param modelPart ModelPart 物理演算が処理されたモデルパーツ
         callback = function (modelPart)
-            print(modelPart)
         end
         ]]
     }
