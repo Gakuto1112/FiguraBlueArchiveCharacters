@@ -1061,7 +1061,7 @@
 			"uuid": "a3859b2c-af09-f7c0-1150-02c09ca10436",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -1081,21 +1081,35 @@
 				},
 				{
 					"name": "HairTail",
-					"origin": [0, 24, 0],
+					"origin": [0, 25.5, 4],
 					"color": 0,
 					"uuid": "818e037c-2207-22d9-70ae-df9c2fe6ac1b",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
 					"children": [
-						"67920b89-ce40-b067-cfb1-c2ab4e63d6ef",
-						"0fee99e5-f20e-8515-2cce-44561b67be5f",
-						"dbc7e6e0-1c96-b742-85b2-527e48e417c9",
-						"13cc3dd9-6388-63c2-d33c-ca55c775162d",
-						"1f91fff1-f0c9-9dd0-6694-7a7f6e844235"
+						{
+							"name": "HairTailZPivot",
+							"origin": [0, 25.5, 4],
+							"color": 0,
+							"uuid": "dfb100fd-e650-733f-4348-fc4509314167",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": [
+								"67920b89-ce40-b067-cfb1-c2ab4e63d6ef",
+								"0fee99e5-f20e-8515-2cce-44561b67be5f",
+								"dbc7e6e0-1c96-b742-85b2-527e48e417c9",
+								"13cc3dd9-6388-63c2-d33c-ca55c775162d",
+								"1f91fff1-f0c9-9dd0-6694-7a7f6e844235"
+							]
+						}
 					]
 				}
 			]
@@ -1107,7 +1121,7 @@
 			"uuid": "b9a399c1-df81-ef36-dcfb-7b054ae43f84",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -1120,7 +1134,7 @@
 					"uuid": "331e943c-54b9-5bd9-1968-6f7399ae9886",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -1243,7 +1257,7 @@
 					"uuid": "d0e2a4ef-6f4f-9e4a-2014-102fa43a71ca",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": true,
+					"isOpen": false,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
