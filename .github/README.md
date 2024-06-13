@@ -24,7 +24,7 @@ The avatars for these characters are completed. Click on a character's name to g
 - [Hoshino Takanashi](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/tree/Hoshino)
 
 ### In progress
-The avatars for these characters are worked in progress. It usually takes about 2~3 weeks. Click on the link in brackets to go to the issue about the character, where you can check the progress.
+The avatars for these characters are worked in progress. It usually takes about 2~3 weeks, but works have been delayed because of my recently busy schedule. Click on the link in brackets to go to the issue about the character, where you can check the progress.
 
 - Momoi Saiba (maid) ([#51](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/51))
 - Midori Saiba (maid) ([#52](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/52))
@@ -32,9 +32,10 @@ The avatars for these characters are worked in progress. It usually takes about 
 ### Planned
 Although the avatars for these characters are not created, there are plans to create them in the future. They will be created in order from top to bottom. This is just a plan and the order may change or creation may be discontinued.
 
-- Serika Kuromi（[#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37)）
-- Serina Sumi（[#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38)）
-- Hihumi Ajitani（[#39](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/39)）
+- Umika Satohama ([#53](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/53))
+- Serika Kuromi ([#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37))
+- Serina Sumi ([#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38))
+- Hihumi Ajitani ([#39](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/39))
 
 ## Features
 - Imitated ex skill cut-ins.
