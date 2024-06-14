@@ -2357,7 +2357,7 @@ BlueArchiveCharacter = {
                 sounds:playSound("minecraft:block.anvil.place", player:getPos(), 0.1, 2)
             end
         elseif not newValue and self.HasShield then
-            models.models.main.Avatar.UpperBody.Body.Shield:setParentType("Body")
+            models.models.main.Avatar.UpperBody.Body.Shield:setParentType("None")
             models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Shield:setPos()
             models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
