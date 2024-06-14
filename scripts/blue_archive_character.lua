@@ -81,7 +81,8 @@ BlueArchiveCharacter = {
             CLOSED = {6, 0},
             ANGRY = {7, 0},
             CLOSED2 = {0, 1},
-            INVERTED = {1, 1}
+            INVERTED = {1, 1},
+            SERIOUS_ANGRY = {2, 1}
         },
 
         ---左目
@@ -92,7 +93,8 @@ BlueArchiveCharacter = {
             CLOSED = {5, 0},
             ANGRY = {7, 0},
             ANGRY_CENTER = {8, 0},
-            CLOSED2 = {-1, 1}
+            CLOSED2 = {-1, 1},
+            SERIOUS_ANGRY = {2, 1}
         },
 
         ---口
@@ -946,7 +948,8 @@ BlueArchiveCharacter = {
                     elseif type == "QUESTION" then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", duration, true)
                     elseif type == "SWEAT" then
-                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "CLOSED2", duration, true)
+                        FaceParts:setEmotion("SERIOUS_ANGRY", "SERIOUS_ANGRY", "CLOSED2", duration, true)
+                        models.models.main.Avatar.Head.FaceParts.Face:setUVPixels(6, 0)
                     end
                 end
             end,
@@ -959,6 +962,7 @@ BlueArchiveCharacter = {
                 if forcedStop then
                     FaceParts:resetEmotion()
                 end
+                models.models.main.Avatar.Head.FaceParts.Face:setUVPixels()
             end
         }
     },
@@ -971,19 +975,19 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {},
 
-        --[[
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
-        end
-        ]]
+            models.models.main.Avatar.Head.FaceParts.Face:setUVPixels()
+        end,
 
-        --[[
         ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
+            if Bubble ~= nil and Bubble.Emoji == "SWEAT" and Bubble.BubbleCounter ~= 0 then
+                models.models.main.Avatar.Head.FaceParts.Face:setUVPixels(6, 0)
+            end
         end
-        ]]
     },
 
     ---ポートレート
@@ -994,19 +998,19 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {models.models.main.Avatar.Head.Cowlick, models.models.main.Avatar.Head.HairEnds}
+        excludeModels = {models.models.main.Avatar.Head.Cowlick, models.models.main.Avatar.Head.HairEnds},
 
-        --[[
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
-        end
-        ]]
+            models.models.main.Avatar.Head.FaceParts.Face:setUVPixels()
+        end,
 
-        --[[
         ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
+            if Bubble ~= nil and Bubble.Emoji == "SWEAT" and Bubble.BubbleCounter ~= 0 then
+                models.models.main.Avatar.Head.FaceParts.Face:setUVPixels(6, 0)
+            end
         end
-        ]]
     },
 
     ---死亡アニメーションのダミーアバター
@@ -1049,13 +1053,12 @@ BlueArchiveCharacter = {
                 dummyAvatar.Head.CSwimsuitH.HairTails.HairTailLeft.HairLeftBottom:setRot(-15, 0, 30)
                 dummyAvatar.Head.CSwimsuitH.HairTails.HairTailRight.HairRightBottom:setRot(-15, 0, -10)
             end
-        end
+        end,
 
-        --[[
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
+            models.models.main.Avatar.Head.FaceParts.Face:setUVPixels()
         end
-        ]]
 
         --[[
         ---モデルのコピー直後に実行される関数（省略可）
