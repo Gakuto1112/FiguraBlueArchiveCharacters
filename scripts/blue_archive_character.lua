@@ -2774,15 +2774,20 @@ events.ENTITY_INIT:register(function ()
         ---@type integer
         local bodyYawPrev = player:getBodyYaw()
 
+        ---前ティックのプレイヤーのHP
+        ---@type integer
+        local healthPrev = 20
+
         events.TICK:register(function ()
             local playerPos = player:getPos()
             local isStanding = player:getPose() == "STANDING" and player:getVehicle() == nil
-            if playerPos:copy():sub(playerPosPrev):length() - 1 > player:getVelocity():length() and isStanding and isStandingPrev then
+            if playerPos:copy():sub(playerPosPrev):length() - 1 > player:getVelocity():length() and isStanding and isStandingPrev and healthPrev > 0 then
                 pings.teleport(playerPos, playerPosPrev, bodyYawPrev)
             end
             playerPosPrev = playerPos
             isStandingPrev = isStanding
             bodyYawPrev = player:getBodyYaw()
+            healthPrev = player:getHealth()
         end)
     end
 end)
