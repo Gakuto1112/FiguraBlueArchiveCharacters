@@ -737,7 +737,7 @@ BlueArchiveCharacter = {
                         local playerPos = player:getPos()
                         for i = 1, 6 do
                             for j = 0, 71 do
-                                particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 2", playerPos):setVelocity(vectors.rotateAroundAxis(j * 6, 0, 0, i * 0.1, 0, 1, 0)):setPower(0.25):setColor((i - 1) * 0.2, 1, 1)
+                                particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 2", playerPos):setVelocity(vectors.rotateAroundAxis(j * 6, 0, -0.25, i * 0.1, 0, 1, 0)):setPower(0.25):setColor((i - 1) * 0.2, 1, 1)
                             end
                         end
                         sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.5)
