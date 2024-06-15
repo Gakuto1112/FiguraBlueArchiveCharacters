@@ -29,6 +29,9 @@ events.ENTITY_INIT:register(function ()
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
 
+	--キャラクター固有クラス
+	ExSkill2WaveParticleManager = require("scripts.ex_skill.ex_skill_2_wave_particle_manager")
+
 	--HypixelZombies = require("scripts.hypixel_zombies")
 end)
 
