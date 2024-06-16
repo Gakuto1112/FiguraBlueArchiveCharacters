@@ -798,7 +798,11 @@ BlueArchiveCharacter = {
                     if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup:moveTo(models.models.ex_skill_2.Wall)
                     end
-                    models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:removeTask("special_item")
+                    local specialItemTask = models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:getTask("special_item")
+                    if specialItemTask ~= nil then
+                        specialItemTask:remove()
+                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:removeTask("special_item")
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
