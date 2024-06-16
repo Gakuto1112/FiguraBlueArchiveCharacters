@@ -737,6 +737,9 @@ BlueArchiveCharacter = {
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
                     end
+                    if host:isHost() then
+                        models.models.ex_skill_2.Gui:setVisible(true)
+                    end
                     models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setRot()
@@ -764,8 +767,18 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 4, true)
                     elseif tick == 14 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "SMILE", 11, true)
-                    elseif tick == 25 then
-
+                    elseif  tick == 28 then
+                        local windowSize = client:getScaledWindowSize()
+                        local centerX = windowSize.x / 2 * -1
+                        local centerY = windowSize.y / 2 * -1
+                        models.models.ex_skill_2.Gui.ReticuleAnchor:setPos(centerX, centerY, 0)
+                        models.models.ex_skill_2.Gui.Reticule:setVisible(true)
+                        events.RENDER:register(function ()
+                            models.models.ex_skill_2.Gui.Reticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.ReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
+                        end, "ex_skill_2_render")
+                    elseif tick == 115 then
+                        models.models.ex_skill_2.Gui.Reticule:setVisible(false)
+                        events.RENDER:remove("ex_skill_2_render")
                     elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItemGroup:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
@@ -802,6 +815,12 @@ BlueArchiveCharacter = {
                     if specialItemTask ~= nil then
                         specialItemTask:remove()
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:removeTask("special_item")
+                    end
+                    if host:isHost() then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui, models.models.ex_skill_2.Gui.Reticule}) do
+                            modelPart:setVisible(false)
+                        end
+                        events.RENDER:remove("ex_skill_2_render")
                     end
                 end,
 
