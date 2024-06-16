@@ -99,16 +99,16 @@ BlueArchiveCharacter = {
 
         ---口
         Mouth = {
-            FUN = {1, 0},
+            FUN = {3, 0},
             ANXIOUS = {2, 0},
-            SHOCK = {3, 0},
-            ANGRY = {4, 0},
-            OPENED = {3, -1}
+            SHOCK = {1, 0},
+            ANGRY = {0, 1},
+            OPENED = {0, 0}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
         ---@type number
-        MouthResolutionMultiplayer = 2,
+        MouthResolutionMultiplayer = 4,
 
         ---表情のセット（省略可）
         FacePartsSets = {
@@ -497,39 +497,44 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 24, true)
                     elseif tick == 24 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar3:setVisible(false)
                             BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("8/20")
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setVisible(true)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(16, 0)
                         end
                     elseif tick == 27 and host:isHost() then
                         models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight}) do
                             modelPart:setUVPixels()
                         end
+                        models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setVisible(false)
                     elseif tick == 31 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar2:setVisible(false)
                             BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE:setText("5/20")
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft:setUVPixels(12, 0)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight:setUVPixels(6, 0)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(24, 0)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setVisible(true)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(16, 0)
                         end
                     elseif tick == 34 and host:isHost() then
                         models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight}) do
                             modelPart:setUVPixels()
                         end
+                        models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setVisible(false)
                     elseif tick == 36 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
                         local playerPos = player:getPos()
+                        sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
                         sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar.HpBar1:setVisible(false)
@@ -539,8 +544,8 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes:setVisible(false)
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye:setVisible(true)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(32, -4)
-                            sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setVisible(true)
+                            models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setUVPixels(16, 8)
                             local koAnimationCount = 0
                             events.RENDER:register(function ()
                                 BlueArchiveCharacter.EX_SKILL_1_KO:setScale(vectors.vec3(1, 1, 1):scale(koAnimationCount <= 0.75 and -3.3333 * koAnimationCount + 5 or (koAnimationCount <= 1 and 2 * koAnimationCount + 1 or 3)))
@@ -611,9 +616,10 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiHPBar["HpBar"..i]:setVisible(true)
                         end
                         models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth}) do
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.MomoiPaperDollEyes.EyeLeft}) do
                             modelPart:setUVPixels()
                         end
+                        models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.Mouth:setVisible(false)
                         for _, eventName in ipairs ({"ex_skill_1_text_render", "ex_skill_1_ko_render"}) do
                             events.RENDER:remove(eventName)
                         end
