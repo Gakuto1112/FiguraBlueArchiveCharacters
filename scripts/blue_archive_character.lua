@@ -657,12 +657,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(),
+                    pos = vectors.vec3(9, 32, -47),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(20, -155, 0)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -670,12 +670,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(),
+                    pos = vectors.vec3(19, 36.1, -14.5),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(45, -210, 0)
                 }
             },
 
@@ -732,15 +732,6 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
-                    --"<>"内を適切な値で置換すること。
-                    --[[
-                    if tick == <tick_int> then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[<ex_skill_index>].animations) do
-                            animations["models."..animation]["ex_skill_"..<ex_skill_index>]:pause()
-                        end
-                    end
-                    ]]
                     if tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItem:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
