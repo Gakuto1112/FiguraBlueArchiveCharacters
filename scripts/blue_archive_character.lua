@@ -741,7 +741,16 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setRot()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(true)
-                    models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(1, 0.984, 0.4)
+                    local specialItemValue = math.random() --0.80未満で「金のマガジン」、0.80~0.90未満で「エメラルド」、0.90~1.00未満で「ダイヤモンド」
+                    if specialItemValue >= 0.8 then
+                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(false)
+                        local item = models:newItem("special_item")
+                        item:setItem(specialItemValue < 0.9 and "minecraft:emerald" or "minecraft:diamond")
+                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:addTask(item)
+                    else
+                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(true)
+                    end
+                    models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(specialItemValue < 0.8 and vectors.vec3(1, 0.984, 0.4) or (specialItemValue < 0.9 and vectors.vec3(0.686, 0.992, 0.804) or vectors.vec3(0.631, 0.984, 0.91)))
                     FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "OPENED", 4, true)
                 end,
 
@@ -789,6 +798,7 @@ BlueArchiveCharacter = {
                     if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup:moveTo(models.models.ex_skill_2.Wall)
                     end
+                    models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:removeTask("special_item")
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
