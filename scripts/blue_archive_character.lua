@@ -82,7 +82,8 @@ BlueArchiveCharacter = {
             SURPLISED2 = {5, 0},
             ANGRY = {6, 0},
             ANXIOUS = {1, 1},
-            UNEQUAL = {3, 1}
+            UNEQUAL = {3, 1},
+            ANGRY_CENTER = {7, 0}
         },
 
         ---左目
@@ -92,9 +93,12 @@ BlueArchiveCharacter = {
             TIRED = {3, 0},
             CLOSED = {2, 0},
             SURPLISED2 = {4, 0},
-            ANGRY = {-1, 1},
+            ANGRY2 = {-1, 1},
             ANXIOUS = {1, 1},
-            UNEQUAL = {2, 1}
+            UNEQUAL = {2, 1},
+            ANGRY = {7, 0},
+            ANGRY_INVERTED = {8, 0},
+            NORMAL_CENTER = {3, 1}
         },
 
         ---口
@@ -103,7 +107,9 @@ BlueArchiveCharacter = {
             ANXIOUS = {2, 0},
             SHOCK = {1, 0},
             ANGRY = {0, 1},
-            OPENED = {0, 0}
+            OPENED = {0, 0},
+            SMILE = {2, 1},
+            TRIANGLE = {3, 1}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
@@ -568,7 +574,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
                     elseif tick == 67 then
                         models.models.ex_skill_1.Gui.DamageIndicators:setVisible(false)
-                        FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 41, true)
+                        FaceParts:setEmotion("ANGRY", "ANGRY2", "ANGRY", 41, true)
                         models.models.main.Avatar.Head.EffectPanel:setUVPixels(9, 0)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.TextAnchor:setVisible(true)
@@ -732,15 +738,37 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setRot()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(true)
+                    FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "OPENED", 4, true)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    if tick == 151 then
+                    if tick == 4 then
+                        FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "SMILE", 6, true)
+                    elseif tick == 10 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 4, true)
+                    elseif tick == 14 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "SMILE", 11, true)
+                    elseif tick == 25 then
+
+                    elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItem:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                        FaceParts:setEmotion("NORMAL", "NORMAL_CENTER", "TRIANGLE", 3, true)
+                    elseif tick == 154 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 2, true)
+                    elseif tick == 156 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
+                    elseif tick == 163 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 2, true)
+                    elseif tick == 165 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL_CENTER", "TRIANGLE", 6, true)
+                    elseif tick == 171 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 3, true)
+                    elseif tick == 174 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "OPENED", 36, true)
                     end
                 end,
 
