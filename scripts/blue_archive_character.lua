@@ -457,6 +457,17 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
+                    if not BlueArchiveCharacter.EX_SKILL[1].isPrepared then
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_name"):setText("MOMOI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
+                        BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_value"):setText("12/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
+                        BlueArchiveCharacter.EX_SKILL_1_MIDORI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_name"):setText("MIDORI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
+                        BlueArchiveCharacter.EX_SKILL_1_MIDORI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_value"):setText("14/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
+                        BlueArchiveCharacter.EX_SKILL_1_KO = models.models.ex_skill_1.Gui.DamageIndicators:newText("ex_skill_1_ko"):setText("§cK.O."):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"):setOutline(true):setVisible(false)
+                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")}
+                        BlueArchiveCharacter.Ex_SKILL_1_TEXT = models.models.ex_skill_1.Gui.TextAnchor:newText("ex_skill_1:text"):setText("§d§lMOMOI"):setScale(4, 4, 4):setAlignment("RIGHT"):setOutline(true):setOutlineColor(1, 1, 1)
+                        BlueArchiveCharacter.EX_SKILL[1].isPrepared = true
+                    end
+
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator:setPos(windowSize.x * -1 + 4, 0)
@@ -609,6 +620,154 @@ BlueArchiveCharacter = {
                     end
                 end
             }
+		},
+
+        {
+            ---Exスキルの名前
+            name = {
+                ---英語
+                ---日本語名を翻訳したものにする。
+                ---@type string
+                en_us = "Virtual Maid Weapon!",
+
+                ---日本語
+                ---実際のスキルの名前と同じにする。
+                ---@type string
+                ja_jp = "バーチャル・メイドウェポン！"
+            },
+
+            ---スキルの種類
+            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
+            ---@type BlueArchiveCharacter.SkillType
+            skillType = "VIBRATION",
+
+            ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
+            ---@type ModelPart[]
+			models = {models.models.ex_skill_2},
+
+            ---Exスキルアニメーションが含まれるモデルファイル名
+            ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
+            ---@type string[]
+			animations = {"main", "costume_maid", "gun", "ex_skill_2"},
+
+            ---Exスキルアニメーションでのカメラワークのデータ
+            camera = {
+                ---Exスキルアニメーション開始時
+                start = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3()
+                },
+
+                ---Exスキルアニメーション終了時
+                fin = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3()
+                }
+            },
+
+            ---コールバック関数
+            callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                end,
+
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    if not BlueArchiveCharacter.EX_SKILL[2].isPrepared then
+                        for i = 1, 3 do
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."Head"].PillagerHead, models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."Head"]["Pillager"..i.."Nose"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."Body"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."RightArm"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."LeftArm"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightLeg"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."LeftLeg"]}) do
+                                modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
+                            end
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Side, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Side, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Side, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Side, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Side, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_2_Side}) do
+                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/barrel_side.png")
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Top, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Top, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Top, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Top, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Top, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_2_Top}) do
+                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/barrel_top.png")
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Bottom, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Bottom, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Bottom, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Bottom, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Bottom}) do
+                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/barrel_bottom.png")
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1, models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2, models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3}) do
+                            modelPart.Base_Side:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/decorated_pot/decorated_pot_side.png")
+                            for _, potPart in ipairs({modelPart.Base_Top, modelPart.Neck1, modelPart.Neck2}) do
+                                potPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/decorated_pot/decorated_pot_base.png")
+                            end
+                        end
+                        models.models.ex_skill_2.Covers.CoverBack2.CoverBack2_1_Front:setPrimaryTexture("RESOURCE", "minecraft:textures/block/chiseled_bookshelf_occupied.png")
+                        models.models.ex_skill_2.Covers.CoverBack2.CoverBack2_1_Side:setPrimaryTexture("RESOURCE", "minecraft:textures/block/chiseled_bookshelf_side.png")
+                        models.models.ex_skill_2.Covers.CoverBack2.CoverBack2_1_TopBottom:setPrimaryTexture("RESOURCE", "minecraft:textures/block/chiseled_bookshelf_top.png")
+                        models.models.ex_skill_2.Covers.CoverBack3.CoverBack3_1:setPrimaryTexture("RESOURCE", "minecraft:textures/block/red_wool.png")
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverBack4.CoverBack4_1, models.models.ex_skill_2.Wall.Wall1, models.models.ex_skill_2.Wall.Wall2, models.models.ex_skill_2.Wall.Wall3}) do
+                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_planks.png")
+                        end
+                        models.models.ex_skill_2.Wall.LogPatterns:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_log_top.png")
+                        models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/pointer.png")
+                        models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Back:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/back.png")
+                        BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
+                    end
+                    models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setRot()
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(true)
+                end,
+
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
+                    --"<>"内を適切な値で置換すること。
+                    --[[
+                    if tick == <tick_int> then
+                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[<ex_skill_index>].animations) do
+                            animations["models."..animation]["ex_skill_"..<ex_skill_index>]:pause()
+                        end
+                    end
+                    ]]
+                    if tick == 151 then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                        models.models.ex_skill_2.Wall.SpecialItem:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    elseif models.models.main.Avatar.UpperBody.Body.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Body.Gun:setVisible(false)
+                    end
+                    if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItem ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItem:moveTo(models.models.ex_skill_2.Wall)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postTransition = function(forcedStop)
+                end
+            }
 		}
 	},
 
@@ -693,7 +852,7 @@ BlueArchiveCharacter = {
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
-                exSkill = 1
+                exSkill = 2
             }
         },
 
@@ -2461,70 +2620,56 @@ BlueArchiveCharacter = {
 
 --生徒固有初期化処理
 events.ENTITY_INIT:register(function ()
-    ---@diagnostic disable-next-line: undefined-field
-    BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_name"):setText("MOMOI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
-    ---@diagnostic disable-next-line: undefined-field
-    BlueArchiveCharacter.EX_SKILL_1_MOMOI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.HPBarBackground:newText("ex_skill_1_momoi_hp_value"):setText("12/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
-    ---@diagnostic disable-next-line: undefined-field
-    BlueArchiveCharacter.EX_SKILL_1_MIDORI_HP_NAME = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_name"):setText("MIDORI"):setPos(0, 16, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
-    ---@diagnostic disable-next-line: undefined-field
-    BlueArchiveCharacter.EX_SKILL_1_MIDORI_HP_VALUE = models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.HPBarBackground:newText("ex_skill_1_midori_hp_value"):setText("14/20"):setPos(0, -7, -1):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER")
-    ---@diagnostic disable-next-line: undefined-field
-    BlueArchiveCharacter.EX_SKILL_1_KO = models.models.ex_skill_1.Gui.DamageIndicators:newText("ex_skill_1_ko"):setText("§cK.O."):setScale(vectors.vec3(1, 1, 1):scale(1.5)):setAlignment("CENTER"):setOutline(true):setVisible(false)
-    BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")}
-    ---@diagnostic disable-next-line: undefined-field
-    BlueArchiveCharacter.Ex_SKILL_1_TEXT = models.models.ex_skill_1.Gui.TextAnchor:newText("ex_skill_1:text"):setText("§d§lMOMOI"):setScale(4, 4, 4):setAlignment("RIGHT"):setOutline(true):setOutlineColor(1, 1, 1)
-end)
+    ---脚と丈の長いスカートの調整が有効かどうか
+    ---@type boolean
+    local legAdjustmentEnabled = true
 
----脚と丈の長いスカートの調整が有効かどうか
----@type boolean
-local legAdjustmentEnabled = true
+    ---前ティックに脚とスカートの調整をしたかどうか
+    ---@type boolean
+    local legAdjustedPrev = false
 
----前ティックに脚とスカートの調整をしたかどうか
----@type boolean
-local legAdjustedPrev = false
+    ---前ティックは脚を隠すべきだったかどうか
+    ---@type boolean
+    local shouldHideLegsPrev = false
 
----前ティックは脚を隠すべきだったかどうか
----@type boolean
-local shouldHideLegsPrev = false
-
-events.TICK:register(function ()
-    local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:getVisible()
-    local shouldHideLegs = skirtVisible and player:getVehicle() ~= nil
-    if shouldHideLegs and not shouldHideLegsPrev then
-        models.models.main.Avatar.LowerBody.Legs:setVisible(false)
-        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
-    elseif not shouldHideLegs and shouldHideLegsPrev then
-        models.models.main.Avatar.LowerBody.Legs:setVisible(true)
-        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale()
-    end
-    local shouldAdjustLegs = legAdjustmentEnabled and skirtVisible and not shouldHideLegs
-    if shouldAdjustLegs and not legAdjustedPrev then
-        events.RENDER:register(function ()
-            local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
-            models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.45, 0, 0)
-            models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.45, 0, 0)
-            local rightLegRotAbs = math.abs(rightLegRotX)
-            local playerPose = player:getPose()
-            local skirtFlipVal = math.min(math.abs(Physics.VelocityAverage[7]) * 0.00025 + ((playerPose == "SWIMMING" or playerPose == "FALL_FLYING") and 0 or math.max(Physics.VelocityAverage[2] * -0.25, 0)), 0.5)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1 + skirtFlipVal, 1 - skirtFlipVal, rightLegRotAbs * 0.001 + 1 + skirtFlipVal)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4:setScale(rightLegRotAbs * -0.00005 + 1, 1, rightLegRotAbs * 0.0005 + 1)
-        end, "skirt_render")
-    elseif not shouldAdjustLegs and legAdjustedPrev then
-        events.RENDER:remove("skirt_render")
-        for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
-            modelPart:setRot()
+    events.TICK:register(function ()
+        local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:getVisible()
+        local shouldHideLegs = skirtVisible and player:getVehicle() ~= nil
+        if shouldHideLegs and not shouldHideLegsPrev then
+            models.models.main.Avatar.LowerBody.Legs:setVisible(false)
+            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
+        elseif not shouldHideLegs and shouldHideLegsPrev then
+            models.models.main.Avatar.LowerBody.Legs:setVisible(true)
+            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale()
         end
-        if not shouldHideLegs then
-            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4}) do
-                modelPart:setScale()
+        local shouldAdjustLegs = legAdjustmentEnabled and skirtVisible and not shouldHideLegs
+        if shouldAdjustLegs and not legAdjustedPrev then
+            events.RENDER:register(function ()
+                local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
+                models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.45, 0, 0)
+                models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.45, 0, 0)
+                local rightLegRotAbs = math.abs(rightLegRotX)
+                local playerPose = player:getPose()
+                local skirtFlipVal = math.min(math.abs(Physics.VelocityAverage[7]) * 0.00025 + ((playerPose == "SWIMMING" or playerPose == "FALL_FLYING") and 0 or math.max(Physics.VelocityAverage[2] * -0.25, 0)), 0.5)
+                models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1 + skirtFlipVal, 1 - skirtFlipVal, rightLegRotAbs * 0.001 + 1 + skirtFlipVal)
+                models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
+                models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
+                models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4:setScale(rightLegRotAbs * -0.00005 + 1, 1, rightLegRotAbs * 0.0005 + 1)
+            end, "skirt_render")
+        elseif not shouldAdjustLegs and legAdjustedPrev then
+            events.RENDER:remove("skirt_render")
+            for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
+                modelPart:setRot()
+            end
+            if not shouldHideLegs then
+                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4}) do
+                    modelPart:setScale()
+                end
             end
         end
-    end
-    shouldHideLegsPrev = shouldHideLegs
-    legAdjustedPrev = shouldAdjustLegs
+        shouldHideLegsPrev = shouldHideLegs
+        legAdjustedPrev = shouldAdjustLegs
+    end)
 end)
 
 return BlueArchiveCharacter
