@@ -732,12 +732,16 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Wall.LogPatterns:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_log_top.png")
                         models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/pointer.png")
                         models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Back:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/back.png")
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Midori.MidoriHead.MidoriHeadRing, models.models.ex_skill_2.Wall.SpecialItemGroup}) do
+                            modelPart:setLight(15)
+                        end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
                     end
                     models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setRot()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(true)
+                    models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(1, 0.984, 0.4)
                     FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "OPENED", 4, true)
                 end,
 
@@ -755,7 +759,7 @@ BlueArchiveCharacter = {
 
                     elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
-                        models.models.ex_skill_2.Wall.SpecialItem:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                        models.models.ex_skill_2.Wall.SpecialItemGroup:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                         FaceParts:setEmotion("NORMAL", "NORMAL_CENTER", "TRIANGLE", 3, true)
                     elseif tick == 154 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 2, true)
@@ -782,8 +786,8 @@ BlueArchiveCharacter = {
                     elseif models.models.main.Avatar.UpperBody.Body.Gun ~= nil then
                         models.models.main.Avatar.UpperBody.Body.Gun:setVisible(false)
                     end
-                    if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItem ~= nil then
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItem:moveTo(models.models.ex_skill_2.Wall)
+                    if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup:moveTo(models.models.ex_skill_2.Wall)
                     end
                 end,
 
