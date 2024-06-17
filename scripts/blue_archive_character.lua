@@ -796,6 +796,10 @@ BlueArchiveCharacter = {
                     elseif tick == 174 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "OPENED", 36, true)
                     end
+
+                    if tick == 42 or tick == 44 or tick == 47 or tick == 50 or tick == 52 or tick == 55 or tick == 68 or tick == 70 or tick == 72 or tick == 80 or tick == 83 or tick == 86 or tick == 88 or tick == 99 or tick == 105 or tick == 108 or tick == 110 or tick == 112 or tick == 113 or tick == 115 then
+                        sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
