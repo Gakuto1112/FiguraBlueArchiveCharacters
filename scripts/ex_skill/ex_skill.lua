@@ -198,6 +198,7 @@ ExSkill = {
             for _, modelPart in ipairs(BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].animations) do
                 animations["models."..modelPart]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill]:play()
             end
+            Gun:setGunPosition("NONE")
             if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.preAnimation ~= nil then
                 BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.preAnimation()
             end
