@@ -787,7 +787,12 @@ BlueArchiveCharacter = {
                         potModel:setVisible(false)
                     end
 
-                    if tick == 4 then
+                    if tick == 1 then
+                        local playerPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
+                        local bodyYaw = player:getBodyYaw()
+                        particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1, -0.75, 1.25, 0, 0, 1, 0):add(playerPos)):setScale(1):setColor(1, 0.984, 0.4):setLifetime(20)
+                        particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1, 0.65, 1.9, 0, 0, 1, 0):add(playerPos)):setScale(0.5):setColor(1, 0.984, 0.4):setLifetime(20)
+                    elseif tick == 4 then
                         FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "SMILE", 6, true)
                     elseif tick == 10 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 4, true)
