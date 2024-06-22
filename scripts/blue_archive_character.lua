@@ -730,7 +730,6 @@ BlueArchiveCharacter = {
                             modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_planks.png")
                         end
                         models.models.ex_skill_2.Wall.LogPatterns:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_log_top.png")
-                        models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/pointer.png")
                         models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Back:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/back.png")
                         for _, modelPart in ipairs({models.models.ex_skill_2.Midori.MidoriHead.MidoriHeadRing, models.models.ex_skill_2.Wall.SpecialItemGroup}) do
                             modelPart:setLight(15)
@@ -752,6 +751,8 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(true)
                     end
                     models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(specialItemValue < 0.8 and vectors.vec3(1, 0.984, 0.4) or (specialItemValue < 0.9 and vectors.vec3(0.686, 0.992, 0.804) or vectors.vec3(0.631, 0.984, 0.91)))
+                    local paintingResources = {"minecraft:textures/painting/pointer.png", "minecraft:textures/painting/pigscene.png", "minecraft:textures/painting/burning_skull.png"}
+                    models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", paintingResources[math.ceil(math.random() * #paintingResources)])
                     FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "OPENED", 4, true)
                 end,
 
@@ -871,6 +872,18 @@ BlueArchiveCharacter = {
                         events.RENDER:remove("ex_skill_2_render")
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor18)
                         shotSound()
+                    elseif tick == 116 then
+                        sounds:playSound("minecraft:entity.zombie.break_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.25, 2)
+                    elseif tick == 132 then
+                        local anchorPos = vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0, -0.75, 2, 0, 1, 0):add(ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting))
+                        for _ = 1, 20 do
+                            local xOffset = math.random() * 4 - 2
+                            local zOffset = math.random() * 4 - 2
+                            particles:newParticle("minecraft:campfire_cosy_smoke", anchorPos:copy():add(xOffset, 0, zOffset)):setScale(5):setVelocity(xOffset * 0.03, 0.025, zOffset * 0.03)
+                        end
+                        sounds:playSound("minecraft:entity.zombie.attack_wooden_door", anchorPos, 0.25, 2)
+                    elseif tick == 138 then
+                        sounds:playSound("minecraft:entity.zombie.attack_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.05, 2)
                     elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItemGroup:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
