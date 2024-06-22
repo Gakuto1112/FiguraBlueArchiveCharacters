@@ -12083,7 +12083,7 @@
 					"uuid": "685643af-3722-358c-4a7b-b08659b91c3f",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -12095,7 +12095,7 @@
 							"uuid": "de851d22-59eb-a421-c1f9-2ecff29a50c9",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": false,
+							"isOpen": true,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -13969,7 +13969,7 @@
 							"data_points": [
 								{
 									"x": 0,
-									"y": 357.84,
+									"y": 372.84,
 									"z": 0
 								}
 							],
@@ -13988,7 +13988,7 @@
 							"data_points": [
 								{
 									"x": 0,
-									"y": 357.84,
+									"y": "372.84",
 									"z": 0
 								}
 							],
@@ -14830,31 +14830,12 @@
 							"data_points": [
 								{
 									"x": 0,
-									"y": 2.5,
+									"y": -7.5,
 									"z": 0
 								}
 							],
 							"uuid": "c8f5f68d-e1ef-bdc2-fd45-b4bd9ea5c9b9",
 							"time": 5.4,
-							"color": -1,
-							"interpolation": "catmullrom",
-							"bezier_linked": true,
-							"bezier_left_time": [-0.1, -0.1, -0.1],
-							"bezier_left_value": [0, 0, 0],
-							"bezier_right_time": [0.1, 0.1, 0.1],
-							"bezier_right_value": [0, 0, 0]
-						},
-						{
-							"channel": "rotation",
-							"data_points": [
-								{
-									"x": 0,
-									"y": 0,
-									"z": 0
-								}
-							],
-							"uuid": "8022a06e-fa44-531b-868e-7484e54c7a06",
-							"time": 6.75,
 							"color": -1,
 							"interpolation": "catmullrom",
 							"bezier_linked": true,
@@ -14874,6 +14855,25 @@
 							],
 							"uuid": "103c68f6-ad54-cf2d-7bfa-ffb78fd4b08a",
 							"time": 7,
+							"color": -1,
+							"interpolation": "catmullrom",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						},
+						{
+							"channel": "rotation",
+							"data_points": [
+								{
+									"x": 0,
+									"y": -7.5,
+									"z": 0
+								}
+							],
+							"uuid": "472359a6-8099-7e0c-b7ad-88ff8f173839",
+							"time": 6.75,
 							"color": -1,
 							"interpolation": "catmullrom",
 							"bezier_linked": true,

@@ -734,6 +734,9 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_2.Midori.MidoriHead.MidoriHeadRing, models.models.ex_skill_2.Wall.SpecialItemGroup}) do
                             modelPart:setLight(15)
                         end
+                        for i = 1, 3 do
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -135)
+                        end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
                     end
                     if host:isHost() then
@@ -880,6 +883,8 @@ BlueArchiveCharacter = {
                         shotSound()
                     elseif tick == 116 then
                         sounds:playSound("minecraft:entity.zombie.break_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.25, 2)
+                    elseif tick == 126 then
+                        sounds:playSound("minecraft:entity.pillager.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
                     elseif tick == 128 then
                         sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup), 1, 1)
                     elseif tick == 132 then
@@ -923,6 +928,22 @@ BlueArchiveCharacter = {
                         for _ = 1, 2 do
                             particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1 + 35, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0):add(anchorPos)):setScale(0.25):setVelocity(0, 0.016, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
                         end
+                    end
+                    if tick < 124 then
+                        for i = 1, 3 do
+                            if math.random() >= 0.99 then
+                                sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers["Pillager"..i]), 0.5, 1)
+                            end
+                        end
+                    end
+                    if tick >= 105 and tick < 124 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
+                    end
+                    if tick >= 70 and tick < 124 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
+                    end
+                    if tick >= 54 and tick < 124 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
                     end
                 end,
 
