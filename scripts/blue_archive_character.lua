@@ -793,6 +793,8 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 4, true)
                     elseif tick == 14 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "SMILE", 11, true)
+                    elseif tick == 25 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "SMILE", 22, true)
                     elseif  tick == 28 then
                         local windowSize = client:getScaledWindowSize()
                         local centerX = windowSize.x / 2 * -1
@@ -809,6 +811,7 @@ BlueArchiveCharacter = {
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor2)
                         shotSound()
                     elseif tick == 47 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY2", "ANGRY", 33, true)
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack4.ExSkill2ParticleAnchor3)
                         shotSound()
                         potBreak(models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3)
@@ -832,6 +835,7 @@ BlueArchiveCharacter = {
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
                         shotSound()
                     elseif tick == 80 then
+                        FaceParts:setEmotion("SURPLISED", "SURPLISED", "SHOCK", 35, true)
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor10)
                         shotSound()
                     elseif tick == 83 then
@@ -862,6 +866,7 @@ BlueArchiveCharacter = {
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor17)
                         shotSound()
                     elseif tick == 115 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 36, true)
                         models.models.ex_skill_2.Gui.Reticule:setVisible(false)
                         events.RENDER:remove("ex_skill_2_render")
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor18)
