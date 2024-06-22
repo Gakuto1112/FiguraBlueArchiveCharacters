@@ -750,7 +750,8 @@ BlueArchiveCharacter = {
                     else
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(true)
                     end
-                    models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(specialItemValue < 0.8 and vectors.vec3(1, 0.984, 0.4) or (specialItemValue < 0.9 and vectors.vec3(0.686, 0.992, 0.804) or vectors.vec3(0.631, 0.984, 0.91)))
+                    BlueArchiveCharacter.EX_SKILL[2].glowColor = specialItemValue < 0.8 and vectors.vec3(1, 0.984, 0.4) or (specialItemValue < 0.9 and vectors.vec3(0.686, 0.992, 0.804) or vectors.vec3(0.631, 0.984, 0.91))
+                    models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor)
                     local paintingResources = {"minecraft:textures/painting/pointer.png", "minecraft:textures/painting/pigscene.png", "minecraft:textures/painting/burning_skull.png"}
                     models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", paintingResources[math.ceil(math.random() * #paintingResources)])
                     FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "OPENED", 4, true)
@@ -874,6 +875,8 @@ BlueArchiveCharacter = {
                         shotSound()
                     elseif tick == 116 then
                         sounds:playSound("minecraft:entity.zombie.break_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.25, 2)
+                    elseif tick == 128 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup), 1, 1)
                     elseif tick == 132 then
                         local anchorPos = vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0, -0.75, 2, 0, 1, 0):add(ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting))
                         for _ = 1, 20 do
@@ -900,6 +903,21 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 3, true)
                     elseif tick == 174 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "OPENED", 36, true)
+                    elseif tick == 178 then
+                        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1.5)
+                    end
+                    if tick >= 128 and tick < 151 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 3 - 1.5, math.random() * 3 - 1.5, 0, 0, 1, 0):add(anchorPos)):setVelocity(0, 0.1, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
+                        end
+                    elseif tick >= 151 and tick < 170 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 2 do
+                            particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1 + 35, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0):add(anchorPos)):setScale(0.25):setVelocity(0, 0.016, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
+                        end
                     end
                 end,
 
