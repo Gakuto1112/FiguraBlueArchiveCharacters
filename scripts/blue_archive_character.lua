@@ -749,11 +749,28 @@ BlueArchiveCharacter = {
                             for i = 2, 3 do
                                 local icon = models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:copy("LifeIcon"..i)
                                 models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(icon)
-                                print(icon)
                                 icon:setPos((i - 1) * -15, 0, 0)
                             end
                             for _, modelPart in ipairs(models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets:getChildren()) do
                                 modelPart:setColor(0.5, 0.5, 0.5)
+                            end
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon, models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets}) do
+                                modelPart:setVisible(false)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MomoiUI:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Gui.UI.MomoiUI, "MidoriUI"))
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon, models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets}) do
+                                modelPart:setVisible(true)
+                            end
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MidoriUI.UI1, models.models.ex_skill_2.Gui.UI.MidoriUI.UI1Shadow, models.models.ex_skill_2.Gui.UI.MidoriUI.UI2}) do
+                                modelPart:setRot(0, 180, 0)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MidoriUI:addChild(models.models.ex_skill_2.Midori.MidoriUpperBody.MidoriArms.MidoriRightArm.MidoriRightArmBottom.Gun2:copy("GunIcon"))
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setPos(116, 15, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setRot(0, 90, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setScale(1.67, 1.67, 1.67)
+                            for i = 1, 3 do
+                                models.models.ex_skill_2.Gui.UI.MidoriUI["LifeIcon"..i]:setPos(22 - (i - 1) * 15, 0, 0)
                             end
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
@@ -761,7 +778,8 @@ BlueArchiveCharacter = {
                     if host:isHost() then
                         models.models.ex_skill_2.Gui:setVisible(true)
                         local windowsSize = client:getScaledWindowSize()
-                        models.models.ex_skill_2.Gui.UI.MomoiUI:setPos(-90, (windowsSize.y - 30) * -1, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiUI:setPos(-90, (windowsSize.y - 20) * -1, 0)
+                        models.models.ex_skill_2.Gui.UI.MidoriUI:setPos(windowsSize.x * -1 + 10, (windowsSize.y - 20) * -1, 0)
                     end
                     models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
