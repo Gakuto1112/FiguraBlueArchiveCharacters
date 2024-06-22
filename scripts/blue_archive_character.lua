@@ -762,7 +762,7 @@ BlueArchiveCharacter = {
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
                     ---銃弾のパーティクルを出す。
-                    ---@param anchor ModelPart パーティクルを出す場所を示すアンカーモデル
+                    ---@param anchor ModelPart パーティクルを出す場所を示すアンカーポイント
                     local function bulletParticle(anchor)
                         local anchorPos = ModelUtils.getModelWorldPos(anchor)
                         local bodyYaw = player:getBodyYaw()
@@ -774,6 +774,17 @@ BlueArchiveCharacter = {
                     ---射撃音を再生する。
                     local function shotSound()
                         sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
+                    end
+
+                    ---飾り壺を割った時の演出
+                    ---@param potModel ModelPart 飾り壺のモデル
+                    local function potBreak(potModel)
+                        local potPos = ModelUtils.getModelWorldPos(potModel)
+                        for _ = 1, 32 do
+                            particles:newParticle("minecraft:block minecraft:decorated_pot", potPos:copy():add(math.random() - 0.5, math.random(), math.random() - 0.5))
+                        end
+                        sounds:playSound("minecraft:block.glass.break", potPos, 1, 0.5)
+                        potModel:setVisible(false)
                     end
 
                     if tick == 4 then
@@ -800,7 +811,7 @@ BlueArchiveCharacter = {
                     elseif tick == 47 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack4.ExSkill2ParticleAnchor3)
                         shotSound()
-                        models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3:setVisible(false)
+                        potBreak(models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3)
                     elseif tick == 50 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor4)
                         shotSound()
@@ -816,7 +827,7 @@ BlueArchiveCharacter = {
                     elseif tick == 70 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor8)
                         shotSound()
-                        models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2:setVisible(false)
+                        potBreak(models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2)
                     elseif tick == 72 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
                         shotSound()
