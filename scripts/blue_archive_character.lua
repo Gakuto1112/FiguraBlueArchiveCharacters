@@ -804,6 +804,8 @@ BlueArchiveCharacter = {
                         events.RENDER:register(function ()
                             models.models.ex_skill_2.Gui.Reticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.ReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
                         end, "ex_skill_2_render")
+                    elseif tick == 35 then
+                        models.models.ex_skill_2.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(-6, 0)
                     elseif tick == 42 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor1)
                         shotSound()
@@ -888,7 +890,6 @@ BlueArchiveCharacter = {
                     elseif tick == 174 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "OPENED", 36, true)
                     end
-
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
@@ -898,6 +899,7 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2, models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3}) do
                         modelPart:setVisible(true)
                     end
+                    models.models.ex_skill_2.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels()
                     if models.models.main.Avatar.UpperBody.Arms.RightArm.Gun ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(false)
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
