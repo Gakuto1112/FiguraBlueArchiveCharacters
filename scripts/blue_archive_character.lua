@@ -737,10 +737,31 @@ BlueArchiveCharacter = {
                         for i = 1, 3 do
                             models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -135)
                         end
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setPos(-1, -1, 1)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setColor(0, 0, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.main.Avatar.UpperBody.Body.Gun:copy("GunIcon"))
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setPos(27, 15, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setRot(0, 90, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setScale(2.5, 2.5, 2.5)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setVisible(true)
+                            for i = 2, 3 do
+                                local icon = models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:copy("LifeIcon"..i)
+                                models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(icon)
+                                print(icon)
+                                icon:setPos((i - 1) * -15, 0, 0)
+                            end
+                            for _, modelPart in ipairs(models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets:getChildren()) do
+                                modelPart:setColor(0.5, 0.5, 0.5)
+                            end
+                        end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
                     end
                     if host:isHost() then
                         models.models.ex_skill_2.Gui:setVisible(true)
+                        local windowsSize = client:getScaledWindowSize()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI:setPos(-90, (windowsSize.y - 30) * -1, 0)
                     end
                     models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
                     models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setPos()
@@ -883,8 +904,6 @@ BlueArchiveCharacter = {
                         shotSound()
                     elseif tick == 116 then
                         sounds:playSound("minecraft:entity.zombie.break_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.25, 2)
-                    elseif tick == 126 then
-                        sounds:playSound("minecraft:entity.pillager.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
                     elseif tick == 128 then
                         sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup), 1, 1)
                     elseif tick == 132 then
@@ -895,12 +914,16 @@ BlueArchiveCharacter = {
                             particles:newParticle("minecraft:campfire_cosy_smoke", anchorPos:copy():add(xOffset, 0, zOffset)):setScale(5):setVelocity(xOffset * 0.03, 0.025, zOffset * 0.03)
                         end
                         sounds:playSound("minecraft:entity.zombie.attack_wooden_door", anchorPos, 0.25, 2)
+                        sounds:playSound("minecraft:entity.pillager.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
                     elseif tick == 138 then
                         sounds:playSound("minecraft:entity.zombie.attack_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.05, 2)
                     elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItemGroup:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                         FaceParts:setEmotion("NORMAL", "NORMAL_CENTER", "TRIANGLE", 3, true)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI:setVisible(false)
+                        end
                     elseif tick == 154 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 2, true)
                     elseif tick == 156 then
@@ -973,6 +996,7 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui, models.models.ex_skill_2.Gui.Reticule}) do
                             modelPart:setVisible(false)
                         end
+                        models.models.ex_skill_2.Gui.UI:setVisible(true)
                         events.RENDER:remove("ex_skill_2_render")
                     end
                 end,
