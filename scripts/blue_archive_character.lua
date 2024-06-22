@@ -761,6 +761,21 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
+                    ---銃弾のパーティクルを出す。
+                    ---@param anchor ModelPart パーティクルを出す場所を示すアンカーモデル
+                    local function bulletParticle(anchor)
+                        local anchorPos = ModelUtils.getModelWorldPos(anchor)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0.1, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
+                        end
+                    end
+
+                    ---射撃音を再生する。
+                    local function shotSound()
+                        sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
+                    end
+
                     if tick == 4 then
                         FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "SMILE", 6, true)
                     elseif tick == 10 then
@@ -776,9 +791,70 @@ BlueArchiveCharacter = {
                         events.RENDER:register(function ()
                             models.models.ex_skill_2.Gui.Reticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.ReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
                         end, "ex_skill_2_render")
+                    elseif tick == 42 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor1)
+                        shotSound()
+                    elseif tick == 44 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor2)
+                        shotSound()
+                    elseif tick == 47 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack4.ExSkill2ParticleAnchor3)
+                        shotSound()
+                        models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3:setVisible(false)
+                    elseif tick == 50 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor4)
+                        shotSound()
+                    elseif tick == 52 then
+                        bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor5)
+                        shotSound()
+                    elseif tick == 55 then
+                        bulletParticle(models.models.ex_skill_2.Wall.ExSkill2ParticleAnchor6)
+                        shotSound()
+                    elseif tick == 68 then
+                        bulletParticle(models.models.ex_skill_2.Wall.ExSkill2ParticleAnchor7)
+                        shotSound()
+                    elseif tick == 70 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor8)
+                        shotSound()
+                        models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2:setVisible(false)
+                    elseif tick == 72 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
+                        shotSound()
+                    elseif tick == 80 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor10)
+                        shotSound()
+                    elseif tick == 83 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor11)
+                        shotSound()
+                    elseif tick == 86 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor12)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0.1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
+                        end
+                        shotSound()
+                    elseif tick == 88 or tick == 99 then
+                        shotSound()
+                    elseif tick == 105 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor13)
+                        shotSound()
+                    elseif tick == 108 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor14)
+                        shotSound()
+                    elseif tick == 110 then
+                        bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor15)
+                        shotSound()
+                    elseif tick == 112 then
+                        bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor16)
+                        shotSound()
+                    elseif tick == 113 then
+                        bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor17)
+                        shotSound()
                     elseif tick == 115 then
                         models.models.ex_skill_2.Gui.Reticule:setVisible(false)
                         events.RENDER:remove("ex_skill_2_render")
+                        bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor18)
+                        shotSound()
                     elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItemGroup:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
@@ -797,15 +873,15 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "OPENED", 36, true)
                     end
 
-                    if tick == 42 or tick == 44 or tick == 47 or tick == 50 or tick == 52 or tick == 55 or tick == 68 or tick == 70 or tick == 72 or tick == 80 or tick == 83 or tick == 86 or tick == 88 or tick == 99 or tick == 105 or tick == 108 or tick == 110 or tick == 112 or tick == 113 or tick == 115 then
-                        sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
-                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
+                    for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2, models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3}) do
+                        modelPart:setVisible(true)
+                    end
                     if models.models.main.Avatar.UpperBody.Arms.RightArm.Gun ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(false)
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
