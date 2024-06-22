@@ -747,9 +747,7 @@ BlueArchiveCharacter = {
                     local specialItemValue = math.random() --0.80未満で「金のマガジン」、0.80~0.90未満で「エメラルド」、0.90~1.00未満で「ダイヤモンド」
                     if specialItemValue >= 0.8 then
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(false)
-                        local item = models:newItem("special_item")
-                        item:setItem(specialItemValue < 0.9 and "minecraft:emerald" or "minecraft:diamond")
-                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:addTask(item)
+                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:newItem("special_item"):setItem(specialItemValue < 0.9 and "minecraft:emerald" or "minecraft:diamond")
                     else
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(true)
                     end
