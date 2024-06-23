@@ -2,7 +2,7 @@
 DeathAnimation = {
     ---デバッグモードを有効にするかどうか。デバッグモードモードではxキーでフェーズ1のモデルを、cキーでフェーズ2のモデルを表示できる。
     ---@type boolean
-    DEBUG_MODE = true,
+    DEBUG_MODE = false,
 
     ---死亡アニメーションに使用されるダミーのアバターのルート。アバターが未生成の場合はnilが入っている。
     ---@type ModelPart?
