@@ -693,18 +693,16 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
-                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
-                ---@type fun()
-                preTransition = function()
-                end,
-
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
                     if not BlueArchiveCharacter.EX_SKILL[2].isPrepared then
-                        for i = 1, 3 do
-                            for _, modelPart in ipairs({models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."Head"].PillagerHead, models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."Head"]["Pillager"..i.."Nose"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."Body"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."RightArm"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."LeftArm"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightLeg"], models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."LeftLeg"]}) do
-                                modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.PillagerHead, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.Pillager1Nose, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Body, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1RightArm, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1LeftArm, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1RightLeg, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1LeftLeg}) do
+                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
+                        end
+                        for _, part in ipairs({"Head", "Body", "RightArm", "LeftArm", "RightLeg", "LeftLeg"}) do
+                            for i = 2, 3 do
+                                models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i..part]:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Pillagers.Pillager1["Pillager1"..part]))
                             end
                         end
                         for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Side, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Side, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Side, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Side, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Side, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_2_Side}) do
@@ -735,7 +733,7 @@ BlueArchiveCharacter = {
                             modelPart:setLight(15)
                         end
                         for i = 1, 3 do
-                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."Waist"]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -135)
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -135)
                         end
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
@@ -1003,7 +1001,7 @@ BlueArchiveCharacter = {
                         sounds:playSound("minecraft:entity.zombie.attack_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.05, 2)
                     elseif tick == 148 and host:isHost() then
                         local windowSize = client:getScaledWindowSize()
-                        models.models.ex_skill_2.Gui.TransitionFilter:setScale(windowSize.x, windowSize.y, 0)
+                        models.models.ex_skill_2.Gui.TransitionFilter:setScale(windowSize.x, windowSize.y, 1)
                         models.models.ex_skill_2.Gui.TransitionFilter:setVisible(true)
                         events.RENDER:register(function (delta)
                             if ExSkill.AnimationCount <= 151 then
@@ -1120,12 +1118,6 @@ BlueArchiveCharacter = {
                             end
                         end
                     end
-                end,
-
-                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
-                ---@type fun(forcedStop: boolean)
-                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
-                postTransition = function(forcedStop)
                 end
             }
 		}
