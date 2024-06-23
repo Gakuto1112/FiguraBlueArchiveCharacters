@@ -772,6 +772,7 @@ BlueArchiveCharacter = {
                             for i = 1, 3 do
                                 models.models.ex_skill_2.Gui.UI.MidoriUI["LifeIcon"..i]:setPos(22 - (i - 1) * 15, 0, 0)
                             end
+                            models.models.ex_skill_2.Gui.UI.MidoriUI:newText("ex_skill_2_reload_text"):setText("§4§lRELOAD"):setPos(154, 190, 0):setScale(1.6, 1.6, 1.6):setVisible(false)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.Frame:copy("FrameShadow"))
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setPos(-1, -1, 1)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setColor(0, 0, 0)
@@ -1041,6 +1042,13 @@ BlueArchiveCharacter = {
                     if tick >= 54 and tick < 124 and math.random() >= 0.95 then
                         sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
                     end
+                    if tick >= 22 and tick < 151 then
+                        if (tick - 22) % 30 == 0 then
+                            models.models.ex_skill_2.Gui.UI.MidoriUI:getTask("ex_skill_2_reload_text"):setVisible(true)
+                        elseif (tick - 22) % 30 == 20 then
+                            models.models.ex_skill_2.Gui.UI.MidoriUI:getTask("ex_skill_2_reload_text"):setVisible(false)
+                        end
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
@@ -1079,6 +1087,7 @@ BlueArchiveCharacter = {
                         for i = 15, 24 do
                             models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets["Bullet"..i]:setColor(0.5, 0.5, 0.5)
                         end
+                        models.models.ex_skill_2.Gui.UI.MidoriUI:getTask("ex_skill_2_reload_text"):setVisible(false)
                         if forcedStop then
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                         end
