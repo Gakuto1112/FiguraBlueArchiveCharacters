@@ -883,6 +883,7 @@ BlueArchiveCharacter = {
                     elseif tick == 42 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor1)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet24:setColor()
                     elseif tick == 44 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor2)
                         shotSound()
@@ -896,6 +897,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet23:setColor()
                     elseif tick == 50 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor4)
                         shotSound()
@@ -903,6 +905,7 @@ BlueArchiveCharacter = {
                     elseif tick == 52 then
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor5)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet22:setColor()
                     elseif tick == 55 then
                         bulletParticle(models.models.ex_skill_2.Wall.ExSkill2ParticleAnchor6)
                         shotSound()
@@ -914,6 +917,7 @@ BlueArchiveCharacter = {
                     elseif tick == 68 then
                         bulletParticle(models.models.ex_skill_2.Wall.ExSkill2ParticleAnchor7)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet21:setColor()
                     elseif tick == 70 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor8)
                         shotSound()
@@ -926,6 +930,7 @@ BlueArchiveCharacter = {
                     elseif tick == 72 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet20:setColor()
                     elseif tick == 73 then
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                     elseif tick == 80 then
@@ -935,6 +940,7 @@ BlueArchiveCharacter = {
                     elseif tick == 83 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor11)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet19:setColor()
                     elseif tick == 86 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor12)
                         local bodyYaw = player:getBodyYaw()
@@ -944,21 +950,25 @@ BlueArchiveCharacter = {
                         shotSound()
                     elseif tick == 88 or tick == 99 then
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet18:setColor()
                     elseif tick == 105 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor13)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet17:setColor()
                     elseif tick == 108 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor14)
                         shotSound()
                     elseif tick == 110 then
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor15)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet16:setColor()
                     elseif tick == 112 then
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor16)
                         shotSound()
                     elseif tick == 113 then
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor17)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet15:setColor()
                     elseif tick == 115 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 36, true)
                         models.models.ex_skill_2.Gui.Reticule:setVisible(false)
@@ -1066,6 +1076,9 @@ BlueArchiveCharacter = {
                             modelPart:setUVPixels()
                         end
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(0, 16)
+                        for i = 15, 24 do
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets["Bullet"..i]:setColor(0.5, 0.5, 0.5)
+                        end
                         if forcedStop then
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                         end
