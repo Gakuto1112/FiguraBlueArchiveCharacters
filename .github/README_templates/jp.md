@@ -28,7 +28,6 @@
 ### 作成中
 これらのキャラクターのアバターは作成中です。 通常は2~3週間程を製作に要しますが、最近は多忙により更新が遅れています。括弧内のリンクをクリックすると対象のissueに移動でき、そこで進捗を確認できます。
 
-- 才羽 モモイ（メイド）（[#51](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/51)）
 - 才羽 ミドリ（メイド）（[#52](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/52)）
 
 ### 作成予定
