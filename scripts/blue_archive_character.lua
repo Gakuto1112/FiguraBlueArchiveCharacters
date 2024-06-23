@@ -705,29 +705,53 @@ BlueArchiveCharacter = {
                                 models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i..part]:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Pillagers.Pillager1["Pillager1"..part]))
                             end
                         end
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Side, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Side, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Side, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Side, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Side, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_2_Side}) do
-                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/barrel_side.png")
-                        end
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Top, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Top, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Top, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Top, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Top, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_2_Top}) do
-                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/barrel_top.png")
-                        end
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.CoverLeft1_Bottom, models.models.ex_skill_2.Covers.CoverLeft.CoverLeft2_Bottom, models.models.ex_skill_2.Covers.CoverRight.CoverRight1_Bottom, models.models.ex_skill_2.Covers.CoverRight.CoverRight2_Bottom, models.models.ex_skill_2.Covers.CoverBack1.CoverBack1_1_Bottom}) do
-                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/barrel_bottom.png")
-                        end
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1, models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2, models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3}) do
-                            modelPart.Base_Side:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/decorated_pot/decorated_pot_side.png")
-                            for _, potPart in ipairs({modelPart.Base_Top, modelPart.Neck1, modelPart.Neck2}) do
-                                potPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/decorated_pot/decorated_pot_base.png")
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_"..y * 2 + x):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16, y * 16, 0)
                             end
                         end
-                        models.models.ex_skill_2.Covers.CoverBack2.CoverBack2_1_Front:setPrimaryTexture("RESOURCE", "minecraft:textures/block/chiseled_bookshelf_occupied.png")
-                        models.models.ex_skill_2.Covers.CoverBack2.CoverBack2_1_Side:setPrimaryTexture("RESOURCE", "minecraft:textures/block/chiseled_bookshelf_side.png")
-                        models.models.ex_skill_2.Covers.CoverBack2.CoverBack2_1_TopBottom:setPrimaryTexture("RESOURCE", "minecraft:textures/block/chiseled_bookshelf_top.png")
-                        models.models.ex_skill_2.Covers.CoverBack3.CoverBack3_1:setPrimaryTexture("RESOURCE", "minecraft:textures/block/red_wool.png")
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverBack4.CoverBack4_1, models.models.ex_skill_2.Wall.Wall1, models.models.ex_skill_2.Wall.Wall2, models.models.ex_skill_2.Wall.Wall3}) do
-                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_planks.png")
+                        models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_4"):setBlock("minecraft:barrel[facing=up]"):setPos(16, 0, -16)
+                        --models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_5"):setBlock("minecraft:decorated_pot"):setPos(16, 16, -16) --ブロックタスクで何故か飾り壺が描画されない...
+                        for i = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..6 + i):setBlock("minecraft:barrel[facing=up]"):setPos(-16, i * 16, 0)
                         end
-                        models.models.ex_skill_2.Wall.LogPatterns:setPrimaryTexture("RESOURCE", "minecraft:textures/block/dark_oak_log_top.png")
+                        for i = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..8 + i):setBlock("minecraft:barrel[facing=up]"):setPos(-32, 0, i * -16)
+                        end
+                        for i = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_"..10 + i):setBlock("minecraft:barrel[facing=up]"):setPos(i * 16, 0, 0)
+                        end
+                        models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_12"):setBlock("minecraft:barrel[facing=up]"):setPos(16, 16, 0)
+                        --models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_13"):setBlock("minecraft:dirt"):setPos(0, 16, 0) --ブロックタスクで何故か飾り壺が描画されない...
+                        for i = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverBack2:newBlock("ex_skill_2_block_"..14 + i):setBlock("minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=true,slot_5_occupied=true]"):setPos(-8, i * 16, -8)
+                        end
+                        for i = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverBack3:newBlock("ex_skill_2_block_"..16 + i):setBlock("minecraft:red_wool"):setPos(-8, i * 16, -8)
+                        end
+                        models.models.ex_skill_2.Covers.CoverBack4:newBlock("ex_skill_2_block_18"):setBlock("minecraft:dark_oak_planks"):setPos(0, 0, 0)
+                        --models.models.ex_skill_2.Covers.CoverBack4:newBlock("ex_skill_2_block_19"):setBlock("minecraft:dirt"):setPos(-16, 16, 0) --ブロックタスクで何故か飾り壺が描画されない...
+                        for y = 0, 6 do
+                            for x = 0, 8 do
+                                local blockCount = y * 9 + x
+                                models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..20 + blockCount):setBlock( (blockCount == 13 or blockCount == 22 or blockCount == 29 or blockCount == 30 or blockCount == 32 or blockCount == 33 or blockCount == 40 or blockCount == 49) and "minecraft:dark_oak_log[axis=z]" or "minecraft:dark_oak_planks"):setPos(x * 16, y * 16, 0)
+                            end
+                        end
+                        for j = 0, 1 do
+                            for i = 0, 6 do
+                                models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..83 + j * 7 + i):setBlock("minecraft:dark_oak_planks"):setPos(j * 128, i * 16, -16)
+                            end
+                        end
+                        --models.models.ex_skill_2.Wall.Paintings.MainPainting:newEntity("ex_skill_2_entity_1"):setPos(0, 32, 0):setRot(0, 180, 0):setLight(15, 15) --謎の影ができて、それが消せない...
+                        models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1.Base_Side:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/decorated_pot/decorated_pot_side.png")
+                        for _, potPart in ipairs({models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1.Base_Top, models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1.Neck1, models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1.Neck2}) do
+                            potPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/decorated_pot/decorated_pot_base.png")
+                        end
+                        for index, modelPart in ipairs({models.models.ex_skill_2.Covers.CoverBack1, models.models.ex_skill_2.Covers.CoverBack4}) do
+                            modelPart:addChild(models.models.ex_skill_2.Covers.CoverLeft.DecoratedPod1:copy("DecoratedPod"..(index + 1)))
+                        end
+                        models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2:setPos(0, 0, 160)
+                        models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3:setPos(-128, 0, 176)
                         models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Back:setPrimaryTexture("RESOURCE", "minecraft:textures/painting/back.png")
                         for _, modelPart in ipairs({models.models.ex_skill_2.Midori.MidoriHead.MidoriHeadRing, models.models.ex_skill_2.Wall.SpecialItemGroup}) do
                             modelPart:setLight(15)
@@ -822,6 +846,11 @@ BlueArchiveCharacter = {
                     models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor)
                     local paintingResources = {"minecraft:textures/painting/pointer.png", "minecraft:textures/painting/pigscene.png", "minecraft:textures/painting/burning_skull.png"}
                     models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", paintingResources[math.ceil(math.random() * #paintingResources)])
+                    --[[
+                        local paintingVarients = {"minecraft:pointer", "minecraft:pigscene", "minecraft:burning_skull"}
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Wall.Paintings.MainPainting:getTask("ex_skill_2_entity_1"):setNbt("minecraft:painting", toJson({variant = paintingVarients[math.ceil(math.random() * #paintingVarients)]}))
+                    ]]
                     ---@diagnostic disable-next-line: discard-returns
                     models.models.ex_skill_2.Covers.CoverBack4:newPart("MissText", "Camera")
                     models.models.ex_skill_2.Covers.CoverBack4.MissText:setOffsetPivot(8, 24, 8)
@@ -1091,11 +1120,7 @@ BlueArchiveCharacter = {
                     if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup:moveTo(models.models.ex_skill_2.Wall)
                     end
-                    local specialItemTask = models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:getTask("special_item")
-                    if specialItemTask ~= nil then
-                        specialItemTask:remove()
-                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:removeTask("special_item")
-                    end
+                    models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:removeTask("special_item")
                     if host:isHost() then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui, models.models.ex_skill_2.Gui.Reticule}) do
                             modelPart:setVisible(false)
