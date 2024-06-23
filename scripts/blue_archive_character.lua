@@ -1317,7 +1317,7 @@ BlueArchiveCharacter = {
                 local shouldHideLegsPrev = false
 
                 events.TICK:register(function ()
-                    local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:getVisible()
+                    local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB:getVisible()
                     local shouldHideLegs = skirtVisible and player:getVehicle() ~= nil
                     if shouldHideLegs and not shouldHideLegsPrev then
                         models.models.main.Avatar.LowerBody.Legs:setVisible(false)
@@ -1484,14 +1484,30 @@ BlueArchiveCharacter = {
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase1 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+            if costume == 1 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+            elseif costume == 2 then
+                dummyAvatar.LowerBody.Legs:setVisible(false)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
+                for _, modelPart in ipairs({dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight, dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft}) do
+                    modelPart:setRot(-40, 0, 0)
+                end
+            end
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase2 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+            if costume == 1 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+            elseif costume == 2 then
+                dummyAvatar.LowerBody.Legs:setVisible(true)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setScale(1, 1, 1)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setRot(32.5, 0, 0)
+                dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight:setRot(20, 0, 5)
+                dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft:setRot(20, 0, -25)
+            end
         end
 
         --[[
