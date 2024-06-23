@@ -772,7 +772,6 @@ BlueArchiveCharacter = {
                             for i = 1, 3 do
                                 models.models.ex_skill_2.Gui.UI.MidoriUI["LifeIcon"..i]:setPos(22 - (i - 1) * 15, 0, 0)
                             end
-                            --models.models.ex_skill_2.Gui:setParentType("World")
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.Frame:copy("FrameShadow"))
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setPos(-1, -1, 1)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setColor(0, 0, 0)
@@ -892,6 +891,7 @@ BlueArchiveCharacter = {
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack4.ExSkill2ParticleAnchor3)
                         shotSound()
                         potBreak(models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3)
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:setVisible(false)
                     elseif tick == 50 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor4)
                         shotSound()
@@ -908,6 +908,7 @@ BlueArchiveCharacter = {
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor8)
                         shotSound()
                         potBreak(models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2)
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2:setVisible(false)
                     elseif tick == 72 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
                         shotSound()
@@ -1042,7 +1043,9 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui, models.models.ex_skill_2.Gui.Reticule}) do
                             modelPart:setVisible(false)
                         end
-                        models.models.ex_skill_2.Gui.UI:setVisible(true)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2}) do
+                            modelPart:setVisible(true)
+                        end
                         events.RENDER:remove("ex_skill_2_render")
                     end
                 end,
