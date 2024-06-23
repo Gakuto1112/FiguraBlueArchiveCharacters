@@ -489,7 +489,6 @@ BlueArchiveCharacter = {
                             for _, modelPart in ipairs(models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:getChildren()) do
                                 modelPart:setVisible(true)
                             end
-                            models.models.ex_skill_1.Gui.UI.MidoriUI:setPos(client:getScaledWindowSize().x * -1 + 220, 0, -56)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.Frame:setRot(0, 180, 0)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.Background:setPos(-139.5, 0, 62)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.Background:setColor(0.098, 0.2, 0.686)
@@ -510,12 +509,7 @@ BlueArchiveCharacter = {
                         BlueArchiveCharacter.EX_SKILL[1].isPrepared = true
                     end
                     if host:isHost() then
-                        local windowSize = client:getScaledWindowSize()
-                        models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator:setPos(windowSize.x * -1 + 4, 0)
-                        local scale = vectors.vec3(1, 1, 0):scale(windowSize.x * 0.45 / 223):add(0, 0, 1)
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator, models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator}) do
-                            modelPart:setScale(scale)
-                        end
+                        models.models.ex_skill_1.Gui.UI.MidoriUI:setPos(client:getScaledWindowSize().x * -1 + 220, 0, -56)
                     end
                 end,
 
@@ -576,18 +570,18 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Eyes:setVisible(false)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 8)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.DeadEye:setVisible(true)
-                            BlueArchiveCharacter.EX_SKILL_1_KO:setPos(client:getScaledWindowSize().x / 2 * -1, -20, -30)
+                            BlueArchiveCharacter.EX_SKILL_1_KO:setPos(client:getScaledWindowSize().x / 2 * -1, -12, -30)
                             BlueArchiveCharacter.EX_SKILL_1_KO:setVisible(true)
                             events.RENDER:register(function (delta)
                                 local count = ExSkill.AnimationCount - 37 + delta
-                                BlueArchiveCharacter.EX_SKILL_1_KO:setScale(vectors.vec3(1, 1, 1):scale(count <= 1.5 and (-3.33 * count + 9) or (4 * count - 2)))
+                                BlueArchiveCharacter.EX_SKILL_1_KO:setScale(vectors.vec3(1, 1, 1):scale(count <= 1.5 and (-1.667 * count + 5) or (count + 1)))
                             end, "ex_skill_1_ko_render")
                         end
                     elseif tick == 38 then
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
                         events.RENDER:remove("ex_skill_1_ko_render")
-                        BlueArchiveCharacter.EX_SKILL_1_KO:setScale(6, 6, 6)
+                        BlueArchiveCharacter.EX_SKILL_1_KO:setScale(3, 3, 3)
                     elseif tick == 40 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "ANXIOUS", 3, true)
                         models.models.ex_skill_1.Midori.MidoriUpperBody.MidoriArms.MidoriLeftArm.MidoriLeftArmBottom.GameConsole2:moveTo(models.models.ex_skill_1.Midori.MidoriLowerBody.MidoriLegs)
