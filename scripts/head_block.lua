@@ -11,6 +11,12 @@ HeadBlock = {
             models.script_head_block.Head:remove()
         end
 
+        --ヘルメットを着けている場合は外しておく。
+        local isHelmetVisible = Armor ~= nil and Armor.ArmorVisible[1] or false
+        if isHelmetVisible then
+            Armor:setHelmet(world.newItem("minecraft:air"))
+        end
+
         --頭ブロックから除外するモデルパーツを予め非表示にする。
         local excludeModelsVisibleList = {}
         for index, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.excludeModels) do
@@ -32,9 +38,6 @@ HeadBlock = {
             models.script_head_block:addChild(copiedPart)
             models.script_head_block.Head:setParentType("Skull")
             models.script_head_block.Head:setPos(0, -24, 0)
-            if models.script_head_block.Head.ArmorH ~= nil then
-                models.script_head_block.Head.ArmorH:remove()
-            end
             models.script_head_block.Head.HeadRing:setRot()
             models.script_head_block.Head.HeadRing:setLight(15)
             for _, modelPart in ipairs({models.script_head_block.Head.FaceParts.Eyes.EyeRight, models.script_head_block.Head.FaceParts.Eyes.EyeLeft}) do
@@ -52,6 +55,9 @@ HeadBlock = {
         end
 
         --非表示にしたモデルを元に戻す。
+        if isHelmetVisible then
+            Armor:setHelmet(Armor.ArmorSlotItemsPrev[1])
+        end
         for index, modelPart in ipairs(BlueArchiveCharacter.HEAD_BLOCK.excludeModels) do
             if excludeModelsVisibleList[index] then
                 modelPart:setVisible(true)

@@ -54,7 +54,6 @@ DeathAnimation = {
             armorVisible[index] = visible
         end
         if armorVisible[1] then
-
             Armor:setHelmet(world.newItem("minecraft:air"))
         end
         if armorVisible[2] then

@@ -7,6 +7,12 @@ Portrait = {
             models.script_portrait.Head:remove()
         end
 
+        --ヘルメットを着けている場合は外しておく。
+        local isHelmetVisible = Armor.ArmorVisible[1]
+        if isHelmetVisible then
+            Armor:setHelmet(world.newItem("minecraft:air"))
+        end
+
         --頭ブロックから除外するモデルパーツを予め非表示にする。
         local excludeModelsVisibleList = {}
         for index, modelPart in ipairs(BlueArchiveCharacter.PORTRAIT.excludeModels) do
@@ -26,9 +32,6 @@ Portrait = {
             models.script_portrait:addChild(copiedPart)
             models.script_portrait.Head:setParentType("Portrait")
             models.script_portrait.Head:setPos(0, -24, 0)
-            if models.script_portrait.Head.ArmorH ~= nil then
-                models.script_portrait.Head.ArmorH:remove()
-            end
             models.script_portrait.Head.HeadRing:remove()
             for _, modelPart in ipairs({models.script_portrait.Head.FaceParts.Eyes.EyeRight, models.script_portrait.Head.FaceParts.Eyes.EyeLeft}) do
                 modelPart:setUVPixels()
@@ -45,6 +48,9 @@ Portrait = {
         end
 
         --非表示にしたモデルを元に戻す。
+        if isHelmetVisible then
+            Armor:setHelmet(Armor.ArmorSlotItemsPrev[1])
+        end
         for index, modelPart in ipairs(BlueArchiveCharacter.PORTRAIT.excludeModels) do
             if excludeModelsVisibleList[index] then
                 modelPart:setVisible(true)
