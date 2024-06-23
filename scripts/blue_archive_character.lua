@@ -892,15 +892,25 @@ BlueArchiveCharacter = {
                         shotSound()
                         potBreak(models.models.ex_skill_2.Covers.CoverBack4.DecoratedPod3)
                         models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:setVisible(false)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 0)
                     elseif tick == 50 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor4)
                         shotSound()
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                     elseif tick == 52 then
                         bulletParticle(models.models.ex_skill_2.Wall.Paintings.MainPainting.ExSkill2ParticleAnchor5)
                         shotSound()
                     elseif tick == 55 then
                         bulletParticle(models.models.ex_skill_2.Wall.ExSkill2ParticleAnchor6)
                         shotSound()
+                    elseif tick == 60 then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(0, 16)
                     elseif tick == 68 then
                         bulletParticle(models.models.ex_skill_2.Wall.ExSkill2ParticleAnchor7)
                         shotSound()
@@ -909,9 +919,15 @@ BlueArchiveCharacter = {
                         shotSound()
                         potBreak(models.models.ex_skill_2.Covers.CoverBack1.DecoratedPod2)
                         models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2:setVisible(false)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 0)
                     elseif tick == 72 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
                         shotSound()
+                    elseif tick == 73 then
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                     elseif tick == 80 then
                         FaceParts:setEmotion("SURPLISED", "SURPLISED", "SHOCK", 35, true)
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor10)
@@ -1045,6 +1061,13 @@ BlueArchiveCharacter = {
                         end
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2}) do
                             modelPart:setVisible(true)
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(0, 16)
+                        if forcedStop then
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                         end
                         events.RENDER:remove("ex_skill_2_render")
                     end
