@@ -10,10 +10,11 @@ ModelUtils = {
 
     ---モデルパーツをディープコピーする。非表示のモデルパーツはコピーしない。
     ---@param modelPart ModelPart コピーするモデルパーツ
+    ---@param name? string コピーしたモデルパーツの名前。省略した際はコピー元と同じ名前になる。
     ---@return ModelPart? copiedModelPart コピーされたモデルパーツ。入力されたモデルパーツが非表示の場合はnilが返る。
-    copyModel = function (self, modelPart)
+    copyModel = function (self, modelPart, name)
         if modelPart:getVisible() then
-            local copy = modelPart:copy(modelPart:getName())
+            local copy = modelPart:copy(name ~= nil and name or modelPart:getName())
             copy:setParentType("None")
             for _, child in ipairs(copy:getChildren()) do
                 copy:removeChild(child)
