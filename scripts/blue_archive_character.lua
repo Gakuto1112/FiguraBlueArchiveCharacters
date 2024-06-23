@@ -1405,13 +1405,13 @@ BlueArchiveCharacter = {
                     if type == "GOOD" then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "FUN", duration, true)
                     elseif type == "HEART" then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "OPENED", duration, true)
-                    elseif type == "NOTE" then
                         FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "OPENED", duration, true)
+                    elseif type == "NOTE" then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "SMILE", duration, true)
                     elseif type == "QUESTION" then
                         FaceParts:setEmotion("SURPLISED", "SURPLISED", "SHOCK", duration, true)
                     elseif type == "SWEAT" then
-                        FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", duration, true)
+                        FaceParts:setEmotion("ANGRY", "ANGRY2", "ANGRY", duration, true)
                     end
                 end
             end,
