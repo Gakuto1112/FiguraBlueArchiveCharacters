@@ -2,7 +2,7 @@
 DeathAnimation = {
     ---デバッグモードを有効にするかどうか。デバッグモードモードではxキーでフェーズ1のモデルを、cキーでフェーズ2のモデルを表示できる。
     ---@type boolean
-    DEBUG_MODE = false,
+    DEBUG_MODE = true,
 
     ---死亡アニメーションに使用されるダミーのアバターのルート。アバターが未生成の場合はnilが入っている。
     ---@type ModelPart?
@@ -49,6 +49,23 @@ DeathAnimation = {
     ---@param self DeathAnimation
     ---@param parent ModelPart ダミーアバターをアタッチする親のモデルパーツ
     generateDummyAvatar = function (self, parent)
+        local armorVisible = {}
+        for index, visible in ipairs(Armor.ArmorVisible) do
+            armorVisible[index] = visible
+        end
+        if armorVisible[1] then
+
+            Armor:setHelmet(world.newItem("minecraft:air"))
+        end
+        if armorVisible[2] then
+            Armor:setChestPlate(world.newItem("minecraft:air"))
+        end
+        if armorVisible[3] then
+            Armor:setLeggings(world.newItem("minecraft:air"))
+        end
+        if armorVisible[4] then
+            Armor:setBoots(world.newItem("minecraft:air"))
+        end
         local excludeModelsVisibleList = {}
         for index, modelPart in ipairs(BlueArchiveCharacter.DEATH_ANIMATION.excludeModels) do
             excludeModelsVisibleList[index] = modelPart:getVisible()
@@ -80,6 +97,18 @@ DeathAnimation = {
             end
         end
 
+        if armorVisible[1] then
+            Armor:setHelmet(Armor.ArmorSlotItemsPrev[1])
+        end
+        if armorVisible[2] then
+            Armor:setChestPlate(Armor.ArmorSlotItemsPrev[2])
+        end
+        if armorVisible[3] then
+            Armor:setLeggings(Armor.ArmorSlotItemsPrev[3])
+        end
+        if armorVisible[4] then
+            Armor:setBoots(Armor.ArmorSlotItemsPrev[4])
+        end
         for index, modelPart in ipairs(BlueArchiveCharacter.DEATH_ANIMATION.excludeModels) do
             if excludeModelsVisibleList[index] then
                 modelPart:setVisible(true)
