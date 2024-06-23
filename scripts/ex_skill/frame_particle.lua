@@ -32,7 +32,7 @@ FrameParticle = {
         instance.render = function (self)
             local fps = client:getFPS()
             if self.velocity ~= vectors.vec2(0, 0) then
-                self.particle:setPos(self.particle:getPos():add(self.velocity:augmented(0):scale(-1 / fps)))
+                self.particle:setPos(self.particle:getPos():add(self.velocity:augmented(100):scale(-1 / fps)))
             end
             self.particle:setScale(vectors.vec3(1, 1, 1):scale(1 - self.counter))
             instance.counter = math.min(self.counter + 4 / fps , 1)

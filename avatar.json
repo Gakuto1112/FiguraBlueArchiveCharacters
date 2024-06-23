@@ -10,7 +10,12 @@
 		"textures.for_modeling.leather_layer_2",
 		"textures.for_modeling.leather_layer_2_overlay",
 		"textures.for_modeling.trim",
-		"textures.for_modeling.trim_leggings"
+		"textures.for_modeling.trim_leggings",
+		"textures.for_modeling.pillager",
+		"textures.for_modeling.decorated_pot_base",
+		"textures.for_modeling.decorated_pot_side",
+		"textures.for_modeling.pointer",
+		"textures.for_modeling.back"
 	],
 	"autoScripts": [
 		"scripts/index.lua"
@@ -177,10 +182,36 @@
 		"models.models.ex_skill_1.Gui.TextAnchor": {
 			"visible": false
 		},
-		"models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator.MomoiPaperDoll.MomoiPaperDollHead.MomoiPaperDollFaceParts.DeadEye": {
+		"models.models.ex_skill_2" : {
+			"visible": false
+		},
+		"models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects" : {
+			"parentType": "Camera",
+			"primaryRenderType": "EMISSIVE_SOLID"
+		},
+		"models.models.ex_skill_2.Gui" : {
+			"visible": false
+		},
+		"models.models.ex_skill_2.Gui.Reticule" : {
 			"visible": false
 		},
 		"models.models.ex_skill_frame.Particles": {
+			"visible": false
+		},
+		"models.models.costume_maid.CMaidH": {
+			"moveTo": "models.models.main.Avatar.Head",
+			"visible": false
+		},
+		"models.models.costume_maid.CMaidB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Body",
+			"visible": false
+		},
+		"models.models.costume_maid.CMaidRAB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom",
+			"visible": false
+		},
+		"models.models.costume_maid.CMaidLAB": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom",
 			"visible": false
 		},
 		"models.models.bubble.Camera.AvatarBubble": {
