@@ -1001,6 +1001,17 @@ BlueArchiveCharacter = {
                         sounds:playSound("minecraft:entity.pillager.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
                     elseif tick == 138 then
                         sounds:playSound("minecraft:entity.zombie.attack_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.05, 2)
+                    elseif tick == 148 and host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.ex_skill_2.Gui.TransitionFilter:setScale(windowSize.x, windowSize.y, 0)
+                        models.models.ex_skill_2.Gui.TransitionFilter:setVisible(true)
+                        events.RENDER:register(function (delta)
+                            if ExSkill.AnimationCount <= 151 then
+                                models.models.ex_skill_2.Gui.TransitionFilter:setOpacity((ExSkill.AnimationCount - 149 + delta) * 0.3333)
+                            else
+                                models.models.ex_skill_2.Gui.TransitionFilter:setOpacity((ExSkill.AnimationCount - 152 + delta) * -0.3333 + 1)
+                            end
+                        end, "ex_skill_2_transition_filter_render")
                     elseif tick == 151 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
                         models.models.ex_skill_2.Wall.SpecialItemGroup:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
@@ -1010,6 +1021,10 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 154 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "TRIANGLE", 2, true)
+                        if host:isHost() then
+                            events.RENDER:remove("ex_skill_2_transition_filter_render")
+                            models.models.ex_skill_2.Gui.TransitionFilter:setVisible(false)
+                        end
                     elseif tick == 156 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 7, true)
                     elseif tick == 163 then
@@ -1100,8 +1115,10 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Gui.UI.MidoriUI:getTask("ex_skill_2_reload_text"):setVisible(false)
                         if forcedStop then
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
+                            for _, event in ipairs({"ex_skill_2_render", "ex_skill_2_transition_filter_render"}) do
+                                events.RENDER:remove(event)
+                            end
                         end
-                        events.RENDER:remove("ex_skill_2_render")
                     end
                 end,
 
