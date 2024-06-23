@@ -1189,6 +1189,7 @@ BlueArchiveCharacter = {
                         end
                         models.models.ex_skill_2.Gui.UI.MidoriUI:getTask("ex_skill_2_reload_text"):setVisible(false)
                         if forcedStop then
+                            models.models.ex_skill_2.Gui.TransitionFilter:setVisible(false)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                             for _, event in ipairs({"ex_skill_2_render", "ex_skill_2_transition_filter_render"}) do
                                 events.RENDER:remove(event)
