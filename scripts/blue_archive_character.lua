@@ -895,6 +895,11 @@ BlueArchiveCharacter = {
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0.1, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
                         end
+                        local muzzleAnchorPos =  ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.Gun.MuzzleAnchor)
+
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:smoke", muzzleAnchorPos)
+                        end
                     end
 
                     ---射撃音を再生する。
