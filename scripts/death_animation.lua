@@ -206,6 +206,8 @@ DeathAnimation = {
                     if BlueArchiveCharacter.DEATH_ANIMATION.onPhase2 ~= nil then
                         BlueArchiveCharacter.DEATH_ANIMATION.onPhase2(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar, self.CostumeIndex)
                     end
+                elseif self.AnimationCount == 180 then
+                    models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar:setVisible(false)
                 elseif self.AnimationCount == 230 then
                     sounds:playSound("minecraft:block.iron_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 elseif self.AnimationCount == 255 then
