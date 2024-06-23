@@ -824,6 +824,14 @@ BlueArchiveCharacter = {
                     models.models.ex_skill_2.Wall.SpecialItemGroup.GlowEffects:setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor)
                     local paintingResources = {"minecraft:textures/painting/pointer.png", "minecraft:textures/painting/pigscene.png", "minecraft:textures/painting/burning_skull.png"}
                     models.models.ex_skill_2.Wall.Paintings.MainPainting.Painting_Front:setPrimaryTexture("RESOURCE", paintingResources[math.ceil(math.random() * #paintingResources)])
+                    ---@diagnostic disable-next-line: discard-returns
+                    models.models.ex_skill_2.Covers.CoverBack4:newPart("MissText", "Camera")
+                    models.models.ex_skill_2.Covers.CoverBack4.MissText:setOffsetPivot(8, 24, 8)
+                    BlueArchiveCharacter.EX_SKILL_2_MISS_TEXT_1 = ExSkill2TextAnimation.new(models.models.ex_skill_2.Covers.CoverBack4.MissText)
+                    ---@diagnostic disable-next-line: discard-returns
+                    models.models.ex_skill_2.Covers.CoverBack1:newPart("MissText", "Camera")
+                    models.models.ex_skill_2.Covers.CoverBack1.MissText:setOffsetPivot(8, 24, 8)
+                    BlueArchiveCharacter.EX_SKILL_2_MISS_TEXT_2 = ExSkill2TextAnimation.new(models.models.ex_skill_2.Covers.CoverBack1.MissText)
                     FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "OPENED", 4, true)
                 end,
 
@@ -899,6 +907,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet23:setColor()
+                        BlueArchiveCharacter.EX_SKILL_2_MISS_TEXT_1:play()
                     elseif tick == 50 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor4)
                         shotSound()
@@ -928,6 +937,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 0)
+                        BlueArchiveCharacter.EX_SKILL_2_MISS_TEXT_2:play()
                     elseif tick == 72 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9)
                         shotSound()
