@@ -147,10 +147,10 @@ Physics = {
                             if physicData.x.horizontal.bodyRot then
                                 rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.horizontal.bodyRot.multiplayer, physicData.x.horizontal.bodyRot.min - physicData.x.horizontal.neutral, physicData.x.horizontal.bodyRot.max - physicData.x.horizontal.neutral)
                             end
-                            rotX = math.clamp(rotX, physicData.x.horizontal.min, physicData.x.horizontal.max)
                             if physicData.x.horizontal.headRotMultiplayer then
                                 rotX = rotX + headRot * physicData.x.horizontal.headRotMultiplayer
                             end
+                            rotX = math.clamp(rotX, physicData.x.horizontal.min, physicData.x.horizontal.max)
                             if isSneaking and physicData.x.horizontal.sneakOffset then
                                 rotX = rotX + physicData.x.horizontal.sneakOffset
                             end
@@ -177,10 +177,10 @@ Physics = {
                             if physicData.x.vertical.bodyRot then
                                 rotX = rotX + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.x.vertical.bodyRot.multiplayer, physicData.x.vertical.bodyRot.min - physicData.x.vertical.neutral, physicData.x.vertical.bodyRot.max - physicData.x.vertical.neutral)
                             end
-                            rotX = math.clamp(rotX, physicData.x.vertical.min, physicData.x.vertical.max)
                             if physicData.x.vertical.headRotMultiplayer then
                                 rotX = rotX + headRot * physicData.x.vertical.headRotMultiplayer
                             end
+                            rotX = math.clamp(rotX, physicData.x.vertical.min, physicData.x.vertical.max)
                             if isSneaking and physicData.x.vertical.sneakOffset then
                                 rotX = rotX + physicData.x.vertical.sneakOffset
                             end
@@ -211,10 +211,10 @@ Physics = {
                             if physicData.y.horizontal.bodyRot then
                                 rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.horizontal.bodyRot.multiplayer, physicData.y.horizontal.bodyRot.min - physicData.y.horizontal.neutral, physicData.y.horizontal.bodyRot.max - physicData.y.horizontal.neutral)
                             end
-                            rotY = math.clamp(rotY, physicData.y.horizontal.min, physicData.y.horizontal.max)
                             if physicData.y.horizontal.headRotMultiplayer then
                                 rotY = rotY + headRot * physicData.y.horizontal.headRotMultiplayer
                             end
+                            rotY = math.clamp(rotY, physicData.y.horizontal.min, physicData.y.horizontal.max)
                             if isSneaking and physicData.y.horizontal.sneakOffset then
                                 rotY = rotY + physicData.y.horizontal.sneakOffset
                             end
@@ -241,10 +241,10 @@ Physics = {
                             if physicData.y.vertical.bodyRot then
                                 rotY = rotY + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.y.vertical.bodyRot.multiplayer, physicData.y.vertical.bodyRot.min - physicData.y.vertical.neutral, physicData.y.vertical.bodyRot.max - physicData.y.vertical.neutral)
                             end
-                            rotY = math.clamp(rotY, physicData.y.vertical.min, physicData.y.vertical.max)
                             if physicData.y.vertical.headRotMultiplayer then
                                 rotY = rotY + headRot * physicData.y.vertical.headRotMultiplayer
                             end
+                            rotY = math.clamp(rotY, physicData.y.vertical.min, physicData.y.vertical.max)
                             if isSneaking and physicData.y.vertical.sneakOffset then
                                 rotY = rotY + physicData.y.vertical.sneakOffset
                             end
@@ -275,10 +275,10 @@ Physics = {
                             if physicData.z.horizontal.bodyRot then
                                 rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.horizontal.bodyRot.multiplayer, physicData.z.horizontal.bodyRot.min - physicData.z.horizontal.neutral, physicData.z.horizontal.bodyRot.max - physicData.z.horizontal.neutral)
                             end
-                            rotZ = math.clamp(rotZ, physicData.z.horizontal.min, physicData.z.horizontal.max)
                             if physicData.z.horizontal.headRotMultiplayer then
                                 rotZ = rotZ + headRot * physicData.z.horizontal.headRotMultiplayer
                             end
+                            rotZ = math.clamp(rotZ, physicData.z.horizontal.min, physicData.z.horizontal.max)
                             if isSneaking and physicData.z.horizontal.sneakOffset then
                                 rotZ = rotZ + physicData.z.horizontal.sneakOffset
                             end
@@ -305,10 +305,10 @@ Physics = {
                             if physicData.z.vertical.bodyRot then
                                 rotZ = rotZ + math.clamp(-math.abs(Physics.VelocityAverage[7]) * physicData.z.vertical.bodyRot.multiplayer, physicData.z.vertical.bodyRot.min - physicData.z.vertical.neutral, physicData.z.vertical.bodyRot.max - physicData.z.vertical.neutral)
                             end
-                            rotZ = math.clamp(rotZ, physicData.z.vertical.min, physicData.z.vertical.max)
                             if physicData.z.vertical.headRotMultiplayer then
                                 rotZ = rotZ + headRot * physicData.z.vertical.headRotMultiplayer
                             end
+                            rotZ = math.clamp(rotZ, physicData.z.vertical.min, physicData.z.vertical.max)
                             if isSneaking and physicData.z.vertical.sneakOffset then
                                 rotZ = rotZ + physicData.z.vertical.sneakOffset
                             end
