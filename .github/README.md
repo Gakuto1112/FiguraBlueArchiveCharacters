@@ -26,7 +26,6 @@ The avatars for these characters are completed. Click on a character's name to g
 ### In progress
 The avatars for these characters are worked in progress. It usually takes about 2~3 weeks, but works have been delayed because of my recently busy schedule. Click on the link in brackets to go to the issue about the character, where you can check the progress.
 
-- Momoi Saiba (maid) ([#51](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/51))
 - Midori Saiba (maid) ([#52](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/52))
 
 ### Planned
