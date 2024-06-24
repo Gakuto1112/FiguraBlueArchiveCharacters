@@ -80,8 +80,8 @@ BlueArchiveCharacter = {
             TIRED = {4, 0},
             CLOSED = {3, 0},
             ANXIOUS = {5, 0},
-            CLOSED2 = {0, 1},
-            STARE = {2, 1}
+            CLOSED2 = {7, 0},
+            STARE = {9, 0}
         },
 
         ---左目
@@ -91,24 +91,24 @@ BlueArchiveCharacter = {
             TIRED = {3, 0},
             CLOSED = {2, 0},
             ANXIOUS = {5, 0},
-            CLOSED2 = {-1, 1},
-            STARE = {2, 1},
-            STARE2 = {0, 1},
+            CLOSED2 = {6, 0},
+            STARE = {9, 0},
+            STARE2 = {7, 0},
         },
 
         ---口
         Mouth = {
-            NORMAL = {1, 0},
+            NORMAL = {3, 0},
             FRUST = {2, 0},
-            ANXIOUS = {3, 0},
+            ANXIOUS = {1, 0},
             NORMAL2 = {4, 0},
-            SMILE = {5, 0},
-            SHOCK = {3, -1},
+            SMILE = {0, 0},
+            SHOCK = {0, 1},
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
         ---@type number
-        MouthResolutionMultiplayer = 2,
+        MouthResolutionMultiplayer = 4,
 
         ---表情のセット（省略可）
         FacePartsSets = {
@@ -746,11 +746,9 @@ BlueArchiveCharacter = {
             onPlay = function(type, duration, showInGui)
                 if duration > 0 then
                     if type == "GOOD" then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED", duration, true)
-                        models.models.main.Avatar.Head.FaceParts.Mouth2:setVisible(true)
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", duration, true)
                     elseif type == "HEART" then
-                        FaceParts:setEmotion("CLOSED", "CLOSED", "CLOSED", duration, true)
-                        models.models.main.Avatar.Head.FaceParts.Mouth2:setVisible(true)
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", duration, true)
                     elseif type == "NOTE" then
                         FaceParts:setEmotion("STARE", "STARE2", "NORMAL2", duration, true)
                     elseif type == "QUESTION" then
@@ -769,7 +767,6 @@ BlueArchiveCharacter = {
                 if forcedStop then
                     FaceParts:resetEmotion()
                 end
-                models.models.main.Avatar.Head.FaceParts.Mouth2:setVisible(false)
             end
         }
     },
@@ -782,7 +779,7 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {models.models.main.Avatar.Head.FaceParts.Mouth2}
+        excludeModels = {}
 
         --[[
         ---モデルのコピー直前に実行される関数（省略可）
@@ -805,7 +802,7 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {models.models.main.Avatar.Head.FaceParts.Mouth2, models.models.main.Avatar.Head.Phone}
+        excludeModels = {models.models.main.Avatar.Head.Phone}
 
         --[[
         ---モデルのコピー直前に実行される関数（省略可）
@@ -824,7 +821,7 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {models.models.main.Avatar.Head.FaceParts.Mouth2},
+        excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param dummyAvatar ModelPart ダミーアバターのルート
