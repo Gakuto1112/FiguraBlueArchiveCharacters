@@ -482,7 +482,7 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels(12, 0)
                         end
-                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(8, 0)
+                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
                     elseif tick == 15 then
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "NORMAL", 22, true)
                     elseif tick == 22 then
@@ -542,7 +542,7 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels()
                         end
-                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 11, true)
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[8]:play()
                         local playerPos = player:getPos()
@@ -570,7 +570,7 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels(24, 0)
                         end
-                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(24, 0)
+                        models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(48, 0)
                     elseif tick == 64 then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1:setVisible(false)
                         models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm)
