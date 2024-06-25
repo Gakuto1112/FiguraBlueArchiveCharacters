@@ -505,18 +505,6 @@ BlueArchiveCharacter = {
                     if host:isHost() then
                         models.models.ex_skill_1.Gui.UI.MidoriUI:setPos(client:getScaledWindowSize().x * -1 + 220, 0, 0)
                     end
-
-                    --[[
-                    FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 15, true)
-                    if host:isHost() then
-                        local windowSize = client:getScaledWindowSize()
-                        models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator:setPos(windowSize.x * -1 + 4, 0)
-                        local scale = vectors.vec3(1, 1, 0):scale(windowSize.x * 0.45 / 223):add(0, 0, 1)
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MomoiDamageIndicator, models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator}) do
-                            modelPart:setScale(scale)
-                        end
-                    end
-                    ]]
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
