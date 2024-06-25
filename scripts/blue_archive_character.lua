@@ -465,10 +465,10 @@ BlueArchiveCharacter = {
                 preAnimation = function()
                     if not BlueArchiveCharacter.EX_SKILL[1].isPrepared then
                         models.models.ex_skill_1.Midori.MidoriUpperBody.MidoriArms.MidoriLeftArm.MidoriLeftArmBottom.GameConsole2:addChild(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.GameConsole1:copy("GameConsole2"))
-                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")}
+                        BlueArchiveCharacter.ExSkill1TextAnimations = {ExSkillTextAnimation.new("damage_indicator_1", "4"), ExSkillTextAnimation.new("damage_indicator_2", "3"), ExSkillTextAnimation.new("damage_indicator_3", "5")}
                         if host:isHost() then
-                            BlueArchiveCharacter.EX_SKILL_1_KO = models.models.ex_skill_1.Gui.UI:newText("ex_skill_1_ko"):setText("§cK.O."):setScale(1.5, 1.5, 1.5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.33, 0, 0):setVisible(false)
-                            BlueArchiveCharacter.Ex_SKILL_1_TEXT = models.models.ex_skill_1.Gui.TextAnchor:newText("ex_skill_1:text"):setText("§d§lMOMOI"):setScale(4, 4, 4):setAlignment("RIGHT"):setOutline(true):setOutlineColor(1, 1, 1)
+                            models.models.ex_skill_1.Gui.UI:newText("ex_skill_1_ko"):setText("§cK.O."):setScale(1.5, 1.5, 1.5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.33, 0, 0):setVisible(false)
+                            models.models.ex_skill_1.Gui.TextAnchor:newText("ex_skill_1:text"):setText("§d§lMOMOI"):setScale(4, 4, 4):setAlignment("RIGHT"):setOutline(true):setOutlineColor(1, 1, 1)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.Background:setColor(0.71, 0.082, 0.067)
                             for _, modelPart in ipairs({models.models.ex_skill_1.Gui.UI.MomoiUI.YellowBar, models.models.ex_skill_1.Gui.UI.MomoiUI.RedBar}) do
                                 modelPart:setPrimaryRenderType("EMISSIVE_SOLID")
@@ -476,7 +476,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.UI.MomoiUI:newText("ex_skill_1_momoi_name"):setText("§d§lMOMOI"):setPos(130, 13, 0):setScale(1.5, 1.5, 1.5):setOutline(true):setOutlineColor(1, 1, 1)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setScale(2.3, 2.3, 2.3)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:addChild(ModelUtils:copyModel(models.script_head_block.Head, "MomoiPaperDollHead"))
-                            models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead:setPos(models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:getPivot():add(0, -24, 0))
+                            models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead:setPos(models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:getTruePivot():add(0, -24, 0))
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.HeadRing:setPrimaryRenderType("CUTOUT_EMISSIVE_SOLID")
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts:addChild(models.models.main.Avatar.Head.FaceParts.Mouth:copy("Mouth"))
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 16)
@@ -490,26 +490,27 @@ BlueArchiveCharacter = {
                                 modelPart:setVisible(true)
                             end
                             models.models.ex_skill_1.Gui.UI.MidoriUI.Frame:setRot(0, 180, 0)
-                            models.models.ex_skill_1.Gui.UI.MidoriUI.Background:setPos(-139.5, 0, 62)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.Background:setPos(-139.5, 0, 0)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.Background:setColor(0.098, 0.2, 0.686)
-                            models.models.ex_skill_1.Gui.UI.MidoriUI.YellowBar:setPos(36, 0, 55)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.YellowBar:setPos(36, 0, 0)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.YellowBar:setOffsetPivot(-135, 0, 0)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.YellowBar:setScale(0.7, 1, 1)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.YellowBar:setPrimaryRenderType("EMISSIVE_SOLID")
                             models.models.ex_skill_1.Gui.UI.MidoriUI.RedBar:remove()
                             models.models.ex_skill_1.Gui.UI.MidoriPaperDollBody:moveTo(models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll)
-                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setPos(0, 0, 126)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollBody:setPos(-139, 0, 0)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setPos(0, 0, 0)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setRot(0, -15, 0)
-                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setOffsetPivot(114, -0.25, 0)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setOffsetPivot(-139, 0, 0)
                             models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:addChild(ModelUtils:copyModel(models.models.ex_skill_1.Midori.MidoriHead, "MidoriPaperDollHead"))
-                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead:setPos(models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:getPivot():add(0, -24, 0))
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead:setPos(models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:getTruePivot():add(0, -24, 0))
                             models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.MidoriHeadRing:setPrimaryRenderType("CUTOUT_EMISSIVE_SOLID")
                             models.models.ex_skill_1.Gui.UI.MidoriUI:newText("ex_skill_1_midori_name"):setText("§a§lMIDORI"):setPos(48, 13, 0):setScale(1.5, 1.5, 1.5):setOutline(true):setOutlineColor(1, 1, 1):setAlignment("RIGHT")
                         end
                         BlueArchiveCharacter.EX_SKILL[1].isPrepared = true
                     end
                     if host:isHost() then
-                        models.models.ex_skill_1.Gui.UI.MidoriUI:setPos(client:getScaledWindowSize().x * -1 + 220, 0, -56)
+                        models.models.ex_skill_1.Gui.UI.MidoriUI:setPos(client:getScaledWindowSize().x * -1 + 220, 0, 0)
                     end
                 end,
 
@@ -531,7 +532,7 @@ BlueArchiveCharacter = {
                     elseif tick == 16 then
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 24, true)
                     elseif tick == 24 then
-                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
+                        BlueArchiveCharacter.ExSkill1TextAnimations[1]:play()
                         sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setColor(1, 0.75, 0.75)
@@ -546,7 +547,7 @@ BlueArchiveCharacter = {
                         end
                         models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 16)
                     elseif tick == 31 then
-                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
+                        BlueArchiveCharacter.ExSkill1TextAnimations[2]:play()
                         sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setColor(1, 0.75, 0.75)
@@ -561,7 +562,7 @@ BlueArchiveCharacter = {
                         end
                         models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 16)
                     elseif tick == 36 then
-                        BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
+                        BlueArchiveCharacter.ExSkill1TextAnimations[3]:play()
                         local playerPos = player:getPos()
                         sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
                         sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
@@ -570,11 +571,12 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Eyes:setVisible(false)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 8)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.DeadEye:setVisible(true)
-                            BlueArchiveCharacter.EX_SKILL_1_KO:setPos(client:getScaledWindowSize().x / 2 * -1, -12, -30)
-                            BlueArchiveCharacter.EX_SKILL_1_KO:setVisible(true)
+                            local task = models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko")
+                            task:setPos(client:getScaledWindowSize().x / 2 * -1, -12, -30)
+                            task:setVisible(true)
                             events.RENDER:register(function (delta)
                                 local count = ExSkill.AnimationCount - 37 + delta
-                                BlueArchiveCharacter.EX_SKILL_1_KO:setScale(vectors.vec3(1, 1, 1):scale(count <= 1.5 and (-1.667 * count + 5) or (count + 1)))
+                                task:setScale(vectors.vec3(1, 1, 1):scale(count <= 1.5 and (-1.667 * count + 5) or (count + 1)))
                             end, "ex_skill_1_ko_render")
                         end
                     elseif tick == 38 then
@@ -582,7 +584,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
                         if host:isHost() then
                             events.RENDER:remove("ex_skill_1_ko_render")
-                            BlueArchiveCharacter.EX_SKILL_1_KO:setScale(3, 3, 3)
+                            models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko"):setScale(3, 3, 3)
                         end
                     elseif tick == 40 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "ANXIOUS", 3, true)
@@ -629,7 +631,7 @@ BlueArchiveCharacter = {
                     end
                     if forcedStop then
                         for i = 1, 3 do
-                            BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[i]:stop()
+                            BlueArchiveCharacter.ExSkill1TextAnimations[i]:stop()
                         end
                     end
                     if host:isHost() then
@@ -641,7 +643,7 @@ BlueArchiveCharacter = {
                         end
                         models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 16)
                         models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setColor()
-                        BlueArchiveCharacter.EX_SKILL_1_KO:setVisible(false)
+                        models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko"):setVisible(false)
                         for _, eventName in ipairs ({"ex_skill_1_text_render", "ex_skill_1_ko_render"}) do
                             events.RENDER:remove(eventName)
                         end
