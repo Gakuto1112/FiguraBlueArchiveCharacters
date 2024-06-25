@@ -651,7 +651,9 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_1.Gui.UI, models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes}) do
                             modelPart:setVisible(true)
                         end
-                        models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.DeadEye:setVisible(false)
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.DeadEye, models.models.ex_skill_1.Gui.TextAnchor}) do
+                            modelPart:setVisible(false)
+                        end
                         models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setColor()
                         models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko"):setVisible(false)
                         for _, modelPart in ipairs({models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight, models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft}) do
