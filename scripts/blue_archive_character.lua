@@ -487,7 +487,6 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Gui.UI.MomoiUI.Background:setPos(139.5, 0, 62)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.Background:setColor(0.71, 0.082, 0.067)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.YellowBar:setPos(-36, 0, 0)
-                            models.models.ex_skill_1.Gui.UI.MomoiUI.YellowBar:setOffsetPivot(135, 0, 0)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.YellowBar:setScale(0.6, 1, 1)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.YellowBar:setPrimaryRenderType("EMISSIVE_SOLID")
                             models.models.ex_skill_1.Gui.UI.MomoiUI.RedBar:remove()
@@ -539,50 +538,31 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "NORMAL", 22, true)
                     elseif tick == 22 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar8:setVisible(false)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll:setColor(1, 0.75, 0.75)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes.EyeLeft:setUVPixels(12, 0)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes.EyeRight:setUVPixels(6, 0)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.Mouth:setUVPixels(24, -4)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(0, 8)
                         end
                     elseif tick == 24 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
-                        if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar7:setVisible(false)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
-                        end
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                     elseif tick == 26 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
-                        if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar6:setVisible(false)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
-                        end
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                     elseif tick == 28 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
-                        if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar5:setVisible(false)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
-                        end
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                     elseif tick == 30 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[5]:play()
-                        if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar4:setVisible(false)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
-                        end
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                     elseif tick == 32 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[6]:play()
-                        if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar3:setVisible(false)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
-                        end
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                     elseif tick == 34 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[7]:play()
-                        if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar2:setVisible(false)
-                            sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
-                        end
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                     elseif tick == 36 then
                         for _, modelPart in ipairs({models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels()
@@ -592,19 +572,24 @@ BlueArchiveCharacter = {
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[8]:play()
                         local playerPos = player:getPos()
                         sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
+                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
                         if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar.HpBar1:setVisible(false)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes:setVisible(false)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.DeadEye:setVisible(true)
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.Mouth:setUVPixels(32, -4)
-                            sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
-                            local koAnimationCount = 0
-                            events.RENDER:register(function ()
-                                koAnimationCount = koAnimationCount + 8 / client.getFPS()
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.DeadEye:setVisible(true)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes:setVisible(false)
+                            models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(16, 8)
+                            local task = models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko")
+                            task:setPos(client:getScaledWindowSize().x / 2 * -1, -12, -30)
+                            task:setVisible(true)
+                            events.RENDER:register(function (delta)
+                                local count = ExSkill.AnimationCount - 37 + delta
+                                task:setScale(vectors.vec3(1, 1, 1):scale(count <= 1.5 and (-1.667 * count + 5) or (count + 1)))
                             end, "ex_skill_1_ko_render")
                         end
                     elseif tick == 37 then
                         models.models.ex_skill_1.Momoi.MomoiUpperBody.MomoiArms.MomoiLeftArm.MomoiLeftArmBottom.GameConsole2:setVisible(false)
+                    elseif tick == 38 and host:isHost() then
+                        events.RENDER:remove("ex_skill_1_ko_render")
+                        models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko"):setScale(3, 3, 3)
                     elseif tick == 47 then
                         FaceParts:setEmotion("STARE", "TIRED", "FRUST", 17, true)
                     elseif tick == 49 then
@@ -620,7 +605,7 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Arms.RightArm.Gun:setVisible(true)
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 8, true)
                         if host:isHost() then
-                            models.models.ex_skill_1.Gui.DamageIndicators:setVisible(false)
+                            models.models.ex_skill_1.Gui.UI:setVisible(false)
                         end
                     elseif tick == 72 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "ANXIOUS", 8, true)
@@ -663,19 +648,16 @@ BlueArchiveCharacter = {
                         end
                     end
                     if host:isHost() then
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators, models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes}) do
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.UI, models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes}) do
                             modelPart:setVisible(true)
                         end
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.DeadEye, models.models.ex_skill_1.Gui.TextAnchor}) do
-                            modelPart:setVisible(false)
-                        end
-                        for i = 1, 8 do
-                            models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriHPBar["HpBar"..i]:setVisible(true)
-                        end
-                        models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll:setColor()
-                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes.EyeLeft, models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.MidoriPaperDollEyes.EyeRight, models.models.ex_skill_1.Gui.DamageIndicators.MidoriDamageIndicator.MidoriPaperDoll.MidoriPaperDollHead.MidoriPaperDollFaceParts.Mouth}) do
+                        models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.DeadEye:setVisible(false)
+                        models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll:setColor()
+                        models.models.ex_skill_1.Gui.UI:getTask("ex_skill_1_ko"):setVisible(false)
+                        for _, modelPart in ipairs({models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight, models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft}) do
                             modelPart:setUVPixels()
                         end
+                        models.models.ex_skill_1.Gui.UI.MidoriUI.PaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 0)
                         for _, eventName in ipairs ({"ex_skill_1_text_render", "ex_skill_1_ko_render"}) do
                             events.RENDER:remove(eventName)
                         end
