@@ -1,5 +1,5 @@
 import fs from "fs";
-import { FileLanguage, ReadmeGenerator } from "C:/Users/gakut/Documents/プログラミング/FiguraAvatarsReadmeTemplate/src/readme_generator";
+import { FileLanguage, ReadmeGenerator } from "../../../generator/src/readme_generator";
 
 /**
  * 作成状況データを示す構造体
@@ -52,7 +52,7 @@ class FBACReadmeGenerator extends ReadmeGenerator {
      * @param repositoryName 対象のレポジトリ名
      */
     constructor(repositoryName: string) {
-        super(repositoryName, "C:/Users/gakut/Documents/プログラミング/FiguraAvatarsReadmeTemplate");
+        super(repositoryName, "../../../generator");
     }
 
     protected onInjectTagFound(tagName: string, fileLanguage: FileLanguage): string {
