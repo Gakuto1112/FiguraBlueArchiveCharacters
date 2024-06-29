@@ -7,7 +7,7 @@
 
 （Minecraft 1.20.4では[Figuraの不具合](https://github.com/FiguraMC/Figura/issues/197)により一部機能が正しく動作しません。Minecraft 1.20.1での利用をお勧めします。）
 
-![サムネイル](../README_images/thumbnail.png)
+![サムネイル](../README_images/thumbnail.jpg)
 
 （上記画像をクリックすると紹介映像が見れます。）
 
