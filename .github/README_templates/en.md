@@ -11,8 +11,6 @@ Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.2
 
 (You can watch the introduction video by clicking the above image.)
 
-**This branch (base) is a generic avatar created to make a new character easily. Please move to a specific character branch from "[Creation status](#creation-status)" section below.**
-
 <!-- $inject(creation_status) -->
 
 ## Features
