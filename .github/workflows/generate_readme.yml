@@ -37,7 +37,7 @@ jobs:
         run: npm install
       - name: Generate readme
         working-directory: ./avatar/.github/readme_generator
-        run: ./node_modules/.bin/ts-node ./src/fbac_readme_generator.ts ./ ${REPOSITORY_NAME}
+        run: ./node_modules/.bin/ts-node ./src/fbac_readme_generator.ts ../ ${REPOSITORY_NAME}
         env:
           REPOSITORY_NAME: ${{ github.repository }}
       - id: check_diff

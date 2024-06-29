@@ -1,5 +1,5 @@
 import fs from "fs";
-import { FileLanguage, ReadmeGenerator } from "../../../generator/src/readme_generator";
+import { FileLanguage, ReadmeGenerator } from "../../../../generator/src/readme_generator";
 
 /**
  * 作成状況データを示す構造体
@@ -58,10 +58,10 @@ class FBACReadmeGenerator extends ReadmeGenerator {
     protected onInjectTagFound(tagName: string, fileLanguage: FileLanguage): string {
         let text: string = super.onInjectTagFound(tagName, fileLanguage);
         if(tagName == "creation_status" && this.caches[`${tagName}_${fileLanguage}`] == undefined) {
-            if(fs.existsSync("./readme_generator/src/creation_status.json")) {
+            if(fs.existsSync("./src/creation_status.json")) {
                 try {
-                    let characterData: CreationStatusData = JSON.parse(fs.readFileSync("./readme_generator/src/creation_status.json", {encoding: "utf-8"}));
-                    if(fs.existsSync(`./README_templates/creation_status/done/${fileLanguage}.md`)) text = fs.readFileSync(`./README_templates/creation_status/done/${fileLanguage}.md`, {encoding: "utf-8"});
+                    let characterData: CreationStatusData = JSON.parse(fs.readFileSync("./src/creation_status.json", {encoding: "utf-8"}));
+                    if(fs.existsSync(`../README_templates/creation_status/done/${fileLanguage}.md`)) text = fs.readFileSync(`../README_templates/creation_status/done/${fileLanguage}.md`, {encoding: "utf-8"});
                     else text = `<!-- ERROR: "creation_status/done/${fileLanguage}.md" doesn't exist -->\n`;
                     text += "\n";
                     if(characterData.done.length > 0) {
@@ -78,8 +78,9 @@ class FBACReadmeGenerator extends ReadmeGenerator {
                     }
                     else text += `${fileLanguage == "en" ? "(There is no character available now.)" : "（現在利用可能なキャラクターはいません。）"}\n`;
                     text += "\n";
-                    if(fs.existsSync(`./README_templates/creation_status/in_progress/${fileLanguage}.md`)) text += fs.readFileSync(`./README_templates/creation_status/in_progress/${fileLanguage}.md`, {encoding: "utf-8"});
-                    else text = `<!-- ERROR: "creation_status/in_progress/${fileLanguage}.md" doesn't exist -->\n`;
+                    if(fs.existsSync(`../README_templates/creation_status/in_progress/${fileLanguage}.md`)) text += fs.readFileSync(`../README_templates/creation_status/in_progress/${fileLanguage}.md`, {encoding: "utf-8"});
+                    else text += `<!-- ERROR: "creation_status/in_progress/${fileLanguage}.md" doesn't exist -->\n`;
+                    text += "\n";
                     if(characterData.in_progress.length > 0) {
                         characterData.in_progress.forEach((character: CharacterData) => {
                             switch(fileLanguage) {
@@ -94,8 +95,8 @@ class FBACReadmeGenerator extends ReadmeGenerator {
                     }
                     else text += `${fileLanguage == "en" ? "(There is no avatar currently being created.)" : "（現在作成中のアバターはありません。）"}\n`;
                     text += "\n";
-                    if(fs.existsSync(`./README_templates/creation_status/planned/${fileLanguage}.md`)) text += fs.readFileSync(`./README_templates/creation_status/planned/${fileLanguage}.md`, {encoding: "utf-8"});
-                    else text = `<!-- ERROR: "creation_status/planned/${fileLanguage}.md" doesn't exist -->\n`;
+                    if(fs.existsSync(`../README_templates/creation_status/planned/${fileLanguage}.md`)) text += fs.readFileSync(`../README_templates/creation_status/planned/${fileLanguage}.md`, {encoding: "utf-8"});
+                    else text += `<!-- ERROR: "creation_status/planned/${fileLanguage}.md" doesn't exist -->\n`;
                     text += "\n";
                     if(characterData.planned.length > 0) {
                         characterData.planned.forEach((character: CharacterData) => {
