@@ -68,10 +68,10 @@ class FBACReadmeGenerator extends ReadmeGenerator {
                         characterData.done.forEach((character: CharacterData) => {
                             switch(fileLanguage) {
                                 case "en":
-                                    text += `- [${character.character_name.first_name.en} ${character.character_name.last_name.en}${character.costume_name != null ? ` (${character.costume_name.en})` : ""}](https://github.com/${this.RepositoryName}/tree/${character.character_name.first_name.en})\n`;
+                                    text += `- ${character.character_name.first_name.en} ${character.character_name.last_name.en}${character.costume_name != null ? ` (${character.costume_name.en})` : ""}\n`;
                                     break;
                                 case "jp":
-                                    text += `- [${character.character_name.last_name.jp}${character.character_name.first_name.jp}${character.costume_name != null ? `（${character.costume_name.jp}）` : ""}](https://github.com/${this.RepositoryName}/tree/${character.character_name.first_name.en})\n`;
+                                    text += `- ${character.character_name.last_name.jp}${character.character_name.first_name.jp}${character.costume_name != null ? `（${character.costume_name.jp}）` : ""}\n`;
                                     break;
                             }
                         });
