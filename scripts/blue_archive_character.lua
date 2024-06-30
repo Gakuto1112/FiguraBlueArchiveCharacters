@@ -731,6 +731,10 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setPos()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setRot()
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(true)
+                    for _, modelPart in ipairs({models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight}) do
+                        modelPart:setUVPixels(12, 0)
+                    end
+
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -747,7 +751,9 @@ BlueArchiveCharacter = {
                     end
                     ]]
 
-                    if tick == 155 then
+                    if tick == 13 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(18, 0)
+                    elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                     end
                 end,
@@ -762,6 +768,9 @@ BlueArchiveCharacter = {
                     elseif models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun:setVisible(false)
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
+                    for _, modelPart in ipairs({models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth}) do
+                        modelPart:setUVPixels()
                     end
                 end,
 
