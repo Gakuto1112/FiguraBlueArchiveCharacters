@@ -683,7 +683,7 @@ BlueArchiveCharacter = {
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main", "ex_skill_2"},
+			animations = {"main", "ex_skill_2", "costume_maid", "gun"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
@@ -726,6 +726,11 @@ BlueArchiveCharacter = {
                 preAnimation = function()
                     --デバッグ用
                     --models.models.main.Avatar:setVisible(false)
+
+                    models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setPos()
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setRot()
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(true)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -741,12 +746,23 @@ BlueArchiveCharacter = {
                         end
                     end
                     ]]
+
+                    if tick == 155 then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postAnimation = function(forcedStop)
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    elseif models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
