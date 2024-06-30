@@ -81,7 +81,8 @@ BlueArchiveCharacter = {
             CLOSED = {3, 0},
             ANXIOUS = {5, 0},
             CLOSED2 = {7, 0},
-            STARE = {9, 0}
+            STARE = {9, 0},
+            INVERTED = {12, 0}
         },
 
         ---左目
@@ -94,6 +95,7 @@ BlueArchiveCharacter = {
             CLOSED2 = {6, 0},
             STARE = {9, 0},
             STARE2 = {7, 0},
+            CENTER = {10, 0}
         },
 
         ---口
@@ -104,6 +106,8 @@ BlueArchiveCharacter = {
             NORMAL2 = {4, 0},
             SMILE = {0, 0},
             SHOCK = {0, 1},
+            TRIANGLE = {2, 1},
+            SMILE_SMALL = {3, 1}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
@@ -733,7 +737,7 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(true)
                     models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                     models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(12, 0)
-
+                    FaceParts:setEmotion("NORMAL", "CENTER", "NORMAL", 16, true)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -743,7 +747,7 @@ BlueArchiveCharacter = {
                     --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
                     --"<>"内を適切な値で置換すること。
                     --[[
-                    if tick == 1000 then
+                    if tick == 179 then
                         for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[2].animations) do
                             animations["models."..animation]["ex_skill_"..2]:pause()
                         end
@@ -753,8 +757,24 @@ BlueArchiveCharacter = {
                     if tick == 13 then
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(24, 0)
+                    elseif tick == 16 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 14, true)
+                    elseif tick == 30 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 125, true)
                     elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    elseif tick == 155 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 2, true)
+                    elseif tick == 157 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 3, true)
+                    elseif tick == 160 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 7, true)
+                    elseif tick == 167 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 2, true)
+                    elseif tick == 169 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 9, true)
+                    elseif tick == 178 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", 25, true)
                     end
                 end,
 
