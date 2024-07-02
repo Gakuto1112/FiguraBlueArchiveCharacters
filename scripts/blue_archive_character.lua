@@ -935,7 +935,7 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "SMILE", 11, true)
                     elseif tick == 25 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "SMILE", 22, true)
-                    elseif  tick == 28 then
+                    elseif tick == 28 and host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         local centerX = windowSize.x / 2 * -1
                         local centerY = windowSize.y / 2 * -1
