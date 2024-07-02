@@ -746,25 +746,41 @@ BlueArchiveCharacter = {
                 animationTick = function(tick)
                     --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
                     --"<>"内を適切な値で置換すること。
-                    --[[
-                    if tick == 179 then
+                    if tick == 1000 then
                         for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[2].animations) do
                             animations["models."..animation]["ex_skill_"..2]:pause()
                         end
                     end
-                    ]]
 
                     if tick == 13 then
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(24, 0)
                     elseif tick == 16 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 14, true)
+                    elseif tick == 27 and host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        local centerX = windowSize.x / 2 * -1
+                        local centerY = windowSize.y / 2 * -1
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticuleAnchor, models.models.ex_skill_2.Gui.Reticules.MidoriReticuleAnchor}) do
+                            modelPart:setPos(centerX, centerY, 0)
+                        end
+                        models.models.ex_skill_2.Gui.Reticules:setVisible(true)
+                        events.RENDER:register(function ()
+                            models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MomoiReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
+                            models.models.ex_skill_2.Gui.Reticules.MidoriReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MidoriReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
+                        end, "ex_skill_2_render")
                     elseif tick == 30 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 125, true)
+                    elseif tick == 81 and host:isHost() then
+                        models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setVisible(false)
                     elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                     elseif tick == 155 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 2, true)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.Reticules:setVisible(false)
+                            events.RENDER:remove("ex_skill_2_render")
+                        end
                     elseif tick == 157 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 3, true)
                     elseif tick == 160 then
@@ -791,6 +807,13 @@ BlueArchiveCharacter = {
                     end
                     for _, modelPart in ipairs({models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth}) do
                         modelPart:setUVPixels()
+                    end
+                    if host:isHost() then
+                        models.models.ex_skill_2.Gui.Reticules:setVisible(false)
+                        models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setVisible(true)
+                        if forcedStop then
+                            events.RENDER:remove("ex_skill_2_render")
+                        end
                     end
                 end,
 
