@@ -20,6 +20,11 @@
 ---| "STRIKER" ストライカー（前衛）
 ---| "SPECIAL" スペシャル（後方支援）
 
+---Exスキル2において射撃を行った人を指定するタイプ
+---@alias BlueArchiveCharacter.ExSkill2ShotByType
+---| "MOMOI" モモイが撃った
+---| "MIDORI" ミドリが撃った
+
 ---@class BlueArchiveCharacter （今後別のキャラを作る時に備えて、）キャラクター変数を保持するクラス。別のキャラクターに対してもここを変更するだけで対応できるようにする。
 BlueArchiveCharacter = {
 	---生徒の基本情報（氏名、誕生日等）
@@ -752,6 +757,29 @@ BlueArchiveCharacter = {
                         end
                     end
 
+                    ---銃弾のパーティクルを出す。
+                    ---@param anchor ModelPart パーティクルを出す場所を示すアンカーポイント
+                    ---@param offsetRotX number パーティクルの射出方向のX軸オフセット値
+                    ---@param offsetRotY number パーティクルの射出方向のY軸オフセット値
+                    ---@param whoShot BlueArchiveCharacter.ExSkill2ShotByType 射撃した人を指定する。
+                    local function bulletParticle(anchor, offsetRotX, offsetRotY, whoShot)
+                        local anchorPos = ModelUtils.getModelWorldPos(anchor)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity( vectors.rotateAroundAxis(bodyYaw * -1 + offsetRotY, vectors.rotateAroundAxis(offsetRotX, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0.1, 1, 0, 0), 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
+                        end
+                        local muzzleAnchorPos =  ModelUtils.getModelWorldPos(whoShot == "MIDORI" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun.MuzzleAnchor or models.models.ex_skill_2.Momoi.MomoiUpperBody.MomoiArms.MomoiRightArm.MomoiRightArmBottom.Gun.MuzzleAnchor)
+
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:smoke", muzzleAnchorPos)
+                        end
+                    end
+
+                    ---射撃音を再生する。
+                    local function shotSound()
+                        sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
+                    end
+
                     if tick == 13 then
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(24, 0)
@@ -771,8 +799,32 @@ BlueArchiveCharacter = {
                         end, "ex_skill_2_render")
                     elseif tick == 30 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 125, true)
+                    elseif tick == 37 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor1, 0, 90, "MOMOI")
+                        shotSound()
+                    elseif tick == 41 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor2, 0, 90, "MOMOI")
+                        shotSound()
+                    elseif tick == 49 then
+                        bulletParticle(models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.ExSkill2ParticleAnchor5, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
+                    elseif tick == 61 then
+                        bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor3, -90, 0, "MOMOI")
+                        shotSound()
+                    elseif tick == 74 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor6, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
+                    elseif tick == 76 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor4, 0, 0, "MOMOI")
+                        shotSound()
                     elseif tick == 81 and host:isHost() then
                         models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setVisible(false)
+                    elseif tick == 93 then
+                        bulletParticle(models.models.ex_skill_2.Pillagers.Pillager2.Pillager2Body.ExSkill2ParticleAnchor7, 0, 0, "MIDORI")
+                        shotSound()
+                    elseif tick == 111 then
+                        bulletParticle(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3Body.ExSkill2ParticleAnchor8, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
                     elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                     elseif tick == 155 then
