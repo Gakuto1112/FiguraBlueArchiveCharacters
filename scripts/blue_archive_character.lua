@@ -745,6 +745,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setPos(-36, 15, 0)
                             models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setRot(0, 90, 0)
                             models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setScale(1.67, 1.67, 1.67)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setPrimaryRenderType("CUTOUT")
                             for i = 2, 3 do
                                 local icon = models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:copy("LifeIcon"..i)
                                 models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(icon)
@@ -781,9 +782,10 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setColor(0, 0, 0)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.Background:setColor(1, 0.643, 0.71)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Momoi.MomoiHead, "MomoiPaperDollHead"))
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setScale(4.1, 4.1, 4.1)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setPrimaryRenderType("CUTOUT")
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead:setPos(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:getTruePivot():add(-64, -24, 0))
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiHeadRing:setPrimaryRenderType("CUTOUT_EMISSIVE_SOLID")
-                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setScale(4.1, 4.1, 4.1)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts:addChild(models.models.main.Avatar.Head.FaceParts.Mouth:copy("Mouth"))
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setVisible(true)
@@ -798,14 +800,19 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setScale(4.1, 4.1, 4.1)
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setOffsetPivot(33.25, 12.5, 16)
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setRot(0, -15, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setPrimaryRenderType("CUTOUT")
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:addChild(ModelUtils:copyModel(models.script_head_block.Head, "MidoriPaperDollHead"))
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts:addChild(models.models.main.Avatar.Head.FaceParts.Mouth:copy("Mouth"))
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(0, 0)
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setVisible(true)
-                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead:setPrimaryRenderType("CUTOUT")
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead:setPos(models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:getTruePivot():add(0, -24, 0))
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.HeadRing:setPrimaryRenderType("CUTOUT_EMISSIVE_SOLID")
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody, "MidoriPaperDollBody"))
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.ClearEffect.Background, models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar}) do
+                                modelPart:setVisible(false)
+                            end
+                            models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_1"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08):setVisible(false)
+                            models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_2"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setVisible(false)
                             --models.models.ex_skill_2.Gui:setParentType("World")
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
@@ -827,6 +834,8 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffect:setPos(models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffectAnchor:getAnimPos().x * windowHalfX + windowHalfX, 0, 0)
                             models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setOpacity(models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffectAnchor:getAnimPos().x * -1)
                         end, "ex_skill_2_damege_effect_render")
+                        models.models.ex_skill_2.Gui.UI.ClearEffect:setPos(windowsSize.x / -2, windowsSize.y / -2, 0)
+                        models.models.ex_skill_2.Gui.UI.ClearEffect.Background:setScale(windowsSize.x, windowsSize.y, 1)
                         models.models.ex_skill_2.Gui.UI:setVisible(true)
                     end
                     models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
@@ -1005,6 +1014,29 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(18, 0)
                         models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(12, 0)
                         models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 8)
+                    elseif tick == 130 and host:isHost() then
+                        models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setVisible(true)
+                        local task = models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_2")
+                        task:setVisible(true)
+                        events.RENDER:register(function (delta)
+                            local count = ExSkill.AnimationCount - 130 + delta
+                            local scale = count <= 2 and (count * -7.5 + 20) or (count <= 4 and (count * 7.5 - 10) or 20)
+                            task:setPos(0, scale * 3.5, 0)
+                            task:setScale(vectors.vec3(1, 1, 1):scale(scale))
+                            ---@diagnostic disable-next-line: undefined-field
+                            task:setOpacity((15 - (scale - 5)) / 15)
+                            if count >= 1 then
+                                local windowSize = client:getScaledWindowSize()
+                                models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setScale(windowSize.x, math.max(count * -40 + 120, 0), 1)
+                            end
+                        end, "ex_skill_2_clear_effect_render")
+                    elseif tick == 131 and host:isHost() then
+                        for _ = 1, 16 do
+                            ExSkill2Particles:spawn()
+                        end
+                    elseif tick == 132 then
+                        models.models.ex_skill_2.Gui.UI.ClearEffect.Background:setVisible(true)
+                        models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_1"):setVisible(true)
                     elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                     elseif tick == 155 then
@@ -1013,7 +1045,7 @@ BlueArchiveCharacter = {
                             for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
                                 modelPart:setVisible(false)
                             end
-                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render"}) do
+                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render", "ex_skill_2_clear_effect_render"}) do
                                 events.RENDER:remove(eventName)
                             end
                         end
@@ -1048,7 +1080,9 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
                             modelPart:setVisible(true)
                         end
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye:setVisible(false)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye, models.models.ex_skill_2.Gui.UI.ClearEffect.Background, models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar}) do
+                            modelPart:setVisible(false)
+                        end
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth}) do
                             modelPart:setUVPixels()
                         end
@@ -1062,12 +1096,15 @@ BlueArchiveCharacter = {
                         for i = 19, 20 do
                             models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets["BulletM"..i]:setColor(0.5, 0.5, 0.5)
                         end
+                        for i = 1, 2 do
+                            models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_"..i):setVisible(false)
+                        end
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setVisible(false)
                         if forcedStop then
                             for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
                                 modelPart:setVisible(false)
                             end
-                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render"}) do
+                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render", "ex_skill_2_clear_effect_render"}) do
                                 events.RENDER:remove(eventName)
                             end
                         end
