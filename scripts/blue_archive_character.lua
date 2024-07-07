@@ -818,6 +818,16 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Gui.UI.MidoriUI:setPos(windowsSize.x * -1 + 10, (windowsSize.y - 20) * -1, 0)
                         models.models.ex_skill_2.Gui.UI.MidoriHeadUI:setPos(windowsSize.x * -1 + 88, 0, 0)
                         models.models.ex_skill_2.Gui.UI.MidoriHeadUI:setOffsetPivot(windowsSize.x * -1 + 88, 0, 0)
+                        models.models.ex_skill_2.Gui.UI.DamageEffect:setPos(windowsSize.x * -0.5, 0, 0)
+                        models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setPrimaryTexture("RESOURCE", "minecraft:textures/block/destroy_stage_9.png")
+                        models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffect:setScale(windowsSize.x / 12, windowsSize.y, 1)
+                        models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setScale(vectors.vec3(1, 1, 1):scale(windowsSize.y / 16))
+                        events.RENDER:register(function ()
+                            local windowHalfX = windowsSize.x / 2
+                            models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffect:setPos(models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffectAnchor:getAnimPos().x * windowHalfX + windowHalfX, 0, 0)
+                            models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setOpacity(models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffectAnchor:getAnimPos().x * -1)
+                        end, "ex_skill_2_damege_effect_render")
+                        models.models.ex_skill_2.Gui.UI:setVisible(true)
                     end
                     models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setPos()
@@ -825,7 +835,6 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(true)
                     models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                     models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(12, 0)
-                    models.models.ex_skill_2.Gui.UI:setVisible(true)
                     FaceParts:setEmotion("NORMAL", "CENTER", "NORMAL", 16, true)
                 end,
 
@@ -880,7 +889,7 @@ BlueArchiveCharacter = {
                         events.RENDER:register(function ()
                             models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MomoiReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
                             models.models.ex_skill_2.Gui.Reticules.MidoriReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MidoriReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
-                        end, "ex_skill_2_render")
+                        end, "ex_skill_2_reticule_render")
                     elseif tick == 30 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 125, true)
                     elseif tick == 37 then
@@ -1004,7 +1013,9 @@ BlueArchiveCharacter = {
                             for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
                                 modelPart:setVisible(false)
                             end
-                            events.RENDER:remove("ex_skill_2_render")
+                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render"}) do
+                                events.RENDER:remove(eventName)
+                            end
                         end
                     elseif tick == 157 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 3, true)
@@ -1056,7 +1067,9 @@ BlueArchiveCharacter = {
                             for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
                                 modelPart:setVisible(false)
                             end
-                            events.RENDER:remove("ex_skill_2_render")
+                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render"}) do
+                                events.RENDER:remove(eventName)
+                            end
                         end
                     end
                 end,
