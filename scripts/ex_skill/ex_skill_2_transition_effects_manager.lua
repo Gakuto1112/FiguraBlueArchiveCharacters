@@ -39,17 +39,23 @@ ExSkill2TransitionEffectsManager = {
     ---@param self ExSkill2TransitionEffectsManager
     play = function (self)
         local spriteDimension = client:getScaledWindowSize():scale(1 / 50):ceil()
-        local count = 0
+        local linesPerTick = (spriteDimension.x + spriteDimension.y - 1) / 10
+        local targetLine = 0
+        local currentLine = 0
         events.TICK:register(function ()
-            for i = 0, math.max(math.min(count, spriteDimension.x - count - 1), spriteDimension.y - 1) do
-                if count - i >= 0 and count - i <= spriteDimension.x - 1 then
-                    self:spawn(vectors.vec2(count - i, i))
+            while currentLine <= targetLine do
+                for i = 0, math.max(math.min(currentLine, spriteDimension.x - currentLine - 1), spriteDimension.y - 1) do
+                    if currentLine - i >= 0 and currentLine - i <= spriteDimension.x - 1 then
+                        self:spawn(vectors.vec2(currentLine - i, i))
+                    end
+                end
+                currentLine = currentLine + 1
+                if currentLine == spriteDimension.x + spriteDimension.y - 1 then
+                    events.TICK:remove("ex_skill_2_transition_manager_tick")
+                    break
                 end
             end
-            count = count + 1
-            if count == spriteDimension.x + spriteDimension.y - 1 then
-                events.TICK:remove("ex_skill_2_transition_manager_tick")
-            end
+            targetLine = targetLine + linesPerTick
         end, "ex_skill_2_transition_manager_tick")
     end
 }
