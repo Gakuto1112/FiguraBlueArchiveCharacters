@@ -687,7 +687,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.ex_skill_2},
+			models = {models.models.ex_skill_2, models.models.main.Avatar.UpperBody.Body.GlowEffects},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -814,6 +814,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_1"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08):setVisible(false)
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_2"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setVisible(false)
                             models.models.ex_skill_2.Gui.MVP.LowerMVP:newText("ex_skill_2_mvp_text"):setText("§e§lMVP"):setPos(0, 17.5, -1):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08)
+                            models.models.main.Avatar.UpperBody.Body.GlowEffects:setColor(1, 0.984, 0.4)
                             --models.models.ex_skill_2.Gui:setParentType("World")
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
