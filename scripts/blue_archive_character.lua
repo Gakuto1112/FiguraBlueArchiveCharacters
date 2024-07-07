@@ -813,6 +813,7 @@ BlueArchiveCharacter = {
                             end
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_1"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08):setVisible(false)
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_2"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setVisible(false)
+                            models.models.ex_skill_2.Gui.MVP.LowerMVP:newText("ex_skill_2_mvp_text"):setText("§e§lMVP"):setPos(0, 17.5, -1):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08)
                             --models.models.ex_skill_2.Gui:setParentType("World")
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
@@ -1051,6 +1052,15 @@ BlueArchiveCharacter = {
                                 events.RENDER:remove(eventName)
                             end
                         end
+                    elseif tick == 156 and host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.ex_skill_2.Gui.MVP:setPos(windowSize.x / 2 * -1, 0, 0)
+                        models.models.ex_skill_2.Gui.MVP.LowerMVP:setPos(0, (windowSize.y - 35) * -1, 0)
+                        models.models.ex_skill_2.Gui.MVP.UpperMVP.UpperMVPBar:setScale(windowSize.x, 1, 1)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.MVP.LowerMVP.LowerRightMVPBar, models.models.ex_skill_2.Gui.MVP.LowerMVP.LowerLeftMVPBar}) do
+                            modelPart:setScale(windowSize.x / 2, 1, 1)
+                        end
+                        models.models.ex_skill_2.Gui.MVP:setVisible(true)
                     elseif tick == 157 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 3, true)
                     elseif tick == 160 then
@@ -1082,7 +1092,7 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
                             modelPart:setVisible(true)
                         end
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye, models.models.ex_skill_2.Gui.UI.ClearEffect.Background, models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar}) do
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye, models.models.ex_skill_2.Gui.UI.ClearEffect.Background, models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar, models.models.ex_skill_2.Gui.MVP}) do
                             modelPart:setVisible(false)
                         end
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth}) do
