@@ -1037,6 +1037,8 @@ BlueArchiveCharacter = {
                     elseif tick == 132 then
                         models.models.ex_skill_2.Gui.UI.ClearEffect.Background:setVisible(true)
                         models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_1"):setVisible(true)
+                    elseif tick == 148 then
+                        ExSkill2TransitionEffectsManager:play()
                     elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                     elseif tick == 155 then
