@@ -17,7 +17,7 @@ ExSkill2TransitionEffectsManager = {
             events.TICK:register(function ()
                 for index, sprite in ipairs(self.Sprites) do
                     sprite:onTick()
-                    if sprite.count == 13 then
+                    if sprite.count == 14 then
                         sprite:onDeinit()
                         table.remove(self.Sprites, index)
                         if #self.Sprites == 0 then
