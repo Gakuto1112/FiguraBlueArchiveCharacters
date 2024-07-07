@@ -787,6 +787,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts:addChild(models.models.main.Avatar.Head.FaceParts.Mouth:copy("Mouth"))
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:newText("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER"):setPos(32, -5, 0):setWidth(64):setAlignment("CENTER"):setScale(2, 2, 2):setShadow(true):setVisible(false)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setVisible(false)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setVisible(true)
                             models.models.ex_skill_2.Gui.UI:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Gui.UI.MomoiHeadUI, "MidoriHeadUI"))
@@ -960,12 +961,34 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI}) do
                             modelPart:setColor(0.25, 0.25, 0.25)
                         end
+                        local task = models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text")
+                        ---@diagnostic disable-next-line: undefined-field
+                        task:setText("§c§lGAME\nOVER")
+                        task:setVisible(true)
+                    elseif tick == 83 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
+                    elseif tick == 85 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER")
+                    elseif tick == 87 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
+                    elseif tick == 89 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER")
+                    elseif tick == 92 then
+                        sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.749154)
                     elseif tick == 93 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager2.Pillager2Body.ExSkill2ParticleAnchor7, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets.BulletM19:setColor()
                         end
+                    elseif tick == 94 then
+                        sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.667420)
+                    elseif tick == 96 then
+                        sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.594604)
                     elseif tick == 111 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3Body.ExSkill2ParticleAnchor8, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
@@ -1028,6 +1051,7 @@ BlueArchiveCharacter = {
                         for i = 19, 20 do
                             models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets["BulletM"..i]:setColor(0.5, 0.5, 0.5)
                         end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setVisible(false)
                         if forcedStop then
                             for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
                                 modelPart:setVisible(false)
