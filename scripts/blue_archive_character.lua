@@ -885,29 +885,94 @@ BlueArchiveCharacter = {
                     elseif tick == 37 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor1, 0, 90, "MOMOI")
                         shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet24:setColor()
+                        end
+                    elseif tick == 39 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9, 0, 90, "MOMOI")
+                        shotSound()
                     elseif tick == 41 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor2, 0, 90, "MOMOI")
                         shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet23:setColor()
+                        end
+                    elseif tick == 48 and host:isHost() then
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:setVisible(false)
                     elseif tick == 49 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.ExSkill2ParticleAnchor5, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets.BulletM20:setColor()
+                        end
+                    elseif tick == 54 and host:isHost() then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                     elseif tick == 61 then
                         bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor3, -90, 0, "MOMOI")
                         shotSound()
+                    elseif tick == 63 then
+                        bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor10, -90, 0, "MOMOI")
+                        shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet22:setColor()
+                        end
+                    elseif tick == 65 then
+                        bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor11, -90, 0, "MOMOI")
+                        shotSound()
+                    elseif tick == 70 and host:isHost() then
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                        models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2:setVisible(false)
+                    elseif tick == 73 and host:isHost() then
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                     elseif tick == 74 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor12, 0, -90, "MOMOI")
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor6, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet21:setColor()
+                        end
                     elseif tick == 76 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor4, 0, 0, "MOMOI")
                         shotSound()
+                    elseif tick == 78 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor13, 0, -90, "MOMOI")
+                        shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet20:setColor()
+                        end
                     elseif tick == 81 and host:isHost() then
-                        models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setVisible(false)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
+                            modelPart:setVisible(false)
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye:setVisible(true)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(48, 0)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI}) do
+                            modelPart:setColor(0.25, 0.25, 0.25)
+                        end
                     elseif tick == 93 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager2.Pillager2Body.ExSkill2ParticleAnchor7, 0, 0, "MIDORI")
-                        shotSound()
+                        shotSound() --ミドリの射撃音
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets.BulletM19:setColor()
+                        end
                     elseif tick == 111 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3Body.ExSkill2ParticleAnchor8, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
+                    elseif tick == 125 then
+                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(18, 0)
+                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 8)
                     elseif tick == 154 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
                     elseif tick == 155 then
@@ -946,7 +1011,23 @@ BlueArchiveCharacter = {
                         modelPart:setUVPixels()
                     end
                     if host:isHost() then
-                        models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setVisible(true)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
+                            modelPart:setVisible(true)
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye:setVisible(false)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI, }) do
+                            modelPart:setColor()
+                        end
+                        for i = 20, 24 do
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets["Bullet"..i]:setColor(0.5, 0.5, 0.5)
+                        end
+                        for i = 19, 20 do
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets["BulletM"..i]:setColor(0.5, 0.5, 0.5)
+                        end
                         if forcedStop then
                             for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
                                 modelPart:setVisible(false)
