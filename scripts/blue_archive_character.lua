@@ -1072,6 +1072,7 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 9, true)
                     elseif tick == 178 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", 25, true)
+                        Bubble:play("V", 24, false, true)
                     end
                 end,
 
