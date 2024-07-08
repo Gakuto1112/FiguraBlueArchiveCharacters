@@ -397,766 +397,6 @@
 			"uuid": "6134fd96-5993-85bb-30ca-4fb03b0c481a"
 		},
 		{
-			"name": "PillagerHead",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 24, -4],
-			"to": [4, 34, 4],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"faces": {
-				"north": {
-					"uv": [8, 8, 16, 18],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 8, 8, 18],
-					"texture": 0
-				},
-				"south": {
-					"uv": [24, 8, 32, 18],
-					"texture": 0
-				},
-				"west": {
-					"uv": [16, 8, 24, 18],
-					"texture": 0
-				},
-				"up": {
-					"uv": [16, 8, 8, 0],
-					"texture": 0
-				},
-				"down": {
-					"uv": [24, 0, 16, 8],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "7df59063-5145-66a1-0746-dfa0c1dd5d34"
-		},
-		{
-			"name": "Sunglasses",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 27, -4],
-			"to": [4, 28.25, 4],
-			"autouv": 0,
-			"color": 0,
-			"inflate": 0.5,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [8, 0, 16, 2],
-					"texture": 1
-				},
-				"east": {
-					"uv": [0, 0, 8, 2],
-					"texture": 1
-				},
-				"south": {
-					"uv": [0, 0, 0, 0],
-					"texture": 1
-				},
-				"west": {
-					"uv": [8, 0, 0, 2],
-					"texture": 1
-				},
-				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": 1
-				},
-				"down": {
-					"uv": [0, 0, 0, 0],
-					"texture": 1
-				}
-			},
-			"type": "cube",
-			"uuid": "a675e46f-be49-48dd-8e24-85c15af1385d"
-		},
-		{
-			"name": "PillagerNose",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-1, 23, -6],
-			"to": [1, 27, -4],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [24, 0],
-			"faces": {
-				"north": {
-					"uv": [26, 2, 28, 6],
-					"texture": 0
-				},
-				"east": {
-					"uv": [24, 2, 26, 6],
-					"texture": 0
-				},
-				"south": {
-					"uv": [30, 2, 32, 6],
-					"texture": 0
-				},
-				"west": {
-					"uv": [28, 2, 30, 6],
-					"texture": 0
-				},
-				"up": {
-					"uv": [28, 2, 26, 0],
-					"texture": 0
-				},
-				"down": {
-					"uv": [30, 0, 28, 2],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "85348280-688e-2268-96bb-637d31bdce7c"
-		},
-		{
-			"name": "PillagerBody",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -3],
-			"to": [4, 24, 3],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [16, 20],
-			"faces": {
-				"north": {
-					"uv": [22, 26, 30, 38],
-					"texture": 0
-				},
-				"east": {
-					"uv": [16, 26, 22, 38],
-					"texture": 0
-				},
-				"south": {
-					"uv": [36, 26, 44, 38],
-					"texture": 0
-				},
-				"west": {
-					"uv": [30, 26, 36, 38],
-					"texture": 0
-				},
-				"up": {
-					"uv": [30, 26, 22, 20],
-					"texture": 0
-				},
-				"down": {
-					"uv": [38, 20, 30, 26],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "def2196f-b130-f23e-55c3-41e88cd49d90"
-		},
-		{
-			"name": "PillagerLayer",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 6, -3],
-			"to": [4, 24, 3],
-			"autouv": 0,
-			"color": 0,
-			"inflate": 0.5,
-			"origin": [0, 0, 0],
-			"uv_offset": [0, 38],
-			"faces": {
-				"north": {
-					"uv": [6, 44, 14, 62],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 44, 6, 62],
-					"texture": 0
-				},
-				"south": {
-					"uv": [20, 44, 28, 62],
-					"texture": 0
-				},
-				"west": {
-					"uv": [14, 44, 20, 62],
-					"texture": 0
-				},
-				"up": {
-					"uv": [14, 44, 6, 38],
-					"texture": 0
-				},
-				"down": {
-					"uv": [22, 38, 14, 44],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "00f51cda-b169-40a0-7b3b-43902807252d"
-		},
-		{
-			"name": "PillagerRightArm",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [4, 12, -2],
-			"to": [8, 24, 2],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [40, 46],
-			"faces": {
-				"north": {
-					"uv": [44, 50, 48, 62],
-					"texture": 0
-				},
-				"east": {
-					"uv": [40, 50, 44, 62],
-					"texture": 0
-				},
-				"south": {
-					"uv": [52, 50, 56, 62],
-					"texture": 0
-				},
-				"west": {
-					"uv": [48, 50, 52, 62],
-					"texture": 0
-				},
-				"up": {
-					"uv": [48, 50, 44, 46],
-					"texture": 0
-				},
-				"down": {
-					"uv": [52, 46, 48, 50],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "36f00d9a-e25f-35dc-5f69-fc4dddff2dba"
-		},
-		{
-			"name": "PillagerLeftArm",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-8, 12, -2],
-			"to": [-4, 24, 2],
-			"autouv": 0,
-			"color": 0,
-			"mirror_uv": true,
-			"origin": [0, 0, 0],
-			"uv_offset": [40, 46],
-			"faces": {
-				"north": {
-					"uv": [48, 50, 44, 62],
-					"texture": 0
-				},
-				"east": {
-					"uv": [52, 50, 48, 62],
-					"texture": 0
-				},
-				"south": {
-					"uv": [56, 50, 52, 62],
-					"texture": 0
-				},
-				"west": {
-					"uv": [44, 50, 40, 62],
-					"texture": 0
-				},
-				"up": {
-					"uv": [44, 50, 48, 46],
-					"texture": 0
-				},
-				"down": {
-					"uv": [48, 46, 52, 50],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "6a38420f-95c5-ead0-1b45-5e4f094e9ada"
-		},
-		{
-			"name": "PillagerLeftLeg",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 0, -2],
-			"to": [0, 12, 2],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [0, 22],
-			"faces": {
-				"north": {
-					"uv": [4, 26, 8, 38],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 26, 4, 38],
-					"texture": 0
-				},
-				"south": {
-					"uv": [12, 26, 16, 38],
-					"texture": 0
-				},
-				"west": {
-					"uv": [8, 26, 12, 38],
-					"texture": 0
-				},
-				"up": {
-					"uv": [8, 26, 4, 22],
-					"texture": 0
-				},
-				"down": {
-					"uv": [12, 22, 8, 26],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "fdb22fa7-f143-8e5f-850e-9f38f96dde9c"
-		},
-		{
-			"name": "PillagerRightLeg",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [0, 0, -2],
-			"to": [4, 12, 2],
-			"autouv": 0,
-			"color": 0,
-			"mirror_uv": true,
-			"origin": [0, 0, 0],
-			"uv_offset": [0, 22],
-			"faces": {
-				"north": {
-					"uv": [8, 26, 4, 38],
-					"texture": 0
-				},
-				"east": {
-					"uv": [12, 26, 8, 38],
-					"texture": 0
-				},
-				"south": {
-					"uv": [16, 26, 12, 38],
-					"texture": 0
-				},
-				"west": {
-					"uv": [4, 26, 0, 38],
-					"texture": 0
-				},
-				"up": {
-					"uv": [4, 26, 8, 22],
-					"texture": 0
-				},
-				"down": {
-					"uv": [8, 22, 12, 26],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "87d706c1-c9c5-4d83-630c-305b207ade4f"
-		},
-		{
-			"name": "PillagerHead",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 24, -4],
-			"to": [4, 34, 4],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"faces": {
-				"north": {
-					"uv": [8, 8, 16, 18],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 8, 8, 18],
-					"texture": 0
-				},
-				"south": {
-					"uv": [24, 8, 32, 18],
-					"texture": 0
-				},
-				"west": {
-					"uv": [16, 8, 24, 18],
-					"texture": 0
-				},
-				"up": {
-					"uv": [16, 8, 8, 0],
-					"texture": 0
-				},
-				"down": {
-					"uv": [24, 0, 16, 8],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "fd248e5e-2962-4b00-e7e3-b10f65a1e06a"
-		},
-		{
-			"name": "Sunglasses",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 27, -4],
-			"to": [4, 28.25, 4],
-			"autouv": 0,
-			"color": 0,
-			"inflate": 0.5,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [8, 0, 16, 2],
-					"texture": 1
-				},
-				"east": {
-					"uv": [0, 0, 8, 2],
-					"texture": 1
-				},
-				"south": {
-					"uv": [0, 0, 0, 0],
-					"texture": 1
-				},
-				"west": {
-					"uv": [8, 0, 0, 2],
-					"texture": 1
-				},
-				"up": {
-					"uv": [0, 0, 0, 0],
-					"texture": 1
-				},
-				"down": {
-					"uv": [0, 0, 0, 0],
-					"texture": 1
-				}
-			},
-			"type": "cube",
-			"uuid": "4bf74a37-1e45-5e98-2c3c-613a907a6ead"
-		},
-		{
-			"name": "PillagerNose",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-1, 23, -6],
-			"to": [1, 27, -4],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [24, 0],
-			"faces": {
-				"north": {
-					"uv": [26, 2, 28, 6],
-					"texture": 0
-				},
-				"east": {
-					"uv": [24, 2, 26, 6],
-					"texture": 0
-				},
-				"south": {
-					"uv": [30, 2, 32, 6],
-					"texture": 0
-				},
-				"west": {
-					"uv": [28, 2, 30, 6],
-					"texture": 0
-				},
-				"up": {
-					"uv": [28, 2, 26, 0],
-					"texture": 0
-				},
-				"down": {
-					"uv": [30, 0, 28, 2],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "4b00afc0-c51d-8de0-8af4-a0d9ddae433f"
-		},
-		{
-			"name": "PillagerBody",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -3],
-			"to": [4, 24, 3],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [16, 20],
-			"faces": {
-				"north": {
-					"uv": [22, 26, 30, 38],
-					"texture": 0
-				},
-				"east": {
-					"uv": [16, 26, 22, 38],
-					"texture": 0
-				},
-				"south": {
-					"uv": [36, 26, 44, 38],
-					"texture": 0
-				},
-				"west": {
-					"uv": [30, 26, 36, 38],
-					"texture": 0
-				},
-				"up": {
-					"uv": [30, 26, 22, 20],
-					"texture": 0
-				},
-				"down": {
-					"uv": [38, 20, 30, 26],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "a0a3512e-952f-36db-e0f3-baf69309b3ec"
-		},
-		{
-			"name": "PillagerLayer",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 6, -3],
-			"to": [4, 24, 3],
-			"autouv": 0,
-			"color": 0,
-			"inflate": 0.5,
-			"origin": [0, 0, 0],
-			"uv_offset": [0, 38],
-			"faces": {
-				"north": {
-					"uv": [6, 44, 14, 62],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 44, 6, 62],
-					"texture": 0
-				},
-				"south": {
-					"uv": [20, 44, 28, 62],
-					"texture": 0
-				},
-				"west": {
-					"uv": [14, 44, 20, 62],
-					"texture": 0
-				},
-				"up": {
-					"uv": [14, 44, 6, 38],
-					"texture": 0
-				},
-				"down": {
-					"uv": [22, 38, 14, 44],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "f9b3de78-1ab4-0c92-68a8-2ed9cb1246af"
-		},
-		{
-			"name": "PillagerRightArm",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [4, 12, -2],
-			"to": [8, 24, 2],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [40, 46],
-			"faces": {
-				"north": {
-					"uv": [44, 50, 48, 62],
-					"texture": 0
-				},
-				"east": {
-					"uv": [40, 50, 44, 62],
-					"texture": 0
-				},
-				"south": {
-					"uv": [52, 50, 56, 62],
-					"texture": 0
-				},
-				"west": {
-					"uv": [48, 50, 52, 62],
-					"texture": 0
-				},
-				"up": {
-					"uv": [48, 50, 44, 46],
-					"texture": 0
-				},
-				"down": {
-					"uv": [52, 46, 48, 50],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "69106ffb-a0d4-3a51-b7d5-fdde78211222"
-		},
-		{
-			"name": "PillagerLeftArm",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-8, 12, -2],
-			"to": [-4, 24, 2],
-			"autouv": 0,
-			"color": 0,
-			"mirror_uv": true,
-			"origin": [0, 0, 0],
-			"uv_offset": [40, 46],
-			"faces": {
-				"north": {
-					"uv": [48, 50, 44, 62],
-					"texture": 0
-				},
-				"east": {
-					"uv": [52, 50, 48, 62],
-					"texture": 0
-				},
-				"south": {
-					"uv": [56, 50, 52, 62],
-					"texture": 0
-				},
-				"west": {
-					"uv": [44, 50, 40, 62],
-					"texture": 0
-				},
-				"up": {
-					"uv": [44, 50, 48, 46],
-					"texture": 0
-				},
-				"down": {
-					"uv": [48, 46, 52, 50],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "3889e608-a947-d492-941b-acce7cafde6a"
-		},
-		{
-			"name": "PillagerLeftLeg",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 0, -2],
-			"to": [0, 12, 2],
-			"autouv": 0,
-			"color": 0,
-			"origin": [0, 0, 0],
-			"uv_offset": [0, 22],
-			"faces": {
-				"north": {
-					"uv": [4, 26, 8, 38],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 26, 4, 38],
-					"texture": 0
-				},
-				"south": {
-					"uv": [12, 26, 16, 38],
-					"texture": 0
-				},
-				"west": {
-					"uv": [8, 26, 12, 38],
-					"texture": 0
-				},
-				"up": {
-					"uv": [8, 26, 4, 22],
-					"texture": 0
-				},
-				"down": {
-					"uv": [12, 22, 8, 26],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "4bfefcf0-0565-5bb7-db0a-ea9148112ea0"
-		},
-		{
-			"name": "PillagerRightLeg",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [0, 0, -2],
-			"to": [4, 12, 2],
-			"autouv": 0,
-			"color": 0,
-			"mirror_uv": true,
-			"origin": [0, 0, 0],
-			"uv_offset": [0, 22],
-			"faces": {
-				"north": {
-					"uv": [8, 26, 4, 38],
-					"texture": 0
-				},
-				"east": {
-					"uv": [12, 26, 8, 38],
-					"texture": 0
-				},
-				"south": {
-					"uv": [16, 26, 12, 38],
-					"texture": 0
-				},
-				"west": {
-					"uv": [4, 26, 0, 38],
-					"texture": 0
-				},
-				"up": {
-					"uv": [4, 26, 8, 22],
-					"texture": 0
-				},
-				"down": {
-					"uv": [8, 22, 12, 26],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "0b1e38ed-b594-60fb-28a2-6ff3fac8d8b9"
-		},
-		{
 			"name": "Head",
 			"box_uv": false,
 			"rescale": false,
@@ -11487,7 +10727,7 @@
 			"uuid": "33e177ec-e053-0505-fef0-1fdf3e23077e",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": false,
+			"isOpen": true,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -11499,7 +10739,7 @@
 					"uuid": "52dae324-1de2-0242-7b62-5b6e300a786c",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -11511,7 +10751,7 @@
 							"uuid": "a5d0f2b7-2e9a-2e13-97ea-1591b4eb5f19",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": true,
+							"isOpen": false,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -11620,7 +10860,7 @@
 					"uuid": "0b5b63cc-05e2-d49a-50c0-569a969e3392",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -11636,23 +10876,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": [
-								"7df59063-5145-66a1-0746-dfa0c1dd5d34",
-								"a675e46f-be49-48dd-8e24-85c15af1385d",
-								{
-									"name": "Pillager2Nose",
-									"origin": [0, 26, 0],
-									"color": 0,
-									"uuid": "cb0912e0-b23f-f51b-fc65-538b85b28a5f",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": ["85348280-688e-2268-96bb-637d31bdce7c"]
-								}
-							]
+							"children": []
 						},
 						{
 							"name": "Pillager2Body",
@@ -11666,8 +10890,6 @@
 							"visibility": true,
 							"autouv": 0,
 							"children": [
-								"def2196f-b130-f23e-55c3-41e88cd49d90",
-								"00f51cda-b169-40a0-7b3b-43902807252d",
 								{
 									"name": "ExSkill2ParticleAnchor7",
 									"origin": [0, 21, -13],
@@ -11694,7 +10916,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["36f00d9a-e25f-35dc-5f69-fc4dddff2dba"]
+							"children": []
 						},
 						{
 							"name": "Pillager2LeftArm",
@@ -11707,7 +10929,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["6a38420f-95c5-ead0-1b45-5e4f094e9ada"]
+							"children": []
 						},
 						{
 							"name": "Pillager2LeftLeg",
@@ -11720,7 +10942,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["fdb22fa7-f143-8e5f-850e-9f38f96dde9c"]
+							"children": []
 						},
 						{
 							"name": "Pillager2RightLeg",
@@ -11733,7 +10955,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["87d706c1-c9c5-4d83-630c-305b207ade4f"]
+							"children": []
 						}
 					]
 				},
@@ -11744,7 +10966,7 @@
 					"uuid": "4822bc9a-ec31-1b48-845f-8da10ed81c26",
 					"export": true,
 					"mirror_uv": false,
-					"isOpen": false,
+					"isOpen": true,
 					"locked": false,
 					"visibility": true,
 					"autouv": 0,
@@ -11760,24 +10982,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": [
-								"4bf74a37-1e45-5e98-2c3c-613a907a6ead",
-								"4b00afc0-c51d-8de0-8af4-a0d9ddae433f",
-								{
-									"name": "Pillager3Nose",
-									"origin": [0, 26, 0],
-									"color": 0,
-									"uuid": "e612171c-37b0-983d-4030-5b6260551f66",
-									"export": true,
-									"mirror_uv": false,
-									"isOpen": true,
-									"locked": false,
-									"visibility": true,
-									"autouv": 0,
-									"children": []
-								},
-								"fd248e5e-2962-4b00-e7e3-b10f65a1e06a"
-							]
+							"children": []
 						},
 						{
 							"name": "Pillager3Body",
@@ -11791,8 +10996,6 @@
 							"visibility": true,
 							"autouv": 0,
 							"children": [
-								"a0a3512e-952f-36db-e0f3-baf69309b3ec",
-								"f9b3de78-1ab4-0c92-68a8-2ed9cb1246af",
 								{
 									"name": "ExSkill2ParticleAnchor8",
 									"origin": [0, 17, -13],
@@ -11819,7 +11022,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["69106ffb-a0d4-3a51-b7d5-fdde78211222"]
+							"children": []
 						},
 						{
 							"name": "Pillager3LeftArm",
@@ -11832,7 +11035,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["3889e608-a947-d492-941b-acce7cafde6a"]
+							"children": []
 						},
 						{
 							"name": "Pillager3LeftLeg",
@@ -11845,7 +11048,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["4bfefcf0-0565-5bb7-db0a-ea9148112ea0"]
+							"children": []
 						},
 						{
 							"name": "Pillager3RightLeg",
@@ -11858,7 +11061,7 @@
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
-							"children": ["0b1e38ed-b594-60fb-28a2-6ff3fac8d8b9"]
+							"children": []
 						}
 					]
 				}
