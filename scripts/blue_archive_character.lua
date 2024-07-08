@@ -745,6 +745,29 @@ BlueArchiveCharacter = {
                                 models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i..part]:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Pillagers.Pillager1["Pillager1"..part]))
                             end
                         end
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_"..y * 2 + x):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16, y * 16, 0)
+                            end
+                        end
+                        models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_4"):setBlock("minecraft:chest"):setPos(8, 0, 24):setRot(0, 180, 0)
+                        models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_5"):setBlock("minecraft:potted_azure_bluet"):setPos(-8, 14, 8)
+                        for y = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..y + 6):setBlock("minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=true,slot_5_occupied=true]"):setPos(-24, y * 16, 8)
+                        end
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_"..y * 2 + x + 8):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16, y * 16, 0)
+                            end
+                        end
+                        for y = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverBack3:newBlock("ex_skill_2_block_"..y + 12):setBlock("minecraft:red_wool"):setPos(-8, y * 16, 0)
+                        end
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverBack2:newBlock("ex_skill_2_block_"..y * 2 + x + 14):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16 - 32, y * 16, 0)
+                            end
+                        end
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
                             models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setPos(-1, -1, 1)
