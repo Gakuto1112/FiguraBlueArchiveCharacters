@@ -112,7 +112,8 @@ BlueArchiveCharacter = {
             SMILE = {0, 0},
             SHOCK = {0, 1},
             TRIANGLE = {2, 1},
-            SMILE_SMALL = {3, 1}
+            SMILE_SMALL = {3, 1},
+            OPENED_SMALL = {4, 1}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
@@ -687,7 +688,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.ex_skill_2, models.models.main.Avatar.UpperBody.Body.GlowEffects},
+			models = {models.models.ex_skill_2},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -812,7 +813,9 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setPos(-1, -1, 1)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setColor(0, 0, 0)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.Background:setColor(1, 0.643, 0.71)
+                            models.models.ex_skill_2.Momoi.MomoiHead.EffectPanel:setVisible(false)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Momoi.MomoiHead, "MomoiPaperDollHead"))
+                            models.models.ex_skill_2.Momoi.MomoiHead.EffectPanel:setVisible(true)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setScale(4.1, 4.1, 4.1)
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setPrimaryRenderType("CUTOUT")
                             models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead:setPos(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:getTruePivot():add(-64, -24, 0))
@@ -920,6 +923,9 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(24, 0)
                     elseif tick == 16 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 14, true)
+                    elseif tick == 22 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(12, 0)
                     elseif tick == 27 and host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         local centerX = windowSize.x / 2 * -1
@@ -933,7 +939,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.Reticules.MidoriReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MidoriReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
                         end, "ex_skill_2_reticule_render")
                     elseif tick == 30 then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 125, true)
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 95, true)
                     elseif tick == 37 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor1, 0, 90, "MOMOI")
                         shotSound()
@@ -949,12 +955,21 @@ BlueArchiveCharacter = {
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet23:setColor()
                         end
-                    elseif tick == 48 and host:isHost() then
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
-                        models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:setVisible(false)
+                    elseif tick == 48 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                        models.models.ex_skill_2.Momoi:setColor(1, 0.75, 0.75)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:setVisible(false)
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 0.5)
+                        else
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi), 1, 1)
+                        end
                     elseif tick == 49 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.ExSkill2ParticleAnchor5, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
@@ -967,6 +982,8 @@ BlueArchiveCharacter = {
                         end
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
+                    elseif tick == 56 then
+                        models.models.ex_skill_2.Momoi:setColor()
                     elseif tick == 61 then
                         bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor3, -90, 0, "MOMOI")
                         shotSound()
@@ -979,12 +996,21 @@ BlueArchiveCharacter = {
                     elseif tick == 65 then
                         bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor11, -90, 0, "MOMOI")
                         shotSound()
-                    elseif tick == 70 and host:isHost() then
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
-                        models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2:setVisible(false)
+                    elseif tick == 70 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(48, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(64, 0)
+                        models.models.ex_skill_2.Momoi:setColor(1, 0.75, 0.75)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2:setVisible(false)
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 0.5)
+                        else
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi), 1, 1)
+                        end
                     elseif tick == 73 and host:isHost() then
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
                     elseif tick == 74 then
@@ -1000,22 +1026,28 @@ BlueArchiveCharacter = {
                     elseif tick == 78 then
                         bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor13, 0, -90, "MOMOI")
                         shotSound()
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet20:setColor()
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 0.5)
+                        else
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi), 1, 1)
                         end
                     elseif tick == 81 and host:isHost() then
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
-                            modelPart:setVisible(false)
-                        end
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye:setVisible(true)
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(48, 0)
-                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI}) do
-                            modelPart:setColor(0.25, 0.25, 0.25)
-                        end
-                        local task = models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text")
-                        ---@diagnostic disable-next-line: undefined-field
-                        task:setText("§c§lGAME\nOVER")
-                        task:setVisible(true)
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
+                                modelPart:setVisible(false)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(48, 0)
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI}) do
+                                modelPart:setColor(0.25, 0.25, 0.25)
+                            end
+                            local task = models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text")
+                            ---@diagnostic disable-next-line: undefined-field
+                            task:setText("§c§lGAME\nOVER")
+                            task:setVisible(true)
                     elseif tick == 83 and host:isHost() then
                         ---@diagnostic disable-next-line: undefined-field
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
@@ -1025,9 +1057,12 @@ BlueArchiveCharacter = {
                     elseif tick == 87 and host:isHost() then
                         ---@diagnostic disable-next-line: undefined-field
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
-                    elseif tick == 89 and host:isHost() then
-                        ---@diagnostic disable-next-line: undefined-field
-                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER")
+                    elseif tick == 89 then
+                        models.models.ex_skill_2.Momoi:setColor()
+                        if host:isHost() then
+                            ---@diagnostic disable-next-line: undefined-field
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER")
+                        end
                     elseif tick == 92 then
                         sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.749154)
                     elseif tick == 93 then
@@ -1043,10 +1078,17 @@ BlueArchiveCharacter = {
                     elseif tick == 111 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3Body.ExSkill2ParticleAnchor8, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
+                    elseif tick == 112 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(42, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(42, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(64, 8)
                     elseif tick == 125 then
-                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(18, 0)
-                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(12, 0)
-                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 8)
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED_SMALL", 30, true)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(18, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(12, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 8)
+                        end
                     elseif tick == 130 and host:isHost() then
                         models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setVisible(true)
                         local task = models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_2")
@@ -1102,6 +1144,7 @@ BlueArchiveCharacter = {
                     elseif tick == 169 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 9, true)
                     elseif tick == 178 then
+                        models.models.main.Avatar.UpperBody.Body.GlowEffects:setVisible(true)
                         FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", 25, true)
                         Bubble:play("V", 24, false, true)
                     end
@@ -1120,6 +1163,10 @@ BlueArchiveCharacter = {
                     end
                     for _, modelPart in ipairs({models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth}) do
                         modelPart:setUVPixels()
+                    end
+                    models.models.main.Avatar.UpperBody.Body.GlowEffects:setVisible(false)
+                    if forcedStop then
+                        models.models.ex_skill_2.Momoi:setColor()
                     end
                     if host:isHost() and BlueArchiveCharacter.EX_SKILL[2].isPrepared then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
