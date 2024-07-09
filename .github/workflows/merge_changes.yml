@@ -57,7 +57,7 @@ jobs:
       - name: Check if readme templates have been changed (base)
         id: check_readme_changes_base
         if: ${{ matrix.target_branch == 'base' }}
-        run: git diff --name-only origin/${MERGE_BRANCH} | grep -e '.github/README_templates/' -e '.github/readme_generator/' -e '.github/workflows/generate_readme.yml'
+        run: git diff --name-only origin/${MERGE_BRANCH} | grep -e '.github/README_templates/' -e '.github/readme_generator/' -e '.github/workflows/'
         env:
           MERGE_BRANCH: ${{ github.ref_name }}
         continue-on-error: true
@@ -83,7 +83,7 @@ jobs:
           if [ ${BASE_BRANCH} = 'base' ]; then
             echo ${BASE_RESULT} | grep 'success'
           else
-            git diff --name-only HEAD~ | grep -e '.github/README_templates/' -e '.github/readme_generator/' -e '.github/workflows/generate_readme.yml'
+            git diff --name-only HEAD~ | grep -e '.github/README_templates/' -e '.github/readme_generator/' -e '.github/workflows/'
           fi
         env:
           BASE_RESULT: ${{ steps.check_readme_changes_base.outcome }}
