@@ -770,6 +770,7 @@ BlueArchiveCharacter = {
                         for i = 1, 3 do
                             models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -120)
                         end
+                        models.models.main.Avatar.UpperBody.Body.GlowEffects:setColor(1, 0.984, 0.4)
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
                             models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setPos(-1, -1, 1)
@@ -849,7 +850,6 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_1"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08):setVisible(false)
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_2"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setVisible(false)
                             models.models.ex_skill_2.Gui.MVP.LowerMVP:newText("ex_skill_2_mvp_text"):setText("§e§lMVP"):setPos(0, 17.5, -1):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08)
-                            models.models.main.Avatar.UpperBody.Body.GlowEffects:setColor(1, 0.984, 0.4)
                             for i = 1, 3 do
                                 models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:newItem("ex_skill_2_coin_"..i.."_item"):setItem("minecraft:emerald"):setVisible(false)
                             end
@@ -1133,7 +1133,7 @@ BlueArchiveCharacter = {
                         for _ = 1, 16 do
                             ExSkill2Particles:spawn()
                         end
-                    elseif tick == 132 then
+                    elseif tick == 132 and host:isHost() then
                         models.models.ex_skill_2.Gui.UI.ClearEffect.Background:setVisible(true)
                         models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_1"):setVisible(true)
                     elseif tick == 148 and host:isHost() then

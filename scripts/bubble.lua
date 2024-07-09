@@ -120,7 +120,10 @@ Bubble = {
                     end
                     local avatarBubblePos = vectors.vec3(0, 32, 0)
                     if exSkill2Mode then
-                        avatarBubblePos:add(models.models.main.Avatar:getAnimPos()):add(0, -4, 0)
+                        avatarBubblePos:add(models.models.main.Avatar:getAnimPos())
+                        if host:isHost() then
+                            avatarBubblePos:add(0, -4, 0)
+                        end
                     end
                     if not renderer:isFirstPerson() then
                         local playerPos = player:getPos()
