@@ -31,7 +31,7 @@ ExSkill2TransitionEffectsManager = {
                 for _, sprite in ipairs(self.Sprites) do
                     sprite:onRender(delta)
                 end
-            end, "ex_skill_2_transition_delta")
+            end, "ex_skill_2_transition_render")
         end
     end,
 
@@ -57,6 +57,19 @@ ExSkill2TransitionEffectsManager = {
             end
             targetLine = targetLine + linesPerTick
         end, "ex_skill_2_transition_manager_tick")
+    end,
+
+    ---トランジションを停止する。
+    ---@param self ExSkill2TransitionEffectsManager
+    stop = function(self)
+        for _, eventName in ipairs({"ex_skill_2_transition_manager_tick", "ex_skill_2_transition_tick"}) do
+            events.TICK:remove(eventName)
+        end
+        events.RENDER:remove("ex_skill_2_transition_render")
+        while #self.Sprites > 0 do
+            self.Sprites[1].onDeinit()
+            table.remove(self.Sprites, 1)
+        end
     end
 }
 

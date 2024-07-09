@@ -1247,6 +1247,7 @@ BlueArchiveCharacter = {
                     end
                     if forcedStop then
                         models.models.ex_skill_2.Momoi:setColor()
+                        Bubble:stop()
                     end
                     if host:isHost() and BlueArchiveCharacter.EX_SKILL[2].isPrepared then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
@@ -1279,6 +1280,7 @@ BlueArchiveCharacter = {
                             for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render", "ex_skill_2_clear_effect_render"}) do
                                 events.RENDER:remove(eventName)
                             end
+                            ExSkill2TransitionEffectsManager:stop()
                         end
                     end
                 end,
