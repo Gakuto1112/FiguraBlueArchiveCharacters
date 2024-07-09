@@ -734,9 +734,6 @@ BlueArchiveCharacter = {
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
-                    --デバッグ用
-                    --models.models.main.Avatar:setVisible(false)
-
                     if not BlueArchiveCharacter.EX_SKILL[2].isPrepared then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.PillagerHead, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.Pillager1Nose, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Body, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1RightArm, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1LeftArm, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1RightLeg, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1LeftLeg}) do
                             modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
@@ -856,7 +853,6 @@ BlueArchiveCharacter = {
                             for i = 1, 3 do
                                 models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:newItem("ex_skill_2_coin_"..i.."_item"):setItem("minecraft:emerald"):setVisible(false)
                             end
-                            --models.models.ex_skill_2.Gui:setParentType("World")
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
                     end
@@ -901,14 +897,6 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
-                    --"<>"内を適切な値で置換すること。
-                    if tick == 1000 then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[2].animations) do
-                            animations["models."..animation]["ex_skill_"..2]:pause()
-                        end
-                    end
-
                     ---銃弾のパーティクルを出す。
                     ---@param anchor ModelPart パーティクルを出す場所を示すアンカーポイント
                     ---@param offsetRotX number パーティクルの射出方向のX軸オフセット値
