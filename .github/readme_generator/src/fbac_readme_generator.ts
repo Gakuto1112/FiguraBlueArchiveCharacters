@@ -46,6 +46,9 @@ interface LanguageData {
     jp: string
 }
 
+/**
+ * FiguraBlueArchiveCharacters用のREADMEの生成クラス
+ */
 class FBACReadmeGenerator extends ReadmeGenerator {
     /**
      * コンストラクタ
@@ -55,10 +58,17 @@ class FBACReadmeGenerator extends ReadmeGenerator {
         super(repositoryName, "../../../generator");
     }
 
+    /**
+     * インジェクトタグ（<!--- $inject(<tag_name>) ->）が見つかった時に呼ばれる関数
+     * @param tagName タグの名前
+     * @param fileLanguage READMEドキュメントの言語
+     * @returns タグに置き換わる文字列。返された文字列がREADMEに挿入される。
+     */
     protected onInjectTagFound(tagName: string, fileLanguage: FileLanguage): string {
         let text: string = super.onInjectTagFound(tagName, fileLanguage);
-        if(tagName == "creation_status" && this.caches[`${tagName}_${fileLanguage}`] == undefined) {
-            if(fs.existsSync("./src/creation_status.json")) {
+        if(tagName == "creation_status") {
+            if(this.caches[`${tagName}_${fileLanguage}`] != undefined) return this.caches[`${tagName}_${fileLanguage}`];
+            else if(fs.existsSync("./src/creation_status.json")) {
                 try {
                     let characterData: CreationStatusData = JSON.parse(fs.readFileSync("./src/creation_status.json", {encoding: "utf-8"}));
                     if(fs.existsSync(`../README_templates/creation_status/done/${fileLanguage}.md`)) text = fs.readFileSync(`../README_templates/creation_status/done/${fileLanguage}.md`, {encoding: "utf-8"});
@@ -112,16 +122,13 @@ class FBACReadmeGenerator extends ReadmeGenerator {
                         text = text.substring(0, text.length - 1);
                     }
                     else text += `${fileLanguage == "en" ? "(There is no avatar planned to be created.)" : "（作成予定のアバターはありません。）"}`;
+                    this.caches[`${tagName}_${fileLanguage}`] = text;
                 }
                 catch {
-                    return "<!-- ERROR: Failed to parse \"character_status.json\" -->\n";
+                    text = "<!-- ERROR: Failed to parse \"character_status.json\" -->\n";
                 }
             }
-            else {
-                return "<!-- ERROR: \"character_status.json\" doesn't exist -->\n";
-            }
-
-            this.caches[`${tagName}_${fileLanguage}`] = text;
+            else text = "<!-- ERROR: \"character_status.json\" doesn't exist -->\n";
         }
         return text;
     }
