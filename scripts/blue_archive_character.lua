@@ -1148,6 +1148,10 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", 25, true)
                         Bubble:play("V", 24, false, true)
                     end
+
+                    if tick >= 84 and tick < 100 then
+                        particles:newParticle("minecraft:splash", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi.MomoiHead.ExSkill2ParticleAnchor14)):setPower(2)
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
