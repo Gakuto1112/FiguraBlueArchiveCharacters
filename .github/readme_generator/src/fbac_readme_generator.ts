@@ -57,7 +57,6 @@ class FBACReadmeGenerator extends ReadmeGenerator {
 
     protected onInjectTagFound(tagName: string, fileLanguage: FileLanguage): string {
         let text: string = super.onInjectTagFound(tagName, fileLanguage);
-        console.log(tagName);
         if(tagName == "creation_status") {
             if(this.caches[`${tagName}_${fileLanguage}`] != undefined) return this.caches[`${tagName}_${fileLanguage}`];
             else if(fs.existsSync("./src/creation_status.json")) {
