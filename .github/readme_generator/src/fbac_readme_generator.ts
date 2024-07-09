@@ -46,6 +46,9 @@ interface LanguageData {
     jp: string
 }
 
+/**
+ * FiguraBlueArchiveCharacters用のREADMEの生成クラス
+ */
 class FBACReadmeGenerator extends ReadmeGenerator {
     /**
      * コンストラクタ
@@ -55,9 +58,14 @@ class FBACReadmeGenerator extends ReadmeGenerator {
         super(repositoryName, "../../../generator");
     }
 
+    /**
+     * インジェクトタグ（<!--- $inject(<tag_name>) ->）が見つかった時に呼ばれる関数
+     * @param tagName タグの名前
+     * @param fileLanguage READMEドキュメントの言語
+     * @returns タグに置き換わる文字列。返された文字列がREADMEに挿入される。
+     */
     protected onInjectTagFound(tagName: string, fileLanguage: FileLanguage): string {
         let text: string = super.onInjectTagFound(tagName, fileLanguage);
-        console.log(tagName);
         if(tagName == "creation_status") {
             if(this.caches[`${tagName}_${fileLanguage}`] != undefined) return this.caches[`${tagName}_${fileLanguage}`];
             else if(fs.existsSync("./src/creation_status.json")) {
