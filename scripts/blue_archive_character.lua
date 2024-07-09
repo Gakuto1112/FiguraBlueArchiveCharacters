@@ -1495,11 +1495,11 @@ BlueArchiveCharacter = {
             onPlay = function(type, duration, showInGui)
                 if duration > 0 then
                     if type == "GOOD" then
-                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", duration, true)
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", duration, true)
                     elseif type == "HEART" then
-                        FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", duration, true)
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED_SMALL", duration, true)
                     elseif type == "NOTE" then
-                        FaceParts:setEmotion("STARE", "STARE2", "NORMAL2", duration, true)
+                        FaceParts:setEmotion("STARE", "STARE2", "NORMAL", duration, true)
                     elseif type == "QUESTION" then
                         FaceParts:setEmotion("SURPLISED", "SURPLISED", "SHOCK", duration, true)
                     elseif type == "SWEAT" then
