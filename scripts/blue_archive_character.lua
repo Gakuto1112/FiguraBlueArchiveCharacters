@@ -990,12 +990,16 @@ BlueArchiveCharacter = {
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets.BulletM20:setColor()
                         end
+                    elseif tick == 51 then
+                        sounds:playSound("minecraft:entity.pillager.death", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
                     elseif tick == 54 and host:isHost() then
                         for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels()
                         end
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
+                    elseif tick == 55 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1.Pillager1CoinAnchor), 1, 2)
                     elseif tick == 56 then
                         models.models.ex_skill_2.Momoi:setColor()
                     elseif tick == 61 then
@@ -1094,8 +1098,11 @@ BlueArchiveCharacter = {
                         end
                     elseif tick == 94 then
                         sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.667420)
+                        sounds:playSound("minecraft:entity.pillager.death", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 1, 1)
                     elseif tick == 96 then
                         sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.594604)
+                    elseif tick == 98 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2.Pillager2CoinAnchor), 1, 2)
                     elseif tick == 111 then
                         bulletParticle(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3Body.ExSkill2ParticleAnchor8, 0, 0, "MIDORI")
                         shotSound() --ミドリの射撃音
@@ -1103,6 +1110,9 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(42, 0)
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(42, 0)
                         models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(64, 8)
+                        sounds:playSound("minecraft:entity.pillager.death", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 1, 1)
+                    elseif tick == 116 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3CoinAnchor), 1, 2)
                     elseif tick == 125 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED_SMALL", 30, true)
                         if host:isHost() then
@@ -1110,22 +1120,27 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(12, 0)
                             models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 8)
                         end
-                    elseif tick == 130 and host:isHost() then
-                        models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setVisible(true)
-                        local task = models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_2")
-                        task:setVisible(true)
-                        events.RENDER:register(function (delta)
-                            local count = ExSkill.AnimationCount - 130 + delta
-                            local scale = count <= 2 and (count * -7.5 + 20) or (count <= 4 and (count * 7.5 - 10) or 20)
-                            task:setPos(0, scale * 3.5, 0)
-                            task:setScale(vectors.vec3(1, 1, 1):scale(scale))
-                            ---@diagnostic disable-next-line: undefined-field
-                            task:setOpacity((15 - (scale - 5)) / 15)
-                            if count >= 1 then
-                                local windowSize = client:getScaledWindowSize()
-                                models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setScale(windowSize.x, math.max(count * -40 + 120, 0), 1)
-                            end
-                        end, "ex_skill_2_clear_effect_render")
+                    elseif tick == 130 then
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setVisible(true)
+                            local task = models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_2")
+                            task:setVisible(true)
+                            events.RENDER:register(function (delta)
+                                local count = ExSkill.AnimationCount - 130 + delta
+                                local scale = count <= 2 and (count * -7.5 + 20) or (count <= 4 and (count * 7.5 - 10) or 20)
+                                task:setPos(0, scale * 3.5, 0)
+                                task:setScale(vectors.vec3(1, 1, 1):scale(scale))
+                                ---@diagnostic disable-next-line: undefined-field
+                                task:setOpacity((15 - (scale - 5)) / 15)
+                                if count >= 1 then
+                                    local windowSize = client:getScaledWindowSize()
+                                    models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setScale(windowSize.x, math.max(count * -40 + 120, 0), 1)
+                                end
+                            end, "ex_skill_2_clear_effect_render")
+                            sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 1)
+                        else
+                            sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1)
+                        end
                     elseif tick == 131 and host:isHost() then
                         for _ = 1, 16 do
                             ExSkill2Particles:spawn()
@@ -1168,6 +1183,9 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Body.GlowEffects:setVisible(true)
                         FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", 25, true)
                         Bubble:play("V", 24, false, true)
+                        local playerPos = player:getPos()
+                        sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
+                        sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 1)
                     end
 
                     ---コインのパーティクルを発生させる。
@@ -1196,6 +1214,25 @@ BlueArchiveCharacter = {
                         for _ = 1, 5 do
                             particles:newParticle("minecraft:end_rod", vectors.vec3(math.random() * 3 - 1.5, math.random() * 3, math.random() * 3 - 1.5):add(avatarPos)):setVelocity(0, 0.1, 0):setColor(1, 0.984, 0.4):setLifetime(16)
                         end
+                    end
+
+                    if tick < 51 and math.random() >= 0.99 then
+                        sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
+                    end
+                    if tick < 94 and math.random() >= 0.99 then
+                        sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
+                    end
+                    if tick < 112 and math.random() >= 0.99 then
+                        sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
+                    end
+                    if tick >= 35 and tick < 51 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
+                    end
+                    if tick >= 80 and tick < 94 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
+                    end
+                    if tick >= 63 and tick < 112 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
                     end
                 end,
 
