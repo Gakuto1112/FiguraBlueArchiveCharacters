@@ -769,6 +769,7 @@ BlueArchiveCharacter = {
                                 models.models.ex_skill_2.Covers.CoverBack2:newBlock("ex_skill_2_block_"..y * 2 + x + 14):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16 - 32, y * 16, 0)
                             end
                         end
+                        BlueArchiveCharacter.EX_SKILL[2].IsEmerald = {}
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
                             models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setPos(-1, -1, 1)
@@ -849,6 +850,9 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_2"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setVisible(false)
                             models.models.ex_skill_2.Gui.MVP.LowerMVP:newText("ex_skill_2_mvp_text"):setText("§e§lMVP"):setPos(0, 17.5, -1):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08)
                             models.models.main.Avatar.UpperBody.Body.GlowEffects:setColor(1, 0.984, 0.4)
+                            for i = 1, 3 do
+                                models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:newItem("ex_skill_2_coin_"..i.."_item"):setItem("minecraft:emerald"):setVisible(false)
+                            end
                             --models.models.ex_skill_2.Gui:setParentType("World")
                         end
                         BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
@@ -880,6 +884,13 @@ BlueArchiveCharacter = {
                     models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(true)
                     models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
                     models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(12, 0)
+                    for i = 1, 3 do
+                        BlueArchiveCharacter.EX_SKILL[2].IsEmerald[i] = math.random() >= 0.9
+                        if BlueArchiveCharacter.EX_SKILL[2].IsEmerald[i] then
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]["Pillager"..i.."Coin"]:setVisible(false)
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:getTask("ex_skill_2_coin_"..i.."_item"):setVisible(true)
+                        end
+                    end
                     FaceParts:setEmotion("NORMAL", "CENTER", "NORMAL", 16, true)
                 end,
 
@@ -1048,6 +1059,13 @@ BlueArchiveCharacter = {
                             ---@diagnostic disable-next-line: undefined-field
                             task:setText("§c§lGAME\nOVER")
                             task:setVisible(true)
+                    elseif tick == 82 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor15)
+                        for _ = 1, 10 do
+                            local xOffset = math.random() * 2 - 1
+                            local zOffset = math.random() * 2 - 1
+                            particles:newParticle("minecraft:campfire_cosy_smoke", anchorPos:copy():add(xOffset, 0, zOffset)):setScale(5):setVelocity(xOffset * 0.03, 0.025, zOffset * 0.03)
+                        end
                     elseif tick == 83 and host:isHost() then
                         ---@diagnostic disable-next-line: undefined-field
                         models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
@@ -1149,8 +1167,26 @@ BlueArchiveCharacter = {
                         Bubble:play("V", 24, false, true)
                     end
 
+                    ---コインのパーティクルを発生させる。
+                    ---@param coinIndex integer パーティクル発生対象のコインのインデックス番号
+                    local function emitConiParticles(coinIndex)
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers["Pillager"..coinIndex]["Pillager"..coinIndex.."CoinAnchor"])
+                        for _ = 1, 3 do
+                            particles:newParticle("minecraft:end_rod", vectors.vec3(math.random() - 0.5, math.random() - 0.5, math.random() - 0.5):add(anchorPos)):setVelocity(0, 0.1, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].IsEmerald[coinIndex] and vectors.vec3(0.686, 0.992, 0.804) or vectors.vec3(1, 0.984, 0.4)):setLifetime(8)
+                        end
+                    end
+
                     if tick >= 84 and tick < 100 then
                         particles:newParticle("minecraft:splash", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi.MomoiHead.ExSkill2ParticleAnchor14)):setPower(2)
+                    end
+                    if tick >= 55 and tick < 82 then
+                        emitConiParticles(1)
+                    end
+                    if tick >= 98 and tick < 125 then
+                        emitConiParticles(2)
+                    end
+                    if tick >= 116 and tick < 143 then
+                        emitConiParticles(3)
                     end
                 end,
 
@@ -1169,6 +1205,12 @@ BlueArchiveCharacter = {
                         modelPart:setUVPixels()
                     end
                     models.models.main.Avatar.UpperBody.Body.GlowEffects:setVisible(false)
+                    for i = 1, 3 do
+                        if BlueArchiveCharacter.EX_SKILL[2].IsEmerald[i] then
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]["Pillager"..i.."Coin"]:setVisible(true)
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:getTask("ex_skill_2_coin_"..i.."_item"):setVisible(false)
+                        end
+                    end
                     if forcedStop then
                         models.models.ex_skill_2.Momoi:setColor()
                     end
