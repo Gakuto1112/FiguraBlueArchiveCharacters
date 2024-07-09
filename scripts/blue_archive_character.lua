@@ -1188,6 +1188,12 @@ BlueArchiveCharacter = {
                     if tick >= 116 and tick < 143 then
                         emitConiParticles(3)
                     end
+                    if tick >= 156 and tick < 177 then
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:end_rod", vectors.vec3(math.random() * 3 - 1.5, math.random() * 3, math.random() * 3 - 1.5):add(avatarPos)):setVelocity(0, 0.1, 0):setColor(1, 0.984, 0.4):setLifetime(16)
+                        end
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
