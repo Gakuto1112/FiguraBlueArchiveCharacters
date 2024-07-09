@@ -1407,6 +1407,57 @@ BlueArchiveCharacter = {
                     modelPart:setVisible(true)
                 end
                 models.models.main.Avatar.UpperBody.Body.CMaidB:setVisible(not Armor.ArmorVisible[3])
+
+                ---脚と丈の長いスカートの調整が有効かどうか
+                ---@type boolean
+                local legAdjustmentEnabled = true
+
+                ---前ティックに脚とスカートの調整をしたかどうか
+                ---@type boolean
+                local legAdjustedPrev = false
+
+                ---前ティックは脚を隠すべきだったかどうか
+                ---@type boolean
+                local shouldHideLegsPrev = false
+
+                events.TICK:register(function ()
+                    local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB:getVisible()
+                    local shouldHideLegs = skirtVisible and player:getVehicle() ~= nil
+                    if shouldHideLegs and not shouldHideLegsPrev then
+                        models.models.main.Avatar.LowerBody.Legs:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
+                    elseif not shouldHideLegs and shouldHideLegsPrev then
+                        models.models.main.Avatar.LowerBody.Legs:setVisible(true)
+                        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale()
+                    end
+                    local shouldAdjustLegs = legAdjustmentEnabled and skirtVisible and not shouldHideLegs
+                    if shouldAdjustLegs and not legAdjustedPrev then
+                        events.RENDER:register(function ()
+                            local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
+                            models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.45, 0, 0)
+                            models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.45, 0, 0)
+                            local rightLegRotAbs = math.abs(rightLegRotX)
+                            local playerPose = player:getPose()
+                            local skirtFlipVal = math.min(math.abs(Physics.VelocityAverage[7]) * 0.00025 + ((playerPose == "SWIMMING" or playerPose == "FALL_FLYING") and 0 or math.max(Physics.VelocityAverage[2] * -0.25, 0)), 0.5)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1 + skirtFlipVal, 1 - skirtFlipVal, rightLegRotAbs * 0.001 + 1 + skirtFlipVal)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4:setScale(rightLegRotAbs * -0.00005 + 1, 1, rightLegRotAbs * 0.0005 + 1)
+                        end, "skirt_render")
+                    elseif not shouldAdjustLegs and legAdjustedPrev then
+                        events.RENDER:remove("skirt_render")
+                        for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
+                            modelPart:setRot()
+                        end
+                        if not shouldHideLegs then
+                            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4}) do
+                                modelPart:setScale()
+                            end
+                        end
+                    end
+                    shouldHideLegsPrev = shouldHideLegs
+                    legAdjustedPrev = shouldAdjustLegs
+                end, "skirt_tick")
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
@@ -1535,14 +1586,30 @@ BlueArchiveCharacter = {
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase1 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+            if costume == 1 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+            elseif costume == 2 then
+                dummyAvatar.LowerBody.Legs:setVisible(false)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
+                for _, modelPart in ipairs({dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight, dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft}) do
+                    modelPart:setRot(-40, 0, 0)
+                end
+            end
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase2 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+            if costume == 1 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+            elseif costume == 2 then
+                dummyAvatar.LowerBody.Legs:setVisible(true)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setScale(1, 1, 1)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setRot(32.5, 0, 0)
+                dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight:setRot(20, 0, 5)
+                dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft:setRot(20, 0, -25)
+            end
         end
 
         --[[
@@ -3163,56 +3230,5 @@ BlueArchiveCharacter = {
 
     --その他定数・変数
 }
-
----脚と丈の長いスカートの調整が有効かどうか
----@type boolean
-local legAdjustmentEnabled = true
-
----前ティックに脚とスカートの調整をしたかどうか
----@type boolean
-local legAdjustedPrev = false
-
----前ティックは脚を隠すべきだったかどうか
----@type boolean
-local shouldHideLegsPrev = false
-
-events.TICK:register(function ()
-    local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:getVisible()
-    local shouldHideLegs = skirtVisible and player:getVehicle() ~= nil
-    if shouldHideLegs and not shouldHideLegsPrev then
-        models.models.main.Avatar.LowerBody.Legs:setVisible(false)
-        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
-    elseif not shouldHideLegs and shouldHideLegsPrev then
-        models.models.main.Avatar.LowerBody.Legs:setVisible(true)
-        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale()
-    end
-    local shouldAdjustLegs = legAdjustmentEnabled and skirtVisible and not shouldHideLegs
-    if shouldAdjustLegs and not legAdjustedPrev then
-        events.RENDER:register(function ()
-            local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
-            models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.45, 0, 0)
-            models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.45, 0, 0)
-            local rightLegRotAbs = math.abs(rightLegRotX)
-            local playerPose = player:getPose()
-            local skirtFlipVal = math.min(math.abs(Physics.VelocityAverage[7]) * 0.00025 + ((playerPose == "SWIMMING" or playerPose == "FALL_FLYING") and 0 or math.max(Physics.VelocityAverage[2] * -0.25, 0)), 0.5)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1 + skirtFlipVal, 1 - skirtFlipVal, rightLegRotAbs * 0.001 + 1 + skirtFlipVal)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
-            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4:setScale(rightLegRotAbs * -0.00005 + 1, 1, rightLegRotAbs * 0.0005 + 1)
-        end, "skirt_render")
-    elseif not shouldAdjustLegs and legAdjustedPrev then
-        events.RENDER:remove("skirt_render")
-        for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
-            modelPart:setRot()
-        end
-        if not shouldHideLegs then
-            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4}) do
-                modelPart:setScale()
-            end
-        end
-    end
-    shouldHideLegsPrev = shouldHideLegs
-    legAdjustedPrev = shouldAdjustLegs
-end)
 
 return BlueArchiveCharacter
