@@ -7,6 +7,7 @@
 ---| "SWEAT" 💦
 ---| "RELOAD" 弾薬をリロードする絵文字
 ---| "DOTS" …
+---| "V" ✌
 
 ---@class Bubble 吹き出しエモートを管理するクラス
 Bubble = {
@@ -51,7 +52,8 @@ Bubble = {
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
     ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
-    play = function (self, type, duration, showInGui)
+    ---@param exSkill2Mode? boolean Exスキル2で使用する専用モード
+    play = function (self, type, duration, showInGui, exSkill2Mode)
         self.Emoji = type
         self.ShowInGui = showInGui
         self.BubbleCounter = duration
@@ -117,10 +119,13 @@ Bubble = {
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
                     end
                     local avatarBubblePos = vectors.vec3(0, 32, 0)
+                    if exSkill2Mode then
+                        avatarBubblePos:add(models.models.main.Avatar:getAnimPos()):add(0, -4, 0)
+                    end
                     if not renderer:isFirstPerson() then
                         local playerPos = player:getPos()
                         local cameraPos = client:getCameraPos()
-                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, 12, 0, 0, 0, -1, 0))
+                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, exSkill2Mode and 16 or 12, 0, 0, 0, -1, 0))
                     else
                         avatarBubblePos:add(12, 0, 0)
                     end

@@ -20,6 +20,11 @@
 ---| "STRIKER" ストライカー（前衛）
 ---| "SPECIAL" スペシャル（後方支援）
 
+---Exスキル2において射撃を行った人を指定するタイプ
+---@alias BlueArchiveCharacter.ExSkill2ShotByType
+---| "MOMOI" モモイが撃った
+---| "MIDORI" ミドリが撃った
+
 ---@class BlueArchiveCharacter （今後別のキャラを作る時に備えて、）キャラクター変数を保持するクラス。別のキャラクターに対してもここを変更するだけで対応できるようにする。
 BlueArchiveCharacter = {
 	---生徒の基本情報（氏名、誕生日等）
@@ -81,7 +86,8 @@ BlueArchiveCharacter = {
             CLOSED = {3, 0},
             ANXIOUS = {5, 0},
             CLOSED2 = {7, 0},
-            STARE = {9, 0}
+            STARE = {9, 0},
+            INVERTED = {12, 0}
         },
 
         ---左目
@@ -94,6 +100,7 @@ BlueArchiveCharacter = {
             CLOSED2 = {6, 0},
             STARE = {9, 0},
             STARE2 = {7, 0},
+            CENTER = {10, 0}
         },
 
         ---口
@@ -104,6 +111,9 @@ BlueArchiveCharacter = {
             NORMAL2 = {4, 0},
             SMILE = {0, 0},
             SHOCK = {0, 1},
+            TRIANGLE = {2, 1},
+            SMILE_SMALL = {3, 1},
+            OPENED_SMALL = {4, 1}
         },
 
         ---口のテクスチャの解像度の倍率。4x2を基準とする。
@@ -134,7 +144,7 @@ BlueArchiveCharacter = {
     SKIRT = {
         ---スカートとして制御するモデルの配列
         ---@type ModelPart
-        SkirtModels = {models.models.main.Avatar.UpperBody.Body.Skirt}
+        SkirtModels = {models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1}
     },
 
     ---銃
@@ -655,6 +665,632 @@ BlueArchiveCharacter = {
                 end
 
             }
+		},
+
+		{
+            ---Exスキルの名前
+            name = {
+                ---英語
+                ---日本語名を翻訳したものにする。
+                ---@type string
+                en_us = "Virtual Maid Shot",
+
+                ---日本語
+                ---実際のスキルの名前と同じにする。
+                ---@type string
+                ja_jp = "バーチャル・メイドショット"
+            },
+
+            ---スキルの種類
+            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
+            ---@type BlueArchiveCharacter.SkillType
+            skillType = "VIBRATION",
+
+            ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
+            ---@type ModelPart[]
+			models = {models.models.ex_skill_2},
+
+            ---Exスキルアニメーションが含まれるモデルファイル名
+            ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
+            ---@type string[]
+			animations = {"main", "ex_skill_2", "costume_maid", "gun"},
+
+            ---Exスキルアニメーションでのカメラワークのデータ
+            camera = {
+                ---Exスキルアニメーション開始時
+                start = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(-14, 22, -13),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3(0, 135, 0)
+                },
+
+                ---Exスキルアニメーション終了時
+                fin = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(-18, 36, -9),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3(40, 190, 0)
+                }
+            },
+
+            ---コールバック関数
+            callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                end,
+
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                    if not BlueArchiveCharacter.EX_SKILL[2].isPrepared then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.PillagerHead, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.Pillager1Nose, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Body, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1RightArm, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1LeftArm, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1RightLeg, models.models.ex_skill_2.Pillagers.Pillager1.Pillager1LeftLeg}) do
+                            modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
+                        end
+                        for _, part in ipairs({"Head", "Body", "RightArm", "LeftArm", "RightLeg", "LeftLeg"}) do
+                            for i = 2, 3 do
+                                models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i..part]:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Pillagers.Pillager1["Pillager1"..part]))
+                            end
+                        end
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_"..y * 2 + x):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16, y * 16, 0)
+                            end
+                        end
+                        models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_4"):setBlock("minecraft:chest"):setPos(8, 0, 24):setRot(0, 180, 0)
+                        models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_5"):setBlock("minecraft:potted_azure_bluet"):setPos(-8, 14, 8)
+                        for y = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..y + 6):setBlock("minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=true,slot_5_occupied=true]"):setPos(-24, y * 16, 8)
+                        end
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_"..y * 2 + x + 8):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16, y * 16, 0)
+                            end
+                        end
+                        for y = 0, 1 do
+                            models.models.ex_skill_2.Covers.CoverBack3:newBlock("ex_skill_2_block_"..y + 12):setBlock("minecraft:red_wool"):setPos(-8, y * 16, 0)
+                        end
+                        for y = 0, 1 do
+                            for x = 0, 1 do
+                                models.models.ex_skill_2.Covers.CoverBack2:newBlock("ex_skill_2_block_"..y * 2 + x + 14):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16 - 32, y * 16, 0)
+                            end
+                        end
+                        BlueArchiveCharacter.EX_SKILL[2].IsEmerald = {}
+                        for i = 1, 3 do
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -120)
+                        end
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setPos(-1, -1, 1)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setColor(0, 0, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Momoi.MomoiUpperBody.MomoiArms.MomoiRightArm.MomoiRightArmBottom.Gun:copy("GunIcon"))
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setPos(-36, 15, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setRot(0, 90, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setScale(1.67, 1.67, 1.67)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon:setPrimaryRenderType("CUTOUT")
+                            for i = 2, 3 do
+                                local icon = models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:copy("LifeIcon"..i)
+                                models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(icon)
+                                icon:setPos((i - 1) * -15, 0, 0)
+                            end
+                            for _, modelPart in ipairs(models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets:getChildren()) do
+                                modelPart:setColor(0.5, 0.5, 0.5)
+                            end
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon, models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets}) do
+                                modelPart:setVisible(false)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MomoiUI:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Gui.UI.MomoiUI, "MidoriUI"))
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI.GunIcon, models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets}) do
+                                modelPart:setVisible(true)
+                            end
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MidoriUI.UI1, models.models.ex_skill_2.Gui.UI.MidoriUI.UI1Shadow, models.models.ex_skill_2.Gui.UI.MidoriUI.UI2}) do
+                                modelPart:setRot(0, 180, 0)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MidoriBullets:moveTo(models.models.ex_skill_2.Gui.UI.MidoriUI)
+                            for _, modelPart in ipairs(models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets:getChildren()) do
+                                modelPart:setColor(0.5, 0.5, 0.5)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MidoriUI:addChild(models.models.main.Avatar.UpperBody.Body.Gun:copy("GunIcon"))
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setPos(52, 15, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setRot(0, 90, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setScale(2.5, 2.5, 2.5)
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.GunIcon:setVisible(true)
+                            for i = 1, 3 do
+                                models.models.ex_skill_2.Gui.UI.MidoriUI["LifeIcon"..i]:setPos(22 - (i - 1) * 15, 0, 0)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.Frame:copy("FrameShadow"))
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setPos(-1, -1, 1)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.FrameShadow:setColor(0, 0, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.Background:setColor(1, 0.643, 0.71)
+                            models.models.ex_skill_2.Momoi.MomoiHead.EffectPanel:setVisible(false)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Momoi.MomoiHead, "MomoiPaperDollHead"))
+                            models.models.ex_skill_2.Momoi.MomoiHead.EffectPanel:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setScale(4.1, 4.1, 4.1)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setPrimaryRenderType("CUTOUT")
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead:setPos(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:getTruePivot():add(-64, -24, 0))
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiHeadRing:setPrimaryRenderType("CUTOUT_EMISSIVE_SOLID")
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts:addChild(models.models.main.Avatar.Head.FaceParts.Mouth:copy("Mouth"))
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:newText("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER"):setPos(32, -5, 0):setWidth(64):setAlignment("CENTER"):setScale(2, 2, 2):setShadow(true):setVisible(false)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setVisible(false)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Gui.UI.MomoiHeadUI, "MidoriHeadUI"))
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.Background:setColor(0.573, 0.98, 0.604)
+                            ---@diagnostic disable-next-line: discard-returns
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI:newPart("MidoriPaperDoll", "None")
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setScale(4.1, 4.1, 4.1)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setOffsetPivot(33.25, 12.5, 16)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setRot(0, -15, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:setPrimaryRenderType("CUTOUT")
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:addChild(ModelUtils:copyModel(models.script_head_block.Head, "MidoriPaperDollHead"))
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts:addChild(models.models.main.Avatar.Head.FaceParts.Mouth:copy("Mouth"))
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(0, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead:setPos(models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:getTruePivot():add(0, -24, 0))
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.HeadRing:setPrimaryRenderType("CUTOUT_EMISSIVE_SOLID")
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll:addChild(ModelUtils:copyModel(models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody, "MidoriPaperDollBody"))
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.ClearEffect.Background, models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar}) do
+                                modelPart:setVisible(false)
+                            end
+                            models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_1"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08):setVisible(false)
+                            models.models.ex_skill_2.Gui.UI.ClearEffect:newText("ex_skill_2_clear_effect_text_2"):setText("§e§lCLEAR"):setPos(0, 17.5, 0):setScale(5, 5, 5):setAlignment("CENTER"):setVisible(false)
+                            models.models.ex_skill_2.Gui.MVP.LowerMVP:newText("ex_skill_2_mvp_text"):setText("§e§lMVP"):setPos(0, 17.5, -1):setScale(5, 5, 5):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.25, 0.25, 0.08)
+                            models.models.main.Avatar.UpperBody.Body.GlowEffects:setColor(1, 0.984, 0.4)
+                            for i = 1, 3 do
+                                models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:newItem("ex_skill_2_coin_"..i.."_item"):setItem("minecraft:emerald"):setVisible(false)
+                            end
+                        end
+                        BlueArchiveCharacter.EX_SKILL[2].isPrepared = true
+                    end
+
+                    if host:isHost() then
+                        models.models.ex_skill_2.Gui:setVisible(true)
+                        local windowsSize = client:getScaledWindowSize()
+                        models.models.ex_skill_2.Gui.UI.MomoiUI:setPos(-90, (windowsSize.y - 20) * -1, 0)
+                        models.models.ex_skill_2.Gui.UI.MidoriUI:setPos(windowsSize.x * -1 + 10, (windowsSize.y - 20) * -1, 0)
+                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI:setPos(windowsSize.x * -1 + 88, 0, 0)
+                        models.models.ex_skill_2.Gui.UI.MidoriHeadUI:setOffsetPivot(windowsSize.x * -1 + 88, 0, 0)
+                        models.models.ex_skill_2.Gui.UI.DamageEffect:setPos(windowsSize.x * -0.5, 0, 0)
+                        models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setPrimaryTexture("RESOURCE", "minecraft:textures/block/destroy_stage_9.png")
+                        models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffect:setScale(windowsSize.x / 12, windowsSize.y, 1)
+                        models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setScale(vectors.vec3(1, 1, 1):scale(windowsSize.y / 16))
+                        events.RENDER:register(function ()
+                            local windowHalfX = windowsSize.x / 2
+                            models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffect:setPos(models.models.ex_skill_2.Gui.UI.DamageEffect.RedEffectAnchor:getAnimPos().x * windowHalfX + windowHalfX, 0, 0)
+                            models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffect:setOpacity(models.models.ex_skill_2.Gui.UI.DamageEffect.CrackEffectAnchor:getAnimPos().x * -1)
+                        end, "ex_skill_2_damege_effect_render")
+                        models.models.ex_skill_2.Gui.UI.ClearEffect:setPos(windowsSize.x / -2, windowsSize.y / -2, 0)
+                        models.models.ex_skill_2.Gui.UI.ClearEffect.Background:setScale(windowsSize.x, windowsSize.y, 1)
+                        models.models.ex_skill_2.Gui.UI:setVisible(true)
+                    end
+                    models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setPos()
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setRot()
+                    models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(true)
+                    models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(24, 0)
+                    models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(12, 0)
+                    for i = 1, 3 do
+                        BlueArchiveCharacter.EX_SKILL[2].IsEmerald[i] = math.random() >= 0.9
+                        if BlueArchiveCharacter.EX_SKILL[2].IsEmerald[i] then
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]["Pillager"..i.."Coin"]:setVisible(false)
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:getTask("ex_skill_2_coin_"..i.."_item"):setVisible(true)
+                        end
+                    end
+                    FaceParts:setEmotion("NORMAL", "CENTER", "NORMAL", 16, true)
+                end,
+
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    ---銃弾のパーティクルを出す。
+                    ---@param anchor ModelPart パーティクルを出す場所を示すアンカーポイント
+                    ---@param offsetRotX number パーティクルの射出方向のX軸オフセット値
+                    ---@param offsetRotY number パーティクルの射出方向のY軸オフセット値
+                    ---@param whoShot BlueArchiveCharacter.ExSkill2ShotByType 射撃した人を指定する。
+                    local function bulletParticle(anchor, offsetRotX, offsetRotY, whoShot)
+                        local anchorPos = ModelUtils.getModelWorldPos(anchor)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity( vectors.rotateAroundAxis(bodyYaw * -1 + offsetRotY, vectors.rotateAroundAxis(offsetRotX, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0.1, 1, 0, 0), 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
+                        end
+                        local muzzleAnchorPos =  ModelUtils.getModelWorldPos(whoShot == "MIDORI" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun.MuzzleAnchor or models.models.ex_skill_2.Momoi.MomoiUpperBody.MomoiArms.MomoiRightArm.MomoiRightArmBottom.Gun.MuzzleAnchor)
+
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:smoke", muzzleAnchorPos)
+                        end
+                    end
+
+                    ---射撃音を再生する。
+                    local function shotSound()
+                        sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
+                    end
+
+                    if tick == 13 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(24, 0)
+                    elseif tick == 16 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 14, true)
+                    elseif tick == 22 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(12, 0)
+                    elseif tick == 27 and host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        local centerX = windowSize.x / 2 * -1
+                        local centerY = windowSize.y / 2 * -1
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticuleAnchor, models.models.ex_skill_2.Gui.Reticules.MidoriReticuleAnchor}) do
+                            modelPart:setPos(centerX, centerY, 0)
+                        end
+                        models.models.ex_skill_2.Gui.Reticules:setVisible(true)
+                        events.RENDER:register(function ()
+                            models.models.ex_skill_2.Gui.Reticules.MomoiReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MomoiReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
+                            models.models.ex_skill_2.Gui.Reticules.MidoriReticule:setPos(vectors.vec3(centerX, centerY, 0):add(models.models.ex_skill_2.Gui.Reticules.MidoriReticuleAnchor:getAnimPos():scale(windowSize.y / 270)))
+                        end, "ex_skill_2_reticule_render")
+                    elseif tick == 30 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 95, true)
+                    elseif tick == 37 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor1, 0, 90, "MOMOI")
+                        shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet24:setColor()
+                        end
+                    elseif tick == 39 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor9, 0, 90, "MOMOI")
+                        shotSound()
+                    elseif tick == 41 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor2, 0, 90, "MOMOI")
+                        shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet23:setColor()
+                        end
+                    elseif tick == 48 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                        models.models.ex_skill_2.Momoi:setColor(1, 0.75, 0.75)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1:setVisible(false)
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 0.5)
+                        else
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi), 1, 1)
+                        end
+                    elseif tick == 49 then
+                        bulletParticle(models.models.ex_skill_2.Pillagers.Pillager1.Pillager1Head.ExSkill2ParticleAnchor5, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets.BulletM20:setColor()
+                        end
+                    elseif tick == 51 then
+                        sounds:playSound("minecraft:entity.pillager.death", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
+                    elseif tick == 54 and host:isHost() then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
+                    elseif tick == 55 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1.Pillager1CoinAnchor), 1, 2)
+                    elseif tick == 56 then
+                        models.models.ex_skill_2.Momoi:setColor()
+                    elseif tick == 61 then
+                        bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor3, -90, 0, "MOMOI")
+                        shotSound()
+                    elseif tick == 63 then
+                        bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor10, -90, 0, "MOMOI")
+                        shotSound()
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet22:setColor()
+                        end
+                    elseif tick == 65 then
+                        bulletParticle(models.models.ex_skill_2.ExSkill2ParticleAnchor11, -90, 0, "MOMOI")
+                        shotSound()
+                    elseif tick == 70 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(12, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(48, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(64, 0)
+                        models.models.ex_skill_2.Momoi:setColor(1, 0.75, 0.75)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor(1, 0.75, 0.75)
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2:setVisible(false)
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 0.5)
+                        else
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi), 1, 1)
+                        end
+                    elseif tick == 73 and host:isHost() then
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:setColor()
+                    elseif tick == 74 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor12, 0, -90, "MOMOI")
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor6, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet21:setColor()
+                        end
+                    elseif tick == 76 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor4, 0, 0, "MOMOI")
+                        shotSound()
+                    elseif tick == 78 then
+                        bulletParticle(models.models.ex_skill_2.Covers.CoverBack2.ExSkill2ParticleAnchor13, 0, -90, "MOMOI")
+                        shotSound()
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(36, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(30, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(32, 0)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets.Bullet20:setColor()
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 0.5)
+                        else
+                            sounds:playSound("minecraft:entity.player.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi), 1, 1)
+                        end
+                    elseif tick == 81 and host:isHost() then
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
+                                modelPart:setVisible(false)
+                            end
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye:setVisible(true)
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(48, 0)
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI}) do
+                                modelPart:setColor(0.25, 0.25, 0.25)
+                            end
+                            local task = models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text")
+                            ---@diagnostic disable-next-line: undefined-field
+                            task:setText("§c§lGAME\nOVER")
+                            task:setVisible(true)
+                    elseif tick == 82 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Covers.CoverBack3.ExSkill2ParticleAnchor15)
+                        for _ = 1, 10 do
+                            local xOffset = math.random() * 2 - 1
+                            local zOffset = math.random() * 2 - 1
+                            particles:newParticle("minecraft:campfire_cosy_smoke", anchorPos:copy():add(xOffset, 0, zOffset)):setScale(5):setVelocity(xOffset * 0.03, 0.025, zOffset * 0.03)
+                        end
+                    elseif tick == 83 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
+                    elseif tick == 85 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER")
+                    elseif tick == 87 and host:isHost() then
+                        ---@diagnostic disable-next-line: undefined-field
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§4§lGAME\nOVER")
+                    elseif tick == 89 then
+                        models.models.ex_skill_2.Momoi:setColor()
+                        if host:isHost() then
+                            ---@diagnostic disable-next-line: undefined-field
+                            models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setText("§c§lGAME\nOVER")
+                        end
+                    elseif tick == 92 then
+                        sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.749154)
+                    elseif tick == 93 then
+                        bulletParticle(models.models.ex_skill_2.Pillagers.Pillager2.Pillager2Body.ExSkill2ParticleAnchor7, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets.BulletM19:setColor()
+                        end
+                    elseif tick == 94 then
+                        sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.667420)
+                        sounds:playSound("minecraft:entity.pillager.death", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 1, 1)
+                    elseif tick == 96 then
+                        sounds:playSound("minecraft:block.note_block.bit", host:isHost() and ModelUtils.getModelWorldPos(models.models.main.CameraAnchor) or player:getPos(), 1, 0.594604)
+                    elseif tick == 98 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2.Pillager2CoinAnchor), 1, 2)
+                    elseif tick == 111 then
+                        bulletParticle(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3Body.ExSkill2ParticleAnchor8, 0, 0, "MIDORI")
+                        shotSound() --ミドリの射撃音
+                    elseif tick == 112 then
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft:setUVPixels(42, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight:setUVPixels(42, 0)
+                        models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth:setUVPixels(64, 8)
+                        sounds:playSound("minecraft:entity.pillager.death", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 1, 1)
+                    elseif tick == 116 then
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3.Pillager3CoinAnchor), 1, 2)
+                    elseif tick == 125 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED_SMALL", 30, true)
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft:setUVPixels(18, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(12, 0)
+                            models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth:setUVPixels(64, 8)
+                        end
+                    elseif tick == 130 then
+                        if host:isHost() then
+                            models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setVisible(true)
+                            local task = models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_2")
+                            task:setVisible(true)
+                            events.RENDER:register(function (delta)
+                                local count = ExSkill.AnimationCount - 130 + delta
+                                local scale = count <= 2 and (count * -7.5 + 20) or (count <= 4 and (count * 7.5 - 10) or 20)
+                                task:setPos(0, scale * 3.5, 0)
+                                task:setScale(vectors.vec3(1, 1, 1):scale(scale))
+                                ---@diagnostic disable-next-line: undefined-field
+                                task:setOpacity((15 - (scale - 5)) / 15)
+                                if count >= 1 then
+                                    local windowSize = client:getScaledWindowSize()
+                                    models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar:setScale(windowSize.x, math.max(count * -40 + 120, 0), 1)
+                                end
+                            end, "ex_skill_2_clear_effect_render")
+                            sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 1, 1)
+                        else
+                            sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1)
+                        end
+                    elseif tick == 131 and host:isHost() then
+                        for _ = 1, 16 do
+                            ExSkill2Particles:spawn()
+                        end
+                    elseif tick == 132 then
+                        models.models.ex_skill_2.Gui.UI.ClearEffect.Background:setVisible(true)
+                        models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_1"):setVisible(true)
+                    elseif tick == 148 and host:isHost() then
+                        ExSkill2TransitionEffectsManager:play()
+                    elseif tick == 154 then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    elseif tick == 155 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "NORMAL", 2, true)
+                        if host:isHost() then
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
+                                modelPart:setVisible(false)
+                            end
+                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render", "ex_skill_2_clear_effect_render"}) do
+                                events.RENDER:remove(eventName)
+                            end
+                        end
+                    elseif tick == 156 and host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.ex_skill_2.Gui.MVP:setPos(windowSize.x / 2 * -1, 0, 0)
+                        models.models.ex_skill_2.Gui.MVP.LowerMVP:setPos(0, (windowSize.y - 35) * -1, 0)
+                        models.models.ex_skill_2.Gui.MVP.UpperMVP.UpperMVPBar:setScale(windowSize.x, 1, 1)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.MVP.LowerMVP.LowerRightMVPBar, models.models.ex_skill_2.Gui.MVP.LowerMVP.LowerLeftMVPBar}) do
+                            modelPart:setScale(windowSize.x / 2, 1, 1)
+                        end
+                        models.models.ex_skill_2.Gui.MVP:setVisible(true)
+                    elseif tick == 157 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 3, true)
+                    elseif tick == 160 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 7, true)
+                    elseif tick == 167 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "NORMAL", 2, true)
+                    elseif tick == 169 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "TRIANGLE", 9, true)
+                    elseif tick == 178 then
+                        models.models.main.Avatar.UpperBody.Body.GlowEffects:setVisible(true)
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE_SMALL", 25, true)
+                        Bubble:play("V", 24, false, true)
+                        local playerPos = player:getPos()
+                        sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
+                        sounds:playSound("minecraft:entity.item.pickup", player:getPos(), 1, 1)
+                    end
+
+                    ---コインのパーティクルを発生させる。
+                    ---@param coinIndex integer パーティクル発生対象のコインのインデックス番号
+                    local function emitConiParticles(coinIndex)
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers["Pillager"..coinIndex]["Pillager"..coinIndex.."CoinAnchor"])
+                        for _ = 1, 3 do
+                            particles:newParticle("minecraft:end_rod", vectors.vec3(math.random() - 0.5, math.random() - 0.5, math.random() - 0.5):add(anchorPos)):setVelocity(0, 0.1, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].IsEmerald[coinIndex] and vectors.vec3(0.686, 0.992, 0.804) or vectors.vec3(1, 0.984, 0.4)):setLifetime(8)
+                        end
+                    end
+
+                    if tick >= 84 and tick < 100 then
+                        particles:newParticle("minecraft:splash", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Momoi.MomoiHead.ExSkill2ParticleAnchor14)):setPower(2)
+                    end
+                    if tick >= 55 and tick < 82 then
+                        emitConiParticles(1)
+                    end
+                    if tick >= 98 and tick < 125 then
+                        emitConiParticles(2)
+                    end
+                    if tick >= 116 and tick < 143 then
+                        emitConiParticles(3)
+                    end
+                    if tick >= 156 and tick < 177 then
+                        local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
+                        for _ = 1, 5 do
+                            particles:newParticle("minecraft:end_rod", vectors.vec3(math.random() * 3 - 1.5, math.random() * 3, math.random() * 3 - 1.5):add(avatarPos)):setVelocity(0, 0.1, 0):setColor(1, 0.984, 0.4):setLifetime(16)
+                        end
+                    end
+
+                    if tick < 51 and math.random() >= 0.99 then
+                        sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
+                    end
+                    if tick < 94 and math.random() >= 0.99 then
+                        sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
+                    end
+                    if tick < 112 and math.random() >= 0.99 then
+                        sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
+                    end
+                    if tick >= 35 and tick < 51 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
+                    end
+                    if tick >= 80 and tick < 94 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
+                    end
+                    if tick >= 63 and tick < 112 and math.random() >= 0.95 then
+                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    elseif models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
+                    for _, modelPart in ipairs({models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Momoi.MomoiHead.MomoiFaceParts.Mouth}) do
+                        modelPart:setUVPixels()
+                    end
+                    models.models.main.Avatar.UpperBody.Body.GlowEffects:setVisible(false)
+                    for i = 1, 3 do
+                        if BlueArchiveCharacter.EX_SKILL[2].IsEmerald[i] then
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]["Pillager"..i.."Coin"]:setVisible(true)
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."CoinAnchor"]:getTask("ex_skill_2_coin_"..i.."_item"):setVisible(false)
+                        end
+                    end
+                    if forcedStop then
+                        models.models.ex_skill_2.Momoi:setColor()
+                        Bubble:stop()
+                    end
+                    if host:isHost() and BlueArchiveCharacter.EX_SKILL[2].isPrepared then
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules.MomoiReticule, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon1, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon2, models.models.ex_skill_2.Gui.UI.MomoiUI.LifeIcon3, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes}) do
+                            modelPart:setVisible(true)
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollBody.DeadEye, models.models.ex_skill_2.Gui.UI.ClearEffect.Background, models.models.ex_skill_2.Gui.UI.ClearEffect.ClearBar, models.models.ex_skill_2.Gui.MVP}) do
+                            modelPart:setVisible(false)
+                        end
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeLeft, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Eyes.EyeRight, models.models.ex_skill_2.Gui.UI.MidoriHeadUI.MidoriPaperDoll.MidoriPaperDollHead.FaceParts.Mouth}) do
+                            modelPart:setUVPixels()
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI.MomoiPaperDoll.MomoiPaperDollHead.MomoiFaceParts.Mouth:setUVPixels(16, 0)
+                        for _, modelPart in ipairs({models.models.ex_skill_2.Gui.UI.MomoiUI, models.models.ex_skill_2.Gui.UI.MomoiHeadUI, }) do
+                            modelPart:setColor()
+                        end
+                        for i = 20, 24 do
+                            models.models.ex_skill_2.Gui.UI.MomoiUI.Bullets.RearBullets["Bullet"..i]:setColor(0.5, 0.5, 0.5)
+                        end
+                        for i = 19, 20 do
+                            models.models.ex_skill_2.Gui.UI.MidoriUI.MidoriBullets.MidoriRearBullets["BulletM"..i]:setColor(0.5, 0.5, 0.5)
+                        end
+                        for i = 1, 2 do
+                            models.models.ex_skill_2.Gui.UI.ClearEffect:getTask("ex_skill_2_clear_effect_text_"..i):setVisible(false)
+                        end
+                        models.models.ex_skill_2.Gui.UI.MomoiHeadUI:getTask("ex_skill_2_gameover_text"):setVisible(false)
+                        if forcedStop then
+                            for _, modelPart in ipairs({models.models.ex_skill_2.Gui.Reticules, models.models.ex_skill_2.Gui.UI}) do
+                                modelPart:setVisible(false)
+                            end
+                            for _, eventName in ipairs({"ex_skill_2_reticule_render", "ex_skill_2_damege_effect_render", "ex_skill_2_clear_effect_render"}) do
+                                events.RENDER:remove(eventName)
+                            end
+                            ExSkill2TransitionEffectsManager:stop()
+                        end
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postTransition = function(forcedStop)
+                end
+            }
 		}
 	},
 
@@ -715,6 +1351,31 @@ BlueArchiveCharacter = {
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
                 exSkill = 1
+            },
+
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "maid",
+
+                ---コスチュームの表示名
+                display_name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Maid",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "メイド"
+                },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 2
             }
         },
 
@@ -725,12 +1386,85 @@ BlueArchiveCharacter = {
             ---@type fun(costumeId: integer)
             ---@param costumeId integer 新たな衣装のインデックス番号
             change = function(costumeId)
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                    modelPart:setUVPixels(0, 16)
+                end
+                Costume.setCostumeTextureOffset(1)
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairRibbons, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Arms.RightArm.GDDLabel, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightCoat, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftCoat}) do
+                    modelPart:setVisible(false)
+                end
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaidH, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CMaidRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CMaidLAB}) do
+                    modelPart:setVisible(true)
+                end
+                models.models.main.Avatar.UpperBody.Body.CMaidB:setVisible(not Armor.ArmorVisible[3])
+
+                ---脚と丈の長いスカートの調整が有効かどうか
+                ---@type boolean
+                local legAdjustmentEnabled = true
+
+                ---前ティックに脚とスカートの調整をしたかどうか
+                ---@type boolean
+                local legAdjustedPrev = false
+
+                ---前ティックは脚を隠すべきだったかどうか
+                ---@type boolean
+                local shouldHideLegsPrev = false
+
+                events.TICK:register(function ()
+                    local skirtVisible = models.models.main.Avatar.UpperBody.Body.CMaidB:getVisible()
+                    local shouldHideLegs = skirtVisible and player:getVehicle() ~= nil
+                    if shouldHideLegs and not shouldHideLegsPrev then
+                        models.models.main.Avatar.LowerBody.Legs:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
+                    elseif not shouldHideLegs and shouldHideLegsPrev then
+                        models.models.main.Avatar.LowerBody.Legs:setVisible(true)
+                        models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale()
+                    end
+                    local shouldAdjustLegs = legAdjustmentEnabled and skirtVisible and not shouldHideLegs
+                    if shouldAdjustLegs and not legAdjustedPrev then
+                        events.RENDER:register(function ()
+                            local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
+                            models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.45, 0, 0)
+                            models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.45, 0, 0)
+                            local rightLegRotAbs = math.abs(rightLegRotX)
+                            local playerPose = player:getPose()
+                            local skirtFlipVal = math.min(math.abs(Physics.VelocityAverage[7]) * 0.00025 + ((playerPose == "SWIMMING" or playerPose == "FALL_FLYING") and 0 or math.max(Physics.VelocityAverage[2] * -0.25, 0)), 0.5)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1:setScale(1 + skirtFlipVal, 1 - skirtFlipVal, rightLegRotAbs * 0.001 + 1 + skirtFlipVal)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3:setScale(rightLegRotAbs * -0.0001 + 1, 1, rightLegRotAbs * 0.001 + 1)
+                            models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4:setScale(rightLegRotAbs * -0.00005 + 1, 1, rightLegRotAbs * 0.0005 + 1)
+                        end, "skirt_render")
+                    elseif not shouldAdjustLegs and legAdjustedPrev then
+                        events.RENDER:remove("skirt_render")
+                        for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
+                            modelPart:setRot()
+                        end
+                        if not shouldHideLegs then
+                            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1.Skirt2.Skirt3.Skirt4}) do
+                                modelPart:setScale()
+                            end
+                        end
+                    end
+                    shouldHideLegsPrev = shouldHideLegs
+                    legAdjustedPrev = shouldAdjustLegs
+                end, "skirt_tick")
             end,
 
             ---衣装がリセットされた時に実行されるコールバック関数
             ---あらゆる衣装からデフォルトの衣装へ推移できるようにする。
             ---@type fun()
             reset = function()
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                    modelPart:setUVPixels()
+                end
+                Costume.setCostumeTextureOffset(0)
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.HairRibbons, models.models.main.Avatar.UpperBody.Arms.RightArm.GDDLabel, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightCoat, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftCoat}) do
+                    modelPart:setVisible(true)
+                end
+                models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaidH, models.models.main.Avatar.UpperBody.Body.CMaidB}) do
+                    modelPart:setVisible(false)
+                end
             end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数
@@ -740,7 +1474,11 @@ BlueArchiveCharacter = {
                 if parts == "HELMET" then
                     models.models.main.Avatar.Head.Sweat:setPos(0, 0, Armor.ArmorVisible[1] and -1 or 0)
                 elseif parts == "LEGGINGS" then
-                    models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                    if Costume.CurrentCostume == 1 then
+                        models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                    else
+                        models.models.main.Avatar.UpperBody.Body.CMaidB:setVisible(not Armor.ArmorVisible[3])
+                    end
                 end
             end
         }
@@ -838,14 +1576,30 @@ BlueArchiveCharacter = {
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase1 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+            if costume == 1 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(70, 0, 0)
+            elseif costume == 2 then
+                dummyAvatar.LowerBody.Legs:setVisible(false)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setScale(1.2, 0.35, 1.5)
+                for _, modelPart in ipairs({dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight, dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft}) do
+                    modelPart:setRot(-40, 0, 0)
+                end
+            end
         end,
 
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase2 = function (dummyAvatar, costume)
-            dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+            if costume == 1 then
+                dummyAvatar.UpperBody.Body.Skirt:setRot(22.5, 0, 0)
+            elseif costume == 2 then
+                dummyAvatar.LowerBody.Legs:setVisible(true)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setScale(1, 1, 1)
+                dummyAvatar.UpperBody.Body.CMaidB.Skirt1:setRot(32.5, 0, 0)
+                dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight:setRot(20, 0, 5)
+                dummyAvatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft:setRot(20, 0, -25)
+            end
         end
 
         --[[
@@ -1760,15 +2514,708 @@ BlueArchiveCharacter = {
                         }
                     }
                 }
-            }
-        }
+            },
 
-        --[[
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CMaidH.HairTail,
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -140,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -1,
+
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -140,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.05,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CMaidH.HairTail.HairTailZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -90,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 90,
+
+                        ---体を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
+                        bodyZ = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 90
+                        },
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonRight,
+
+                ---y軸回転における物理演算データ（省略可）
+                y = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -70,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -40,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -70,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.025,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -70,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -70,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 40,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -70,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonRight.RibbonRightZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -20,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 20,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 20
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -20,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 20,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 20
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonLeft,
+
+                ---y軸回転における物理演算データ（省略可）
+                y = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 70,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 40,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 70
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -0.025,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 70
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 70,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -40,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = 0,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 70
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonLeft.RibbonLeftZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -20,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 20,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 20
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -20,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 20,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 20,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -20,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 20
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = {models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight, models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft},
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -140,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
+                        ---@type number
+                        sneakOffset = 30,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -60,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -140,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.05,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -60,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -140,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -60,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight.RibbonBottomRightZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -22.5,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 15,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 10,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -22.5,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 15
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -0.025,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -22.5,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 15
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -22.5,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 10,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 10,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -22.5,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 15
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft.RibbonBottomLeftZPivot,
+
+                ---z軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -15,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 22.5,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -10,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -15,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 22.5
+                        },
+
+                        ---体の回転によるによるモデルパーツの回転データ（省略可）
+                        bodyRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.025,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -15,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 22.5
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -22.5,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 10,
+
+                        ---体を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        bodyX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 10,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -22.5,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 15
+                        }
+                    }
+                }
+            }
+        },
+
         ---物理演算処理後に実行されるコールバック関数（省略可）。ここでモデルパーツの向きを上書きできる。
         ---@param modelPart ModelPart 物理演算が処理されたモデルパーツ
         callback = function (modelPart)
+            local playerPose = player:getPose()
+            local isHorizontal = playerPose == "SWIMMING" or playerPose == "FALL_FLYING"
+            if (modelPart == models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomRight or modelPart == models.models.main.Avatar.UpperBody.Body.CMaidB.BackRibbon.RibbonBottomLeft) and isHorizontal then
+                modelPart:setRot(modelPart:getRot():scale(1 - math.clamp(Physics.VelocityAverage[5], 0, 1.6) / 1.6))
+            end
         end
-        ]]
     }
 
     --その他定数・変数

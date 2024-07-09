@@ -1,6 +1,6 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
-	ExSkillTextAnimation = require("scripts.ex_skill_text_animation")
+	ExSkillTextAnimation = require("scripts.ex_skill.ex_skill_text_animation")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
 	KeyManager = require("scripts.key_manager")
@@ -29,6 +29,10 @@ events.ENTITY_INIT:register(function ()
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
+
+	--生徒固有クラス
+	ExSkill2Particles = require("scripts.ex_skill.ex_skill_2_particles")
+	ExSkill2TransitionEffectsManager = require("scripts.ex_skill.ex_skill_2_transition_effects_manager")
 
 	--HypixelZombies = require("scripts.hypixel_zombies")
 end)
