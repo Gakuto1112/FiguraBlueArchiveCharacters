@@ -1,0 +1,57 @@
+name: Generate readme
+
+on:
+  workflow_call:
+    inputs:
+      branch-name:
+        required: true
+        type: string
+
+jobs:
+  generate:
+    name: Generate readme
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout avatar repository
+        uses: actions/checkout@v4.1.7
+        with:
+          path: ./avatar
+          ref: ${{ inputs.branch-name }}
+      - name: Checkout template repository
+        uses: actions/checkout@v4.1.7
+        with:
+          repository: Gakuto1112/FiguraAvatarsReadmeTemplate
+          path: ./generator
+      - name: Setup Node.js@20.12.0
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20.12.0
+          cache: npm
+          cache-dependency-path: ./avatar/.github/readme_generator/package-lock.json
+      - name: Install script dependencies
+        working-directory: ./avatar/.github/readme_generator
+        run: npm install
+      - name: Generate readme
+        working-directory: ./avatar/.github/readme_generator
+        run: ./node_modules/.bin/ts-node ./src/fbac_readme_generator.ts ../ ${REPOSITORY_NAME}
+        env:
+          REPOSITORY_NAME: ${{ github.repository }}
+      - id: check_diff
+        name: Check diff
+        working-directory: ./avatar
+        continue-on-error: true
+        run: |
+          git add -N --all
+          git diff --exit-code
+      - name: Commit and push
+        if: ${{ steps.check_diff.outcome == 'failure' }}
+        working-directory: ./avatar
+        run: |
+          git remote set-url origin https://github-actions:${{ github.token }}@github.com/${{ github.repository }}
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add --all
+          git commit -m '[GitHub Actions] ドキュメントの自動生成' -m '対象のコミット: ${{ github.sha }}'
+          git push origin
