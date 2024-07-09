@@ -770,6 +770,9 @@ BlueArchiveCharacter = {
                             end
                         end
                         BlueArchiveCharacter.EX_SKILL[2].IsEmerald = {}
+                        for i = 1, 3 do
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -120)
+                        end
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
                             models.models.ex_skill_2.Gui.UI.MomoiUI.UI1Shadow:setPos(-1, -1, 1)
