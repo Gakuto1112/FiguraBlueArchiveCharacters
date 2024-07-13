@@ -1,11 +1,13 @@
 <!-- $inject(locale_link) -->
 
 # FiguraBlueArchiveCharacters
+<!-- DESCRIPTION_START -->
 This is the avatars for [Figura](https://modrinth.com/mod/figura), the skin mod for [Minecraft](https://www.minecraft.net/en-us) Java Edition, which are imitated characters who appear in "[Blue Archive](https://bluearchive.jp/)" the game for mobile devices.
 
 Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.20.1)
 
 (Some avatar functions don't work correctly in Minecraft 1.20.4 doe to [a bug in Figura](https://github.com/FiguraMC/Figura/issues/197). I recommend using in Minecraft 1.20.1.)
+<!-- DESCRIPTION_END -->
 
 ![Thumbnail](../README_images/thumbnail.jpg)
 
