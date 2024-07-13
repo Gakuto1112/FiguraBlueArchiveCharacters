@@ -20,3 +20,4 @@ jobs:
     uses: Gakuto1112/MyFiguraAvatarPacker/.github/workflows/attach_avatars.yml@main
     with:
       target_branches: ${{ needs.get_target_branches.outputs.target_branches }}
+      should_show_branch_name: true
