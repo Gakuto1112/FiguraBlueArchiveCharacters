@@ -1,10 +1,3 @@
----生徒の攻撃属性。アクションホイール上のExスキルアクションの色に影響する。
----@alias BlueArchiveCharacter.SkillType
----| "EXPLOSION" 爆発
----| "PIERCE" 貫通
----| "MYSTERY" 神秘
----| "VIBRATION" 振動
-
 ---銃の構え方
 ---@alias BlueArchiveCharacter.GunHoldType
 ---| "NORMAL" バニラの弓やクロスボウの構え方と同じ
@@ -111,11 +104,7 @@ BlueArchiveCharacter = {
             ANGRY = {2, 0},
             CLOSED2 = {3, 0},
             CLOSED3 = {0, 1}
-        },
-
-        ---口のテクスチャの解像度の倍率。4x2を基準とする。
-        ---@type number
-        MouthResolutionMultiplayer = 4
+        }
 
         ---表情のセット（省略可）
         --[[
@@ -315,11 +304,6 @@ BlueArchiveCharacter = {
                 ja_jp = "Exスキル"
             },
 
-            ---スキルの種類
-            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
-            ---@type BlueArchiveCharacter.SkillType
-            skillType = "EXPLOSION",
-
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
 			models = {models.models.main.Avatar},
@@ -412,11 +396,6 @@ BlueArchiveCharacter = {
                 ja_jp = "ドローン召喚：火力支援"
             },
 
-            ---スキルの種類
-            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
-            ---@type BlueArchiveCharacter.SkillType
-            skillType = "EXPLOSION",
-
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
 			models = {models.models.ex_skill_1.Drone},
@@ -497,11 +476,6 @@ BlueArchiveCharacter = {
                 ---@type string
                 ja_jp = "大物だ"
             },
-
-            ---スキルの種類
-            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
-            ---@type BlueArchiveCharacter.SkillType
-            skillType = "MYSTERY",
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
@@ -719,11 +693,6 @@ BlueArchiveCharacter = {
                 ---@type string
                 ja_jp = "ライド＆グレネード"
             },
-
-            ---スキルの種類
-            ---アクションホイールの色に影響を与える。ゲーム内での生徒の攻撃属性と同じにする。
-            ---@type BlueArchiveCharacter.SkillType
-            skillType = "MYSTERY",
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
