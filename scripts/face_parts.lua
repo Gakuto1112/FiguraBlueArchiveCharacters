@@ -26,7 +26,7 @@ FaceParts = {
 			if mouth ~= "HOLD" then
 				if mouth ~= "CLOSED" then
 					models.models.main.Avatar.Head.FaceParts.Mouth:setVisible(true)
-					models.models.main.Avatar.Head.FaceParts.Mouth:setUVPixels(BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][1] * 4 * BlueArchiveCharacter.FACE_PARTS.MouthResolutionMultiplayer, BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][2] * 2 * BlueArchiveCharacter.FACE_PARTS.MouthResolutionMultiplayer)
+					models.models.main.Avatar.Head.FaceParts.Mouth:setUVPixels(BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][1] * 16, BlueArchiveCharacter.FACE_PARTS.Mouth[mouth][2] * 8)
 				else
 					models.models.main.Avatar.Head.FaceParts.Mouth:setVisible(false)
 				end
