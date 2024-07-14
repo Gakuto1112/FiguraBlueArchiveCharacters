@@ -21,33 +21,33 @@ BlueArchiveCharacter = {
         firstName = {
             ---英語
             ---@type string
-            en_us = "FirstName",
+            en_us = "Umika",
 
             ---日本語
             ---@type string
-            ja_jp = "名前"
+            ja_jp = "ウミカ"
         },
 
         ---生徒の苗字
         lastName = {
             ---英語
             ---@type string
-            en_us = "LastName",
+            en_us = "Satohama",
 
             ---日本語
             ---@type string
-            ja_jp = "苗字"
+            ja_jp = "里浜"
         },
 
         ---生徒所属の部活名
         clubName = {
             ---英語
             ---@type string
-            en_us = "ClubName",
+            en_us = "Festival Management Committee",
 
             ---日本語
             ---@type string
-            ja_jp = "部活名",
+            ja_jp = "お祭り運営委員会",
         },
 
         ---生徒の誕生日
