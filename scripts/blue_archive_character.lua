@@ -1752,6 +1752,26 @@ BlueArchiveCharacter = {
                 ---@type ModelPart | ModelPart[]
                 modelPart = models.models.main.Avatar.Head.Brim.BrimRightRibbon,
 
+                x = {
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -1,
+                    }
+                },
+
                 ---z軸回転における物理演算データ（省略可）
                 z = {
                     ---体が垂直方向である時（通常時）の物理演算データ（省略可）
@@ -1850,6 +1870,26 @@ BlueArchiveCharacter = {
                 ---この物理演算データを適用させるモデルパーツ
                 ---@type ModelPart | ModelPart[]
                 modelPart = models.models.main.Avatar.Head.Brim.BrimLeftRibbon,
+
+                x = {
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = 0,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 0,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -1,
+                    }
+                },
 
                 ---z軸回転における物理演算データ（省略可）
                 z = {
