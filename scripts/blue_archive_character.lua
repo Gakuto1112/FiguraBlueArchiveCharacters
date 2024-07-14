@@ -110,7 +110,7 @@ BlueArchiveCharacter = {
     SKIRT = {
         ---スカートとして制御するモデルの配列
         ---@type ModelPart
-        SkirtModels = {}
+        SkirtModels = {models.models.main.Avatar.UpperBody.Body.Skirt}
     },
 
     ---銃
