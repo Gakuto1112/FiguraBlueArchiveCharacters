@@ -54,7 +54,7 @@ BlueArchiveCharacter = {
         birth = {
             ---誕生月
             ---@type integer
-            month = 1,
+            month = 7,
 
             ---誕生日
             ---@type integer
