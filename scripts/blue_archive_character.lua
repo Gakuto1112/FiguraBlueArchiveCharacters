@@ -117,7 +117,7 @@ BlueArchiveCharacter = {
     GUN = {
         ---銃の大きさの倍率（省略可）
         ---@type number
-        scale = 1.2,
+        scale = 1.5,
 
         ---構えている時
         hold = {
@@ -126,17 +126,15 @@ BlueArchiveCharacter = {
             type = "NORMAL",
 
             ---一人称視点での位置オフセット（省略可）
-            --[[
             first_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(1.5, 0, -4),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
-            }
-            ]]
+                left = vectors.vec3(1.5, 0, -4)
+            },
 
             --[[
             ---一人称視点での向きオフセット（省略可）
@@ -152,17 +150,15 @@ BlueArchiveCharacter = {
             ]]
 
             ---三人称視点での位置オフセット（省略可）
-            --[[
             third_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(),
+                right = vectors.vec3(-1.75, 0, -7),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3()
+                left = vectors.vec3(1.75, 0, -7)
             }
-            ]]
 
             --[[
             ---三人称視点での向きオフセット（省略可）
@@ -177,6 +173,7 @@ BlueArchiveCharacter = {
             }
             ]]
 
+            --[[
             ---装填済みクロスボウの位置オフセット（省略可）
             charged_crossbow_pos = {
                 ---右手で構える場合（省略可）
@@ -187,6 +184,7 @@ BlueArchiveCharacter = {
                 ---@type Vector3
                 left = vectors.vec3(9.05, 1, 0)
             }
+            ]]
 
             ---装填済みクロスボウの向きオフセット（省略可）
             --[[
@@ -212,22 +210,22 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(4.5, -3, 4),
+                right = vectors.vec3(0, 3, 2.25),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-4.5, -3, 4)
+                left = vectors.vec3(0, 3, 2.25)
             },
 
             ---向きオフセット（省略可）
             rot = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-90, 0, 0),
+                right = vectors.vec3(0, -90, 45),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(-90, 0, 0)
+                left = vectors.vec3(0, 90, -45)
             }
         },
 
@@ -235,11 +233,11 @@ BlueArchiveCharacter = {
         sound = {
             ---使用するゲームの音源名
             ---@type Minecraft.soundID
-            name = "minecraft:entity.iron_golem.hurt",
+            name = "minecraft:entity.firework_rocket.blast",
 
             ---音源のピッチ（0.5 ~ 2）
             ---@type number
-            pitch = 2
+            pitch = 1
         }
 
         --[[
