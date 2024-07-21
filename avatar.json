@@ -10,7 +10,8 @@
 		"textures.for_modeling.leather_layer_2",
 		"textures.for_modeling.leather_layer_2_overlay",
 		"textures.for_modeling.trim",
-		"textures.for_modeling.trim_leggings"
+		"textures.for_modeling.trim_leggings",
+		"textures.for_modeling.oak_planks"
 	],
 	"autoScripts": [
 		"scripts/index.lua"
@@ -161,6 +162,9 @@
 			"moveTo": "models.models.main.Avatar.UpperBody.Body"
 		},
 		"models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.TakoyakiStallLamp.TakoyakiStallLamp": {
+			"primaryRenderType": "EMISSIVE_SOLID"
+		},
+		"models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallFrames.IkayakiStallLamp.IkayakiStallLamp": {
 			"primaryRenderType": "EMISSIVE_SOLID"
 		},
 		"models.models.placement_object.PlacementObject": {
