@@ -2381,4 +2381,31 @@ events.TICK:register(function ()
     legAdjustedPrev = shouldAdjustLegs
 end)
 
+
+--屋台のテキストレンダータスク
+
+---屋台のたこ焼き看板のテキストレンダータスクを作成する。
+---@param parent ModelPart テキストレンダータスクを作成する対象の親パーツ
+---@param posOffset Vector3 テキストレンダータスクの位置オフセット
+---@param rot number テキストレンダータスク設置の基準となるY軸の向き
+local function makeTakoyakiText(parent, posOffset, rot)
+    local parentName = parent:getName()
+    parent:newText(parentName.."_takoyaki_text_1"):setText("§0§lたこやき"):setPos(vectors.rotateAroundAxis(rot, 0, 3, 0, 0, 1, 0):add(posOffset)):setRot(0, rot, 0):setScale(0.85, 0.85, 0.85):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+    parent:newText(parentName.."_flavor_text_1"):setText("§2§l本場の味"):setPos(vectors.rotateAroundAxis(rot, -9, 5, 0, 0, 1, 0):add(posOffset)):setRot(0, rot, 0):setScale(0.25, 0.25, 0.25):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+    parent:newText(parentName.."_takoyaki_text_2"):setText("§0§lたこやき"):setPos(vectors.rotateAroundAxis(rot + 180, 0, 3, -1.02, 0, 1, 0):add(posOffset)):setRot(0, rot + 180, 0):setScale(0.85, 0.85, 0.85):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+    parent:newText(parentName.."_flavor_text_2"):setText("§2§l本場の味"):setPos(vectors.rotateAroundAxis(rot + 180, -9, 5, -1.02, 0, 1, 0):add(posOffset)):setRot(0, rot + 180, 0):setScale(0.25, 0.25, 0.25):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+end
+
+makeTakoyakiText(models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallRoof.StallRoofFront, vectors.vec3(0, -6, -1.01), 0)
+makeTakoyakiText(models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallRoof.StallRoofRight, vectors.vec3(0.501, -6, 22.5), -90)
+makeTakoyakiText(models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallRoof.StallRoofLeft, vectors.vec3(-0.501, -6, 22.5), 90)
+for i = 1, 2 do
+    models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallTable["MenuLabel"..i]:newText("MenuLabel"..i.."_takoyaki_text"):setText("§4§lた\nこ\nや\nき"):setPos(-0.25, -0.25, -0.01):setScale(0.25, 0.25, 0.25):setAlignment("CENTER"):setOutline(true)
+    models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallTable["MenuLabel"..i]:newItem("MenuLabel"..i.."_emerald_item"):setItem("minecraft:emerald"):setPos(0.75, -10.75, -0.01):setScale(0.1, 0.1, 0)
+    models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallTable["MenuLabel"..i]:newText("MenuLabel"..i.."_price_text"):setText("§0§lx5"):setPos(-0.5, -10.5, -0.01):setScale(0.1, 0.1, 0.1):setAlignment("CENTER")
+end
+models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.MenuSign:newText("MenuSign_takoyaki_text"):setText("§4§lたこ\n焼き"):setPos(-3.25, 4.25, -0.01):setScale(0.35, 0.35, 0.35):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.MenuSign:newItem("MenuSign_emerald_item"):setItem("minecraft:emerald"):setPos(3, -3.25, -0.01):setScale(0.175, 0.175, 0)
+models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.MenuSign:newText("MenuSign_price_text"):setText("§0§lx5"):setPos(0.5, -3, -0.01):setScale(0.15, 0.15, 0.15):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+
 return BlueArchiveCharacter
