@@ -111,6 +111,12 @@ As an additional option, I have added an option to disable the frame during the 
 
 <!-- $inject(notes) -->
 
+## Known issues
+- Weapons are not rendered correctly when changing main hand (#24).
+  - You can resolve this issue by re-holding a weapon.
+- The halo (head ring) and arms holding weapons may not be rendered when activating a shader pack with [Iris Shaders](https://www.irisshaders.dev/) only once after game startup (#63).
+  - You can resolve this issue by reloading the avatar.
+
 ---
 
 ![ID card](../README_images/id_card.jpg)
