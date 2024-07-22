@@ -15,7 +15,7 @@ Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.2
 
 ## Creation status
 ### Done
-The avatars for these characters are completed. Click on a character's name to go to the character's branch.
+The avatars for these characters are completed. You can download and use avatars below in the game according to the chapter "[How to use](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/blob/base/.github/README.md#how-to-use)".
 
 - Shizuko Kawawa
 - Izuna Kuda
@@ -33,6 +33,7 @@ The avatars for these characters are worked in progress. It usually takes about 
 ### Planned
 Although the avatars for these characters are not created, there are plans to create them in the future. They will be created in order from top to bottom. This is just a plan and the order may change or creation may be discontinued.
 
+- Hoshino Takanashi (Battle) ([#62](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/62))
 - Serika Kuromi ([#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37))
 - Serina Sumi ([#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38))
 - Hihumi Ajitani ([#39](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/39))
@@ -152,6 +153,12 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 - There may be a bug which occurs in multiplayer because my ([Gakuto1112](https://github.com/Gakuto1112)) multiplayer environment to verify the avatar is insufficient.
 - Please [report an issue](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues) if you find it.
 - Please contact me via [Discussions](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/discussions) or [Discord](https://discord.com/) if you want to do for my avatars. My Discord name is "vinny_san" and display name is "ばにーさん". My display name in [Figura Discord server](https://discord.gg/figuramc) is "BunnySan/ばにーさん".
+
+## Known issues
+- Weapons are not rendered correctly when changing main hand ([#24](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/24)).
+  - You can resolve this issue by re-holding a weapon.
+- The halo (head ring) and arms holding weapons may not be rendered when activating a shader pack with [Iris Shaders](https://www.irisshaders.dev/) only once after game startup ([#63](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/63)).
+  - You can resolve this issue by reloading the avatar.
 
 ---
 
