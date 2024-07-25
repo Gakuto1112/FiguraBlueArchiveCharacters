@@ -34,6 +34,8 @@
 これらのキャラクターのアバターは作成していないものの、今後作成する予定です。上から順に作成予定です。これはあくまでも予定であり、順番が変更されたり作成を中止したりする可能性があります。
 
 - 小鳥遊ホシノ（臨戦）（[#62](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/62)）
+- 棗イロハ（[#64](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/64)）
+- 丹花イブキ（[#65](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/65)）
 - 黒見セリカ（[#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37)）
 - 鷲見セリナ（[#38](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/38)）
 - 阿慈谷ヒフミ（[#39](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/39)）
