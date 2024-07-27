@@ -71,7 +71,10 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {2, 0},
             TIRED = {3, 0},
-            CLOSED = {4, 0}
+            CLOSED = {4, 0},
+            CLOSED2 = {6, 0},
+            INVERTED = {7, 0},
+            NARROW = {8, 0}
         },
 
         ---左目
@@ -79,11 +82,20 @@ BlueArchiveCharacter = {
             NORMAL = {0, 0},
             SURPLISED = {1, 0},
             TIRED = {2, 0},
-            CLOSED = {3, 0}
+            CLOSED = {3, 0},
+            CENTER = {4, 0},
+            CLOSED2 = {5, 0},
+            NARROW_CENTER = {8, 0}
         },
 
         ---口
         Mouth = {
+            CIRCLE = {0, 0},
+            SMILE = {1, 0},
+            OPENED = {2, 0},
+            DROOL = {3, 0},
+            YUMMY = {0, 1},
+            OPENED2 = {1, 1}
         }
 
         ---表情のセット（省略可）
@@ -476,9 +488,9 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable["MenuLabel"..i]:newItem("MenuLabel"..i.."_emerald_item"):setItem("minecraft:emerald"):setPos(1.75, -2, -0.01):setScale(0.25, 0.25, 0)
                             models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable["MenuLabel"..i]:newText("MenuLabel"..i.."_price_text"):setText("§0§lx"..(i - 1) * 2 + 1):setPos(-1.5, -1.75, -0.01):setScale(0.25, 0.25, 0.25):setAlignment("CENTER")
                         end
-
                         BlueArchiveCharacter.EX_SKILL[1].IsPrepared = true
                     end
+                    FaceParts:setEmotion("NORMAL", "CENTER", "CIRCLE", 11, true)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -493,16 +505,39 @@ BlueArchiveCharacter = {
                         end
                     end
 
-                    if tick == 54 then
+                    if tick == 11 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", 10, true)
+                    elseif tick == 21 then
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "SMILE", 7, true)
+                    elseif tick == 28 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "SMILE", 6, true)
+                    elseif tick == 34 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 6, true)
+                    elseif tick == 40 then
+                        FaceParts:setEmotion("INVERTED", "NORMAL", "OPENED", 14, true)
+                    elseif tick == 54 then
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Dumplings, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Takoyaki3, models.models.ex_skill_1.Dogs.Dog2.Dog2Head.Sweat}) do
                             modelPart:setVisible(true)
                         end
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "DROOL", 26, true)
+                    elseif tick == 80 then
+                        FaceParts:setEmotion("NORMAL", "NORMAL", "YUMMY", 12, true)
+                    elseif tick == 92 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "YUMMY", 2, true)
+                    elseif tick == 94 then
+                        FaceParts:setEmotion("NORMAL", "CENTER", "CIRCLE", 28, true)
                     elseif tick == 110 then
                         models.models.ex_skill_1.Dogs.Dog2.Dog2Head.Sweat:setVisible(false)
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9:setVisible(true)
+                    elseif tick == 122 then
+                        FaceParts:setEmotion("NARROW", "NARROW_CENTER", "SMILE", 29, true)
                     elseif tick == 132 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9:moveTo(models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm)
                         models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm.ChocoBanana:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    elseif tick == 151 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 5, true)
+                    elseif tick == 156 then
+                        FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED2", 34, true)
                     end
                 end,
 
