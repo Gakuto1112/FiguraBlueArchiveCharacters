@@ -402,7 +402,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.ex_skill_1},
+			models = {models.models.ex_skill_1, models.models.main.Avatar.Head.FaceParts.Eyes.EyeShines, models.models.main.LaughterLines},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -490,6 +490,9 @@ BlueArchiveCharacter = {
                         end
                         BlueArchiveCharacter.EX_SKILL[1].IsPrepared = true
                     end
+                    events.RENDER:register(function ()
+                        models.models.main.LaughterLines:setOffsetPivot(models.models.main.LaughterLines.LaughterLinesInner:getAnimPos())
+                    end, "ex_skill_1_render")
                     FaceParts:setEmotion("NORMAL", "CENTER", "CIRCLE", 11, true)
                 end,
 
@@ -497,22 +500,24 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
-                    --"<>"内を適切な値で置換すること。
-                    if tick == 1000 then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[1].animations) do
-                            animations["models."..animation]["ex_skill_"..1]:pause()
-                        end
-                    end
-
                     if tick == 11 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "SMILE", 10, true)
+                        sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.25, 0.75)
                     elseif tick == 21 then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "SMILE", 7, true)
+                        sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.25, 0.75)
                     elseif tick == 28 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "SMILE", 6, true)
                     elseif tick == 34 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED", 6, true)
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot)
+                        local bodyYaw = player:getBodyYaw()
+                        for i = 0, 7 do
+                            particles:newParticle("minecraft:wax_off", anchorPos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, vectors.rotateAroundAxis(i * 45 + 0.1, 0, -0.015, 0, 0, 0, 1), 0, 1, 0)):setScale(0.25):setColor(1, 1, 0.71):setLifetime(20)
+                        end
+                        Bubble:play("GOOD", 20, false, true)
+                        sounds:playSound("minecraft:entity.egg.throw", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.5, 2)
+                        sounds:playSound("minecraft:entity.experience_orb.pickup", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 1.5)
                     elseif tick == 40 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "OPENED", 14, true)
                     elseif tick == 54 then
@@ -520,17 +525,24 @@ BlueArchiveCharacter = {
                             modelPart:setVisible(true)
                         end
                         FaceParts:setEmotion("NORMAL", "NORMAL", "DROOL", 26, true)
+                        if host:isHost() then
+                            sounds:playSound("minecraft:block.fire.extinguish", ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable.IkayakiTableItems.IkayakiPlate.ExSkill1ParticleAnchor3), 0.25, 0.5)
+                        end
                     elseif tick == 80 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "YUMMY", 12, true)
                     elseif tick == 92 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "YUMMY", 2, true)
                     elseif tick == 94 then
                         FaceParts:setEmotion("NORMAL", "CENTER", "CIRCLE", 28, true)
+                    elseif tick == 97 then
+                        sounds:playSound("minecraft:entity.item.pickup", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 1.25)
                     elseif tick == 110 then
                         models.models.ex_skill_1.Dogs.Dog2.Dog2Head.Sweat:setVisible(false)
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9:setVisible(true)
                     elseif tick == 122 then
                         FaceParts:setEmotion("NARROW", "NARROW_CENTER", "SMILE", 29, true)
+                    elseif tick == 129 then
+                        sounds:playSound("minecraft:entity.item.pickup", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 0.75)
                     elseif tick == 132 then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9:moveTo(models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm)
                         models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm.ChocoBanana:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
@@ -538,6 +550,53 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("CLOSED", "CLOSED", "SMILE", 5, true)
                     elseif tick == 156 then
                         FaceParts:setEmotion("CLOSED", "CLOSED", "OPENED2", 34, true)
+                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 1)
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_1.ExSkill1ParticleAnchor5)
+                        local bodyYaw = player:getBodyYaw()
+                        for i = 1, 6 do
+                            local particleColor = i <= 3 and (vectors.vec3(0.667, 0.949, 0.561):add(vectors.vec3(-0.02,- 0.137, -0.094):scale((i - 1) / 2))) or (vectors.vec3(1, 0.78, 0.38):add(vectors.vec3(0, 0.22, 0.165):scale((i - 4) / 2)))
+                            for j = 0, 4 * i do
+                                local offset = vectors.rotateAroundAxis(bodyYaw * -1, vectors.rotateAroundAxis(j * (360 / (8 * i)) - 90.1, 0, 0.25, 0, 0, 0, 1), 0, 1, 0)
+                                particles:newParticle("minecraft:wax_off", anchorPos:copy():add(offset:copy():scale(i))):setVelocity(offset:copy():scale(0.35)):setScale(2):setLifetime(32):setColor(particleColor)
+                            end
+                        end
+                    end
+
+                    ---湯気のパーティクルを1つスポーンさせる。
+                    ---@param pos Vector3 パーティクルのスポーン座標
+                    local function spawnvaporParticle(pos)
+                        particles:newParticle("minecraft:poof", pos):setVelocity(math.random() * 0.05 - 0.025, 0.035, math.random() * 0.05 - 0.025):setScale(0.25)
+                    end
+
+                    if tick >= 54 and tick < 92 and (tick - 54) % 8 == 0 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.Head):add(0, 0.25, 0)
+                        local bodyYaw = player:getBodyYaw()
+                        for i = 1, 7 do
+                            particles:newParticle("minecraft:happy_villager", anchorPos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, vectors.rotateAroundAxis(i * 45, 0, -0.1, 0, 0, 0, 1), 0, 1, 0)):setScale(0.75):setLifetime(10)
+                        end
+                        if tick >= 66 then
+                            sounds:playSound("minecraft:entity.egg.throw", anchorPos, 0.25, 2)
+                        end
+                    end
+                    local vaporAnchor1 = ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallTable.TakoyakiTableItems.TakoyakiPlate.TakoyakiPlate2.ExSkill1ParticleAnchor1)
+                    local bodyYaw = player:getBodyYaw()
+                    for _ = 1, 2 do
+                        spawnvaporParticle(vaporAnchor1:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 1.874375 - 0.921875, 0, math.random() * 0.484375 - 0.2421875, 0, 1, 0)))
+                    end
+                    local vaporAnchor2 = ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallTable.TakoyakiTableItems.Takoyaki.ExSkill1ParticleAnchor2)
+                    spawnvaporParticle(vaporAnchor2:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.6875 - 0.34375, 0, math.random() * 0.4375 - 0.21875, 0, 1, 0)))
+                    local vaporAnchor3 = ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable.IkayakiTableItems.IkayakiPlate.ExSkill1ParticleAnchor3)
+                    for _ = 1, 2 do
+                        spawnvaporParticle(vaporAnchor3:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 1.6875 - 0.84375, 0, math.random() * 0.484375 - 0.2421875, 0, 1, 0)))
+                    end
+                    if tick >= 54 and tick % 2 == 0 then
+                        local vaporAnchor4 = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Takoyaki3.ExSkill1ParticleAnchor4)
+                        spawnvaporParticle(vaporAnchor4:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.265625 - 0.1328125, 0, math.random() * 0.265625 - 0.1328125, 0, 1, 0)))
+                    end
+                    if tick % 4 == 0 and not host:isHost() then
+                        for _, anchorPos in ipairs({vaporAnchor1, vaporAnchor3}) do
+                            sounds:playSound("minecraft:block.fire.extinguish", anchorPos, 0.005, 0.5)
+                        end
                     end
                 end,
 
@@ -554,6 +613,7 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Dumplings, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Takoyaki3, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9}) do
                         modelPart:setVisible(false)
                     end
+                    events.RENDER:remove("ex_skill_1_render")
                 end
             }
 		}

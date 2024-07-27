@@ -51,7 +51,8 @@ Bubble = {
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
     ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
-    play = function (self, type, duration, showInGui)
+    ---@param exSkillMode? boolean Exスキルで使用する専用モード
+    play = function (self, type, duration, showInGui, exSkillMode)
         self.Emoji = type
         self.ShowInGui = showInGui
         self.BubbleCounter = duration
@@ -117,10 +118,17 @@ Bubble = {
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
                     end
                     local avatarBubblePos = vectors.vec3(0, 32, 0)
+                    if exSkillMode then
+                        avatarBubblePos:add(models.models.main.Avatar:getAnimPos()):add(0, -4, 0)
+                    end
                     if not renderer:isFirstPerson() then
                         local playerPos = player:getPos()
                         local cameraPos = client:getCameraPos()
-                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, 12, 0, 0, 0, -1, 0))
+                        if exSkillMode then
+                            avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) - 45) % 360, 11, 4, 0, 0, -1, 0))
+                        else
+                            avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, 12, 0, 0, 0, -1, 0))
+                        end
                     else
                         avatarBubblePos:add(12, 0, 0)
                     end
@@ -130,7 +138,7 @@ Bubble = {
                 end
             end, "bubble_render")
         end
-        if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil then
+        if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil and not exSkillMode then
             BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration, showInGui)
         end
     end,
