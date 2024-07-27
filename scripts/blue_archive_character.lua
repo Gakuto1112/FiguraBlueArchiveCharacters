@@ -479,6 +479,46 @@ BlueArchiveCharacter = {
 
                         BlueArchiveCharacter.EX_SKILL[1].IsPrepared = true
                     end
+                end,
+
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
+                    --"<>"内を適切な値で置換すること。
+                    if tick == 1000 then
+                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[1].animations) do
+                            animations["models."..animation]["ex_skill_"..1]:pause()
+                        end
+                    end
+
+                    if tick == 54 then
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Dumplings, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Takoyaki3, models.models.ex_skill_1.Dogs.Dog2.Dog2Head.Sweat}) do
+                            modelPart:setVisible(true)
+                        end
+                    elseif tick == 110 then
+                        models.models.ex_skill_1.Dogs.Dog2.Dog2Head.Sweat:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9:setVisible(true)
+                    elseif tick == 132 then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9:moveTo(models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm)
+                        models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm.ChocoBanana:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    if models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm.Ikayaki9 ~= nil then
+                        models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm.Ikayaki9:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    end
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ChocoBanana ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ChocoBanana:moveTo(models.models.ex_skill_1.Dogs.Dog3.Dog3UpperBody.Dog3RightArm)
+                    end
+                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Dumplings, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Takoyaki3, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Ikayaki9}) do
+                        modelPart:setVisible(false)
+                    end
                 end
             }
 		}
@@ -2431,6 +2471,11 @@ events.TICK:register(function ()
     end
     shouldHideLegsPrev = shouldHideLegs
     legAdjustedPrev = shouldAdjustLegs
+end)
+
+events.RENDER:register(function ()
+    models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:getTrueRot().x < 0 and -7 or 0, 0)
+    models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:getTrueRot().x < 0 and -7 or 0, 0)
 end)
 
 return BlueArchiveCharacter
