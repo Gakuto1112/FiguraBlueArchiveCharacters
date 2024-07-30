@@ -2572,7 +2572,20 @@ events.TICK:register(function ()
     legAdjustedPrev = shouldAdjustLegs
 end)
 
-events.RENDER:register(function ()
+events.RENDER:register(function (delta, context)
+    if ExSkill.AnimationCount == -1 and context ~= "FIRST_PERSON" then
+        if Gun.CurrentGunPosition == "NONE" then
+            models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setRot(math.clamp(vanilla_model.RIGHT_ARM:getOriginRot().x * -1 + 90, -35, 35), 0, 0)
+            models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setRot(math.clamp(vanilla_model.LEFT_ARM:getOriginRot().x * -1 + 90, -35, 35), 0, 0)
+        else
+            models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setRot(math.clamp(models.models.main.Avatar.UpperBody.Arms.RightArm:getRot().x * -1 + 90, -35, 35), 0, 0)
+            models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setRot(math.clamp(models.models.main.Avatar.UpperBody.Arms.LeftArm:getRot().x * -1 + 90, -35, 35), 0, 0)
+        end
+    else
+        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve}) do
+            modelPart:setRot()
+        end
+    end
     models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:getTrueRot().x < 0 and -7 or 0, 0)
     models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:getTrueRot().x < 0 and -7 or 0, 0)
 end)
