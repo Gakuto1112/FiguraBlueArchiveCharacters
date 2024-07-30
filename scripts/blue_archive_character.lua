@@ -286,7 +286,7 @@ BlueArchiveCharacter = {
             ---設置物の当たり判定
             ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
             ---@type Vector3
-            boundingBox = vectors.vec3(8, 8, 8)
+            boundingBox = vectors.vec3(38, 37, 38)
         }
     },
 
@@ -614,6 +614,10 @@ BlueArchiveCharacter = {
                         modelPart:setVisible(false)
                     end
                     events.RENDER:remove("ex_skill_1_render")
+                    if not forcedStop then
+                        local bodyYaw = player:getBodyYaw()
+                        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], player:getPos():add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 1, 4, 0, 1, 0)), (bodyYaw * -1 + 180) % 360)
+                    end
                 end
             }
 		}
