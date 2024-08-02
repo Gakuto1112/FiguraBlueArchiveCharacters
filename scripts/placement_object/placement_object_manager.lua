@@ -23,7 +23,7 @@ PlacementObjectManager = {
     ---@param worldRot number 設置物を設置するワールド方向（Y軸のみ）
     place = function (self, objectIndex, worldPos, worldRot)
         if BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementMode == "COPY" then
-            table.insert(self.PlacementObjects, self.PlacementObjectInstance.new(ModelUtils:copyModel(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel, "PlacementObject_"..client.intUUIDToString(client:generateUUID())):moveTo(models.script_placement_object), objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot))
+            table.insert(self.PlacementObjects, self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel:copy("PlacementObject_"..client.intUUIDToString(client:generateUUID())):moveTo(models.script_placement_object), objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot))
         else
             for index, placementObject in ipairs(self.PlacementObjects) do
                 if placementObject.objectIndex == objectIndex then
