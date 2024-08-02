@@ -161,6 +161,7 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
   - You can resolve this issue by re-holding a weapon.
 - The halo (head ring) and arms holding weapons may not be rendered when activating a shader pack with [Iris Shaders](https://www.irisshaders.dev/) only once after game startup ([#63](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/63)).
   - You can resolve this issue by reloading the avatar.
+- Some parts of placement objects flicker black when they are placed on opaque blocks ([#67](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/67)).
 
 ---
 
