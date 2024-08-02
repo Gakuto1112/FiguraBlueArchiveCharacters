@@ -114,6 +114,7 @@ Exスキルアニメーション中に表示される赤や青の枠から出現
   - 武器を持ち直すと解消されます。
 - [Iris Shaders](https://www.irisshaders.dev/)を用いて影Modを有効化した際に、ゲーム起動後の1回のみに限り、ヘイロー（頭の輪っか）や武器を構える腕が描画されないことがある（[#63](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/63)）。
   - アバターを再読み込みすると解消されます。
+- 不透過ブロックの上に設置物を設置すると設置物の一部パーツが黒くちらつく（[#67](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/67)）。
 
 ---
 
