@@ -54,6 +54,26 @@ PlacementObject = {
             instance.currentPos = instance.nextPos
             instance.objectModel:setPos(instance.currentPos:copy():add(instance.modelOffsetPos):scale(16))
 
+            --当たり判定同士が重複しているか確認
+            local boundingBoxStartPos = vectors.vec3(instance.currentPos.x - instance.boundingBox.x / 2, instance.currentPos.y, instance.currentPos.z - instance.boundingBox.z / 2)
+            local boundingBoxEndPos = vectors.vec3(instance.currentPos.x + instance.boundingBox.x / 2, instance.currentPos.y + instance.boundingBox.y, instance.currentPos.z + instance.boundingBox.z / 2)
+            local boundingBoxCenter = boundingBoxEndPos:copy():sub(boundingBoxStartPos):scale(0.5):add(boundingBoxStartPos)
+            for z = math.floor(boundingBoxStartPos.z), math.floor(boundingBoxEndPos.z) do
+                for y = math.floor(boundingBoxStartPos.y), math.floor(boundingBoxEndPos.y) do
+                    for x = math.floor(boundingBoxStartPos.x), math.floor(boundingBoxEndPos.x) do
+                        for _, collisionBox in ipairs( world.getBlockState(x, y, z):getCollisionShape()) do
+                            local collisionStartPos = collisionBox[1]:copy():add(x, y, z)
+                            local collisionEndPos = collisionBox[2]:copy():add(x, y, z)
+                            local collisionBoxCenter = collisionStartPos:copy():add(collisionEndPos:copy():sub(collisionStartPos):scale(0.5))
+                            if math.abs(collisionBoxCenter.x - boundingBoxCenter.x) < ((collisionEndPos.x - collisionStartPos.x) + (boundingBoxEndPos.x - boundingBoxStartPos.x)) / 2 and math.abs(collisionBoxCenter.y - boundingBoxCenter.y) < ((collisionEndPos.y - collisionStartPos.y) + (boundingBoxEndPos.y - boundingBoxStartPos.y)) / 2 and math.abs(collisionBoxCenter.z - boundingBoxCenter.z) < ((collisionEndPos.z - collisionStartPos.z) + (boundingBoxEndPos.z - boundingBoxStartPos.z)) / 2 then
+                                instance.deinitRequired = true
+                                return
+                            end
+                        end
+                    end
+                end
+            end
+
             --落下速度を更新
             local fluidTags = world.getBlockState(instance.currentPos):getFluidTags()
             if fluidTags[1] == "c:water" then
