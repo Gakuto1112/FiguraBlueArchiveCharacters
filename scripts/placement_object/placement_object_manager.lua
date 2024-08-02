@@ -1,3 +1,7 @@
+---@alias PlacementObjectManager.PlecementMode
+---| "COPY" コピーモード。BBアニメーションは使えないが、複数の設置物を設置可能。
+---| "MOVE" 移動モード。同時に1つしか設置物を設置できないが、BBアニメーションが使える。
+
 ---@class PlacementObjectManager 設置物を管理するマネージャークラス
 PlacementObjectManager = {
     ---デバッグモード

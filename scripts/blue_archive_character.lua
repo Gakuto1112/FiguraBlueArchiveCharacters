@@ -258,12 +258,30 @@ BlueArchiveCharacter = {
             ---設置物として扱うモデル
             ---指定したモデルをコピーして設置物とする。
             ---@type ModelPart
-            model = models.models.placement_object.PlacementObject,
+            placementModel = models.models.placement_object.PlacementObject,
 
             ---設置物の当たり判定
-            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
-            ---@type Vector3
-            boundingBox = vectors.vec3(8, 8, 8)
+            boundingBox = {
+                ---設置物の底の中心点のオフセット位置（任意）。基準点は(0, 0, 0)。
+                ---@type Vector3
+                offsetPos = vectors.vec3(),
+
+                ---当たり判定の大きさ。BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+                ---@type Vector3
+                size = vectors.vec3(8, 8, 8)
+            },
+
+            ---設置物の設置モード
+            ---@type PlacementObjectManager.PlecementMode
+            placementMode = "MOVE",
+
+            ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。
+            ---@type number
+            gravity = 1,
+
+            ---設置物に火炎耐性を付与するかどうか（任意）。trueにすると炎やマグマで焼かれなくなる。
+            ---@type boolean
+            hasFireResistance = false
         }
         ]]
 
@@ -271,12 +289,36 @@ BlueArchiveCharacter = {
             ---設置物として扱うモデル
             ---指定したモデルをコピーして設置物とする。
             ---@type ModelPart
-            model = models.models.placement_object.PlacementObject,
+            placementModel = models.models.placement_object.PlacementObject,
 
             ---設置物の当たり判定
-            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
-            ---@type Vector3
-            boundingBox = vectors.vec3(8, 8, 8)
+            boundingBox = {
+                --[[
+                ---設置物の底の中心点のオフセット位置（任意）。基準点は(0, 0, 0)。
+                ---@type Vector3
+                offsetPos = vectors.vec3()
+                ]]
+
+                ---当たり判定の大きさ。BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+                ---@type Vector3
+                size = vectors.vec3(8, 8, 8)
+            },
+
+            ---設置物の設置モード
+            ---@type PlacementObjectManager.PlecementMode
+            placementMode = "MOVE"
+
+            --[[
+            ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。
+            ---@type number
+            gravity = 1
+            ]]
+
+            --[[
+            ---設置物に火炎耐性を付与するかどうか（任意）。trueにすると炎やマグマで焼かれなくなる。
+            ---@type boolean
+            hasFireResistance = false
+            ]]
         }
     },
 
