@@ -1462,8 +1462,5 @@ BlueArchiveCharacter = {
 }
 
 --生徒固有初期化処理
-keybinds:newKeybind("placement_object_test", "key.keyboard.b", false, false):onPress(function ()
-    PlacementObjectManager:place(1, player:getPos(), player:getBodyYaw() * -1 % 360 + 180)
-end)
 
 return BlueArchiveCharacter
