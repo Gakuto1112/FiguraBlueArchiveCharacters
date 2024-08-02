@@ -306,7 +306,7 @@ BlueArchiveCharacter = {
 
             ---設置物の設置モード
             ---@type PlacementObjectManager.PlecementMode
-            placementMode = "MOVE"
+            placementMode = "COPY"
 
             --[[
             ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。

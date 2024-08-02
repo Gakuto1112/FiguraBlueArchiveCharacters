@@ -60,14 +60,35 @@ PlacementObjectManager = {
         end
     end,
 
+    ---設置済みの設置物を1つ削除する。
+    ---@param self PlacementObjectManager
+    ---@param index integer 削除対象の設置物のインデックス番号（PlacementObjectManager.PlacementObjectsでの番号）
+    remove = function (self, index)
+        self.PlacementObjects[index].onDeinit()
+        table.remove(self.PlacementObjects, index)
+        if #self.PlacementObjects == 0 then
+            events.TICK:remove("placement_object_tick")
+            events.RENDER:remove("placement_object_render")
+        end
+    end,
+
     ---設置済みの設置物を全て削除する。
     ---@param self PlacementObjectManager
     removeAll = function (self)
-        events.TICK:remove("placement_object_tick")
-        events.RENDER:remove("placement_object_render")
         while #self.PlacementObjects > 0 do
-            self.PlacementObjects[1].onDeinit()
-            table.remove(self.PlacementObjects, 1)
+            self:remove(1)
+        end
+    end,
+
+    ---設置済み設置物の、指定した設置物データのインデックス番号のみに関数を適用する。
+    ---@param self PlacementObjectManager
+    ---@param objectIndex integer 関数実行対象の設置物データのインデックス番号
+    ---@param func fun(objectData: table, index: integer)
+    applyFunc = function (self, objectIndex, func)
+        for index, placementObject in ipairs(self.PlacementObjects) do
+            if placementObject.objectIndex == objectIndex then
+                func(placementObject, index)
+            end
         end
     end,
 
