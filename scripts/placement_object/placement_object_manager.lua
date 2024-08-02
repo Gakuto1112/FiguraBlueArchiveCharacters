@@ -60,6 +60,17 @@ PlacementObjectManager = {
         end
     end,
 
+    ---設置済みの設置物を全て削除する。
+    ---@param self PlacementObjectManager
+    removeAll = function (self)
+        events.TICK:remove("placement_object_tick")
+        events.RENDER:remove("placement_object_render")
+        while #self.PlacementObjects > 0 do
+            self.PlacementObjects[1].onDeinit()
+            table.remove(self.PlacementObjects, 1)
+        end
+    end,
+
     ---初期化関数
     init = function ()
         ---@diagnostic disable-next-line: discard-returns
