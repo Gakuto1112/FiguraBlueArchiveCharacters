@@ -171,7 +171,6 @@ ExSkill = {
 
     ---アニメーションを再生する。
     play = function (self)
-        PlacementObjectManager:removeAll()
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
         renderer:setRenderHUD(false)
