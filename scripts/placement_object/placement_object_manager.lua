@@ -23,7 +23,9 @@ PlacementObjectManager = {
     ---@param worldRot number 設置物を設置するワールド方向（Y軸のみ）
     place = function (self, objectIndex, worldPos, worldRot)
         if BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementMode == "COPY" then
-            table.insert(self.PlacementObjects, self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel:copy("PlacementObject_"..client.intUUIDToString(client:generateUUID())):moveTo(models.script_placement_object), objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot))
+            local instance = self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel:copy("PlacementObject_"..client.intUUIDToString(client:generateUUID())):moveTo(models.script_placement_object), objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot)
+            table.insert(self.PlacementObjects, instance)
+            instance:onInit()
         else
             for index, placementObject in ipairs(self.PlacementObjects) do
                 if placementObject.objectIndex == objectIndex then
@@ -32,12 +34,22 @@ PlacementObjectManager = {
                     break
                 end
             end
-            table.insert(self.PlacementObjects, self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel, objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot))
+            local instance = self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel, objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot)
+            table.insert(self.PlacementObjects, instance)
+            instance:onInit()
         end
-        if #self.PlacementObjects == 1 then
+        if events.TICK:getRegisteredCount("placement_object_tick") == 0 then
             events.TICK:register(function ()
-                for _, placementObject in ipairs(self.PlacementObjects) do
+                for index, placementObject in ipairs(self.PlacementObjects) do
                     placementObject.onTick()
+                    if placementObject.deinitRequired then
+                        placementObject.onDeinit()
+                        table.remove(self.PlacementObjects, index)
+                        if #self.PlacementObjects == 0 then
+                            events.TICK:remove("placement_object_tick")
+                            events.RENDER:remove("placement_object_render")
+                        end
+                    end
                 end
             end, "placement_object_tick")
             events.RENDER:register(function (delta, context, matrix)
