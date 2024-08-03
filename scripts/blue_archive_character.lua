@@ -925,23 +925,24 @@ BlueArchiveCharacter = {
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart>[]
-        excludeModels = {}
+        excludeModels = {},
 
-        --[[
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase1 = function (dummyAvatar, costume)
-        end
-        ]]
+            dummyAvatar.LowerBody:setVisible(false)
+            dummyAvatar.UpperBody.Body.Skirt:setScale(1.5, 0.35, 2)
+        end,
 
-        --[[
         ---ダミーアバターが縄ばしごにつかまった直後に実行される関数（省略可）
         ---@param dummyAvatar ModelPart ダミーアバターのルート
         ---@param costume integer ダミーアバターのコスチュームのインデックス
         onPhase2 = function (dummyAvatar, costume)
+            dummyAvatar.LowerBody:setVisible(true)
+            dummyAvatar.UpperBody.Body.Skirt:setRot(30, 0, 0)
+            dummyAvatar.UpperBody.Body.Skirt:setScale(1.2, 1, 1)
         end
-        ]]
 
         --[[
         ---モデルのコピー直前に実行される関数（省略可）
