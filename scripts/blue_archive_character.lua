@@ -281,7 +281,38 @@ BlueArchiveCharacter = {
 
             ---設置物に火炎耐性を付与するかどうか（任意）。trueにすると炎やマグマで焼かれなくなる。
             ---@type boolean
-            hasFireResistance = false
+            hasFireResistance = false,
+
+            ---コールバック関数
+            callbacks = {
+                ---設置物インスタンスが生成された直後に呼ばれる関数（任意）
+                ---@param placementObject table 設置物インスタンス
+                onInit = function (placementObject)
+                end,
+
+                ---設置物インスタンスが破棄される直前に呼ばれる関数（任意）
+                ---@param placementObject table 設置物インスタンス
+                onDeinit = function (placementObject)
+                end,
+
+                ---各ティック毎に呼ばれる関数（任意）
+                ---@param placementObject table 設置物のインスタンス
+                onTick = function (placementObject)
+                end,
+
+                ---各レンダーティック毎に呼ばれる関数（任意）
+                ---@param delta number デルタ値
+                ---@param context Event.Render.context レンダーコンテキスト
+                ---@param matrix Matrix4 レンダーマトリックス
+                ---@param placementObject table 設置物のインスタンス
+                onRender = function (delta, context, matrix, placementObject)
+                end,
+
+                ---設置物が接地した瞬間に呼ばれる関数（任意）
+                ---@param placementObject table 設置物のインスタンス
+                onGround = function (placementObject)
+                end
+            }
         }
         ]]
 
@@ -306,7 +337,7 @@ BlueArchiveCharacter = {
 
             ---設置物の設置モード
             ---@type PlacementObjectManager.PlecementMode
-            placementMode = "COPY"
+            placementMode = "COPY",
 
             --[[
             ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。
@@ -319,6 +350,10 @@ BlueArchiveCharacter = {
             ---@type boolean
             hasFireResistance = false
             ]]
+
+            ---コールバック関数
+            callbacks = {
+            }
         }
     },
 

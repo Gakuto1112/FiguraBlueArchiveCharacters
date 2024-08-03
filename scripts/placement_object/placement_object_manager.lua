@@ -1,6 +1,15 @@
+---設置物の設置モードの列挙型
 ---@alias PlacementObjectManager.PlecementMode
 ---| "COPY" コピーモード。BBアニメーションは使えないが、複数の設置物を設置可能。
 ---| "MOVE" 移動モード。同時に1つしか設置物を設置できないが、BBアニメーションが使える。
+
+---設置物が削除された理由の列挙型
+---@alias PlacementObjectManager.RemoveReason
+---| "REMOVED_BY_SCRIPTS" スクリプトによって削除
+---| "OVERLAPPED" 設置物がブロックと重なって削除
+---| "BURNT" 炎に焼かれて削除
+---| "TOO_LOW" 設置物のY座標が低過ぎて削除
+---| "TOO_HIGH" 設置物のY座標が高過ぎて削除
 
 ---@class PlacementObjectManager 設置物を管理するマネージャークラス
 PlacementObjectManager = {

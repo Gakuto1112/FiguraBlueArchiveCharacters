@@ -37,6 +37,10 @@ PlacementObject = {
         ---@type boolean
         instance.deinitRequired = false
 
+        ---この設置物のインスタンスが破棄される理由
+        ---@type PlacementObjectManager.RemoveReason
+        instance.removeReason = "REMOVED_BY_SCRIPTS"
+
         ---設置物の現在の位置
         ---@type Vector3
         instance.currentPos = pos
@@ -47,6 +51,41 @@ PlacementObject = {
         ---設置物の落下速度
         ---@type number
         instance.fallingSpeed = 0
+
+        ---設置物が接地しているかどうか
+        ---@type boolean
+        instance.isOnGround = false
+
+        ---このインスタンスが生成された直後に呼ばれる関数
+        instance.onInit = function ()
+            if objectData.gravity ~= nil then
+                instance.gravity = objectData.gravity
+                if instance.gravity < 0 then
+                    instance.modelOffsetPos.y = -0.075
+                end
+            end
+            if objectData.hasFireResistance ~= nil then
+                instance.hasFireResistance = objectData.hasFireResistance
+            end
+            instance.objectModel:setPos(instance.currentPos:copy():add(instance.modelOffsetPos):scale(16))
+            instance.objectModel:setRot(0, rot, 0)
+            instance.objectModel:setVisible(true)
+            if objectData.callbacks.onInit ~= nil then
+                objectData.callbacks.onInit(instance)
+            end
+        end
+
+        ---このインスタンスが破棄される直前に呼ばれる関数
+        instance.onDeinit = function ()
+            if objectData.placementMode == "COPY" then
+                instance.objectModel:remove()
+            else
+                instance.objectModel:setVisible(false)
+            end
+            if objectData.callbacks.onDeinit ~= nil then
+                objectData.callbacks.onDeinit(instance)
+            end
+        end
 
         ---各ティック毎に呼ばれる関数
         instance.onTick = function ()
@@ -66,6 +105,7 @@ PlacementObject = {
                             local collisionEndPos = collisionBox[2]:copy():add(x, y, z)
                             local collisionBoxCenter = collisionStartPos:copy():add(collisionEndPos:copy():sub(collisionStartPos):scale(0.5))
                             if math.abs(collisionBoxCenter.x - boundingBoxCenter.x) < ((collisionEndPos.x - collisionStartPos.x) + (boundingBoxEndPos.x - boundingBoxStartPos.x)) / 2 and math.abs(collisionBoxCenter.y - boundingBoxCenter.y) < ((collisionEndPos.y - collisionStartPos.y) + (boundingBoxEndPos.y - boundingBoxStartPos.y)) / 2 and math.abs(collisionBoxCenter.z - boundingBoxCenter.z) < ((collisionEndPos.z - collisionStartPos.z) + (boundingBoxEndPos.z - boundingBoxStartPos.z)) / 2 then
+                                instance.removeReason = "OVERLAPPED"
                                 instance.deinitRequired = true
                                 return
                             end
@@ -110,6 +150,7 @@ PlacementObject = {
             local nextBoxCenter = nextBoxStartPos:copy():add(nextBoxEndPos:copy():sub(nextBoxStartPos):scale(0.5))
 
             --直方体と重なるブロック座標を全て算出
+            local collisionDetected = false
             if instance.gravity >= 0 then
                 local collisionYPos = math.floor(nextBoxStartPos.y)
                 for y = math.floor(nextBoxEndPos.y), math.floor(nextBoxStartPos.y) - 1, -1 do
@@ -124,6 +165,7 @@ PlacementObject = {
                                         instance.nextPos.y = collisionEndPos.y
                                         collisionYPos = y
                                         instance.fallingSpeed = 0
+                                        collisionDetected = true
                                     end
                                 end
                             end
@@ -147,6 +189,7 @@ PlacementObject = {
                                         instance.nextPos.y = collisionStartPos.y - instance.boundingBox.y
                                         collisionYPos = y
                                         instance.fallingSpeed = 0
+                                        collisionDetected = true
                                     end
                                 end
                             end
@@ -157,6 +200,10 @@ PlacementObject = {
                     end
                 end
             end
+            if collisionDetected and not instance.isOnGround and objectData.callbacks.onGround ~= nil then
+                objectData.callbacks.onGround(instance)
+            end
+            instance.isOnGround = collisionDetected
             local nextBlock = world.getBlockState(instance.nextPos)
             local isNextBlockFire = false
             for _, tag in ipairs(nextBlock:getTags()) do
@@ -165,46 +212,37 @@ PlacementObject = {
                     break
                 end
             end
-            if instance.nextPos.y < -128 or instance.nextPos.y > 384 then
+            if instance.nextPos.y < -128 then
+                instance.removeReason = "TOO_LOW"
+                instance.deinitRequired = true
+            elseif instance.nextPos.y > 384 then
+                instance.removeReason = "TOO_HIGH"
                 instance.deinitRequired = true
             elseif not instance.hasFireResistance and (nextBlock:getFluidTags()[1] == "c:lava" or isNextBlockFire) then
                 sounds:playSound("minecraft:block.fire.extinguish", instance.nextPos)
                 for _ = 0, instance.boundingBox.x * instance.boundingBox.y * instance.boundingBox.z * 8 do
                     particles:newParticle("minecraft:smoke", vectors.vec3(instance.nextPos.x + math.random() * instance.boundingBox.x - instance.boundingBox.x / 2, instance.nextPos.y + math.random() * instance.boundingBox.y, instance.nextPos.z + math.random() * instance.boundingBox.z - instance.boundingBox.z / 2))
                 end
+                instance.removeReason = "BURNT"
                 instance.deinitRequired = true
+            end
+            if objectData.callbacks.onTick ~= nil then
+                objectData.callbacks.onTick(instance)
             end
         end
 
         ---各レンダーティック毎に呼ばれる関数
         ---@param delta number デルタ値
-        instance.onRender = function (delta)
+        instance.onRender = function (delta, context, matrix)
             instance.objectModel:setPos(instance.nextPos:copy():sub(instance.currentPos):scale(delta):add(instance.currentPos):add(instance.modelOffsetPos):scale(16))
+            if objectData.callbacks.onRender ~= nil then
+                objectData.callbacks.onRender(delta, context, matrix, instance)
+            end
         end
 
-        ---このインスタンスが生成された直後に呼ばれる関数
-        instance.onInit = function ()
-            if objectData.gravity ~= nil then
-                instance.gravity = objectData.gravity
-                if instance.gravity < 0 then
-                    instance.modelOffsetPos.y = -0.075
-                end
-            end
-            if objectData.hasFireResistance ~= nil then
-                instance.hasFireResistance = objectData.hasFireResistance
-            end
-            instance.objectModel:setPos(instance.currentPos:copy():add(instance.modelOffsetPos):scale(16))
-            instance.objectModel:setRot(0, rot, 0)
-            instance.objectModel:setVisible(true)
-        end
-
-        ---このインスタンスが破棄される直前に呼ばれる関数
-        instance.onDeinit = function ()
-            if objectData.placementMode == "COPY" then
-                instance.objectModel:remove()
-            else
-                instance.objectModel:setVisible(false)
-            end
+        ---この設置物インスタンスを削除する。コールバック関数から削除したい場合はこの関数を呼ぶ。
+        instance.remove = function ()
+            instance.deinitRequired = true
         end
 
         return instance
