@@ -2732,9 +2732,6 @@ events.ENTITY_INIT:register(function ()
             end
         end)
 
-        keybinds:newKeybind("test", "key.keyboard.keypad.1"):onPress(function ()
-            PlacementObjectManager:place(1, player:getPos():add(0, 2, 0), player:getBodyYaw() * -1 + 180)
-        end)
         Language.LanguageData.en_us["ex_skill_1__in_cool_down_pre"] = "Please wait "
         Language.LanguageData.ja_jp["ex_skill_1__in_cool_down_pre"] = "あと"
         Language.LanguageData.en_us["ex_skill_1__in_cool_down_post"] = " more seconds to lanch fireworks."
