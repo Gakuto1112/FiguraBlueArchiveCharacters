@@ -122,13 +122,13 @@ PlacementObject = {
 
             --落下速度を更新
             local fluidTags = world.getBlockState(instance.currentPos):getFluidTags()
-            if fluidTags[1] == "c:water" then
+            if fluidTags[2] == "c:water" then
                 if instance.gravity >= 0 then
                     instance.fallingSpeed = math.max(instance.fallingSpeed - 0.1 * instance.gravity, 0.1 * instance.gravity)
                 else
                     instance.fallingSpeed = math.min(instance.fallingSpeed - 0.1 * instance.gravity, 0.1 * instance.gravity)
                 end
-            elseif fluidTags[1] == "c:lava" then
+            elseif fluidTags[2] == "c:lava" then
                 if instance.gravity >= 0 then
                     instance.fallingSpeed = math.max(instance.fallingSpeed - 0.1 * instance.gravity, 0.02 * instance.gravity)
                 else
@@ -224,7 +224,7 @@ PlacementObject = {
             elseif instance.nextPos.y > 384 then
                 instance.removeReason = "TOO_HIGH"
                 instance.deinitRequired = true
-            elseif not instance.hasFireResistance and (nextBlock:getFluidTags()[1] == "c:lava" or isNextBlockFire) then
+            elseif not instance.hasFireResistance and (nextBlock:getFluidTags()[2] == "c:lava" or isNextBlockFire) then
                 sounds:playSound("minecraft:block.fire.extinguish", instance.nextPos)
                 for _ = 0, instance.boundingBox.x * instance.boundingBox.y * instance.boundingBox.z * 8 do
                     particles:newParticle("minecraft:smoke", vectors.vec3(instance.nextPos.x + math.random() * instance.boundingBox.x - instance.boundingBox.x / 2, instance.nextPos.y + math.random() * instance.boundingBox.y, instance.nextPos.z + math.random() * instance.boundingBox.z - instance.boundingBox.z / 2))
