@@ -2791,18 +2791,21 @@ function pings.lauchFireworks()
             local fireworkPos = vectors.vec3()
             if count == 0 then
                 fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.734375, -0.72, 0, 1, 0))
+                FireworkManager:spawn(fireworkPos, vectors.vec3(-17.5, rot + 177.5, 0))
             elseif count == 10 then
                 fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.734375, -0.72, 0, 1, 0))
+                FireworkManager:spawn(fireworkPos, vectors.vec3(-17.5, rot + 182.5, 0))
             elseif count == 20 then
                 fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.296875, -0.72, 0, 1, 0))
+                FireworkManager:spawn(fireworkPos, vectors.vec3(-12.5, rot + 177.5, 0))
             elseif count == 30 then
                 fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.296875, -0.72, 0, 1, 0))
+                FireworkManager:spawn(fireworkPos, vectors.vec3(-12.5, rot + 182.5, 0))
             elseif count == 35 then
                 events.TICK:remove("firework_launcher_"..modelName.."_tick")
                 events.RENDER:remove("firework_launcher_"..modelName.."_render")
             end
             if count % 10 == 0 then
-                FireworkManager:spawn(fireworkPos, vectors.vec3(-15, rot + 180, 0))
                 for _ = 1, 10 do
                     particles:newParticle("minecraft:smoke", fireworkPos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.25, math.random() * 0.25 - 0.125))
                 end
