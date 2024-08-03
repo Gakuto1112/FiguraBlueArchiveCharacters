@@ -24,6 +24,10 @@ ExSkill = {
     ---@type number
     TransitionCount = 0,
 
+    ---Exスキルキーを押下し続ける時間を計るカウンター
+    ---@type integer
+    KeyPressCount = 0,
+
     ---プレイヤーの体の回転
     ---@type number[]
     BodyYaw = {},
@@ -320,6 +324,7 @@ ExSkill = {
     end,
 
     ---Exスキルスクリプトの初期化関数
+    ---@param self ExSkill
     init = function (self)
         for _, exSkill in ipairs(BlueArchiveCharacter.EX_SKILL) do
             exSkill.camera.start.pos:mul(-1, 1, 1):scale(1 / 16 * 0.9375)
@@ -327,11 +332,30 @@ ExSkill = {
         end
         if host:isHost() then
             KeyManager:register("ex_skill", Config.loadConfig("keybind.ex_skill", "key.keyboard.v"), function ()
-                if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 and ExSkill.TransitionCount == 0 then
-                    pings.ex_skill()
-                else
-                    print(Language:getTranslate("key_bind__ex_skill__unavailable"..(renderer:isFirstPerson() and "_firstperson" or "")))
-                    sounds:playSound("minecraft:block.note_block.bass", player:getPos(), 1, 0.5)
+                while events.TICK:getRegisteredCount("ex_skill_keypress_tick") > 0 do
+                    events.TICK:remove("ex_skill_keypress_tick")
+                end
+                events.TICK:register(function ()
+                    if self.KeyPressCount == 30 then
+                        events.TICK:remove("ex_skill_keypress_tick")
+                        pings.ex_skill_removeAll()
+                        sounds:playSound("minecraft:entity.zombie.break_wooden_door", player:getPos(), 0.25, 2)
+                        self.KeyPressCount = 0
+                        return
+                    end
+                    self.KeyPressCount = self.KeyPressCount + 1
+                end, "ex_skill_keypress_tick")
+            end)
+            KeyManager.KeyMappings["ex_skill"]:onRelease(function ()
+                events.TICK:remove("ex_skill_keypress_tick")
+                if self.KeyPressCount > 0 then
+                    if ExSkill:canPlayAnimation() and ExSkill.AnimationCount == -1 and ExSkill.TransitionCount == 0 then
+                        pings.ex_skill()
+                    else
+                        print(Language:getTranslate("key_bind__ex_skill__unavailable"..(renderer:isFirstPerson() and "_firstperson" or "")))
+                        sounds:playSound("minecraft:block.note_block.bass", player:getPos(), 1, 0.5)
+                    end
+                    self.KeyPressCount = 0
                 end
             end)
         end
@@ -361,6 +385,10 @@ ExSkill = {
 
 function pings.ex_skill()
     ExSkill:play()
+end
+
+function pings.ex_skill_removeAll()
+    PlacementObjectManager:removeAll()
 end
 
 ExSkill:init()
