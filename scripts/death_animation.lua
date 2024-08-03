@@ -189,7 +189,7 @@ DeathAnimation = {
 
                 end
                 if self.AnimationCount % 2 == 1 then
-                    sounds:playSound("minecraft:block.bamboo_wood_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                    sounds:playSound("minecraft:block.bamboo_wood_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5):setAttenuation(2)
                 end
                 if self.AnimationCount < 120 then
                     models.models.death_animation.Avatar:setLight(world.getLightLevel(self.AnimationPos))
