@@ -328,12 +328,36 @@ BlueArchiveCharacter = {
             ---設置物として扱うモデル
             ---指定したモデルをコピーして設置物とする。
             ---@type ModelPart
-            model = models.models.ex_skill_1.PlacementObject,
+            placementModel = models.models.ex_skill_1.PlacementObject,
 
             ---設置物の当たり判定
-            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
-            ---@type Vector3
-            boundingBox = vectors.vec3(12, 19, 12)
+            boundingBox = {
+                ---設置物の底の中心点のオフセット位置（任意）。基準点は(0, 0, 0)。
+                ---@type Vector3
+                offsetPos = vectors.vec3(),
+
+                ---当たり判定の大きさ。BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+                ---@type Vector3
+                size = vectors.vec3(12, 19, 12)
+            },
+
+            ---設置物の設置モード
+            ---@type PlacementObjectManager.PlecementMode
+            placementMode = "MOVE",
+
+            --[[
+            ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。
+            ---@type number
+            gravity = 1,
+
+            ---設置物に火炎耐性を付与するかどうか（任意）。trueにすると炎やマグマで焼かれなくなる。
+            ---@type boolean
+            hasFireResistance = false,
+            ]]
+
+            ---コールバック関数
+            callbacks = {
+            }
         }
     },
 
@@ -487,6 +511,12 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                    PlacementObjectManager:removeAll()
+                end,
+
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
@@ -554,11 +584,11 @@ BlueArchiveCharacter = {
                         sounds:playSound("minecraft:item.armor.equip_leather", avatarPos)
                     elseif tick == 98 then
                         if math.random() >= 0.95 then
-                            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+                            BlueArchiveCharacter.PLACEMENT_OBJECT[1].placementModel:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
                         else
-                            models.models.ex_skill_1.PlacementObject:setPrimaryTexture("PRIMARY")
+                            BlueArchiveCharacter.PLACEMENT_OBJECT[1].placementModel:setPrimaryTexture("PRIMARY")
                         end
-                        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], ModelUtils.getModelWorldPos(models.models.main.Avatar), -player:getBodyYaw() + 180)
+                        PlacementObjectManager:place(1, ModelUtils.getModelWorldPos(models.models.main.Avatar), player:getBodyYaw() * -1 + 180)
                     end
                     if tick <= 10 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.ExSkill1Anchor1)
@@ -2824,11 +2854,11 @@ models.models.main.Avatar.Head.CSwimsuitH.SunflowerAccessory.Sunflower:setPrimar
 function pings.teleport(currentPos, previousPos, previousRot)
     PlacementObjectManager:removeAll()
     if math.random() >= 0.95 then
-        models.models.ex_skill_1.PlacementObject:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
+        BlueArchiveCharacter.PLACEMENT_OBJECT[1].placementModel:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
     else
-        models.models.ex_skill_1.PlacementObject:setPrimaryTexture("PRIMARY")
+        BlueArchiveCharacter.PLACEMENT_OBJECT[1].placementModel:setPrimaryTexture("PRIMARY")
     end
-    PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], previousPos, previousRot * -1 + 180)
+    PlacementObjectManager:place(1, previousPos, previousRot * -1 + 180)
     for _ = 1, 70 do
         particles:newParticle("minecraft:poof", currentPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
         particles:newParticle("minecraft:poof", previousPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
