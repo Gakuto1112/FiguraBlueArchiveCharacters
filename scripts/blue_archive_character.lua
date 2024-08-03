@@ -224,11 +224,11 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(0, 3, 2.25),
+                right = vectors.vec3(0, 3, 3),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(0, 3, 2.25)
+                left = vectors.vec3(0, 3, 3)
             },
 
             ---向きオフセット（省略可）
@@ -807,6 +807,34 @@ BlueArchiveCharacter = {
             ---@type fun(index: integer)
             ---@param parts Armor.ArmorPart 変更された防具の部位
             armorChange = function(parts)
+                if parts == "HELMET" then
+                    if Armor.ArmorVisible[1] then
+                        BlueArchiveCharacter.PHYSICS.data[3].z.vertical.max = 10
+                        BlueArchiveCharacter.PHYSICS.data[3].z.horizontal.max = 10
+                        BlueArchiveCharacter.PHYSICS.data[4].z.vertical.min = -10
+                        BlueArchiveCharacter.PHYSICS.data[4].z.horizontal.min = -10
+                        models.models.main.Avatar.Head.Brim:setVisible(false)
+                    else
+                        BlueArchiveCharacter.PHYSICS.data[3].z.vertical.max = 180
+                        BlueArchiveCharacter.PHYSICS.data[3].z.horizontal.max = 180
+                        BlueArchiveCharacter.PHYSICS.data[4].z.vertical.min = -180
+                        BlueArchiveCharacter.PHYSICS.data[4].z.horizontal.min = -180
+                        models.models.main.Avatar.Head.Brim:setVisible(true)
+                    end
+                elseif parts == "CHEST_PLATE" then
+                    if Armor.ArmorVisible[2] then
+                        models.models.main.Avatar.UpperBody.Body.BackRibbons:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, -1)
+                        models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, 1)
+                    else
+                        models.models.main.Avatar.UpperBody.Body.BackRibbons:setVisible(true)
+                        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
+                            modelPart:setPos()
+                        end
+                    end
+                elseif parts == "LEGGINGS" then
+                    models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                end
             end
         }
 	},
