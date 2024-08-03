@@ -171,7 +171,6 @@ ExSkill = {
 
     ---アニメーションを再生する。
     play = function (self)
-        PlacementObjectManager:removeAll()
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
         renderer:setRenderHUD(false)
@@ -242,7 +241,7 @@ ExSkill = {
     ---アニメーションを停止する。
     stop = function (self)
         if host:isHost() then
-            sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
+            sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2):setAttenuation(100)
         end
         for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
             itemModel:setVisible(true)
