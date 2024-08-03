@@ -2691,4 +2691,8 @@ events.RENDER:register(function (delta, context)
     models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:getTrueRot().x < 0 and -7 or 0, 0)
 end)
 
+keybinds:newKeybind("test", "key.keyboard.x"):onPress(function ()
+    FireworkManager:spawn(player:getPos():add(0, 2.5, 0), vectors.vec3(0, 0, 0))
+end)
+
 return BlueArchiveCharacter

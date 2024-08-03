@@ -29,6 +29,8 @@ events.ENTITY_INIT:register(function ()
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
 
+	FireworkManager = require("scripts.ex_skill.firework_manager")
+
 	--HypixelZombies = require("scripts.hypixel_zombies")
 end)
 
