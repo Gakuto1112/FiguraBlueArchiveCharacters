@@ -136,11 +136,11 @@ BlueArchiveCharacter = {
             first_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(0, 1, -8),
+                right = vectors.vec3(0, 1, -7),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(0, 1, -8)
+                left = vectors.vec3(0, 1, -7)
             },
 
             --[[
@@ -160,11 +160,11 @@ BlueArchiveCharacter = {
             third_person_pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(-1.5, 0.5, -6),
+                right = vectors.vec3(-1.5, -0.25, -8),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(1.5, 0.5, -6)
+                left = vectors.vec3(1.5, -0.25, -8)
             },
 
             ---三人称視点での向きオフセット（省略可）
@@ -215,11 +215,11 @@ BlueArchiveCharacter = {
             pos = {
                 ---右手で構える場合（省略可）
                 ---@type Vector3
-                right = vectors.vec3(0, 4, 3.5),
+                right = vectors.vec3(-1.5, 4, 3.5),
 
                 ---左手で構える場合（省略可）
                 ---@type Vector3
-                left = vectors.vec3(0, 4, 3.5)
+                left = vectors.vec3(1.5, 4, 3.5)
             },
 
             ---向きオフセット（省略可）
