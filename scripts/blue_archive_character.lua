@@ -469,7 +469,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "The festival begins!",
+                en_us = "The festival has begun!",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
@@ -703,8 +703,19 @@ BlueArchiveCharacter = {
                         local bodyYaw = player:getBodyYaw()
                         PlacementObjectManager:place(1, player:getPos():add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 1, 4, 0, 1, 0)), (bodyYaw * -1 + 180) % 360)
                     end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postTransition = function(forcedStop)
+                    if not forcedStop and BlueArchiveCharacter.EX_SKILL[1].TipShowed == nil and host:isHost() then
+                        print(Language:getTranslate("ex_skill_1__tip_1_pre")..KeyManager.KeyMappings["ex_skill"]:getKeyName()..Language:getTranslate("ex_skill_1__tip_1_post"))
+                        print(Language:getTranslate("ex_skill_1__tip_2_pre")..KeyManager.KeyMappings["firework_launch"]:getKeyName()..Language:getTranslate("ex_skill_1__tip_2_post"))
+                        BlueArchiveCharacter.EX_SKILL[1].TipShowed = true
+                    end
                 end
-            }
+              }
 		}
 	},
 
@@ -2699,25 +2710,34 @@ events.ENTITY_INIT:register(function ()
         events.TICK:register(function ()
             BlueArchiveCharacter.ExSKill1LaunchCooldown = math.max(BlueArchiveCharacter.ExSKill1LaunchCooldown - 1, 0)
         end)
-        keybinds:newKeybind("test", "key.keyboard.keypad.1"):onPress(function ()
-            PlacementObjectManager:place(1, player:getPos():add(0, 2, 0), player:getBodyYaw() * -1 + 180)
-        end)
 
-        keybinds:newKeybind("test2", "key.keyboard.keypad.2"):onPress(function ()
+        KeyManager:register("firework_launch", "key.keyboard.b", function ()
             if #PlacementObjectManager.PlacementObjects > 0 then
                 if BlueArchiveCharacter.ExSKill1LaunchCooldown == 0 then
                     pings.lauchFireworks()
                     BlueArchiveCharacter.ExSKill1LaunchCooldown = 200
                 else
+                    sounds:playSound("minecraft:block.note_block.bass", player:getPos(), 1, 0.5)
                     print(Language:getTranslate("ex_skill_1__in_cool_down_pre")..math.ceil(BlueArchiveCharacter.ExSKill1LaunchCooldown / 20)..Language:getTranslate("ex_skill_1__in_cool_down_post"))
                 end
             end
         end)
 
+        keybinds:newKeybind("test", "key.keyboard.keypad.1"):onPress(function ()
+            PlacementObjectManager:place(1, player:getPos():add(0, 2, 0), player:getBodyYaw() * -1 + 180)
+        end)
         Language.LanguageData.en_us["ex_skill_1__in_cool_down_pre"] = "Please wait "
         Language.LanguageData.ja_jp["ex_skill_1__in_cool_down_pre"] = "あと"
         Language.LanguageData.en_us["ex_skill_1__in_cool_down_post"] = " more seconds to lanch fireworks."
         Language.LanguageData.ja_jp["ex_skill_1__in_cool_down_post"] = "秒待ってください。"
+        Language.LanguageData.en_us["ex_skill_1__tip_1_pre"] = "§9§l[TIP]§r Hold "
+        Language.LanguageData.ja_jp["ex_skill_1__tip_1_pre"] = "§9§l[TIP]§r "
+        Language.LanguageData.en_us["ex_skill_1__tip_1_post"] = " key to put all firework launchers away!"
+        Language.LanguageData.ja_jp["ex_skill_1__tip_1_post"] = "キーを長押しすると花火台を全て片付けます！"
+        Language.LanguageData.en_us["ex_skill_1__tip_2_pre"] = "§9§l[TIP]§r Press "
+        Language.LanguageData.ja_jp["ex_skill_1__tip_2_pre"] = "§9§l[TIP]§r "
+        Language.LanguageData.en_us["ex_skill_1__tip_2_post"] = " key to launch fireworks from all firework launchers!"
+        Language.LanguageData.ja_jp["ex_skill_1__tip_2_post"] = "キーを押すと\"たまや～\"ができます！"
     end
 end)
 
