@@ -357,6 +357,11 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---設置物インスタンスが生成された直後に呼ばれる関数（任意）
+                ---@param placementObject table 設置物インスタンス
+                onInit = function (placementObject)
+                    animations["models.ex_skill_1"]["swing"]:play()
+                end
             }
         }
     },
