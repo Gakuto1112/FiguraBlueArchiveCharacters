@@ -17,10 +17,7 @@ PlayerUtils = {
 
     ---初期化関数
     init = function (self)
-        local healthPrev = 20
-        if player:isLoaded() then
-            healthPrev = player:getHealth()
-        end
+        local healthPrev = player:getHealth()
         events.TICK:register(function()
             local health = player:getHealth()
             self.DamageStatus = healthPrev > health and (health == 0 and "DIED" or "DAMAGE") or "NONE"
