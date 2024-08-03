@@ -2691,8 +2691,27 @@ events.RENDER:register(function (delta, context)
     models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:getTrueRot().x < 0 and -7 or 0, 0)
 end)
 
-keybinds:newKeybind("test", "key.keyboard.x"):onPress(function ()
-    FireworkManager:spawn(player:getPos():add(0, 2.5, 0), vectors.vec3(0, 0, 0))
+keybinds:newKeybind("test", "key.keyboard.keypad.1"):onPress(function ()
+    PlacementObjectManager:place(1, player:getPos():add(0, 2, 0), player:getBodyYaw() * -1 + 180)
+end)
+
+keybinds:newKeybind("test2", "key.keyboard.keypad.2"):onPress(function ()
+    PlacementObjectManager:applyFunc(1, function (objectData, index)
+        local count = 0
+        local rot = objectData.objectModel:getRot().y
+        events.TICK:register(function ()
+            if count == 0 then
+                FireworkManager:spawn(objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.734375, -0.72, 0, 1, 0)), vectors.vec3(-15, rot + 180, 0))
+            elseif count == 10 then
+                FireworkManager:spawn(objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.734375, -0.72, 0, 1, 0)), vectors.vec3(-15, rot + 180, 0))
+            elseif count == 20 then
+                FireworkManager:spawn(objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.296875, -0.72, 0, 1, 0)), vectors.vec3(-15, rot + 180, 0))
+            elseif count == 30 then
+                FireworkManager:spawn(objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.296875, -0.72, 0, 1, 0)), vectors.vec3(-15, rot + 180, 0))
+            end
+            count = count + 1
+        end, "firework_launcher_"..objectData.objectModel:getName().."_tick")
+    end)
 end)
 
 return BlueArchiveCharacter
