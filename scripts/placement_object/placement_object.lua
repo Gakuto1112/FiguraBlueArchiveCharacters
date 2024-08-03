@@ -11,7 +11,7 @@ PlacementObject = {
 
         ---設置物の見かけのオフセット位置
         ---@type Vector3
-        instance.modelOffsetPos = vectors.vec3(0, 0.075, 0)
+        instance.modelOffsetPos = vectors.vec3()
 
         ---設置物としてこのインスタンスで操作するモデルパーツ
         ---@type ModelPart
@@ -60,9 +60,15 @@ PlacementObject = {
         instance.onInit = function ()
             if objectData.gravity ~= nil then
                 instance.gravity = objectData.gravity
-                if instance.gravity < 0 then
-                    instance.modelOffsetPos.y = -0.075
-                end
+            end
+            local objectOffset = vectors.vec3()
+            if objectData.boundingBox.offsetPos ~= nil then
+                objectOffset = objectData.boundingBox.offsetPos:copy():scale(-0.0625)
+            end
+            if instance.gravity >= 0 then
+                instance.modelOffsetPos = objectOffset:copy():add(0, 0.075, 0)
+            else
+                instance.modelOffsetPos = objectOffset:copy():add(0, -0.075, 0)
             end
             if objectData.hasFireResistance ~= nil then
                 instance.hasFireResistance = objectData.hasFireResistance
