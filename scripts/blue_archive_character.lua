@@ -2662,8 +2662,4 @@ models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet:setRot(1
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
 models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill:setColor(0.25, 0.39, 0.67)
 
-for _, modelPart in ipairs({models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb1.LightBulb1, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb2.LightBulb2, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb3.LightBulb3, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb4.LightBulb4, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb5.LightBulb5, models.models.ex_skill_1.Stall.Roof.RoofTop.LightBulbs.LightBulb6.LightBulb6}) do
-    modelPart:setLight(15)
-end
-
 return BlueArchiveCharacter
