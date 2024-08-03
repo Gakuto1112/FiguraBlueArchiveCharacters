@@ -2618,84 +2618,110 @@ BlueArchiveCharacter = {
         callback = function (modelPart)
         end
         ]]
-    }
+    },
 
     --その他定数・変数
+
+    ---花火台発射のクールダウン
+    ExSKill1LaunchCooldown = 0
 }
 
---生徒固有初期化処理
----脚と丈の長いスカートの調整が有効かどうか
----@type boolean
-local legAdjustmentEnabled = true
+events.ENTITY_INIT:register(function ()
+    --生徒固有初期化処理
+    ---脚と丈の長いスカートの調整が有効かどうか
+    ---@type boolean
+    local legAdjustmentEnabled = true
 
----前ティックに脚とスカートの調整をしたかどうか
----@type boolean
-local legAdjustedPrev = false
+    ---前ティックに脚とスカートの調整をしたかどうか
+    ---@type boolean
+    local legAdjustedPrev = false
 
----前ティックは脚を隠すべきだったかどうか
----@type boolean
-local shouldHideLegsPrev = false
+    ---前ティックは脚を隠すべきだったかどうか
+    ---@type boolean
+    local shouldHideLegsPrev = false
 
-events.TICK:register(function ()
-    local robeVisible = models.models.main.Avatar.UpperBody.Body.Skirt:getVisible()
-    local shouldHideLegs = robeVisible and player:getVehicle() ~= nil
-    if shouldHideLegs and not shouldHideLegsPrev then
-        models.models.main.Avatar.LowerBody.Legs:setVisible(false)
-        models.models.main.Avatar.UpperBody.Body.Skirt:setScale(1.5, 0.35, 2)
-    elseif not shouldHideLegs and shouldHideLegsPrev then
-        models.models.main.Avatar.LowerBody.Legs:setVisible(true)
-        models.models.main.Avatar.UpperBody.Body.Skirt:setScale()
-    end
-    local shouldAdjustLegs = legAdjustmentEnabled and robeVisible and not shouldHideLegs
-    if shouldAdjustLegs and not legAdjustedPrev then
-        events.RENDER:register(function ()
-            local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
-            models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.55, 0, 0)
-            models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.55, 0, 0)
-            local rightLegRotAbs = math.abs(rightLegRotX)
-            models.models.main.Avatar.UpperBody.Body.Skirt:setScale(1, 1, rightLegRotAbs * 0.0025 + 1)
-            local robeScale2 = vectors.vec3(rightLegRotAbs * -0.000625 + 1, 1, rightLegRotAbs * 0.00125 + 1)
-            models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2:setScale(robeScale2)
-            models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2.Skirt3:setScale(robeScale2)
-        end, "skirt_render")
-    elseif not shouldAdjustLegs and legAdjustedPrev then
-        events.RENDER:remove("skirt_render")
-        for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
-            modelPart:setRot()
+    events.TICK:register(function ()
+        local robeVisible = models.models.main.Avatar.UpperBody.Body.Skirt:getVisible()
+        local shouldHideLegs = robeVisible and player:getVehicle() ~= nil
+        if shouldHideLegs and not shouldHideLegsPrev then
+            models.models.main.Avatar.LowerBody.Legs:setVisible(false)
+            models.models.main.Avatar.UpperBody.Body.Skirt:setScale(1.5, 0.35, 2)
+        elseif not shouldHideLegs and shouldHideLegsPrev then
+            models.models.main.Avatar.LowerBody.Legs:setVisible(true)
+            models.models.main.Avatar.UpperBody.Body.Skirt:setScale()
         end
-        if not shouldHideLegs then
-            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2, models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2.Skirt3}) do
-                modelPart:setScale()
+        local shouldAdjustLegs = legAdjustmentEnabled and robeVisible and not shouldHideLegs
+        if shouldAdjustLegs and not legAdjustedPrev then
+            events.RENDER:register(function ()
+                local rightLegRotX = vanilla_model.RIGHT_LEG:getOriginRot().x
+                models.models.main.Avatar.LowerBody.Legs.RightLeg:setRot(rightLegRotX * -0.55, 0, 0)
+                models.models.main.Avatar.LowerBody.Legs.LeftLeg:setRot(vanilla_model.LEFT_LEG:getOriginRot().x * -0.55, 0, 0)
+                local rightLegRotAbs = math.abs(rightLegRotX)
+                models.models.main.Avatar.UpperBody.Body.Skirt:setScale(1, 1, rightLegRotAbs * 0.0025 + 1)
+                local robeScale2 = vectors.vec3(rightLegRotAbs * -0.000625 + 1, 1, rightLegRotAbs * 0.00125 + 1)
+                models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2:setScale(robeScale2)
+                models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2.Skirt3:setScale(robeScale2)
+            end, "skirt_render")
+        elseif not shouldAdjustLegs and legAdjustedPrev then
+            events.RENDER:remove("skirt_render")
+            for _, modelPart in ipairs({models.models.main.Avatar.LowerBody.Legs.RightLeg, models.models.main.Avatar.LowerBody.Legs.LeftLeg}) do
+                modelPart:setRot()
+            end
+            if not shouldHideLegs then
+                for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2, models.models.main.Avatar.UpperBody.Body.Skirt.Skirt2.Skirt3}) do
+                    modelPart:setScale()
+                end
             end
         end
-    end
-    shouldHideLegsPrev = shouldHideLegs
-    legAdjustedPrev = shouldAdjustLegs
-end)
+        shouldHideLegsPrev = shouldHideLegs
+        legAdjustedPrev = shouldAdjustLegs
+    end)
 
-events.RENDER:register(function (delta, context)
-    if ExSkill.AnimationCount == -1 and context ~= "FIRST_PERSON" then
-        if Gun.CurrentGunPosition == "NONE" then
-            models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setRot(math.clamp(vanilla_model.RIGHT_ARM:getOriginRot().x * -1 + 90, -35, 35), 0, 0)
-            models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setRot(math.clamp(vanilla_model.LEFT_ARM:getOriginRot().x * -1 + 90, -35, 35), 0, 0)
+    events.RENDER:register(function (delta, context)
+        if ExSkill.AnimationCount == -1 and context ~= "FIRST_PERSON" then
+            if Gun.CurrentGunPosition == "NONE" then
+                models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setRot(math.clamp(vanilla_model.RIGHT_ARM:getOriginRot().x * -1 + 90, -35, 35), 0, 0)
+                models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setRot(math.clamp(vanilla_model.LEFT_ARM:getOriginRot().x * -1 + 90, -35, 35), 0, 0)
+            else
+                models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setRot(math.clamp(models.models.main.Avatar.UpperBody.Arms.RightArm:getRot().x * -1 + 90, -35, 35), 0, 0)
+                models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setRot(math.clamp(models.models.main.Avatar.UpperBody.Arms.LeftArm:getRot().x * -1 + 90, -35, 35), 0, 0)
+            end
         else
-            models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setRot(math.clamp(models.models.main.Avatar.UpperBody.Arms.RightArm:getRot().x * -1 + 90, -35, 35), 0, 0)
-            models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setRot(math.clamp(models.models.main.Avatar.UpperBody.Arms.LeftArm:getRot().x * -1 + 90, -35, 35), 0, 0)
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve}) do
+                modelPart:setRot()
+            end
         end
-    else
-        for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve}) do
-            modelPart:setRot()
-        end
+        models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:getTrueRot().x < 0 and -7 or 0, 0)
+        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:getTrueRot().x < 0 and -7 or 0, 0)
+    end)
+
+    if host:isHost() then
+        events.TICK:register(function ()
+            BlueArchiveCharacter.ExSKill1LaunchCooldown = math.max(BlueArchiveCharacter.ExSKill1LaunchCooldown - 1, 0)
+        end)
+        keybinds:newKeybind("test", "key.keyboard.keypad.1"):onPress(function ()
+            PlacementObjectManager:place(1, player:getPos():add(0, 2, 0), player:getBodyYaw() * -1 + 180)
+        end)
+
+        keybinds:newKeybind("test2", "key.keyboard.keypad.2"):onPress(function ()
+            if #PlacementObjectManager.PlacementObjects > 0 then
+                if BlueArchiveCharacter.ExSKill1LaunchCooldown == 0 then
+                    pings.lauchFireworks()
+                    BlueArchiveCharacter.ExSKill1LaunchCooldown = 200
+                else
+                    print(Language:getTranslate("ex_skill_1__in_cool_down_pre")..math.ceil(BlueArchiveCharacter.ExSKill1LaunchCooldown / 20)..Language:getTranslate("ex_skill_1__in_cool_down_post"))
+                end
+            end
+        end)
+
+        Language.LanguageData.en_us["ex_skill_1__in_cool_down_pre"] = "Please wait "
+        Language.LanguageData.ja_jp["ex_skill_1__in_cool_down_pre"] = "あと"
+        Language.LanguageData.en_us["ex_skill_1__in_cool_down_post"] = " more seconds to lanch fireworks."
+        Language.LanguageData.ja_jp["ex_skill_1__in_cool_down_post"] = "秒待ってください。"
     end
-    models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.RightArm.RightSleeve:getTrueRot().x < 0 and -7 or 0, 0)
-    models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:setOffsetPivot(0, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftSleeve:getTrueRot().x < 0 and -7 or 0, 0)
 end)
 
-keybinds:newKeybind("test", "key.keyboard.keypad.1"):onPress(function ()
-    PlacementObjectManager:place(1, player:getPos():add(0, 2, 0), player:getBodyYaw() * -1 + 180)
-end)
-
-keybinds:newKeybind("test2", "key.keyboard.keypad.2"):onPress(function ()
+function pings.lauchFireworks()
     PlacementObjectManager:applyFunc(1, function (objectData, index)
         local modelName = objectData.objectModel:getName()
 
@@ -2743,6 +2769,6 @@ keybinds:newKeybind("test2", "key.keyboard.keypad.2"):onPress(function ()
             barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel4, count >= 30 and math.clamp((count + delta) * -0.2 + 7, 0, 1) or 0)
         end, "firework_launcher_"..modelName.."_render")
     end)
-end)
+end
 
 return BlueArchiveCharacter
