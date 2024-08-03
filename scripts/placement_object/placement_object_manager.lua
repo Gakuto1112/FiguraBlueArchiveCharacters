@@ -1,92 +1,119 @@
+---設置物の設置モードの列挙型
+---@alias PlacementObjectManager.PlecementMode
+---| "COPY" コピーモード。BBアニメーションは使えないが、複数の設置物を設置可能。
+---| "MOVE" 移動モード。同時に1つしか設置物を設置できないが、BBアニメーションが使える。
+
+---設置物が削除された理由の列挙型
+---@alias PlacementObjectManager.RemoveReason
+---| "REMOVED_BY_SCRIPTS" スクリプトによって削除
+---| "OVERLAPPED" 設置物がブロックと重なって削除
+---| "BURNT" 炎に焼かれて削除
+---| "TOO_LOW" 設置物のY座標が低過ぎて削除
+---| "TOO_HIGH" 設置物のY座標が高過ぎて削除
+
 ---@class PlacementObjectManager 設置物を管理するマネージャークラス
 PlacementObjectManager = {
     ---デバッグモード
     ---@type boolean
     DEBUG_MODE = false,
 
+    ---設置物インスタンスを生成するクラス
+    ---@type PlacementObject
+    PlacementObjectInstance = require("scripts.placement_object.placement_object"),
+
     ---設置物のインスタンスを保持するテーブル
-    ---@type table<table>
-    Objects = {},
+    ---@type table[]
+    PlacementObjects = {},
 
-    ---レンダーイベントを処理したかどうか
-    ---@type boolean
-    IsRenderProcessed = false,
+    ---設置物を設置する。
+    ---@param self PlacementObjectManager
+    ---@param objectIndex integer 設置物データのインデックス番号
+    ---@param worldPos Vector3 設置物を設置するワールド座標
+    ---@param worldRot number 設置物を設置するワールド方向（Y軸のみ）
+    place = function (self, objectIndex, worldPos, worldRot)
+        if BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementMode == "COPY" then
+            local instance = self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel:copy("PlacementObject_"..client.intUUIDToString(client:generateUUID())):moveTo(models.script_placement_object), objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot)
+            table.insert(self.PlacementObjects, instance)
+            instance:onInit()
+        else
+            for index, placementObject in ipairs(self.PlacementObjects) do
+                if placementObject.objectIndex == objectIndex then
+                    placementObject.onDeinit()
+                    table.remove(self.PlacementObjects, index)
+                    break
+                end
+            end
+            local instance = self.PlacementObjectInstance.new(BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex].placementModel, objectIndex, BlueArchiveCharacter.PLACEMENT_OBJECT[objectIndex], worldPos, worldRot)
+            table.insert(self.PlacementObjects, instance)
+            instance:onInit()
+        end
+        if events.TICK:getRegisteredCount("placement_object_tick") == 0 then
+            events.TICK:register(function ()
+                for index, placementObject in ipairs(self.PlacementObjects) do
+                    placementObject.onTick()
+                    if placementObject.deinitRequired then
+                        placementObject.onDeinit()
+                        table.remove(self.PlacementObjects, index)
+                        if #self.PlacementObjects == 0 then
+                            events.TICK:remove("placement_object_tick")
+                            events.RENDER:remove("placement_object_render")
+                        end
+                    end
+                end
+            end, "placement_object_tick")
+            events.RENDER:register(function (delta, context, matrix)
+                for _, placementObject in ipairs(self.PlacementObjects) do
+                    placementObject.onRender(delta, context, matrix)
+                end
+            end, "placement_object_render")
+        end
+    end,
 
-    ---今ある全ての設置物を削除する。
+    ---設置済みの設置物を1つ削除する。
+    ---@param self PlacementObjectManager
+    ---@param index integer 削除対象の設置物のインデックス番号（PlacementObjectManager.PlacementObjectsでの番号）
+    remove = function (self, index)
+        self.PlacementObjects[index].onDeinit()
+        table.remove(self.PlacementObjects, index)
+        if #self.PlacementObjects == 0 then
+            events.TICK:remove("placement_object_tick")
+            events.RENDER:remove("placement_object_render")
+        end
+    end,
+
+    ---設置済みの設置物を全て削除する。
+    ---@param self PlacementObjectManager
     removeAll = function (self)
-        while #self.Objects > 0 do
-            self.Objects[1]:remove()
-            table.remove(self.Objects, 1)
+        while #self.PlacementObjects > 0 do
+            self:remove(1)
+        end
+    end,
+
+    ---設置済み設置物の、指定した設置物データのインデックス番号のみに関数を適用する。
+    ---@param self PlacementObjectManager
+    ---@param objectIndex integer 関数実行対象の設置物データのインデックス番号
+    ---@param func fun(objectData: table, index: integer)
+    applyFunc = function (self, objectIndex, func)
+        for index, placementObject in ipairs(self.PlacementObjects) do
+            if placementObject.objectIndex == objectIndex then
+                func(placementObject, index)
+            end
         end
     end,
 
     ---初期化関数
-    init = function (self)
+    init = function ()
         ---@diagnostic disable-next-line: discard-returns
         models:newPart("script_placement_object", "World")
-
-        events.TICK:register(function ()
-            local index = 1
-            while index <= #self.Objects do
-                if self.Objects[index]:getIsObjectOverlapped() then
-                    self.Objects[index]:remove()
-                    table.remove(self.Objects, index)
-                elseif self.Objects[index]:getWorldPos().y <= -128 then
-                    self.Objects[index]:remove()
-                    table.remove(self.Objects, index)
-                else
-                    local objectRemoved = false
-                    local objectPos = self.Objects[index]:getWorldPos()
-                    local worldBoungingBoxSize = self.Objects[index].boundingBox:copy():scale(1 / 16)
-                    local halfWorldBoungingBoxSize = worldBoungingBoxSize:copy():scale(1 / 2)
-                    for _, block in ipairs(self.Objects[index]:getCollisionBlocks(vectors.vec3(objectPos.x - halfWorldBoungingBoxSize.x, objectPos.y, objectPos.z - halfWorldBoungingBoxSize.z), vectors.vec3(objectPos.x + halfWorldBoungingBoxSize.x, objectPos.y + worldBoungingBoxSize.y, objectPos.z + halfWorldBoungingBoxSize.z))) do
-                        local objectBlockId = world.getBlockState(block).id
-                        if objectBlockId == "minecraft:lava" or objectBlockId == "minecraft:fire" or objectBlockId == "minecraft:soul_fire" then
-                            self.Objects[index]:remove()
-                            table.remove(self.Objects, index)
-                            sounds:playSound("minecraft:block.fire.extinguish", objectPos)
-                            for _ = 0, worldBoungingBoxSize.x * worldBoungingBoxSize.y * worldBoungingBoxSize.z * 8 do
-                                particles:newParticle("minecraft:smoke", vectors.vec3(objectPos.x + math.random() * worldBoungingBoxSize.x - halfWorldBoungingBoxSize.x, objectPos.y + math.random() * worldBoungingBoxSize.y, objectPos.z + math.random() * worldBoungingBoxSize.z - halfWorldBoungingBoxSize.z))
-                            end
-                            objectRemoved = true
-                            break
-                        end
-                    end
-                    if not objectRemoved then
-                        self.Objects[index]:fallTickProcess()
-                        index = index + 1
-                    end
-                end
-
+        for _, placementObjectData in ipairs(BlueArchiveCharacter.PLACEMENT_OBJECT) do
+            if placementObjectData.placementMode == "MOVE" then
+                placementObjectData.placementModel = placementObjectData.placementModel:moveTo(models.script_placement_object)
+                placementObjectData.placementModel:setVisible(false)
             end
-        end)
-
-        events.RENDER:register(function (delta)
-            if not self.IsRenderProcessed then
-                for _, placementObject in ipairs(self.Objects) do
-                    placementObject:fallRenderProcess(delta)
-                end
-                self.IsRenderProcessed = true
-            end
-        end)
-
-        events.WORLD_RENDER:register(function ()
-            self.IsRenderProcessed = false
-        end)
-    end,
-
-    ---指定した場所に指定した向きで設置物を置く。
-    ---@param objectData table 設置するオブジェクトのデータ
-    ---@param worldPos Vector3 設置する場所を示すワールド座標
-    ---@param worldRot number 設置物の向き
-    place = function (self, objectData, worldPos, worldRot)
-        local instance = PlacementObject.new(objectData)
-        instance:setWorldPos(worldPos, true)
-        instance:setWorldRot(vectors.vec3(0, worldRot))
-        table.insert(self.Objects, instance)
+        end
     end
 }
 
-PlacementObjectManager:init()
+PlacementObjectManager.init()
 
 return PlacementObjectManager
