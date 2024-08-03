@@ -335,9 +335,35 @@ BlueArchiveCharacter = {
             placementModel = models.models.placement_object.PlacementObject,
 
             ---設置物の当たり判定
-            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
-            ---@type Vector3
-            boundingBox = vectors.vec3(38, 37, 38)
+            boundingBox = {
+                --[[
+                ---設置物の底の中心点のオフセット位置（任意）。基準点は(0, 0, 0)。
+                ---@type Vector3
+                offsetPos = vectors.vec3()
+                ]]
+
+                ---当たり判定の大きさ。BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+                ---@type Vector3
+                size = vectors.vec3(38, 37, 38)
+            },
+
+            ---設置物の設置モード
+            ---@type PlacementObjectManager.PlecementMode
+            placementMode = "COPY",
+
+            --[[
+            ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。
+            ---@type number
+            gravity = 1,
+
+            ---設置物に火炎耐性を付与するかどうか（任意）。trueにすると炎やマグマで焼かれなくなる。
+            ---@type boolean
+            hasFireResistance = false,
+            ]]
+
+            ---コールバック関数
+            callbacks = {
+            }
         }
     },
 
@@ -491,6 +517,14 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                    if #PlacementObjectManager.PlacementObjects == 5 then
+                        PlacementObjectManager:remove(1)
+                    end
+                end,
+
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
@@ -667,7 +701,7 @@ BlueArchiveCharacter = {
                     events.RENDER:remove("ex_skill_1_render")
                     if not forcedStop then
                         local bodyYaw = player:getBodyYaw()
-                        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], player:getPos():add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 1, 4, 0, 1, 0)), (bodyYaw * -1 + 180) % 360)
+                        PlacementObjectManager:place(1, player:getPos():add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 1, 4, 0, 1, 0)), (bodyYaw * -1 + 180) % 360)
                     end
                 end
             }
