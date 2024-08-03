@@ -48,7 +48,7 @@ Although the avatars for these characters are not created, there are plans to cr
 - An object remains after the ex skill if the ex skill type is "leaving something in a place".
   - The object doesn't affect the game at all.
   - The object will be remove when the hit boxes of a block and it are overlapped.
-  - You can also remove the object by right-clicking the action of the ex skill.
+  - You can remove all placement objects by holding the Ex skill key (default: V).
 
   ![Placement object](./README_images/placement_object.jpg)
 
@@ -161,7 +161,6 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
   - You can resolve this issue by re-holding a weapon.
 - The halo (head ring) and arms holding weapons may not be rendered when activating a shader pack with [Iris Shaders](https://www.irisshaders.dev/) only once after game startup ([#63](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/63)).
   - You can resolve this issue by reloading the avatar.
-- Some parts of placement objects flicker black when they are placed on opaque blocks ([#67](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/67)).
 
 ---
 
