@@ -1,5 +1,6 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
+	PlayerUtils = require("scripts.utils.player_utils")
 	ExSkillTextAnimation = require("scripts.ex_skill.ex_skill_text_animation")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
@@ -37,7 +38,6 @@ events.ENTITY_INIT:register(function ()
 end)
 
 --ENTITY_INITを待たず読み込むクラス
-PlayerUtils = require("scripts.utils.player_utils")
 ModelUtils = require("scripts.utils.model_utils")
 BlueArchiveCharacter = require("scripts.blue_archive_character")
 HeadRing = require("scripts.head_ring")
