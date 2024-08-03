@@ -320,17 +320,41 @@ BlueArchiveCharacter = {
         ]]
 
         {
-
-
             ---設置物として扱うモデル
             ---指定したモデルをコピーして設置物とする。
             ---@type ModelPart
-            model = models.models.ex_skill_1.Stall,
+            placementModel = models.models.ex_skill_1.Stall,
 
             ---設置物の当たり判定
-            ---BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
-            ---@type Vector3
-            boundingBox = vectors.vec3(20, 38, 20)
+            boundingBox = {
+                --[[
+                ---設置物の底の中心点のオフセット位置（任意）。基準点は(0, 0, 0)。
+                ---@type Vector3
+                offsetPos = vectors.vec3()
+                ]]
+
+                ---当たり判定の大きさ。BlockBenchでのサイズの値をそのまま入力する。基準点はモデルの底面の中心
+                ---@type Vector3
+                size = vectors.vec3(20, 38, 20)
+            },
+
+            ---設置物の設置モード
+            ---@type PlacementObjectManager.PlecementMode
+            placementMode = "COPY",
+
+            --[[
+            ---設置物にかかる重力（任意）。1が標準的な自由落下。0で空中静止。負の数で反重力。
+            ---@type number
+            gravity = 1,
+
+            ---設置物に火炎耐性を付与するかどうか（任意）。trueにすると炎やマグマで焼かれなくなる。
+            ---@type boolean
+            hasFireResistance = false,
+            ]]
+
+            ---コールバック関数
+            callbacks = {
+            }
         }
     },
 
@@ -484,6 +508,12 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                    PlacementObjectManager:removeAll()
+                end,
+
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
@@ -586,7 +616,7 @@ BlueArchiveCharacter = {
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_1:setVisible(false)
                     else
                         local bodyYaw = player:getBodyYaw() % 360
-                        PlacementObjectManager:place(BlueArchiveCharacter.PLACEMENT_OBJECT[1], vectors.rotateAroundAxis(bodyYaw * -1, -7.9375, 0, -0.5625, 0, 1, 0):add(player:getPos()), 195 + bodyYaw * -1)
+                        PlacementObjectManager:place(1, vectors.rotateAroundAxis(bodyYaw * -1, -7.9375, 0, -0.5625, 0, 1, 0):add(player:getPos()), 195 + bodyYaw * -1)
                     end
                 end
             }
