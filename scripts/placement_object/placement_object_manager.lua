@@ -49,21 +49,25 @@ PlacementObjectManager = {
         end
         if events.TICK:getRegisteredCount("placement_object_tick") == 0 then
             events.TICK:register(function ()
-                for index, placementObject in ipairs(self.PlacementObjects) do
-                    placementObject.onTick()
-                    if placementObject.deinitRequired then
-                        placementObject.onDeinit()
-                        table.remove(self.PlacementObjects, index)
-                        if #self.PlacementObjects == 0 then
-                            events.TICK:remove("placement_object_tick")
-                            events.RENDER:remove("placement_object_render")
+                if not client:isPaused() then
+                    for index, placementObject in ipairs(self.PlacementObjects) do
+                        placementObject.onTick()
+                        if placementObject.deinitRequired then
+                            placementObject.onDeinit()
+                            table.remove(self.PlacementObjects, index)
+                            if #self.PlacementObjects == 0 then
+                                events.TICK:remove("placement_object_tick")
+                                events.RENDER:remove("placement_object_render")
+                            end
                         end
                     end
                 end
             end, "placement_object_tick")
             events.RENDER:register(function (delta, context, matrix)
-                for _, placementObject in ipairs(self.PlacementObjects) do
-                    placementObject.onRender(delta, context, matrix)
+                if not client:isPaused() then
+                    for _, placementObject in ipairs(self.PlacementObjects) do
+                        placementObject.onRender(delta, context, matrix)
+                    end
                 end
             end, "placement_object_render")
         end
