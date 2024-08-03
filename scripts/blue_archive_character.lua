@@ -363,6 +363,15 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
+                ---設置物インスタンスが破棄される直前に呼ばれる関数（任意）
+                ---@param placementObject table 設置物インスタンス
+                onDeinit = function (placementObject)
+                    local modelName = placementObject.objectModel:getName()
+                    while events.TICK:getRegisteredCount("firework_launcher_"..modelName.."_tick") > 0 do
+                        events.TICK:remove("firework_launcher_"..modelName.."_tick")
+                        events.RENDER:remove("firework_launcher_"..modelName.."_render")
+                    end
+                end
             }
         }
     },
