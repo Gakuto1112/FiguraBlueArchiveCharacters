@@ -43,7 +43,7 @@ BlueArchiveCharacter = {
         clubName = {
             ---英語
             ---@type string
-            en_us = "Task force committee",
+            en_us = "Countermeasure Council",
 
             ---日本語
             ---@type string
@@ -442,7 +442,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Tactical suppression",
+                en_us = "Tactical Suppression",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
@@ -628,7 +628,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Aquatic support",
+                en_us = "Aquatic Support",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
