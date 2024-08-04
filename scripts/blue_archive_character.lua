@@ -573,6 +573,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.MenuSign:newText("MenuSign_takoyaki_text"):setText("§4§lたこ\n焼き"):setPos(-3.25, 4.25, -0.01):setScale(0.35, 0.35, 0.35):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
                         models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.MenuSign:newItem("MenuSign_emerald_item"):setItem(CompatibilityUtils:checkItem("minecraft:emerald")):setPos(3, -3.25, -0.01):setScale(0.175, 0.175, 0)
                         models.models.ex_skill_1.Stalls.TakoyakiStall.TakoyakiStallFrames.MenuSign:newText("MenuSign_price_text"):setText("§0§lx5"):setPos(0.5, -3, -0.01):setScale(0.15, 0.15, 0.15):setAlignment("CENTER"):setOutline(true):setOutlineColor(0.8, 0.8, 0.8)
+                        models.models.ex_skill_1.Stalls.TakoyakiStall:newBlock("TakoyakiStall_step"):setBlock(CompatibilityUtils:checkBlock("minecraft:scaffolding")):setPos(20, -6, 16)
 
                         models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable.PlanksSheet:setPrimaryTexture("RESOURCE", "minecraft:textures/block/oak_planks.png")
                         makeIkayakiText(models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallRoof.StallRoofFront, vectors.vec3(0, -6, -1.01), 0)
@@ -582,6 +583,7 @@ BlueArchiveCharacter = {
                             models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable["MenuLabel"..i]:newItem("MenuLabel"..i.."_emerald_item"):setItem(CompatibilityUtils:checkItem("minecraft:emerald")):setPos(1.75, -2, -0.01):setScale(0.25, 0.25, 0)
                             models.models.ex_skill_1.Stalls.IkayakiStall.IkayakiStallTable["MenuLabel"..i]:newText("MenuLabel"..i.."_price_text"):setText("§0§lx"..(i - 1) * 2 + 1):setPos(-1.5, -1.75, -0.01):setScale(0.25, 0.25, 0.25):setAlignment("CENTER")
                         end
+                        models.models.ex_skill_1.Stalls.IkayakiStall:newBlock("IkayakiStall_step"):setBlock(CompatibilityUtils:checkBlock("minecraft:scaffolding")):setPos(15, -6, 16)
                         BlueArchiveCharacter.EX_SKILL[1].IsPrepared = true
                     end
                     events.RENDER:register(function ()
