@@ -138,6 +138,10 @@ NameUtils = {
         self.CheckedList.item["minecraft:barrier"] = true
         self.CheckedList.particle["minecraft:empty"] = true
         self.CheckedList.sound["minecraft:ui.button.click"] = true
+
+        if host:isHost() and client:getVersion() < "1.20.1" then
+            print(Language:getTranslate("avatar__old_version_warning"))
+        end
     end
 }
 
