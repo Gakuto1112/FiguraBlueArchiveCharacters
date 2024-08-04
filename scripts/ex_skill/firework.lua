@@ -8,7 +8,7 @@ Firework = {
 
         ---ロケット花火のアイテムタスク
         ---@type ItemTask
-        instance.itemTask = models.script_firework:newItem("firework_"..client.intUUIDToString(client:generateUUID())):setItem("minecraft:firework_rocket"):setScale(0.5, 0.5, 0.5)
+        instance.itemTask = models.script_firework:newItem("firework_"..client.intUUIDToString(client:generateUUID())):setItem(CompatibilityUtils:checkItem("minecraft:firework_rocket")):setScale(0.5, 0.5, 0.5)
 
         ---ロケット花火の現在位置
         ---@type Vector3
@@ -28,7 +28,7 @@ Firework = {
 
         ---ロケット花火を飛ばす音のインスタンス
         ---@type Sound
-        instance.launchSound = sounds:playSound("minecraft:entity.firework_rocket.launch", instance.currentPos, 1, 0.5)
+        instance.launchSound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.launch"), instance.currentPos, 1, 0.5)
 
         ---この設置物インスタンスの破棄を要求するかどうか。trueにした次のティックにインスタンスは破棄される。
         ---@type boolean
@@ -66,7 +66,7 @@ Firework = {
                 end
             end
 
-            particles:newParticle("minecraft:firework", instance.currentPos):setVelocity(vectors.rotateAroundAxis(rot.z, vectors.rotateAroundAxis(rot.y, vectors.rotateAroundAxis(rot.x, math.random() * 0.05 - 0.025, 0.1, 0, 1, 0, 0), 0, 1, 0), 0, 0, 1))
+            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:firework"), instance.currentPos):setVelocity(vectors.rotateAroundAxis(rot.z, vectors.rotateAroundAxis(rot.y, vectors.rotateAroundAxis(rot.x, math.random() * 0.05 - 0.025, 0.1, 0, 1, 0, 0), 0, 1, 0), 0, 0, 1))
 
             --次ティックの花火の位置を算出
             instance.nextPos = instance.currentPos:copy():add(instance.rotVec:copy():scale(1.4))
@@ -83,13 +83,13 @@ Firework = {
         ---花火を爆発させる。
         instance.blast = function ()
             local fireworkColor = vectors.hsvToRGB(math.random(), 0.8, 1)
-            particles:newParticle("minecraft:flash", instance.currentPos):setColor(fireworkColor)
+            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:flash"), instance.currentPos):setColor(fireworkColor)
             for _ = 1, 400 do
                 local particleAngleX = math.random() * math.pi * 2
                 local particleAngleY = math.random() * math.pi * 2
-                particles:newParticle("minecraft:firework", instance.currentPos):setVelocity(math.cos(particleAngleX) * math.cos(particleAngleY) * 0.4, math.sin(particleAngleY) * 0.4, math.sin(particleAngleX) * math.cos(particleAngleY) * 0.4):setColor(fireworkColor)
+                particles:newParticle(CompatibilityUtils:checkParticle("minecraft:firework"), instance.currentPos):setVelocity(math.cos(particleAngleX) * math.cos(particleAngleY) * 0.4, math.sin(particleAngleY) * 0.4, math.sin(particleAngleX) * math.cos(particleAngleY) * 0.4):setColor(fireworkColor)
             end
-            sounds:playSound("minecraft:entity.firework_rocket.large_blast", instance.currentPos, 1, 1):setAttenuation(5)
+            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.large_blast"), instance.currentPos, 1, 1):setAttenuation(5)
             instance.blastCount = -1
             instance.deinitRequired = true
         end
