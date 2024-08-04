@@ -10,7 +10,7 @@ Portrait = {
         --ヘルメットを着けている場合は外しておく。
         local isHelmetVisible = Armor.ArmorVisible[1]
         if isHelmetVisible then
-            Armor:setHelmet(world.newItem("minecraft:air"))
+            Armor:setHelmet(world.newItem(NameUtils:checkItem("minecraft:air")))
         end
 
         --頭ブロックから除外するモデルパーツを予め非表示にする。
