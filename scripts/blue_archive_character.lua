@@ -548,11 +548,11 @@ BlueArchiveCharacter = {
                 animationTick = function(tick)
                     if tick == 0 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "FUN", 16, true)
-                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 1, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.note_block.bit"), player:getPos(), 1, 1.5)
                     elseif tick == 1 then
-                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 1, 1.75)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.note_block.bit"), player:getPos(), 1, 1.75)
                     elseif tick == 2 then
-                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 1, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.note_block.bit"), player:getPos(), 1, 2)
                     elseif tick == 14 then
                         for _, modelPart in ipairs({models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeLeft, models.models.ex_skill_1.Midori.MidoriHead.MidoriFaceParts.Eyes.EyeRight}) do
                             modelPart:setUVPixels(12, 0)
@@ -561,7 +561,7 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANXIOUS", "ANXIOUS", "ANXIOUS", 24, true)
                     elseif tick == 24 then
                         BlueArchiveCharacter.ExSkill1TextAnimations[1]:play()
-                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.hurt"), player:getPos(), 0.25, 1)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
@@ -576,7 +576,7 @@ BlueArchiveCharacter = {
                         models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Mouth:setUVPixels(16, 16)
                     elseif tick == 31 then
                         BlueArchiveCharacter.ExSkill1TextAnimations[2]:play()
-                        sounds:playSound("minecraft:entity.generic.hurt", player:getPos(), 0.25, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.hurt"), player:getPos(), 0.25, 1)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Eyes.EyeRight:setUVPixels(6, 0)
@@ -592,8 +592,8 @@ BlueArchiveCharacter = {
                     elseif tick == 36 then
                         BlueArchiveCharacter.ExSkill1TextAnimations[3]:play()
                         local playerPos = player:getPos()
-                        sounds:playSound("minecraft:entity.generic.hurt", playerPos, 0.25, 1)
-                        sounds:playSound("minecraft:entity.player.levelup", playerPos, 1, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.hurt"), playerPos, 0.25, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), playerPos, 1, 1.5)
                         if host:isHost() then
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll:setColor(1, 0.75, 0.75)
                             models.models.ex_skill_1.Gui.UI.MomoiUI.PaperDoll.MomoiPaperDollHead.FaceParts.Eyes:setVisible(false)
@@ -637,13 +637,13 @@ BlueArchiveCharacter = {
                             end, "ex_skill_1_text_render")
                         end
                     elseif tick == 83 then
-                        sounds:playSound("minecraft:entity.generic.explode", player:getPos(), 0.25, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.explode"), player:getPos(), 0.25, 0.5)
                     end
                     if tick <= 38 and math.random() >= 0.75 then
-                        sounds:playSound("minecraft:block.note_block.bit", player:getPos(), 0.1, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.note_block.bit"), player:getPos(), 0.1, 2)
                     end
                     if tick <= 38 and tick % 3 == 0 and host:isHost() then
-                        sounds:playSound("minecraft:entity.player.attack.nodamage", player:getPos(), 0.25, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.nodamage"), player:getPos(), 0.25, 1)
                     end
                 end,
 
@@ -753,39 +753,42 @@ BlueArchiveCharacter = {
                         end
                         for y = 0, 1 do
                             for x = 0, 1 do
-                                models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_"..y * 2 + x):setBlock("minecraft:barrel[facing=up]"):setPos(x * 16, y * 16, 0)
+                                models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_"..y * 2 + x):setBlock(CompatibilityUtils:checkBlock("minecraft:barrel", "[facing=up]")):setPos(x * 16, y * 16, 0)
                             end
                         end
-                        models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_4"):setBlock("minecraft:barrel[facing=up]"):setPos(16, 0, -16)
-                        --models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_5"):setBlock("minecraft:decorated_pot"):setPos(16, 16, -16) --ブロックタスクで何故か飾り壺が描画されない...
+                        models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_4"):setBlock(CompatibilityUtils:checkBlock("minecraft:barrel", "[facing=up]")):setPos(16, 0, -16)
+                        --models.models.ex_skill_2.Covers.CoverLeft:newBlock("ex_skill_2_block_5"):setBlock(CompatibilityUtils:checkBlock("minecraft:decorated_pot")):setPos(16, 16, -16) --ブロックタスクで何故か飾り壺が描画されない...
                         for i = 0, 1 do
-                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..6 + i):setBlock("minecraft:barrel[facing=up]"):setPos(-16, i * 16, 0)
+                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..6 + i):setBlock(CompatibilityUtils:checkBlock("minecraft:barrel", "[facing=up]")):setPos(-16, i * 16, 0)
                         end
                         for i = 0, 1 do
-                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..8 + i):setBlock("minecraft:barrel[facing=up]"):setPos(-32, 0, i * -16)
+                            models.models.ex_skill_2.Covers.CoverRight:newBlock("ex_skill_2_block_"..8 + i):setBlock(CompatibilityUtils:checkBlock("minecraft:barrel", "[facing=up]")):setPos(-32, 0, i * -16)
                         end
                         for i = 0, 1 do
-                            models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_"..10 + i):setBlock("minecraft:barrel[facing=up]"):setPos(i * 16, 0, 0)
+                            models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_"..10 + i):setBlock(CompatibilityUtils:checkBlock("minecraft:barrel", "[facing=up]")):setPos(i * 16, 0, 0)
                         end
-                        models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_12"):setBlock("minecraft:barrel[facing=up]"):setPos(16, 16, 0)
-                        --models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_13"):setBlock("minecraft:dirt"):setPos(0, 16, 0) --ブロックタスクで何故か飾り壺が描画されない...
+                        models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_12"):setBlock(CompatibilityUtils:checkBlock("minecraft:barrel", "[facing=up]")):setPos(16, 16, 0)
+                        --models.models.ex_skill_2.Covers.CoverBack1:newBlock("ex_skill_2_block_13"):setBlock(CompatibilityUtils:checkBlock("minecraft:decorated_pot")):setPos(0, 16, 0) --ブロックタスクで何故か飾り壺が描画されない...
                         for i = 0, 1 do
-                            models.models.ex_skill_2.Covers.CoverBack2:newBlock("ex_skill_2_block_"..14 + i):setBlock("minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=true,slot_5_occupied=true]"):setPos(-8, i * 16, -8)
+                            models.models.ex_skill_2.Covers.CoverBack2:newBlock("ex_skill_2_block_"..14 + i):setBlock(CompatibilityUtils:checkBlock( "minecraft:chiseled_bookshelf", "[facing=north,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=true,slot_5_occupied=true]")):setPos(-8, i * 16, -8)
                         end
                         for i = 0, 1 do
-                            models.models.ex_skill_2.Covers.CoverBack3:newBlock("ex_skill_2_block_"..16 + i):setBlock("minecraft:red_wool"):setPos(-8, i * 16, -8)
+                            models.models.ex_skill_2.Covers.CoverBack3:newBlock("ex_skill_2_block_"..16 + i):setBlock(CompatibilityUtils:checkBlock("minecraft:red_wool")):setPos(-8, i * 16, -8)
                         end
-                        models.models.ex_skill_2.Covers.CoverBack4:newBlock("ex_skill_2_block_18"):setBlock("minecraft:dark_oak_planks"):setPos(0, 0, 0)
-                        --models.models.ex_skill_2.Covers.CoverBack4:newBlock("ex_skill_2_block_19"):setBlock("minecraft:dirt"):setPos(-16, 16, 0) --ブロックタスクで何故か飾り壺が描画されない...
+                        models.models.ex_skill_2.Covers.CoverBack4:newBlock("ex_skill_2_block_18"):setBlock(CompatibilityUtils:checkBlock("minecraft:dark_oak_planks")):setPos(0, 0, 0)
+                        --models.models.ex_skill_2.Covers.CoverBack4:newBlock("ex_skill_2_block_19"):setBlock(CompatibilityUtils:checkBlock("minecraft:decorated_pot")):setPos(-16, 16, 0) --ブロックタスクで何故か飾り壺が描画されない...
                         for y = 0, 6 do
                             for x = 0, 8 do
                                 local blockCount = y * 9 + x
-                                models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..20 + blockCount):setBlock( (blockCount == 13 or blockCount == 22 or blockCount == 29 or blockCount == 30 or blockCount == 32 or blockCount == 33 or blockCount == 40 or blockCount == 49) and "minecraft:dark_oak_log[axis=z]" or "minecraft:dark_oak_planks"):setPos(x * 16, y * 16, 0)
+                                if blockCount == 13 or blockCount == 22 or blockCount == 29 or blockCount == 30 or blockCount == 32 or blockCount == 33 or blockCount == 40 or blockCount == 49 then
+                                    models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..20 + blockCount):setBlock(CompatibilityUtils:checkBlock("minecraft:dark_oak_log", "[axis=z]")):setPos(x * 16, y * 16, 0)
+                                end
+                                models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..20 + blockCount):setBlock( CompatibilityUtils:checkBlock("minecraft:dark_oak_planks")):setPos(x * 16, y * 16, 0)
                             end
                         end
                         for j = 0, 1 do
                             for i = 0, 6 do
-                                models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..83 + j * 7 + i):setBlock("minecraft:dark_oak_planks"):setPos(j * 128, i * 16, -16)
+                                models.models.ex_skill_2.Wall:newBlock("ex_skill_2_block_"..83 + j * 7 + i):setBlock(CompatibilityUtils:checkBlock("minecraft:dark_oak_planks")):setPos(j * 128, i * 16, -16)
                             end
                         end
                         --models.models.ex_skill_2.Wall.Paintings.MainPainting:newEntity("ex_skill_2_entity_1"):setPos(0, 32, 0):setRot(0, 180, 0):setLight(15, 15) --謎の影ができて、それが消せない...
@@ -803,7 +806,7 @@ BlueArchiveCharacter = {
                             modelPart:setLight(15)
                         end
                         for i = 1, 3 do
-                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem("minecraft:crossbow"):setPos(0, -12, -2):setRot(0, 0, -135)
+                            models.models.ex_skill_2.Pillagers["Pillager"..i]["Pillager"..i.."RightArm"]:newItem("ex_skill_2_pillager_"..i.."_crossbow"):setItem(CompatibilityUtils:checkItem("minecraft:crossbow")):setPos(0, -12, -2):setRot(0, 0, -135)
                         end
                         if host:isHost() then
                             models.models.ex_skill_2.Gui.UI.MomoiUI:addChild(models.models.ex_skill_2.Gui.UI.MomoiUI.UI1:copy("UI1Shadow"))
@@ -886,7 +889,7 @@ BlueArchiveCharacter = {
                     local specialItemValue = math.random() --0.80未満で「金のマガジン」、0.80~0.90未満で「エメラルド」、0.90~1.00未満で「ダイヤモンド」
                     if specialItemValue >= 0.8 then
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(false)
-                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:newItem("special_item"):setItem(specialItemValue < 0.9 and "minecraft:emerald" or "minecraft:diamond")
+                        models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem:newItem("special_item"):setItem(CompatibilityUtils:checkItem(specialItemValue < 0.9 and "minecraft:emerald" or "minecraft:diamond"))
                     else
                         models.models.ex_skill_2.Wall.SpecialItemGroup.SpecialItem.GoldenMagazine:setVisible(true)
                     end
@@ -920,18 +923,18 @@ BlueArchiveCharacter = {
                         local anchorPos = ModelUtils.getModelWorldPos(anchor)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 5 do
-                            particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0.1, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0.1, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
                         end
                         local muzzleAnchorPos =  ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.Gun.MuzzleAnchor)
 
                         for _ = 1, 5 do
-                            particles:newParticle("minecraft:smoke", muzzleAnchorPos)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), muzzleAnchorPos)
                         end
                     end
 
                     ---射撃音を再生する。
                     local function shotSound()
-                        sounds:playSound("minecraft:entity.firework_rocket.blast", ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.blast"), ModelUtils.getModelWorldPos(host:isHost() and models.models.main.CameraAnchor or models.models.main.Avatar), 1, math.random() * 0.25 + 0.5)
                     end
 
                     ---飾り壺を割った時の演出
@@ -939,17 +942,17 @@ BlueArchiveCharacter = {
                     local function potBreak(potModel)
                         local potPos = ModelUtils.getModelWorldPos(potModel)
                         for _ = 1, 32 do
-                            particles:newParticle("minecraft:block minecraft:decorated_pot", potPos:copy():add(math.random() - 0.5, math.random(), math.random() - 0.5))
+                            particles:newParticle(CompatibilityUtils.getBlockParticleId(CompatibilityUtils:checkBlock("minecraft:decorated_pot")), potPos:copy():add(math.random() - 0.5, math.random(), math.random() - 0.5))
                         end
-                        sounds:playSound("minecraft:block.glass.break", potPos, 1, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.glass.break"), potPos, 1, 0.5)
                         potModel:setVisible(false)
                     end
 
                     if tick == 1 then
                         local playerPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
                         local bodyYaw = player:getBodyYaw()
-                        particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1, -0.75, 1.25, 0, 0, 1, 0):add(playerPos)):setScale(1):setColor(1, 0.984, 0.4):setLifetime(20)
-                        particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1, 0.65, 1.9, 0, 0, 1, 0):add(playerPos)):setScale(0.5):setColor(1, 0.984, 0.4):setLifetime(20)
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), vectors.rotateAroundAxis(bodyYaw * -1, -0.75, 1.25, 0, 0, 1, 0):add(playerPos)):setScale(1):setColor(1, 0.984, 0.4):setLifetime(20)
+                        particles:newParticle(CompatibilityUtils:checkBlock("minecraft:end_rod"), vectors.rotateAroundAxis(bodyYaw * -1, 0.65, 1.9, 0, 0, 1, 0):add(playerPos)):setScale(0.5):setColor(1, 0.984, 0.4):setLifetime(20)
                     elseif tick == 4 then
                         FaceParts:setEmotion("ANGRY_CENTER", "ANGRY", "SMILE", 6, true)
                     elseif tick == 10 then
@@ -1052,7 +1055,7 @@ BlueArchiveCharacter = {
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Covers.CoverBack1.ExSkill2ParticleAnchor12)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 5 do
-                            particles:newParticle("minecraft:electric_spark", anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0.1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), anchorPos):setScale(1):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0.1, math.random() * 0.25 - 0.125, math.random() * 0.25 - 0.125, 0, 1, 0)):setColor(0.98, 0.843, 0.341):setLifetime(2)
                         end
                         shotSound()
                     elseif tick == 88 or tick == 99 then
@@ -1093,20 +1096,20 @@ BlueArchiveCharacter = {
                             events.RENDER:remove("ex_skill_2_render")
                         end
                     elseif tick == 116 then
-                        sounds:playSound("minecraft:entity.zombie.break_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.25, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.zombie.break_wooden_door"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.25, 2)
                     elseif tick == 128 then
-                        sounds:playSound("minecraft:entity.player.levelup", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup), 1, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup), 1, 1)
                     elseif tick == 132 then
                         local anchorPos = vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0, -0.75, 2, 0, 1, 0):add(ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting))
                         for _ = 1, 20 do
                             local xOffset = math.random() * 4 - 2
                             local zOffset = math.random() * 4 - 2
-                            particles:newParticle("minecraft:campfire_cosy_smoke", anchorPos:copy():add(xOffset, 0, zOffset)):setScale(5):setVelocity(xOffset * 0.03, 0.025, zOffset * 0.03)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:campfire_cosy_smoke"), anchorPos:copy():add(xOffset, 0, zOffset)):setScale(5):setVelocity(xOffset * 0.03, 0.025, zOffset * 0.03)
                         end
-                        sounds:playSound("minecraft:entity.zombie.attack_wooden_door", anchorPos, 0.25, 2)
-                        sounds:playSound("minecraft:entity.pillager.hurt", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.zombie.attack_wooden_door"), anchorPos, 0.25, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.pillager.hurt"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 1, 1)
                     elseif tick == 138 then
-                        sounds:playSound("minecraft:entity.zombie.attack_wooden_door", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.05, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.zombie.attack_wooden_door"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.Paintings.MainPainting), 0.05, 2)
                     elseif tick == 148 and host:isHost() then
                         local windowSize = client:getScaledWindowSize()
                         models.models.ex_skill_2.Gui.TransitionFilter:setScale(windowSize.x, windowSize.y, 1)
@@ -1142,36 +1145,36 @@ BlueArchiveCharacter = {
                     elseif tick == 174 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "OPENED", 36, true)
                     elseif tick == 178 then
-                        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), player:getPos(), 1, 1.5)
                     end
                     if tick >= 128 and tick < 151 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Wall.SpecialItemGroup)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 5 do
-                            particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 3 - 1.5, math.random() * 3 - 1.5, 0, 0, 1, 0):add(anchorPos)):setVelocity(0, 0.1, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 3 - 1.5, math.random() * 3 - 1.5, 0, 0, 1, 0):add(anchorPos)):setVelocity(0, 0.1, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
                         end
                     elseif tick >= 151 and tick < 170 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.SpecialItemGroup)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 2 do
-                            particles:newParticle("minecraft:end_rod", vectors.rotateAroundAxis(bodyYaw * -1 + 35, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0):add(anchorPos)):setScale(0.25):setVelocity(0, 0.016, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:end_rod"), vectors.rotateAroundAxis(bodyYaw * -1 + 35, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0):add(anchorPos)):setScale(0.25):setVelocity(0, 0.016, 0):setColor(BlueArchiveCharacter.EX_SKILL[2].glowColor):setLifetime(8)
                         end
                     end
                     if tick < 124 then
                         for i = 1, 3 do
                             if math.random() >= 0.99 then
-                                sounds:playSound("minecraft:entity.pillager.ambient", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers["Pillager"..i]), 0.5, 1)
+                                sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.pillager.ambient"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers["Pillager"..i]), 0.5, 1)
                             end
                         end
                     end
                     if tick >= 105 and tick < 124 and math.random() >= 0.95 then
-                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.crossbow.shoot"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager1), 0.5, 1)
                     end
                     if tick >= 70 and tick < 124 and math.random() >= 0.95 then
-                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.crossbow.shoot"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager2), 0.5, 1)
                     end
                     if tick >= 54 and tick < 124 and math.random() >= 0.95 then
-                        sounds:playSound("minecraft:item.crossbow.shoot", ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.crossbow.shoot"), ModelUtils.getModelWorldPos(models.models.ex_skill_2.Pillagers.Pillager3), 0.5, 1)
                     end
                     if tick >= 22 and tick < 151 and host:isHost() then
                         if (tick - 22) % 30 == 0 then
