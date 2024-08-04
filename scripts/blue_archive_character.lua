@@ -533,7 +533,7 @@ BlueArchiveCharacter = {
                                 FaceParts:setEmotion("INVERSED", "NORMAL", "TRIANGLE", 8, true)
                             end
                             if (tick - 24) % 2 == 0 then
-                                sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 1, 2)
+                                sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.experience_orb.pickup"), player:getPos(), 1, 2)
                             end
                             BlueArchiveCharacter.EX_SKILL_1_TEXT_1:setPos(vectors.vec3(-7, 6, -6):add(math.random() * 0.2 - 0.05, math.random() * 0.2 - 0.05))
                         elseif tick == 36 then
@@ -558,13 +558,13 @@ BlueArchiveCharacter = {
                             end
                             local particleAnchor = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, 5, 0)
                             local fireworkColor = vectors.hsvToRGB(math.random(), 0.8, 1)
-                            particles:newParticle("minecraft:flash", particleAnchor):setColor(fireworkColor)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:flash"), particleAnchor):setColor(fireworkColor)
                             for _ = 1, 400 do
                                 local particleAngleX = math.random() * math.pi * 2
                                     local particleAngleY = math.random() * math.pi * 2
-                                    particles:newParticle("minecraft:firework", particleAnchor):setVelocity(math.cos(particleAngleX) * math.cos(particleAngleY) * 0.2, math.sin(particleAngleY) * 0.2, math.sin(particleAngleX) * math.cos(particleAngleY) * 0.2):setColor(fireworkColor)
+                                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:firework"), particleAnchor):setVelocity(math.cos(particleAngleX) * math.cos(particleAngleY) * 0.2, math.sin(particleAngleY) * 0.2, math.sin(particleAngleX) * math.cos(particleAngleY) * 0.2):setColor(fireworkColor)
                             end
-                            sounds:playSound("minecraft:entity.firework_rocket.large_blast", player:getPos())
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.large_blast"), player:getPos())
                         elseif tick == 57 then
                             FaceParts:setEmotion("SURPLISED", "SURPLISED", "TRIANGLE", 19, true)
                         elseif tick == 69 and host:isHost() then
@@ -572,23 +572,23 @@ BlueArchiveCharacter = {
                             events.RENDER:remove("ex_skill_1_background_render")
                         elseif tick == 76 then
                             FaceParts:setEmotion("UNEQUAL", "UNEQUAL", "CLOSED", 24, true)
-                            sounds:playSound("minecraft:entity.generic.small_fall", player:getPos(), 1)
-                            sounds:playSound("minecraft:block.glass.break", ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.ExSkill1SoundAnchor2), 1, 0.5)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.small_fall"), player:getPos(), 1)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.glass.break"), ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.ExSkill1SoundAnchor2), 1, 0.5)
                             local particleAnchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.ExSkill1ParticleAnchor1)
                             for i = 0, 5 do
                                 local particleRot = math.rad(i * 60)
-                                particles:newParticle("minecraft:wax_off", particleAnchor1Pos):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
+                                particles:newParticle(CompatibilityUtils:checkParticle("minecraft:wax_off"), particleAnchor1Pos):setColor(1, 1, 0):setLifetime(12):setVelocity(math.cos(particleRot) * 0.05, 0.1, math.sin(particleRot) * 0.05):setGravity(0.5)
                             end
                             local particleAnchor4Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.WaterSpill.ExSkill1ParticleAnchor4)
                             for i = 0, 5 do
                                 local particleRot = i * (math.pi / 3)
-                                particles:newParticle("minecraft:splash", particleAnchor4Pos:copy():add(math.cos(particleRot) * 0.25, 0, math.sin(particleRot) * 0.25)):setScale(1.5):setLifetime(10)
+                                particles:newParticle(CompatibilityUtils:checkParticle("minecraft:splash"), particleAnchor4Pos:copy():add(math.cos(particleRot) * 0.25, 0, math.sin(particleRot) * 0.25)):setScale(1.5):setLifetime(10)
                             end
                         end
                         if tick % 4 == 0 then
                             for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi1.ExSkill1ParticleAnchor2, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.TeaSet.Yunomi2.ExSkill1ParticleAnchor3}) do
                                 local particleAnchorPos = ModelUtils.getModelWorldPos(modelPart)
-                                particles:newParticle("poof", particleAnchorPos):setScale(0.2):setVelocity():setLifetime(15)
+                                particles:newParticle(CompatibilityUtils:checkParticle("poof"), particleAnchorPos):setScale(0.2):setVelocity():setLifetime(15)
                             end
                         end
                     end
@@ -596,11 +596,11 @@ BlueArchiveCharacter = {
                         local particleAnchor5Pos = ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stall.ExSkill1ParticleAnchor5)
                         for i = 0, 11 do
                             local particleRot = i * (math.pi / 6)
-                            particles:newParticle("minecraft:block minecraft:dirt", particleAnchor5Pos:copy():add(math.cos(particleRot) * 0.6, 0, math.sin(particleRot) * 0.6))
+                            particles:newParticle(CompatibilityUtils.getBlockParticleId(CompatibilityUtils:checkBlock("minecraft:dirt")), particleAnchor5Pos:copy():add(math.cos(particleRot) * 0.6, 0, math.sin(particleRot) * 0.6))
                         end
                     end
                     if tick % math.ceil((ExSkill.AnimationLength - tick) / 20) == 0 then
-                        sounds:playSound("minecraft:entity.boat.paddle_land", ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stall.Wheels.ExSkill1SoundAnchor1))
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.boat.paddle_land"), ModelUtils.getModelWorldPos(models.models.ex_skill_1.Stall.Wheels.ExSkill1SoundAnchor1))
                     end
                 end,
 
@@ -702,12 +702,12 @@ BlueArchiveCharacter = {
                         local particleAnchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ExSkill2ParticleAnchor1)
                         if tick <= 16 then
                             for _ = 1, 2 do
-                                particles:newParticle("minecraft:block minecraft:snow", particleAnchor1Pos):setPower(0.25):setLifetime(10)
+                                particles:newParticle(CompatibilityUtils.getBlockParticleId(CompatibilityUtils:checkBlock("minecraft:snow")), particleAnchor1Pos):setPower(0.25):setLifetime(10)
                             end
                         end
                         if tick >= 16 then
                             for _ = 1, 4 do
-                                particles:newParticle("minecraft:block minecraft:light_blue_concrete", particleAnchor1Pos):setPower(0):setLifetime(10)
+                                particles:newParticle(CompatibilityUtils.getBlockParticleId(CompatibilityUtils:checkBlock("minecraft:light_blue_concrete")), particleAnchor1Pos):setPower(0):setLifetime(10)
                             end
                             if tick == 16 then
                                 for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIce1, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIce2, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIce3, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIce4, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIce5, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIceEars.ShavedIceEarLeft, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ShavedIceEars.ShavedIceEarRight}) do
@@ -738,9 +738,9 @@ BlueArchiveCharacter = {
                         local particleAnchor2Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ExSkill2ParticleAnchor2)
                         local bodyYaw = player:getBodyYaw()
                         for i = 1, 4 do
-                            particles:newParticle("minecraft:electric_spark", particleAnchor2Pos):setColor(0.99, 0.6, 0.73):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 30, vectors.vec3(i <= 2 and 0.2 or -0.2, i % 2 == 0 and 0 or 0.1), 0, 1)):setGravity(0.5):setLifetime(4)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), particleAnchor2Pos):setColor(0.99, 0.6, 0.73):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 30, vectors.vec3(i <= 2 and 0.2 or -0.2, i % 2 == 0 and 0 or 0.1), 0, 1)):setGravity(0.5):setLifetime(4)
                         end
-                        sounds:playSound("minecraft:entity.item.pickup", ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ExSkill2SoundAnchor1), 1, 0.75)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.ShavedIce2.ExSkill2SoundAnchor1), 1, 0.75)
                     elseif tick >= 34 and tick <= 69 then
                         sounds:playSound("minecraft:item.bucket.empty", ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Plate.ShavedIce.Wave.ExSkill2SoundAnchor2), math.clamp(tick <= 43 and (tick * 0.056 - 1.904) or (tick >= 60 and (tick * -0.056 + 3.86) or 0.5), 0, 0.5), 0.75)
                     elseif tick == 75 then
@@ -748,12 +748,12 @@ BlueArchiveCharacter = {
                     elseif tick == 92 then
                         FaceParts:setEmotion("NORMAL", "CLOSED", "OPENED", 18, true)
                         local bodyYaw = player:getBodyYaw()
-                        particles:newParticle("minecraft:electric_spark", ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2ParticleAnchor3)):setColor(1, 1, 0.68):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 5, vectors.vec3(0.2, 0.2), 0, 1)):setGravity(1):setLifetime(18)
-                        sounds:playSound("minecraft:entity.experience_orb.pickup", ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2SoundAnchor3), 1, 2)
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2ParticleAnchor3)):setColor(1, 1, 0.68):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 5, vectors.vec3(0.2, 0.2), 0, 1)):setGravity(1):setLifetime(18)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.experience_orb.pickup"), ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Eyes.ExSkill2SoundAnchor3), 1, 2)
                         local particleAnchor4Pos = ModelUtils.getModelWorldPos(models.models.main.ExSkill2ParticleAnchor4)
                         for i = 0, 31 do
                             local particleRot = i / 8 * math.pi + 0.2
-                            particles:newParticle("minecraft:electric_spark", particleAnchor4Pos):setColor(0.87, 0.71, 0.99, 0.5):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 17.5, vectors.vec3(math.cos(particleRot), math.sin(particleRot)), 0, 1):scale(i < 16 and 0.15 or 0.2)):setScale(1.5) :setLifetime(18)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), particleAnchor4Pos):setColor(0.87, 0.71, 0.99, 0.5):setVelocity(vectors.rotateAroundAxis(-bodyYaw - 17.5, vectors.vec3(math.cos(particleRot), math.sin(particleRot)), 0, 1):scale(i < 16 and 0.15 or 0.2)):setScale(1.5) :setLifetime(18)
                         end
                     end
                 end,
