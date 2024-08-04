@@ -98,15 +98,15 @@ NameUtils = {
         return self.CheckedList.particle[particle] and particle or "minecraft:poof"
     end,
 
-    ---指定されたサウンドIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:ui.button.click"を返す。
+    ---指定されたサウンドIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:empty"を返す。
     ---@param self NameUtils
     ---@param sound Minecraft.soundID 確認対象のサウンドID
-    ---@return Minecraft.soundID particleID レジストリに登録してある場合は確認対象のサウンドIDをそのまま返し、未登録の場合は"minecraft:ui.button.click"が返す。
+    ---@return Minecraft.soundID particleID レジストリに登録してある場合は確認対象のサウンドIDをそのまま返し、未登録の場合は"minecraft:empty"が返す。
     checkSound = function (self, sound)
         if self.CheckedList.sound[sound] == nil then
             self.CheckedList.sound[sound] = self:find("SOUND", sound)
         end
-        return self.CheckedList.sound[sound] and sound or "minecraft:ui.button.click"
+        return self.CheckedList.sound[sound] and sound or "minecraft:empty"
     end,
 
     ---ブロックの破片のパーティクルを示す文字列を返す。Minecraftのバージョン違いを吸収するための関数。
@@ -137,7 +137,7 @@ NameUtils = {
         self.CheckedList.block["minecraft:air"] = true
         self.CheckedList.item["minecraft:barrier"] = true
         self.CheckedList.particle["minecraft:poof"] = true
-        self.CheckedList.sound["minecraft:ui.button.click"] = true
+        self.CheckedList.sound["minecraft:empty"] = true
 
         if host:isHost() and client:getVersion() < "1.20.1" then
             print(Language:getTranslate("avatar__old_version_warning"))
