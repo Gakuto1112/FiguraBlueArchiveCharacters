@@ -460,7 +460,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Momoyado on-site service!",
+                en_us = "Momoyo Hall Take-out!",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
@@ -628,7 +628,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "On-site, summer Momoyado stall!",
+                en_us = "Business trip, Momoyo summer stall!",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
