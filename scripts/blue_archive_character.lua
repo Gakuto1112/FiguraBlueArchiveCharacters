@@ -2746,7 +2746,9 @@ events.ENTITY_INIT:register(function ()
 
     if host:isHost() then
         events.TICK:register(function ()
-            BlueArchiveCharacter.ExSKill1LaunchCooldown = math.max(BlueArchiveCharacter.ExSKill1LaunchCooldown - 1, 0)
+            if not client:isPaused() then
+                BlueArchiveCharacter.ExSKill1LaunchCooldown = math.max(BlueArchiveCharacter.ExSKill1LaunchCooldown - 1, 0)
+            end
         end)
 
         KeyManager:register("firework_launch", "key.keyboard.g", function ()
@@ -2788,43 +2790,47 @@ function pings.lauchFireworks()
         local count = 0
         local rot = objectData.objectModel:getRot().y
         events.TICK:register(function ()
-            local fireworkPos = vectors.vec3()
-            if count == 0 then
-                fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.734375, -0.72, 0, 1, 0))
-                FireworkManager:spawn(fireworkPos, vectors.vec3(-17.5, rot + 177.5, 0))
-            elseif count == 10 then
-                fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.734375, -0.72, 0, 1, 0))
-                FireworkManager:spawn(fireworkPos, vectors.vec3(-17.5, rot + 182.5, 0))
-            elseif count == 20 then
-                fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.296875, -0.72, 0, 1, 0))
-                FireworkManager:spawn(fireworkPos, vectors.vec3(-12.5, rot + 177.5, 0))
-            elseif count == 30 then
-                fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.296875, -0.72, 0, 1, 0))
-                FireworkManager:spawn(fireworkPos, vectors.vec3(-12.5, rot + 182.5, 0))
-            elseif count == 35 then
-                events.TICK:remove("firework_launcher_"..modelName.."_tick")
-                events.RENDER:remove("firework_launcher_"..modelName.."_render")
-            end
-            if count % 10 == 0 then
-                for _ = 1, 10 do
-                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), fireworkPos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.25, math.random() * 0.25 - 0.125))
+            if not client:isPaused() then
+                local fireworkPos = vectors.vec3()
+                if count == 0 then
+                    fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.734375, -0.72, 0, 1, 0))
+                    FireworkManager:spawn(fireworkPos, vectors.vec3(-17.5, rot + 177.5, 0))
+                elseif count == 10 then
+                    fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.734375, -0.72, 0, 1, 0))
+                    FireworkManager:spawn(fireworkPos, vectors.vec3(-17.5, rot + 182.5, 0))
+                elseif count == 20 then
+                    fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, 0.234375, 1.296875, -0.72, 0, 1, 0))
+                    FireworkManager:spawn(fireworkPos, vectors.vec3(-12.5, rot + 177.5, 0))
+                elseif count == 30 then
+                    fireworkPos = objectData.currentPos:copy():add(vectors.rotateAroundAxis(rot, -0.234375, 1.296875, -0.72, 0, 1, 0))
+                    FireworkManager:spawn(fireworkPos, vectors.vec3(-12.5, rot + 182.5, 0))
+                elseif count == 35 then
+                    events.TICK:remove("firework_launcher_"..modelName.."_tick")
+                    events.RENDER:remove("firework_launcher_"..modelName.."_render")
                 end
-                sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.blaze.hurt"), objectData.currentPos, 1, 1.5)
+                if count % 10 == 0 then
+                    for _ = 1, 10 do
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), fireworkPos:copy():add(math.random() * 0.25 - 0.125, math.random() * 0.25 + 0.25, math.random() * 0.25 - 0.125))
+                    end
+                    sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.blaze.hurt"), objectData.currentPos, 1, 1.5)
+                end
+                count = count + 1
             end
-            count = count + 1
         end, "firework_launcher_"..modelName.."_tick")
         events.RENDER:register(function (delta)
-            ---バレルのレンダー処理
-            ---@param barrelModel ModelPart 処理対象のバレルもモデル
-            ---@param barrelCount number バレルのカウンタ値。0~1。
-            local function barrelRender(barrelModel, barrelCount)
-                barrelModel:setPos(0, 0, barrelCount * 4)
-                barrelModel:setColor(vectors.vec3(1, 1, 1):sub(vectors.vec3(0, 0.087, 0.242):scale(barrelCount)))
+            if not client:isPaused() then
+                ---バレルのレンダー処理
+                ---@param barrelModel ModelPart 処理対象のバレルもモデル
+                ---@param barrelCount number バレルのカウンタ値。0~1。
+                local function barrelRender(barrelModel, barrelCount)
+                    barrelModel:setPos(0, 0, barrelCount * 4)
+                    barrelModel:setColor(vectors.vec3(1, 1, 1):sub(vectors.vec3(0, 0.087, 0.242):scale(barrelCount)))
+                end
+                barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel1, math.max((count + delta) * -0.2 + 1, 0))
+                barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel2, count >= 10 and math.clamp((count + delta) * -0.2 + 3, 0, 1) or 0)
+                barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel3, count >= 20 and math.clamp((count + delta) * -0.2 + 5, 0, 1) or 0)
+                barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel4, count >= 30 and math.clamp((count + delta) * -0.2 + 7, 0, 1) or 0)
             end
-            barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel1, math.max((count + delta) * -0.2 + 1, 0))
-            barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel2, count >= 10 and math.clamp((count + delta) * -0.2 + 3, 0, 1) or 0)
-            barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel3, count >= 20 and math.clamp((count + delta) * -0.2 + 5, 0, 1) or 0)
-            barrelRender(objectData.objectModel.Cannon.CannonHead.CannonBarrel4, count >= 30 and math.clamp((count + delta) * -0.2 + 7, 0, 1) or 0)
         end, "firework_launcher_"..modelName.."_render")
     end)
 end
