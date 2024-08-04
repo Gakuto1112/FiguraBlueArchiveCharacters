@@ -48,7 +48,7 @@ BlueArchiveCharacter = {
         clubName = {
             ---英語
             ---@type string
-            en_us = "Game development department",
+            en_us = "Game Development Club",
 
             ---日本語
             ---@type string
@@ -444,7 +444,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Drawing art",
+                en_us = "Drawing Art",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
@@ -701,7 +701,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Virtual Maid Shot",
+                en_us = "Virtual・Maid・Shot!",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
