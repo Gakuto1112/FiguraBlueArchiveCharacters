@@ -29,7 +29,7 @@ Gun = {
 
     ---前ティックに手に持っていたアイテム: 1. メインハンド, 2. オフハンド
     ---@type ItemStack[]
-    HeldItemsPrev = {world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air"))},
+    HeldItemsPrev = {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))},
 
     ---銃の位置を変更する。
     ---@param GunPosition Gun.GunPosition 変更先の構え位置
@@ -80,7 +80,7 @@ Gun = {
             models.models.main.Avatar.UpperBody.Body.Gun:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("Item")
             if not client:isPaused() then
-                sounds:playSound(NameUtils:checkSound("minecraft:item.flintandsteel.use"), player:getPos(), 1, 2)
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.flintandsteel.use"), player:getPos(), 1, 2)
             end
             self.CurrentGunPosition = "RIGHT"
         else
@@ -110,7 +110,7 @@ Gun = {
             models.models.main.Avatar.UpperBody.Body.Gun:setVisible(true)
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("Item")
             if not client:isPaused() then
-                sounds:playSound(NameUtils:checkSound("minecraft:item.flintandsteel.use"), player:getPos(), 1, 2)
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.flintandsteel.use"), player:getPos(), 1, 2)
             end
             self.CurrentGunPosition = "LEFT"
         end
@@ -143,7 +143,7 @@ Gun = {
     ---@param self Gun
     init = function (self)
         events.TICK:register(function()
-            local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air"))}
+            local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
             local targetItemFound = false
             local isLeftHanded = player:isLeftHanded()
             if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id then
@@ -206,15 +206,15 @@ Gun = {
                 local distanceFromSound = math.abs(pos:copy():sub(player:getPos()):length() - velocityDistance)
                 if (id == "minecraft:entity.arrow.shoot" or id == "minecraft:item.crossbow.loading_end" or id == "minecraft:item.crossbow.shoot") and math.abs(velocityDistance - distanceFromSound) < 1 then
                     if id == "minecraft:item.crossbow.loading_end" then
-                        sounds:playSound(NameUtils:checkSound("minecraft:block.dispenser.fail"), pos, 1, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.dispenser.fail"), pos, 1, 2)
                     elseif player:isUnderwater() then
-                        sounds:playSound(NameUtils:checkSound("minecraft:entity.generic.extinguish_fire"), pos, 0.5, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.extinguish_fire"), pos, 0.5, 1.5)
                     else
                         local particleAnchor = ModelUtils.getModelWorldPos(renderer:isFirstPerson() and (Gun.CurrentGunPosition == "RIGHT" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot or models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot) or models.models.main.Avatar.UpperBody.Body.Gun.MuzzleAnchor)
                         for _ = 1, 5 do
-                            particles:newParticle(NameUtils:checkParticle("minecraft:smoke"), particleAnchor)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), particleAnchor)
                         end
-                        sounds:playSound(NameUtils:checkSound(BlueArchiveCharacter.GUN.sound.name), pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
+                        sounds:playSound(CompatibilityUtils:checkSound(BlueArchiveCharacter.GUN.sound.name), pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
                     end
                     return true
                 elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and distanceFromSound < 1 and player:getActiveItem().id == "minecraft:crossbow" then
@@ -230,7 +230,7 @@ Gun = {
                         end
                     end
                     if (quickChageLevel <= 4 and activeItemTime + quickChageLevel >= 4 and activeItemTime + quickChageLevel <= 6) or (quickChageLevel == 5 and activeItemTime <= 2) then
-                        sounds:playSound(NameUtils:checkSound("minecraft:item.flintandsteel.use"), pos, 1, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.flintandsteel.use"), pos, 1, 2)
                         return true
                     elseif id == "minecraft:item.crossbow.loading_middle" then
                         return true

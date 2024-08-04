@@ -13,7 +13,7 @@ Armor = {
 
 	---前ティックの防具スロットのアイテム
 	---@type ItemStack[]
-	ArmorSlotItemsPrev = {world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air"))},
+	ArmorSlotItemsPrev = {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))},
 
 	---各防具の部位（ヘルメット、チェストプイート、レギンス、ブーツ）が可視状態かどうか。
 	---@type boolean[]
@@ -198,7 +198,7 @@ Armor = {
 	---@param self Armor
 	init = function (self)
 		events.TICK:register(function ()
-			local armorSlotItems = self.ShowArmor and {player:getItem(6), player:getItem(5), player:getItem(4), player:getItem(3)} or {world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air")), world.newItem(NameUtils:checkItem("minecraft:air"))}
+			local armorSlotItems = self.ShowArmor and {player:getItem(6), player:getItem(5), player:getItem(4), player:getItem(3)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
 			if armorSlotItems[1].id ~= self.ArmorSlotItemsPrev[1].id then
 				self:setHelmet(armorSlotItems[1])
 			end
