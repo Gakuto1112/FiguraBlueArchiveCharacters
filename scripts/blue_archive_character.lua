@@ -535,19 +535,19 @@ BlueArchiveCharacter = {
                     elseif tick == 27 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "SMILE", 24, true)
                     elseif tick == 29 then
-                        sounds:playSound("minecraft:entity.player.attack.weak", player:getPos(), 0.5, 1.5)
+                        sounds:playSound(NameUtils:checkSound("minecraft:entity.player.attack.weak"), player:getPos(), 0.5, 1.5)
                     elseif tick == 31 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[1]:play()
                     elseif tick == 34 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[2]:play()
                     elseif tick == 35 or tick == 40 or tick == 43 or tick == 48 then
-                        sounds:playSound("minecraft:entity.player.attack.weak", player:getPos(), 0.25, 1.5)
+                        sounds:playSound(NameUtils:checkSound("minecraft:entity.player.attack.weak"), player:getPos(), 0.25, 1.5)
                     elseif tick == 38 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[3]:play()
                     elseif tick == 41 then
                         BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS[4]:play()
                     elseif tick == 49 then
-                        sounds:playSound("minecraft:entity.player.attack.sweep", player:getPos(), 0.5, 1.5)
+                        sounds:playSound(NameUtils:checkSound("minecraft:entity.player.attack.sweep"), player:getPos(), 0.5, 1.5)
                     elseif tick == 50 and host:isHost() then
                         models.models.main.CameraBackground:setVisible(true)
                         local backgroundPos = vectors.rotateAroundAxis(player:getBodyYaw() + 180, renderer:getCameraOffsetPivot():copy():add(0, 1.62, 0):add(client:getCameraDir():copy():scale(1.75)), 0, 1, 0):scale(16 / 0.9375)
@@ -572,7 +572,7 @@ BlueArchiveCharacter = {
                     elseif tick == 58 then
                         local playerPos = player:getPos()
                         for _ = 1, 70 do
-                            particles:newParticle("minecraft:poof", playerPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+                            particles:newParticle(NameUtils:checkParticle("minecraft:poof"), playerPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
                         end
                     elseif tick == 61 then
                         for _, textAnimation in ipairs(BlueArchiveCharacter.EX_SKILL_1_TEXT_ANIMATIONS) do
@@ -584,9 +584,9 @@ BlueArchiveCharacter = {
                         local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
                         for _ = 1, 100 do
                             local offset = vectors.vec3(math.random() * 2 - 1, math.random() * 2 - 1, math.random() * 2 - 1)
-                            particles:newParticle("minecraft:cherry_leaves", avatarPos:copy():add(offset)):setVelocity(offset:scale(0.1))
+                            particles:newParticle(NameUtils:checkParticle("minecraft:cherry_leaves"), avatarPos:copy():add(offset)):setVelocity(offset:scale(0.1))
                         end
-                        sounds:playSound("minecraft:item.armor.equip_leather", avatarPos)
+                        sounds:playSound(NameUtils:checkSound("minecraft:item.armor.equip_leather"), avatarPos)
                     elseif tick == 98 then
                         if math.random() >= 0.95 then
                             BlueArchiveCharacter.PLACEMENT_OBJECT[1].placementModel:setPrimaryTexture("RESOURCE", "textures/entity/fox/snow_fox.png")
@@ -599,7 +599,7 @@ BlueArchiveCharacter = {
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.ExSkill1Anchor1)
                         local verocityRot = vectors.rotateAroundAxis(-player:getBodyYaw(), -0.1, 0, 0, 0, 1, 0)
                         for _ = 1, 2 do
-                            particles:newParticle("minecraft:cherry_leaves", anchorPos:copy():add(math.random() * 3 -  1.5, math.random() * 3, math.random() * 3 - 1.5)):setVelocity(verocityRot)
+                            particles:newParticle(NameUtils:checkParticle("minecraft:cherry_leaves"), anchorPos:copy():add(math.random() * 3 -  1.5, math.random() * 3, math.random() * 3 - 1.5)):setVelocity(verocityRot)
                         end
                     end
                 end,
@@ -691,16 +691,16 @@ BlueArchiveCharacter = {
                         local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
                         if particleBlock ~= "minecraft:air" and particleBlock ~= "minecraft:void_air" then
                             for _ = 1, 50 do
-                                particles:newParticle("minecraft:block "..particleBlock, anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
+                                particles:newParticle(NameUtils.getBlockParticleId(NameUtils:checkBlock(particleBlock)), anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
                             end
                         end
                     elseif tick == 25 then
                         models.models.main.Avatar:setVisible(false)
                         local anchor1Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill2Anchor1)
                         for _ = 1, 30 do
-                            particles:newParticle("minecraft:poof", anchor1Pos:copy():add(math.random() - 0.5, math.random() * 2, math.random() - 0.5))
+                            particles:newParticle(NameUtils:checkParticle("minecraft:poof"), anchor1Pos:copy():add(math.random() - 0.5, math.random() * 2, math.random() - 0.5))
                         end
-                        sounds:playSound("minecraft:entity.bat.takeoff", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 2)
+                        sounds:playSound(NameUtils:checkSound("minecraft:entity.bat.takeoff"), ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 2)
                     elseif tick == 28 then
                         renderer:setPostEffect("phosphor")
                     elseif tick == 38 then
@@ -711,7 +711,7 @@ BlueArchiveCharacter = {
                     elseif tick == 44 then
                         local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, -1.5, 0)
                         for _ = 1, 30 do
-                            particles:newParticle("minecraft:poof", avatarPos:copy():add(math.random() - 0.5, math.random() * 2, math.random() - 0.5))
+                            particles:newParticle(NameUtils:checkParticle("minecraft:poof"), avatarPos:copy():add(math.random() - 0.5, math.random() * 2, math.random() - 0.5))
                         end
                     elseif tick >= 45 and tick <= 60 then
                         local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body)
@@ -720,13 +720,13 @@ BlueArchiveCharacter = {
                             local particleDirection = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, 0, 0, 1, 1, 0, 0), 0, 1, 0)
                             for i = 1, 30 do
                                 for j = 0.7, 1.5, 0.1 do
-                                    particles:newParticle("minecraft:dust 100 1000000000 1000000000 1", vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * j, math.sin(math.rad(i * 12)) * j, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
+                                    particles:newParticle(NameUtils.getDustParticleId(vectors.vec3(100, 1000000000, 1000000000), 1), vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * j, math.sin(math.rad(i * 12)) * j, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
                                 end
                                 local particlePos = vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(40, math.cos(math.rad(i * 12)) * 1.5, math.sin(math.rad(i * 12)) * 1.5, 0, 1, 0, 0), 0, 1, 0):add(avatarPos)
-                                particles:newParticle("minecraft:dust 100000000 1000000000 1000000000 1", particlePos):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
+                                particles:newParticle(NameUtils.getDustParticleId(vectors.vec3(100, 1000000000, 1000000000), 1), particlePos):setVelocity(particleDirection:copy():scale(math.random() * 0.1 + 0.2)):setLifetime(math.random() * 10 + 10)
                             end
                         end
-                        sounds:playSound("minecraft:item.bucket.empty", avatarPos, 1 - math.map(tick, 45, 60, 0, 0.5), 0.75)
+                        sounds:playSound(NameUtils:checkSound("minecraft:item.bucket.empty"), avatarPos, 1 - math.map(tick, 45, 60, 0, 0.5), 0.75)
                     elseif tick == 79 and host:isHost() then
                         models.models.main.CameraBackground:setVisible(true)
                         local windowSize = client:getWindowSize()
@@ -749,7 +749,7 @@ BlueArchiveCharacter = {
                         FaceParts:setEmotion("ANGRY", "ANGRY", "OPENED", 16, true)
                         models.models.costume_swimsuit.BeachBall:setUVPixels(0, 7)
                         models.models.costume_swimsuit.BeachBall:setPrimaryRenderType("EMISSIVE_SOLID")
-                        sounds:playSound("minecraft:entity.blaze.death", ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 2)
+                        sounds:playSound(NameUtils:checkSound("minecraft:entity.blaze.death"), ModelUtils.getModelWorldPos(models.models.main.Avatar), 1, 2)
                     elseif tick == 86 then
                         local bodyYaw = player:getBodyYaw()
                         local anchor2Pos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.Legs.RightLeg.RightLegBottom.ExSkill2Anchor2):add(vectors.rotateAroundAxis(-bodyYaw, -0.1, 0, 0, 0, 1, 0)):add(0, 0.4, 0)
@@ -758,8 +758,8 @@ BlueArchiveCharacter = {
                         for i = 1, 60 do
                             local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
                             for _, particleData in ipairs({{0.5, 0.4, 0.1}, {0.25, 0.6, 0.025}, {0.375, 2, 0.05}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール
-                                particles:newParticle("minecraft:dust 1000000000 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
-                                particles:newParticle("minecraft:dust 0 0 0 1", vectors.rotateAroundAxis(i * 6, 0, particleData[1] * 1.5, 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                                particles:newParticle(NameUtils.getDustParticleId(vectors.vec3(1000000000, 0, 0), 1), vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
+                                particles:newParticle(NameUtils.getDustParticleId(vectors.vec3(0, 0, 0), 1), vectors.rotateAroundAxis(i * 6, 0, particleData[1] * 1.5, 0, particleAxis):add(anchor2Pos):add(0, -0.3, 0):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(20)
                             end
                         end
                         if host:isHost() then
@@ -780,17 +780,17 @@ BlueArchiveCharacter = {
                             for i = 1, 60 do
                                 local currentParticleVelocityDirection = vectors.rotateAroundAxis(i * 6, particleVelocityDirection, particleAxis)
                                 for _, particleData in ipairs({{0.3, 3.5, 0.01, 0.5}, {0.5, 3.5, 0.01, 0.5}, {0.25, 7.9, 0.003, 0.2}, {0.28, 7.89, 0.003, 0.2}, {0.45, 7.85, 0.003, 0.5}}) do --[1]. 輪っかの半径, [2]. 輪っかの位置のスケール, [3]. 輪っかの拡散速度のスケール, [4]. 輪っかのパーティクルの大きさ
-                                    particles:newParticle("minecraft:dust 1000000000 1 1 "..particleData[4], vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(45)
+                                    particles:newParticle(NameUtils.getDustParticleId(vectors.vec3(1000000000, 1, 1), particleData[4]), vectors.rotateAroundAxis(i * 6, 0, particleData[1], 0, particleAxis):add(anchor2Pos):add(particleAxis:copy():scale(particleData[2]))):setVelocity(currentParticleVelocityDirection:copy():scale(particleData[3])):setLifetime(45)
                                 end
                             end
-                            sounds:playSound("minecraft:entity.lightning_bolt.thunder", ModelUtils.getModelWorldPos(models.models.costume_swimsuit.BeachBall), 1, 2)
+                            sounds:playSound(NameUtils:checkSound("minecraft:entity.lightning_bolt.thunder"), ModelUtils.getModelWorldPos(models.models.costume_swimsuit.BeachBall), 1, 2)
                         end
                         for _ = 1, 10 do
-                            particles:newParticle("minecraft:dust 1000000000 1 1 1", anchor2Pos:copy():add(particleAxis:copy():scale(7.5)):add(vectors.rotateAroundAxis(-bodyYaw, -0.3, 0, 0, 0, 1, 0)):add(math.random() * 0.2 - 0.1, math.random() * 0.2 - 0.1 - 0.4, math.random() * 0.2 - 0.1)):setVelocity(particleAxis:copy():scale(-1))
+                            particles:newParticle(NameUtils.getDustParticleId(vectors.vec3(1000000000, 1, 1), 1), anchor2Pos:copy():add(particleAxis:copy():scale(7.5)):add(vectors.rotateAroundAxis(-bodyYaw, -0.3, 0, 0, 0, 1, 0)):add(math.random() * 0.2 - 0.1, math.random() * 0.2 - 0.1 - 0.4, math.random() * 0.2 - 0.1)):setVelocity(particleAxis:copy():scale(-1))
                         end
                     end
                     if tick <= 28 and tick % 4 == 0 then
-                        sounds:playSound("minecraft:block.sand.step", ModelUtils.getModelWorldPos(models.models.main.Avatar))
+                        sounds:playSound(NameUtils:checkSound("minecraft:block.sand.step"), ModelUtils.getModelWorldPos(models.models.main.Avatar))
                     end
                 end,
 
@@ -2865,10 +2865,10 @@ function pings.teleport(currentPos, previousPos, previousRot)
     end
     PlacementObjectManager:place(1, previousPos, previousRot * -1 + 180)
     for _ = 1, 70 do
-        particles:newParticle("minecraft:poof", currentPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
-        particles:newParticle("minecraft:poof", previousPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+        particles:newParticle(NameUtils:checkParticle("minecraft:poof"), currentPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
+        particles:newParticle(NameUtils:checkParticle("minecraft:poof"), previousPos:copy():add(math.random() * 2 - 1, math.random() * 3 - 0.5, math.random() * 2 - 1))
     end
-    sounds:playSound("minecraft:entity.shulker.shoot", currentPos, 1, 2)
+    sounds:playSound(NameUtils:checkSound("minecraft:entity.shulker.shoot"), currentPos, 1, 2)
 end
 
 return BlueArchiveCharacter
