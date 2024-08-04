@@ -1,12 +1,12 @@
 ---レジストリの種類を示す列挙型
----@alias NameManager.RegistoryType
+---@alias NameUtils.RegistoryType
 ---| "BLOCK" ブロック名
 ---| "ITEM" アイテム名
 ---| "PARTICLE" パーティクル名
 ---| "SOUND" サウンド名
 
----@class NameManager ゲーム内の各種名称（ブロック、アイテム、パーティクル、サウンド）を安全に使用するためのラッパークラス
-NameManager = {
+---@class NameUtils ゲーム内の各種名称（ブロック、アイテム、パーティクル、サウンド）を安全に使用するためのラッパークラス
+NameUtils = {
     ---ゲームから取得した全アイテム名を保持するテーブル
     Registries = {
         block = {},
@@ -16,9 +16,10 @@ NameManager = {
     },
 
     ---指定されたターゲットがレジストリに登録されているかどうかを返す。
-    ---@param self NameManager
-    ---@param registoryType NameManager.RegistoryType 検索をかける対象のレジストリ
+    ---@param self NameUtils
+    ---@param registoryType NameUtils.RegistoryType 検索をかける対象のレジストリ
     ---@param target string 検索対象名。"minecraft:"を抜かないこと。
+    ---@return boolean found 指定されたターゲットがレジストリで見つかったかどうか
     find = function (self, registoryType, target)
         ---リスト内の中央の要素（偶数の場合は中央から1つ左の要素）と指定されたターゲットのUnicode順を比較する。
         ---@param from integer リストの検索開始のインデックス番号
@@ -47,7 +48,6 @@ NameManager = {
                 break
             end
         end
-        print(startIndex, endIndex)
         if startIndex == endIndex then
             return compareToCenterElement(startIndex, endIndex) == 0
         else
@@ -55,8 +55,55 @@ NameManager = {
         end
     end,
 
+    ---指定されたブロックIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:air"を返す。
+    ---@param self NameUtils
+    ---@param block Minecraft.blockID 確認対象のブロックID
+    ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のブロックIDをそのまま返し、未登録の場合は"minecraft:air"が返す。
+    checkBlock = function (self, block)
+        return self:find("BLOCK", block) and block or "minecraft:air"
+    end,
+
+    ---指定されたアイテムIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:barrier"を返す。
+    ---@param self NameUtils
+    ---@param item Minecraft.blockID 確認対象のアイテムID
+    ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のアイテムIDをそのまま返し、未登録の場合は"minecraft:barrier"が返す。
+    checkItem = function (self, item)
+        return self:find("ITEM", item) and item or "minecraft:barrier"
+    end,
+
+    ---指定されたパーティクルIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:poof"を返す。
+    ---@param self NameUtils
+    ---@param particle Minecraft.particleID 確認対象のパーティクルID
+    ---@return Minecraft.particleID particleID レジストリに登録してある場合は確認対象のパーティクルIDをそのまま返し、未登録の場合は"minecraft:poof"が返す。
+    checkParticle = function (self, particle)
+        return self:find("PARTICLE", particle) and particle or "minecraft:poof"
+    end,
+
+    ---指定されたサウンドIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:ui.button.click"を返す。
+    ---@param self NameUtils
+    ---@param sound Minecraft.soundID 確認対象のサウンドID
+    ---@return Minecraft.soundID particleID レジストリに登録してある場合は確認対象のサウンドIDをそのまま返し、未登録の場合は"minecraft:ui.button.click"が返す。
+    checkSound = function (self, sound)
+        return self:find("SOUND", sound) and sound or "minecraft:ui.button.click"
+    end,
+
+    ---ブロックの破片のパーティクルを示す文字列を返す。Minecraftのバージョン違いを吸収するための関数。
+    ---@param block Minecraft.blockID ブロックの破片パーティクルとして表示するブロックのID。レジストリへの確認は行わない。
+    ---@return string particleData ブロックの破片のパーティクルを示す文字列
+    getBlockParticleId = function (block)
+        return client:getVersion() >= "1.20.5" and "minecraft:block{block_state:\""..block.."\"}" or "minecraft:block "..block
+    end,
+
+    ---dustパーティクルを示す文字列を返す。Minecraftのバージョン違いを吸収するための関数。
+    ---@param color Vector3 dustの色
+    ---@param size number dustの大きさ
+    ---@return string particleData dustの破片のパーティクルを示す文字列
+    getDustParticleId = function (color, size)
+        return client:getVersion() >= "1.20.5" and "minecraft:dust{color:["..color.x..","..color.y..","..color.z.."],scale:"..size.."}" or "minecraft:dust "..color.x.." "..color.y.." "..color.z.." "..size
+    end,
+
     ---初期化関数
-    ---@param self NameManager
+    ---@param self NameUtils
     init = function (self)
         self.Registries.block = client.getRegistry("minecraft:block")
         self.Registries.item = client.getRegistry("minecraft:item")
@@ -68,6 +115,6 @@ NameManager = {
     end
 }
 
-NameManager:init()
+NameUtils:init()
 
-return NameManager
+return NameUtils
