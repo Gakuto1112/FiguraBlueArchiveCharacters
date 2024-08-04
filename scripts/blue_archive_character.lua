@@ -2749,7 +2749,7 @@ events.ENTITY_INIT:register(function ()
             BlueArchiveCharacter.ExSKill1LaunchCooldown = math.max(BlueArchiveCharacter.ExSKill1LaunchCooldown - 1, 0)
         end)
 
-        KeyManager:register("firework_launch", "key.keyboard.b", function ()
+        KeyManager:register("firework_launch", "key.keyboard.g", function ()
             if #PlacementObjectManager.PlacementObjects > 0 then
                 if BlueArchiveCharacter.ExSKill1LaunchCooldown == 0 then
                     pings.lauchFireworks()
