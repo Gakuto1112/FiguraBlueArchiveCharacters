@@ -1,10 +1,11 @@
 events.ENTITY_INIT:register(function ()
 	--クラスのインスタンス化
-	PlayerUtils = require("scripts.utils.player_utils")
 	ExSkillTextAnimation = require("scripts.ex_skill.ex_skill_text_animation")
 	Language = require("scripts.language")
 	Config = require("scripts.config")
 	KeyManager = require("scripts.key_manager")
+	PlayerUtils = require("scripts.utils.player_utils")
+	CompatibilityUtils = require("scripts.utils.compatibility_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")
