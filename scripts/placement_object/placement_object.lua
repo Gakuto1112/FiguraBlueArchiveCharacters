@@ -225,9 +225,9 @@ PlacementObject = {
                 instance.removeReason = "TOO_HIGH"
                 instance.deinitRequired = true
             elseif not instance.hasFireResistance and (nextBlock:getFluidTags()[2] == "c:lava" or isNextBlockFire) then
-                sounds:playSound("minecraft:block.fire.extinguish", instance.nextPos)
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.fire.extinguish"), instance.nextPos)
                 for _ = 0, instance.boundingBox.x * instance.boundingBox.y * instance.boundingBox.z * 8 do
-                    particles:newParticle("minecraft:smoke", vectors.vec3(instance.nextPos.x + math.random() * instance.boundingBox.x - instance.boundingBox.x / 2, instance.nextPos.y + math.random() * instance.boundingBox.y, instance.nextPos.z + math.random() * instance.boundingBox.z - instance.boundingBox.z / 2))
+                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), vectors.vec3(instance.nextPos.x + math.random() * instance.boundingBox.x - instance.boundingBox.x / 2, instance.nextPos.y + math.random() * instance.boundingBox.y, instance.nextPos.z + math.random() * instance.boundingBox.z - instance.boundingBox.z / 2))
                 end
                 instance.removeReason = "BURNT"
                 instance.deinitRequired = true
