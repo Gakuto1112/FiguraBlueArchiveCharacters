@@ -180,7 +180,7 @@ ExSkill = {
         renderer:setRenderHUD(false)
         CameraManager:setCameraCollisionDenial(true)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
-        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2)
+        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), player:getPos(), 5, 2)
         if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.preTransition ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.preTransition()
         end
@@ -245,7 +245,7 @@ ExSkill = {
     ---アニメーションを停止する。
     stop = function (self)
         if host:isHost() then
-            sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 5, 2):setAttenuation(100)
+            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), player:getPos(), 5, 2):setAttenuation(100)
         end
         for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
             itemModel:setVisible(true)
@@ -339,7 +339,7 @@ ExSkill = {
                     if self.KeyPressCount == 30 then
                         events.TICK:remove("ex_skill_keypress_tick")
                         pings.ex_skill_removeAll()
-                        sounds:playSound("minecraft:entity.zombie.break_wooden_door", player:getPos(), 0.25, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.zombie.break_wooden_door"), player:getPos(), 0.25, 2)
                         self.KeyPressCount = 0
                         return
                     end
@@ -353,7 +353,7 @@ ExSkill = {
                         pings.ex_skill()
                     else
                         print(Language:getTranslate("key_bind__ex_skill__unavailable"..(renderer:isFirstPerson() and "_firstperson" or "")))
-                        sounds:playSound("minecraft:block.note_block.bass", player:getPos(), 1, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.note_block.bass"), player:getPos(), 1, 0.5)
                     end
                     self.KeyPressCount = 0
                 end
