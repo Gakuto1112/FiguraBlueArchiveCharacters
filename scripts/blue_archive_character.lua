@@ -533,7 +533,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Here's some water for you",
+                en_us = "Please have some water",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
