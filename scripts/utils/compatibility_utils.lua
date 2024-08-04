@@ -65,15 +65,17 @@ CompatibilityUtils = {
         end
     end,
 
-    ---指定されたブロックIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:air"を返す。
+    ---指定されたブロックIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:dirt"を返す。
     ---@param self CompatibilityUtils
     ---@param block Minecraft.blockID 確認対象のブロックID
-    ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のブロックIDをそのまま返し、未登録の場合は"minecraft:air"が返す。
-    checkBlock = function (self, block)
+    ---@param blockState string? ブロックステートを示す文字列
+    ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のブロックIDをそのまま返し、未登録の場合は"minecraft:dirt"が返す。
+    checkBlock = function (self, block, blockState)
         if self.CheckedList.block[block] == nil then
             self.CheckedList.block[block] = self:find("BLOCK", block)
         end
-        return self.CheckedList.block[block] and block or "minecraft:air"
+        local state = blockState ~= nil and blockState or ""
+        return self.CheckedList.block[block] and block..state or "minecraft:dirt"
     end,
 
     ---指定されたアイテムIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:barrier"を返す。
@@ -134,7 +136,7 @@ CompatibilityUtils = {
         for name, _ in pairs(self.Registries) do
             table.sort(self.Registries[name])
         end
-        self.CheckedList.block["minecraft:air"] = true
+        self.CheckedList.block["minecraft:dirt"] = true
         self.CheckedList.item["minecraft:barrier"] = true
         self.CheckedList.particle["minecraft:poof"] = true
         self.CheckedList.sound["minecraft:empty"] = true
