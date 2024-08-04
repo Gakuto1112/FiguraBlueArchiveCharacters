@@ -33,7 +33,7 @@ DeathAnimation = {
     spawnHelicopterParticles = function (self)
         local helicopterPos = ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter)
         for _ = 1, 100 do
-            particles:newParticle("minecraft:poof", helicopterPos:copy():add(vectors.rotateAroundAxis(self.AnimationRot, math.random() * 9.375 - 4.6875, math.random() * 11.125 - 5.5625, math.random() * 23.875 - 11.9375, 0, math.abs(helicopterPos.y), 0)))
+            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), helicopterPos:copy():add(vectors.rotateAroundAxis(self.AnimationRot, math.random() * 9.375 - 4.6875, math.random() * 11.125 - 5.5625, math.random() * 23.875 - 11.9375, 0, math.abs(helicopterPos.y), 0)))
         end
     end,
 
@@ -54,16 +54,16 @@ DeathAnimation = {
             armorVisible[index] = visible
         end
         if armorVisible[1] then
-            Armor:setHelmet(world.newItem("minecraft:air"))
+            Armor:setHelmet(world.newItem(CompatibilityUtils:checkItem("minecraft:air")))
         end
         if armorVisible[2] then
-            Armor:setChestPlate(world.newItem("minecraft:air"))
+            Armor:setChestPlate(world.newItem(CompatibilityUtils:checkItem("minecraft:air")))
         end
         if armorVisible[3] then
-            Armor:setLeggings(world.newItem("minecraft:air"))
+            Armor:setLeggings(world.newItem(CompatibilityUtils:checkItem("minecraft:air")))
         end
         if armorVisible[4] then
-            Armor:setBoots(world.newItem("minecraft:air"))
+            Armor:setBoots(world.newItem(CompatibilityUtils:checkItem("minecraft:air")))
         end
         local excludeModelsVisibleList = {}
         for index, modelPart in ipairs(BlueArchiveCharacter.DEATH_ANIMATION.excludeModels) do
@@ -192,11 +192,11 @@ DeathAnimation = {
                 for _ = 1, 3 do
                     local particleRot = math.random() * math.pi * 2
                     local particleOffset = math.random() * 3
-                    particles:newParticle("minecraft:poof", particleAnchorPos:copy():add(math.cos(particleRot) * particleOffset, 0, math.sin(particleRot) * particleOffset)):setVelocity(math.cos(particleRot), 0, math.sin(particleRot))
+                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchorPos:copy():add(math.cos(particleRot) * particleOffset, 0, math.sin(particleRot) * particleOffset)):setVelocity(math.cos(particleRot), 0, math.sin(particleRot))
 
                 end
                 if self.AnimationCount % 2 == 1 then
-                    sounds:playSound("minecraft:block.bamboo_wood_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5):setAttenuation(2)
+                    sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.bamboo_wood_door.close"), ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5):setAttenuation(2)
                 end
                 if self.AnimationCount < 120 then
                     models.models.death_animation.Avatar:setLight(world.getLightLevel(self.AnimationPos))
@@ -204,9 +204,9 @@ DeathAnimation = {
                 if self.AnimationCount == 1 then
                     self:spawnHelicopterParticles()
                 elseif self.AnimationCount == 10 then
-                    sounds:playSound("minecraft:block.iron_door.open", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                    sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.iron_door.open"), ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 elseif self.AnimationCount >= 57 and self.AnimationCount < 76 then
-                    sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14), 0.25, -0.056 * (self.AnimationCount - 57) + 2)
+                    sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14), 0.25, -0.056 * (self.AnimationCount - 57) + 2)
                 elseif self.AnimationCount == 120 then
                     self.DummyAvatarRoot = models.models.death_animation.Avatar:moveTo(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14)
                     self.setPhase2Pose(models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar)
@@ -216,7 +216,7 @@ DeathAnimation = {
                 elseif self.AnimationCount == 180 then
                     models.models.death_animation.Helicopter.RopeLadder.RopeLadder2.RopeLadder3.RopeLadder4.RopeLadder5.RopeLadder6.RopeLadder7.RopeLadder8.RopeLadder9.RopeLadder10.RopeLadder11.RopeLadder12.RopeLadder13.RopeLadder14.Avatar:setVisible(false)
                 elseif self.AnimationCount == 230 then
-                    sounds:playSound("minecraft:block.iron_door.close", ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
+                    sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.iron_door.close"), ModelUtils.getModelWorldPos(models.models.death_animation.Helicopter.DeathAnimationSoundAnchor1), 1, 0.5)
                 elseif self.AnimationCount == 255 then
                     self:spawnHelicopterParticles()
                     self:stop()
