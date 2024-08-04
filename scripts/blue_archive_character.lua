@@ -506,7 +506,7 @@ BlueArchiveCharacter = {
                     elseif tick == 40 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "ANGRY", 30, true)
                     elseif tick == 41 then
-                        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 0.5, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), player:getPos(), 0.5, 1.5)
                     end
                 end,
             }
@@ -595,7 +595,7 @@ BlueArchiveCharacter = {
                         if BlueArchiveCharacter.PHOTO_MODE then
                             host:sendChatCommand("/fill ~-2 ~3 ~-2 ~2 ~3 ~2 minecraft:barrier")
                         end
-                        sounds:playSound("minecraft:block.bubble_column.upwards_inside", player:getPos(), 1, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.bubble_column.upwards_inside"), player:getPos(), 1, 0.5)
                     end
                 end,
 
@@ -606,7 +606,7 @@ BlueArchiveCharacter = {
                     if tick <= 28 and host:isHost() then
                         local finPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.RearBody.TailFin)
                         for _ = 1, 5 do
-                            particles:newParticle("minecraft:underwater", finPos:copy():add(math.random() * 0.1 - 0.05, math.random() * 0.1 - 0.05, 0)):setScale(0.2)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:underwater"), finPos:copy():add(math.random() * 0.1 - 0.05, math.random() * 0.1 - 0.05, 0)):setScale(0.2)
                         end
                     elseif tick >= 37 and tick < 73 and host:isHost() then
                         local headPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna.FrontBody.Head)
@@ -614,9 +614,9 @@ BlueArchiveCharacter = {
                         local cameraRotY = renderer:getCameraRot().y
                         local particleCount = math.max(tick - 52, 0)
                         for i = 0, 2 * math.pi, math.pi / 6 do
-                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 "..(particleCount / 27 + 1), vectors.rotateAroundAxis(tunaRotY + cameraRotY, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(tunaRotY - cameraRotY - 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
+                            particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(100, 1000000000, 1000000000), particleCount / 27 + 1), vectors.rotateAroundAxis(tunaRotY + cameraRotY, 0, math.cos(i) * 0.3, math.sin(i) * 0.3, 0, 1, 0):add(headPos)):setVelocity(vectors.rotateAroundAxis(tunaRotY - cameraRotY - 90, 0, 0, 0.1, 0, 1, 0)):setLifetime(20)
                         end
-                        sounds:playSound("minecraft:entity.squid.ambient", player:getPos(), 1, 0.75)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.squid.ambient"), player:getPos(), 1, 0.75)
                     elseif tick == 78 and host:isHost() then
                         events.RENDER:remove("ex_skill_2_render")
                         models.models.ex_skill_2.UnderWater:setVisible(false)
@@ -632,7 +632,7 @@ BlueArchiveCharacter = {
                     elseif tick == 134 then
                         FaceParts:setEmotion("NARROW_ANGRY_CENTER", "NARROW_ANGRY", "NORMAL", 16, true)
                     elseif tick == 139 then
-                        sounds:playSound("minecraft:entity.player.levelup", player:getPos(), 1, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), player:getPos(), 1, 1.5)
                         if host:isHost() then
                             local windowSize = client:getWindowSize()
                             models.models.ex_skill_2.Flash.ForCameraOffset2.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(22.5))
@@ -649,30 +649,30 @@ BlueArchiveCharacter = {
                             renderer:setPostEffect("phosphor")
                         end
                     elseif tick == 157 then
-                        sounds:playSound("minecraft:entity.player.attack.sweep", player:getPos(), 0.5, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), player:getPos(), 0.5, 2)
                     elseif tick == 158 then
                         FaceParts:setEmotion("CENTER", "NORMAL", "CLOSED2", 48, true)
                     elseif tick >= 160 and tick <= 170 and host:isHost() then
                         local cameraPos = renderer:getCameraOffsetPivot()
                         for i = 0, 8 do
-                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 4", cameraPos:copy():add(player:getPos()):add((i % 3 - 1) * 0.25, 1.25, (math.floor(i / 3) - 1) * 0.25)):setLifetime(5):setVelocity(0, 0.25, 0)
+                            particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(100, 1000000000, 1000000000), 4), cameraPos:copy():add(player:getPos()):add((i % 3 - 1) * 0.25, 1.25, (math.floor(i / 3) - 1) * 0.25)):setLifetime(5):setVelocity(0, 0.25, 0)
                         end
                         if tick == 160 then
                             local playerPos = player:getPos()
-                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.25)
-                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.5)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.bucket.empty"), playerPos, 1, 0.25)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.bucket.empty"), playerPos, 1, 0.5)
                         elseif tick == 170 then
                             renderer:setPostEffect()
                         end
                     elseif tick == 175 then
                         models.models.ex_skill_2.UnderWater.ForCameraOffset.Tuna:moveTo(models.models.ex_skill_2)
                         local playerPos = player:getPos()
-                        sounds:playSound("minecraft:entity.generic.splash", playerPos, 1, 0.5)
-                        sounds:playSound("minecraft:ambient.underwater.exit", playerPos, 0.5, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.splash"), playerPos, 1, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:ambient.underwater.exit"), playerPos, 0.5, 0.5)
                     elseif tick == 180 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_2.Tuna)
                         for _ = 1, 50 do
-                            particles:newParticle("minecraft:dust 100 1000000000 1000000000 3", anchorPos:copy()):setVelocity(vectors.rotateAroundAxis(player:getBodyYaw() * -1, math.random() * 0.2, math.random() * 0.25 + 0.125, math.random() * 0.2 - 0.1, 0, 1, 0)):setGravity(0.5):setLifetime(25)
+                            particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(100, 1000000000, 1000000000), 3), anchorPos:copy()):setVelocity(vectors.rotateAroundAxis(player:getBodyYaw() * -1, math.random() * 0.2, math.random() * 0.25 + 0.125, math.random() * 0.2 - 0.1, 0, 1, 0)):setGravity(0.5):setLifetime(25)
                         end
                     end
                     if tick % 35 == 24 and tick <= 160 then
@@ -680,12 +680,12 @@ BlueArchiveCharacter = {
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 50 do
                             local particleOffset = math.random()
-                            particles:newParticle("minecraft:dust 1000000000 1000000000 1000000000 5", anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset - 0.5, 0, 0, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset * 0.5 - 0.25, math.random() * 0.5 + 0.25, math.random() * 0.25 - 0.125, 0, 1, 0)):setGravity(1):setLifetime(40)
+                            particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(1000000000, 1000000000, 1000000000), 5), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset - 0.5, 0, 0, 0, 1, 0))):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, particleOffset * 0.5 - 0.25, math.random() * 0.5 + 0.25, math.random() * 0.25 - 0.125, 0, 1, 0)):setGravity(1):setLifetime(40)
                         end
                         if tick >= 80 or not host:isHost() then
                             local playerPos = player:getPos()
-                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.25)
-                            sounds:playSound("minecraft:item.bucket.empty", playerPos, 1, 0.5)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.bucket.empty"), playerPos, 1, 0.25)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.bucket.empty"), playerPos, 1, 0.5)
                         end
                     end
                     if tick <= 139 or tick % 2 == 0 then
@@ -697,7 +697,7 @@ BlueArchiveCharacter = {
                         end
                     end
                     if (tick >= 83 and tick < 110) or (tick >= 110 and tick <= 130 and tick % 2 == 0) then
-                        sounds:playSound("minecraft:block.dispenser.fail", player:getPos(), 0.5, 5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.dispenser.fail"), player:getPos(), 0.5, 5)
                     end
                 end,
 
@@ -787,7 +787,7 @@ BlueArchiveCharacter = {
                 ---@type fun()
                 preAnimation = function()
                     FaceParts:setEmotion("NORMAL", "NORMAL", "CLOSED3", 40, true)
-                    BlueArchiveCharacter.EX_SKILL_3_SOUND_1 = sounds:playSound("minecraft:item.elytra.flying", player:getPos(), 0.05, 2)
+                    BlueArchiveCharacter.EX_SKILL_3_SOUND_1 = sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.elytra.flying"), player:getPos(), 0.05, 2)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -797,7 +797,7 @@ BlueArchiveCharacter = {
                     if tick == 40 then
                         FaceParts:setEmotion("NORMAL", "INVERTED", "CLOSED3", 7, true)
                     elseif tick == 27 and host:isHost() then
-                        sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.1, 0.75)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.1, 0.75)
                     elseif tick == 47 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "NORMAL", 35, true)
                     elseif tick >= 58 and tick < 80 then
@@ -810,20 +810,20 @@ BlueArchiveCharacter = {
                         local frontWheelPos = vectors.rotateAroundAxis(bicycleYaw, 0, 0, 0.5625, 0, 1, 0):add(bicyclePos)
                         local backWheelPos = vectors.rotateAroundAxis(bicycleYaw, 0, 0, -0.5625, 0, 1, 0):add(bicyclePos)
                         for _ = 1, 5 do
-                            particles:newParticle("minecraft:electric_spark", frontWheelPos):setColor(0.973, 0.714, 0.29):setScale(0.5):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.25, math.random() * 0.5 - 0.25)
-                            particles:newParticle("minecraft:electric_spark", backWheelPos):setColor(0.973, 0.714, 0.29):setScale(0.5):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.25, math.random() * 0.5 - 0.25)
-                            particles:newParticle("minecraft:campfire_cosy_smoke", frontWheelPos):setVelocity(math.random() * 0.2 - 0.1, 0.015, math.random() * 0.2 - 0.1)
-                            particles:newParticle("minecraft:campfire_cosy_smoke", backWheelPos):setVelocity(math.random() * 0.2 - 0.1, 0.015, math.random() * 0.2 - 0.1)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), frontWheelPos):setColor(0.973, 0.714, 0.29):setScale(0.5):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.25, math.random() * 0.5 - 0.25)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), backWheelPos):setColor(0.973, 0.714, 0.29):setScale(0.5):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.25, math.random() * 0.5 - 0.25)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:campfire_cosy_smoke"), frontWheelPos):setVelocity(math.random() * 0.2 - 0.1, 0.015, math.random() * 0.2 - 0.1)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:campfire_cosy_smoke"), backWheelPos):setVelocity(math.random() * 0.2 - 0.1, 0.015, math.random() * 0.2 - 0.1)
                         end
                         local particleBlock = world.getBlockState(bicyclePos:copy():sub(0, 0.5, 0)).id
                         if particleBlock ~= "minecraft:air" and particleBlock ~= "minecraft:void_air" then
                             for _ = 1, 5 do
-                                particles:newParticle("minecraft:block "..particleBlock, frontWheelPos)
-                                particles:newParticle("minecraft:block "..particleBlock, backWheelPos)
+                                particles:newParticle(CompatibilityUtils.getBlockParticleId(particleBlock), frontWheelPos)
+                                particles:newParticle(CompatibilityUtils.getBlockParticleId(particleBlock), backWheelPos)
                             end
                         end
-                        sounds:playSound("minecraft:block.gravel.hit", bicyclePos, 0.1, 0.5)
-                        sounds:playSound("minecraft:block.grindstone.use", bicyclePos, 0.1, 3)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.gravel.hit"), bicyclePos, 0.1, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grindstone.use"), bicyclePos, 0.1, 3)
                     elseif tick == 82 then
                         FaceParts:setEmotion("NORMAL", "NORMAL", "NORMAL", 15, true)
                         models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
@@ -832,7 +832,7 @@ BlueArchiveCharacter = {
                     elseif tick == 101 then
                         FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY_INVERTED", "CLOSED3", 26, true)
                     elseif tick == 109 then
-                        sounds:playSound("minecraft:entity.player.attack.sweep", ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.25, 0.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.25, 0.5)
                         if host:isHost() then
                             local windowSize = client:getWindowSize()
                             models.models.ex_skill_3.CameraBackground.Background:setScale(vectors.vec3(windowSize.x / windowSize.y, 1, 1):scale(33.5))
@@ -849,7 +849,7 @@ BlueArchiveCharacter = {
                     if tick < 69 then
                         local bodyYaw = player:getBodyYaw()
                         local avatarPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
-                        particles:newParticle("minecraft:cloud", vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 8 - 4, math.random() * 4, 10, 0, 1, 0):add(avatarPos)):setColor(1, 1, 1, 0.25):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.5, 0, 1, 0))
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:cloud"), vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 8 - 4, math.random() * 4, 10, 0, 1, 0):add(avatarPos)):setColor(1, 1, 1, 0.25):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.5, 0, 1, 0))
                     end
                 end,
 
