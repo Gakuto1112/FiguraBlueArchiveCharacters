@@ -45,7 +45,7 @@ BlueArchiveCharacter = {
         clubName = {
             ---英語
             ---@type string
-            en_us = "Ninjutsu study club",
+            en_us = "Ninjutsu Research Club",
 
             ---日本語
             ---@type string
@@ -468,7 +468,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "This is Izuna-styled ninja arts!",
+                en_us = "This is The Izuna-Style Ninjutsu!",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
@@ -627,7 +627,7 @@ BlueArchiveCharacter = {
                 ---英語
                 ---日本語名を翻訳したものにする。
                 ---@type string
-                en_us = "Izuna-styled ninja arts: Summer version",
+                en_us = "Izuna-Style Ninjutsu・Summer Version!",
 
                 ---日本語
                 ---実際のスキルの名前と同じにする。
