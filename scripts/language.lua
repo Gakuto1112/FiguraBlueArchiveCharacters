@@ -3,7 +3,7 @@
 Language = {
 	LanguageData = {
 		en_us = {
-			avatar__old_version_warning = "For the best experience, playing with 1.20.1 or higher is recommended.",
+			avatar__old_version_warning = "For the best experience, playing with 1.20.1 or higher is recommended!",
 			action_wheel__toggle_off = "off",
 			action_wheel__toggle_on = "on",
 			action_wheel__main__action_1__title = "Change costume: ",
@@ -37,7 +37,7 @@ Language = {
 			key_bind__ex_skill__unavailable_firstperson = "You cannot do this in first person.",
 		},
 		ja_jp = {
-			avatar__old_version_warning = "生徒さんとより良い時間を過ごすためにバージョン1.20.1以上でのプレイをおすすめします。",
+			avatar__old_version_warning = "生徒さんとより良い時間を過ごすためにバージョン1.20.1以上でのプレイをおすすめします！",
 			action_wheel__toggle_off = "オフ",
 			action_wheel__toggle_on = "オン",
 			action_wheel__main__action_1__title = "衣装を変更：",
