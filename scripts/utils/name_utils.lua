@@ -8,7 +8,17 @@
 ---@class NameUtils ゲーム内の各種名称（ブロック、アイテム、パーティクル、サウンド）を安全に使用するためのラッパークラス
 NameUtils = {
     ---ゲームから取得した全アイテム名を保持するテーブル
+    ---@type table[]
     Registries = {
+        block = {},
+        item = {},
+        particle = {},
+        sound = {}
+    },
+
+    ---レジストリへの確認が済んでいるIDを保持するテーブル。
+    ---@type table[]
+    CheckedList = {
         block = {},
         item = {},
         particle = {},
@@ -60,7 +70,10 @@ NameUtils = {
     ---@param block Minecraft.blockID 確認対象のブロックID
     ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のブロックIDをそのまま返し、未登録の場合は"minecraft:air"が返す。
     checkBlock = function (self, block)
-        return self:find("BLOCK", block) and block or "minecraft:air"
+        if self.CheckedList.block[block] == nil then
+            self.CheckedList.block[block] = self:find("BLOCK", block)
+        end
+        return self.CheckedList.block[block] and block or "minecraft:air"
     end,
 
     ---指定されたアイテムIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:barrier"を返す。
@@ -68,7 +81,10 @@ NameUtils = {
     ---@param item Minecraft.blockID 確認対象のアイテムID
     ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のアイテムIDをそのまま返し、未登録の場合は"minecraft:barrier"が返す。
     checkItem = function (self, item)
-        return self:find("ITEM", item) and item or "minecraft:barrier"
+        if self.CheckedList.item[item] == nil then
+            self.CheckedList.item[item] = self:find("ITEM", item)
+        end
+        return self.CheckedList.item[item] and item or "minecraft:barrier"
     end,
 
     ---指定されたパーティクルIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:poof"を返す。
@@ -76,7 +92,10 @@ NameUtils = {
     ---@param particle Minecraft.particleID 確認対象のパーティクルID
     ---@return Minecraft.particleID particleID レジストリに登録してある場合は確認対象のパーティクルIDをそのまま返し、未登録の場合は"minecraft:poof"が返す。
     checkParticle = function (self, particle)
-        return self:find("PARTICLE", particle) and particle or "minecraft:poof"
+        if self.CheckedList.particle[particle] == nil then
+            self.CheckedList.particle[particle] = self:find("PARTICLE", particle)
+        end
+        return self.CheckedList.particle[particle] and particle or "minecraft:poof"
     end,
 
     ---指定されたサウンドIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:ui.button.click"を返す。
@@ -84,7 +103,10 @@ NameUtils = {
     ---@param sound Minecraft.soundID 確認対象のサウンドID
     ---@return Minecraft.soundID particleID レジストリに登録してある場合は確認対象のサウンドIDをそのまま返し、未登録の場合は"minecraft:ui.button.click"が返す。
     checkSound = function (self, sound)
-        return self:find("SOUND", sound) and sound or "minecraft:ui.button.click"
+        if self.CheckedList.sound[sound] == nil then
+            self.CheckedList.sound[sound] = self:find("SOUND", sound)
+        end
+        return self.CheckedList.sound[sound] and sound or "minecraft:ui.button.click"
     end,
 
     ---ブロックの破片のパーティクルを示す文字列を返す。Minecraftのバージョン違いを吸収するための関数。
