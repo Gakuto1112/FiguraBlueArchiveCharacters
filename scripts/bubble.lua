@@ -63,7 +63,7 @@ Bubble = {
         models.models.bubble.Camera.AvatarBubble.Dots:setVisible(self.Emoji == "DOTS")
         if self.ShowInGui then
             models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
-            sounds:playSound("minecraft:entity.item.pickup", player:getPos())
+            sounds:playSound(NameUtils:checkSound("minecraft:entity.item.pickup"), player:getPos())
         end
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
