@@ -75,19 +75,19 @@ if host:isHost() then
                 pings.action_wheel_main_action2_changeName(selectingNameState, selectingShowClubName)
                 Config.saveConfig("name", selectingNameState)
                 Config.saveConfig("showClubName", selectingShowClubName)
-                sounds:playSound(NameUtils:checkSound("minecraft:ui.cartography_table.take_result"), player:getPos())
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:ui.cartography_table.take_result"), player:getPos())
                 print(Language:getTranslate("action_wheel__main__action_2__done_first")..Nameplate:getName(selectingNameState)..Language:getTranslate("action_wheel__main__action_2__done_last"))
             end
             if selectingCostume ~= Costume.CurrentCostume then
                 pings.action_wheel_main_action1_changeCostume(selectingCostume)
                 Config.saveConfig("costume", selectingCostume)
-                sounds:playSound(NameUtils:checkSound("minecraft:item.armor.equip_leather"), player:getPos())
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.armor.equip_leather"), player:getPos())
                 print(Language:getTranslate("action_wheel__main__action_1__done_first")..Costume.getCostumeLocalName(selectingCostume)..Language:getTranslate("action_wheel__main__action_1__done_last"))
             end
             if selectingExSkillFrameParticleAmount ~= ExSkill.FrameParticleAmount then
                 ExSkill.FrameParticleAmount = selectingExSkillFrameParticleAmount
                 Config.saveConfig("ex_skill_frame_particle_amount", selectingExSkillFrameParticleAmount)
-                sounds:playSound(NameUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos(), 1, 0.5)
                 print(Language:getTranslate("action_wheel__main__action_5__done_first")..Language:getTranslate("action_wheel__main__action_5__option_"..selectingExSkillFrameParticleAmount)..Language:getTranslate("action_wheel__main__action_5__done_last"))
             end
         end

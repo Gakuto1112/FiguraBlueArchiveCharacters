@@ -4,7 +4,7 @@ events.ENTITY_INIT:register(function ()
 	Config = require("scripts.config")
 	KeyManager = require("scripts.key_manager")
 	PlayerUtils = require("scripts.utils.player_utils")
-	NameUtils = require("scripts.utils.name_utils")
+	CompatibilityUtils = require("scripts.utils.compatibility_utils")
 
 	--パーツ別クラス
 	require("scripts.vanilla_model")

@@ -14,7 +14,7 @@ HeadBlock = {
         --ヘルメットを着けている場合は外しておく。
         local isHelmetVisible = Armor ~= nil and Armor.ArmorVisible[1] or false
         if isHelmetVisible then
-            Armor:setHelmet(world.newItem(NameUtils:checkItem("minecraft:air")))
+            Armor:setHelmet(world.newItem(CompatibilityUtils:checkItem("minecraft:air")))
         end
 
         --頭ブロックから除外するモデルパーツを予め非表示にする。
