@@ -134,6 +134,10 @@ NameUtils = {
         for name, _ in pairs(self.Registries) do
             table.sort(self.Registries[name])
         end
+        self.CheckedList.block["minecraft:air"] = true
+        self.CheckedList.item["minecraft:barrier"] = true
+        self.CheckedList.particle["minecraft:poof"] = true
+        self.CheckedList.sound["minecraft:ui.button.click"] = true
     end
 }
 
