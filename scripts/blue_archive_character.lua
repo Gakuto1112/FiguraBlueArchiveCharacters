@@ -691,7 +691,7 @@ BlueArchiveCharacter = {
                         local particleBlock = world.getBlockState(anchor1Pos:copy() - 1).id
                         if particleBlock ~= "minecraft:air" and particleBlock ~= "minecraft:void_air" then
                             for _ = 1, 50 do
-                                particles:newParticle(CompatibilityUtils.getBlockParticleId(CompatibilityUtils:checkBlock(particleBlock)), anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
+                                particles:newParticle(CompatibilityUtils.getBlockParticleId(particleBlock), anchor1Pos:copy():add(math.random() - 0.5, 0, math.random() - 0.5)):setVelocity(math.random() * 0.5 - 0.25, math.random() * 0.5, math.random() * 0.5 - 0.25)
                             end
                         end
                     elseif tick == 25 then
