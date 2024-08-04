@@ -87,15 +87,15 @@ NameUtils = {
         return self.CheckedList.item[item] and item or "minecraft:barrier"
     end,
 
-    ---指定されたパーティクルIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:poof"を返す。
+    ---指定されたパーティクルIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:empty"を返す。
     ---@param self NameUtils
     ---@param particle Minecraft.particleID 確認対象のパーティクルID
-    ---@return Minecraft.particleID particleID レジストリに登録してある場合は確認対象のパーティクルIDをそのまま返し、未登録の場合は"minecraft:poof"が返す。
+    ---@return Minecraft.particleID particleID レジストリに登録してある場合は確認対象のパーティクルIDをそのまま返し、未登録の場合は"minecraft:empty"が返す。
     checkParticle = function (self, particle)
         if self.CheckedList.particle[particle] == nil then
             self.CheckedList.particle[particle] = self:find("PARTICLE", particle)
         end
-        return self.CheckedList.particle[particle] and particle or "minecraft:poof"
+        return self.CheckedList.particle[particle] and particle or "minecraft:empty"
     end,
 
     ---指定されたサウンドIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:ui.button.click"を返す。
@@ -136,7 +136,7 @@ NameUtils = {
         end
         self.CheckedList.block["minecraft:air"] = true
         self.CheckedList.item["minecraft:barrier"] = true
-        self.CheckedList.particle["minecraft:poof"] = true
+        self.CheckedList.particle["minecraft:empty"] = true
         self.CheckedList.sound["minecraft:ui.button.click"] = true
     end
 }
