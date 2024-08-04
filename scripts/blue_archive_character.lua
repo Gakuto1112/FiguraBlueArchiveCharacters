@@ -494,7 +494,7 @@ BlueArchiveCharacter = {
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill1ParticleAnchor1)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 30 do
-                            particles:newParticle("minecraft:cherry_leaves", anchorPos:copy():add(math.random() - 0.5, math.random() * 2 - 1, math.random() - 0.5)):setColor(0.2, 1, 0.2):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0, 0, 0, 1, 0))
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:cherry_leaves"), anchorPos:copy():add(math.random() - 0.5, math.random() * 2 - 1, math.random() - 0.5)):setColor(0.2, 1, 0.2):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0, 0, 0, 1, 0))
                         end
                     elseif tick == 14 then
                         FaceParts:setEmotion("NARROW1", "NARROW1", "STRAIGHT", 2, true)
@@ -505,23 +505,23 @@ BlueArchiveCharacter = {
                     elseif tick == 59 then
                         local playerPos = player:getPos()
                         for _ = 1, 100 do
-                            particles:newParticle("minecraft:dust 100000000 100000000 100000000 1", playerPos:copy():add(math.random() * 4 - 2, 0, math.random() * 4 - 2)):setLifetime(100):setVelocity()
+                            particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(100000000, 100000000, 100000000), 1), playerPos:copy():add(math.random() * 4 - 2, 0, math.random() * 4 - 2)):setLifetime(100):setVelocity()
                         end
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.ExSkill1ParticleAnchor3)
                         local bodyYaw = player:getBodyYaw()
                         for _ = 1, 50 do
-                            particles:newParticle("minecraft:dust 100000000 100000000 100000000 1", anchorPos:copy():add(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(math.random() * 360, 0, 1.25, 0, 0, 0, 1), 0, 1, 0))):setLifetime(40):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0, 0, math.random() * 0.1 + 0.05, 0, 1, 0))
+                            particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(100000000, 100000000, 100000000), 1), anchorPos:copy():add(vectors.rotateAroundAxis(-bodyYaw, vectors.rotateAroundAxis(math.random() * 360, 0, 1.25, 0, 0, 0, 1), 0, 1, 0))):setLifetime(40):setVelocity(vectors.rotateAroundAxis(-bodyYaw, 0, 0, math.random() * 0.1 + 0.05, 0, 1, 0))
                         end
-                        sounds:playSound("minecraft:block.beacon.activate", playerPos, 1, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.beacon.activate"), playerPos, 1, 1.5)
                     end
                     if tick >= 24 then
                         local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.ExSkill1ParticleAnchor2)
                         for _ = 1, 2 do
-                            particles:newParticle("minecraft:wax_off", anchorPos:copy():add(math.random() * 0.4 - 0.2, 0, math.random() * 0.4 - 0.2)):setScale(0.15):setVelocity(0, math.random() * 0.025, 0):setColor(1, 1, 0.875)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:wax_off"), anchorPos:copy():add(math.random() * 0.4 - 0.2, 0, math.random() * 0.4 - 0.2)):setScale(0.15):setVelocity(0, math.random() * 0.025, 0):setColor(1, 1, 0.875)
                         end
                     end
                     if tick % 3 == 0 and tick <= 50 then
-                        sounds:playSound("minecraft:entity.parrot.ambient", player:getPos(), (50 - tick) / 50, 1.5)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.parrot.ambient"), player:getPos(), (50 - tick) / 50, 1.5)
                     end
                 end
             }
@@ -607,7 +607,7 @@ BlueArchiveCharacter = {
                             local windowSize = client:getScaledWindowSize()
                             models.models.ex_skill_2.Gui.AnxiousFrame:setScale(windowSize.x, windowSize.y, 1)
                             models.models.ex_skill_2.Gui.AnxiousFrame:setVisible(true)
-                            sounds:playSound("minecraft:entity.wither.spawn", player:getPos(), 0.15, 2)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.wither.spawn"), player:getPos(), 0.15, 2)
                         end
                     elseif tick == 50 then
                         FaceParts:setEmotion("INVERTED", "NORMAL", "ANXIOUS", 6, true)
@@ -633,12 +633,12 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.Head.FaceShadow:setVisible(true)
                         FaceParts:setEmotion("TIRED", "TIRED", "TIRED", 43, true)
                         local bodyYaw = player:getBodyYaw()
-                        particles:newParticle("minecraft:soul", ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Mouth):add(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0.17, 0.35, 0, 1, 0))):setScale(0.75):setVelocity(vectors.rotateAroundAxis(-bodyYaw, -0.01, 0, 0, 0, 1, 0)):setLifetime(40)
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:soul"), ModelUtils.getModelWorldPos(models.models.main.Avatar.Head.FaceParts.Mouth):add(vectors.rotateAroundAxis(-bodyYaw, 0.1, 0.17, 0.35, 0, 1, 0))):setScale(0.75):setVelocity(vectors.rotateAroundAxis(-bodyYaw, -0.01, 0, 0, 0, 1, 0)):setLifetime(40)
                         local playerPos = player:getPos()
                         for _ = 1, 50 do
-                            particles:newParticle("minecraft:entity_effect", playerPos:copy():add(math.random() * 1.5 - 0.75, math.random() * 1.5 + 0.5, math.random() * 1.5 - 0.75)):setGravity(0.1):setLifetime(40)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:entity_effect"), playerPos:copy():add(math.random() * 1.5 - 0.75, math.random() * 1.5 + 0.5, math.random() * 1.5 - 0.75)):setGravity(0.1):setLifetime(40)
                         end
-                        sounds:playSound("minecraft:block.beacon.deactivate", playerPos, 1, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.beacon.deactivate"), playerPos, 1, 2)
                     end
                     if tick >= 45 and tick <= 56 then
                         models.models.main.Avatar:setColor(vectors.vec3(1, 1, 1):scale(1 - math.map(tick, 45, 56, 0, 0.25)))
@@ -647,12 +647,12 @@ BlueArchiveCharacter = {
                         end
                     end
                     if tick >= 8 and tick < 80 then
-                        particles:newParticle("minecraft:splash", ModelUtils.getModelWorldPos(models.models.main.Avatar.Head)):setPower(2)
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:splash"), ModelUtils.getModelWorldPos(models.models.main.Avatar.Head)):setPower(2)
                         if tick % 4 == 0 then
-                            sounds:playSound("minecraft:block.bubble_column.bubble_pop", player:getPos(), 0.15, 2 - math.random() * 0.5)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.bubble_column.bubble_pop"), player:getPos(), 0.15, 2 - math.random() * 0.5)
                         end
                     elseif tick >= 85 and tick < 100 and tick % 2 == 0 then
-                        sounds:playSound("minecraft:entity.experience_orb.pickup", player:getPos(), 0.5, 2)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.experience_orb.pickup"), player:getPos(), 0.5, 2)
                     end
                 end,
 
