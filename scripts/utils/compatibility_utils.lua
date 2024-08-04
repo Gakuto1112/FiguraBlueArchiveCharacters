@@ -1,12 +1,12 @@
 ---レジストリの種類を示す列挙型
----@alias NameUtils.RegistoryType
+---@alias CompatibilityUtils.RegistoryType
 ---| "BLOCK" ブロック名
 ---| "ITEM" アイテム名
 ---| "PARTICLE" パーティクル名
 ---| "SOUND" サウンド名
 
----@class NameUtils ゲーム内の各種名称（ブロック、アイテム、パーティクル、サウンド）を安全に使用するためのラッパークラス
-NameUtils = {
+---@class CompatibilityUtils Minecraftのゲームバージョンが異なっていてもある程度互換性を確保するためのユーティリティクラス
+CompatibilityUtils = {
     ---ゲームから取得した全アイテム名を保持するテーブル
     ---@type table[]
     Registries = {
@@ -26,8 +26,8 @@ NameUtils = {
     },
 
     ---指定されたターゲットがレジストリに登録されているかどうかを返す。
-    ---@param self NameUtils
-    ---@param registoryType NameUtils.RegistoryType 検索をかける対象のレジストリ
+    ---@param self CompatibilityUtils
+    ---@param registoryType CompatibilityUtils.RegistoryType 検索をかける対象のレジストリ
     ---@param target string 検索対象名。"minecraft:"を抜かないこと。
     ---@return boolean found 指定されたターゲットがレジストリで見つかったかどうか
     find = function (self, registoryType, target)
@@ -66,7 +66,7 @@ NameUtils = {
     end,
 
     ---指定されたブロックIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:air"を返す。
-    ---@param self NameUtils
+    ---@param self CompatibilityUtils
     ---@param block Minecraft.blockID 確認対象のブロックID
     ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のブロックIDをそのまま返し、未登録の場合は"minecraft:air"が返す。
     checkBlock = function (self, block)
@@ -77,7 +77,7 @@ NameUtils = {
     end,
 
     ---指定されたアイテムIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:barrier"を返す。
-    ---@param self NameUtils
+    ---@param self CompatibilityUtils
     ---@param item Minecraft.blockID 確認対象のアイテムID
     ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のアイテムIDをそのまま返し、未登録の場合は"minecraft:barrier"が返す。
     checkItem = function (self, item)
@@ -88,7 +88,7 @@ NameUtils = {
     end,
 
     ---指定されたパーティクルIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:poof"を返す。
-    ---@param self NameUtils
+    ---@param self CompatibilityUtils
     ---@param particle Minecraft.particleID 確認対象のパーティクルID
     ---@return Minecraft.particleID particleID レジストリに登録してある場合は確認対象のパーティクルIDをそのまま返し、未登録の場合は"minecraft:poof"が返す。
     checkParticle = function (self, particle)
@@ -99,7 +99,7 @@ NameUtils = {
     end,
 
     ---指定されたサウンドIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:empty"を返す。
-    ---@param self NameUtils
+    ---@param self CompatibilityUtils
     ---@param sound Minecraft.soundID 確認対象のサウンドID
     ---@return Minecraft.soundID particleID レジストリに登録してある場合は確認対象のサウンドIDをそのまま返し、未登録の場合は"minecraft:empty"が返す。
     checkSound = function (self, sound)
@@ -125,7 +125,7 @@ NameUtils = {
     end,
 
     ---初期化関数
-    ---@param self NameUtils
+    ---@param self CompatibilityUtils
     init = function (self)
         self.Registries.block = client.getRegistry("minecraft:block")
         self.Registries.item = client.getRegistry("minecraft:item")
@@ -145,6 +145,6 @@ NameUtils = {
     end
 }
 
-NameUtils:init()
+CompatibilityUtils:init()
 
-return NameUtils
+return CompatibilityUtils
