@@ -28,6 +28,7 @@ Arms = {
             for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
                 modelPart:setRot()
             end
+            events.TICK:remove("bow_pose_tick_2")
             events.RENDER:remove("bow_pose_render")
         end
 
