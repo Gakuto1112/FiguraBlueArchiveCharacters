@@ -19,6 +19,14 @@ FrameParticle = {
         ---@diagnostic disable-next-line: redundant-parameter
         instance.particle = models.models.ex_skill_frame.Particles["Particle"..(type == "NORMAL" and 1 or 2)]:copy(particleUUID)
 
+        ---パーティクルの現在位置
+        ---@type Vector3
+        instance.currentPos = screenPos:augmented(100):scale(-1)
+
+        ---次ティックのパーティクルの位置
+        ---@type Vector3
+        instance.nextPos = instance.currentPos
+
         ---パーティクルの秒間移動距離（ピクセル）
         ---@type Vector2
         instance.velocity = velocity
@@ -27,31 +35,41 @@ FrameParticle = {
         ---@type number
         instance.counter = 0
 
-        ---レンダーイベントで実行する関数
-        ---@return boolean canDiscardInstance このインスタンスを破棄してもよいか
-        instance.render = function (self)
-            local fps = client:getFPS()
-            if self.velocity ~= vectors.vec2(0, 0) then
-                self.particle:setPos(self.particle:getPos():add(self.velocity:augmented(100):scale(-1 / fps)))
+        ---このインスタンスを破棄すべきかどうか
+        ---@type boolean
+        instance.shouldDeinit = false
+
+        ---ティックイベントで実行する関数
+        instance.tick = function (self)
+            --パーティクル位置を強制更新
+            self.currentPos = self.nextPos:copy()
+            self.particle:setPos(self.currentPos)
+            self.particle:setScale(vectors.vec3(1, 1, 1):scale(1 - self.counter / 5))
+
+            --カウンターを更新
+            self.counter = self.counter + 1
+            if self.counter == 5 then
+                self.particle:remove()
+            elseif self.counter == 6 then
+                self.shouldDeinit = true
             end
-            self.particle:setScale(vectors.vec3(1, 1, 1):scale(1 - self.counter))
-            instance.counter = math.min(self.counter + 4 / fps , 1)
-            if instance.counter == 1 then
-                instance:remove()
-                return true
-            else
-                return false
+
+            --次ティックの位置を計算
+            if self.velocity:length() > 0 then
+                self.nextPos = self.currentPos:copy():add(self.velocity:copy():scale(-0.05):augmented(100))
             end
         end
 
-        ---パーティクルを削除する。パーティクルを削除するとパーティクルの再生成ができないのでこのインスタンスは破棄する。
-        instance.remove = function (self)
-            self.particle:remove()
+        ---レンダーイベントで実行する関数
+        ---@param delta number デルタ値
+        instance.render = function (self, delta)
+            self.particle:setPos(self.nextPos:copy():sub(self.currentPos):scale(delta):add(self.currentPos))
+            self.particle:setScale(vectors.vec3(1, 1, 1):scale(1 - (self.counter + delta) / 5))
         end
 
         models.models.ex_skill_frame.Gui.script_ex_skill_frame_particles:addChild(instance.particle)
-        instance.particle:setPos(screenPos:augmented(1):scale(-1))
-        instance.particle:setRot(90, math.map(math.random(), 0, 1, 0, 360), 180)
+        instance.particle:setPos(instance.currentPos)
+        instance.particle:setRot(90, math.random() * 360, 180)
 
         return instance
     end
