@@ -54,24 +54,26 @@ Bubble = {
     ---@param self Bubble
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
-    ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
-    play = function (self, type, duration, showInGui)
+    ---@param offsetPos number アバターと吹き出しの距離のオフセット値
+    ---@param offsetRot number アバター周回上の、吹き出しが表示される位置のオフセット値
+    ---@param shouldShowInHUD boolean 一人称用にHUDに吹き出しを表示するかどうか
+    play = function (self, type, duration, offsetPos, offsetRot, shouldShowInHUD)
         self.Emoji = type
         self.Duration = duration
-        self.ShowInGui = showInGui
+        self.ShouldShowInHUD = shouldShowInHUD
         self.BubbleCounter = 1
         self.EmojiAnimationCounter = 0
         models.models.bubble.Camera.AvatarBubble.Emoji:setPrimaryTexture("CUSTOM", textures["textures.emojis."..self.Emoji:lower()])
         models.models.bubble.Camera.AvatarBubble.Bullets:setVisible(self.Emoji == "RELOAD")
         models.models.bubble.Camera.AvatarBubble.Dots:setVisible(self.Emoji == "DOTS")
-        if self.ShowInGui then
+        if self.ShouldShowInHUD then
             models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", textures["textures.emojis."..self.Emoji:lower()])
             sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos())
         end
 
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
-                models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShowInGui and renderer:isFirstPerson())
+                models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShouldShowInHUD and renderer:isFirstPerson())
                 if not client:isPaused() then
                     self.BubbleCounter = self.BubbleCounter + 1
                     if self.BubbleCounter == 0 then
@@ -109,13 +111,13 @@ Bubble = {
                     if not renderer:isFirstPerson() then
                         local playerPos = player:getPos()
                         local cameraPos = client:getCameraPos()
-                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, 12, 0, 0, 0, -1, 0))
+                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) + offsetRot) % 360, 12 + offsetPos, 0, 0, 0, -1, 0))
                     else
-                        avatarBubblePos:add(12, 0, 0)
+                        avatarBubblePos:add(12 + offsetPos, 0, 0)
                     end
                     models.models.bubble.Camera:setOffsetPivot(avatarBubblePos)
                     models.models.bubble.Camera.AvatarBubble:setPos(avatarBubblePos)
-                    if host:isHost() and self.ShowInGui then
+                    if host:isHost() and self.ShouldShowInHUD then
                         local windowSize = client:getScaledWindowSize()
                         models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 125 or 10), 0)
                         models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(bubbleScale * 4))
@@ -135,7 +137,7 @@ Bubble = {
             end, "bubble_render")
         end
         if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil then
-            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration, showInGui)
+            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration, shouldShowInHUD)
         end
     end,
 
@@ -160,27 +162,27 @@ Bubble = {
         if host:isHost() then
             KeyManager:register("bubble_1", Config.loadConfig("keybind.bubble_1", "key.keyboard.j"), function ()
                 if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_1()
+                    pings.showBubbleEmote("GOOD")
                 end
             end)
             KeyManager:register("bubble_2", Config.loadConfig("keybind.bubble_2", "key.keyboard.k"), function ()
                 if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_2()
+                    pings.showBubbleEmote("HEART")
                 end
             end)
             KeyManager:register("bubble_3", Config.loadConfig("keybind.bubble_3", "key.keyboard.n"), function ()
                 if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_3()
+                    pings.showBubbleEmote("NOTE")
                 end
             end)
             KeyManager:register("bubble_4", Config.loadConfig("keybind.bubble_4", "key.keyboard.m"), function ()
                 if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_4()
+                    pings.showBubbleEmote("QUESTION")
                 end
             end)
             KeyManager:register("bubble_5", Config.loadConfig("keybind.bubble_5", "key.keyboard.comma"), function ()
                 if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_5()
+                    pings.showBubbleEmote("SWEAT")
                 end
             end)
         end
@@ -196,12 +198,12 @@ Bubble = {
 
             if player:getActiveItem().id == "minecraft:crossbow" then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "RELOAD") then
-                    self:play("RELOAD", -1, false)
+                    self:play("RELOAD", -1, 0, 0, false)
                     self.IsAutoBubble = true
                 end
             elseif self.IsChatOpened and ExSkill.TransitionCount == 0 then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "DOTS") then
-                    self:play("DOTS", -1, false)
+                    self:play("DOTS", -1, 0, 0, false)
                     self.IsAutoBubble = true
                 end
             elseif self.IsAutoBubble then
@@ -213,28 +215,11 @@ Bubble = {
 }
 
 --ping関数
-function pings.bubble_1()
-    Bubble:play("GOOD", 50, true)
-    Bubble.IsAutoBubble = false
-end
 
-function pings.bubble_2()
-    Bubble:play("HEART", 50, true)
-    Bubble.IsAutoBubble = false
-end
-
-function pings.bubble_3()
-    Bubble:play("NOTE", 50, true)
-    Bubble.IsAutoBubble = false
-end
-
-function pings.bubble_4()
-    Bubble:play("QUESTION", 50, true)
-    Bubble.IsAutoBubble = false
-end
-
-function pings.bubble_5()
-    Bubble:play("SWEAT", 50, true)
+---吹き出しエモートを表示する。
+---@param type Bubble.BubbleType 表示する絵文字の種類
+function pings.showBubbleEmote(type)
+    Bubble:play(type, 50, 0, 0, true)
     Bubble.IsAutoBubble = false
 end
 
