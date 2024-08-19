@@ -38,6 +38,9 @@ Nameplate = {
         if self.CurrentName >= 2 then
             self:setName(self.CurrentName, self.ClubShown)
         end
+        events.RENDER:register(function (delta)
+            nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.NameplateAnchor):sub(player:getPos(delta)))
+        end)
     end
 }
 
