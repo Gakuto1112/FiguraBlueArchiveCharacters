@@ -51,9 +51,39 @@ ExSkill = {
     ---@param direction ExSkill.TransitionPhase カメラのトランジションの向き
     ---@param callback function トランジション終了時に呼び出されるコールバック関数
     transition = function (self, direction, callback)
-        if host:isHost() then
-            events.TICK:register(function ()
-                if not client:isPaused() then
+        events.TICK:register(function ()
+            if not client:isPaused() then
+                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 1, 10) or math.max(self.TransitionCount - 1, 0)
+                if (direction == "PRE" and self.TransitionCount == 10) or (direction == "POST" and self.TransitionCount == 0) then
+                    if host:isHost() then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.ex_skill_frame.Gui.FrameBar:setPos(0, 0, 0)
+                        if direction == "PRE" and self.FrameParticleAmount < 4 then
+                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
+                                modelPart:setVisible(true)
+                            end
+                            models.models.ex_skill_frame.Gui.Frame.FrameTop:setPos(-windowSize.x + 16, -16)
+                            models.models.ex_skill_frame.Gui.Frame.FrameTop:setScale(windowSize.x / 16 - 2, 1, 1)
+                            models.models.ex_skill_frame.Gui.Frame.FrameLeft:setPos(-16, -windowSize.y + 16)
+                            models.models.ex_skill_frame.Gui.Frame.FrameLeft:setScale(1, windowSize.y / 16 - 2, 1)
+                            models.models.ex_skill_frame.Gui.Frame.FrameBottom:setPos(-windowSize.x + 16, -windowSize.y)
+                            models.models.ex_skill_frame.Gui.Frame.FrameBottom:setScale(windowSize.x / 16 - 2, 1, 1)
+                            models.models.ex_skill_frame.Gui.Frame.FrameRight:setPos(-windowSize.x, -windowSize.y + 16)
+                            models.models.ex_skill_frame.Gui.Frame.FrameRight:setScale(1, windowSize.y / 16 - 2, 1)
+                        elseif direction == "POST" then
+                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
+                                modelPart:setVisible(false)
+                            end
+                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
+                                modelPart:setScale(0, 0, 0)
+                            end
+                        end
+                        events.TICK:remove("ex_skill_transition_tick")
+                    end
+                    callback()
+                    events.RENDER:remove("ex_skill_transition_render")
+                end
+                if host:isHost() then
                     local barPos = models.models.ex_skill_frame.Gui.FrameBar:getPos().x * -1
                     local windowSizeY = client:getScaledWindowSize().y
                     if self.FrameParticleAmount ~= 3 then
@@ -63,12 +93,11 @@ ExSkill = {
                         end
                     end
                 end
-            end, "ex_skill_transition_tick")
-        end
-        events.RENDER:register(function ()
+            end
+        end, "ex_skill_transition_tick")
+        events.RENDER:register(function (delta)
             --カメラのトランジション
-            local isPaused = client:isPaused()
-            if host:isHost() and not isPaused then
+            if not client:isPaused() and host:isHost() then
                 local lookDir = player:getLookDir()
                 local cameraRot = renderer:isCameraBackwards() and vectors.vec3(math.deg(math.asin(lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) + math.pi / 2)) or vectors.vec3(math.deg(math.asin(-lookDir.y)), math.deg(math.atan2(lookDir.z, lookDir.x) - math.pi / 2))
                 local targetCameraPos = vectors.vec3()
@@ -87,13 +116,14 @@ ExSkill = {
                         targetCameraRot.y = targetCameraRot.y + 360
                     end
                 end
-                CameraManager.setCameraPivot(targetCameraPos:scale(self.TransitionCount))
-                CameraManager.setCameraRot(targetCameraRot:copy():sub(cameraRot):scale(self.TransitionCount):add(cameraRot))
-                CameraManager:setThirdPersonCameraDistance(4 - self.TransitionCount * 4)
+                local trueDelta = direction == "PRE" and delta or delta * -1
+                CameraManager.setCameraPivot(targetCameraPos:scale((self.TransitionCount + trueDelta) / 10))
+                CameraManager.setCameraRot(targetCameraRot:copy():sub(cameraRot):scale((self.TransitionCount + trueDelta) / 10):add(cameraRot))
+                CameraManager:setThirdPersonCameraDistance(4 - (self.TransitionCount + trueDelta) / 10 * 4)
 
                 --フレーム演出
                 local windowSize = client:getScaledWindowSize()
-                local barPos = (windowSize.x + windowSize.y + math.sqrt(2) * 16) * (direction == "PRE" and self.TransitionCount or (1 - self.TransitionCount))
+                local barPos = (windowSize.x + windowSize.y + math.sqrt(2) * 16) * (direction == "PRE" and (self.TransitionCount + trueDelta) / 10 or (1 - (self.TransitionCount + trueDelta) / 10))
                 models.models.ex_skill_frame.Gui.FrameBar:setPos(-barPos, 0, 0)
 
                 if self.FrameParticleAmount < 4 then
@@ -133,40 +163,6 @@ ExSkill = {
                         models.models.ex_skill_frame.Gui.Frame.FrameRight:setPos(-windowSize.x, -windowSize.y + 16)
                         models.models.ex_skill_frame.Gui.Frame.FrameRight:setScale(1, (windowSize.y - frameRightLength) / 16, 1)
                     end
-                end
-            end
-
-            --カウンター更新
-            if not (isPaused or self.RenderProcessed) then
-                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 2 / client:getFPS(), 1) or math.max(self.TransitionCount - 2 / client:getFPS(), 0)
-                if (direction == "PRE" and self.TransitionCount == 1) or (direction == "POST" and self.TransitionCount == 0) then
-                    if host:isHost() then
-                        local windowSize = client:getScaledWindowSize()
-                        models.models.ex_skill_frame.Gui.FrameBar:setPos(0, 0, 0)
-                        if direction == "PRE" and self.FrameParticleAmount < 4 then
-                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
-                                modelPart:setVisible(true)
-                            end
-                            models.models.ex_skill_frame.Gui.Frame.FrameTop:setPos(-windowSize.x + 16, -16)
-                            models.models.ex_skill_frame.Gui.Frame.FrameTop:setScale(windowSize.x / 16 - 2, 1, 1)
-                            models.models.ex_skill_frame.Gui.Frame.FrameLeft:setPos(-16, -windowSize.y + 16)
-                            models.models.ex_skill_frame.Gui.Frame.FrameLeft:setScale(1, windowSize.y / 16 - 2, 1)
-                            models.models.ex_skill_frame.Gui.Frame.FrameBottom:setPos(-windowSize.x + 16, -windowSize.y)
-                            models.models.ex_skill_frame.Gui.Frame.FrameBottom:setScale(windowSize.x / 16 - 2, 1, 1)
-                            models.models.ex_skill_frame.Gui.Frame.FrameRight:setPos(-windowSize.x, -windowSize.y + 16)
-                            models.models.ex_skill_frame.Gui.Frame.FrameRight:setScale(1, windowSize.y / 16 - 2, 1)
-                        elseif direction == "POST" then
-                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTopLeft, models.models.ex_skill_frame.Gui.Frame.FrameTopRight, models.models.ex_skill_frame.Gui.Frame.FrameBottomLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottomRight}) do
-                                modelPart:setVisible(false)
-                            end
-                            for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
-                                modelPart:setScale(0, 0, 0)
-                            end
-                        end
-                        events.TICK:remove("ex_skill_transition_tick")
-                    end
-                    callback()
-                    events.RENDER:remove("ex_skill_transition_render")
                 end
             end
             self.RenderProcessed = true
@@ -376,9 +372,6 @@ ExSkill = {
                     table.remove(self.BodyYaw, 1)
                 end
             end
-        end)
-        events.WORLD_RENDER:register(function ()
-            self.RenderProcessed = false
         end)
     end
 }
