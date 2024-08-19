@@ -7,6 +7,7 @@
 ---| "SWEAT" 💦
 ---| "RELOAD" 弾薬をリロードする絵文字
 ---| "DOTS" …
+---| "V" ✌
 
 ---@class Bubble 吹き出しエモートを管理するクラス
 Bubble = {
@@ -54,7 +55,7 @@ Bubble = {
     ---@param self Bubble
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
-    ---@param offsetPos number アバターと吹き出しの距離のオフセット値
+    ---@param offsetPos Vector2 吹き出しの位置のオフセット値
     ---@param offsetRot number アバター周回上の、吹き出しが表示される位置のオフセット値
     ---@param shouldShowInHUD boolean 一人称用にHUDに吹き出しを表示するかどうか
     play = function (self, type, duration, offsetPos, offsetRot, shouldShowInHUD)
@@ -108,12 +109,12 @@ Bubble = {
                     local bubbleScale = math.min(math.abs(0.5 * (self.BubbleCounter + delta)), 1)
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(bubbleScale))
                     local playerPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
-                    local avatarBubblePos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, playerPos:copy():sub(player:getPos(delta)):scale(17.067):add(0, 32, 0), 0, 1, 0)
+                    local avatarBubblePos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, playerPos:copy():sub(player:getPos(delta)):scale(17.067):add(0, 32 + offsetPos.y, 0), 0, 1, 0)
                     if not renderer:isFirstPerson() then
                         local cameraPos = client:getCameraPos()
-                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) + offsetRot) % 360, 12 + offsetPos, 0, 0, 0, -1, 0))
+                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) + offsetRot) % 360, 12 + offsetPos.x, 0, 0, 0, -1, 0))
                     else
-                        avatarBubblePos:add(12 + offsetPos, 0, 0)
+                        avatarBubblePos:add(12 + offsetPos.x, 0, 0)
                     end
                     models.models.bubble.Camera:setOffsetPivot(avatarBubblePos)
                     models.models.bubble.Camera.AvatarBubble:setPos(avatarBubblePos)
@@ -198,12 +199,12 @@ Bubble = {
 
             if player:getActiveItem().id == "minecraft:crossbow" then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "RELOAD") then
-                    self:play("RELOAD", -1, 0, 0, false)
+                    self:play("RELOAD", -1, vectors.vec2(), 0, false)
                     self.IsAutoBubble = true
                 end
             elseif self.IsChatOpened and ExSkill.TransitionCount == 0 then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "DOTS") then
-                    self:play("DOTS", -1, 0, 0, false)
+                    self:play("DOTS", -1, vectors.vec2(), 0, false)
                     self.IsAutoBubble = true
                 end
             elseif self.IsAutoBubble then
