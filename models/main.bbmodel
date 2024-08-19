@@ -4010,7 +4010,36 @@
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
-									"children": ["7853e9a2-b429-5a00-5e0e-70449c3a71ee", "328a2de5-64bc-807b-5906-227bfceedf26"]
+									"children": [
+										"7853e9a2-b429-5a00-5e0e-70449c3a71ee",
+										"328a2de5-64bc-807b-5906-227bfceedf26",
+										{
+											"name": "RightSpyglassPivot",
+											"origin": [2, 26, -4],
+											"color": 0,
+											"uuid": "d775a8e4-818b-b21e-93df-fdb4456fefc8",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": []
+										},
+										{
+											"name": "LeftSpyglassPivot",
+											"origin": [-2, 26, -4],
+											"color": 0,
+											"uuid": "5e757c9d-cb7e-d074-a20f-d95f46e96872",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": []
+										}
+									]
 								},
 								"d9d80373-4145-9e90-28de-12248a8075d9"
 							]
@@ -4022,7 +4051,7 @@
 							"uuid": "e8809cb5-a507-86d8-da91-c79b1d4d233e",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": true,
+							"isOpen": false,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -4048,6 +4077,32 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "HelmetPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "84f4ab3f-638e-0106-0c91-5b9a1bd42798",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": false,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "HelmetItemPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "a79c4d57-e81a-accf-19f0-268ebedad907",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
 						}
 					]
 				},
@@ -4165,6 +4220,32 @@
 											]
 										}
 									]
+								},
+								{
+									"name": "ChestplateBodyPivot",
+									"origin": [0, 24, 0],
+									"color": 0,
+									"uuid": "01b59940-384b-c0fa-675d-5adb9d8f5c09",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": false,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": []
+								},
+								{
+									"name": "BeltPivot",
+									"origin": [0, 12, 0],
+									"color": 0,
+									"uuid": "8633b52a-d6e5-7bfd-769b-5528e8a43c1a",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": false,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": []
 								}
 							]
 						},
@@ -4175,7 +4256,7 @@
 							"uuid": "c062b0e8-6983-de4d-12e9-7b5ad9e81528",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": true,
+							"isOpen": false,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -4274,6 +4355,58 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "LeftElytraPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "34f8f1e3-7498-d32a-cbaa-e08af5c6b7e9",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "RightElytraPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "884aa12d-4d86-c86f-f3ae-27294c5df1b1",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "LeftParrotPivot",
+							"origin": [-6.5, 24, 0],
+							"color": 0,
+							"uuid": "29a158b7-4e78-b2e4-f4a6-a828afb1514f",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "RightParrotPivot",
+							"origin": [6.5, 24, 0],
+							"color": 0,
+							"uuid": "7d993335-4efa-18af-e219-def6c191632a",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
 						}
 					]
 				},
@@ -4360,6 +4493,19 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "NameplateAnchor",
+							"origin": [0, 39.25, 0],
+							"color": 0,
+							"uuid": "71b16a49-1da9-df63-2f72-f5272bb4b134",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
 						}
 					]
 				}
@@ -6489,7 +6635,7 @@
 			"override": true,
 			"length": 10.15,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",

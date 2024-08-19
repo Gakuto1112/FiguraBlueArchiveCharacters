@@ -8,7 +8,7 @@ events.ENTITY_INIT:register(function ()
 	CompatibilityUtils = require("scripts.utils.compatibility_utils")
 
 	--パーツ別クラス
-	require("scripts.vanilla_model")
+	VanillaModel = require("scripts.vanilla_model")
 	Arms = require("scripts.arms")
 	Skirt = require("scripts.skirt")
 	Armor = require("scripts.armor")
