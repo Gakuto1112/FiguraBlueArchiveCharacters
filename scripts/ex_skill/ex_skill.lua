@@ -116,7 +116,7 @@ ExSkill = {
                         targetCameraRot.y = targetCameraRot.y + 360
                     end
                 end
-                local trueDelta = direction == "PRE" and delta or 1 - delta
+                local trueDelta = direction == "PRE" and delta or delta * -1
                 CameraManager.setCameraPivot(targetCameraPos:scale((self.TransitionCount + trueDelta) / 10))
                 CameraManager.setCameraRot(targetCameraRot:copy():sub(cameraRot):scale((self.TransitionCount + trueDelta) / 10):add(cameraRot))
                 CameraManager:setThirdPersonCameraDistance(4 - (self.TransitionCount + trueDelta) / 10 * 4)
@@ -173,7 +173,7 @@ ExSkill = {
     play = function (self)
         Bubble:stop()
         renderer:setFOV(70 / client:getFOV())
-        --renderer:setRenderHUD(false)
+        renderer:setRenderHUD(false)
         CameraManager:setCameraCollisionDenial(true)
         models.models.ex_skill_frame.Gui:setColor(BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].formationType == "STRIKER" and vectors.vec3(1, 0.75, 0.75) or vectors.vec3(0.75, 1, 1))
         sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.levelup"), player:getPos(), 5, 2)
