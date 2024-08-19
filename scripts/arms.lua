@@ -1,5 +1,9 @@
 ---@class Arms アバターの腕を制御するクラス
 Arms = {
+    ---腕の角度のオフセット値。銃を構えているときには適用されない。
+    ---@type Vector3[]
+    ArmOffsetRot = {vectors.vec3(), vectors.vec3()},
+
     ---弓の構えを行うかどうか
     ---@type boolean
     BowPoseEnabled = false,
@@ -20,7 +24,33 @@ Arms = {
     ---@type boolean
     IsRenderProcessed = false,
 
+    ---腕の角度を更新する。`self:setRightArmOffsetRot()`と`self:setLeftArmOffsetRot()`用。
+    ---@param self Arms
+    updateArmRot = function (self)
+        if not self.BowPoseEnabled then
+            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(self.ArmOffsetRot[1])
+            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(self.ArmOffsetRot[2])
+        end
+    end,
+
+    ---右腕の角度のオフセット値を設定する。銃を構えているときには適用されない。
+    ---@param self Arms
+    ---@param offsetRot Vector3 新しい右腕の角度のオフセット値
+    setRightArmOffsetRot = function (self, offsetRot)
+        self.ArmOffsetRot[1] = offsetRot:copy()
+        self:updateArmRot()
+    end,
+
+    ---左腕の角度のオフセット値を設定する。銃を構えているときには適用されない。
+    ---@param self Arms
+    ---@param offsetRot Vector3 新しい右腕の角度のオフセット値
+    setLeftArmOffsetRot = function (self, offsetRot)
+        self.ArmOffsetRot[2] = offsetRot:copy()
+        self:updateArmRot()
+    end,
+
     ---弓の構えを行う。実際に弓を構えていなくても有効。
+    ---@param self Arms
     ---@param enabled boolean 弓の構えの開始/終了
     ---@param leftHanded boolean 左手で構えているかどうか
     setBowPose = function(self, enabled, leftHanded)
@@ -28,9 +58,8 @@ Arms = {
         local function stopBowPose()
             models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("RightArm")
             models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("LeftArm")
-            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
-                modelPart:setRot()
-            end
+            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(self.ArmOffsetRot[1])
+            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(self.ArmOffsetRot[2])
             events.RENDER:remove("bow_pose_render")
             events.WORLD_RENDER:remove("bow_pose_world_render")
         end
