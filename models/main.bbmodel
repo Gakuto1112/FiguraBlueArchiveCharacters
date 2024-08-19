@@ -6462,7 +6462,36 @@
 									"locked": false,
 									"visibility": true,
 									"autouv": 0,
-									"children": ["7853e9a2-b429-5a00-5e0e-70449c3a71ee", "328a2de5-64bc-807b-5906-227bfceedf26"]
+									"children": [
+										"7853e9a2-b429-5a00-5e0e-70449c3a71ee",
+										"328a2de5-64bc-807b-5906-227bfceedf26",
+										{
+											"name": "RightSpyglassPivot",
+											"origin": [2, 26, -4],
+											"color": 0,
+											"uuid": "d775a8e4-818b-b21e-93df-fdb4456fefc8",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": []
+										},
+										{
+											"name": "LeftSpyglassPivot",
+											"origin": [-2, 26, -4],
+											"color": 0,
+											"uuid": "5e757c9d-cb7e-d074-a20f-d95f46e96872",
+											"export": true,
+											"mirror_uv": false,
+											"isOpen": true,
+											"locked": false,
+											"visibility": true,
+											"autouv": 0,
+											"children": []
+										}
+									]
 								},
 								"d9d80373-4145-9e90-28de-12248a8075d9",
 								"d6ab704c-e079-a030-b7fc-f0918f9a0036"
@@ -6475,7 +6504,7 @@
 							"uuid": "e8809cb5-a507-86d8-da91-c79b1d4d233e",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": true,
+							"isOpen": false,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -6572,6 +6601,32 @@
 							"visibility": true,
 							"autouv": 0,
 							"children": ["7ceb25cf-9e75-77d7-a94d-a070738a7faf", "9fc18b09-fa23-b4bc-cf76-502630dc811d"]
+						},
+						{
+							"name": "HelmetPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "f5a40897-30dc-eeb8-1309-3766c73b43da",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": false,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "HelmetItemPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "41bc6dc8-d266-7db5-4ccf-eeaf02321250",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
 						}
 					]
 				},
@@ -7143,6 +7198,32 @@
 											]
 										}
 									]
+								},
+								{
+									"name": "ChestplateBodyPivot",
+									"origin": [0, 24, 0],
+									"color": 0,
+									"uuid": "363cb287-01a3-8e05-95d1-28fb2ce1a8ad",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": false,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": []
+								},
+								{
+									"name": "BeltPivot",
+									"origin": [0, 12, 0],
+									"color": 0,
+									"uuid": "34d6477e-fc9e-8523-6a77-c202bbc8101b",
+									"export": true,
+									"mirror_uv": false,
+									"isOpen": false,
+									"locked": false,
+									"visibility": true,
+									"autouv": 0,
+									"children": []
 								}
 							]
 						},
@@ -7153,7 +7234,7 @@
 							"uuid": "c062b0e8-6983-de4d-12e9-7b5ad9e81528",
 							"export": true,
 							"mirror_uv": false,
-							"isOpen": true,
+							"isOpen": false,
 							"locked": false,
 							"visibility": true,
 							"autouv": 0,
@@ -7249,6 +7330,58 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "LeftElytraPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "34f8f1e3-7498-d32a-cbaa-e08af5c6b7e9",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "RightElytraPivot",
+							"origin": [0, 24, 0],
+							"color": 0,
+							"uuid": "884aa12d-4d86-c86f-f3ae-27294c5df1b1",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "LeftParrotPivot",
+							"origin": [-6.5, 24, 0],
+							"color": 0,
+							"uuid": "29a158b7-4e78-b2e4-f4a6-a828afb1514f",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
+						},
+						{
+							"name": "RightParrotPivot",
+							"origin": [6.5, 24, 0],
+							"color": 0,
+							"uuid": "7d993335-4efa-18af-e219-def6c191632a",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
 						}
 					]
 				},
@@ -7335,6 +7468,19 @@
 									]
 								}
 							]
+						},
+						{
+							"name": "NameplateAnchor",
+							"origin": [0, 39.25, 0],
+							"color": 0,
+							"uuid": "71b16a49-1da9-df63-2f72-f5272bb4b134",
+							"export": true,
+							"mirror_uv": false,
+							"isOpen": true,
+							"locked": false,
+							"visibility": true,
+							"autouv": 0,
+							"children": []
 						}
 					]
 				}

@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"format_version": "4.5",
+		"format_version": "4.9",
 		"model_format": "free",
 		"box_uv": false
 	},
@@ -16,268 +16,6 @@
 		"height": 48
 	},
 	"elements": [
-		{
-			"name": "Helmet",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 24, -4],
-			"to": [4, 32, 4],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 1,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [2.375, 12, 4.75, 24],
-					"texture": 0
-				},
-				"east": {
-					"uv": [0, 12, 2.375, 24],
-					"texture": 0
-				},
-				"south": {
-					"uv": [7.125, 12, 9.5, 24],
-					"texture": 0
-				},
-				"west": {
-					"uv": [4.75, 12, 7.125, 24],
-					"texture": 0
-				},
-				"up": {
-					"uv": [2.375, 0, 4.75, 12],
-					"rotation": 180,
-					"texture": 0
-				},
-				"down": {
-					"uv": [4.75, 0, 7.125, 12],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "0aad52c2-be58-2fa6-66aa-0bc7ff05495e"
-		},
-		{
-			"name": "HelmetOverlay",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 24, -4],
-			"to": [4, 32, 4],
-			"autouv": 1,
-			"color": 6,
-			"inflate": 1.001,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [2.375, 12, 4.75, 24],
-					"texture": 1
-				},
-				"east": {
-					"uv": [0, 12, 2.375, 24],
-					"texture": 1
-				},
-				"south": {
-					"uv": [7.125, 12, 9.5, 24],
-					"texture": 1
-				},
-				"west": {
-					"uv": [4.75, 12, 7.125, 24],
-					"texture": 1
-				},
-				"up": {
-					"uv": [2.375, 0, 4.75, 12],
-					"rotation": 180,
-					"texture": 1
-				},
-				"down": {
-					"uv": [4.75, 0, 7.125, 12],
-					"texture": 1
-				}
-			},
-			"type": "cube",
-			"uuid": "07733d01-139b-f7db-82c2-6908214bd51d"
-		},
-		{
-			"name": "Chestplate",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -2],
-			"to": [4, 24, 2],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 1,
-			"origin": [-4, 10, 0],
-			"uv_offset": [16, 16],
-			"faces": {
-				"north": {
-					"uv": [5.9375, 30, 8.3125, 48],
-					"texture": 0
-				},
-				"east": {
-					"uv": [4.75, 30, 5.9375, 48],
-					"texture": 0
-				},
-				"south": {
-					"uv": [9.5, 30, 11.875, 48],
-					"texture": 0
-				},
-				"west": {
-					"uv": [8.3125, 30, 9.5, 48],
-					"texture": 0
-				},
-				"up": {
-					"uv": [5.9375, 24, 8.3125, 30],
-					"rotation": 180,
-					"texture": 0
-				},
-				"down": {
-					"uv": [8.3125, 24, 10.6875, 30],
-					"texture": 0
-				}
-			},
-			"type": "cube",
-			"uuid": "dd71e763-3f50-27e7-4890-60712fe4b470"
-		},
-		{
-			"name": "ChestplateOverlay",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -2],
-			"to": [4, 24, 2],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 1.001,
-			"origin": [-4, 10, 0],
-			"uv_offset": [16, 16],
-			"faces": {
-				"north": {
-					"uv": [5.9375, 30, 8.3125, 48],
-					"texture": 1
-				},
-				"east": {
-					"uv": [4.75, 30, 5.9375, 48],
-					"texture": 1
-				},
-				"south": {
-					"uv": [9.5, 30, 11.875, 48],
-					"texture": 1
-				},
-				"west": {
-					"uv": [8.3125, 30, 9.5, 48],
-					"texture": 1
-				},
-				"up": {
-					"uv": [5.9375, 24, 8.3125, 30],
-					"rotation": 180,
-					"texture": 1
-				},
-				"down": {
-					"uv": [8.3125, 24, 10.6875, 30],
-					"texture": 1
-				}
-			},
-			"type": "cube",
-			"uuid": "221586a8-f1b7-d89c-103a-a8a78d463c14"
-		},
-		{
-			"name": "Leggings",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -2],
-			"to": [4, 24, 2],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 0.5,
-			"origin": [-4, 22, 0],
-			"uv_offset": [16, 16],
-			"faces": {
-				"north": {
-					"uv": [5.9375, 30, 8.3125, 48],
-					"texture": 2
-				},
-				"east": {
-					"uv": [4.75, 30, 5.9375, 48],
-					"texture": 2
-				},
-				"south": {
-					"uv": [9.5, 30, 11.875, 48],
-					"texture": 2
-				},
-				"west": {
-					"uv": [8.3125, 30, 9.5, 48],
-					"texture": 2
-				},
-				"up": {
-					"uv": [5.9375, 24, 8.3125, 30],
-					"rotation": 180,
-					"texture": 2
-				},
-				"down": {
-					"uv": [8.3125, 24, 10.6875, 30],
-					"texture": 2
-				}
-			},
-			"type": "cube",
-			"uuid": "7ad0bece-d1c9-6e51-4f44-ef97a7f7f1b9"
-		},
-		{
-			"name": "LeggingsOverlay",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -2],
-			"to": [4, 24, 2],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 0.501,
-			"origin": [-4, 22, 0],
-			"uv_offset": [16, 16],
-			"faces": {
-				"north": {
-					"uv": [5.9375, 30, 8.3125, 48],
-					"texture": 3
-				},
-				"east": {
-					"uv": [4.75, 30, 5.9375, 48],
-					"texture": 3
-				},
-				"south": {
-					"uv": [9.5, 30, 11.875, 48],
-					"texture": 3
-				},
-				"west": {
-					"uv": [8.3125, 30, 9.5, 48],
-					"texture": 3
-				},
-				"up": {
-					"uv": [5.9375, 24, 8.3125, 30],
-					"rotation": 180,
-					"texture": 3
-				},
-				"down": {
-					"uv": [8.3125, 24, 10.6875, 30],
-					"texture": 3
-				}
-			},
-			"type": "cube",
-			"uuid": "081f8895-a57e-f3d5-a6fc-c503639b7960"
-		},
 		{
 			"name": "RightChestplate",
 			"box_uv": false,
@@ -1343,138 +1081,6 @@
 			"uuid": "2f97fafc-dd7b-205e-8403-0de28ab11617"
 		},
 		{
-			"name": "HelmetTrim",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 24, -4],
-			"to": [4, 32, 4],
-			"autouv": 1,
-			"color": 6,
-			"inflate": 1.002,
-			"origin": [0, 24, 0],
-			"faces": {
-				"north": {
-					"uv": [2.375, 12, 4.75, 24],
-					"texture": 4
-				},
-				"east": {
-					"uv": [0, 12, 2.375, 24],
-					"texture": 4
-				},
-				"south": {
-					"uv": [7.125, 12, 9.5, 24],
-					"texture": 4
-				},
-				"west": {
-					"uv": [4.75, 12, 7.125, 24],
-					"texture": 4
-				},
-				"up": {
-					"uv": [2.375, 0, 4.75, 12],
-					"rotation": 180,
-					"texture": 4
-				},
-				"down": {
-					"uv": [4.75, 0, 7.125, 12],
-					"texture": 4
-				}
-			},
-			"type": "cube",
-			"uuid": "b9d295d6-b563-7e14-8d3c-08e946188c6b"
-		},
-		{
-			"name": "ChestplateTrim",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -2],
-			"to": [4, 24, 2],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 1.002,
-			"origin": [-4, 10, 0],
-			"uv_offset": [16, 16],
-			"faces": {
-				"north": {
-					"uv": [5.9375, 30, 8.3125, 48],
-					"texture": 4
-				},
-				"east": {
-					"uv": [4.75, 30, 5.9375, 48],
-					"texture": 4
-				},
-				"south": {
-					"uv": [9.5, 30, 11.875, 48],
-					"texture": 4
-				},
-				"west": {
-					"uv": [8.3125, 30, 9.5, 48],
-					"texture": 4
-				},
-				"up": {
-					"uv": [5.9375, 24, 8.3125, 30],
-					"rotation": 180,
-					"texture": 4
-				},
-				"down": {
-					"uv": [8.3125, 24, 10.6875, 30],
-					"rotation": 180,
-					"texture": 4
-				}
-			},
-			"type": "cube",
-			"uuid": "049088bb-c67b-89d6-c0c9-39cdf4d55248"
-		},
-		{
-			"name": "LeggingsTrim",
-			"box_uv": false,
-			"rescale": false,
-			"locked": false,
-			"render_order": "default",
-			"allow_mirror_modeling": true,
-			"from": [-4, 12, -2],
-			"to": [4, 24, 2],
-			"autouv": 0,
-			"color": 6,
-			"inflate": 0.502,
-			"origin": [-4, 22, 0],
-			"uv_offset": [16, 16],
-			"faces": {
-				"north": {
-					"uv": [5.9375, 30, 8.3125, 48],
-					"texture": 5
-				},
-				"east": {
-					"uv": [4.75, 30, 5.9375, 48],
-					"texture": 5
-				},
-				"south": {
-					"uv": [9.5, 30, 11.875, 48],
-					"texture": 5
-				},
-				"west": {
-					"uv": [8.3125, 30, 9.5, 48],
-					"texture": 5
-				},
-				"up": {
-					"uv": [5.9375, 24, 8.3125, 30],
-					"rotation": 180,
-					"texture": 5
-				},
-				"down": {
-					"uv": [8.3125, 24, 10.6875, 30],
-					"texture": 5
-				}
-			},
-			"type": "cube",
-			"uuid": "94f742cd-a66f-e884-64b7-8dd716c679b7"
-		},
-		{
 			"name": "RightChestplateTrim",
 			"box_uv": false,
 			"rescale": false,
@@ -2009,73 +1615,6 @@
 	],
 	"outliner": [
 		{
-			"name": "ArmorH",
-			"origin": [0, 24, 0],
-			"color": 0,
-			"uuid": "40004832-5346-1967-b51b-86b0d68683ae",
-			"export": true,
-			"mirror_uv": false,
-			"isOpen": true,
-			"locked": false,
-			"visibility": true,
-			"autouv": 0,
-			"children": [
-				{
-					"name": "Helmet",
-					"origin": [0, 24, 0],
-					"color": 0,
-					"uuid": "bbcfd570-027f-caba-54e7-280e79727a3c",
-					"export": true,
-					"mirror_uv": false,
-					"isOpen": true,
-					"locked": false,
-					"visibility": true,
-					"autouv": 0,
-					"children": ["0aad52c2-be58-2fa6-66aa-0bc7ff05495e", "07733d01-139b-f7db-82c2-6908214bd51d", "b9d295d6-b563-7e14-8d3c-08e946188c6b"]
-				}
-			]
-		},
-		{
-			"name": "ArmorB",
-			"origin": [0, 24, 0],
-			"color": 0,
-			"uuid": "c3e1c2e8-b582-70a8-2ed1-8ca003253271",
-			"export": true,
-			"mirror_uv": false,
-			"isOpen": true,
-			"locked": false,
-			"visibility": true,
-			"autouv": 0,
-			"children": [
-				{
-					"name": "Chestplate",
-					"origin": [-4, 10, 0],
-					"color": 0,
-					"uuid": "6784fc9e-2fb3-25fd-4049-0034d3427917",
-					"export": true,
-					"mirror_uv": false,
-					"isOpen": true,
-					"locked": false,
-					"visibility": true,
-					"autouv": 0,
-					"children": ["dd71e763-3f50-27e7-4890-60712fe4b470", "221586a8-f1b7-d89c-103a-a8a78d463c14", "049088bb-c67b-89d6-c0c9-39cdf4d55248"]
-				},
-				{
-					"name": "Leggings",
-					"origin": [0, 36, 0],
-					"color": 0,
-					"uuid": "e770072b-82d4-ffe0-aa7d-fac77de0c084",
-					"export": true,
-					"mirror_uv": false,
-					"isOpen": true,
-					"locked": false,
-					"visibility": true,
-					"autouv": 0,
-					"children": ["7ad0bece-d1c9-6e51-4f44-ef97a7f7f1b9", "081f8895-a57e-f3d5-a6fc-c503639b7960", "94f742cd-a66f-e884-64b7-8dd716c679b7"]
-				}
-			]
-		},
-		{
 			"name": "ArmorRA",
 			"origin": [0, 24, 0],
 			"color": 0,
@@ -2346,12 +1885,18 @@
 	],
 	"textures": [
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\leather_layer_1.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\leather_layer_1.png",
 			"name": "leather_layer_1.png",
 			"folder": "",
 			"namespace": "",
 			"id": "0",
+			"width": 64,
+			"height": 32,
+			"uv_width": 19,
+			"uv_height": 48,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -2359,19 +1904,25 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "3077f184-e559-5a8a-71d6-29d7cea0677e",
 			"relative_path": "../../textures/for_modeling/leather_layer_1.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAA3lJREFUaEPlmTFv4kAQhU0TnWiQEEW4DlFSRRFVdB1/g5rfRM3foDulQkeacKcUiO5IgZBo0CmNT99Kz5qs7CzENvh8K0XB7Ho98zzzZt7SiAJjNpvFx+PRrWo2m8lqfTeZTBqhPao8HzQeAO7v7t758OftzV2vVqtoPB4H96gFAL9eXqJWq5X40m63/w8AptNp/O3hIfr9+hodDocEAMDYbrf1jwAfgF6vl4CwWCyi2nMAAAyHw2i/37sIEABfbm6iH09P9Y8ASHAwGLi3DgjkPs4zvj8+1j8CAABns0rhP58CWQ7isK37SvwsILQ2bd6WQbsvn68NYMPWedV3hTssj5FUAeZIAQ34YLfbOZC63a5LDQ2lCBzBsH0E1URrq9BHNNLKHCXu6+2ty3ENPxr0ppn3y6S9n/sAAMcZKqWQaWUA6Pf7iWFyzIZyVrcHeD5AAgoQ1uu1mwYgGik7NF+JFLAkl9cggWI5QQDbHqIqZbT0Pl5iChBsCYUfKkGClxIqRIaNiryRVpTdpUdAUYaWtU8QgPl8Hou5Ia7RaBS8pyxj2Vd9i3grbyQFnVkul7F0QFUAUF9RhBYJAvDz+TlWgwQQ144A9S2UVUg074FMEADbKkNieR+YNz1s78FepadAyOAsLeEDZXM3TVx9tN7XD9yfpT3O1RrBCDgFAHKSNKG1Ve9v81NnCnbeX0/bbZ2ie9R3NuettvC1hn99ilzPDYDVElY8Yai0hMQUAEhcoQ1Ybx0S19AlMk8rbbWErhFf0ioSY+yj/ZjXdShlcwNAaOuB1mCpRwyVYxyhWYOtVvCVKKVXesQ6hGP+87KuTzmzLAQAnRj5Ib7ZbNxJspW/OJC2XmpRilFqERA6nY7bRxGWdW0jRACWHgGkgMQOxvLHGSJDR2jiEaWAXW8B8flG64kaK7/TpLnlj3NabncecA6ryhj7EB2a6g0JgLQIEECAo/UAomG7Tt5o3jIXIvF3J0JSaJAWI41VRUoiOeW0f0KkByv8cdgPUU6UGAJMUcP/S/3w4gAgJ/VGFJLWYDvvv0E5ausvoJCzgKJfkyypcY9dLxK7xg8vLgUgFUjHsrQMxlBpeeWk1mcdaWlPHBUQvO2scE5rpi51VpBEgE5oVJfVqOiN23kiguuPGo2iW9ZQLn923kVAWltpWVckmcbEoTLzWcMudd9f6+s3Tq3qU78AAAAASUVORK5CYII="
 		},
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\leather_layer_1_overlay.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\leather_layer_1_overlay.png",
 			"name": "leather_layer_1_overlay.png",
 			"folder": "",
 			"namespace": "",
 			"id": "1",
+			"width": 64,
+			"height": 32,
+			"uv_width": 19,
+			"uv_height": 48,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -2379,19 +1930,25 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "2ba8879b-4ecb-195a-59ee-6d9e98804dde",
 			"relative_path": "../../textures/for_modeling/leather_layer_1_overlay.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAARtJREFUaENjZCABeOlI/Acp33blBSMJ2ga1UpI8EmWhAA6AZScekKRvMIcASR4Z8QGQZANJAfOOjNAUkOWgCQ6AaQeuk5Ryhk0WGA2AkZ4CRnwZQGkABJlACtF1ZwZPIUpSYUZpNUhpANKiMCUpAEAtQQEeDrIbQoOxECUpACiNAVAK4GDhHFTVKF0DAJQCfvz5PqgaUnQNgCFfBlCaBSgtRCm1H5t+uqYAWniAUjMJBgBsDABm0XAaCwD5iagAUBARZPjw4zvDhy8/htVgCNEBAKr7OVgYGF58GKEBgJzPRlwWoLSQGez6CZYBg90DlLpvNAAoDcGhrn80BQz1GKTU/aMpgNIQHOr6R1PAUI9BSt0/mgIoDcGhrh8ARURkId1f/LQAAAAASUVORK5CYII="
 		},
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\leather_layer_2.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\leather_layer_2.png",
 			"name": "leather_layer_2.png",
 			"folder": "",
 			"namespace": "",
 			"id": "2",
+			"width": 64,
+			"height": 32,
+			"uv_width": 19,
+			"uv_height": 48,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -2399,19 +1956,25 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "a3d07fcc-8736-7c2a-3a7d-01bca4f29360",
 			"relative_path": "../../textures/for_modeling/leather_layer_2.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAbNJREFUaEPtVquOg0AUHTSGIDA4BA7ZLLLZj8DzZXi+BI9DoJYKBMGwqevmTHI2N7Ntd5NuSToz15B5NOk9cx43UI5X4Hj/ygPgGeA4Al4CjhPAm6CXgJeA4wh4CThOAJ8CXgJeAgYCbdtesLVtmwrDUFVVZTVLfjQHAN4OB/V5Pquu61Rd124B0DTNpSxLNY6jmufZTQCkKqxnADVP3eML7UsfuHWG/VcHKAAAaDiKIjUMg24+TVMNgLmepknv43xdVyskEkDzSZJoANhgURS60b7vdRrAE1AwRRTWy7Lo+6+eEpoBfHE0hIbzPL/JAAkIALICAL44XpgSAMXRLCkfx7FmBNf4WsEAKQFqHiBkWfYtATDCBIRrKxhAU8OLk+KcA8gIMIAMkaZpRQpIDzBjEICYJmmmxL2YNCOVIzblxXMZuzzbI2a1CfJPmdn/l8Zwh6MzPQJrFkZqljznqA0A5H3c5W/2MNmH53w5OlNC78ej+jiddN/wCpScM2C6kNhv9/cw2YcBuDZIsUG+PJpnapiSYuwSKIKFL0z52R7zbwBIudzzlGsew7mDg5j0jWenzBfesmAwq9d1bgAAAABJRU5ErkJggg=="
 		},
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\leather_layer_2_overlay.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\leather_layer_2_overlay.png",
 			"name": "leather_layer_2_overlay.png",
 			"folder": "",
 			"namespace": "",
 			"id": "3",
+			"width": 64,
+			"height": 32,
+			"uv_width": 19,
+			"uv_height": 48,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -2419,19 +1982,25 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "72561028-643a-e907-78d7-d707a6b9393f",
 			"relative_path": "../../textures/for_modeling/leather_layer_2_overlay.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAP5JREFUaEPtlbEKwjAQhq/gkEKHCA516wM4OvgMjo4+oKPP4eBDODp2KOSGQuUaAramLirE3n9LSS4N3Mf//8lIeWXK5ycAgAKUE4AFlAsAIQgLwALKCcACygWAVwAWgAWUE4AFlAsArwAsAAtECBx3VSfbp8tt9gp5GVCGX9ucHBPV7GYPIQrAmrzXhUoAMrhqC2gLxY9D7rD1gRmKmckYE+U47r07Gy44X38bxF8BUBY+M+6N679hPQDTOqrZ70ifR+sYMbkveQD7TdnZwpBZSGgOBxwPFfrWEHFLVDf+h2q17IHEzicP4NkCImmpKQtM5YvAi5VASh7Av4fmA8zRVyFbTtAIAAAAAElFTkSuQmCC"
 		},
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\trim.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\trim.png",
 			"name": "trim.png",
 			"folder": "",
 			"namespace": "",
 			"id": "5",
+			"width": 64,
+			"height": 32,
+			"uv_width": 19,
+			"uv_height": 48,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -2439,19 +2008,25 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "10cc6101-1a98-56ff-84bb-c18cb34472c0",
 			"relative_path": "../../textures/for_modeling/trim.png",
 			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAARlJREFUaEPtWIEJxCAMrJtkFEdxFEdxFEdxE5/Ip+TFL31S+TamUFrE2NzlUsi5bfHLLY5/MwJMAYszYC2wuADsJ2gtEGOs2AallNYNANBueqcWea83wkoplfbzWFzj53Sx+7m0D58xxr8W4fTHc86ViMHEvfenY+/8n1EBQkKwESBhT0OsKUBDFSUYTAES9jTEmgI0VFGCwRQgYU9DrClAQxUlGG6vAD6FcqA0UuecP/B77/uR/hCjmAD0EzCZkY9AIzOCGPkGfQwft8lXCCGIczxSiEMAxBpt7Od93EPJcjMD174ZGmiaAMBuoNC7RK4zYofs8uTxoyml+mslnmKgDAno+06TA9SraGp/zZDs1WcaAVcz+rTzXjFzgCFw/S4BAAAAAElFTkSuQmCC"
 		},
 		{
-			"path": "C:\\Users\\gakut\\curseforge\\minecraft\\Instances\\Fabricバニラ\\figura\\avatars\\ShizukoPrototype\\textures\\for_modeling\\trim_leggings.png",
+			"path": "C:\\Users\\gakut\\AppData\\Roaming\\com.modrinth.theseus\\profiles\\Fabricバニラ\\figura\\avatars\\ブルーアーカイブ\\ベースアバター\\textures\\for_modeling\\trim_leggings.png",
 			"name": "trim_leggings.png",
 			"folder": "",
 			"namespace": "",
 			"id": "6",
+			"width": 64,
+			"height": 32,
+			"uv_width": 19,
+			"uv_height": 48,
 			"particle": false,
+			"layers_enabled": false,
+			"sync_to_project": "",
 			"render_mode": "default",
 			"render_sides": "auto",
 			"frame_time": 1,
@@ -2459,7 +2034,7 @@
 			"frame_order": "",
 			"frame_interpolate": false,
 			"visible": true,
-			"mode": "bitmap",
+			"internal": true,
 			"saved": true,
 			"uuid": "a801ffff-07dc-221a-9ca4-89a631acd89b",
 			"relative_path": "../../textures/for_modeling/trim_leggings.png",
