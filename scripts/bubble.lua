@@ -15,21 +15,21 @@ Bubble = {
     ---@type number
     BubbleCounter = 0,
 
-    ---吹き出しのトランジションを測るカウンター
-    ---@type number
-    TransitionCounter = 0,
+    ---吹き出しの絵文字
+    ---@type Bubble.BubbleType
+    Emoji = "GOOD",
+
+    ---吹き出しを表示する時間。-1は時間無制限を示す。
+    ---@type integer
+    Duration = 0,
 
     ---吹き出しエモートが自動で出たものかどうか
     ---@type boolean
     IsAutoBubble = false,
 
-    ---一人称用にGUIに吹き出しを表示するかどうか
+    ---一人称用にHUDに吹き出しを表示するかどうか
     ---@type boolean
-    ShowInGui = false,
-
-    ---吹き出しの絵文字
-    ---@type Bubble.BubbleType
-    Emoji = "GOOD",
+    ShouldShowInHUD = false,
 
     ---絵文字のアニメーションのタイミングを測るカウンター
     ---@type number
@@ -40,118 +40,117 @@ Bubble = {
     IsForcedStop = false,
 
     ---チャットを開けているかどうか
-    --- 1. 現ティック, 2. 前ティック
-    ---@type boolean[]
-    IsChatOpened = {false, false},
+    ---@type boolean
+    IsChatOpened = false,
+
+    ---前ティックにチャットを開けていたかどうか
+    ---@type boolean
+    IsChatOpenedPrev = false,
 
     ---このワールドレンダーでレンダー処理を行ったかどうか
     ---@type boolean
     IsRenderProcessed = false,
 
     ---吹き出しエモートを再生する。
+    ---@param self Bubble
     ---@param type Bubble.BubbleType 再生する絵文字の種類
     ---@param duration integer 吹き出しを表示している時間。-1にすると停止するまでずっと表示する。
-    ---@param showInGui boolean 一人称用にGUIに吹き出しを表示するかどうか
-    ---@param exSkill2Mode? boolean Exスキル2で使用する専用モード
-    play = function (self, type, duration, showInGui, exSkill2Mode)
+    ---@param offsetPos Vector2 吹き出しの位置のオフセット値
+    ---@param offsetRot number アバター周回上の、吹き出しが表示される位置のオフセット値
+    ---@param shouldShowInHUD boolean 一人称用にHUDに吹き出しを表示するかどうか
+    play = function (self, type, duration, offsetPos, offsetRot, shouldShowInHUD)
         self.Emoji = type
-        self.ShowInGui = showInGui
-        self.BubbleCounter = duration
-        self.TransitionCounter = 0
+        self.Duration = duration
+        self.ShouldShowInHUD = shouldShowInHUD
+        self.BubbleCounter = 1
         self.EmojiAnimationCounter = 0
-        local emojiTexture = textures["textures.emojis."..self.Emoji:lower()]
-        models.models.bubble.Camera.AvatarBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
+        models.models.bubble.Camera.AvatarBubble.Emoji:setPrimaryTexture("CUSTOM", textures["textures.emojis."..self.Emoji:lower()])
         models.models.bubble.Camera.AvatarBubble.Bullets:setVisible(self.Emoji == "RELOAD")
         models.models.bubble.Camera.AvatarBubble.Dots:setVisible(self.Emoji == "DOTS")
-        if self.ShowInGui then
-            models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", emojiTexture)
-            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos())
+        if self.ShouldShowInHUD then
+            models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", textures["textures.emojis."..self.Emoji:lower()])
+            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), ModelUtils.getModelWorldPos(models.models.main.Avatar))
         end
+
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
             events.TICK:register(function ()
-                models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShowInGui and renderer:isFirstPerson())
-                if not client:isPaused() and self.BubbleCounter >= 0 then
-                    self.BubbleCounter = math.max(self.BubbleCounter - 1, 0)
+                models.models.bubble.Gui.FirstPersonBubble:setVisible(self.ShouldShowInHUD and renderer:isFirstPerson())
+                if not client:isPaused() then
+                    self.BubbleCounter = self.BubbleCounter + 1
+                    if self.BubbleCounter == 0 then
+                        for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble, models.models.bubble.Gui.FirstPersonBubble, models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
+                            modelPart:setVisible(false)
+                        end
+                        events.TICK:remove("bubble_tick")
+                        events.RENDER:remove("bubble_render")
+                        if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onStop ~= nil then
+                            BlueArchiveCharacter.BUBBLE.callbacks.onStop(type, self.IsForcedStop)
+                        end
+                    elseif self.Duration >= 0 and self.BubbleCounter == self.Duration + 2 then
+                        self:stop()
+                    end
+                    if self.Emoji == "RELOAD" or self.Emoji == "DOTS" then
+                        self.EmojiAnimationCounter = self.EmojiAnimationCounter + 1
+                        self.EmojiAnimationCounter = self.EmojiAnimationCounter == 25 and 0 or self.EmojiAnimationCounter
+                        if self.Emoji == "DOTS" then
+                            for i = 1, 3 do
+                                models.models.bubble.Camera.AvatarBubble.Dots["Dot"..i]:setVisible(self.EmojiAnimationCounter >= 6 * i)
+                            end
+                        end
+                    end
                 end
             end, "bubble_tick")
         end
+
         if events.RENDER:getRegisteredCount("bubble_render") == 0 then
             events.RENDER:register(function (delta, context)
                 models.models.bubble.Camera.AvatarBubble:setVisible(context ~= "OTHER")
-                if not self.IsRenderProcessed then
-                    if not client:isPaused() then
-                        if self.BubbleCounter ~= 0 then
-                            self.TransitionCounter = math.min(self.TransitionCounter + 32 / client:getFPS(), 1)
-                        else
-                            self.TransitionCounter = math.max(self.TransitionCounter - 32 / client:getFPS(), 0)
-                            if self.TransitionCounter == 0 then
-                                for _, modelPart in ipairs({models.models.bubble.Camera.AvatarBubble, models.models.bubble.Gui.FirstPersonBubble, models.models.bubble.Camera.AvatarBubble.Bullets, models.models.bubble.Gui.FirstPersonBubble.Bullets}) do
-                                    modelPart:setVisible(false)
-                                end
-                                events.TICK:remove("bubble_tick")
-                                events.RENDER:remove("bubble_render")
-                                if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onStop ~= nil then
-                                    BlueArchiveCharacter.BUBBLE.callbacks.onStop(type, self.IsForcedStop)
-                                end
-                                self.IsForcedStop = false
-                            end
-                        end
-                        if self.Emoji == "RELOAD" or self.Emoji == "DOTS" then
-                            if self.Emoji == "RELOAD" then
-                                local bulletCounters = {math.clamp(self.EmojiAnimationCounter * 2 - 2, 0, 1), math.clamp(self.EmojiAnimationCounter * 2 - 4, 0, 1), math.clamp(self.EmojiAnimationCounter * 2 - 6, 0, 1)}
-                                for index, bulletModel in ipairs(models.models.bubble.Camera.AvatarBubble.Bullets:getChildren()) do
-                                    bulletModel:setPos(0, 1 - bulletCounters[index], 0)
-                                    bulletModel:setOpacity(bulletCounters[index])
-                                end
-                            elseif self.Emoji == "DOTS" then
-                                models.models.bubble.Camera.AvatarBubble.Dots.Dot1:setVisible(self.EmojiAnimationCounter > 1.25)
-                                models.models.bubble.Camera.AvatarBubble.Dots.Dot2:setVisible(self.EmojiAnimationCounter > 2.5)
-                                models.models.bubble.Camera.AvatarBubble.Dots.Dot3:setVisible(self.EmojiAnimationCounter > 3.75)
-                            end
-                            self.EmojiAnimationCounter = self.EmojiAnimationCounter + 4 / client:getFPS()
-                            self.EmojiAnimationCounter = self.EmojiAnimationCounter >= 5 and self.EmojiAnimationCounter - 5 or self.EmojiAnimationCounter
-                        end
-                    end
-                    models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter))
-                    if host:isHost() and self.ShowInGui then
-                        local windowSize = client:getScaledWindowSize()
-                        models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 125 or 10), 0)
-                        models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(self.TransitionCounter * 4))
-                    end
-                    local avatarBubblePos = vectors.vec3(0, 32, 0)
-                    if exSkill2Mode then
-                        avatarBubblePos:add(models.models.main.Avatar:getAnimPos())
-                        if host:isHost() then
-                            avatarBubblePos:add(0, -4, 0)
-                        end
-                    end
+                if not client:isPaused() then
+                    local bubbleScale = math.min(math.abs(0.5 * (self.BubbleCounter + delta)), 1)
+                    models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(bubbleScale))
+                    local playerPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
+                    local avatarBubblePos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, playerPos:copy():sub(player:getPos(delta)):scale(17.067):add(0, 32 + offsetPos.y, 0), 0, 1, 0)
                     if not renderer:isFirstPerson() then
-                        local playerPos = player:getPos()
                         local cameraPos = client:getCameraPos()
-                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - player:getBodyYaw(delta) % 360, exSkill2Mode and 16 or 12, 0, 0, 0, -1, 0))
+                        avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) + offsetRot) % 360, 12 + offsetPos.x, 0, 0, 0, -1, 0))
                     else
-                        avatarBubblePos:add(12, 0, 0)
+                        avatarBubblePos:add(12 + offsetPos.x, 0, 0)
                     end
                     models.models.bubble.Camera:setOffsetPivot(avatarBubblePos)
                     models.models.bubble.Camera.AvatarBubble:setPos(avatarBubblePos)
-                    self.IsRenderProcessed = true
+                    if host:isHost() and self.ShouldShowInHUD then
+                        local windowSize = client:getScaledWindowSize()
+                        models.models.bubble.Gui.FirstPersonBubble:setPos(-windowSize.x + 10, -windowSize.y + (action_wheel:isEnabled() and 125 or 10), 0)
+                        models.models.bubble.Gui.FirstPersonBubble:setScale(vectors.vec3(1, 1, 1):scale(bubbleScale * 4))
+                    end
+                    if self.Emoji == "RELOAD" then
+                        local bullet1Counter = math.clamp((self.EmojiAnimationCounter + delta) * 0.2 - 1, 0, 1)
+                        models.models.bubble.Camera.AvatarBubble.Bullets.Bullet1:setPos(0, 1 - bullet1Counter, 0)
+                        models.models.bubble.Camera.AvatarBubble.Bullets.Bullet1:setOpacity(bullet1Counter)
+                        local bullet2Counter = math.clamp((self.EmojiAnimationCounter + delta) * 0.2 - 2, 0, 1)
+                        models.models.bubble.Camera.AvatarBubble.Bullets.Bullet2:setPos(0, 1 - bullet2Counter, 0)
+                        models.models.bubble.Camera.AvatarBubble.Bullets.Bullet2:setOpacity(bullet2Counter)
+                        local bullet3Counter = math.clamp((self.EmojiAnimationCounter + delta) * 0.2 - 3, 0, 1)
+                        models.models.bubble.Camera.AvatarBubble.Bullets.Bullet3:setPos(0, 1 - bullet3Counter, 0)
+                        models.models.bubble.Camera.AvatarBubble.Bullets.Bullet3:setOpacity(bullet3Counter)
+                    end
                 end
             end, "bubble_render")
         end
         if BlueArchiveCharacter.BUBBLE ~= nil and BlueArchiveCharacter.BUBBLE.callbacks ~= nil and BlueArchiveCharacter.BUBBLE.callbacks.onPlay ~= nil then
-            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration, showInGui)
+            BlueArchiveCharacter.BUBBLE.callbacks.onPlay(type, duration, shouldShowInHUD)
         end
     end,
 
     ---吹き出しエモートを停止する。
+    ---@param self Bubble
     stop = function (self)
-        if self.BubbleCounter >= 2 then
-            self.IsForcedStop = true
-        end
-        self.BubbleCounter = 0
+        self.IsForcedStop = self.Duration == -1 or self.BubbleCounter < self.Duration + 2
+        self.BubbleCounter = -2
     end,
 
     ---初期化関数
+    ---@param self Bubble
     init = function (self)
         models.models.bubble:addChild(models:newPart("Gui", "Gui"))
         models.models.bubble.Gui:addChild(models.models.bubble.Camera.AvatarBubble:copy("FirstPersonBubble"))
@@ -163,51 +162,49 @@ Bubble = {
         --エモートガイド
         if host:isHost() then
             KeyManager:register("bubble_1", Config.loadConfig("keybind.bubble_1", "key.keyboard.j"), function ()
-                if ExSkill.AnimationCount == -1 and (self.TransitionCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_1()
+                if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
+                    pings.showBubbleEmote("GOOD")
                 end
             end)
             KeyManager:register("bubble_2", Config.loadConfig("keybind.bubble_2", "key.keyboard.k"), function ()
-                if ExSkill.AnimationCount == -1 and (self.TransitionCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_2()
+                if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
+                    pings.showBubbleEmote("HEART")
                 end
             end)
             KeyManager:register("bubble_3", Config.loadConfig("keybind.bubble_3", "key.keyboard.n"), function ()
-                if ExSkill.AnimationCount == -1 and (self.TransitionCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_3()
+                if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
+                    pings.showBubbleEmote("NOTE")
                 end
             end)
             KeyManager:register("bubble_4", Config.loadConfig("keybind.bubble_4", "key.keyboard.m"), function ()
-                if ExSkill.AnimationCount == -1 and (self.TransitionCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_4()
+                if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
+                    pings.showBubbleEmote("QUESTION")
                 end
             end)
             KeyManager:register("bubble_5", Config.loadConfig("keybind.bubble_5", "key.keyboard.comma"), function ()
-                if ExSkill.AnimationCount == -1 and (self.TransitionCounter == 0 or self.IsAutoBubble) then
-                    pings.bubble_5()
+                if ExSkill.AnimationCount == -1 and (self.BubbleCounter == 0 or self.IsAutoBubble) then
+                    pings.showBubbleEmote("SWEAT")
                 end
             end)
         end
 
         events.TICK:register(function ()
             if host:isHost() then
-                self.IsChatOpened[1] = host:isChatOpen()
-                if self.IsChatOpened[1] and not self.IsChatOpened[2] then
-                    pings.setChatOpen(self.IsChatOpened[1])
-                elseif not self.IsChatOpened[1] and self.IsChatOpened[2] then
-                    pings.setChatOpen(self.IsChatOpened[1])
+                local isChatOpened = host:isChatOpen()
+                if isChatOpened ~= self.IsChatOpenedPrev then
+                    pings.setChatOpen(isChatOpened)
                 end
-                self.IsChatOpened[2] = self.IsChatOpened[1]
+                self.IsChatOpenedPrev = isChatOpened
             end
 
             if player:getActiveItem().id == "minecraft:crossbow" then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "RELOAD") then
-                    self:play("RELOAD", -1, false)
+                    self:play("RELOAD", -1, vectors.vec2(), 0, false)
                     self.IsAutoBubble = true
                 end
-            elseif self.IsChatOpened[1] and ExSkill.TransitionCount == 0 then
+            elseif self.IsChatOpened and ExSkill.TransitionCount == 0 then
                 if self.BubbleCounter == 0 or (self.IsAutoBubble and self.Emoji ~= "DOTS") then
-                    self:play("DOTS", -1, false)
+                    self:play("DOTS", -1, vectors.vec2(), 0, false)
                     self.IsAutoBubble = true
                 end
             elseif self.IsAutoBubble then
@@ -215,45 +212,28 @@ Bubble = {
                 self.IsAutoBubble = false
             end
         end)
-
-        events.WORLD_RENDER:register(function ()
-            self.IsRenderProcessed = false
-        end)
     end
 }
 
 --ping関数
-function pings.bubble_1()
-    Bubble:play("GOOD", 50, true)
-    Bubble.IsAutoBubble = false
-end
 
-function pings.bubble_2()
-    Bubble:play("HEART", 50, true)
-    Bubble.IsAutoBubble = false
-end
-
-function pings.bubble_3()
-    Bubble:play("NOTE", 50, true)
-    Bubble.IsAutoBubble = false
-end
-
-function pings.bubble_4()
-    Bubble:play("QUESTION", 50, true)
-    Bubble.IsAutoBubble = false
-end
-
-function pings.bubble_5()
-    Bubble:play("SWEAT", 50, true)
+---吹き出しエモートを表示する。
+---@param type Bubble.BubbleType 表示する絵文字の種類
+function pings.showBubbleEmote(type)
+    Bubble:play(type, 50, 0, 0, true)
     Bubble.IsAutoBubble = false
 end
 
 ---Bubbleのチャットを開けているフラグを更新する。
 ---@param value boolean 新しい値
 function pings.setChatOpen(value)
-    Bubble.IsChatOpened[1] = value
+    Bubble.IsChatOpened = value
 end
 
 Bubble:init()
+
+local a = 0
+events.TICK:register(function ()
+end)
 
 return Bubble
