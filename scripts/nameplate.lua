@@ -38,8 +38,12 @@ Nameplate = {
         if self.CurrentName >= 2 then
             self:setName(self.CurrentName, self.ClubShown)
         end
-        events.RENDER:register(function (delta)
-            nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.NameplateAnchor):sub(player:getPos(delta)))
+        events.RENDER:register(function (delta, context)
+            if context ~= "PAPERDOLL" then
+                nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.NameplateAnchor):sub(player:getPos(delta)):add(0, 0.895, 0))
+            else
+                nameplate.ENTITY:setPivot()
+            end
         end)
     end
 }
