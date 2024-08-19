@@ -1100,7 +1100,7 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, -0.25)
                     end
                 elseif parts == "LEGGINGS" then
-                    models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3])
+                    models.models.main.Avatar.UpperBody.Body.Skirt:setVisible(not Armor.ArmorVisible[3] and Costume.CurrentCostume <= 2)
                 end
             end
         }
