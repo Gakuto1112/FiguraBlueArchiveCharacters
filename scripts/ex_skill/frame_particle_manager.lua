@@ -16,24 +16,27 @@ FrameParticleManager = {
         local instance = FrameParticle.spawn(client.intUUIDToString(client:generateUUID()), screenPos, math.random() > 0.9999 and "FIGURA" or "NORMAL", velocity)
         table.insert(self.Particles, instance)
         if #self.Particles == 1 then
-            events.RENDER:register(function ()
-                if not (client:isPaused() or self.IsRenderProcessed) then
+            events.TICK:register(function ()
+                if not client:isPaused() then
                     for index, particle in ipairs(self.Particles) do
-                        if particle:render() then
+                        particle:tick()
+                        if particle.shouldDeinit then
                             table.remove(self.Particles, index)
                             if #self.Particles == 0 then
+                                events.TICK:remove("ex_skill_frame_particle_tick")
                                 events.RENDER:remove("ex_skill_frame_particle_render")
-                                events.WORLD_RENDER:remove("ex_skill_frame_particle_world_render")
-                                self.IsRenderProcessed = false
                             end
                         end
                     end
-                    self.IsRenderProcessed = true
+                end
+            end, "ex_skill_frame_particle_tick")
+            events.RENDER:register(function (delta)
+                if not client:isPaused() then
+                    for _, particle in ipairs(self.Particles) do
+                        particle:render(delta)
+                    end
                 end
             end, "ex_skill_frame_particle_render")
-            events.WORLD_RENDER:register(function ()
-                self.IsRenderProcessed = false
-            end, "ex_skill_frame_particle_world_render")
         end
     end,
 
