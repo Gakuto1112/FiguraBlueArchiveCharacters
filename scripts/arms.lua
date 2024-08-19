@@ -16,11 +16,8 @@ Arms = {
     ---@type number
     ArmSwingCounter = 0,
 
-    ---このレンダーフレームでレンダー処理を終わらせたかどうか
-    ---@type boolean
-    IsRenderProcessed = false,
-
     ---弓の構えを行う。実際に弓を構えていなくても有効。
+    ---@param self Arms
     ---@param enabled boolean 弓の構えの開始/終了
     ---@param leftHanded boolean 左手で構えているかどうか
     setBowPose = function(self, enabled, leftHanded)
@@ -32,7 +29,6 @@ Arms = {
                 modelPart:setRot()
             end
             events.RENDER:remove("bow_pose_render")
-            events.WORLD_RENDER:remove("bow_pose_world_render")
         end
 
         self.BowPoseEnabled = enabled
@@ -44,32 +40,22 @@ Arms = {
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
                             modelPart:setParentType("Body")
                         end
-                        if events.RENDER:getRegisteredCount("bow_pose_render") == 0 then
-                            events.RENDER:register(function ()
-                                if not self.IsRenderProcessed then
-                                    if not client:isPaused() then
-                                        self.ArmSwingCounter = self.ArmSwingCounter + 0.2 / client:getFPS()
-                                        if self.ArmSwingCounter > 1 then
-                                            self.ArmSwingCounter = self.ArmSwingCounter - 1
-                                        end
-                                    end
-                                    local headRot = vanilla_model.HEAD:getOriginRot()
-                                    local armSwingOffset = math.sin(self.ArmSwingCounter * math.pi * 2) * 2.5
-                                    if self.BowPoseLeftHanded then
-                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0)
-                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, headRot.y, 0)
-                                    else
-                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, headRot.y, 0)
-                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0)
-                                    end
-                                    self.IsRenderProcessed = true
+                        if events.TICK:getRegisteredCount("bow_pose_tick_2") == 0 then
+                            events.TICK:register(function ()
+                                self.ArmSwingCounter = self.ArmSwingCounter + 1
+                                self.ArmSwingCounter = self.ArmSwingCounter == 100 and 0 or self.ArmSwingCounter
+                            end, "bow_pose_tick_2")
+                            events.RENDER:register(function (delta)
+                                local headRot = vanilla_model.HEAD:getOriginRot()
+                                local armSwingOffset = math.sin((self.ArmSwingCounter + delta) / 100 * math.pi * 2) * 2.5
+                                if self.BowPoseLeftHanded then
+                                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0)
+                                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, headRot.y, 0)
+                                else
+                                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, headRot.y, 0)
+                                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0)
                                 end
                             end, "bow_pose_render")
-                        end
-                        if events.WORLD_RENDER:getRegisteredCount("bow_pose_world_render") == 0 then
-                            events.WORLD_RENDER:register(function ()
-                                self.IsRenderProcessed = false
-                            end, "bow_pose_world_render")
                         end
                     elseif not shouldBowPose and self.BowPosePrev then
                         stopBowPose()
