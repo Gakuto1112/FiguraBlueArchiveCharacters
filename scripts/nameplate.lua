@@ -39,7 +39,7 @@ Nameplate = {
             self:setName(self.CurrentName, self.ClubShown)
         end
         events.RENDER:register(function (delta)
-            nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.NameplateAnchor):sub(player:getPos(delta)))
+            nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.NameplateAnchor):sub(player:getPos(delta)))
         end)
     end
 }
