@@ -917,13 +917,13 @@ BlueArchiveCharacter = {
                         end
                         models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair:setPos(0, 0, -1)
                         models.models.main.Avatar.UpperBody.Body.Hairs.BackHair:setPos(0, 0, 1)
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.neutral = 0
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.max = 0
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.bodyX.max = 0
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.bodyY.max = 0
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.bodyRot.max = 0
-                        BlueArchiveCharacter.PHYSICS[1].x.horizontal.neutral = 0
-                        BlueArchiveCharacter.PHYSICS[1].x.horizontal.max = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.neutral = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.max = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.bodyX.max = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.bodyY.max = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.bodyRot.max = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.horizontal.neutral = 0
+                        BlueArchiveCharacter.PHYSICS.data[1].x.horizontal.max = 0
                     else
                         if Costume.CurrentCostume == 1 then
                             for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.BackRibbon, models.models.main.Avatar.UpperBody.Body.Skirt}) do
@@ -933,13 +933,13 @@ BlueArchiveCharacter = {
                         for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs.FrontHair, models.models.main.Avatar.UpperBody.Body.Hairs.BackHair}) do
                             modelPart:setPos()
                         end
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.neutral = -10
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.max = -10
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.bodyX.max = -10
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.bodyY.max = -10
-                        BlueArchiveCharacter.PHYSICS[1].x.vertical.bodyRot.max = -10
-                        BlueArchiveCharacter.PHYSICS[1].x.horizontal.neutral = -10
-                        BlueArchiveCharacter.PHYSICS[1].x.horizontal.max = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.neutral = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.max = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.bodyX.max = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.bodyY.max = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.vertical.bodyRot.max = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.horizontal.neutral = -10
+                        BlueArchiveCharacter.PHYSICS.data[1].x.horizontal.max = -10
                     end
                 end
             end
