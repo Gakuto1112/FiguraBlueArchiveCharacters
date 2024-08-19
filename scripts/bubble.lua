@@ -68,7 +68,7 @@ Bubble = {
         models.models.bubble.Camera.AvatarBubble.Dots:setVisible(self.Emoji == "DOTS")
         if self.ShouldShowInHUD then
             models.models.bubble.Gui.FirstPersonBubble.Emoji:setPrimaryTexture("CUSTOM", textures["textures.emojis."..self.Emoji:lower()])
-            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), player:getPos())
+            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.item.pickup"), ModelUtils.getModelWorldPos(models.models.main.Avatar))
         end
 
         if events.TICK:getRegisteredCount("bubble_tick") == 0 then
@@ -107,9 +107,9 @@ Bubble = {
                 if not client:isPaused() then
                     local bubbleScale = math.min(math.abs(0.5 * (self.BubbleCounter + delta)), 1)
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(bubbleScale))
-                    local avatarBubblePos = vectors.vec3(0, 32, 0)
+                    local playerPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
+                    local avatarBubblePos = playerPos:copy():sub(player:getPos(delta)):scale(17.067):add(0, 30, 0)
                     if not renderer:isFirstPerson() then
-                        local playerPos = player:getPos()
                         local cameraPos = client:getCameraPos()
                         avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) + offsetRot) % 360, 12 + offsetPos, 0, 0, 0, -1, 0))
                     else
@@ -230,5 +230,9 @@ function pings.setChatOpen(value)
 end
 
 Bubble:init()
+
+local a = 0
+events.TICK:register(function ()
+end)
 
 return Bubble
