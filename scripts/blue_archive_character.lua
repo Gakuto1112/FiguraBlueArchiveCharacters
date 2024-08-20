@@ -2803,7 +2803,7 @@ function pings.lauchMissiles()
                 local lookDir = player:getLookDir()
                 MissileManager:spawn(ModelUtils.getModelWorldPos(missileModel), vectors.vec3(math.deg(math.asin(lookDir.y)) * -1, math.deg(math.atan2(lookDir.z, lookDir.x)) * -1 + 90, 0))
                 missileModel:setVisible(false)
-
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.blaze.hurt"), player:getPos(), 1, 1.5)
             elseif launchCounter == 135 then
                 events.TICK:remove("missile_launch_tick")
                 for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
@@ -2811,6 +2811,7 @@ function pings.lauchMissiles()
                         modelPart2:setVisible(true)
                     end
                 end
+                sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.dispenser.fail"), player:getPos(), 1, 2)
             end
             if launchCounter % 5 <= 1 and launchCounter <= 36 then
                 for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.LauncherBase, models.models.main.Avatar.Drone.LauncherLeft.LauncherBase}) do
@@ -2858,7 +2859,7 @@ events.ENTITY_INIT:register(function ()
 
         Language.LanguageData.en_us["missile_launch__in_cool_down_pre"] = "Please wait "
         Language.LanguageData.ja_jp["missile_launch__in_cool_down_pre"] = "あと"
-        Language.LanguageData.en_us["missile_launch__in_cool_down_post"] = " more seconds to lanch fireworks."
+        Language.LanguageData.en_us["missile_launch__in_cool_down_post"] = " more seconds to lanch missiles."
         Language.LanguageData.ja_jp["missile_launch__in_cool_down_post"] = "秒待ってください。"
         Language.LanguageData.en_us["missile_launch__tip_pre"] = "§9§l[TIP]§r Press "
         Language.LanguageData.ja_jp["missile_launch__tip_pre"] = "§9§l[TIP]§r "
