@@ -78,9 +78,9 @@ ExSkill = {
                                 modelPart:setScale(0, 0, 0)
                             end
                         end
-                        events.TICK:remove("ex_skill_transition_tick")
                     end
                     callback()
+                    events.TICK:remove("ex_skill_transition_tick")
                     events.RENDER:remove("ex_skill_transition_render")
                 end
                 if host:isHost() then
