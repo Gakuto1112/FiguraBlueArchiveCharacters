@@ -2660,7 +2660,11 @@ BlueArchiveCharacter = {
 
     ---ヒントを表示したかどうか
     ---@type boolean
-    TipShowed = false
+    TipShowed = false,
+
+    ---ドローンの飛行音
+    ---@type Sound
+    DroneSound = nil
 }
 
 ---クリエイティブ飛行のフラグを設定する。
@@ -2687,10 +2691,12 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
         for _ = 1, 30 do
             particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchor:copy():add(math.random() * 2.4 - 1.2, math.random() * 1 - 0.5, (math.random() * 2.4 - 1.2)))
         end
+        BlueArchiveCharacter.DroneSound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.bee.loop"), player:getPos(), 0.1, 1, true)
 
         local startCount = 0
         events.TICK:register(function ()
             startCount = startCount + 1
+            BlueArchiveCharacter.DroneSound:setPos(player:getPos())
             if startCount == 5 then
                 events.TICK:remove("drone_tick_start")
                 for _, ctx in ipairs({"right", "left"}) do
@@ -2716,6 +2722,7 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                 end
                 BlueArchiveCharacter.MissileLaunchAllowed = true
                 events.TICK:register(function ()
+                    BlueArchiveCharacter.DroneSound:setPos(player:getPos())
                     local isLeftHanded = player:isLeftHanded()
                     if (Gun.CurrentGunPosition == "RIGHT" or (Gun.CurrentGunPosition == "NONE" and not isLeftHanded)) and animations["models.main"]["creative_flying_left"]:getPlayState() == "PLAYING" then
                         for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
@@ -2763,6 +2770,7 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
         local endCount = 0
         events.TICK:register(function ()
             endCount = endCount + 1
+            BlueArchiveCharacter.DroneSound:setPos(player:getPos())
             if endCount == 5 then
                 for _, eventName in ipairs({"drone_tick_end", "missile_launch_tick"}) do
                     events.TICK:remove(eventName)
@@ -2778,6 +2786,7 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                 for _ = 1, 30 do
                     particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchor:copy():add(math.random() * 2.4 - 1.2, math.random() * 1 - 0.5, (math.random() * 2.4 - 1.2)))
                 end
+                BlueArchiveCharacter.DroneSound:stop()
                 BlueArchiveCharacter.DronePosition = "NONE"
             end
         end, "drone_tick_end")
