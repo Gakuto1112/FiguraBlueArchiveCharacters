@@ -220,7 +220,7 @@ Bubble = {
 ---吹き出しエモートを表示する。
 ---@param type Bubble.BubbleType 表示する絵文字の種類
 function pings.showBubbleEmote(type)
-    Bubble:play(type, 50, 0, 0, true)
+    Bubble:play(type, 50, vectors.vec2(), 0, true)
     Bubble.IsAutoBubble = false
 end
 
