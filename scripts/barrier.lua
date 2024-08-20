@@ -4,6 +4,10 @@ Barrier = {
     ---@type number[]
     AnimationCounters = {},
 
+    ---バリアが可視化状態かどうか
+    ---@type boolean
+    BarrierVisible = false,
+
     ---前ティックの衝撃吸収のハートを持っていたかどうか
     ---@type boolean
     HadAbsorptionPrev = false,
@@ -40,13 +44,17 @@ Barrier = {
                 models.models.main.Avatar.barrier:setVisible(false)
             end
         end, "barrier_render")
+
+        self.BarrierVisible = true
     end,
 
     ---バリア機能を無効化する。
-    disable = function ()
+    ---@param self Barrier
+    disable = function (self)
         models.models.main.Avatar.barrier:setVisible(false)
         events.TICK:remove("barrier_tick")
         events.RENDER:remove("barrier_render")
+        self.BarrierVisible = false
     end,
 
     ---初期化関数
@@ -59,7 +67,7 @@ Barrier = {
             if hasAbsorption and not self.HadAbsorptionPrev then
                 Barrier:enable()
             elseif not hasAbsorption and self.HadAbsorptionPrev then
-                Barrier.disable()
+                Barrier:disable()
             end
             self.HadAbsorptionPrev = hasAbsorption
         end)
