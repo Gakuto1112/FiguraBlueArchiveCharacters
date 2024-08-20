@@ -926,6 +926,8 @@ BlueArchiveCharacter = {
                             local id = vehicle:getType()
                             if (id == "minecraft:boat" or id == "minecraft:chest_boat") and #vehicle:getPassengers() == 1 then
                                 if not BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
+                                    BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev = player:getLookDir()
+                                    BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = 0
                                     models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(true)
                                     renderer:setRenderVehicle(false)
                                     models.models.main.Avatar.Head:setRot(10, 0, 0)
@@ -934,6 +936,7 @@ BlueArchiveCharacter = {
                                     for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
                                         animations[animationModel]["float_ride"]:play()
                                     end
+                                    animations["models.main"]["whale_float"]:play()
                                     CameraManager.setCameraPivot(vectors.vec3(0, 0.5625, 0))
                                     renderer:setEyeOffset(0, 0.5625, 0)
                                     events.TICK:register(function ()
@@ -951,6 +954,43 @@ BlueArchiveCharacter = {
                                                 end
                                             end
                                         end
+                                        local lookdir = player:getLookDir()
+                                        if player:getVelocity():length() < 0.01 and BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev:copy():sub(lookdir):length() == 0 and not player:isSwingingArm() and PlayerUtils:getDamageStatus() == "NONE" and player:getActiveItem().id == "minecraft:air" then
+                                            BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount + 1
+                                            if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount == 60 then
+                                                for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
+                                                    animations[animationModel]["float_afk"]:setSpeed(1)
+                                                    animations[animationModel]["float_afk"]:play()
+                                                end
+                                                Arms:setBowPose(false, false)
+                                                Physics.disable()
+                                                BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = true
+                                            elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount >= 90 then
+                                                FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", 1, false)
+                                            end
+                                        else
+                                            if BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                                                for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
+                                                    animations[animationModel]["float_afk"]:setSpeed(-1)
+                                                end
+                                                events.TICK:remove("whale_float_afk_end_tick")
+                                                events.TICK:register(function ()
+                                                    if animations["models.main"]["float_afk"]:getTime() == 0 then
+                                                        for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
+                                                            animations[animationModel]["float_afk"]:stop()
+                                                        end
+                                                        if Gun.CurrentGunPosition ~= "NONE" then
+                                                            Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
+                                                        end
+                                                        Physics:enable()
+                                                        events.TICK:remove("whale_float_afk_end_tick")
+                                                    end
+                                                end, "whale_float_afk_end_tick")
+                                                BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = false
+                                            end
+                                            BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = 0
+                                        end
+                                        BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev = lookdir
                                     end, "whale_float_tick")
                                 end
                                 BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = true
@@ -962,7 +1002,7 @@ BlueArchiveCharacter = {
                             BlueArchiveCharacter.stopWhaleFloat()
                             BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
                         end
-                    end)
+                    end, "whale_float_tick_2")
                 end
             end,
 
@@ -979,6 +1019,8 @@ BlueArchiveCharacter = {
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
                     modelPart:setVisible(true)
                 end
+                events.TICK:remove("whale_float_tick_2")
+                BlueArchiveCharacter.stopWhaleFloat()
             end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数
@@ -2459,17 +2501,28 @@ BlueArchiveCharacter = {
 
     ---クジラフロートのアニメーションを停止する。
     stopWhaleFloat = function ()
+        events.TICK:remove("whale_float_tick")
+        events.TICK:remove("whale_float_afk_end_tick")
         models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(false)
         renderer:setRenderVehicle(true)
         models.models.main.Avatar.Head:setRot()
         Arms:setRightArmOffsetRot(vectors.vec3())
         Arms:setLeftArmOffsetRot(vectors.vec3())
+        if Gun.CurrentGunPosition ~= "NONE" then
+            Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
+        end
         for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
             animations[animationModel]["float_ride"]:stop()
+            animations[animationModel]["float_afk"]:stop()
         end
-        CameraManager.setCameraPivot(vectors.vec3())
+        animations["models.costume_swimsuit"]["float_afk"]:stop()
+        animations["models.main"]["whale_float"]:stop()
+        if CameraManager ~= nil then
+            CameraManager.setCameraPivot(vectors.vec3())
+        end
         renderer:setEyeOffset()
-        events.TICK:remove("whale_float_tick")
+        BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = 0
+        BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = false
         BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
     end
 }

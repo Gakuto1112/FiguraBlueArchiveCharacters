@@ -72,7 +72,7 @@ Gun = {
                 end, "right_gun_tick")
             end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setBowPose(true, false)
+                Arms:setBowPose(not BlueArchiveCharacter.COSTUME.costumes[3].IsAFK, false)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 animations["models.main"]["gun_hold_left"]:stop()
                 animations["models.main"]["gun_hold_right"]:play()
@@ -102,7 +102,7 @@ Gun = {
                 end, "left_gun_tick")
             end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setBowPose(true, true)
+                Arms:setBowPose(not BlueArchiveCharacter.COSTUME.costumes[3].IsAFK, true)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 animations["models.main"]["gun_hold_right"]:stop()
                 animations["models.main"]["gun_hold_left"]:play()
