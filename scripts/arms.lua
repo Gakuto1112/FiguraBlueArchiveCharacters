@@ -85,11 +85,11 @@ Arms = {
                                     local headRot = vanilla_model.HEAD:getOriginRot()
                                     local armSwingOffset = math.sin(self.ArmSwingCounter * math.pi * 2) * 2.5
                                     if self.BowPoseLeftHanded then
-                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0)
+                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(BlueArchiveCharacter.DronePosition == "LEFT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0))
                                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, headRot.y, 0)
                                     else
                                         models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, headRot.y, 0)
-                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0)
+                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(BlueArchiveCharacter.DronePosition == "RIGHT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset * -1 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0))
                                     end
                                     self.IsRenderProcessed = true
                                 end

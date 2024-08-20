@@ -139,65 +139,56 @@ Gun = {
         models.models.main.Avatar.UpperBody.Body.Gun:setRot(offsetRot)
     end,
 
-    ---初期化関数
+    ---銃の位置を取得する。
     ---@param self Gun
-    init = function (self)
-        events.TICK:register(function()
-            local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
-            local targetItemFound = false
-            local isLeftHanded = player:isLeftHanded()
-            if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id then
+    ---@return Gun.GunPosition gunPosition 現ティックの銃の位置
+    getGunPosition = function (self)
+        local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
+        local targetItemFound = false
+        local isLeftHanded = player:isLeftHanded()
+        if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id then
+            for _, gunItem in ipairs(Gun.GUN_ITEMS) do
+                if heldItems[1].id == gunItem then
+                    --メインハンドに対象アイテムを持つ
+                    targetItemFound = true
+                    if isLeftHanded and self.CurrentGunPosition ~= "LEFT" then
+                        return "LEFT"
+                    elseif not isLeftHanded and self.CurrentGunPosition ~= "RIGHT" then
+                        return "RIGHT"
+                    end
+                    break
+                end
+            end
+            if not targetItemFound then
                 for _, gunItem in ipairs(Gun.GUN_ITEMS) do
-                    if heldItems[1].id == gunItem then
-                        --メインハンドに対象アイテムを持つ
+                    if heldItems[2].id == gunItem then
+                        --オフハンドに対象アイテムを持つ
                         targetItemFound = true
-                        if isLeftHanded then
-                            if self.CurrentGunPosition ~= "LEFT" then
-                                self:setGunPosition("LEFT")
-                            end
-                        else
-                            if self.CurrentGunPosition ~= "RIGHT" then
-                                self:setGunPosition("RIGHT")
-                            end
+                        if isLeftHanded and self.CurrentGunPosition ~= "RIGHT" then
+                            return "RIGHT"
+                        elseif not isLeftHanded and self.CurrentGunPosition ~= "LEFT" then
+                            return "LEFT"
                         end
                         break
                     end
                 end
-                if not targetItemFound then
-                    for _, gunItem in ipairs(Gun.GUN_ITEMS) do
-                        if heldItems[2].id == gunItem then
-                            --オフハンドに対象アイテムを持つ
-                            targetItemFound = true
-                            if isLeftHanded then
-                                if self.CurrentGunPosition ~= "RIGHT" then
-                                    self:setGunPosition("RIGHT")
-                                end
-                            else
-                                if self.CurrentGunPosition ~= "LEFT" then
-                                    self:setGunPosition("LEFT")
-                                end
-                            end
-                            break
-                        end
-                    end
-                end
-                if not targetItemFound then
-                    --対象アイテムは持たない
-                    if self.CurrentGunPosition ~= "NONE" then
-                        self:setGunPosition("NONE")
-                    end
-                end
-                self.HeldItemsPrev = heldItems
             end
-            if isLeftHanded ~= self.LeftHandedPrev then
-                if self.CurrentGunPosition == "NONE" then
-                    self.setBodyGunPos()
-                end
-                if BlueArchiveCharacter.GUN.onMainHandChange ~= nil then
-                    BlueArchiveCharacter.GUN.onMainHandChange(isLeftHanded and "LEFT" or "RIGHT")
-                end
-                self.LeftHandedPrev = isLeftHanded
+            return "NONE"
+        else
+            return Gun.CurrentGunPosition
+        end
+    end,
+
+    ---初期化関数
+    ---@param self Gun
+    init = function (self)
+        events.TICK:register(function()
+            local currentGunPos = self:getGunPosition()
+            if currentGunPos ~= self.CurrentGunPosition then
+                self:setGunPosition(currentGunPos)
             end
+            self.HeldItemsPrev = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
+            self.LeftHandedPrev = player:isLeftHanded()
         end)
 
         events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)

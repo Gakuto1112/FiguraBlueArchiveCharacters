@@ -2632,10 +2632,134 @@ BlueArchiveCharacter = {
 
     ---Exスキル3で使用する風切り音。
     ---@type Sound|nil
-    EX_SKILL_3_SOUND_1 = nil
+    EX_SKILL_3_SOUND_1 = nil,
+
+    ---前ティックにクリエイティブ飛行をしていたかどうか
+    ---@type boolean
+    IsFlyingPrev = false,
+
+    ---前ティックに左利きだったかどうか
+    ---@type boolean
+    IsLeftHandedPrev = false,
+
+    ---前ティックの銃の位置
+    ---@type Gun.GunPosition
+    GunPositionPrev = "NONE",
+
+    ---ドローンの位置
+    ---@type Gun.GunPosition
+    DronePosition = "NONE"
 }
 
+---クリエイティブ飛行のフラグを設定する。
+---@param shouldPlay boolean クリエイティブ飛行のアニメーションを再生するかどうか。
+function pings.setCreativeFlyingAnimation(shouldPlay)
+    if shouldPlay then
+        models.models.ex_skill_1.Drone:moveTo(models.models.main.Avatar)
+        models.models.main.Avatar.Drone:setVisible(true)
+        BlueArchiveCharacter.IsLeftHandedPrev = player:isLeftHanded()
+        BlueArchiveCharacter.GunPositionPrev = Gun:getGunPosition()
+        if BlueArchiveCharacter.GunPositionPrev == "RIGHT" or (BlueArchiveCharacter.GunPositionPrev == "NONE" and not BlueArchiveCharacter.IsLeftHandedPrev) then
+            animations["models.main"]["creative_flying_transition_right"]:setSpeed(1)
+            animations["models.main"]["creative_flying_transition_right"]:play()
+            animations["models.ex_skill_1"]["creative_flying_start_right"]:play()
+            BlueArchiveCharacter.DronePosition = "RIGHT"
+        else
+            animations["models.main"]["creative_flying_transition_left"]:setSpeed(1)
+            animations["models.main"]["creative_flying_transition_left"]:play()
+            animations["models.ex_skill_1"]["creative_flying_start_left"]:play()
+            BlueArchiveCharacter.DronePosition = "LEFT"
+        end
+        local startCount = 0
+        events.TICK:register(function ()
+            startCount = startCount + 1
+            if startCount == 5 then
+                events.TICK:remove("drone_tick_start")
+                for _, ctx in ipairs({"right", "left"}) do
+                    animations["models.main"]["creative_flying_transition_"..ctx]:stop()
+                    animations["models.ex_skill_1"]["creative_flying_start_"..ctx]:stop()
+                end
+                BlueArchiveCharacter.IsLeftHandedPrev = player:isLeftHanded()
+                BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
+                if BlueArchiveCharacter.GunPositionPrev == "RIGHT" or (BlueArchiveCharacter.GunPositionPrev == "NONE" and not BlueArchiveCharacter.IsLeftHandedPrev) then
+                    for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                        animations[animationModel]["creative_flying_right"]:play()
+                    end
+                    BlueArchiveCharacter.DronePosition = "RIGHT"
+                else
+                    for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                        animations[animationModel]["creative_flying_left"]:play()
+                    end
+                    BlueArchiveCharacter.DronePosition = "LEFT"
+                end
+                events.TICK:register(function ()
+                    local isLeftHanded = player:isLeftHanded()
+                    if (Gun.CurrentGunPosition == "RIGHT" or (Gun.CurrentGunPosition == "NONE" and not isLeftHanded)) and animations["models.main"]["creative_flying_left"]:getPlayState() == "PLAYING" then
+                        for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                            animations[animationModel]["creative_flying_right"]:play()
+                            animations[animationModel]["creative_flying_right"]:setTime(animations[animationModel]["creative_flying_left"]:getTime())
+                            animations[animationModel]["creative_flying_left"]:stop()
+                        end
+                        BlueArchiveCharacter.DronePosition = "RIGHT"
+                    elseif (Gun.CurrentGunPosition == "LEFT" or (Gun.CurrentGunPosition == "NONE" and isLeftHanded)) and animations["models.main"]["creative_flying_right"]:getPlayState() == "PLAYING" then
+                        for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                            animations[animationModel]["creative_flying_left"]:play()
+                            animations[animationModel]["creative_flying_left"]:setTime(animations[animationModel]["creative_flying_right"]:getTime())
+                            animations[animationModel]["creative_flying_right"]:stop()
+                        end
+                        BlueArchiveCharacter.DronePosition = "LEFT"
+                    end
+                    BlueArchiveCharacter.IsLeftHandedPrev = isLeftHanded
+                    BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
+                end, "drone_tick")
+            end
+        end, "drone_tick_start")
+    else
+        for _, eventName in ipairs({"drone_tick_start", "drone_tick"}) do
+            events.TICK:remove(eventName)
+        end
+        for _, ctx in ipairs({"right", "left"}) do
+            animations["models.main"]["creative_flying_transition_"..ctx]:stop()
+            animations["models.ex_skill_1"]["creative_flying_start_"..ctx]:stop()
+            for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                animations[animationModel]["creative_flying_"..ctx]:stop()
+            end
+        end
+        if Gun.CurrentGunPosition == "RIGHT" or (Gun.CurrentGunPosition == "NONE" and not player:isLeftHanded()) then
+            animations["models.main"]["creative_flying_transition_right"]:setSpeed(-1)
+            animations["models.main"]["creative_flying_transition_right"]:play()
+            animations["models.ex_skill_1"]["creative_flying_end_right"]:play()
+            BlueArchiveCharacter.DronePosition = "RIGHT"
+        else
+            animations["models.main"]["creative_flying_transition_left"]:setSpeed(-1)
+            animations["models.main"]["creative_flying_transition_left"]:play()
+            animations["models.ex_skill_1"]["creative_flying_end_left"]:play()
+            BlueArchiveCharacter.DronePosition = "LEFT"
+        end
+        local endCount = 0
+        events.TICK:register(function ()
+            endCount = endCount + 1
+            if endCount == 5 then
+                events.TICK:remove("drone_tick_end")
+                models.models.main.Avatar.Drone:moveTo(models.models.ex_skill_1)
+                models.models.ex_skill_1.Drone:setVisible(false)
+                BlueArchiveCharacter.DronePosition = "NONE"
+            end
+        end, "drone_tick_end")
+    end
+end
+
 --生徒固有初期化処理
+if host:isHost() then
+    events.TICK:register(function ()
+        local isFlying = host:isFlying()
+        if isFlying ~= BlueArchiveCharacter.IsFlyingPrev then
+            pings.setCreativeFlyingAnimation(isFlying)
+            BlueArchiveCharacter.IsFlyingPrev = isFlying
+        end
+    end)
+end
+
 models.models.ex_skill_2.UnderWater:setLight(15)
 models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
 models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
