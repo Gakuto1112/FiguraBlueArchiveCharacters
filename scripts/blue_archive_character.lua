@@ -934,9 +934,25 @@ BlueArchiveCharacter = {
                                     for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
                                         animations[animationModel]["float_ride"]:play()
                                     end
+                                    CameraManager.setCameraPivot(vectors.vec3(0, 0.5625, 0))
+                                    renderer:setEyeOffset(0, 0.5625, 0)
+                                    events.TICK:register(function ()
+                                        if world.getBlockState(player:getPos()).id == "minecraft:water" then
+                                            if Physics.VelocityAverage[5] >= 0.35 then
+                                                FaceParts:setEmotion("CLOSED", "CLOSED", "W", 1, false)
+                                            end
+                                            if Physics.VelocityAverage[5] >= 0.1  then
+                                                local bodyYaw = player:getBodyYaw()
+                                                local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar.LowerBody.WhaleFloat.WhaleParticleAnchor1):add(vectors.rotateAroundAxis(bodyYaw * -1, 0.1875, 0, 0, 0, 1, 0))
+                                                for _ = 1, 5 do
+                                                    local particleDirection = math.random() * 60 - 30
+                                                    particleDirection = particleDirection > 0 and particleDirection + 30 or particleDirection - 30
+                                                    particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(1000000000, 1000000000, 1000000000), 3), anchorPos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1 + particleDirection + 150, vectors.vec3(1, 1, 1), 0, 1, 0):scale(math.random()):normalize():scale(Physics.VelocityAverage[5])):setGravity(0.5):setLifetime(10)
+                                                end
+                                            end
+                                        end
+                                    end, "whale_float_tick")
                                 end
-                                CameraManager.setCameraPivot(vectors.vec3(0, 0.5625, 0))
-                                renderer:setEyeOffset(0, 0.5625, 0)
                                 BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = true
                             elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
                                 BlueArchiveCharacter.stopWhaleFloat()
@@ -2453,6 +2469,7 @@ BlueArchiveCharacter = {
         end
         CameraManager.setCameraPivot(vectors.vec3())
         renderer:setEyeOffset()
+        events.TICK:remove("whale_float_tick")
         BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
     end
 }
