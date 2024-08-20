@@ -109,7 +109,7 @@ Bubble = {
                     local bubbleScale = math.min(math.abs(0.5 * (self.BubbleCounter + delta)), 1)
                     models.models.bubble.Camera.AvatarBubble:setScale(vectors.vec3(1, 1, 1):scale(bubbleScale))
                     local playerPos = ModelUtils.getModelWorldPos(models.models.main.Avatar)
-                    local avatarBubblePos = vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, playerPos:copy():sub(player:getPos(delta)):scale(17.067):add(0, 32 + offsetPos.y, 0), 0, 1, 0)
+                    local avatarBubblePos = context == "PAPERDOLL" and vectors.vec3(0, 32, 0) or vectors.rotateAroundAxis(player:getBodyYaw(delta) + 180, playerPos:copy():sub(player:getPos(delta)):scale(17.067):add(0, 32 + offsetPos.y, 0), 0, 1, 0)
                     if not renderer:isFirstPerson() then
                         local cameraPos = client:getCameraPos()
                         avatarBubblePos:add(vectors.rotateAroundAxis(math.deg(math.atan2(cameraPos.z - playerPos.z, cameraPos.x - playerPos.x) - math.pi / 2) % 360 - (player:getBodyYaw(delta) + offsetRot) % 360, 12 + offsetPos.x, 0, 0, 0, -1, 0))
