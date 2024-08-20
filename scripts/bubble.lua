@@ -145,8 +145,10 @@ Bubble = {
     ---吹き出しエモートを停止する。
     ---@param self Bubble
     stop = function (self)
-        self.IsForcedStop = self.Duration == -1 or self.BubbleCounter < self.Duration + 2
-        self.BubbleCounter = -2
+        if self.BubbleCounter > 0 then
+            self.IsForcedStop = self.Duration == -1 or self.BubbleCounter < self.Duration + 2
+            self.BubbleCounter = -2
+        end
     end,
 
     ---初期化関数
