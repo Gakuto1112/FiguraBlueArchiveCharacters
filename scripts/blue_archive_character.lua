@@ -957,7 +957,7 @@ BlueArchiveCharacter = {
                                         local lookdir = player:getLookDir()
                                         if player:getVelocity():length() < 0.01 and BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev:copy():sub(lookdir):length() == 0 and not player:isSwingingArm() and PlayerUtils:getDamageStatus() == "NONE" and player:getActiveItem().id == "minecraft:air" then
                                             BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount + 1
-                                            if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount == 60 then
+                                            if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount == 2400 then
                                                 for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
                                                     animations[animationModel]["float_afk"]:setSpeed(1)
                                                     animations[animationModel]["float_afk"]:play()
@@ -965,7 +965,7 @@ BlueArchiveCharacter = {
                                                 Arms:setBowPose(false, false)
                                                 Physics.disable()
                                                 BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = true
-                                            elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount >= 90 then
+                                            elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount >= 2430 then
                                                 FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", 1, false)
                                             end
                                         else
