@@ -918,6 +918,35 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
                         modelPart:setVisible(false)
                     end
+
+                    BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
+                    events.TICK:register(function ()
+                        local vehicle = player:getVehicle()
+                        if vehicle ~= nil  then
+                            local id = vehicle:getType()
+                            if (id == "minecraft:boat" or id == "minecraft:chest_boat") and #vehicle:getPassengers() == 1 then
+                                if not BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
+                                    models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(true)
+                                    renderer:setRenderVehicle(false)
+                                    models.models.main.Avatar.Head:setRot(10, 0, 0)
+                                    Arms:setRightArmOffsetRot(vectors.vec3(20, 0, 20))
+                                    Arms:setLeftArmOffsetRot(vectors.vec3(20, 0, -20))
+                                    for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
+                                        animations[animationModel]["float_ride"]:play()
+                                    end
+                                end
+                                CameraManager.setCameraPivot(vectors.vec3(0, 0.5625, 0))
+                                renderer:setEyeOffset(0, 0.5625, 0)
+                                BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = true
+                            elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
+                                BlueArchiveCharacter.stopWhaleFloat()
+                                BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
+                            end
+                        elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
+                            BlueArchiveCharacter.stopWhaleFloat()
+                            BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
+                        end
+                    end)
                 end
             end,
 
@@ -2410,6 +2439,21 @@ BlueArchiveCharacter = {
         end
         models.models.main.Avatar.Head.CSwimsuitH.Glasses:setPos()
         events.TICK:remove("ex_skill_2_post_tick")
+    end,
+
+    ---クジラフロートのアニメーションを停止する。
+    stopWhaleFloat = function ()
+        models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(false)
+        renderer:setRenderVehicle(true)
+        models.models.main.Avatar.Head:setRot()
+        Arms:setRightArmOffsetRot(vectors.vec3())
+        Arms:setLeftArmOffsetRot(vectors.vec3())
+        for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
+            animations[animationModel]["float_ride"]:stop()
+        end
+        CameraManager.setCameraPivot(vectors.vec3())
+        renderer:setEyeOffset()
+        BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
     end
 }
 

@@ -683,7 +683,7 @@
 			"uuid": "d4f72910-f823-f7e7-bbf1-ba136e6d74ad",
 			"export": true,
 			"mirror_uv": false,
-			"isOpen": true,
+			"isOpen": false,
 			"locked": false,
 			"visibility": true,
 			"autouv": 0,
@@ -822,7 +822,7 @@
 			"override": true,
 			"length": 2.05,
 			"snapping": 20,
-			"selected": true,
+			"selected": false,
 			"anim_time_update": "",
 			"blend_weight": "",
 			"start_delay": "",
@@ -1149,6 +1149,46 @@
 							"color": -1,
 							"uniform": false,
 							"interpolation": "step",
+							"bezier_linked": true,
+							"bezier_left_time": [-0.1, -0.1, -0.1],
+							"bezier_left_value": [0, 0, 0],
+							"bezier_right_time": [0.1, 0.1, 0.1],
+							"bezier_right_value": [0, 0, 0]
+						}
+					]
+				}
+			}
+		},
+		{
+			"uuid": "0d8035be-c18c-bc6b-399e-591322013866",
+			"name": "float_ride",
+			"loop": "hold",
+			"override": false,
+			"length": 0,
+			"snapping": 20,
+			"selected": true,
+			"anim_time_update": "",
+			"blend_weight": "",
+			"start_delay": "",
+			"loop_delay": "",
+			"animators": {
+				"f8239839-d31b-5a25-59d2-d5c26e5817e0": {
+					"name": "WhaleFloat",
+					"type": "bone",
+					"keyframes": [
+						{
+							"channel": "position",
+							"data_points": [
+								{
+									"x": "0",
+									"y": 2,
+									"z": -14
+								}
+							],
+							"uuid": "89d064e6-2422-441c-45b4-425076c975b5",
+							"time": 0,
+							"color": -1,
+							"interpolation": "linear",
 							"bezier_linked": true,
 							"bezier_left_time": [-0.1, -0.1, -0.1],
 							"bezier_left_value": [0, 0, 0],
