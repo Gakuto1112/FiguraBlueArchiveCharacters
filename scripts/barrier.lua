@@ -4,6 +4,10 @@ Barrier = {
     ---@type number[]
     AnimationCounters = {},
 
+    ---バリアが可視化状態かどうか
+    ---@type boolean
+    BarrierVisible = false,
+
     ---前ティックの衝撃吸収のハートを持っていたかどうか
     ---@type boolean
     HadAbsorptionPrev = false,
@@ -30,36 +34,40 @@ Barrier = {
         end, "barrier_tick")
         events.RENDER:register(function (delta, context)
             if context == "FIRST_PERSON" or context == "RENDER" then
-                models.models.barrier:setVisible(true)
+                models.models.main.Avatar.barrier:setVisible(true)
                 for i = 1, 32 do
                     local opacity = math.abs(-0.025 * (self.AnimationCounters[i] + delta) + 0.5) + 0.5
-                    models.models.barrier.Barrier["Barrier"..i]:setOpacity(opacity)
-                    models.models.barrier.Barrier["Barrier"..i]:setColor(opacity * self.ColorFactor, opacity * self.ColorFactor, 1)
+                    models.models.main.Avatar.barrier.Barrier["Barrier"..i]:setOpacity(opacity)
+                    models.models.main.Avatar.barrier.Barrier["Barrier"..i]:setColor(opacity * self.ColorFactor, opacity * self.ColorFactor, 1)
                 end
             else
-                models.models.barrier:setVisible(false)
+                models.models.main.Avatar.barrier:setVisible(false)
             end
         end, "barrier_render")
+
+        self.BarrierVisible = true
     end,
 
     ---バリア機能を無効化する。
-    disable = function ()
-        models.models.barrier:setVisible(false)
+    ---@param self Barrier
+    disable = function (self)
+        models.models.main.Avatar.barrier:setVisible(false)
         events.TICK:remove("barrier_tick")
         events.RENDER:remove("barrier_render")
+        self.BarrierVisible = false
     end,
 
     ---初期化関数
     ---@param self Barrier
     init = function (self)
-        models.models.barrier:setLight(15)
+        models.models.main.Avatar.barrier:setLight(15)
 
         events.TICK:register(function ()
             local hasAbsorption = player:getAbsorptionAmount() > 0 and player:getHealth() > 0
             if hasAbsorption and not self.HadAbsorptionPrev then
                 Barrier:enable()
             elseif not hasAbsorption and self.HadAbsorptionPrev then
-                Barrier.disable()
+                Barrier:disable()
             end
             self.HadAbsorptionPrev = hasAbsorption
         end)
