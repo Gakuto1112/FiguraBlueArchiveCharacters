@@ -2648,7 +2648,19 @@ BlueArchiveCharacter = {
 
     ---ドローンの位置
     ---@type Gun.GunPosition
-    DronePosition = "NONE"
+    DronePosition = "NONE",
+
+    ---ミサイル発射が許可されているかどうか
+    ---@type boolean
+    MissileLaunchAllowed = false,
+
+    ---ミサイル発射のクールダウン
+    ---@type integer
+    MissileCooldown = 0,
+
+    ---ヒントを表示したかどうか
+    ---@type boolean
+    TipShowed = false
 }
 
 ---クリエイティブ飛行のフラグを設定する。
@@ -2692,6 +2704,11 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                     end
                     BlueArchiveCharacter.DronePosition = "LEFT"
                 end
+                if not BlueArchiveCharacter.TipShowed and host:isHost() then
+                    print(Language:getTranslate("missile_launch__tip_pre")..KeyManager.KeyMappings["missile_launch"]:getKeyName()..Language:getTranslate("missile_launch__tip_post"))
+                    BlueArchiveCharacter.TipShowed = true
+                end
+                BlueArchiveCharacter.MissileLaunchAllowed = true
                 events.TICK:register(function ()
                     local isLeftHanded = player:isLeftHanded()
                     if (Gun.CurrentGunPosition == "RIGHT" or (Gun.CurrentGunPosition == "NONE" and not isLeftHanded)) and animations["models.main"]["creative_flying_left"]:getPlayState() == "PLAYING" then
@@ -2736,11 +2753,19 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
             animations["models.ex_skill_1"]["creative_flying_end_left"]:play()
             BlueArchiveCharacter.DronePosition = "LEFT"
         end
+        BlueArchiveCharacter.MissileLaunchAllowed = false
         local endCount = 0
         events.TICK:register(function ()
             endCount = endCount + 1
             if endCount == 5 then
-                events.TICK:remove("drone_tick_end")
+                for _, eventName in ipairs({"drone_tick_end", "missile_launch_tick"}) do
+                    events.TICK:remove(eventName)
+                end
+                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
+                    for _, modelPart2 in ipairs(modelPart:getChildren()) do
+                        modelPart2:setVisible(true)
+                    end
+                end
                 models.models.main.Avatar.Drone:moveTo(models.models.ex_skill_1)
                 models.models.ex_skill_1.Drone:setVisible(false)
                 BlueArchiveCharacter.DronePosition = "NONE"
@@ -2750,18 +2775,81 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
 end
 
 --生徒固有初期化処理
-if host:isHost() then
-    events.TICK:register(function ()
-        local isFlying = host:isFlying()
-        if isFlying ~= BlueArchiveCharacter.IsFlyingPrev then
-            pings.setCreativeFlyingAnimation(isFlying)
-            BlueArchiveCharacter.IsFlyingPrev = isFlying
-        end
-    end)
-end
+events.ENTITY_INIT:register(function ()
+    if host:isHost() then
+        events.TICK:register(function ()
+            local isFlying = host:isFlying()
+            if isFlying ~= BlueArchiveCharacter.IsFlyingPrev then
+                pings.setCreativeFlyingAnimation(isFlying)
+                BlueArchiveCharacter.IsFlyingPrev = isFlying
+            end
+            BlueArchiveCharacter.MissileCooldown = math.max(BlueArchiveCharacter.MissileCooldown - 1, 0)
+        end)
 
-models.models.ex_skill_2.UnderWater:setLight(15)
-models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
-models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+        KeyManager:register("missile_launch", "key.keyboard.g", function ()
+            if BlueArchiveCharacter.MissileLaunchAllowed then
+                if BlueArchiveCharacter.MissileCooldown == 0 then
+                    pings.lauchMissiles()
+                    BlueArchiveCharacter.MissileCooldown = 200
+                else
+                    sounds:playSound("minecraft:block.note_block.bass", player:getPos(), 1, 0.5)
+                    print(Language:getTranslate("missile_launch__in_cool_down_pre")..math.ceil(BlueArchiveCharacter.MissileCooldown / 20)..Language:getTranslate("missile_launch__in_cool_down_post"))
+                end
+            end
+        end)
+
+        Language.LanguageData.en_us["missile_launch__in_cool_down_pre"] = "Please wait "
+        Language.LanguageData.ja_jp["missile_launch__in_cool_down_pre"] = "あと"
+        Language.LanguageData.en_us["missile_launch__in_cool_down_post"] = " more seconds to lanch fireworks."
+        Language.LanguageData.ja_jp["missile_launch__in_cool_down_post"] = "秒待ってください。"
+        Language.LanguageData.en_us["missile_launch__tip_pre"] = "§9§l[TIP]§r Press "
+        Language.LanguageData.ja_jp["missile_launch__tip_pre"] = "§9§l[TIP]§r "
+        Language.LanguageData.en_us["missile_launch__tip_post"] = " key to launch missiles!"
+        Language.LanguageData.ja_jp["missile_launch__tip_post"] = "キーを押すとミサイルを発射します！"
+    end
+
+    models.models.ex_skill_2.UnderWater:setLight(15)
+    models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
+    models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+end)
+
+function pings.lauchMissiles()
+    local launchCounter = 0
+    if events.TICK:getRegisteredCount("missile_launch_tick") == 0 then
+        events.TICK:register(function ()
+            if launchCounter % 5 == 0 and launchCounter <= 35 then
+                local missileNum = math.floor(launchCounter / 5) + 1
+                local missileModel = missileNum <= 4 and models.models.main.Avatar.Drone.LauncherRight.MissilesRight["Missile"..missileNum] or models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft["Missile"..(missileNum - 4)]
+                local lookDir = player:getLookDir()
+                MissileManager:spawn(ModelUtils.getModelWorldPos(missileModel), vectors.vec3(math.deg(math.asin(lookDir.y)) * -1, math.deg(math.atan2(lookDir.z, lookDir.x)) * -1 + 90, 0))
+                missileModel:setVisible(false)
+
+            elseif launchCounter == 135 then
+                events.TICK:remove("missile_launch_tick")
+                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
+                    for _, modelPart2 in ipairs(modelPart:getChildren()) do
+                        modelPart2:setVisible(true)
+                    end
+                end
+            end
+            if launchCounter % 5 <= 1 and launchCounter <= 36 then
+                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.LauncherBase, models.models.main.Avatar.Drone.LauncherLeft.LauncherBase}) do
+                    local anchorPos = ModelUtils.getModelWorldPos(modelPart)
+                    local bodyYaw = player:getBodyYaw()
+                    local particleDir = vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.25, 0, 1, 0)
+                    if launchCounter % 5 == 0 then
+                        for _ = 1, 5 do
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:flame"), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0))):setVelocity(particleDir:copy():scale(2)):setLifetime(4)
+                        end
+                    end
+                    for _ = 1, 5 do
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:large_smoke"), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0))):setVelocity(particleDir)
+                    end
+                end
+            end
+            launchCounter = launchCounter + 1
+        end, "missile_launch_tick")
+    end
+end
 
 return BlueArchiveCharacter

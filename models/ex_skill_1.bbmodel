@@ -27,7 +27,7 @@
 			"to": [12, 8, 8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [0, 0, 0],
+			"origin": [8, 4, 8],
 			"faces": {
 				"north": {
 					"uv": [0, 3, 16, 19],
@@ -71,7 +71,7 @@
 			"to": [10.5, 6.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [0, 0, 0],
+			"origin": [9.5, 5.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -112,7 +112,7 @@
 			"to": [7.5, 6.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [0, 0, 0],
+			"origin": [6.5, 5.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -153,7 +153,7 @@
 			"to": [10.5, 3.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [0, 0, 0],
+			"origin": [9.5, 2.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -194,7 +194,7 @@
 			"to": [7.5, 3.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [0, 0, 0],
+			"origin": [6.5, 2.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -532,7 +532,7 @@
 			"to": [-4, 8, 8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-16, 0, 0],
+			"origin": [-8, 4, 8],
 			"faces": {
 				"north": {
 					"uv": [0, 3, 16, 19],
@@ -576,7 +576,7 @@
 			"to": [-5.5, 6.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-16, 0, 0],
+			"origin": [-6.5, 5.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -617,7 +617,7 @@
 			"to": [-8.5, 6.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-16, 0, 0],
+			"origin": [-9.5, 5.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -658,7 +658,7 @@
 			"to": [-5.5, 3.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-16, 0, 0],
+			"origin": [-6.5, 2.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -689,7 +689,7 @@
 			"uuid": "8d376cc6-d386-0eff-a46c-4f3edaf695ef"
 		},
 		{
-			"name": "Missile3",
+			"name": "Missile4",
 			"box_uv": false,
 			"rescale": false,
 			"locked": false,
@@ -699,7 +699,7 @@
 			"to": [-8.5, 3.5, -8],
 			"autouv": 0,
 			"color": 0,
-			"origin": [-16, 0, 0],
+			"origin": [-9.5, 2.5, -8],
 			"faces": {
 				"north": {
 					"uv": [8, 0, 10, 2],
@@ -2724,6 +2724,50 @@
 			},
 			"type": "cube",
 			"uuid": "1524fa04-63d0-ace4-93a3-59af50bf3bc6"
+		},
+		{
+			"name": "Missile",
+			"box_uv": false,
+			"rescale": false,
+			"locked": false,
+			"render_order": "default",
+			"allow_mirror_modeling": true,
+			"from": [-1, -1, -4],
+			"to": [1, 1, 4],
+			"autouv": 0,
+			"color": 0,
+			"rotation": [0, -180, 0],
+			"origin": [0, 0, 0],
+			"faces": {
+				"north": {
+					"uv": [8, 0, 10, 2],
+					"texture": 0
+				},
+				"east": {
+					"uv": [16, 22, 24, 24],
+					"texture": 0
+				},
+				"south": {
+					"uv": [10, 0, 12, 2],
+					"texture": 0
+				},
+				"west": {
+					"uv": [24, 25, 16, 23],
+					"texture": 0
+				},
+				"up": {
+					"uv": [16, 25, 24, 23],
+					"rotation": 270,
+					"texture": 0
+				},
+				"down": {
+					"uv": [16, 22, 24, 24],
+					"rotation": 90,
+					"texture": 0
+				}
+			},
+			"type": "cube",
+			"uuid": "1552004a-cfba-8960-bc91-4b7f63ced646"
 		}
 	],
 	"outliner": [
@@ -3050,6 +3094,19 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Missile",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"uuid": "5f245713-1b2d-dac1-67e8-2a2fb5c42017",
+			"export": true,
+			"mirror_uv": false,
+			"isOpen": true,
+			"locked": false,
+			"visibility": true,
+			"autouv": 0,
+			"children": ["1552004a-cfba-8960-bc91-4b7f63ced646"]
 		}
 	],
 	"textures": [
@@ -3077,7 +3134,7 @@
 			"saved": true,
 			"uuid": "bfb8c124-f138-8d9e-a05a-ec39c87a4c21",
 			"relative_path": "../../textures/ex_skill_1.png",
-			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAnCAYAAAB0Q6rCAAAAAXNSR0IArs4c6QAAA3xJREFUWEfVmL1rFEEYxp/3Ll8mMSls1MYyKDY20ZATxXSmUhQRtNN/wMrK2sp/QKwURBRTxUKIoAkqsbAxSErFWAqJid7X3ivv7M6xtze7O7M3G3Bh2bu9+fjNM888Mxxt72wzDNedvSk8mNiBPG8dBuaIyFSu4Dvps1B7tPVzywh8d28M9yfquEdHFdOjI96ANWwhaMpTuDa/iNnXq76Ak5DO0Ebg3d1d40xPTk72vZ+emrad2jhc2udchyngxUvXewo+e/zQWPHazds975eXnsIBOF7XWVld2QicO8yogANwnhWsB9ADPPNkuYd188ai+p723gFYmvFvCQH7fLmmIE+9XEMc2PTeEtikbneGYwpZqdynsGfgLNhC0GVaIp63tstCEidT6bIWXVqnpk3KFIup0PsNrBefyQ5WsVeGJbLU1WrabBzGdnwvOhvYZMSZvmu1+9rzCWwVSxFJ4bI+LWE89RniIZ4ELnVUU2UtOtsYcy7n6/CjlYovqmQSJM/BcXXj0ZZsqydZfBwv1UwlvGlKAROwS73QErWFi6k+Wlt5ZXPWTdbXHs3berMGZTosKV4FnDyNyS9y8HEAtlHK5sSWl8/cBdYnM32c9ABso3BamaTNuuV8ADuv9EEq/L/AyVE7WGIQwZzr+kgJ504HqdAXW2vc4kosVjsAajRsE294zg2+SqNWZYtCdxtf5RaPABgGKdzwB0YAoA2gCeBsDvgbbvEFy8ENBPyWWzwGQggc3uFFCMBoKGhGkxnzlRGjgp+4zQxGB4QzNFSayqrhj9zmUQBjAI4bOvvKba4D2OYA5yvmKd/ggCvRjJwsE1g8OwrCAQBZHX3hNjfA+JNije8ccDWyzzGqlqfw+wh4PEVdbY5NbrPA1sGYi3y6zi2eUoMlyFOAm2DsAfgNVrcuW9SzyXokwNKhAM9kTGUc+AcYh0CQvwYPRrDylFuD7kTA8rfiL3RwxVN6kFhCgMUSJzKBA/4LhtwmhQV2CITQNqG6pSgsCSGw46BMD29EC09gTPH2jQMe2g8Pi0c+RNCy+NJSQqJN1DudkrOSJNJWoAZe4qKTTt5xUyXFCEhlsCwe2e1kl+tI/qqbUEcH58icw+sRsLQ3W2as6VUo1hBY8WEVjKraNEJgUa2RAavbWOEmL6QMyFtKJBsS8FBhgQ0v27PEC26wrzRIG+A/Y9E+RCVUcGoAAAAASUVORK5CYII="
+			"source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAnCAYAAAB0Q6rCAAAAAXNSR0IArs4c6QAAA6BJREFUWEfVmD9oFEEYxd/cXXIxfy6FjdpYBsXGJhpyopjOqwyKCNppZWclCJZiZWkjVgoiSqxiIUTQBJVY2BglpWK0ExIvev/2Pvlmd469vZnd2c1swIXl7vZmvv3Nmzdv505sbm0SNMf17Qrujm2BX6/sA37euylbzV+7LXTtU17je2aqIzZ+bGiBb2yP4M5YA7fEAclSW3AGrGAzQYskhauzNUy/XMaD/SKTIhHlo5CpobXA9XpdO8Pj4+MD1ycrk7YDCcOZ3ic6SwLXzl7sa/jk4X1txwuXr/ZdX3z+GCmAw31TK6s6a4EThxk0SAGcZAXrAfQBTz1a7GNdv1STn03XUwBzGfeWYLCP81UJeXRhBWFg3XVLYJ26vRkOKWSl8oDCjoHjYDNB52mJcN7aLgtOnFil81p0ppvqHlK6WDRC7zawWnw6O1jFXh6WiFNXqWnz4NDWcb3obGCjEaf7rNQeqOcS2CqWApLMbV1aQrvr08RDOAnS9JGl8lp0tjGWup2rzY9SKryookkQ3QeH1Q1HW7RWX7K42F7KmYp4U5cCOuA0/XxLVOfOGH20svTCZq8b7a88mvTojRuUbrMkeSVwdDfG3/DGJwWwjVI2O7akfKYesNqZqe2kA2AbhU1tojbrtdsxMM8QbzN1B//idvRbsFf+/wWOKmRriTiFP09UMCOc/NruV9iU3paLLnX476TDQGytUJsKoVjtAqiKIZt4w1Nq0nlRtmqbFbpXfJnaNAxgCELi+l8QPAAdAC0AJxLAX1GbTlsObkfAr6lNIxDwgf3TPwQ8EJoSmtAiwmxhWKvgB+oQgdCFwHFRyk1lWfg9dagMYATAIc3NvlCHGgA2ycOpgn7K18ijQjAjR/IEZs+WIbAHQNyNPlGHmiD8MVjjG3lUDOxzUBTzU/htADxqUFeZY506xLANEGYCn65SmypysAL8ysAtELYB/AbJU7XN6tloP8HAfEMGnoqZyjDwdxD2QoD/GpwIYPmVTwW6FQDz34q/0MU5R+kh2BIMzJY4HAvs0V8Q+NQpzLAlCPi28dXNRWFOCIYdhYj18Fqw8BhGF29fyaPSbniYPfIugObFZ0oJjjZW75ghZzlJuJYnB57jouObvKGWTIphCJnBvHj4acdPuS7nrzwFGujipNDn8GoAzPWm84w1tQrZGgzLPiyCUJQPDR+YVWvGwKoaS9SiOcOAnKVEtBCD+wozrH/Y7iWeUZNcpYFpgP8Aoh1URPWZGAkAAAAASUVORK5CYII="
 		}
 	],
 	"animations": [
