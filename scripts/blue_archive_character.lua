@@ -2682,6 +2682,12 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
             animations["models.ex_skill_1"]["creative_flying_start_left"]:play()
             BlueArchiveCharacter.DronePosition = "LEFT"
         end
+
+        local particleAnchor = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1 + 180, BlueArchiveCharacter.DronePosition == "RIGHT" and -0.40625 or 0.40625, 5.015625, 1.9375, 0, 1, 0))
+        for _ = 1, 30 do
+            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchor:copy():add(math.random() * 2.4 - 1.2, math.random() * 1 - 0.5, (math.random() * 2.4 - 1.2)))
+        end
+
         local startCount = 0
         events.TICK:register(function ()
             startCount = startCount + 1
@@ -2768,9 +2774,52 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                 end
                 models.models.main.Avatar.Drone:moveTo(models.models.ex_skill_1)
                 models.models.ex_skill_1.Drone:setVisible(false)
+                local particleAnchor = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1 + 180, BlueArchiveCharacter.DronePosition == "RIGHT" and -0.40625 or 0.40625, 5.015625, -1.9375, 0, 1, 0))
+                for _ = 1, 30 do
+                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchor:copy():add(math.random() * 2.4 - 1.2, math.random() * 1 - 0.5, (math.random() * 2.4 - 1.2)))
+                end
                 BlueArchiveCharacter.DronePosition = "NONE"
             end
         end, "drone_tick_end")
+    end
+end
+
+function pings.lauchMissiles()
+    local launchCounter = 0
+    if events.TICK:getRegisteredCount("missile_launch_tick") == 0 then
+        events.TICK:register(function ()
+            if launchCounter % 5 == 0 and launchCounter <= 35 then
+                local missileNum = math.floor(launchCounter / 5) + 1
+                local missileModel = missileNum <= 4 and models.models.main.Avatar.Drone.LauncherRight.MissilesRight["Missile"..missileNum] or models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft["Missile"..(missileNum - 4)]
+                local lookDir = player:getLookDir()
+                MissileManager:spawn(ModelUtils.getModelWorldPos(missileModel), vectors.vec3(math.deg(math.asin(lookDir.y)) * -1, math.deg(math.atan2(lookDir.z, lookDir.x)) * -1 + 90, 0))
+                missileModel:setVisible(false)
+
+            elseif launchCounter == 135 then
+                events.TICK:remove("missile_launch_tick")
+                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
+                    for _, modelPart2 in ipairs(modelPart:getChildren()) do
+                        modelPart2:setVisible(true)
+                    end
+                end
+            end
+            if launchCounter % 5 <= 1 and launchCounter <= 36 then
+                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.LauncherBase, models.models.main.Avatar.Drone.LauncherLeft.LauncherBase}) do
+                    local anchorPos = ModelUtils.getModelWorldPos(modelPart)
+                    local bodyYaw = player:getBodyYaw()
+                    local particleDir = vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.25, 0, 1, 0)
+                    if launchCounter % 5 == 0 then
+                        for _ = 1, 5 do
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:flame"), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0))):setVelocity(particleDir:copy():scale(2)):setLifetime(4)
+                        end
+                    end
+                    for _ = 1, 5 do
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:large_smoke"), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0))):setVelocity(particleDir)
+                    end
+                end
+            end
+            launchCounter = launchCounter + 1
+        end, "missile_launch_tick")
     end
 end
 
@@ -2812,44 +2861,5 @@ events.ENTITY_INIT:register(function ()
     models.models.ex_skill_2.Stage.Reef:setPrimaryTexture("RESOURCE", "textures/block/stone.png")
     models.models.ex_skill_2.Stage.Ocean:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
 end)
-
-function pings.lauchMissiles()
-    local launchCounter = 0
-    if events.TICK:getRegisteredCount("missile_launch_tick") == 0 then
-        events.TICK:register(function ()
-            if launchCounter % 5 == 0 and launchCounter <= 35 then
-                local missileNum = math.floor(launchCounter / 5) + 1
-                local missileModel = missileNum <= 4 and models.models.main.Avatar.Drone.LauncherRight.MissilesRight["Missile"..missileNum] or models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft["Missile"..(missileNum - 4)]
-                local lookDir = player:getLookDir()
-                MissileManager:spawn(ModelUtils.getModelWorldPos(missileModel), vectors.vec3(math.deg(math.asin(lookDir.y)) * -1, math.deg(math.atan2(lookDir.z, lookDir.x)) * -1 + 90, 0))
-                missileModel:setVisible(false)
-
-            elseif launchCounter == 135 then
-                events.TICK:remove("missile_launch_tick")
-                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
-                    for _, modelPart2 in ipairs(modelPart:getChildren()) do
-                        modelPart2:setVisible(true)
-                    end
-                end
-            end
-            if launchCounter % 5 <= 1 and launchCounter <= 36 then
-                for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.LauncherBase, models.models.main.Avatar.Drone.LauncherLeft.LauncherBase}) do
-                    local anchorPos = ModelUtils.getModelWorldPos(modelPart)
-                    local bodyYaw = player:getBodyYaw()
-                    local particleDir = vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, -0.25, 0, 1, 0)
-                    if launchCounter % 5 == 0 then
-                        for _ = 1, 5 do
-                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:flame"), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0))):setVelocity(particleDir:copy():scale(2)):setLifetime(4)
-                        end
-                    end
-                    for _ = 1, 5 do
-                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:large_smoke"), anchorPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.5 - 0.25, math.random() * 0.5 - 0.25, 0, 0, 1, 0))):setVelocity(particleDir)
-                    end
-                end
-            end
-            launchCounter = launchCounter + 1
-        end, "missile_launch_tick")
-    end
-end
 
 return BlueArchiveCharacter
