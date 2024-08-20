@@ -1212,14 +1212,27 @@ BlueArchiveCharacter = {
             if costume <= 2 then
                 dummyAvatar.UpperBody.Body.Skirt:setRot(12.5, 0, 0)
             end
-        end
+        end,
 
-        --[[
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
+            if models.models.main.Avatar.Drone ~= nil then
+                models.models.main.Avatar.Drone:moveTo(models.models.ex_skill_1)
+                models.models.ex_skill_1.Drone:setVisible(false)
+                for _, eventName in ipairs({"drone_tick_start", "drone_tick_end", "drone_tick"}) do
+                    events.TICK:remove(eventName)
+                end
+                for _, ctx in ipairs({"right", "left"}) do
+                    animations["models.main"]["creative_flying_transition_"..ctx]:stop()
+                    animations["models.ex_skill_1"]["creative_flying_start_"..ctx]:stop()
+                    animations["models.ex_skill_1"]["creative_flying_end_"..ctx]:stop()
+                    for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                        animations[animationModel]["creative_flying_"..ctx]:stop()
+                    end
+                end
+                BlueArchiveCharacter.DroneSound:stop()
+            end
         end
-        ]]
-
         --[[
         ---モデルのコピー直後に実行される関数（省略可）
         onAfterModelCopy = function ()
@@ -2744,7 +2757,7 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                 end, "drone_tick")
             end
         end, "drone_tick_start")
-    else
+    elseif models.models.main.Avatar.Drone ~= nil then
         for _, eventName in ipairs({"drone_tick_start", "drone_tick"}) do
             events.TICK:remove(eventName)
         end
