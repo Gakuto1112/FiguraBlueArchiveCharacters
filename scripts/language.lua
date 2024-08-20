@@ -33,6 +33,7 @@ Language = {
 			key_name__bubble_3 = "Bubble: Note",
 			key_name__bubble_4 = "Bubble: Question",
 			key_name__bubble_5 = "Bubble: Sweat",
+			key_name__missile_launch = "Launch missiles",
 			key_bind__ex_skill__unavailable = "You cannot do this now.",
 			key_bind__ex_skill__unavailable_firstperson = "You cannot do this in first person.",
 		},
@@ -67,6 +68,7 @@ Language = {
 			key_name__bubble_3 = "吹き出し：音符",
 			key_name__bubble_4 = "吹き出し：はてな",
 			key_name__bubble_5 = "吹き出し：汗",
+			key_name__missile_launch = "ミサイル発射",
 			key_bind__ex_skill__unavailable = "今は再生できません。",
 			key_bind__ex_skill__unavailable_firstperson = "一人称視点では再生できません。",
 		}
