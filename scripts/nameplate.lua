@@ -40,7 +40,7 @@ Nameplate = {
         end
         events.RENDER:register(function (delta, context)
             if context ~= "PAPERDOLL" then
-                nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.NameplateAnchor):sub(player:getPos(delta)):add(0, Barrier.BarrierVisible and 1.095 or 0.895, 0))
+                nameplate.ENTITY:setPivot(ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.NameplateAnchor):sub(player:getPos(delta)):add(0, BlueArchiveCharacter.DronePosition ~= "NONE" and 1.595 or (Barrier.BarrierVisible and 1.095 or 0.895), 0))
             else
                 nameplate.ENTITY:setPivot()
             end
