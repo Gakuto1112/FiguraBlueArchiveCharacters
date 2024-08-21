@@ -2692,11 +2692,13 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
             animations["models.main"]["creative_flying_transition_right"]:setSpeed(1)
             animations["models.main"]["creative_flying_transition_right"]:play()
             animations["models.ex_skill_1"]["creative_flying_start_right"]:play()
+            Arms:setRightArmOffsetRot(vectors.vec3(0, 0, 10))
             BlueArchiveCharacter.DronePosition = "RIGHT"
         else
             animations["models.main"]["creative_flying_transition_left"]:setSpeed(1)
             animations["models.main"]["creative_flying_transition_left"]:play()
             animations["models.ex_skill_1"]["creative_flying_start_left"]:play()
+            Arms:setLeftArmOffsetRot(vectors.vec3(0, 0, -10))
             BlueArchiveCharacter.DronePosition = "LEFT"
         end
 
@@ -2752,6 +2754,30 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                         end
                         BlueArchiveCharacter.DronePosition = "LEFT"
                     end
+                    local activeItem = player:getActiveItem()
+                    local activeHand = player:getActiveHand()
+                    if activeItem.id ~= "minecraft:air" then
+                        if ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded)) and Gun.CurrentGunPosition ~= "RIGHT" then
+                            if Gun.CurrentGunPosition ~= "RIGHT" then
+                                Arms:setRightArmOffsetRot(vectors.vec3())
+                            else
+                                Arms:setRightArmOffsetRot(vectors.vec3())
+                            end
+                        elseif ((activeHand == "MAIN_HAND" and isLeftHanded) or (activeHand == "OFF_HAND" and not isLeftHanded)) and Gun.CurrentGunPosition ~= "LEFT" then
+                            if Gun.CurrentGunPosition ~= "LEFT" then
+                                Arms:setLeftArmOffsetRot(vectors.vec3())
+                            else
+                                Arms:setLeftArmOffsetRot(vectors.vec3())
+                            end
+                            Arms:setLeftArmOffsetRot(vectors.vec3())
+                        end
+                    elseif BlueArchiveCharacter.DronePosition == "RIGHT" then
+                        Arms:setRightArmOffsetRot(vectors.vec3(0, 0, 10))
+                        Arms:setLeftArmOffsetRot(vectors.vec3())
+                    else
+                        Arms:setLeftArmOffsetRot(vectors.vec3(0, 0, -10))
+                        Arms:setRightArmOffsetRot(vectors.vec3())
+                    end
                     BlueArchiveCharacter.IsLeftHandedPrev = isLeftHanded
                     BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
                 end, "drone_tick")
@@ -2788,6 +2814,8 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
                 for _, eventName in ipairs({"drone_tick_end", "missile_launch_tick"}) do
                     events.TICK:remove(eventName)
                 end
+                Arms:setRightArmOffsetRot(vectors.vec3())
+                Arms:setLeftArmOffsetRot(vectors.vec3())
                 for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
                     for _, modelPart2 in ipairs(modelPart:getChildren()) do
                         modelPart2:setVisible(true)
