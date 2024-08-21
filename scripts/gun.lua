@@ -146,37 +146,23 @@ Gun = {
         local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
         local targetItemFound = false
         local isLeftHanded = player:isLeftHanded()
-        if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id then
-            for _, gunItem in ipairs(Gun.GUN_ITEMS) do
-                if heldItems[1].id == gunItem then
-                    --メインハンドに対象アイテムを持つ
-                    targetItemFound = true
-                    if isLeftHanded and self.CurrentGunPosition ~= "LEFT" then
-                        return "LEFT"
-                    elseif not isLeftHanded and self.CurrentGunPosition ~= "RIGHT" then
-                        return "RIGHT"
-                    end
-                    break
-                end
+        for _, gunItem in ipairs(Gun.GUN_ITEMS) do
+            if heldItems[1].id == gunItem then
+                --メインハンドに対象アイテムを持つ
+                targetItemFound = true
+                return player:isLeftHanded() and "LEFT" or "RIGHT"
             end
-            if not targetItemFound then
-                for _, gunItem in ipairs(Gun.GUN_ITEMS) do
-                    if heldItems[2].id == gunItem then
-                        --オフハンドに対象アイテムを持つ
-                        targetItemFound = true
-                        if isLeftHanded and self.CurrentGunPosition ~= "RIGHT" then
-                            return "RIGHT"
-                        elseif not isLeftHanded and self.CurrentGunPosition ~= "LEFT" then
-                            return "LEFT"
-                        end
-                        break
-                    end
-                end
-            end
-            return "NONE"
-        else
-            return Gun.CurrentGunPosition
         end
+        if not targetItemFound then
+            for _, gunItem in ipairs(Gun.GUN_ITEMS) do
+                if heldItems[2].id == gunItem then
+                    --オフハンドに対象アイテムを持つ
+                    targetItemFound = true
+                    return player:isLeftHanded() and "RIGHT" or "LEFT"
+                end
+            end
+        end
+        return "NONE"
     end,
 
     ---初期化関数
@@ -187,7 +173,6 @@ Gun = {
             if currentGunPos ~= self.CurrentGunPosition then
                 self:setGunPosition(currentGunPos)
             end
-            self.HeldItemsPrev = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
             self.LeftHandedPrev = player:isLeftHanded()
         end)
 
