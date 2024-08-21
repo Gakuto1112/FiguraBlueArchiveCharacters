@@ -2878,7 +2878,7 @@ end
 events.ENTITY_INIT:register(function ()
     if host:isHost() then
         events.TICK:register(function ()
-            local isFlying = host:isFlying()
+            local isFlying = host:isFlying() and player:getGamemode() ~= "SPECTATOR"
             if isFlying ~= BlueArchiveCharacter.IsFlyingPrev then
                 pings.setCreativeFlyingAnimation(isFlying)
                 BlueArchiveCharacter.IsFlyingPrev = isFlying
