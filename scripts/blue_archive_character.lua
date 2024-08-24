@@ -2711,7 +2711,15 @@ BlueArchiveCharacter = {
 
     ---自転車の風切り音のインスタンス
     ---@type Sound
-    BicycleWindSound = nil
+    BicycleWindSound = nil,
+
+    ---現在の自転車のハンドルの角度
+    ---@type number
+    BicycleHandleRot = 0,
+
+    ---前の自転車のハンドルの角度
+    ---@type number
+    BicycleHandleRotPrev = 0
 }
 
 ---クリエイティブ飛行フラグを設定する。
@@ -2941,7 +2949,9 @@ events.ENTITY_INIT:register(function ()
                 BlueArchiveCharacter.BycycleRidingPrev = false
                 BlueArchiveCharacter.DrinkItemHeldPrev = false
                 events.TICK:register(function ()
-                    local isBycicleRiding = (math.abs(Physics.VelocityAverage[5]) >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01) and BlueArchiveCharacter.BycycleEnabled
+                    local velocity = player:getVelocity()
+                    local horizontalSpeed = math.sqrt(velocity.x ^ 2 + velocity.z ^ 2)
+                    local isBycicleRiding = (horizontalSpeed >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01) and BlueArchiveCharacter.BycycleEnabled
                     if isBycicleRiding ~= BlueArchiveCharacter.BycycleRidingPrev then
                         if isBycicleRiding then
                             animations["models.main"]["bicycle_idle"]:setSpeed(1)
@@ -2957,16 +2967,18 @@ events.ENTITY_INIT:register(function ()
                         BlueArchiveCharacter.BycycleRidingPrev = isBycicleRiding
                     end
                     for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
-                        animations[animationModel]["bicycle_run"]:setSpeed(2 * Physics.VelocityAverage[5])
+                        animations[animationModel]["bicycle_run"]:setSpeed(2 * horizontalSpeed)
                     end
-                    if isBycicleRiding and Physics.VelocityAverage[5] >= 0.3 then
+                    BlueArchiveCharacter.BicycleHandleRotPrev = BlueArchiveCharacter.BicycleHandleRot
+                    BlueArchiveCharacter.BicycleHandleRot = math.clamp(Physics.VelocityAverage[3], -0.2, 0.2) * 75
+                    if isBycicleRiding and horizontalSpeed >= 0.3 then
                         local playerPos = player:getPos()
                         sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.dispenser.fail"), playerPos, 0.025, 5)
                         if BlueArchiveCharacter.BicycleWindSound ~= nil then
                             BlueArchiveCharacter.BicycleWindSound:setPos(playerPos)
-                            BlueArchiveCharacter.BicycleWindSound:setVolume(0.14285714285714 * Physics.VelocityAverage[5] - 0.042857142857143)
+                            BlueArchiveCharacter.BicycleWindSound:setVolume(0.14285714285714 * horizontalSpeed - 0.042857142857143)
                         else
-                            BlueArchiveCharacter.BicycleWindSound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.elytra.flying"), playerPos, 0.14285714285714 * Physics.VelocityAverage[5] - 0.042857142857143, 2, true)
+                            BlueArchiveCharacter.BicycleWindSound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.elytra.flying"), playerPos, 0.14285714285714 * horizontalSpeed - 0.042857142857143, 2, true)
                         end
                     elseif BlueArchiveCharacter.BicycleWindSound ~= nil then
                         BlueArchiveCharacter.BicycleWindSound:stop()
@@ -3009,11 +3021,13 @@ events.ENTITY_INIT:register(function ()
                         BlueArchiveCharacter.DrinkItemHeldPrev = BlueArchiveCharacter.DrinkItemHeld
                     end
                 end, "bicycle_ride_tick")
-                events.RENDER:register(function ()
+                events.RENDER:register(function (delta)
                     local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
                     models.models.main.Avatar.Head:setRot(45 - 30 * bicycleIdleFactor, 0, 0)
-                    Arms:setRightArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), 8 * (1 - bicycleIdleFactor), 0))
-                    Arms:setLeftArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), -8 * (1 - bicycleIdleFactor), 0))
+                    local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
+                    models.models.main.Avatar.LowerBody.Bicycle.Handle:setRot(0, currentHandleRot, 0)
+                    Arms:setRightArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
+                    Arms:setLeftArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     if host:isHost() then
                         CameraManager.setCameraPivot(vectors.vec3(0, 0.15 * bicycleIdleFactor - 0.75, 0))
                         renderer:setEyeOffset(0, 0.15 * bicycleIdleFactor - 0.75, 0)
