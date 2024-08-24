@@ -187,6 +187,7 @@ ExSkill = {
             end
         end, "ex_skill_tick")
         self:transition("PRE", function ()
+            Gun:processGunTick()
             Physics.disable()
             for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
                 itemModel:setVisible(false)
