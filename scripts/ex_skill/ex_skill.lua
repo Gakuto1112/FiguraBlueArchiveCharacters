@@ -187,7 +187,6 @@ ExSkill = {
             end
         end, "ex_skill_tick")
         self:transition("PRE", function ()
-            Gun:processGunTick()
             Physics.disable()
             for _, itemModel in ipairs({vanilla_model.RIGHT_ITEM, vanilla_model.LEFT_ITEM}) do
                 itemModel:setVisible(false)
@@ -234,6 +233,7 @@ ExSkill = {
                 end, "ex_skill_animation_render")
             end
             self.AnimationCount = 0
+            Gun:processGunTick()
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill]:getLength() * 20)
         end)
     end,

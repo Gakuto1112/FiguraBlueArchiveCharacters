@@ -39,7 +39,6 @@ Gun = {
     ---@param GunPosition Gun.GunPosition 変更先の構え位置
     setGunPosition = function (self, GunPosition)
         if GunPosition == "NONE" then
-            print("A")
             for _, tickName in ipairs({"right_gun_tick", "left_gun_tick"}) do
                 events.TICK:remove(tickName)
             end
