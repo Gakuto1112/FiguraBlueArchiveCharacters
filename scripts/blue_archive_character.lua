@@ -1169,6 +1169,7 @@ BlueArchiveCharacter = {
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
             models.models.main.Avatar.Head.FaceParts.Face:setUVPixels()
+            models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(false)
         end
 
         --[[
