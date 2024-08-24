@@ -158,8 +158,6 @@ Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftfor
 - Please contact me via [Discussions](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/discussions) or [Discord](https://discord.com/) if you want to do for my avatars. My Discord name is "vinny_san" and display name is "ばにーさん". My display name in [Figura Discord server](https://discord.gg/figuramc) is "BunnySan/ばにーさん".
 
 ## Known issues
-- Weapons are not rendered correctly when changing main hand ([#24](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/24)).
-  - You can resolve this issue by re-holding a weapon.
 - The halo (head ring) and arms holding weapons may not be rendered when activating a shader pack with [Iris Shaders](https://www.irisshaders.dev/) only once after game startup ([#63](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/63)).
   - You can resolve this issue by reloading the avatar.
 
