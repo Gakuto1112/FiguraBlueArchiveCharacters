@@ -2936,7 +2936,7 @@ events.ENTITY_INIT:register(function ()
                 BlueArchiveCharacter.BycycleRidingPrev = false
                 BlueArchiveCharacter.DrinkItemHeldPrev = false
                 events.TICK:register(function ()
-                    local isBycicleRiding = math.abs(Physics.VelocityAverage[5]) >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01
+                    local isBycicleRiding = (math.abs(Physics.VelocityAverage[5]) >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01) and BlueArchiveCharacter.BycycleEnabled
                     if isBycicleRiding ~= BlueArchiveCharacter.BycycleRidingPrev then
                         if isBycicleRiding then
                             animations["models.main"]["bicycle_idle"]:setSpeed(1)
@@ -3065,6 +3065,10 @@ events.ENTITY_INIT:register(function ()
                 models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setParentType("None")
                 models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos()
                 models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot()
+                if BlueArchiveCharacter.BicycleWindSound ~= nil then
+                    BlueArchiveCharacter.BicycleWindSound:stop()
+                    BlueArchiveCharacter.BicycleWindSound = nil
+                end
                 BlueArchiveCharacter.DrinkItemHeld = false
             end
             BlueArchiveCharacter.BycycleEnabledPrev = BlueArchiveCharacter.BycycleEnabled
