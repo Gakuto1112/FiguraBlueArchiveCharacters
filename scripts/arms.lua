@@ -88,7 +88,7 @@ Arms = {
                                     end
                                     local headRot = vanilla_model.HEAD:getOriginRot()
                                     local armSwingOffset = math.sin(self.ArmSwingCounter * math.pi * 2) * 2.5
-                                    local bicycleArmOffset = BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled and models.models.main.Avatar:getAnimRot().x or 0
+                                    local bicycleArmOffset = BlueArchiveCharacter.BycycleEnabled and models.models.main.Avatar:getAnimRot().x or 0
                                     if self.BowPoseLeftHanded then
                                         models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(BlueArchiveCharacter.DronePosition == "LEFT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset + 90 - bicycleArmOffset, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0))
                                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90 - bicycleArmOffset, headRot.y, 0)
@@ -114,9 +114,6 @@ Arms = {
             self.BowPoseLeftHanded = leftHanded
         else
             events.tick:remove("bow_pose_tick")
-            events.TICK:register(function ()
-
-            end, "non_bow_pose_tick")
             stopBowPose()
             self.BowPosePrev = false
         end
