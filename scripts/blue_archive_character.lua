@@ -2836,6 +2836,7 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
 end
 
 function pings.lauchMissiles()
+    FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY", "ANGRY", 60, true)
     local launchCounter = 0
     if events.TICK:getRegisteredCount("missile_launch_tick") == 0 then
         events.TICK:register(function ()
