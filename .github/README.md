@@ -133,6 +133,11 @@ Changes the amount of triangular particles that appear from the red or blue bord
 
 As an additional option, I have added an option to disable the frame during the Ex skill animations. This is the closest to the original one.
 
+### Action6. Toggle vehicle models
+Toggles the vehicle models replacement feature for some characters. This option is disabled for characters with no vehicle models.
+
+![Vehicle models](./README_images/vehicle_model.jpg)
+
 ## How to use
 Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Fabric](https://fabricmc.net/) and [NeoForge](https://neoforged.net/).
 
