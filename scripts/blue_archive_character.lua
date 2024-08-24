@@ -1154,13 +1154,12 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart[]
-        excludeModels = {}
+        excludeModels = {},
 
-        --[[
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
+            models.models.main.Avatar.Head:setRot()
         end
-        ]]
 
         --[[
         ---モデルのコピー直後に実行される関数（省略可）
@@ -1177,13 +1176,12 @@ BlueArchiveCharacter = {
 
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
         ---@type ModelPart[]
-        excludeModels = {models.models.main.Avatar.Head.Ears, models.models.main.Avatar.Head.CSwimsuitH}
+        excludeModels = {models.models.main.Avatar.Head.Ears, models.models.main.Avatar.Head.CSwimsuitH},
 
-        --[[
         ---モデルのコピー直前に実行される関数（省略可）
         onBeforeModelCopy = function ()
+            models.models.main.Avatar.Head:setRot()
         end
-        ]]
 
         --[[
         ---モデルのコピー直後に実行される関数（省略可）
@@ -1236,6 +1234,7 @@ BlueArchiveCharacter = {
                 end
                 BlueArchiveCharacter.DroneSound:stop()
             end
+            models.models.main.Avatar.LowerBody.Bicycle:setVisible(false)
         end
         --[[
         ---モデルのコピー直後に実行される関数（省略可）
