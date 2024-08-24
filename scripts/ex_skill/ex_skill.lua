@@ -233,6 +233,7 @@ ExSkill = {
                 end, "ex_skill_animation_render")
             end
             self.AnimationCount = 0
+            Gun:processGunTick()
             self.AnimationLength = math.round(animations["models.main"]["ex_skill_"..BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill]:getLength() * 20)
         end)
     end,
