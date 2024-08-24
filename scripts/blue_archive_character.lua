@@ -924,7 +924,7 @@ BlueArchiveCharacter = {
                         local vehicle = player:getVehicle()
                         if vehicle ~= nil  then
                             local id = vehicle:getType()
-                            if (id == "minecraft:boat" or id == "minecraft:chest_boat") and #vehicle:getPassengers() == 1 then
+                            if ActionWheel.ShouldReplaceVehicleModels and (id == "minecraft:boat" or id == "minecraft:chest_boat") and #vehicle:getPassengers() == 1 then
                                 if not BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
                                     BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev = player:getLookDir()
                                     BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = 0
@@ -1182,7 +1182,7 @@ BlueArchiveCharacter = {
     ACTION_WHEEL = {
         ---乗り物のモデル置き換えオプションを有効にするかどうか。
         ---@type boolean
-        vehicleOptionEnabled = false
+        vehicleOptionEnabled = true
     },
 
     ---物理演算
