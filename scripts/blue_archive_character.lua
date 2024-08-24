@@ -2719,7 +2719,11 @@ BlueArchiveCharacter = {
 
     ---前の自転車のハンドルの角度
     ---@type number
-    BicycleHandleRotPrev = 0
+    BicycleHandleRotPrev = 0,
+
+    ---自転車のオフセット位置
+    ---@type number
+    BicycleOffsetPos = 0
 }
 
 ---クリエイティブ飛行フラグを設定する。
@@ -2937,6 +2941,13 @@ events.ENTITY_INIT:register(function ()
             else
                 BlueArchiveCharacter.BycycleEnabled = false
             end
+            if BlueArchiveCharacter.BycycleEnabled then
+                if vehicleType == "minecraft:horse" then
+                    BlueArchiveCharacter.BicycleOffsetPos = 0
+                else
+                    BlueArchiveCharacter.BicycleOffsetPos = 0.34375
+                end
+            end
         end
         if BlueArchiveCharacter.BycycleEnabled ~= BlueArchiveCharacter.BycycleEnabledPrev then
             if BlueArchiveCharacter.BycycleEnabled then
@@ -2949,6 +2960,9 @@ events.ENTITY_INIT:register(function ()
                 BlueArchiveCharacter.BycycleRidingPrev = false
                 BlueArchiveCharacter.DrinkItemHeldPrev = false
                 events.TICK:register(function ()
+                    if BlueArchiveCharacter.BycycleEnabled then
+                        models.models.main.Avatar:setPos(0, BlueArchiveCharacter.BicycleOffsetPos * 16, 0)
+                    end
                     local velocity = player:getVelocity()
                     local horizontalSpeed = math.sqrt(velocity.x ^ 2 + velocity.z ^ 2)
                     local isBycicleRiding = (horizontalSpeed >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01) and BlueArchiveCharacter.BycycleEnabled
@@ -3028,22 +3042,22 @@ events.ENTITY_INIT:register(function ()
                     models.models.main.Avatar.LowerBody.Bicycle.Handle:setRot(0, currentHandleRot, 0)
                     Arms:setRightArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     Arms:setLeftArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
-                    if host:isHost() then
-                        CameraManager.setCameraPivot(vectors.vec3(0, 0.15 * bicycleIdleFactor - 0.75, 0))
-                        renderer:setEyeOffset(0, 0.15 * bicycleIdleFactor - 0.75, 0)
+                    if host:isHost() and BlueArchiveCharacter.BycycleEnabled then
+                        CameraManager.setCameraPivot(vectors.vec3(0, 0.15 * bicycleIdleFactor - 0.75 + BlueArchiveCharacter.BicycleOffsetPos, 0))
+                        renderer:setEyeOffset(0, 0.15 * bicycleIdleFactor - 0.75 + BlueArchiveCharacter.BicycleOffsetPos, 0)
                     end
                 end, "bicycle_ride_render")
                 events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
-                    if path ~= nil and id:match("^minecraft:entity%.horse%.") and pos:copy():sub(player:getPos()):length() <= 1.5 then
+                    if path ~= nil and (id:match("^minecraft:entity%.horse%.") or id:match("^minecraft:entity%.donkey%.") or id:match("^minecraft:entity%.mule%.")) and pos:copy():sub(player:getPos()):length() <= 1.5 then
                         if id == "minecraft:entity.horse.jump" then
                             sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.blaze.hurt"), pos, 0.5, 2, false)
                             sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.wool.step"), pos, 1, 0.75, false)
                         elseif id == "minecraft:entity.horse.land" then
                             sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.iron_door.close"), pos, 0.25, 1.75, false)
                             sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.wool.step"), pos, 1, 0.75, false)
-                        elseif id == "minecraft:entity.horse.hurt" then
+                        elseif id:match("^minecraft:entity%.%w+%.hurt$") then
                             sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.anvil.place"), pos, 0.5, 2, false)
-                        elseif id == "minecraft:entity.horse.death" then
+                        elseif id:match("^minecraft:entity%.%w+%.death$") then
                             sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.blast"), pos, 1, 2, false)
                             local playerPos = player:getPos()
                             local lookDir = player:getLookDir()
@@ -3067,6 +3081,7 @@ events.ENTITY_INIT:register(function ()
                 events.RENDER:remove("bicycle_ride_render")
                 events.ITEM_RENDER:remove("drink_bottle_item_render")
                 events.ON_PLAY_SOUND:remove("bicycle_ride_sound")
+                models.models.main.Avatar:setPos()
                 models.models.main.Avatar.LowerBody.Bicycle:setVisible(false)
                 renderer:setRenderVehicle(true)
                 for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
