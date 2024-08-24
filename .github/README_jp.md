@@ -131,6 +131,11 @@ Exスキルアニメーション中に表示される赤や青の枠から出現
 
 追加のオプションとして、Exスキルアニメーション中のフレーム表示をなくすオプションを追加しました。この状態が本家に一番近い状態です。
 
+### アクション6. 乗り物モデルの置き換えの切り替え
+一部生徒の「ゲーム内の乗り物に乗った時にそのモデルを置き換える」機能を有効にするか無効にするかを切り替えます。乗り物モデルの置き換えがない生徒ではこのオプションが無効化されています。
+
+![乗り物モデル](./README_images/vehicle_model.jpg)
+
 ## 使用方法
 Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[Fabric](https://fabricmc.net/)、[NeoForge](https://neoforged.net/)に対応しています。
 
