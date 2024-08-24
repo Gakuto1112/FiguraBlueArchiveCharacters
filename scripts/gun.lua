@@ -31,10 +31,15 @@ Gun = {
     ---@type ItemStack[]
     HeldItemsPrev = {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))},
 
+    ---銃ティックを処理したかどうか
+    ---@type boolean
+    GunTickProcessed = false,
+
     ---銃の位置を変更する。
     ---@param GunPosition Gun.GunPosition 変更先の構え位置
     setGunPosition = function (self, GunPosition)
         if GunPosition == "NONE" then
+            print("A")
             for _, tickName in ipairs({"right_gun_tick", "left_gun_tick"}) do
                 events.TICK:remove(tickName)
             end
@@ -139,10 +144,10 @@ Gun = {
         models.models.main.Avatar.UpperBody.Body.Gun:setRot(offsetRot)
     end,
 
-    ---初期化関数
+    ---銃ティックを処理する。
     ---@param self Gun
-    init = function (self)
-        events.TICK:register(function()
+    processGunTick = function (self)
+        if not self.GunTickProcessed then
             local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
             local targetItemFound = false
             local isLeftHanded = player:isLeftHanded()
@@ -198,6 +203,16 @@ Gun = {
                 end
                 self.LeftHandedPrev = isLeftHanded
             end
+            self.GunTickProcessed = true
+        end
+    end,
+
+    ---初期化関数
+    ---@param self Gun
+    init = function (self)
+        events.TICK:register(function()
+            self:processGunTick()
+            self.GunTickProcessed = false
         end)
 
         events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
