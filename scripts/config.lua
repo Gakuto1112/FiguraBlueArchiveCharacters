@@ -53,7 +53,8 @@ local nextSyncCount = 0
 ---@param isArmorShown boolean 防具が見えているかどうか
 ---@param shouldReplaceVehicleModels boolean 乗り物モデルを置き換えるかどうか
 ---@param isChatOpened boolean チャット欄を開いているかどうか
-function pings.syncAvatarConfig(nameTypeId, showClubName, costumeId, isArmorShown, shouldReplaceVehicleModels, isChatOpened)
+---@param isFlying boolean クリエイティブ飛行をしているかどうか
+function pings.syncAvatarConfig(nameTypeId, showClubName, costumeId, isArmorShown, shouldReplaceVehicleModels, isChatOpened, isFlying)
 	if not isSynced then
 		Nameplate:setName(nameTypeId, showClubName)
 		Armor.ShowArmor = isArmorShown
@@ -62,6 +63,7 @@ function pings.syncAvatarConfig(nameTypeId, showClubName, costumeId, isArmorShow
 		if costumeId >= 2 then
 			Costume:setCostume(costumeId)
 		end
+		BlueArchiveCharacter.IsFlying = isFlying
 		isSynced = true
 	end
 end
@@ -70,7 +72,7 @@ if host:isHost() then
 	config:setName("BlueArchive_"..BlueArchiveCharacter.BASIC.firstName.en_us..BlueArchiveCharacter.BASIC.lastName.en_us)
 	events.TICK:register(function ()
 		if nextSyncCount == 0 then
-			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown, Costume.CurrentCostume, Armor.ShowArmor, ActionWheel.ShouldReplaceVehicleModels, Bubble.IsChatOpened)
+			pings.syncAvatarConfig(Nameplate.CurrentName, Nameplate.ClubShown, Costume.CurrentCostume, Armor.ShowArmor, ActionWheel.ShouldReplaceVehicleModels, Bubble.IsChatOpened, BlueArchiveCharacter.IsFlying)
 			nextSyncCount = 300
 		else
 			nextSyncCount = nextSyncCount - 1
