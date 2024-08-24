@@ -2923,7 +2923,12 @@ events.ENTITY_INIT:register(function ()
         BlueArchiveCharacter.BycycleEnabled = false
         if vehicle ~= nil then
             local vehicleType = vehicle:getType()
-            BlueArchiveCharacter.BycycleEnabled = ActionWheel.ShouldReplaceVehicleModels and (vehicleType == "minecraft:horse" or vehicleType == "minecraft:donkey" or vehicleType == "minecraft:mule")
+            local jockey = vehicle:getControllingPassenger()
+            if jockey ~= nil then
+                BlueArchiveCharacter.BycycleEnabled = ActionWheel.ShouldReplaceVehicleModels and (vehicleType == "minecraft:horse" or vehicleType == "minecraft:donkey" or vehicleType == "minecraft:mule") and vehicle:getControllingPassenger():getName() == player:getName()
+            else
+                BlueArchiveCharacter.BycycleEnabled = false
+            end
         end
         if BlueArchiveCharacter.BycycleEnabled ~= BlueArchiveCharacter.BycycleEnabledPrev then
             if BlueArchiveCharacter.BycycleEnabled then
