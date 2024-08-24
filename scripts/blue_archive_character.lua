@@ -132,7 +132,7 @@ BlueArchiveCharacter = {
     ---スカート
     SKIRT = {
         ---スカートとして制御するモデルの配列
-        ---@type ModelPart
+        ---@type ModelPart[]
         SkirtModels = {models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.CMaidB.Skirt1}
     },
 
@@ -1573,11 +1573,11 @@ BlueArchiveCharacter = {
     ---頭ブロック
     HEAD_BLOCK = {
         ---頭以外のモデルパーツで頭ブロックにアタッチしたいモデルパーツを配列形式で列挙する。
-        ---@type ModelPart>[]
+        ---@type ModelPart[]
         includeModels = {},
 
         ---頭のモデルパーツで頭ブロックから除外したいモデルパーツを配列形式で列挙する。
-        ---@type ModelPart>[]
+        ---@type ModelPart[]
         excludeModels = {}
 
         --[[
@@ -1596,11 +1596,11 @@ BlueArchiveCharacter = {
     ---ポートレート
     PORTRAIT = {
         ---頭以外のモデルパーツでポートレートにアタッチしたいモデルパーツを配列形式で列挙する。
-        ---@type ModelPart>[]
+        ---@type ModelPart[]
         includeModels = {},
 
         ---頭のモデルパーツでポートレートから除外したいモデルパーツを配列形式で列挙する。
-        ---@type ModelPart>[]
+        ---@type ModelPart[]
         excludeModels = {models.models.main.Avatar.Head.Phone}
 
         --[[
@@ -1619,7 +1619,7 @@ BlueArchiveCharacter = {
     ---死亡アニメーションのダミーアバター
     DEATH_ANIMATION = {
         ---ダミーアバターから除外したいモデルパーツを配列形式で列挙する。
-        ---@type ModelPart>[]
+        ---@type ModelPart[]
         excludeModels = {},
 
         ---死亡アニメーションが再生された直後に実行される関数（省略可）
@@ -1663,6 +1663,13 @@ BlueArchiveCharacter = {
         onAfterModelCopy = function ()
         end
         ]]
+    },
+
+    ---アクションホイールに関わる設定
+    ACTION_WHEEL = {
+        ---乗り物のモデル置き換えオプションを有効にするかどうか。
+        ---@type boolean
+        vehicleOptionEnabled = false
     },
 
     ---物理演算
