@@ -60,12 +60,11 @@ Arms = {
     setBowPose = function(self, enabled, leftHanded)
         ---弓の構えを止める。
         local function stopBowPose()
-            models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("RightArm")
-            models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("LeftArm")
-            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(self.ArmOffsetRot[1])
-            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(self.ArmOffsetRot[2])
             events.RENDER:remove("bow_pose_render")
             events.WORLD_RENDER:remove("bow_pose_world_render")
+            models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("RightArm")
+            models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("LeftArm")
+            self:updateArmRot()
         end
 
         self.BowPoseEnabled = enabled

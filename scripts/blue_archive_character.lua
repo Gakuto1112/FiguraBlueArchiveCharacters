@@ -2692,7 +2692,11 @@ BlueArchiveCharacter = {
 
     ---前ティックで自転車モデル置き換えが有効だったかどうか
     ---@type boolean
-    BycycleEnabledPrev = false
+    BycycleEnabledPrev = false,
+
+    ---飲み物アイテムを手に持っているかどうか
+    ---@type boolean
+    DrinkItemHeld = false
 }
 
 ---クリエイティブ飛行のフラグを設定する。
@@ -2908,10 +2912,11 @@ events.ENTITY_INIT:register(function ()
                     animations[animationModel]["bicycle_idle"]:play()
                 end
                 animations["models.main"]["bicycle_idle"]:setSpeed(-1)
-                BlueArchiveCharacter.COSTUME.costumes[4].BycycleRidingPrev = false
+                BlueArchiveCharacter.BycycleRidingPrev = false
+                BlueArchiveCharacter.DrinkItemHeldPrev = false
                 events.TICK:register(function ()
                     local isBycicleRiding = math.abs(Physics.VelocityAverage[5]) >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01
-                    if isBycicleRiding ~= BlueArchiveCharacter.COSTUME.costumes[4].BycycleRidingPrev then
+                    if isBycicleRiding ~= BlueArchiveCharacter.BycycleRidingPrev then
                         if isBycicleRiding then
                             animations["models.main"]["bicycle_idle"]:setSpeed(1)
                             for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
@@ -2923,10 +2928,46 @@ events.ENTITY_INIT:register(function ()
                                 animations[animationModel]["bicycle_run"]:stop()
                             end
                         end
-                        BlueArchiveCharacter.COSTUME.costumes[4].BycycleRidingPrev = isBycicleRiding
+                        BlueArchiveCharacter.BycycleRidingPrev = isBycicleRiding
                     end
                     for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
                         animations[animationModel]["bicycle_run"]:setSpeed(2 * Physics.VelocityAverage[5])
+                    end
+                    BlueArchiveCharacter.DrinkItemHeld = false
+                    for _, item in ipairs({player:getHeldItem(false), player:getHeldItem(true)}) do
+                        if item.id == "minecraft:potion" or item.id == "minecraft:milk_bucket" then
+                            BlueArchiveCharacter.DrinkItemHeld = true
+                            break
+                        end
+                    end
+                    if BlueArchiveCharacter.DrinkItemHeld ~= BlueArchiveCharacter.DrinkItemHeldPrev then
+                        if BlueArchiveCharacter.DrinkItemHeld then
+                            models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setParentType("Item")
+                            events.ITEM_RENDER:register(function (item, mode, pos, rot, scale, lefthanded)
+                                if (item.id == "minecraft:potion" or item.id == "minecraft:milk_bucket") and BlueArchiveCharacter.DrinkItemHeld and mode ~= "HEAD" and ExSkill.AnimationCount == -1 then
+                                    if mode == "FIRST_PERSON_LEFT_HAND" then
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos(-2, -6, 5.5)
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot(90, -60, 0)
+                                    elseif mode == "FIRST_PERSON_RIGHT_HAND" then
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos(2, -6, 5.5)
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot(90, -120, 0)
+                                    elseif mode == "THIRD_PERSON_LEFT_HAND" then
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos(0, -7.5, 5.5)
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot(90, 90, 0)
+                                    elseif mode == "THIRD_PERSON_RIGHT_HAND" then
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos(0, -7.5, 5.5)
+                                        models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot(90, 90, 0)
+                                    end
+                                    return models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle
+                                end
+                            end, "drink_bottle_item_render")
+                        else
+                            events.ITEM_RENDER:remove("drink_bottle_item_render")
+                            models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setParentType("None")
+                            models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos()
+                            models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot()
+                        end
+                        BlueArchiveCharacter.DrinkItemHeldPrev = BlueArchiveCharacter.DrinkItemHeld
                     end
                 end, "bicycle_ride_tick")
                 events.RENDER:register(function ()
@@ -2955,6 +2996,11 @@ events.ENTITY_INIT:register(function ()
                     CameraManager.setCameraPivot(vectors.vec3())
                     renderer:setEyeOffset()
                 end
+                events.ITEM_RENDER:remove("drink_bottle_item_render")
+                models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setParentType("None")
+                models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setPos()
+                models.models.main.Avatar.LowerBody.Bicycle.Shaft.Shaft8.WaterBottle:setRot()
+                BlueArchiveCharacter.DrinkItemHeld = false
             end
             BlueArchiveCharacter.BycycleEnabledPrev = BlueArchiveCharacter.BycycleEnabled
         end
