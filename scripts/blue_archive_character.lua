@@ -1021,6 +1021,73 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Scarf, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.IDCard}) do
                         modelPart:setVisible(false)
                     end
+                    BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabledPrev = false
+                    events.TICK:register(function ()
+                        BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled = false
+                        local vehicle = player:getVehicle()
+                        if vehicle ~= nil then
+                            local vehicleType = vehicle:getType()
+                            BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled = ActionWheel.ShouldReplaceVehicleModels and (vehicleType == "minecraft:horse" or vehicleType == "minecraft:donkey" or vehicleType == "minecraft:mule")
+                        end
+                        if BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled ~= BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabledPrev then
+                            if BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled then
+                                models.models.main.Avatar.LowerBody.Bicycle:setVisible(true)
+                                renderer:setRenderVehicle(false)
+                                for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
+                                    animations[animationModel]["bicycle_idle"]:play()
+                                end
+                                animations["models.main"]["bicycle_idle"]:setSpeed(-1)
+                                BlueArchiveCharacter.COSTUME.costumes[4].BycycleRidingPrev = false
+                                events.TICK:register(function ()
+                                    local isBycicleRiding = math.abs(Physics.VelocityAverage[5]) >= 0.01 or math.abs(Physics.VelocityAverage[2]) >= 0.01
+                                    if isBycicleRiding ~= BlueArchiveCharacter.COSTUME.costumes[4].BycycleRidingPrev then
+                                        if isBycicleRiding then
+                                            animations["models.main"]["bicycle_idle"]:setSpeed(1)
+                                            for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
+                                                animations[animationModel]["bicycle_run"]:play()
+                                            end
+                                        else
+                                            animations["models.main"]["bicycle_idle"]:setSpeed(-1)
+                                            for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
+                                                animations[animationModel]["bicycle_run"]:stop()
+                                            end
+                                        end
+                                        BlueArchiveCharacter.COSTUME.costumes[4].BycycleRidingPrev = isBycicleRiding
+                                    end
+                                    for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
+                                        animations[animationModel]["bicycle_run"]:setSpeed(2 * Physics.VelocityAverage[5])
+                                    end
+                                end, "bicycle_ride_tick")
+                                events.RENDER:register(function ()
+                                    local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
+                                    models.models.main.Avatar.Head:setRot(45 - 30 * bicycleIdleFactor, 0, 0)
+                                    Arms:setRightArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), 8 * (1 - bicycleIdleFactor), 0))
+                                    Arms:setLeftArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), -8 * (1 - bicycleIdleFactor), 0))
+                                    if host:isHost() then
+                                        CameraManager.setCameraPivot(vectors.vec3(0, 0.15 * bicycleIdleFactor - 0.75, 0))
+                                        renderer:setEyeOffset(0, 0.15 * bicycleIdleFactor - 0.75, 0)
+                                    end
+                                end, "bicycle_ride_render")
+                            else
+                                events.TICK:remove("bicycle_ride_tick")
+                                events.RENDER:remove("bicycle_ride_render")
+                                models.models.main.Avatar.LowerBody.Bicycle:setVisible(false)
+                                renderer:setRenderVehicle(true)
+                                for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
+                                    animations[animationModel]["bicycle_run"]:stop()
+                                    animations[animationModel]["bicycle_idle"]:stop()
+                                end
+                                models.models.main.Avatar.Head:setRot()
+                                Arms:setRightArmOffsetRot(vectors.vec3())
+                                Arms:setLeftArmOffsetRot(vectors.vec3())
+                                if host:isHost() then
+                                    CameraManager.setCameraPivot(vectors.vec3())
+                                    renderer:setEyeOffset()
+                                end
+                            end
+                            BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabledPrev = BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled
+                        end
+                    end, "bicycle_tick")
                 elseif costumeId == 2 then
                     --覆面水着団
                     for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH}) do
@@ -1244,7 +1311,7 @@ BlueArchiveCharacter = {
     ACTION_WHEEL = {
         ---乗り物のモデル置き換えオプションを有効にするかどうか。
         ---@type boolean
-        vehicleOptionEnabled = false
+        vehicleOptionEnabled = true
     },
 
     ---物理演算

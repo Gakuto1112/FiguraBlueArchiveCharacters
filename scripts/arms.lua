@@ -28,8 +28,12 @@ Arms = {
     ---@param self Arms
     updateArmRot = function (self)
         if not self.BowPoseEnabled then
-            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(self.ArmOffsetRot[1])
-            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(self.ArmOffsetRot[2])
+            local leftHanded = player:isLeftHanded()
+            local isItemActive = player:getActiveItem().id ~= "minecraft:air"
+            local activeHand = player:getActiveHand()
+            local avatarPitch = models.models.main.Avatar:getAnimRot().x
+            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isItemActive and ((activeHand == "MAIN_HAND" and not leftHanded) or (activeHand == "OFF_HAND" and leftHanded)) and vectors.vec3(avatarPitch * -1 , 0, 0) or self.ArmOffsetRot[1])
+            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isItemActive and ((activeHand == "OFF_HAND" and not leftHanded) or (activeHand == "MAIN_HAND" and leftHanded)) and vectors.vec3(avatarPitch * -1, 0, 0) or self.ArmOffsetRot[2])
         end
     end,
 
@@ -84,12 +88,13 @@ Arms = {
                                     end
                                     local headRot = vanilla_model.HEAD:getOriginRot()
                                     local armSwingOffset = math.sin(self.ArmSwingCounter * math.pi * 2) * 2.5
+                                    local bicycleArmOffset = BlueArchiveCharacter.COSTUME.costumes[4].BycycleEnabled and models.models.main.Avatar:getAnimRot().x or 0
                                     if self.BowPoseLeftHanded then
-                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(BlueArchiveCharacter.DronePosition == "LEFT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0))
-                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90, headRot.y, 0)
+                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(BlueArchiveCharacter.DronePosition == "LEFT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset + 90 - bicycleArmOffset, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0))
+                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + armSwingOffset * -1 + 90 - bicycleArmOffset, headRot.y, 0)
                                     else
-                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90, headRot.y, 0)
-                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(BlueArchiveCharacter.DronePosition == "RIGHT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset * -1 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0))
+                                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + armSwingOffset + 90 - bicycleArmOffset, headRot.y, 0)
+                                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(BlueArchiveCharacter.DronePosition == "RIGHT" and vectors.vec3() or vectors.vec3(headRot.x + armSwingOffset * -1 + 90 - bicycleArmOffset, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0))
                                     end
                                     self.IsRenderProcessed = true
                                 end
@@ -109,6 +114,9 @@ Arms = {
             self.BowPoseLeftHanded = leftHanded
         else
             events.tick:remove("bow_pose_tick")
+            events.TICK:register(function ()
+
+            end, "non_bow_pose_tick")
             stopBowPose()
             self.BowPosePrev = false
         end
