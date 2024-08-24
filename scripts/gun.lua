@@ -39,7 +39,6 @@ Gun = {
     ---@param GunPosition Gun.GunPosition 変更先の構え位置
     setGunPosition = function (self, GunPosition)
         if GunPosition == "NONE" then
-            print("A")
             for _, tickName in ipairs({"right_gun_tick", "left_gun_tick"}) do
                 events.TICK:remove(tickName)
             end
@@ -151,7 +150,7 @@ Gun = {
             local heldItems = (player:getPose() ~= "SLEEPING" and ExSkill.AnimationCount == -1) and {player:getHeldItem(false), player:getHeldItem(true)} or {world.newItem(CompatibilityUtils:checkItem("minecraft:air")), world.newItem(CompatibilityUtils:checkItem("minecraft:air"))}
             local targetItemFound = false
             local isLeftHanded = player:isLeftHanded()
-            if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id then
+            if heldItems[1].id ~= self.HeldItemsPrev[1].id or heldItems[2].id ~= self.HeldItemsPrev[2].id or isLeftHanded ~= self.LeftHandedPrev then
                 for _, gunItem in ipairs(Gun.GUN_ITEMS) do
                     if heldItems[1].id == gunItem then
                         --メインハンドに対象アイテムを持つ
@@ -192,16 +191,16 @@ Gun = {
                         self:setGunPosition("NONE")
                     end
                 end
+                if isLeftHanded ~= self.LeftHandedPrev then
+                    if self.CurrentGunPosition == "NONE" then
+                        self.setBodyGunPos()
+                    end
+                    if BlueArchiveCharacter.GUN.onMainHandChange ~= nil then
+                        BlueArchiveCharacter.GUN.onMainHandChange(isLeftHanded and "LEFT" or "RIGHT")
+                    end
+                    self.LeftHandedPrev = isLeftHanded
+                end
                 self.HeldItemsPrev = heldItems
-            end
-            if isLeftHanded ~= self.LeftHandedPrev then
-                if self.CurrentGunPosition == "NONE" then
-                    self.setBodyGunPos()
-                end
-                if BlueArchiveCharacter.GUN.onMainHandChange ~= nil then
-                    BlueArchiveCharacter.GUN.onMainHandChange(isLeftHanded and "LEFT" or "RIGHT")
-                end
-                self.LeftHandedPrev = isLeftHanded
             end
             self.GunTickProcessed = true
         end
