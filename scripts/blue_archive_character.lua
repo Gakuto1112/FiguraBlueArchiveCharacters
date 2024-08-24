@@ -2687,7 +2687,8 @@ function pings.setCreativeFlyingAnimation(shouldPlay)
         models.models.ex_skill_1.Drone:moveTo(models.models.main.Avatar)
         models.models.main.Avatar.Drone:setVisible(true)
         BlueArchiveCharacter.IsLeftHandedPrev = player:isLeftHanded()
-        BlueArchiveCharacter.GunPositionPrev = Gun:getGunPosition()
+        Gun:processGunTick()
+        BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
         if BlueArchiveCharacter.GunPositionPrev == "RIGHT" or (BlueArchiveCharacter.GunPositionPrev == "NONE" and not BlueArchiveCharacter.IsLeftHandedPrev) then
             animations["models.main"]["creative_flying_transition_right"]:setSpeed(1)
             animations["models.main"]["creative_flying_transition_right"]:play()
