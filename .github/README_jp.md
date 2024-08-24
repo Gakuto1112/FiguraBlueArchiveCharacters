@@ -157,8 +157,6 @@ Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[
 - アバター関係で私に連絡したい方は[Discussions](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/discussions)または、[Discord](https://discord.com/)でご連絡下さい。私のDiscordのアカウント名は「vinny_san」で表示名は「ばにーさん」です。[FiguraのDiscordサーバー](https://discord.gg/figuramc)での表示名は「BunnySan/ばにーさん」です。
 
 ## 既知の不具合
-- 利き手変更時に武器が正しく描画されない（[#24](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/24)）。
-  - 武器を持ち直すと解消されます。
 - [Iris Shaders](https://www.irisshaders.dev/)を用いて影Modを有効化した際に、ゲーム起動後の1回のみに限り、ヘイロー（頭の輪っか）や武器を構える腕が描画されないことがある（[#63](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/63)）。
   - アバターを再読み込みすると解消されます。
 
