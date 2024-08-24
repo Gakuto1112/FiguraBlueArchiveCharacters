@@ -1125,7 +1125,11 @@ BlueArchiveCharacter = {
                     elseif type == "QUESTION" then
                         FaceParts:setEmotion("NORMAL","NORMAL", "ANGRY", duration, true)
                     elseif type == "SWEAT" then
-                        FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY", "ANGRY", duration, true)
+                        if not BlueArchiveCharacter.IsTyreBurst then
+                            FaceParts:setEmotion("NARROW_ANGRY", "NARROW_ANGRY", "ANGRY", duration, true)
+                        else
+                            FaceParts:setEmotion("SURPLISED", "SURPLISED", "ANGRY", duration, true)
+                        end
                     end
                 end
             end,
@@ -2696,7 +2700,11 @@ BlueArchiveCharacter = {
 
     ---飲み物アイテムを手に持っているかどうか
     ---@type boolean
-    DrinkItemHeld = false
+    DrinkItemHeld = false,
+
+    ---自転車の風切り音のインスタンス
+    ---@type Sound
+    BicycleWindSound = nil
 }
 
 ---クリエイティブ飛行のフラグを設定する。
@@ -2933,6 +2941,19 @@ events.ENTITY_INIT:register(function ()
                     for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
                         animations[animationModel]["bicycle_run"]:setSpeed(2 * Physics.VelocityAverage[5])
                     end
+                    if isBycicleRiding and Physics.VelocityAverage[5] >= 0.3 then
+                        local playerPos = player:getPos()
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.dispenser.fail"), playerPos, 0.025, 5)
+                        if BlueArchiveCharacter.BicycleWindSound ~= nil then
+                            BlueArchiveCharacter.BicycleWindSound:setPos(playerPos)
+                            BlueArchiveCharacter.BicycleWindSound:setVolume(0.14285714285714 * Physics.VelocityAverage[5] - 0.042857142857143)
+                        else
+                            BlueArchiveCharacter.BicycleWindSound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.elytra.flying"), playerPos, 0.14285714285714 * Physics.VelocityAverage[5] - 0.042857142857143, 2, true)
+                        end
+                    elseif BlueArchiveCharacter.BicycleWindSound ~= nil then
+                        BlueArchiveCharacter.BicycleWindSound:stop()
+                        BlueArchiveCharacter.BicycleWindSound = nil
+                    end
                     BlueArchiveCharacter.DrinkItemHeld = false
                     for _, item in ipairs({player:getHeldItem(false), player:getHeldItem(true)}) do
                         if item.id == "minecraft:potion" or item.id == "minecraft:milk_bucket" then
@@ -2980,9 +3001,40 @@ events.ENTITY_INIT:register(function ()
                         renderer:setEyeOffset(0, 0.15 * bicycleIdleFactor - 0.75, 0)
                     end
                 end, "bicycle_ride_render")
+                events.ON_PLAY_SOUND:register(function (id, pos, _, _, _, _, path)
+                    if path ~= nil and id:match("^minecraft:entity%.horse%.") and pos:copy():sub(player:getPos()):length() <= 1.5 then
+                        if id == "minecraft:entity.horse.jump" then
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.blaze.hurt"), pos, 0.5, 2, false)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.wool.step"), pos, 1, 0.75, false)
+                        elseif id == "minecraft:entity.horse.land" then
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.iron_door.close"), pos, 0.25, 1.75, false)
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.wool.step"), pos, 1, 0.75, false)
+                        elseif id == "minecraft:entity.horse.hurt" then
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.anvil.place"), pos, 0.5, 2, false)
+                        elseif id == "minecraft:entity.horse.death" then
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.blast"), pos, 1, 2, false)
+                            local playerPos = player:getPos()
+                            local lookDir = player:getLookDir()
+                            local bodyYaw = math.deg(math.atan2(lookDir.z, lookDir.x))
+                            local anchor1Pos = playerPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1 + 90, 0, -0.75, -0.65, 0, 1, 0))
+                            local anchor2Pos = playerPos:copy():add(vectors.rotateAroundAxis(bodyYaw * -1 + 90, 0, -0.75, 0.5, 0, 1, 0))
+                            for _ = 1, 5 do
+                                for _, anchorPos in ipairs({anchor1Pos, anchor2Pos}) do
+                                    particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), anchorPos):setVelocity(math.random() * 0.04 - 0.02, 0, math.random() * 0.04 - 0.02)
+                                end
+                            end
+                            BlueArchiveCharacter.IsTyreBurst = true
+                            Bubble:play("SWEAT", 40, vectors.vec2(), 0, false)
+                            BlueArchiveCharacter.IsTyreBurst = false
+                        end
+                        return true
+                    end
+                end, "bicycle_ride_sound")
             else
                 events.TICK:remove("bicycle_ride_tick")
                 events.RENDER:remove("bicycle_ride_render")
+                events.ITEM_RENDER:remove("drink_bottle_item_render")
+                events.ON_PLAY_SOUND:remove("bicycle_ride_sound")
                 models.models.main.Avatar.LowerBody.Bicycle:setVisible(false)
                 renderer:setRenderVehicle(true)
                 for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
