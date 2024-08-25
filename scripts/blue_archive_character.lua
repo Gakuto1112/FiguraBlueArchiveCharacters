@@ -2947,8 +2947,10 @@ events.ENTITY_INIT:register(function ()
             if BlueArchiveCharacter.BycycleEnabled then
                 if vehicleType == "minecraft:horse" then
                     BlueArchiveCharacter.BicycleOffsetPos = 0
-                else
-                    BlueArchiveCharacter.BicycleOffsetPos = 0.34375
+                elseif vehicleType == "minecraft:donkey" then
+                    BlueArchiveCharacter.BicycleOffsetPos = 0.35
+                elseif vehicleType == "minecraft:mule" then
+                    BlueArchiveCharacter.BicycleOffsetPos = 0.27
                 end
             end
         end
