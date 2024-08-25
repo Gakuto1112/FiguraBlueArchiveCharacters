@@ -2986,6 +2986,7 @@ events.ENTITY_INIT:register(function ()
                     for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
                         animations[animationModel]["bicycle_run"]:setSpeed(2 * horizontalSpeed)
                     end
+                    models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(math.ceil(animations["models.main"]["bicycle_run"]:getTime() * 20) % 2, 0)
                     BlueArchiveCharacter.BicycleHandleRotPrev = BlueArchiveCharacter.BicycleHandleRot
                     BlueArchiveCharacter.BicycleHandleRot = math.clamp(Physics.VelocityAverage[3], -0.2, 0.2) * 75
                     if isBycicleRiding and horizontalSpeed >= 0.3 then
