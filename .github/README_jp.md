@@ -78,6 +78,10 @@
 
   ![衣装](./README_images/costume.jpg)
 
+- 一部の生徒には、ゲーム内の乗り物向けの固有モデルがあります。
+
+  ![乗り物モデル](./README_images/vehicle_model.jpg)
+
 - プレイヤーの名前を生徒の名前にすることができます。
   - 部活名を表示することもできます。
   - 他のプレイヤーがこの名前を見えるようにするには、**他のプレイヤーもFiguraを導入し、他のプレイヤー側であなたに対する信頼設定を十分上げる必要があります。**
@@ -134,7 +138,7 @@ Exスキルアニメーション中に表示される赤や青の枠から出現
 ### アクション6. 乗り物モデルの置き換えの切り替え
 一部生徒の「ゲーム内の乗り物に乗った時にそのモデルを置き換える」機能を有効にするか無効にするかを切り替えます。乗り物モデルの置き換えがない生徒ではこのオプションが無効化されています。
 
-![乗り物モデル](./README_images/vehicle_model.jpg)
+![乗り物モデル](./README_images/vehicle_model_2.jpg)
 
 ## 使用方法
 Figuraは[Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)、[Fabric](https://fabricmc.net/)、[NeoForge](https://neoforged.net/)に対応しています。
