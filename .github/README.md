@@ -78,6 +78,10 @@ Although the avatars for these characters are not created, there are plans to cr
 
   ![Costume](./README_images/costume.jpg)
 
+- Some characters have unique models for in-game vehicles.
+
+  ![Vehicle models](./README_images/vehicle_model.jpg)
+
 - Can change your display name to the character's name.
   - Can also display the club name which the character is participated in.
   - **Other players also need to install Figura and give enough permissions** to see your display name.
@@ -132,6 +136,11 @@ Toggles whether weapon models (including students' guns) are visible or not in f
 Changes the amount of triangular particles that appear from the red or blue borders that appear during Ex skill animations. Reducing or disabling particles may improve performance.
 
 As an additional option, I have added an option to disable the frame during the Ex skill animations. This is the closest to the original one.
+
+### Action 6. Toggle vehicle models
+Toggles the vehicle models replacement feature for some characters. This option is disabled for characters with no vehicle models.
+
+![Vehicle models](./README_images/vehicle_model_2.jpg)
 
 ## How to use
 Figura is available in [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Fabric](https://fabricmc.net/) and [NeoForge](https://neoforged.net/).
