@@ -2806,77 +2806,79 @@ events.ENTITY_INIT:register(function ()
 
                 local startCount = 0
                 events.TICK:register(function ()
-                    startCount = startCount + 1
-                    BlueArchiveCharacter.DroneSound:setPos(player:getPos():add(0, 3, 0))
-                    if startCount == 5 then
-                        events.TICK:remove("drone_tick_start")
-                        for _, ctx in ipairs({"right", "left"}) do
-                            animations["models.main"]["creative_flying_transition_"..ctx]:stop()
-                            animations["models.ex_skill_1"]["creative_flying_start_"..ctx]:stop()
-                        end
-                        BlueArchiveCharacter.IsLeftHandedPrev = player:isLeftHanded()
-                        BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
-                        if BlueArchiveCharacter.GunPositionPrev == "RIGHT" or (BlueArchiveCharacter.GunPositionPrev == "NONE" and not BlueArchiveCharacter.IsLeftHandedPrev) then
-                            for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
-                                animations[animationModel]["creative_flying_right"]:play()
+                    if not client:isPaused() then
+                        startCount = startCount + 1
+                        BlueArchiveCharacter.DroneSound:setPos(player:getPos():add(0, 3, 0))
+                        if startCount == 5 then
+                            events.TICK:remove("drone_tick_start")
+                            for _, ctx in ipairs({"right", "left"}) do
+                                animations["models.main"]["creative_flying_transition_"..ctx]:stop()
+                                animations["models.ex_skill_1"]["creative_flying_start_"..ctx]:stop()
                             end
-                            BlueArchiveCharacter.DronePosition = "RIGHT"
-                        else
-                            for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
-                                animations[animationModel]["creative_flying_left"]:play()
-                            end
-                            BlueArchiveCharacter.DronePosition = "LEFT"
-                        end
-                        if not BlueArchiveCharacter.TipShowed and host:isHost() then
-                            print(Language:getTranslate("missile_launch__tip_pre")..KeyManager.KeyMappings["missile_launch"]:getKeyName()..Language:getTranslate("missile_launch__tip_post"))
-                            BlueArchiveCharacter.TipShowed = true
-                        end
-                        BlueArchiveCharacter.MissileLaunchAllowed = true
-                        events.TICK:register(function ()
-                            BlueArchiveCharacter.DroneSound:setPos(player:getPos():add(0, 3, 0))
-                            local isLeftHanded = player:isLeftHanded()
-                            if (Gun.CurrentGunPosition == "RIGHT" or (Gun.CurrentGunPosition == "NONE" and not isLeftHanded)) and animations["models.main"]["creative_flying_left"]:getPlayState() == "PLAYING" then
+                            BlueArchiveCharacter.IsLeftHandedPrev = player:isLeftHanded()
+                            BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
+                            if BlueArchiveCharacter.GunPositionPrev == "RIGHT" or (BlueArchiveCharacter.GunPositionPrev == "NONE" and not BlueArchiveCharacter.IsLeftHandedPrev) then
                                 for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
                                     animations[animationModel]["creative_flying_right"]:play()
-                                    animations[animationModel]["creative_flying_right"]:setTime(animations[animationModel]["creative_flying_left"]:getTime())
-                                    animations[animationModel]["creative_flying_left"]:stop()
                                 end
                                 BlueArchiveCharacter.DronePosition = "RIGHT"
-                            elseif (Gun.CurrentGunPosition == "LEFT" or (Gun.CurrentGunPosition == "NONE" and isLeftHanded)) and animations["models.main"]["creative_flying_right"]:getPlayState() == "PLAYING" then
+                            else
                                 for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
                                     animations[animationModel]["creative_flying_left"]:play()
-                                    animations[animationModel]["creative_flying_left"]:setTime(animations[animationModel]["creative_flying_right"]:getTime())
-                                    animations[animationModel]["creative_flying_right"]:stop()
                                 end
                                 BlueArchiveCharacter.DronePosition = "LEFT"
                             end
-                            local activeItem = player:getActiveItem()
-                            local activeHand = player:getActiveHand()
-                            if activeItem.id ~= "minecraft:air" then
-                                if ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded)) and Gun.CurrentGunPosition ~= "RIGHT" then
-                                    if Gun.CurrentGunPosition ~= "RIGHT" then
-                                        Arms:setRightArmOffsetRot(vectors.vec3())
-                                    else
-                                        Arms:setRightArmOffsetRot(vectors.vec3())
-                                    end
-                                elseif ((activeHand == "MAIN_HAND" and isLeftHanded) or (activeHand == "OFF_HAND" and not isLeftHanded)) and Gun.CurrentGunPosition ~= "LEFT" then
-                                    if Gun.CurrentGunPosition ~= "LEFT" then
-                                        Arms:setLeftArmOffsetRot(vectors.vec3())
-                                    else
-                                        Arms:setLeftArmOffsetRot(vectors.vec3())
-                                    end
-                                    Arms:setLeftArmOffsetRot(vectors.vec3())
-                                end
-                            elseif BlueArchiveCharacter.DronePosition == "RIGHT" then
-                                Arms:setRightArmOffsetRot(vectors.vec3(0, 0, 10))
-                                Arms:setLeftArmOffsetRot(vectors.vec3())
-                            else
-                                Arms:setLeftArmOffsetRot(vectors.vec3(0, 0, -10))
-                                Arms:setRightArmOffsetRot(vectors.vec3())
+                            if not BlueArchiveCharacter.TipShowed and host:isHost() then
+                                print(Language:getTranslate("missile_launch__tip_pre")..KeyManager.KeyMappings["missile_launch"]:getKeyName()..Language:getTranslate("missile_launch__tip_post"))
+                                BlueArchiveCharacter.TipShowed = true
                             end
-                            BlueArchiveCharacter.IsLeftHandedPrev = isLeftHanded
-                            BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
-                        end, "drone_tick")
+                            BlueArchiveCharacter.MissileLaunchAllowed = true
+                            events.TICK:register(function ()
+                                BlueArchiveCharacter.DroneSound:setPos(player:getPos():add(0, 3, 0))
+                                local isLeftHanded = player:isLeftHanded()
+                                if (Gun.CurrentGunPosition == "RIGHT" or (Gun.CurrentGunPosition == "NONE" and not isLeftHanded)) and animations["models.main"]["creative_flying_left"]:getPlayState() == "PLAYING" then
+                                    for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                                        animations[animationModel]["creative_flying_right"]:play()
+                                        animations[animationModel]["creative_flying_right"]:setTime(animations[animationModel]["creative_flying_left"]:getTime())
+                                        animations[animationModel]["creative_flying_left"]:stop()
+                                    end
+                                    BlueArchiveCharacter.DronePosition = "RIGHT"
+                                elseif (Gun.CurrentGunPosition == "LEFT" or (Gun.CurrentGunPosition == "NONE" and isLeftHanded)) and animations["models.main"]["creative_flying_right"]:getPlayState() == "PLAYING" then
+                                    for _, animationModel in ipairs({"models.main", "models.ex_skill_1"}) do
+                                        animations[animationModel]["creative_flying_left"]:play()
+                                        animations[animationModel]["creative_flying_left"]:setTime(animations[animationModel]["creative_flying_right"]:getTime())
+                                        animations[animationModel]["creative_flying_right"]:stop()
+                                    end
+                                    BlueArchiveCharacter.DronePosition = "LEFT"
+                                end
+                                local activeItem = player:getActiveItem()
+                                local activeHand = player:getActiveHand()
+                                if activeItem.id ~= "minecraft:air" then
+                                    if ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded)) and Gun.CurrentGunPosition ~= "RIGHT" then
+                                        if Gun.CurrentGunPosition ~= "RIGHT" then
+                                            Arms:setRightArmOffsetRot(vectors.vec3())
+                                        else
+                                            Arms:setRightArmOffsetRot(vectors.vec3())
+                                        end
+                                    elseif ((activeHand == "MAIN_HAND" and isLeftHanded) or (activeHand == "OFF_HAND" and not isLeftHanded)) and Gun.CurrentGunPosition ~= "LEFT" then
+                                        if Gun.CurrentGunPosition ~= "LEFT" then
+                                            Arms:setLeftArmOffsetRot(vectors.vec3())
+                                        else
+                                            Arms:setLeftArmOffsetRot(vectors.vec3())
+                                        end
+                                        Arms:setLeftArmOffsetRot(vectors.vec3())
+                                    end
+                                elseif BlueArchiveCharacter.DronePosition == "RIGHT" then
+                                    Arms:setRightArmOffsetRot(vectors.vec3(0, 0, 10))
+                                    Arms:setLeftArmOffsetRot(vectors.vec3())
+                                else
+                                    Arms:setLeftArmOffsetRot(vectors.vec3(0, 0, -10))
+                                    Arms:setRightArmOffsetRot(vectors.vec3())
+                                end
+                                BlueArchiveCharacter.IsLeftHandedPrev = isLeftHanded
+                                BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
+                            end, "drone_tick")
+                        end
                     end
                 end, "drone_tick_start")
             elseif models.models.main.Avatar.Drone ~= nil then
@@ -2904,27 +2906,29 @@ events.ENTITY_INIT:register(function ()
                 BlueArchiveCharacter.MissileLaunchAllowed = false
                 local endCount = 0
                 events.TICK:register(function ()
-                    endCount = endCount + 1
-                    BlueArchiveCharacter.DroneSound:setPos(player:getPos():add(0, 3, 0))
-                    if endCount == 5 then
-                        for _, eventName in ipairs({"drone_tick_end", "missile_launch_tick"}) do
-                            events.TICK:remove(eventName)
-                        end
-                        Arms:setRightArmOffsetRot(vectors.vec3())
-                        Arms:setLeftArmOffsetRot(vectors.vec3())
-                        for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
-                            for _, modelPart2 in ipairs(modelPart:getChildren()) do
-                                modelPart2:setVisible(true)
+                    if not client:isPaused() then
+                        endCount = endCount + 1
+                        BlueArchiveCharacter.DroneSound:setPos(player:getPos():add(0, 3, 0))
+                        if endCount == 5 then
+                            for _, eventName in ipairs({"drone_tick_end", "missile_launch_tick"}) do
+                                events.TICK:remove(eventName)
                             end
+                            Arms:setRightArmOffsetRot(vectors.vec3())
+                            Arms:setLeftArmOffsetRot(vectors.vec3())
+                            for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
+                                for _, modelPart2 in ipairs(modelPart:getChildren()) do
+                                    modelPart2:setVisible(true)
+                                end
+                            end
+                            models.models.main.Avatar.Drone:moveTo(models.models.ex_skill_1)
+                            models.models.ex_skill_1.Drone:setVisible(false)
+                            local particleAnchor = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1 + 180, BlueArchiveCharacter.DronePosition == "RIGHT" and -0.40625 or 0.40625, 5.015625, -1.9375, 0, 1, 0))
+                            for _ = 1, 30 do
+                                particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchor:copy():add(math.random() * 2.4 - 1.2, math.random() * 1 - 0.5, (math.random() * 2.4 - 1.2)))
+                            end
+                            BlueArchiveCharacter.DroneSound:stop()
+                            BlueArchiveCharacter.DronePosition = "NONE"
                         end
-                        models.models.main.Avatar.Drone:moveTo(models.models.ex_skill_1)
-                        models.models.ex_skill_1.Drone:setVisible(false)
-                        local particleAnchor = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1 + 180, BlueArchiveCharacter.DronePosition == "RIGHT" and -0.40625 or 0.40625, 5.015625, -1.9375, 0, 1, 0))
-                        for _ = 1, 30 do
-                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), particleAnchor:copy():add(math.random() * 2.4 - 1.2, math.random() * 1 - 0.5, (math.random() * 2.4 - 1.2)))
-                        end
-                        BlueArchiveCharacter.DroneSound:stop()
-                        BlueArchiveCharacter.DronePosition = "NONE"
                     end
                 end, "drone_tick_end")
             end
