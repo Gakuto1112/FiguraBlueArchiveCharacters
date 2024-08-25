@@ -2986,7 +2986,7 @@ events.ENTITY_INIT:register(function ()
                         BlueArchiveCharacter.BycycleRidingPrev = isBycicleRiding
                     end
                     for _, animationModel in ipairs({"models.main", "models.ex_skill_3"}) do
-                        animations[animationModel]["bicycle_run"]:setSpeed(2 * horizontalSpeed)
+                        animations[animationModel]["bicycle_run"]:setSpeed(2 * (Physics.VelocityAverage[1] + math.abs(Physics.VelocityAverage[3])))
                     end
                     models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(math.ceil(animations["models.main"]["bicycle_run"]:getTime() * 20) % 2, 0)
                     BlueArchiveCharacter.BicycleHandleRotPrev = BlueArchiveCharacter.BicycleHandleRot
