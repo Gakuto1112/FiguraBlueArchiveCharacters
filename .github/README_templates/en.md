@@ -52,6 +52,10 @@ Target figura version: [0.1.4](https://modrinth.com/mod/figura/version/0.1.4+1.2
 
   ![Costume](../README_images/costume.jpg)
 
+- Some characters have unique models for in-game vehicles.
+
+  ![Vehicle models](../README_images/vehicle_model.jpg)
+
 - Can change your display name to the character's name.
   - Can also display the club name which the character is participated in.
   - **Other players also need to install Figura and give enough permissions** to see your display name.
@@ -107,10 +111,10 @@ Changes the amount of triangular particles that appear from the red or blue bord
 
 As an additional option, I have added an option to disable the frame during the Ex skill animations. This is the closest to the original one.
 
-### Action6. Toggle vehicle models
+### Action 6. Toggle vehicle models
 Toggles the vehicle models replacement feature for some characters. This option is disabled for characters with no vehicle models.
 
-![Vehicle models](../README_images/vehicle_model.jpg)
+![Vehicle models](../README_images/vehicle_model_2.jpg)
 
 <!-- $inject(how_to_use) -->
 
