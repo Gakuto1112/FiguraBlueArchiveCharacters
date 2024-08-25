@@ -34,6 +34,10 @@ Arms = {
             local avatarPitch = models.models.main.Avatar:getAnimRot().x
             models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isItemActive and ((activeHand == "MAIN_HAND" and not leftHanded) or (activeHand == "OFF_HAND" and leftHanded)) and vectors.vec3(avatarPitch * -1 , 0, 0) or self.ArmOffsetRot[1])
             models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isItemActive and ((activeHand == "OFF_HAND" and not leftHanded) or (activeHand == "MAIN_HAND" and leftHanded)) and vectors.vec3(avatarPitch * -1, 0, 0) or self.ArmOffsetRot[2])
+        elseif player:getActiveItem().id == "minecraft:crossbow" then
+            for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Arms.RightArm, models.models.main.Avatar.UpperBody.Arms.LeftArm}) do
+                modelPart:setRot()
+            end
         end
     end,
 
