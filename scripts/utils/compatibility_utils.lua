@@ -80,8 +80,8 @@ CompatibilityUtils = {
 
     ---指定されたアイテムIDがレジストリに登録されているか確認する。レジストリに未登録の場合は"minecraft:barrier"を返す。
     ---@param self CompatibilityUtils
-    ---@param item Minecraft.blockID 確認対象のアイテムID
-    ---@return Minecraft.blockID blockID レジストリに登録してある場合は確認対象のアイテムIDをそのまま返し、未登録の場合は"minecraft:barrier"が返す。
+    ---@param item Minecraft.itemID 確認対象のアイテムID
+    ---@return Minecraft.itemID blockID レジストリに登録してある場合は確認対象のアイテムIDをそのまま返し、未登録の場合は"minecraft:barrier"が返す。
     checkItem = function (self, item)
         if self.CheckedList.item[item] == nil then
             self.CheckedList.item[item] = self:find("ITEM", item)
