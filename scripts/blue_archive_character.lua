@@ -159,7 +159,7 @@ BlueArchiveCharacter = {
                     --ドローンぶら下がり
                     local isHoldingItem = false
                     events.TICK:register(function ()
-                        Arms.ArmSwingCount = Arms.ArmSwingCount == 99 and 0 or Arms.ArmSwingCount + 1
+                        Arms:processArmWingCount()
                         isHoldingItem = (player:isLeftHanded() and player:getHeldItem(true).id or player:getHeldItem(false).id) ~= "minecraft:air"
                     end, "right_arm_tick")
                     events.RENDER:register(function (delta, context)
@@ -179,7 +179,7 @@ BlueArchiveCharacter = {
                     --ドローンぶら下がり
                     local isHoldingItem = false
                     events.TICK:register(function ()
-                        Arms.ArmSwingCount = Arms.ArmSwingCount == 99 and 0 or Arms.ArmSwingCount + 1
+                        Arms:processArmWingCount()
                         isHoldingItem = (player:isLeftHanded() and player:getHeldItem(false).id or player:getHeldItem(true).id) ~= "minecraft:air"
                     end, "left_arm_tick")
                     events.RENDER:register(function (delta, context)
@@ -2922,6 +2922,13 @@ events.ENTITY_INIT:register(function ()
                                         animations[animationModel]["creative_flying_right"]:stop()
                                     end
                                     BlueArchiveCharacter.DronePosition = "LEFT"
+                                end
+                                if isLeftHanded ~= BlueArchiveCharacter.IsLeftHandedPrev and Gun.CurrentGunPosition == "NONE" then
+                                    if isLeftHanded then
+                                        Arms:setArmState(4, 5)
+                                    else
+                                        Arms:setArmState(5, 4)
+                                    end
                                 end
                                 BlueArchiveCharacter.IsLeftHandedPrev = isLeftHanded
                                 BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
