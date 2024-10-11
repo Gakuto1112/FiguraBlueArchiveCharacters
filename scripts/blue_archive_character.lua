@@ -136,15 +136,25 @@ BlueArchiveCharacter = {
             ---@param left integer 新しい左腕の状態
             ---@return {right?: integer, left?: integer}|nil overriddenArmState 返した値で腕の状態を上書きできる。
             onArmStateChanged = function (right, left)
-                if left == 2 and right == 1 and BlueArchiveCharacter.DronePosition ~= "NONE" then
-                    return {right = 1, left = 4}
-                elseif left == 1 and right == 2 and BlueArchiveCharacter.DronePosition ~= "NONE" then
-                    return {right = 4, left = 1}
+                if left == 2 and right == 1 then
+                    if BlueArchiveCharacter.DronePosition ~= "NONE" then
+                        return {right = 1, left = 4}
+                    elseif BlueArchiveCharacter.BycycleEnabled then
+                        return {right = 7, left = 6}
+                    end
+                elseif left == 1 and right == 2 then
+                    if BlueArchiveCharacter.DronePosition ~= "NONE" then
+                        return {right = 4, left = 1}
+                    elseif BlueArchiveCharacter.BycycleEnabled then
+                        return {right = 6, left = 7}
+                    end
                 elseif left == 0 and right == 0 then
                     if BlueArchiveCharacter.DronePosition == "RIGHT" then
                         return {right = 5, left = 4}
                     elseif BlueArchiveCharacter.DronePosition == "LEFT" then
                         return {right = 4, left = 5}
+                    elseif BlueArchiveCharacter.BycycleEnabled then
+                        return {right = 6, left = 6}
                     end
                 end
             end,
@@ -152,7 +162,13 @@ BlueArchiveCharacter = {
             ---右腕の追加処理（任意）
             ---@param state integer 新しい右腕の状態
             onAddtionalRightArmProcess = function (state)
-                if state == 4 then
+                if state == 2 then
+                    events.TICK:register(function ()
+                        if BlueArchiveCharacter.BycycleEnabled and animations["models.main"]["bicycle_idle"]:getTime() * 4 > 0 then
+                            Arms:setArmState(6, nil)
+                        end
+                    end, "right_arm_tick")
+                elseif state == 4 then
                     --ドローンに掴まる腕
                     models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
                 elseif state == 5 then
@@ -166,13 +182,54 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or "Body")
                         models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isHoldingItem and 20 or 0, 0, 10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5)
                     end, "right_arm_render")
+                elseif state == 6 then
+                    --自転車
+                    events.TICK:register(function ()
+                        Arms:processArmWingCount()
+                        if animations["models.main"]["bicycle_idle"]:getTime() * 4 == 0 then
+                            Arms:setArmState(Gun.CurrentGunPosition == "LEFT" and 2 or 8, nil)
+                        end
+                    end, "right_arm_tick")
+                    events.RENDER:register(function (delta, context)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or "Body")
+                        local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
+                        local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(50 * (1 - bicycleIdleFactor) + 20, 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0)
+                    end, "right_arm_render")
+                elseif state == 7 then
+                    --自転車で銃を持っているとき
+                    models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
+                    events.TICK:register(function ()
+                        Arms:processArmWingCount()
+                        if player:getActiveItem().id == "minecraft:crossbow" then
+                            Arms:setArmState(3, 3)
+                        end
+                    end, "right_arm_tick")
+                    events.RENDER:register(function (delta)
+                        local headRot = vanilla_model.HEAD:getOriginRot()
+                        local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + (1 - bicycleIdleFactor) * 35 + 105, headRot.y, 0)
+                    end, "right_arm_render")
+                elseif state == 8 then
+                    --自転車で待機中
+                    events.TICK:register(function ()
+                        if animations["models.main"]["bicycle_idle"]:getTime() * 4 > 0 then
+                            Arms:setArmState(6, nil)
+                        end
+                    end, "right_arm_tick")
                 end
             end,
 
             ---左腕の追加処理（任意）
             ---@param state integer 新しい左腕の状態
             onAddtionalLeftArmProcess = function (state)
-                if state == 4 then
+                if state == 2 then
+                    events.TICK:register(function ()
+                        if BlueArchiveCharacter.BycycleEnabled and animations["models.main"]["bicycle_idle"]:getTime() * 4 > 0 then
+                            Arms:setArmState(nil, 6)
+                        end
+                    end, "left_arm_tick")
+                elseif state == 4 then
                     --ドローンに掴まる腕
                     models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
                 elseif state == 5 then
@@ -186,6 +243,41 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or "Body")
                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isHoldingItem and 20 or 0, 0, -10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5)
                     end, "left_arm_render")
+                elseif state == 6 then
+                    --自転車
+                    events.TICK:register(function ()
+                        Arms:processArmWingCount()
+                        if animations["models.main"]["bicycle_idle"]:getTime() * 4 == 0 then
+                            Arms:setArmState(nil, Gun.CurrentGunPosition == "RIGHT" and 2 or 8)
+                        end
+                    end, "left_arm_tick")
+                    events.RENDER:register(function (delta, context)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or "Body")
+                        local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
+                        local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(50 * (1 - bicycleIdleFactor) + 20, -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0)
+                    end, "left_arm_render")
+                elseif state == 7 then
+                    --自転車で銃を持っているとき
+                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
+                    events.TICK:register(function ()
+                        Arms:processArmWingCount()
+                        if player:getActiveItem().id == "minecraft:crossbow" then
+                            Arms:setArmState(3, 3)
+                        end
+                    end, "left_arm_tick")
+                    events.RENDER:register(function (delta)
+                        local headRot = vanilla_model.HEAD:getOriginRot()
+                        local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + (1 - bicycleIdleFactor) * 35 + 105, headRot.y, 0)
+                    end, "left_arm_render")
+                elseif state == 8 then
+                    --自転車で待機中
+                    events.TICK:register(function ()
+                        if animations["models.main"]["bicycle_idle"]:getTime() * 4 > 0 then
+                            Arms:setArmState(nil, 6)
+                        end
+                    end, "left_arm_tick")
                 end
             end
         }
@@ -3022,6 +3114,13 @@ events.ENTITY_INIT:register(function ()
                     animations[animationModel]["bicycle_idle"]:play()
                 end
                 animations["models.main"]["bicycle_idle"]:setSpeed(-1)
+                if Gun.CurrentGunPosition == "RIGHT" then
+                    Arms:setArmState(7, 6)
+                elseif Gun.CurrentGunPosition == "LEFT" then
+                    Arms:setArmState(6, 7)
+                else
+                    Arms:setArmState(6, 6)
+                end
                 BlueArchiveCharacter.BycycleRidingPrev = false
                 BlueArchiveCharacter.DrinkItemHeldPrev = false
                 events.TICK:register(function ()
@@ -3106,8 +3205,8 @@ events.ENTITY_INIT:register(function ()
                     models.models.main.Avatar.Head:setRot(45 - 30 * bicycleIdleFactor, 0, 0)
                     local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
                     models.models.main.Avatar.LowerBody.Bicycle.Handle:setRot(0, currentHandleRot, 0)
-                    Arms:setRightArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
-                    Arms:setLeftArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
+                    --Arms:setRightArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
+                    --Arms:setLeftArmOffsetRot(vectors.vec3(50 * (1 - bicycleIdleFactor), -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     if host:isHost() and BlueArchiveCharacter.BycycleEnabled then
                         CameraManager.setCameraPivot(vectors.vec3(0, 0.15 * bicycleIdleFactor - 0.75 + BlueArchiveCharacter.BicycleOffsetPos, 0))
                         renderer:setEyeOffset(0, 0.15 * bicycleIdleFactor - 0.75 + BlueArchiveCharacter.BicycleOffsetPos, 0)
@@ -3155,8 +3254,8 @@ events.ENTITY_INIT:register(function ()
                     animations[animationModel]["bicycle_idle"]:stop()
                 end
                 models.models.main.Avatar.Head:setRot()
-                Arms:setRightArmOffsetRot(vectors.vec3())
-                Arms:setLeftArmOffsetRot(vectors.vec3())
+                --Arms:setRightArmOffsetRot(vectors.vec3())
+                --Arms:setLeftArmOffsetRot(vectors.vec3())
                 if host:isHost() then
                     CameraManager.setCameraPivot(vectors.vec3())
                     renderer:setEyeOffset()
@@ -3170,6 +3269,14 @@ events.ENTITY_INIT:register(function ()
                     BlueArchiveCharacter.BicycleWindSound = nil
                 end
                 BlueArchiveCharacter.DrinkItemHeld = false
+                BlueArchiveCharacter.BycycleEnabled = false
+                if Gun.CurrentGunPosition == "RIGHT" then
+                    Arms:setArmState(1, 2)
+                elseif Gun.CurrentGunPosition == "LEFT" then
+                    Arms:setArmState(2, 1)
+                else
+                    Arms:setArmState(0, 0)
+                end
             end
             BlueArchiveCharacter.BycycleEnabledPrev = BlueArchiveCharacter.BycycleEnabled
         end
