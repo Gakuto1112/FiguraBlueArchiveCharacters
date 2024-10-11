@@ -22,7 +22,7 @@ Arms = {
     ---腕プラプラカウンターを処理する。
     ---@param self Arms
     processArmWingCount = function (self)
-        if client:isPaused() then
+        if not client:isPaused() then
             self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
         end
     end,
