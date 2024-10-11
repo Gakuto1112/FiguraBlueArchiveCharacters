@@ -76,7 +76,7 @@ Gun = {
                 end, "right_gun_tick")
             end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setArmState(1, 2)
+                Arms:setArmState(2, 3)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 animations["models.main"]["gun_hold_left"]:stop()
                 animations["models.main"]["gun_hold_right"]:play()
@@ -106,7 +106,7 @@ Gun = {
                 end, "left_gun_tick")
             end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setArmState(2, 1)
+                Arms:setArmState(3, 2)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 animations["models.main"]["gun_hold_right"]:stop()
                 animations["models.main"]["gun_hold_left"]:play()
