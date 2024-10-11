@@ -131,28 +131,63 @@ BlueArchiveCharacter = {
         ---コールバック関数
         ---@type {[string]: function}
         callbacks = {
-            --[[
             ---腕の状態が変更された際のコールバック関数（任意）
             ---@param right integer 新しい右腕の状態
             ---@param left integer 新しい左腕の状態
             ---@return {right?: integer, left?: integer}|nil overriddenArmState 返した値で腕の状態を上書きできる。
             onArmStateChanged = function (right, left)
-            end
-            ]]
+                if left == 2 and right == 1 and BlueArchiveCharacter.DronePosition ~= "NONE" then
+                    return {right = 1, left = 4}
+                elseif left == 1 and right == 2 and BlueArchiveCharacter.DronePosition ~= "NONE" then
+                    return {right = 4, left = 1}
+                elseif left == 0 and right == 0 then
+                    if BlueArchiveCharacter.DronePosition == "RIGHT" then
+                        return {right = 5, left = 4}
+                    elseif BlueArchiveCharacter.DronePosition == "LEFT" then
+                        return {right = 4, left = 5}
+                    end
+                end
+            end,
 
-            --[[
             ---右腕の追加処理（任意）
             ---@param state integer 新しい右腕の状態
             onAddtionalRightArmProcess = function (state)
-            end
-            ]]
+                if state == 4 then
+                    --ドローンに掴まる腕
+                    models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
+                elseif state == 5 then
+                    --ドローンぶら下がり
+                    local isHoldingItem = false
+                    events.TICK:register(function ()
+                        Arms.ArmSwingCount = Arms.ArmSwingCount == 99 and 0 or Arms.ArmSwingCount + 1
+                        isHoldingItem = (player:isLeftHanded() and player:getHeldItem(true).id or player:getHeldItem(false).id) ~= "minecraft:air"
+                    end, "right_arm_tick")
+                    events.RENDER:register(function (delta, context)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or "Body")
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isHoldingItem and 20 or 0, 0, 10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5)
+                    end, "right_arm_render")
+                end
+            end,
 
-            --[[
             ---左腕の追加処理（任意）
             ---@param state integer 新しい左腕の状態
             onAddtionalLeftArmProcess = function (state)
+                if state == 4 then
+                    --ドローンに掴まる腕
+                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
+                elseif state == 5 then
+                    --ドローンぶら下がり
+                    local isHoldingItem = false
+                    events.TICK:register(function ()
+                        Arms.ArmSwingCount = Arms.ArmSwingCount == 99 and 0 or Arms.ArmSwingCount + 1
+                        isHoldingItem = (player:isLeftHanded() and player:getHeldItem(false).id or player:getHeldItem(true).id) ~= "minecraft:air"
+                    end, "left_arm_tick")
+                    events.RENDER:register(function (delta, context)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or "Body")
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isHoldingItem and 20 or 0, 0, -10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5)
+                    end, "left_arm_render")
+                end
             end
-            ]]
         }
     },
 
@@ -2818,14 +2853,21 @@ events.ENTITY_INIT:register(function ()
                     animations["models.main"]["creative_flying_transition_right"]:setSpeed(1)
                     animations["models.main"]["creative_flying_transition_right"]:play()
                     animations["models.ex_skill_1"]["creative_flying_start_right"]:play()
-                    Arms:setRightArmOffsetRot(vectors.vec3(0, 0, 10))
                     BlueArchiveCharacter.DronePosition = "RIGHT"
                 else
                     animations["models.main"]["creative_flying_transition_left"]:setSpeed(1)
                     animations["models.main"]["creative_flying_transition_left"]:play()
                     animations["models.ex_skill_1"]["creative_flying_start_left"]:play()
-                    Arms:setLeftArmOffsetRot(vectors.vec3(0, 0, -10))
                     BlueArchiveCharacter.DronePosition = "LEFT"
+                end
+                if Gun.CurrentGunPosition == "RIGHT" then
+                    Arms:setArmState(1, 4)
+                elseif Gun.CurrentGunPosition == "LEFT" then
+                    Arms:setArmState(4, 1)
+                elseif BlueArchiveCharacter.DronePosition == "RIGHT" then
+                    Arms:setArmState(5, 4)
+                else
+                    Arms:setArmState(4, 5)
                 end
 
                 local particleAnchor = player:getPos():add(vectors.rotateAroundAxis(player:getBodyYaw() * -1 + 180, BlueArchiveCharacter.DronePosition == "RIGHT" and -0.40625 or 0.40625, 5.015625, 1.9375, 0, 1, 0))
@@ -2881,30 +2923,6 @@ events.ENTITY_INIT:register(function ()
                                     end
                                     BlueArchiveCharacter.DronePosition = "LEFT"
                                 end
-                                local activeItem = player:getActiveItem()
-                                local activeHand = player:getActiveHand()
-                                if activeItem.id ~= "minecraft:air" then
-                                    if ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded)) and Gun.CurrentGunPosition ~= "RIGHT" then
-                                        if Gun.CurrentGunPosition ~= "RIGHT" then
-                                            Arms:setRightArmOffsetRot(vectors.vec3())
-                                        else
-                                            Arms:setRightArmOffsetRot(vectors.vec3())
-                                        end
-                                    elseif ((activeHand == "MAIN_HAND" and isLeftHanded) or (activeHand == "OFF_HAND" and not isLeftHanded)) and Gun.CurrentGunPosition ~= "LEFT" then
-                                        if Gun.CurrentGunPosition ~= "LEFT" then
-                                            Arms:setLeftArmOffsetRot(vectors.vec3())
-                                        else
-                                            Arms:setLeftArmOffsetRot(vectors.vec3())
-                                        end
-                                        Arms:setLeftArmOffsetRot(vectors.vec3())
-                                    end
-                                elseif BlueArchiveCharacter.DronePosition == "RIGHT" then
-                                    Arms:setRightArmOffsetRot(vectors.vec3(0, 0, 10))
-                                    Arms:setLeftArmOffsetRot(vectors.vec3())
-                                else
-                                    Arms:setLeftArmOffsetRot(vectors.vec3(0, 0, -10))
-                                    Arms:setRightArmOffsetRot(vectors.vec3())
-                                end
                                 BlueArchiveCharacter.IsLeftHandedPrev = isLeftHanded
                                 BlueArchiveCharacter.GunPositionPrev = Gun.CurrentGunPosition
                             end, "drone_tick")
@@ -2943,8 +2961,6 @@ events.ENTITY_INIT:register(function ()
                             for _, eventName in ipairs({"drone_tick_end", "missile_launch_tick"}) do
                                 events.TICK:remove(eventName)
                             end
-                            Arms:setRightArmOffsetRot(vectors.vec3())
-                            Arms:setLeftArmOffsetRot(vectors.vec3())
                             for _, modelPart in ipairs({models.models.main.Avatar.Drone.LauncherRight.MissilesRight, models.models.main.Avatar.Drone.LauncherLeft.MissilesLeft}) do
                                 for _, modelPart2 in ipairs(modelPart:getChildren()) do
                                     modelPart2:setVisible(true)
@@ -2958,6 +2974,13 @@ events.ENTITY_INIT:register(function ()
                             end
                             BlueArchiveCharacter.DroneSound:stop()
                             BlueArchiveCharacter.DronePosition = "NONE"
+                            if Gun.CurrentGunPosition == "RIGHT" then
+                                Arms:setArmState(1, 2)
+                            elseif Gun.CurrentGunPosition == "LEFT" then
+                                Arms:setArmState(2, 1)
+                            else
+                                Arms:setArmState(0, 0)
+                            end
                         end
                     end
                 end, "drone_tick_end")
