@@ -76,7 +76,7 @@ Arms = {
                 end, "right_arm_tick")
                 events.RENDER:register(function (delta)
                     local headRot = vanilla_model.HEAD:getOriginRot()
-                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(player:isSwingingArm() and not player:isLeftHanded() and 0 or headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + 90, headRot.y, 0)
+                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(player:isSwingingArm() and not player:isLeftHanded() and vectors.vec3() or vectors.vec3(headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + 90, headRot.y, 0))
                 end, "right_arm_render")
             elseif self.ArmState.right == 2 then
                 --銃を構えている際の、銃を構えていない方の腕
@@ -90,7 +90,7 @@ Arms = {
                 end, "right_arm_tick")
                 events.RENDER:register(function (delta)
                     local headRot = vanilla_model.HEAD:getOriginRot()
-                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(player:isSwingingArm() and not player:isLeftHanded() and 0 or headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0)
+                    models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(player:isSwingingArm() and not player:isLeftHanded() and vectors.vec3() or vectors.vec3(headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -21, 78), 0))
                 end, "right_arm_render")
             elseif self.ArmState.right == 3 then
                 --クロスボウ装填中
@@ -131,7 +131,7 @@ Arms = {
                 end, "left_arm_tick")
                 events.RENDER:register(function (delta)
                     local headRot = vanilla_model.HEAD:getOriginRot()
-                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(player:isSwingingArm() and player:isLeftHanded() and 0 or headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + 90, headRot.y, 0)
+                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(player:isSwingingArm() and player:isLeftHanded() and vectors.vec3() or vectors.vec3(headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + 90, headRot.y, 0))
                 end, "left_arm_render")
             elseif self.ArmState.left == 2 then
                 --銃を構えている際の、銃を構えていない方の腕
@@ -146,7 +146,7 @@ Arms = {
                 end, "left_arm_tick")
                 events.RENDER:register(function (delta)
                     local headRot = vanilla_model.HEAD:getOriginRot()
-                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(player:isSwingingArm() and player:isLeftHanded() and 0 or headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0)
+                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(player:isSwingingArm() and player:isLeftHanded() and vectors.vec3() or vectors.vec3(headRot.x + math.sin((self.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + 90, math.map((headRot.y + 180) % 360 - 180, -50, 50, -78, 21), 0))
                 end, "left_arm_render")
             elseif self.ArmState.left == 3 then
                 --クロスボウ装填中
