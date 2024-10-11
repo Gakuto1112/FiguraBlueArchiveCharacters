@@ -179,8 +179,9 @@ BlueArchiveCharacter = {
                         isHoldingItem = (player:isLeftHanded() and player:getHeldItem(true).id or player:getHeldItem(false).id) ~= "minecraft:air"
                     end, "right_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or "Body")
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isHoldingItem and 20 or 0, 0, 10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5)
+                        local isSwingingArm = player:isSwingingArm() and not player:isLeftHanded()
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "RightArm" or "Body")
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3(isHoldingItem and 20 or 0, 0, 0) or vectors.vec3(isHoldingItem and 20 or 0, 0, 10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5))
                     end, "right_arm_render")
                 elseif state == 6 then
                     --自転車
@@ -191,16 +192,21 @@ BlueArchiveCharacter = {
                         end
                     end, "right_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or "Body")
+                        local isSwingingArm = player:isSwingingArm() and not player:isLeftHanded()
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "RightArm" or "Body")
                         local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
                         local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(50 * (1 - bicycleIdleFactor) + 20, 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3(20, 0, 0) or vectors.vec3(50 * (1 - bicycleIdleFactor) + 20, 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     end, "right_arm_render")
                 elseif state == 7 then
                     --自転車で銃を持っているとき
-                    models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
                     events.TICK:register(function ()
                         Arms:processArmWingCount()
+                        if player:isSwingingArm() and not player:isLeftHanded() then
+                            models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("RightArm")
+                        else
+                            models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
+                        end
                         if player:getActiveItem().id == "minecraft:crossbow" then
                             Arms:setArmState(3, 3)
                         end
@@ -208,7 +214,7 @@ BlueArchiveCharacter = {
                     events.RENDER:register(function (delta)
                         local headRot = vanilla_model.HEAD:getOriginRot()
                         local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(headRot.x + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + (1 - bicycleIdleFactor) * 35 + 105, headRot.y, 0)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(player:isSwingingArm() and not player:isLeftHanded() and vectors.vec3(60, 0, 0) or vectors.vec3(headRot.x + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + (1 - bicycleIdleFactor) * 35 + 105, headRot.y, 0))
                     end, "right_arm_render")
                 elseif state == 8 then
                     --自転車で待機中
@@ -240,8 +246,9 @@ BlueArchiveCharacter = {
                         isHoldingItem = (player:isLeftHanded() and player:getHeldItem(false).id or player:getHeldItem(true).id) ~= "minecraft:air"
                     end, "left_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or "Body")
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isHoldingItem and 20 or 0, 0, -10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5)
+                        local isSwingingArm = player:isSwingingArm() and player:isLeftHanded()
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "LeftArm" or "Body")
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3(isHoldingItem and 20 or 0, 0, 0) or vectors.vec3(isHoldingItem and 20 or 0, 0, -10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5))
                     end, "left_arm_render")
                 elseif state == 6 then
                     --自転車
@@ -252,16 +259,21 @@ BlueArchiveCharacter = {
                         end
                     end, "left_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or "Body")
+                        local isSwingingArm = player:isSwingingArm() and player:isLeftHanded()
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "LeftArm" or "Body")
                         local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
                         local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(50 * (1 - bicycleIdleFactor) + 20, -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3(20, 0, 0) or vectors.vec3(50 * (1 - bicycleIdleFactor) + 20, -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     end, "left_arm_render")
                 elseif state == 7 then
                     --自転車で銃を持っているとき
-                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
                     events.TICK:register(function ()
                         Arms:processArmWingCount()
+                        if player:isSwingingArm() and player:isLeftHanded() then
+                            models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("LeftArm")
+                        else
+                            models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
+                        end
                         if player:getActiveItem().id == "minecraft:crossbow" then
                             Arms:setArmState(3, 3)
                         end
@@ -269,7 +281,7 @@ BlueArchiveCharacter = {
                     events.RENDER:register(function (delta)
                         local headRot = vanilla_model.HEAD:getOriginRot()
                         local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(headRot.x + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + (1 - bicycleIdleFactor) * 35 + 105, headRot.y, 0)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(player:isSwingingArm() and player:isLeftHanded() and vectors.vec3(60, 0, 0) or vectors.vec3(headRot.x + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + (1 - bicycleIdleFactor) * 35 + 105, headRot.y, 0))
                     end, "left_arm_render")
                 elseif state == 8 then
                     --自転車で待機中
