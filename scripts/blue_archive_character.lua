@@ -106,6 +106,36 @@ BlueArchiveCharacter = {
         ]]
     },
 
+    ---腕
+    ARMS = {
+        ---コールバック関数
+        ---@type {[string]: function}
+        callbacks = {
+            --[[
+            ---腕の状態が変更された際のコールバック関数（任意）
+            ---@param right integer 新しい右腕の状態
+            ---@param left integer 新しい左腕の状態
+            ---@return {right?: integer, left?: integer}|nil overriddenArmState 返した値で腕の状態を上書きできる。
+            onArmStateChanged = function (right, left)
+            end
+            ]]
+
+            --[[
+            ---右腕の追加処理（任意）
+            ---@param state integer 新しい右腕の状態
+            onAddtionalRightArmProcess = function (state)
+            end
+            ]]
+
+            --[[
+            ---左腕の追加処理（任意）
+            ---@param state integer 新しい左腕の状態
+            onAddtionalLeftArmProcess = function (state)
+            end
+            ]]
+        }
+    },
+
     ---スカート
     SKIRT = {
         ---スカートとして制御するモデルの配列
