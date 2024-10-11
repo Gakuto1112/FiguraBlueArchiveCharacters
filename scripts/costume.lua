@@ -1,9 +1,11 @@
 ---@class Costume キャラクターのコスチュームを管理し、円滑に切り替えられるようにするクラス
----@field CostumeList string[] 利用可能なコスチューム一覧。BlueArchiveCharacterクラスから動的に生成される。
----@field CurrentCostume integer 現在のコスチューム
 Costume = {
-	--変数
+	---利用可能なコスチューム一覧。BlueArchiveCharacterクラスから動的に生成される。
+	---@type string[]
 	CostumeList = {},
+
+	---現在のコスチューム
+	---@type integer
 	CurrentCostume = Config.loadConfig("costume", 1),
 
 	--関数
@@ -42,18 +44,33 @@ Costume = {
 		HeadBlock.generateHeadBlockModel()
 		Portrait.generatePortraitModel()
 		self.CurrentCostume = 1
+	end,
+
+	---初期化関数
+	---@param self Costume
+	init = function(self)
+		for _, costume in ipairs(BlueArchiveCharacter.COSTUME.costumes) do
+			table.insert(self.CostumeList, costume.name)
+		end
+		if self.CurrentCostume >= 2 then
+			if self.CostumeList[self.CurrentCostume] ~= nil then
+				self:setCostume(self.CurrentCostume)
+			else
+				self.CurrentCostume = 1
+				if host:isHost() then
+					Config.saveConfig("costume", 1)
+				end
+				HeadBlock.generateHeadBlockModel()
+				Portrait.generatePortraitModel()
+			end
+
+		else
+			HeadBlock.generateHeadBlockModel()
+			Portrait.generatePortraitModel()
+		end
 	end
 }
 
-for _, costume in ipairs(BlueArchiveCharacter.COSTUME.costumes) do
-	table.insert(Costume.CostumeList, costume.name)
-end
-
-if Costume.CurrentCostume >= 2 then
-	Costume:setCostume(Costume.CurrentCostume)
-else
-	HeadBlock.generateHeadBlockModel()
-	Portrait.generatePortraitModel()
-end
+Costume:init()
 
 return Costume
