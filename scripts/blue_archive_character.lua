@@ -3161,7 +3161,7 @@ events.ENTITY_INIT:register(function ()
                     end
                     models.models.main.Avatar.LowerBody.Bicycle.Wheels.Chain:setUVPixels(math.ceil(animations["models.main"]["bicycle_run"]:getTime() * 20) % 2, 0)
                     BlueArchiveCharacter.BicycleHandleRotPrev = BlueArchiveCharacter.BicycleHandleRot
-                    BlueArchiveCharacter.BicycleHandleRot = math.clamp(Physics.VelocityAverage[3], -0.2, 0.2) * 75
+                    BlueArchiveCharacter.BicycleHandleRot = math.clamp(Physics.VelocityAverage[3] + Physics.VelocityAverage[4] / 1500, -0.2, 0.2) * -75
                     if isBycicleRiding and horizontalSpeed >= 0.3 then
                         local playerPos = player:getPos()
                         sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.dispenser.fail"), playerPos, 0.025, 5)
