@@ -19,6 +19,14 @@ Arms = {
     ---@type integer
     ArmSwingCount = 0,
 
+    ---腕プラプラカウンターを処理する。
+    ---@param self Arms
+    processArmWingCount = function (self)
+        if client:isPaused() then
+            self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
+        end
+    end,
+
     ---腕の状態を設定する。
     ---@param self Arms
     ---@param right? integer 右腕の状態
@@ -57,7 +65,7 @@ Arms = {
                 --銃を構えている際の、銃を構えている方の腕
                 models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
                 events.TICK:register(function ()
-                    self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
+                    self:processArmWingCount()
                     if player:getActiveItem().id == "minecraft:crossbow" then
                         self:setArmState(3, 3)
                     end
@@ -70,7 +78,7 @@ Arms = {
                 --銃を構えている際の、銃を構えていない方の腕
                 models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
                 events.TICK:register(function ()
-                    self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
+                    self:processArmWingCount()
                 end, "right_arm_tick")
                 events.RENDER:register(function (delta)
                     local headRot = vanilla_model.HEAD:getOriginRot()
@@ -104,7 +112,7 @@ Arms = {
                 --銃を構えている際の、銃を構えている方の腕
                 models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
                 events.TICK:register(function ()
-                    self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
+                    self:processArmWingCount()
                     if player:getActiveItem().id == "minecraft:crossbow" then
                         self:setArmState(3, 3)
                     end
@@ -117,7 +125,7 @@ Arms = {
                 --銃を構えている際の、銃を構えていない方の腕
                 models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
                 events.TICK:register(function ()
-                    self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
+                    self:processArmWingCount()
                 end, "left_arm_tick")
                 events.RENDER:register(function (delta)
                     local headRot = vanilla_model.HEAD:getOriginRot()
