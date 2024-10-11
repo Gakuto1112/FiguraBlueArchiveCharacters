@@ -179,9 +179,12 @@ BlueArchiveCharacter = {
                         isHoldingItem = (player:isLeftHanded() and player:getHeldItem(true).id or player:getHeldItem(false).id) ~= "minecraft:air"
                     end, "right_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        local isSwingingArm = player:isSwingingArm() and not player:isLeftHanded()
+                        local isLeftHanded = player:isLeftHanded()
+                        local activeHand = player:getActiveHand()
+                        local isUsingSpyglass = player:getActiveItem().id == "minecraft:spyglass" and ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded))
+                        local isSwingingArm = (player:isSwingingArm() and not isLeftHanded) or isUsingSpyglass
                         models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "RightArm" or "Body")
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3(isHoldingItem and 20 or 0, 0, 0) or vectors.vec3(isHoldingItem and 20 or 0, 0, 10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5))
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3((isHoldingItem and not isUsingSpyglass) and 20 or 0, 0, 0) or vectors.vec3(isHoldingItem and 20 or 0, 0, 10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5))
                     end, "right_arm_render")
                 elseif state == 6 then
                     --自転車
@@ -192,11 +195,14 @@ BlueArchiveCharacter = {
                         end
                     end, "right_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        local isSwingingArm = player:isSwingingArm() and not player:isLeftHanded()
+                        local isLeftHanded = player:isLeftHanded()
+                        local activeHand = player:getActiveHand()
+                        local isUsingSpyglass = player:getActiveItem().id == "minecraft:spyglass" and ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded))
+                        local isSwingingArm = (player:isSwingingArm() and not isLeftHanded) or isUsingSpyglass
                         models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "RightArm" or "Body")
                         local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
                         local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
-                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3(20, 0, 0) or vectors.vec3(50 * (1 - bicycleIdleFactor) + 20, 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3(isUsingSpyglass and 40 or 20, 0, 0) or vectors.vec3(50 * (1 - bicycleIdleFactor) + 20, 8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     end, "right_arm_render")
                 elseif state == 7 then
                     --自転車で銃を持っているとき
@@ -246,9 +252,12 @@ BlueArchiveCharacter = {
                         isHoldingItem = (player:isLeftHanded() and player:getHeldItem(false).id or player:getHeldItem(true).id) ~= "minecraft:air"
                     end, "left_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        local isSwingingArm = player:isSwingingArm() and player:isLeftHanded()
+                        local isLeftHanded = player:isLeftHanded()
+                        local activeHand = player:getActiveHand()
+                        local isUsingSpyglass = player:getActiveItem().id == "minecraft:spyglass" and ((activeHand == "MAIN_HAND" and isLeftHanded) or (activeHand == "OFF_HAND" and not isLeftHanded))
+                        local isSwingingArm = (player:isSwingingArm() and isLeftHanded) or isUsingSpyglass
                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "LeftArm" or "Body")
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3(isHoldingItem and 20 or 0, 0, 0) or vectors.vec3(isHoldingItem and 20 or 0, 0, -10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5))
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3((isHoldingItem and not isUsingSpyglass) and 20 or 0, 0, 0) or vectors.vec3(isHoldingItem and 20 or 0, 0, -10 + math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5))
                     end, "left_arm_render")
                 elseif state == 6 then
                     --自転車
@@ -259,11 +268,14 @@ BlueArchiveCharacter = {
                         end
                     end, "left_arm_tick")
                     events.RENDER:register(function (delta, context)
-                        local isSwingingArm = player:isSwingingArm() and player:isLeftHanded()
+                        local isLeftHanded = player:isLeftHanded()
+                        local activeHand = player:getActiveHand()
+                        local isUsingSpyglass = player:getActiveItem().id == "minecraft:spyglass" and ((activeHand == "MAIN_HAND" and isLeftHanded) or (activeHand == "OFF_HAND" and not isLeftHanded))
+                        local isSwingingArm = (player:isSwingingArm() and isLeftHanded) or isUsingSpyglass
                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType((context == "FIRST_PERSON" or isSwingingArm) and "LeftArm" or "Body")
                         local bicycleIdleFactor = 1 - animations["models.main"]["bicycle_idle"]:getTime() * 4
                         local currentHandleRot = (BlueArchiveCharacter.BicycleHandleRot - BlueArchiveCharacter.BicycleHandleRotPrev) * delta + BlueArchiveCharacter.BicycleHandleRot
-                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3(20, 0, 0) or vectors.vec3(50 * (1 - bicycleIdleFactor) + 20, -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3(isUsingSpyglass and 40 or 20, 0, 0) or vectors.vec3(50 * (1 - bicycleIdleFactor) + 20, -8 * (1 - bicycleIdleFactor) + 8 * (currentHandleRot / 15), 0))
                     end, "left_arm_render")
                 elseif state == 7 then
                     --自転車で銃を持っているとき
