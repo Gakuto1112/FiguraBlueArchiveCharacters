@@ -45,7 +45,7 @@ Gun = {
             models.models.main.Avatar.UpperBody.Body.Gun:setParentType("None")
             models.models.main.Avatar.UpperBody.Body.Gun:setSecondaryRenderType("NONE")
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setBowPose(false, false)
+                Arms:setArmState(0, 0)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 for _, animationName in ipairs({"gun_hold_right", "gun_hold_left"}) do
                     animations["models.main"][animationName]:stop()
@@ -76,7 +76,7 @@ Gun = {
                 end, "right_gun_tick")
             end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setBowPose(true, false)
+                Arms:setArmState(1, 2)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 animations["models.main"]["gun_hold_left"]:stop()
                 animations["models.main"]["gun_hold_right"]:play()
@@ -106,7 +106,7 @@ Gun = {
                 end, "left_gun_tick")
             end
             if BlueArchiveCharacter.GUN.hold.type == "NORMAL" then
-                Arms:setBowPose(true, true)
+                Arms:setArmState(2, 1)
             elseif BlueArchiveCharacter.GUN.hold.type == "CUSTOM" then
                 animations["models.main"]["gun_hold_right"]:stop()
                 animations["models.main"]["gun_hold_left"]:play()
