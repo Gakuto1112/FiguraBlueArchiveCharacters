@@ -1079,11 +1079,9 @@ BlueArchiveCharacter = {
                                     for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
                                         animations[animationModel]["float_ride"]:play()
                                     end
-                                    animations["models.main"]["whale_float"]:play()
-                                    CameraManager.setCameraPivot(vectors.vec3(0, 0.5625, 0))
-                                    renderer:setEyeOffset(0, 0.5625, 0)
                                     events.TICK:register(function ()
                                         if world.getBlockState(player:getPos()).id == "minecraft:water" then
+                                            animations["models.main"]["whale_float"]:setPlaying(true)
                                             if Physics.VelocityAverage[5] >= 0.35 then
                                                 FaceParts:setEmotion("CLOSED", "CLOSED", "W", 1, false)
                                             end
@@ -1095,6 +1093,27 @@ BlueArchiveCharacter = {
                                                     particleDirection = particleDirection > 0 and particleDirection + 30 or particleDirection - 30
                                                     particles:newParticle(CompatibilityUtils.getDustParticleId(vectors.vec3(1000000000, 1000000000, 1000000000), 3), anchorPos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1 + particleDirection + 150, vectors.vec3(1, 1, 1), 0, 1, 0):scale(math.random()):normalize():scale(Physics.VelocityAverage[5])):setGravity(0.5):setLifetime(10)
                                                 end
+                                            end
+
+                                            if player:getVehicle():getNbt().Type == "bamboo" then
+                                                models.models.main.Avatar:setPos(0, -6, 0)
+                                                CameraManager.setCameraPivot(vectors.vec3(0, 0.1875, 0))
+                                                renderer:setEyeOffset(0, 0.1875, 0)
+                                            else
+                                                models.models.main.Avatar:setPos()
+                                                CameraManager.setCameraPivot(vectors.vec3(0, 0.5625, 0))
+                                                renderer:setEyeOffset(0, 0.5625, 0)
+                                            end
+                                        else
+                                            animations["models.main"]["whale_float"]:setPlaying(false)
+                                            if player:getVehicle():getNbt().Type == "bamboo" then
+                                                models.models.main.Avatar:setPos(0, -9, 0)
+                                                CameraManager.setCameraPivot(vectors.vec3())
+                                                renderer:setEyeOffset()
+                                            else
+                                                models.models.main.Avatar:setPos(0, -3, 0)
+                                                CameraManager.setCameraPivot(vectors.vec3(0, 0.375, 0))
+                                                renderer:setEyeOffset(0, 0.375, 0)
                                             end
                                         end
                                         local lookdir = player:getLookDir()
@@ -2675,6 +2694,7 @@ BlueArchiveCharacter = {
         end
         animations["models.costume_swimsuit"]["float_afk"]:stop()
         animations["models.main"]["whale_float"]:stop()
+        models.models.main.Avatar:setPos()
         if CameraManager ~= nil then
             CameraManager.setCameraPivot(vectors.vec3())
         end
