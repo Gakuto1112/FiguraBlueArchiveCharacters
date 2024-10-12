@@ -128,15 +128,23 @@ BlueArchiveCharacter = {
             ---@param left integer 新しい左腕の状態
             ---@return {right?: integer, left?: integer}|nil overriddenArmState 返した値で腕の状態を上書きできる。
             onArmStateChanged = function (right, left)
-                if right == 1 and left == 2 then
+                if right == 0 and left == 0 and BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled and not BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                    return {right = 5, left = 5}
+                elseif right == 1 and left == 2 then
                     local isLeftHanded = player:isLeftHanded()
                     if (player:getHeldItem(true).id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem().id == "minecraft:shield" and isLeftHanded) then
                         return {right = 1, left = 4}
+                    end
+                    if BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                        return {right = 0, left = 0}
                     end
                 elseif right == 2 and left == 1 then
                     local isLeftHanded = player:isLeftHanded()
                     if (player:getHeldItem().id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and isLeftHanded) then
                         return {right = 4, left = 1}
+                    end
+                    if BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                        return {right = 0, left = 0}
                     end
                 end
             end,
@@ -144,13 +152,24 @@ BlueArchiveCharacter = {
             ---右腕の追加処理（任意）
             ---@param state integer 新しい右腕の状態
             onAddtionalRightArmProcess = function (state)
-                if state == 2 then
+                if state == 1 then
+                    events.RENDER:register(function ()
+                        if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled then
+                            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(models.models.main.Avatar.UpperBody.Arms.RightArm:getRot():add(10, 0, 0))
+                        end
+                    end, "right_arm_render")
+                elseif state == 2 then
                     events.TICK:register(function ()
                         local isLeftHanded = player:isLeftHanded()
                         if ((player:getHeldItem().id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and isLeftHanded)) and Arms.ArmState.right == 2 then
                             Arms:setArmState(4, nil)
                         end
                     end, "right_arm_tick")
+                    events.RENDER:register(function ()
+                        if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled then
+                            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(models.models.main.Avatar.UpperBody.Arms.RightArm:getRot():add(10, 0, 0))
+                        end
+                    end, "right_arm_render")
                 elseif state == 4 then
                     events.TICK:register(function ()
                         Arms:processArmWingCount()
@@ -164,19 +183,38 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType((isSwingingArm or context == "FIRST_PERSON") and "RightArm" or "Body")
                         models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3() or vectors.vec3(math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + 40, 30, 0))
                     end, "right_arm_render")
+                elseif state == 5 then
+                    events.TICK:register(function ()
+                        if  Arms.ArmState.left == 5 then
+                            local activeHand = player:getActiveHand()
+                            local isLeftHanded = player:isLeftHanded()
+                            models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(player:getActiveItem().id ~= "minecraft:air" and ((activeHand == "MAIN_HAND" and not isLeftHanded) or (activeHand == "OFF_HAND" and isLeftHanded)) and vectors.vec3() or vectors.vec3(20, 0, 20))
+                        end
+                    end, "right_arm_tick")
                 end
             end,
 
             ---左腕の追加処理（任意）
             ---@param state integer 新しい左腕の状態
             onAddtionalLeftArmProcess = function (state)
-                if state == 2 then
+                if state == 1 then
+                    events.RENDER:register(function ()
+                        if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled then
+                            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(models.models.main.Avatar.UpperBody.Arms.LeftArm:getRot():add(10, 0, 0))
+                        end
+                    end, "left_arm_render")
+                elseif state == 2 then
                     events.TICK:register(function ()
                         local isLeftHanded = player:isLeftHanded()
                         if ((player:getHeldItem().id == "minecraft:shield" and isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and not isLeftHanded)) and Arms.ArmState.left == 2 then
                             Arms:setArmState(nil, 4)
                         end
                     end, "left_arm_tick")
+                    events.RENDER:register(function ()
+                        if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled then
+                            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(models.models.main.Avatar.UpperBody.Arms.LeftArm:getRot():add(10, 0, 0))
+                        end
+                    end, "left_arm_render")
                 elseif state == 4 then
                     events.TICK:register(function ()
                         Arms:processArmWingCount()
@@ -190,6 +228,14 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType((isSwingingArm or context == "FIRST_PERSON") and "LeftArm" or "Body")
                         models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3() or vectors.vec3(math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + 40, -30, 0))
                     end, "left_arm_render")
+                elseif state == 5 then
+                    events.TICK:register(function ()
+                        if Arms.ArmState.left == 5 then
+                            local activeHand = player:getActiveHand()
+                            local isLeftHanded = player:isLeftHanded()
+                            models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(player:getActiveItem().id ~= "minecraft:air" and ((activeHand == "OFF_HAND" and not isLeftHanded) or (activeHand == "MAIN_HAND" and isLeftHanded)) and vectors.vec3() or vectors.vec3(20, 0, -20))
+                        end
+                    end, "left_arm_tick")
                 end
             end
         }
@@ -966,7 +1012,23 @@ BlueArchiveCharacter = {
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
-                exSkill = 2
+                exSkill = 2,
+
+                ---クジラフロートに乗っているかどうか
+                ---@type boolean
+                WhaleFloatEnabled = false,
+
+                ---前ティックにクジラフロートに乗っていたかどうか
+                ---@type boolean
+                WhaleFloatEnabledPrev = false,
+
+                ---クジラフロート上でのAFKカウンター
+                ---@type integer
+                WhaleFloatAFKCount = 0,
+
+                ---AFK中かどうか
+                ---@type boolean
+                IsAFK = false
             }
         },
 
@@ -996,20 +1058,24 @@ BlueArchiveCharacter = {
                         modelPart:setVisible(false)
                     end
 
-                    BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
                     events.TICK:register(function ()
                         local vehicle = player:getVehicle()
                         if vehicle ~= nil  then
                             local id = vehicle:getType()
-                            if ActionWheel.ShouldReplaceVehicleModels and (id == "minecraft:boat" or id == "minecraft:chest_boat") and #vehicle:getPassengers() == 1 then
+                            BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled = ActionWheel.ShouldReplaceVehicleModels and (id == "minecraft:boat" or id == "minecraft:chest_boat") and #vehicle:getPassengers() == 1
+                            if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled then
                                 if not BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
                                     BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev = player:getLookDir()
-                                    BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = 0
                                     models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(true)
                                     renderer:setRenderVehicle(false)
                                     models.models.main.Avatar.Head:setRot(10, 0, 0)
-                                    --Arms:setRightArmOffsetRot(vectors.vec3(20, 0, 20))
-                                    --Arms:setLeftArmOffsetRot(vectors.vec3(20, 0, -20))
+                                    if Gun.CurrentGunPosition == "RIGHT" then
+                                        Arms:setArmState(1, 2)
+                                    elseif Gun.CurrentGunPosition == "LEFT" then
+                                        Arms:setArmState(2, 1)
+                                    else
+                                        Arms:setArmState(5, 5)
+                                    end
                                     for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
                                         animations[animationModel]["float_ride"]:play()
                                     end
@@ -1035,18 +1101,19 @@ BlueArchiveCharacter = {
                                         if player:getVelocity():length() < 0.01 and BlueArchiveCharacter.COSTUME.costumes[3].LookDirPrev:copy():sub(lookdir):length() == 0 and not player:isSwingingArm() and PlayerUtils:getDamageStatus() == "NONE" and player:getActiveItem().id == "minecraft:air" then
                                             BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount + 1
                                             if BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount == 2400 then
+                                                BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = true
                                                 for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
                                                     animations[animationModel]["float_afk"]:setSpeed(1)
                                                     animations[animationModel]["float_afk"]:play()
                                                 end
-                                                --Arms:setBowPose(false, false)
+                                                Arms:setArmState(0, 0)
                                                 Physics.disable()
-                                                BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = true
                                             elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount >= 2430 then
                                                 FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", 1, false)
                                             end
                                         else
                                             if BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                                                BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = false
                                                 for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
                                                     animations[animationModel]["float_afk"]:setSpeed(-1)
                                                 end
@@ -1056,14 +1123,17 @@ BlueArchiveCharacter = {
                                                         for _, animationModel in ipairs({"models.main", "models.costume_swimsuit", "models.ex_skill_2"}) do
                                                             animations[animationModel]["float_afk"]:stop()
                                                         end
-                                                        if Gun.CurrentGunPosition ~= "NONE" then
-                                                            --Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
+                                                        if Gun.CurrentGunPosition == "RIGHT" then
+                                                            Arms:setArmState(1, 2)
+                                                        elseif Gun.CurrentGunPosition == "LEFT" then
+                                                            Arms:setArmState(2, 1)
+                                                        else
+                                                            Arms:setArmState(5, 5)
                                                         end
                                                         Physics:enable()
                                                         events.TICK:remove("whale_float_afk_end_tick")
                                                     end
                                                 end, "whale_float_afk_end_tick")
-                                                BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = false
                                             end
                                             BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount = 0
                                         end
@@ -1076,6 +1146,7 @@ BlueArchiveCharacter = {
                                 BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
                             end
                         elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev then
+                            BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabled = false
                             BlueArchiveCharacter.stopWhaleFloat()
                             BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
                         end
@@ -2591,10 +2662,12 @@ BlueArchiveCharacter = {
         models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(false)
         renderer:setRenderVehicle(true)
         models.models.main.Avatar.Head:setRot()
-        --Arms:setRightArmOffsetRot(vectors.vec3())
-        --Arms:setLeftArmOffsetRot(vectors.vec3())
-        if Gun.CurrentGunPosition ~= "NONE" then
-            --Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
+        if Gun.CurrentGunPosition == "RIGHT" then
+            Arms:setArmState(1, 2)
+        elseif Gun.CurrentGunPosition == "LEFT" then
+            Arms:setArmState(2, 1)
+        else
+            Arms:setArmState(0, 0)
         end
         for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
             animations[animationModel]["float_ride"]:stop()
