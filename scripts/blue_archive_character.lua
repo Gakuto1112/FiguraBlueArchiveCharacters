@@ -220,6 +220,7 @@ BlueArchiveCharacter = {
             }
             ]]
 
+            --[[
             ---装填済みクロスボウの位置オフセット（省略可）
             charged_crossbow_pos = {
                 ---右手で構える場合（省略可）
@@ -230,6 +231,7 @@ BlueArchiveCharacter = {
                 ---@type Vector3
                 left = vectors.vec3(8.25, 1, 0)
             }
+            ]]
 
             ---装填済みクロスボウの向きオフセット（省略可）
             --[[
