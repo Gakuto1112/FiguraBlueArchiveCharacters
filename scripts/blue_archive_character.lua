@@ -162,7 +162,18 @@ BlueArchiveCharacter = {
             ---右腕の追加処理（任意）
             ---@param state integer 新しい右腕の状態
             onAddtionalRightArmProcess = function (state)
-                if state == 2 then
+                if state == 1 then
+                    events.RENDER:register(function (_, context)
+                        local isLeftHanded = player:isLeftHanded()
+                        if BlueArchiveCharacter.DronePosition == "RIGHT" and isLeftHanded then
+                            local isSwingingArm = player:isSwingingArm() and isLeftHanded
+                            models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or (isSwingingArm and "LeftArm" or "Body"))
+                            if isSwingingArm then
+                                models.models.main.Avatar.UpperBody.Arms.RightArm:setRot()
+                            end
+                        end
+                    end, "right_arm_render")
+                elseif state == 2 then
                     events.TICK:register(function ()
                         if BlueArchiveCharacter.BycycleEnabled and animations["models.main"]["bicycle_idle"]:getTime() * 4 > 0 then
                             Arms:setArmState(6, nil)
@@ -237,7 +248,18 @@ BlueArchiveCharacter = {
             ---左腕の追加処理（任意）
             ---@param state integer 新しい左腕の状態
             onAddtionalLeftArmProcess = function (state)
-                if state == 2 then
+                if state == 1 then
+                    events.RENDER:register(function (_, context)
+                        local isLeftHanded = player:isLeftHanded()
+                        if BlueArchiveCharacter.DronePosition == "LEFT" and not isLeftHanded then
+                            local isSwingingArm = player:isSwingingArm() and not isLeftHanded
+                            models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or (isSwingingArm and "RightArm" or "Body"))
+                            if isSwingingArm then
+                                models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot()
+                            end
+                        end
+                    end, "left_arm_render")
+                elseif state == 2 then
                     events.TICK:register(function ()
                         if BlueArchiveCharacter.BycycleEnabled and animations["models.main"]["bicycle_idle"]:getTime() * 4 > 0 then
                             Arms:setArmState(nil, 6)
