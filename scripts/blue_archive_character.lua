@@ -123,28 +123,75 @@ BlueArchiveCharacter = {
         ---コールバック関数
         ---@type {[string]: function}
         callbacks = {
-            --[[
             ---腕の状態が変更された際のコールバック関数（任意）
             ---@param right integer 新しい右腕の状態
             ---@param left integer 新しい左腕の状態
             ---@return {right?: integer, left?: integer}|nil overriddenArmState 返した値で腕の状態を上書きできる。
             onArmStateChanged = function (right, left)
-            end
-            ]]
+                if right == 1 and left == 2 then
+                    local isLeftHanded = player:isLeftHanded()
+                    if (player:getHeldItem(true).id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem().id == "minecraft:shield" and isLeftHanded) then
+                        return {right = 1, left = 4}
+                    end
+                elseif right == 2 and left == 1 then
+                    local isLeftHanded = player:isLeftHanded()
+                    if (player:getHeldItem().id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and isLeftHanded) then
+                        return {right = 4, left = 1}
+                    end
+                end
+            end,
 
-            --[[
             ---右腕の追加処理（任意）
             ---@param state integer 新しい右腕の状態
             onAddtionalRightArmProcess = function (state)
-            end
-            ]]
+                if state == 2 then
+                    events.TICK:register(function ()
+                        local isLeftHanded = player:isLeftHanded()
+                        if ((player:getHeldItem().id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and isLeftHanded)) and Arms.ArmState.right == 2 then
+                            Arms:setArmState(4, nil)
+                        end
+                    end, "right_arm_tick")
+                elseif state == 4 then
+                    events.TICK:register(function ()
+                        Arms:processArmWingCount()
+                        local isLeftHanded = player:isLeftHanded()
+                        if ((player:getHeldItem().id ~= "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id ~= "minecraft:shield" and isLeftHanded)) and Arms.ArmState.right == 4 then
+                            Arms:setArmState(2, nil)
+                        end
+                    end, "right_arm_tick")
+                    events.RENDER:register(function (delta, context)
+                        local isSwingingArm = player:isSwingingArm() and not player:isLeftHanded()
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType((isSwingingArm or context == "FIRST_PERSON") and "RightArm" or "Body")
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setRot(isSwingingArm and vectors.vec3() or vectors.vec3(math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * 2.5 + 40, 30, 0))
+                    end, "right_arm_render")
+                end
+            end,
 
-            --[[
             ---左腕の追加処理（任意）
             ---@param state integer 新しい左腕の状態
             onAddtionalLeftArmProcess = function (state)
+                if state == 2 then
+                    events.TICK:register(function ()
+                        local isLeftHanded = player:isLeftHanded()
+                        if ((player:getHeldItem().id == "minecraft:shield" and isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and not isLeftHanded)) and Arms.ArmState.left == 2 then
+                            Arms:setArmState(nil, 4)
+                        end
+                    end, "left_arm_tick")
+                elseif state == 4 then
+                    events.TICK:register(function ()
+                        Arms:processArmWingCount()
+                        local isLeftHanded = player:isLeftHanded()
+                        if ((player:getHeldItem().id ~= "minecraft:shield" and isLeftHanded) or (player:getHeldItem(true).id ~= "minecraft:shield" and not isLeftHanded)) and Arms.ArmState.left == 4 then
+                            Arms:setArmState(nil, 2)
+                        end
+                    end, "left_arm_tick")
+                    events.RENDER:register(function (delta, context)
+                        local isSwingingArm = player:isSwingingArm() and player:isLeftHanded()
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType((isSwingingArm or context == "FIRST_PERSON") and "LeftArm" or "Body")
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setRot(isSwingingArm and vectors.vec3() or vectors.vec3(math.sin((Arms.ArmSwingCount + delta) / 100 * math.pi * 2) * -2.5 + 40, -30, 0))
+                    end, "left_arm_render")
+                end
             end
-            ]]
         }
     },
 
@@ -961,8 +1008,8 @@ BlueArchiveCharacter = {
                                     models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(true)
                                     renderer:setRenderVehicle(false)
                                     models.models.main.Avatar.Head:setRot(10, 0, 0)
-                                    Arms:setRightArmOffsetRot(vectors.vec3(20, 0, 20))
-                                    Arms:setLeftArmOffsetRot(vectors.vec3(20, 0, -20))
+                                    --Arms:setRightArmOffsetRot(vectors.vec3(20, 0, 20))
+                                    --Arms:setLeftArmOffsetRot(vectors.vec3(20, 0, -20))
                                     for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
                                         animations[animationModel]["float_ride"]:play()
                                     end
@@ -992,7 +1039,7 @@ BlueArchiveCharacter = {
                                                     animations[animationModel]["float_afk"]:setSpeed(1)
                                                     animations[animationModel]["float_afk"]:play()
                                                 end
-                                                Arms:setBowPose(false, false)
+                                                --Arms:setBowPose(false, false)
                                                 Physics.disable()
                                                 BlueArchiveCharacter.COSTUME.costumes[3].IsAFK = true
                                             elseif BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatAFKCount >= 2430 then
@@ -1010,7 +1057,7 @@ BlueArchiveCharacter = {
                                                             animations[animationModel]["float_afk"]:stop()
                                                         end
                                                         if Gun.CurrentGunPosition ~= "NONE" then
-                                                            Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
+                                                            --Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
                                                         end
                                                         Physics:enable()
                                                         events.TICK:remove("whale_float_afk_end_tick")
@@ -2544,10 +2591,10 @@ BlueArchiveCharacter = {
         models.models.main.Avatar.LowerBody.WhaleFloat:setVisible(false)
         renderer:setRenderVehicle(true)
         models.models.main.Avatar.Head:setRot()
-        Arms:setRightArmOffsetRot(vectors.vec3())
-        Arms:setLeftArmOffsetRot(vectors.vec3())
+        --Arms:setRightArmOffsetRot(vectors.vec3())
+        --Arms:setLeftArmOffsetRot(vectors.vec3())
         if Gun.CurrentGunPosition ~= "NONE" then
-            Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
+            --Arms:setBowPose(true, Gun.CurrentGunPosition == "LEFT")
         end
         for _, animationModel in ipairs({"models.main", "models.ex_skill_2"}) do
             animations[animationModel]["float_ride"]:stop()
@@ -2595,22 +2642,42 @@ events.ENTITY_INIT:register(function ()
                     models.models.main.Avatar.UpperBody.Body.Shield:setRot(0, 0, -5)
                 end
             elseif mode == "THIRD_PERSON_LEFT_HAND" then
-                local leftHanded = player:isLeftHanded()
-                if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
-                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, -2)
-                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, 30, 30)
+                if Arms.ArmState.left == 4 then
+                    if player:isCrouching() then
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(3.5, -19.5, 0)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(80, 5, 30)
+                    else
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, -1)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(55, 20, 25)
+                    end
                 else
-                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, 2.5)
-                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
+                    local leftHanded = player:isLeftHanded()
+                    if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "OFF_HAND" and not leftHanded) or (player:getActiveHand() == "MAIN_HAND" and leftHanded)) then
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, -2)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, 30, 30)
+                    else
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(2, -20.5, 2.5)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, 90, 0)
+                    end
                 end
             elseif mode == "THIRD_PERSON_RIGHT_HAND" then
-                local leftHanded = player:isLeftHanded()
-                if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
-                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, -2)
-                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, -30, -30)
+                if Arms.ArmState.right == 4 then
+                    if player:isCrouching() then
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(4.5, -19.5, 0)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(80, -5, -30)
+                    else
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, -1)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(55, -20, -25)
+                    end
                 else
-                    models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, 2.5)
-                    models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, -90, 0)
+                    local leftHanded = player:isLeftHanded()
+                    if player:getActiveItemTime() > 0 and ((player:getActiveHand() == "MAIN_HAND" and not leftHanded) or (player:getActiveHand() == "OFF_HAND" and leftHanded)) then
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, -2)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(50, -30, -30)
+                    else
+                        models.models.main.Avatar.UpperBody.Body.Shield:setPos(6, -20.5, 2.5)
+                        models.models.main.Avatar.UpperBody.Body.Shield:setRot(5, -90, 0)
+                    end
                 end
             end
             models.models.main.Avatar.UpperBody.Body.Shield:setSecondaryRenderType(item:hasGlint() and "GLINT" or "NONE")
