@@ -170,7 +170,9 @@ BlueArchiveCharacter = {
                     end, "right_arm_tick")
                 elseif state == 4 then
                     --ドローンに掴まる腕
-                    models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType("Body")
+                    events.RENDER:register(function (_, context)
+                        models.models.main.Avatar.UpperBody.Arms.RightArm:setParentType(context == "FIRST_PERSON" and "RightArm" or "Body")
+                    end, "right_arm_render")
                 elseif state == 5 then
                     --ドローンぶら下がり
                     local isHoldingItem = false
@@ -243,7 +245,9 @@ BlueArchiveCharacter = {
                     end, "left_arm_tick")
                 elseif state == 4 then
                     --ドローンに掴まる腕
-                    models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType("Body")
+                    events.RENDER:register(function (_, context)
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm:setParentType(context == "FIRST_PERSON" and "LeftArm" or "Body")
+                    end, "left_arm_render")
                 elseif state == 5 then
                     --ドローンぶら下がり
                     local isHoldingItem = false
