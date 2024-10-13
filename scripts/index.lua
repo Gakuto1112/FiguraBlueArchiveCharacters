@@ -29,6 +29,7 @@ events.ENTITY_INIT:register(function ()
 	PlacementObjectManager = require("scripts.placement_object.placement_object_manager")
 	Bubble = require("scripts.bubble")
 	Barrier = require("scripts.barrier")
+	HpBar = require("scripts.hp_bar")
 
 	--HypixelZombies = require("scripts.hypixel_zombies")
 end)
