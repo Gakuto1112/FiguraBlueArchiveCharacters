@@ -65,8 +65,10 @@ HpBar = {
     setBarrierGage = function (scale)
         if scale == 0 then
             models.models.hp_bar.Camera.BarrierGage:setVisible(false)
+            models.models.hp_bar.Camera.BuffArea:setPos(0, -1, 0)
         else
             models.models.hp_bar.Camera.BarrierGage:setVisible(true)
+            models.models.hp_bar.Camera.BuffArea:setPos()
             local targetLength = 15.225 * scale - 0.195
             models.models.hp_bar.Camera.BarrierGage.BarrierBar.Bar:setScale(math.clamp(targetLength / 15.03, 0, 1), 1, 1)
             models.models.hp_bar.Camera.BarrierGage.BarrierBar.BarTipRight:setPos(math.min(15.03 - targetLength, 15.03), 0, 0)
@@ -78,7 +80,6 @@ HpBar = {
     init = function (self)
         events.TICK:register(function ()
             self.setHpGage(player:getHealth() / player:getMaxHealth())
-            self.setBarrierGage(0.35)
             if host:isHost() then
                 local validEffects = {}
                 local newEffectTable = {}
@@ -115,7 +116,7 @@ HpBar = {
                         models.models.hp_bar.Camera.BuffArea["BuffSlot"..index].BuffBackground:setUVPixels(effectType == "UP" and 0 or (effectType == "DOWN" and 24 or (effectType == "CC" and 48 or 72)))
                         models.models.hp_bar.Camera.BuffArea["BuffSlot"..index].BuffIcon:setPrimaryTexture("RESOURCE", "minecraft:textures/mob_effect/"..effectName..".png")
                         models.models.hp_bar.Camera.BuffArea["BuffSlot"..index].BuffIcon:setPos(0, effectType == "UP" and 0 or (effectType == "DOWN" and 0.583 or 0.292))
-                        local opacity = effect.duration < 100 and math.abs((effect.duration % 20) * 0.075 - 0.75) + 0.25 or 1
+                        local opacity = (effect.duration >= 0 and effect.duration < 100) and math.abs((effect.duration % 20) * 0.075 - 0.75) + 0.25 or 1
                         models.models.hp_bar.Camera.BuffArea["BuffSlot"..index]:setOpacity(opacity)
                         if effect.amplifier == 0 then
                             models.models.hp_bar.Camera.BuffArea["BuffSlot"..index]:getTask("effect_amplifier"):setVisible(false)
@@ -146,6 +147,11 @@ HpBar = {
                     end
                 else
                     self.NextEffectCount = 0
+                end
+                if self.EffectTable.absorption ~= nil then
+                    self.setBarrierGage(player:getAbsorptionAmount() / ((self.EffectTable.absorption.amplifier + 1) * 4))
+                else
+                    self.setBarrierGage(0)
                 end
             end
         end)
