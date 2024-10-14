@@ -53,7 +53,9 @@ ExSkill = {
     transition = function (self, direction, callback)
         events.TICK:register(function ()
             if not client:isPaused() then
-                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 1, 10) or math.max(self.TransitionCount - 1, 0)
+                if events.TICK:getRegisteredCount("ex_skill_transition_tick") == 1 then
+                    self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 1, 10) or math.max(self.TransitionCount - 1, 0)
+                end
                 if (direction == "PRE" and self.TransitionCount == 10) or (direction == "POST" and self.TransitionCount == 0) then
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
@@ -303,7 +305,7 @@ ExSkill = {
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
             modelPart:setScale(0, 0, 0)
         end
-        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postAnimation ~= nil then
+        if self.AnimationCount >= 0 and BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postAnimation ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postAnimation(true)
         end
         if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postTransition ~= nil then
