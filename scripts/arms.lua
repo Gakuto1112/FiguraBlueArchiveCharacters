@@ -19,11 +19,16 @@ Arms = {
     ---@type integer
     ArmSwingCount = 0,
 
+    ---腕プラプラカウンターを処理したかどうか
+    ---@type boolean
+    IsSwingCountProcessed = false,
+
     ---腕プラプラカウンターを処理する。
     ---@param self Arms
     processArmWingCount = function (self)
-        if not client:isPaused() then
+        if not client:isPaused() and not self.IsSwingCountProcessed then
             self.ArmSwingCount = self.ArmSwingCount == 99 and 0 or self.ArmSwingCount + 1
+            self.IsSwingCountProcessed = true
         end
     end,
 
@@ -163,7 +168,17 @@ Arms = {
             end
             self.ArmStatePrev.left = self.ArmState.left
         end
+    end,
+
+    ---初期化関数
+    ---@param self Arms
+    init = function (self)
+        events.TICK:register(function ()
+            self.IsSwingCountProcessed = false
+        end)
     end
 }
+
+Arms:init()
 
 return Arms
