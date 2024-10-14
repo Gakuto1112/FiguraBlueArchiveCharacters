@@ -304,7 +304,7 @@ ExSkill = {
         for _, modelPart in ipairs({models.models.ex_skill_frame.Gui.Frame.FrameTop, models.models.ex_skill_frame.Gui.Frame.FrameLeft, models.models.ex_skill_frame.Gui.Frame.FrameBottom, models.models.ex_skill_frame.Gui.Frame.FrameRight}) do
             modelPart:setScale(0, 0, 0)
         end
-        if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postAnimation ~= nil then
+        if self.AnimationCount >= 0 and BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postAnimation ~= nil then
             BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postAnimation(true)
         end
         if BlueArchiveCharacter.EX_SKILL[BlueArchiveCharacter.COSTUME.costumes[Costume.CurrentCostume].exSkill].callbacks.postTransition ~= nil then
