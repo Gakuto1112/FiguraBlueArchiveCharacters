@@ -125,7 +125,7 @@ HpBar = {
                             models.models.hp_bar.Camera.BuffArea["BuffSlot"..index]:getTask("effect_amplifier"):setVisible(false)
                         else
                             local textTask = models.models.hp_bar.Camera.BuffArea["BuffSlot"..index]:getTask("effect_amplifier")
-                            textTask:setText("x"..(effect.amplifier + 1))
+                            textTask:setText("x"..(effect.amplifier + (effect.amplifier > 0 and 1 or 257)))
                             textTask:setOpacity(opacity)
                             textTask:setVisible(true)
                         end
