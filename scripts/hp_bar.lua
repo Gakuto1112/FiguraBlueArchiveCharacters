@@ -125,6 +125,11 @@ HpBar = {
                             models.models.hp_bar.Camera.BuffArea["BuffSlot"..index]:getTask("effect_amplifier"):setVisible(false)
                         else
                             local textTask = models.models.hp_bar.Camera.BuffArea["BuffSlot"..index]:getTask("effect_amplifier")
+                            if effectType == "DOWN" then
+                                textTask:setPos(-0.8, 4.2, 0)
+                            else
+                                textTask:setPos(-0.8, 3.8, 0)
+                            end
                             textTask:setText("x"..(effect.amplifier + (effect.amplifier > 0 and 1 or 257)))
                             textTask:setOpacity(opacity)
                             textTask:setVisible(true)
@@ -161,7 +166,6 @@ HpBar = {
 
         for i = 1, 4 do
             local textTask = models.models.hp_bar.Camera.BuffArea["BuffSlot"..i]:newText("effect_amplifier")
-            textTask:setPos(-0.8, 3.4, 0)
             textTask:setScale(0.2, 0.2, 0.2)
             textTask:setShadow(true)
             textTask:setAlignment("RIGHT")
