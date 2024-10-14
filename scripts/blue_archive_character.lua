@@ -1029,6 +1029,30 @@ BlueArchiveCharacter = {
                 ---AFK中かどうか
                 ---@type boolean
                 IsAFK = false
+            },
+            {
+                ---コスチュームの内部名
+                ---@type string
+                name = "battle",
+
+                ---コスチュームの表示名
+                display_name = {
+                    ---英語
+                    ---@type string
+                    en_us = "Battle",
+
+                    ---日本語
+                    ---@type string
+                    ja_jp = "臨戦"
+                },
+
+                ---この衣装での生徒の配置タイプ
+                ---@type BlueArchiveCharacter.FormationType
+                formationType = "STRIKER",
+
+                ---コスチュームに対応するExスキルのインデックス番号
+                ---@type integer
+                exSkill = 1
             }
         },
 
@@ -1170,6 +1194,19 @@ BlueArchiveCharacter = {
                             BlueArchiveCharacter.COSTUME.costumes[3].WhaleFloatEnabledPrev = false
                         end
                     end, "whale_float_tick_2")
+                elseif costumeId == 4 then
+                    --臨戦
+                    Costume.setCostumeTextureOffset(2)
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
+                        modelPart:setUVPixels(0, 16)
+                    end
+
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CBattleH, models.models.main.Avatar.UpperBody.Body.CBattleB}) do
+                        modelPart:setVisible(true)
+                    end
+                    for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie}) do
+                        modelPart:setVisible(false)
+                    end
                 end
             end,
 
@@ -1180,7 +1217,7 @@ BlueArchiveCharacter = {
                 Costume.setCostumeTextureOffset(0)
                 models.models.main.Avatar.Head.HatLayer:setUVPixels()
                 BlueArchiveCharacter.resetExSkill2Feature()
-                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH, models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL}) do
+                for _, modelPart in ipairs({models.models.main.Avatar.Head.CMaskedH, models.models.main.Avatar.Head.CSwimsuitH, models.models.main.Avatar.UpperBody.Body.CSwimsuitB, models.models.main.Avatar.UpperBody.Arms.RightArm.CSwimsuitRA, models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.CSwimsuitRAB, models.models.main.Avatar.UpperBody.Arms.LeftArm.CSwimsuitLA, models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.CSwimsuitLAB, models.models.main.Avatar.LowerBody.Legs.RightLeg.CSwimsuitRL, models.models.main.Avatar.LowerBody.Legs.LeftLeg.CSwimsuitLL, models.models.main.Avatar.Head.CBattleH, models.models.main.Avatar.UpperBody.Body.CBattleB}) do
                     modelPart:setVisible(false)
                 end
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
@@ -2610,15 +2647,167 @@ BlueArchiveCharacter = {
                         max = 80
                     }
                 }
-            }
-        }
+            },
 
-        --[[
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CBattleH.HairTail,
+
+                ---x軸回転における物理演算データ（省略可）
+                x = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -170,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 30,
+
+                        ---スニーク時にこのモデルパーツの回転に加えられるオフセット値（省略可）
+                        ---@type number
+                        sneakOffset = -20,
+
+                        ---頭の縦方向の回転と共にこのモデルパーツの回転に加えられる値の倍率（省略可）
+                        ---@type number
+                        headRotMultiplayer = -1,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 10
+                        },
+
+                        ---頭の回転によるによるモデルパーツの回転データ（省略可）
+                        headRot = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 0.05,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -90,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        },
+
+                        ---体を基準とした、上下方向移動によるモデルパーツの回転データ（省略可）
+                        bodyY = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = 80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -170,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 0
+                        }
+                    },
+
+                    ---体が水平方向である時（水泳時、エリトラ飛行時）の物理演算データ（省略可）
+                    horizontal = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -135,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = -30,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = -30,
+
+                        ---頭を基準とした、前後方向移動によるモデルパーツの回転データ（省略可）
+                        headX = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -45,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = -30
+                        }
+                    }
+                }
+            },
+
+            {
+                ---この物理演算データを適用させるモデルパーツ
+                ---@type ModelPart | ModelPart[]
+                modelPart = models.models.main.Avatar.Head.CBattleH.HairTail.HairTailZPivot,
+
+                ---x軸回転における物理演算データ（省略可）
+                z = {
+                    ---体が垂直方向である時（通常時）の物理演算データ（省略可）
+                    vertical = {
+                        ---このモデルパーツ、回転軸の絶対的な回転の最小値（度）
+                        ---@type number
+                        min = -80,
+
+                        ---このモデルパーツ、回転軸の中立の回転位置（度）
+                        ---@type number
+                        neutral = 0,
+
+                        ---このモデルパーツ、回転軸の絶対的な回転の最大値（度）
+                        ---@type number
+                        max = 80,
+
+                        ---頭を基準とした、左右方向移動によるモデルパーツの回転データ（省略可）
+                        headZ = {
+                            ---この回転事象がモデルパーツに与える回転の倍率
+                            ---@type number
+                            multiplayer = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最小値
+                            ---@type number
+                            min = -80,
+
+                            ---この回転事象がモデルパーツに与える回転の最大値
+                            ---@type number
+                            max = 80
+                        }
+                    }
+                }
+            }
+        },
+
         ---物理演算処理後に実行されるコールバック関数（省略可）。ここでモデルパーツの向きを上書きできる。
         ---@param modelPart ModelPart 物理演算が処理されたモデルパーツ
         callback = function (modelPart)
+            if modelPart == models.models.main.Avatar.Head.CBattleH.HairTail then
+                local modelRot = modelPart:getRot()
+                local headRotY = math.deg(math.asin(player:getLookDir().y))
+                if headRotY < 0 then
+                    modelRot.x = math.min(modelRot.x, 30)
+                end
+                modelPart:setRot(modelRot)
+            end
         end
-        ]]
     },
 
     --その他定数・変数
