@@ -224,11 +224,19 @@ Gun = {
                     elseif player:isUnderwater() then
                         sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.extinguish_fire"), pos, 0.5, 1.5)
                     else
-                        local particleAnchor = ModelUtils.getModelWorldPos(renderer:isFirstPerson() and (Gun.CurrentGunPosition == "RIGHT" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot or models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot) or models.models.main.Avatar.UpperBody.Body.Gun.MuzzleAnchor)
+                        local gunPosition = Gun.CurrentGunPosition
+                        if BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun and math.random() >= 0.5 then
+                            gunPosition = gunPosition == "RIGHT" and "LEFT" or "RIGHT"
+                        end
+                        local particleAnchor = ModelUtils.getModelWorldPos(renderer:isFirstPerson() and (gunPosition == "RIGHT" and models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.RightItemPivot or models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.LeftItemPivot) or (Gun.CurrentGunPosition == gunPosition and models.models.main.Avatar.UpperBody.Body.Gun.MuzzleAnchor or models.models.main.Avatar.UpperBody.Body.SubGun.MuzzleAnchor2))
                         for _ = 1, 5 do
                             particles:newParticle(CompatibilityUtils:checkParticle("minecraft:smoke"), particleAnchor)
                         end
-                        sounds:playSound(CompatibilityUtils:checkSound(BlueArchiveCharacter.GUN.sound.name), pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
+                        if Gun.CurrentGunPosition == gunPosition then
+                            sounds:playSound(CompatibilityUtils:checkSound(BlueArchiveCharacter.GUN.sound.name), pos, 1, BlueArchiveCharacter.GUN.sound.pitch)
+                        else
+                            sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.iron_golem.hurt"), pos, 1, 2)
+                        end
                     end
                     return true
                 elseif (id == "minecraft:item.crossbow.loading_start" or id == "minecraft:item.crossbow.loading_middle" or id:match("^minecraft:item%.crossbow%.quick_charge_[1-3]$") ~= nil) and distanceFromSound < 1 and player:getActiveItem().id == "minecraft:crossbow" then

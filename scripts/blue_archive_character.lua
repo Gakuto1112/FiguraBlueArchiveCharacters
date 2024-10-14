@@ -134,16 +134,14 @@ BlueArchiveCharacter = {
                     local isLeftHanded = player:isLeftHanded()
                     if (player:getHeldItem(true).id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem().id == "minecraft:shield" and isLeftHanded) then
                         return {right = 1, left = 4}
-                    end
-                    if BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                    elseif BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
                         return {right = 0, left = 0}
                     end
                 elseif right == 2 and left == 1 then
                     local isLeftHanded = player:isLeftHanded()
                     if (player:getHeldItem().id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and isLeftHanded) then
                         return {right = 4, left = 1}
-                    end
-                    if BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
+                    elseif BlueArchiveCharacter.COSTUME.costumes[3].IsAFK then
                         return {right = 0, left = 0}
                     end
                 end
@@ -163,6 +161,8 @@ BlueArchiveCharacter = {
                         local isLeftHanded = player:isLeftHanded()
                         if ((player:getHeldItem().id == "minecraft:shield" and not isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and isLeftHanded)) and Arms.ArmState.right == 2 then
                             Arms:setArmState(4, nil)
+                        elseif BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun then
+                            Arms:setArmState(1, 1)
                         end
                     end, "right_arm_tick")
                     events.RENDER:register(function ()
@@ -208,6 +208,8 @@ BlueArchiveCharacter = {
                         local isLeftHanded = player:isLeftHanded()
                         if ((player:getHeldItem().id == "minecraft:shield" and isLeftHanded) or (player:getHeldItem(true).id == "minecraft:shield" and not isLeftHanded)) and Arms.ArmState.left == 2 then
                             Arms:setArmState(nil, 4)
+                        elseif BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun then
+                            Arms:setArmState(1, 1)
                         end
                     end, "left_arm_tick")
                     events.RENDER:register(function ()
@@ -1052,7 +1054,11 @@ BlueArchiveCharacter = {
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
-                exSkill = 1
+                exSkill = 1,
+
+                ---サブハンドガンを持っているかどうか
+                ---@param boolean
+                HasSubGun = false
             }
         },
 
@@ -1200,13 +1206,59 @@ BlueArchiveCharacter = {
                     for _, modelPart in ipairs({models.models.main.Avatar.Head.Head, models.models.main.Avatar.Head.HatLayer}) do
                         modelPart:setUVPixels(0, 16)
                     end
-
-                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CBattleH, models.models.main.Avatar.UpperBody.Body.CBattleB}) do
+                    for _, modelPart in ipairs({models.models.main.Avatar.Head.CBattleH, models.models.main.Avatar.UpperBody.Body.CBattleB, models.models.main.Avatar.UpperBody.Body.SubGun}) do
                         modelPart:setVisible(true)
                     end
                     for _, modelPart in ipairs({models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie}) do
                         modelPart:setVisible(false)
                     end
+                    events.TICK:register(function ()
+                        BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun = false
+                        if Gun.CurrentGunPosition ~= "NONE" then
+                            local isLeftHanded = player:isLeftHanded()
+                            local heldItem = player:getHeldItem(Gun.CurrentGunPosition == "RIGHT" ~= isLeftHanded)
+                            for _, gunItem in ipairs(Gun.GUN_ITEMS) do
+                                if gunItem == heldItem.id then
+                                    BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun = true
+                                    break
+                                end
+                            end
+                        end
+                        if BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun then
+                            models.models.main.Avatar.UpperBody.Body.SubGun:setScale(1.5, 1.5, 1.5)
+                            models.models.main.Avatar.UpperBody.Body.SubGun:setParentType("Item")
+                        else
+                            models.models.main.Avatar.UpperBody.Body.SubGun:setPos(-1, 17.5, -1.9)
+                            models.models.main.Avatar.UpperBody.Body.SubGun:setRot(-30, 90, 0)
+                            models.models.main.Avatar.UpperBody.Body.SubGun:setScale()
+                            models.models.main.Avatar.UpperBody.Body.SubGun:setParentType("None")
+                        end
+                    end, "costume_battle_tick")
+                    events.ITEM_RENDER:register(function (_, mode)
+                        if BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun then
+                            if Gun.CurrentGunPosition == "RIGHT" then
+                                if mode == "FIRST_PERSON_LEFT_HAND" then
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setPos(-1, 0.5, -2.5)
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setRot()
+                                    return models.models.main.Avatar.UpperBody.Body.SubGun
+                                elseif mode == "THIRD_PERSON_LEFT_HAND" then
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setPos(0, -2, -1)
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setRot()
+                                    return models.models.main.Avatar.UpperBody.Body.SubGun
+                                end
+                            elseif Gun.CurrentGunPosition == "LEFT" then
+                                if mode == "FIRST_PERSON_RIGHT_HAND" then
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setPos(-1, 0.5, -1)
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setRot()
+                                    return models.models.main.Avatar.UpperBody.Body.SubGun
+                                elseif mode == "THIRD_PERSON_RIGHT_HAND" then
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setPos(0, -2, -1)
+                                    models.models.main.Avatar.UpperBody.Body.SubGun:setRot()
+                                    return models.models.main.Avatar.UpperBody.Body.SubGun
+                                end
+                            end
+                        end
+                    end, "costume_battle_item_render")
                 end
             end,
 
@@ -1223,8 +1275,12 @@ BlueArchiveCharacter = {
                 for _, modelPart in ipairs({models.models.main.Avatar.Head.HairEnds, models.models.main.Avatar.UpperBody.Body.Hairs, models.models.main.Avatar.UpperBody.Body.IDCard, models.models.main.Avatar.UpperBody.Body.Tie, models.models.main.Avatar.UpperBody.Body.Skirt, models.models.main.Avatar.UpperBody.Body.Shield}) do
                     modelPart:setVisible(true)
                 end
-                events.TICK:remove("whale_float_tick_2")
+                for _, eventName in ipairs({"whale_float_tick_2", "costume_battle_tick"}) do
+                    events.TICK:remove(eventName)
+                end
+                events.ITEM_RENDER:remove("costume_battle_item_render")
                 BlueArchiveCharacter.stopWhaleFloat()
+                BlueArchiveCharacter.COSTUME.costumes[4].HasSubGun = false
             end,
 
             ---防具が変更された（防具が見える/見えない）時に実行されるコールバック関数

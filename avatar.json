@@ -140,6 +140,10 @@
 		"models.models.gun.Gun": {
 			"moveTo": "models.models.main.Avatar.UpperBody.Body"
 		},
+		"models.models.gun.SubGun": {
+			"moveTo": "models.models.main.Avatar.UpperBody.Body",
+			"visible": false
+		},
 		"models.models.ex_skill_1.ShineEffect": {
 			"moveTo": "models.models.gun.Gun.Barrel",
 			"primaryRenderType": "EMISSIVE_SOLID",
