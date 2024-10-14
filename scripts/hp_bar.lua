@@ -25,8 +25,8 @@ HpBar = {
         saturation = "UP",
         jump_boost = "UP",
         mining_fatigue = "DOWN",
-        dolphing_grace = "UP",
-        heath_boost = "UP",
+        dolphins_grace = "UP",
+        health_boost = "UP",
         regeneration = "UP",
         speed = "UP",
         luck = "UP",
@@ -41,7 +41,8 @@ HpBar = {
         wither = "DOWN",
         absorption = "UP",
         glowing = "SPECIAL",
-        night_vision = "SPECIAL"
+        night_vision = "SPECIAL",
+        conduit_power = "UP"
     },
 
     ---Hpバーに表示しているバフテーブル
@@ -96,6 +97,8 @@ HpBar = {
                         end
                         newEffectTable[matchedString] = {duration = effect.duration, amplifier = effect.amplifier}
                         self.EffectTable[matchedString] = nil
+                    else
+                        print(matchedString)
                     end
                 end
                 for effectName, effect in pairs(self.EffectTable) do
