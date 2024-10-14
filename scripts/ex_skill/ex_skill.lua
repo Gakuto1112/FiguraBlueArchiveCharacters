@@ -53,7 +53,9 @@ ExSkill = {
     transition = function (self, direction, callback)
         events.TICK:register(function ()
             if not client:isPaused() then
-                self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 1, 10) or math.max(self.TransitionCount - 1, 0)
+                if events.TICK:getRegisteredCount("ex_skill_transition_tick") == 1 then
+                    self.TransitionCount = direction == "PRE" and math.min(self.TransitionCount + 1, 10) or math.max(self.TransitionCount - 1, 0)
+                end
                 if (direction == "PRE" and self.TransitionCount == 10) or (direction == "POST" and self.TransitionCount == 0) then
                     if host:isHost() then
                         local windowSize = client:getScaledWindowSize()
