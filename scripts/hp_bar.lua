@@ -161,7 +161,7 @@ HpBar = {
 
         for i = 1, 4 do
             local textTask = models.models.hp_bar.Camera.BuffArea["BuffSlot"..i]:newText("effect_amplifier")
-            textTask:setPos(-0.75, 1.4, 0)
+            textTask:setPos(-0.8, 3.4, 0)
             textTask:setScale(0.2, 0.2, 0.2)
             textTask:setShadow(true)
             textTask:setAlignment("RIGHT")
