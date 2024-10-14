@@ -788,10 +788,10 @@ BlueArchiveCharacter = {
                     end
                 end,
 
-                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun(forcedStop: boolean)
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
-                postAnimation = function(forcedStop)
+                postTransition = function(forcedStop)
                     for _, modelPart in ipairs({models.models.ex_skill_2.Stall, models.models.ex_skill_2.SoftCream}) do
                         modelPart:setVisible(false)
                     end
