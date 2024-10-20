@@ -929,7 +929,7 @@ BlueArchiveCharacter = {
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
             ---@type string[]
-			animations = {"main", "gun", "ex_skill_3"},
+			animations = {"main", "gun", "costume_battle", "ex_skill_3"},
 
             ---Exスキルアニメーションでのカメラワークのデータ
             camera = {
@@ -938,12 +938,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(),
+                    pos = vectors.vec3(96.8, 40.4, -27),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(0, -123, 0)
                 },
 
                 ---Exスキルアニメーション終了時
@@ -951,12 +951,12 @@ BlueArchiveCharacter = {
                     ---カメラの位置
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    pos = vectors.vec3(),
+                    pos = vectors.vec3(-9, 14.9, -30),
 
                     ---カメラの向き
                     ---BBアニメーション上での値をそのまま入力する。
                     ---@type Vector3
-                    rot = vectors.vec3()
+                    rot = vectors.vec3(-10, -155, -10)
                 }
             },
 
@@ -979,9 +979,9 @@ BlueArchiveCharacter = {
                     --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
                     --"<>"内を適切な値で置換すること。
                     --[[
-                    if tick == <tick_int> then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[<ex_skill_index>].animations) do
-                            animations["models."..animation]["ex_skill_"..<ex_skill_index>]:pause()
+                    if tick == 185000 then
+                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[3].animations) do
+                            animations["models."..animation]["ex_skill_"..3]:pause()
                         end
                     end
                     ]]
@@ -1001,6 +1001,13 @@ BlueArchiveCharacter = {
                 postAnimation = function(forcedStop)
                     if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
+                    if player:isLeftHanded() then
+                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.left))
+                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(BlueArchiveCharacter.GUN.put.rot.left)
+                    else
+                        models.models.main.Avatar.UpperBody.Body.Gun:setPos(vectors.vec3(0, 12, 0):add(BlueArchiveCharacter.GUN.put.pos.right))
+                        models.models.main.Avatar.UpperBody.Body.Gun:setRot(BlueArchiveCharacter.GUN.put.rot.right)
                     end
                     if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield ~= nil then
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
@@ -3153,11 +3160,13 @@ events.ENTITY_INIT:register(function ()
     models.models.ex_skill_2.Waves.Wave2:setPrimaryTexture("RESOURCE", "textures/block/water_flow.png")
     models.models.ex_skill_3.Illagers.Ravager:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/ravager.png")
 
-    for _, modelPart in ipairs({models.models.ex_skill_3.Illagers.Ravager.Pillager1, models.models.ex_skill_3.Illagers.Pillager2}) do
+    for index, modelPart in ipairs({models.models.ex_skill_3.Illagers.Ravager.Pillager1, models.models.ex_skill_3.Illagers.Pillager2}) do
         modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
+        modelPart["P"..index.."RightArm"]:newItem("pillager_"..index.."_crossbow"):setItem(CompatibilityUtils:checkItem("minecraft:crossbow")):setPos(0, -15, -2.5):setRot(0, 0, -135)
     end
     for i = 1, 2 do
         models.models.ex_skill_3.Illagers["Vindicator"..i]:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/vindicator.png")
+        models.models.ex_skill_3.Illagers["Vindicator"..i]["V"..i.."RightArm"]:newItem("vindicator_"..i.."_iron_axe"):setItem(CompatibilityUtils:checkItem("minecraft:iron_axe")):setPos(1, -9, -5):setRot(-90, -45, -90)
     end
     models.models.ex_skill_3.Firework:setPrimaryTexture("RESOURCE", "minecraft:textures/item/firework_rocket.png")
 end)
