@@ -98,6 +98,7 @@ BlueArchiveCharacter = {
             OPENED = {0, 0},
             OUT_OF_BREATH = {0, 1},
             TEETH = {1, 1},
+            SAD = {2, 1}
         },
 
         ---表情のセット（省略可）
@@ -1445,8 +1446,7 @@ BlueArchiveCharacter = {
                     elseif type == "QUESTION" then
                         FaceParts:setEmotion("CLOSED2", "CLOSED2", "YAWN", duration, true)
                     elseif type == "SWEAT" then
-                        FaceParts:setEmotion("SERIOUS_ANGRY", "SERIOUS_ANGRY", "CLOSED2", duration, true)
-                        models.models.main.Avatar.Head.FaceParts.Face:setUVPixels(6, 0)
+                        FaceParts:setEmotion("CLOSED2", "CLOSED2", "SAD", duration, true)
                     end
                 end
             end,
