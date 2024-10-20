@@ -906,7 +906,115 @@ BlueArchiveCharacter = {
                     end
                 end
             }
-		}
+		},
+
+        {
+            ---Exスキルの名前
+            name = {
+                ---英語
+                ---日本語名を翻訳したものにする。
+                ---@type string
+                en_us = "Hardened defensive posture",
+
+                ---日本語
+                ---実際のスキルの名前と同じにする。
+                ---@type string
+                ja_jp = "防御姿勢強化"
+            },
+
+            ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
+            ---@type ModelPart[]
+			models = {models.models.ex_skill_3.Illagers, models.models.ex_skill_3.Firework},
+
+            ---Exスキルアニメーションが含まれるモデルファイル名
+            ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
+            ---@type string[]
+			animations = {"main", "gun", "ex_skill_3"},
+
+            ---Exスキルアニメーションでのカメラワークのデータ
+            camera = {
+                ---Exスキルアニメーション開始時
+                start = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3()
+                },
+
+                ---Exスキルアニメーション終了時
+                fin = {
+                    ---カメラの位置
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    pos = vectors.vec3(),
+
+                    ---カメラの向き
+                    ---BBアニメーション上での値をそのまま入力する。
+                    ---@type Vector3
+                    rot = vectors.vec3()
+                }
+            },
+
+            ---コールバック関数
+            callbacks = {
+                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun()
+                preTransition = function()
+                end,
+
+                ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun()
+                preAnimation = function()
+                end,
+
+                ---Exスキルアニメーション再生中のみ実行されるティック関数
+                ---@type fun(tick: integer)
+                ---@param tick integer アニメーションの現在位置を示す。単位はティック。
+                animationTick = function(tick)
+                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
+                    --"<>"内を適切な値で置換すること。
+                    --[[
+                    if tick == <tick_int> then
+                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[<ex_skill_index>].animations) do
+                            animations["models."..animation]["ex_skill_"..<ex_skill_index>]:pause()
+                        end
+                    end
+                    ]]
+                    if tick == 0 then
+                        models.models.main.Avatar.UpperBody.Body.Gun:setPos()
+                        models.models.main.Avatar.UpperBody.Body.Gun:setRot()
+                        models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    elseif tick == 14 then
+                        models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
+                        models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    end
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション開始前に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postAnimation = function(forcedStop)
+                    if models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom.Gun:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
+                    if models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield ~= nil then
+                        models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
+                    end
+                    models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
+                end,
+
+                ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
+                ---@type fun(forcedStop: boolean)
+                ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
+                postTransition = function(forcedStop)
+                end
+            }
+        }
 	},
 
 
@@ -1054,7 +1162,7 @@ BlueArchiveCharacter = {
 
                 ---コスチュームに対応するExスキルのインデックス番号
                 ---@type integer
-                exSkill = 1,
+                exSkill = 3,
 
                 ---サブハンドガンを持っているかどうか
                 ---@param boolean
@@ -3043,6 +3151,15 @@ events.ENTITY_INIT:register(function ()
         modelPart:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
     end
     models.models.ex_skill_2.Waves.Wave2:setPrimaryTexture("RESOURCE", "textures/block/water_flow.png")
+    models.models.ex_skill_3.Illagers.Ravager:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/ravager.png")
+
+    for _, modelPart in ipairs({models.models.ex_skill_3.Illagers.Ravager.Pillager1, models.models.ex_skill_3.Illagers.Pillager2}) do
+        modelPart:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/pillager.png")
+    end
+    for i = 1, 2 do
+        models.models.ex_skill_3.Illagers["Vindicator"..i]:setPrimaryTexture("RESOURCE", "minecraft:textures/entity/illager/vindicator.png")
+    end
+    models.models.ex_skill_3.Firework:setPrimaryTexture("RESOURCE", "minecraft:textures/item/firework_rocket.png")
 end)
 
 return BlueArchiveCharacter
