@@ -75,7 +75,7 @@ BlueArchiveCharacter = {
             ANGRY = {7, 0},
             CLOSED2 = {0, 1},
             INVERTED = {1, 1},
-            SERIOUS_ANGRY = {2, 1}
+            ANGRY_INVERTED = {2, 1}
         },
 
         ---左目
@@ -86,8 +86,8 @@ BlueArchiveCharacter = {
             CLOSED = {5, 0},
             ANGRY = {7, 0},
             ANGRY_CENTER = {8, 0},
-            CLOSED2 = {-1, 1},
-            SERIOUS_ANGRY = {2, 1}
+            ANGRY_INVERTED = {2, 1},
+            CLOSED2 = {-1, 1}
         },
 
         ---口
@@ -95,7 +95,9 @@ BlueArchiveCharacter = {
             CLOSED2 = {1, 0},
             W = {2, 0},
             YAWN = {3, 0},
-            OPENED = {0, 0}
+            OPENED = {0, 0},
+            OUT_OF_BREATH = {0, 1},
+            TEETH = {1, 1},
         },
 
         ---表情のセット（省略可）
@@ -962,14 +964,10 @@ BlueArchiveCharacter = {
 
             ---コールバック関数
             callbacks = {
-                ---Exスキルアニメーション開始前のトランジション開始前に実行されるコールバック関数（任意）
-                ---@type fun()
-                preTransition = function()
-                end,
-
                 ---Exスキルアニメーション開始前のトランジション終了後に実行されるコールバック関数（任意）
                 ---@type fun()
                 preAnimation = function()
+                    FaceParts:setEmotion("ANGRY", "ANGRY", "OUT_OF_BREATH", 20, true)
                 end,
 
                 ---Exスキルアニメーション再生中のみ実行されるティック関数
@@ -992,6 +990,16 @@ BlueArchiveCharacter = {
                     elseif tick == 14 then
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
                         models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    elseif tick == 20 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED2", 68, true)
+                    elseif tick == 88 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "TEETH", 21, true)
+                    elseif tick == 109 then
+                        FaceParts:setEmotion("ANGRY_INVERTED", "ANGRY", "OUT_OF_BREATH", 17, true)
+                    elseif tick == 126 then
+                        FaceParts:setEmotion("ANGRY_INVERTED", "ANGRY", "W", 14, true)
+                    elseif tick == 140 then
+                        FaceParts:setEmotion("ANGRY", "ANGRY", "W", 48, true)
                     end
                 end,
 
