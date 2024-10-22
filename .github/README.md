@@ -34,7 +34,7 @@ The avatars for these characters are worked in progress. It usually takes about 
 ### Planned
 Although the avatars for these characters are not created, there are plans to create them in the future. They will be created in order from top to bottom. This is just a plan and the order may change or creation may be discontinued.
 
-- Mari Iochi (undefined) ([#82](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/82))
+- Mari Iochi (Idol) ([#82](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/82))
 - Iroha Natsume ([#64](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/64))
 - Ibuki Tanga ([#65](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/65))
 - Serika Kuromi ([#37](https://github.com/Gakuto1112/FiguraBlueArchiveCharacters/issues/37))
