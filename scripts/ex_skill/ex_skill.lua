@@ -6,7 +6,7 @@
 ExSkill = {
     ---アバター読み込み時に自動的にExスキルが再生される。デバッグ用。
     ---@type boolean
-    AUTO_PLAY = true,
+    AUTO_PLAY = false,
 
     ---そのレンダーで既にレンダー処理したかどうか
     ---@type boolean
