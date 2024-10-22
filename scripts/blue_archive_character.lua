@@ -927,7 +927,7 @@ BlueArchiveCharacter = {
 
             ---Exスキルアニメーション開始時に表示し、Exスキルアニメーション終了時に非表示にするモデルパーツ
             ---@type ModelPart[]
-			models = {models.models.ex_skill_3.Illagers, models.models.ex_skill_3.Firework},
+			models = {models.models.ex_skill_3.Illagers},
 
             ---Exスキルアニメーションが含まれるモデルファイル名
             ---アニメーション名は"ex_skill_<Exスキルのインデックス番号>"にすること。
@@ -975,32 +975,103 @@ BlueArchiveCharacter = {
                 ---@type fun(tick: integer)
                 ---@param tick integer アニメーションの現在位置を示す。単位はティック。
                 animationTick = function(tick)
-                    --Exスキルアニメーションを任意のティックで停止させるスニペット。デバッグ用。
-                    --"<>"内を適切な値で置換すること。
-                    --[[
-                    if tick == 185000 then
-                        for _, animation in ipairs(BlueArchiveCharacter.EX_SKILL[3].animations) do
-                            animations["models."..animation]["ex_skill_"..3]:pause()
-                        end
-                    end
-                    ]]
                     if tick == 0 then
                         models.models.main.Avatar.UpperBody.Body.Gun:setPos()
                         models.models.main.Avatar.UpperBody.Body.Gun:setRot()
                         models.models.main.Avatar.UpperBody.Body.Gun:moveTo(models.models.main.Avatar.UpperBody.Arms.RightArm.RightArmBottom)
+                    elseif tick == 1 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), ModelUtils.getModelWorldPos(models.models.main.Avatar), 0.5, 0.5)
+                    elseif tick == 13 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.chest.locked"), ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Body.Shield), 0.5, 2)
                     elseif tick == 14 then
                         models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(false)
                         models.models.main.Avatar.UpperBody.Body.Shield:moveTo(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom)
+                    elseif tick == 19 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.main.Avatar):add(0, 0.25, 0)
+                        local bodyYaw = player:getBodyYaw()
+                        for _ = 1, 10 do
+                            local offset = vectors.vec3(math.random() * 1 - 0.5, 0, math.random() * 1 - 0.5)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:campfire_cosy_smoke"), anchorPos:copy():add(offset)):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, -0.1, 0, offset.z * -0.1, 0, 1, 0)):setLifetime(20)
+                        end
                     elseif tick == 20 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "CLOSED2", 68, true)
+                    elseif tick == 21 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.anvil.place"), ModelUtils.getModelWorldPos(models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield), 0.15, 2)
+                    elseif tick == 23 and host:isHost() then
+                        renderer:setPostEffect("phosphor")
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), ModelUtils.getModelWorldPos(models.models.main.CameraAnchor), 0.15, 0.5)
+                    elseif tick == 36 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.vindicator.ambient"), ModelUtils.getModelWorldPos(models.models.ex_skill_3.Illagers.Vindicator1), 1, 1)
+                    elseif tick == 38 and host:isHost() then
+                        renderer:setPostEffect()
+                    elseif tick == 42 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.ravager.roar"), ModelUtils.getModelWorldPos(models.models.ex_skill_3.Illagers.Ravager), 1, 1)
+                    elseif tick == 46 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.pillager.ambient"), ModelUtils.getModelWorldPos(models.models.ex_skill_3.Illagers.Pillager2), 1, 1)
+                    elseif tick == 49 then
+                        models.models.ex_skill_3.Firework:setVisible(true)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:item.crossbow.shoot"), ModelUtils.getModelWorldPos(models.models.ex_skill_3.Illagers.Ravager.Pillager1), 1, 1)
+                        BlueArchiveCharacter.EX_SKILL[3].firework_sound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.firework_rocket.launch"), ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework), 1, 0.5)
                     elseif tick == 88 then
                         FaceParts:setEmotion("ANGRY", "ANGRY_INVERTED", "TEETH", 21, true)
+                    elseif tick == 97 and host:isHost() then
+                        models.models.ex_skill_3.Gui:setScale(client:getScaledWindowSize():augmented(1))
+                        models.models.ex_skill_3.Gui:setVisible(true)
+                    elseif tick == 99 and host:isHost() then
+                        models.models.ex_skill_3.Gui.Filter:setUVPixels(1, 0)
+                    elseif tick == 100 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.anvil.place"), player:getPos(), 0.15, 2)
+                        BlueArchiveCharacter.EX_SKILL[3].grindstone_sound = sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.grindstone.use"), player:getPos(), 1, 1.25)
+                    elseif tick == 102 and host:isHost() then
+                        models.models.ex_skill_3.Gui:setVisible(false)
                     elseif tick == 109 then
+                        BlueArchiveCharacter.EX_SKILL[3].grindstone_sound:stop()
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:block.anvil.place"), player:getPos(), 0.5, 0.75)
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:sweep_attack"), ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework.ExSkill3ParticleAnchor2):add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0.75, 0, -0.4, 0, 1, 0))):setColor(1, 0.98, 0.69)
                         FaceParts:setEmotion("ANGRY_INVERTED", "ANGRY", "OUT_OF_BREATH", 17, true)
+                    elseif tick == 122 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework)
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.generic.explode"), anchorPos, 1, 0.75)
+                        for _ = 1, 100 do
+                            local particleOffset = vectors.vec3(math.random() - 0.5, math.random() * 0.5, math.random() - 0.5)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:poof"), anchorPos:copy():add(particleOffset)):setScale(10):setVelocity(particleOffset:mul(1, 0.5, 1):scale(2)):setColor(vectors.vec3(0.45, 0.35, 0.35):scale(math.random() * 0.2 - 0.1 + 1)):setGravity(math.random() * -0.1):setLifetime(120)
+                        end
+                        models.models.ex_skill_3.Firework:setVisible(false)
+                        models.models.ex_skill_3.Explosion:setVisible(true)
                     elseif tick == 126 then
                         FaceParts:setEmotion("ANGRY_INVERTED", "ANGRY", "W", 14, true)
+                    elseif tick == 131 then
+                        models.models.ex_skill_3.Explosion:setVisible(false)
+                    elseif tick == 138 then
+                        sounds:playSound(CompatibilityUtils:checkSound("minecraft:entity.player.attack.sweep"), player:getPos(), 0.5, 0.75)
                     elseif tick == 140 then
                         FaceParts:setEmotion("ANGRY", "ANGRY", "W", 48, true)
+                    end
+                    if tick >= 49 and tick <= 109 then
+                        BlueArchiveCharacter.EX_SKILL[3].firework_sound:setPos(ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework))
+                        local anchor2Pos = ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework.ExSkill3ParticleAnchor2)
+                        local anchorPos = anchor2Pos:copy()
+                        if host:isHost() and tick < 100 then
+                            anchorPos:add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0, 0, -1.5, 0, 1, 0))
+                        elseif tick >= 100 then
+                            local bodyYaw = player:getBodyYaw()
+                            anchorPos:add(vectors.rotateAroundAxis(bodyYaw * -1, 0, 0, 0.3, 0, 1, 0))
+                            for _ = 0, 3 do
+                                particles:newParticle(CompatibilityUtils:checkParticle("minecraft:electric_spark"), anchor2Pos):setVelocity(vectors.rotateAroundAxis(bodyYaw * -1, math.random() * 0.2 - 0.1, math.random() * 0.2 - 0.1, 0.05, 0, 1, 0)):setColor(1, 0.804, 0.357):setLifetime(2)
+                            end
+                        end
+                        local axisVector = anchor2Pos:copy():sub(ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework.ExSkill3ParticleAnchor1))
+                        for i = 0, 3 do
+                            local offset = vectors.rotateAroundAxis(i * 90 + tick * 20, 0, 0.1, 0, axisVector)
+                            particles:newParticle(CompatibilityUtils:checkParticle("minecraft:cloud"), anchorPos:copy():add(offset)):setScale(0.5):setVelocity(offset:scale(0.5)):setGravity(0):setColor(0.5, 0.5, 0.5):setLifetime(4)
+                        end
+                    end
+                    if tick >= 49 and tick < 122 then
+                        local anchorPos = ModelUtils.getModelWorldPos(models.models.ex_skill_3.Firework.ExSkill3ParticleAnchor1)
+                        if host:isHost() and tick < 100 then
+                            anchorPos:add(vectors.rotateAroundAxis(player:getBodyYaw() * -1, 0, 0, -1.5, 0, 1, 0))
+                        end
+                        particles:newParticle(CompatibilityUtils:checkParticle("minecraft:firework"), anchorPos):setColor(1, 0.804, 0.357)
                     end
                 end,
 
@@ -1022,6 +1093,18 @@ BlueArchiveCharacter = {
                         models.models.main.Avatar.UpperBody.Arms.LeftArm.LeftArmBottom.Shield:moveTo(models.models.main.Avatar.UpperBody.Body)
                     end
                     models.models.main.Avatar.UpperBody.Body.Shield.Section2.ShoulderBelt:setVisible(true)
+                    BlueArchiveCharacter.EX_SKILL[3].firework_sound = nil
+                    BlueArchiveCharacter.EX_SKILL[3].grindstone_sound = nil
+                    if forcedStop then
+                        for _, modelPart in ipairs({models.models.ex_skill_3.Firework, models.models.ex_skill_3.Explosion}) do
+                            modelPart:setVisible(false)
+                        end
+                        models.models.ex_skill_3.Gui.Filter:setUVPixels()
+                        if host:isHost() then
+                            renderer:setPostEffect()
+                            models.models.ex_skill_3.Gui:setVisible(false)
+                        end
+                    end
                 end,
 
                 ---Exスキルアニメーション終了後のトランジション終了後に実行されるコールバック関数（任意）
@@ -1029,7 +1112,13 @@ BlueArchiveCharacter = {
                 ---@param forcedStop boolean アニメーションが途中終了した場合は"true"、アニメーションが最後まで再生されて終了した場合は"false"が代入される。
                 postTransition = function(forcedStop)
                 end
-            }
+            },
+
+            ---花火の音のインスタンス
+            firework_sound = nil,
+
+            ---砥石の音のインスタンス
+            grindstone_sound = nil
         }
 	},
 
