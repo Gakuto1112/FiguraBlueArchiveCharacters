@@ -359,9 +359,9 @@ local BlueArchiveCharacter = {
 		primary = {
 			formationType = "STRIKER";
 
-			models = {};
+			models = {models.models.ex_skill_1.ShulkerBox, models.models.ex_skill_1.Waves, models.models.ex_skill_1.ExSkillItems};
 
-			animations = {"main"};
+			animations = {"main", "ex_skill_1"};
 
 			camera = {
 				start = {
@@ -374,6 +374,35 @@ local BlueArchiveCharacter = {
 					pos = vectors.vec3(0, 28, -64);
 				};
 			};
+
+			callbacks = {
+				onPreAnimation = function (self)
+					if not self.exSkill.primary.isInitialized then
+						for _, modelPart in ipairs({models.models.ex_skill_1.ShulkerBox.ShulkerBoxTop.ShulkerBoxTop, models.models.ex_skill_1.ShulkerBox.ShulkerBoxBottom}) do
+							modelPart:setPrimaryTexture("RESOURCE", "textures/entity/shulker/shulker_cyan.png")
+						end
+
+						models.models.ex_skill_1.Waves:setPrimaryTexture("RESOURCE", "textures/block/water_still.png")
+						models.models.ex_skill_1.Waves:setColor(0.26274, 0.83529, 0.93333) -- 暖かい海バイオームの水の色
+
+						for i, modelPart in ipairs(models.models.ex_skill_1.ExSkillItems:getChildren()) do
+							modelPart:newItem("ex_skill_1_item_" .. i)
+						end
+
+						self.exSkill.primary.isInitialized = true;
+					end;
+
+					local itemTable = {"melon", "potion", "melon_slice", "apple", "milk_bucket", "tube_coral_block", "brain_coral_block", "bubble_coral_block", "fire_coral_block", "horn_coral_block", "tube_coral", "brain_coral", "fire_coral", "horn_coral", "bubble_coral", "tube_coral_fan", "brain_coral_fan", "bubble_coral_fan", "fire_coral_fan", "horn_coral_fan", "cod", "cod_bucket", "salmon", "salmon_bucket", "tropical_fish", "tropical_fish_bucket", "seagrass", "sea_pickle", "kelp", "ink_sac", "turtle_scute", "sand", "heart_of_the_sea"}
+					for i, modelPart in ipairs(models.models.ex_skill_1.ExSkillItems:getChildren()) do
+						modelPart:getTask("ex_skill_1_item_" .. i)
+							:setItem("minecraft:" .. itemTable[math.random(#itemTable)])
+					end
+				end;
+			};
+
+			---このExスキルの初期化処理が行われたかどうか
+			---@type boolean
+			isInitialized = false;
 		};
 	};
 
